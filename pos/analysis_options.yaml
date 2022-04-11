@@ -1,0 +1,6 @@
+include: package:lint/analysis_options.yaml
+
+linter:
+  rules:
+    lower_camel_case: false
+    non_constant_identifier_names: false

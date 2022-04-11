@@ -1,0 +1,12 @@
+enum OrigemIntegracao {
+  WAITER,
+  WAITER_MOBILE,
+  ALFA_SYNC,
+  IFOOD,
+  RAPPI,
+  WABIZ,
+  FOURALL,
+  CONCENTRADOR,
+  WAYMENU,
+  OUTRO,
+}

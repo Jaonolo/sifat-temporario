@@ -1,0 +1,7 @@
+enum StatusNota {
+  ABERTA,
+  FECHADA,
+  JUNTADA,
+  RECEBIDA,
+  CANCELADA,
+}
