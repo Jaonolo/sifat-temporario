@@ -9,7 +9,7 @@ part of 'splash_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SplashController on SplashBase, Store {
-  final _$statusAtom = Atom(name: 'SplashBase.status');
+  late final _$statusAtom = Atom(name: 'SplashBase.status', context: context);
 
   @override
   String get status {
@@ -24,7 +24,8 @@ mixin _$SplashController on SplashBase, Store {
     });
   }
 
-  final _$botaoDetalhesErroAtom = Atom(name: 'SplashBase.botaoDetalhesErro');
+  late final _$botaoDetalhesErroAtom =
+      Atom(name: 'SplashBase.botaoDetalhesErro', context: context);
 
   @override
   bool get botaoDetalhesErro {
@@ -39,7 +40,8 @@ mixin _$SplashController on SplashBase, Store {
     });
   }
 
-  final _$SplashBaseActionController = ActionController(name: 'SplashBase');
+  late final _$SplashBaseActionController =
+      ActionController(name: 'SplashBase', context: context);
 
   @override
   void changeStatus(String value) {

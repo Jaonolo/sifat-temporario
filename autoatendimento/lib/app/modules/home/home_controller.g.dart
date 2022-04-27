@@ -9,7 +9,8 @@ part of 'home_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeController on HomeBase, Store {
-  final _$habilitarCarrinhoAtom = Atom(name: 'HomeBase.habilitarCarrinho');
+  late final _$habilitarCarrinhoAtom =
+      Atom(name: 'HomeBase.habilitarCarrinho', context: context);
 
   @override
   bool get habilitarCarrinho {
@@ -24,7 +25,8 @@ mixin _$HomeController on HomeBase, Store {
     });
   }
 
-  final _$apareceCarrinhoAtom = Atom(name: 'HomeBase.apareceCarrinho');
+  late final _$apareceCarrinhoAtom =
+      Atom(name: 'HomeBase.apareceCarrinho', context: context);
 
   @override
   bool get apareceCarrinho {
@@ -39,7 +41,8 @@ mixin _$HomeController on HomeBase, Store {
     });
   }
 
-  final _$menuSelecionadoAtom = Atom(name: 'HomeBase.menuSelecionado');
+  late final _$menuSelecionadoAtom =
+      Atom(name: 'HomeBase.menuSelecionado', context: context);
 
   @override
   CardapioMenu get menuSelecionado {
@@ -54,7 +57,7 @@ mixin _$HomeController on HomeBase, Store {
     });
   }
 
-  final _$palcoAtom = Atom(name: 'HomeBase.palco');
+  late final _$palcoAtom = Atom(name: 'HomeBase.palco', context: context);
 
   @override
   ObservableList<Widget> get palco {
@@ -69,7 +72,8 @@ mixin _$HomeController on HomeBase, Store {
     });
   }
 
-  final _$HomeBaseActionController = ActionController(name: 'HomeBase');
+  late final _$HomeBaseActionController =
+      ActionController(name: 'HomeBase', context: context);
 
   @override
   dynamic changeMenuSelecionado(CardapioMenu value) {
@@ -85,7 +89,7 @@ mixin _$HomeController on HomeBase, Store {
   @override
   dynamic addPalco(Widget value) {
     final _$actionInfo =
-    _$HomeBaseActionController.startAction(name: 'HomeBase.addPalco');
+        _$HomeBaseActionController.startAction(name: 'HomeBase.addPalco');
     try {
       return super.addPalco(value);
     } finally {
@@ -96,7 +100,7 @@ mixin _$HomeController on HomeBase, Store {
   @override
   dynamic removePalco() {
     final _$actionInfo =
-    _$HomeBaseActionController.startAction(name: 'HomeBase.removePalco');
+        _$HomeBaseActionController.startAction(name: 'HomeBase.removePalco');
     try {
       return super.removePalco();
     } finally {
@@ -118,7 +122,7 @@ mixin _$HomeController on HomeBase, Store {
   @override
   dynamic recomecar() {
     final _$actionInfo =
-    _$HomeBaseActionController.startAction(name: 'HomeBase.recomecar');
+        _$HomeBaseActionController.startAction(name: 'HomeBase.recomecar');
     try {
       return super.recomecar();
     } finally {

@@ -23,8 +23,6 @@ abstract class TransacaoTefBase with Store {
   VendaController vendaController = Modular.get();
   AppController appController = Modular.get();
   HomeController homeController = Modular.get();
-
-  late BuildContext context;
   String viaCliente = "";
   String? xml;
   late HtmlWebSocketChannel channel;
@@ -73,7 +71,7 @@ abstract class TransacaoTefBase with Store {
 
       //Falha (Transação Falhou)
       else if (message.toString().startsWith('[SitefFail]')) {
-        _tratativasRetornoFalha(_messageSitefTratada(message));
+        _tratativasRetornoFalha(_messageSitefTratada(message), context);
       }
 
       //Finalizado (Pendencia da transação Finalizada)
@@ -81,15 +79,16 @@ abstract class TransacaoTefBase with Store {
         String content = message.substring(15);
         switch (content) {
           case "EFETUADA":
-          //Imprimir Cupom Fiscal e Comprovante TEF
+            //Imprimir Cupom Fiscal e Comprovante TEF
             atualizaBuffer("Imprimindo cupom fiscal");
-            _printerNFCe(xml ?? "");
+            _printerNFCe(xml ?? "", context);
             break;
           case "CANC_PDV":
             break;
         }
       }
     }).onError((e) {
+      atualizaPermiteCancelar(false);
       atualizaBuffer("Problema ao transacionar o cartão: \n$e");
     });
   }
@@ -146,7 +145,7 @@ abstract class TransacaoTefBase with Store {
     //Capturar a transação cartão
     //Salvar a via do cliente em memória
     if (value.isNotEmpty) {
-      Map <String, dynamic> valueMap = json.decode(value);
+      Map<String, dynamic> valueMap = json.decode(value);
       TransacaoCartao transacaoCartao = TransacaoCartao.fromJson(valueMap);
       viaCliente = transacaoCartao.viaCliente!;
       vendaController.nota.finalizadoras[0].transacaoCartao = transacaoCartao;
@@ -154,16 +153,15 @@ abstract class TransacaoTefBase with Store {
     }
   }
 
-  Future<void> _tratativasRetornoFalha(String motivo) async {
-    String motivoTratado =
-    (motivo.isNotEmpty ? 'Motivo: $motivo' : '');
+  Future<void> _tratativasRetornoFalha(
+      String motivo, BuildContext context) async {
+    String motivoTratado = (motivo.isNotEmpty ? 'Motivo: $motivo' : '');
 
     atualizaPermiteCancelar(false);
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) =>
-            DialogAuto(
+        builder: (context) => DialogAuto(
               showCancelButton: false,
               title: "Pagamento não aprovado",
               message: '$motivoTratado \n\n Tentar novamente ?',
@@ -197,13 +195,14 @@ abstract class TransacaoTefBase with Store {
       //Confirmar transação TEF
       await finalizar(vendaController.nota.id!, true);
     } catch (e) {
+      atualizaPermiteCancelar(false);
       atualizaBuffer(
-          'Desculpe! \n\n Ocorreu um problema na finalização do pedido: \n\n  [$e]');
-      print('[ERRO - tratativasPosTransacao]: $e');
+          'Desculpe! \n\n Ocorreu um problema na finalização do pedido: \n\n  [${e.toString()}]');
+      print('[ERRO - tratativasPosTransacao]: ${e.toString()}');
     }
   }
 
-  Future<void> _printerNFCe(String xml) async {
+  Future<void> _printerNFCe(String xml, BuildContext context) async {
     try {
       print('xml >> $xml');
       if (xml.isEmpty) {
@@ -216,41 +215,37 @@ abstract class TransacaoTefBase with Store {
             vendaController.nota,
             appController.servicoAutoAtendimento,
             itens,
-            appController
-                .getImpressoraVenda()
-                .impressora!,
+            appController.getImpressoraVenda().impressora!,
             senha: vendaController.nota.consumo!.comanda.toString(),
             mensagemRodape: viaCliente);
       } else {
         await PrinterRepository.printerNFCe(appController.pwsConfigLocal, xml,
-            appController
-                .getImpressoraVenda()
-                .impressora!,
+            appController.getImpressoraVenda().impressora!,
             senha: vendaController.nota.consumo!.senhaAtendimento ??
                 vendaController.nota.consumo!.comanda.toString(),
-
             mensagemRodape: viaCliente);
       }
 
-      if (appController.servicoAutoAtendimento.impressaoVenda.equals(
-          ImpressaoVenda.IMPRIME)) {
-        _printConsumo();
+      if (appController.servicoAutoAtendimento.impressaoVenda
+          .equals(ImpressaoVenda.IMPRIME)) {
+        _printConsumo(context);
       } else {
         _avancar();
       }
     } catch (e) {
       _tentarNovamentePrinter(
           "Desculpe, houve um problema na impressão do cupom fiscal",
-              () => _printerNFCe(xml),
-              () => _printConsumo());
+          () => _printerNFCe(xml, context),
+          () => _printConsumo(context),
+          context);
       return;
     }
   }
 
-  Future<void> _printConsumo() async {
+  Future<void> _printConsumo(BuildContext context) async {
     try {
-      if (appController.servicoAutoAtendimento.impressaoVenda.equals(
-          ImpressaoVenda.IMPRIME)) {
+      if (appController.servicoAutoAtendimento.impressaoVenda
+          .equals(ImpressaoVenda.IMPRIME)) {
         List<NotaItem> itens = [];
         for (var ni in vendaController.itensLancados) {
           itens.add(ni.notaItem);
@@ -260,9 +255,7 @@ abstract class TransacaoTefBase with Store {
             vendaController.nota,
             appController.servicoAutoAtendimento,
             itens,
-            appController
-                .getImpressoraVenda()
-                .impressora!,
+            appController.getImpressoraVenda().impressora!,
             senha: vendaController.nota.consumo!.comanda.toString(),
             mensagemRodape: viaCliente);
       }
@@ -270,19 +263,19 @@ abstract class TransacaoTefBase with Store {
     } catch (e) {
       _tentarNovamentePrinter(
           "Desculpe, houve um problema na impressão do pedido",
-              () => _printConsumo(),
-              () => _avancar());
+          () => _printConsumo(context),
+          () => _avancar(),
+          context);
       return;
     }
   }
 
   void _tentarNovamentePrinter(String title, Function onConfirmar,
-      Function onCancelar) {
+      Function onCancelar, BuildContext context) {
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (c) =>
-            DialogAuto(
+        builder: (c) => DialogAuto(
               showCancelButton: true,
               title: title,
               message: "",

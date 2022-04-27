@@ -17,7 +17,6 @@ class TransacaoTefComponent {
 
   initialize(BuildContext context) {
     this.context = context;
-    controller.context = context;
   }
 
   body() {

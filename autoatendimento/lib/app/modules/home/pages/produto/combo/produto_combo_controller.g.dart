@@ -9,7 +9,7 @@ part of 'produto_combo_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ProdutoComboController on ProdutoComboBase, Store {
-  final _$menuAtom = Atom(name: 'ProdutoComboBase.menu');
+  late final _$menuAtom = Atom(name: 'ProdutoComboBase.menu', context: context);
 
   @override
   NotaItem? get menu {
@@ -24,8 +24,8 @@ mixin _$ProdutoComboController on ProdutoComboBase, Store {
     });
   }
 
-  final _$ProdutoComboBaseActionController =
-  ActionController(name: 'ProdutoComboBase');
+  late final _$ProdutoComboBaseActionController =
+      ActionController(name: 'ProdutoComboBase', context: context);
 
   @override
   dynamic setarCarrinhoOriginal(ProdutoCarrinho original) {

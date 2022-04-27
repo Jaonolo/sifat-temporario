@@ -9,7 +9,8 @@ part of 'transacao_tef_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$TransacaoTefController on TransacaoTefBase, Store {
-  final _$bufferSitefAtom = Atom(name: 'TransacaoTefBase.bufferSitef');
+  late final _$bufferSitefAtom =
+      Atom(name: 'TransacaoTefBase.bufferSitef', context: context);
 
   @override
   String? get bufferSitef {
@@ -24,7 +25,8 @@ mixin _$TransacaoTefController on TransacaoTefBase, Store {
     });
   }
 
-  final _$permiteCancelarAtom = Atom(name: 'TransacaoTefBase.permiteCancelar');
+  late final _$permiteCancelarAtom =
+      Atom(name: 'TransacaoTefBase.permiteCancelar', context: context);
 
   @override
   bool get permiteCancelar {
@@ -39,8 +41,8 @@ mixin _$TransacaoTefController on TransacaoTefBase, Store {
     });
   }
 
-  final _$comunicaWebSocketAsyncAction =
-  AsyncAction('TransacaoTefBase.comunicaWebSocket');
+  late final _$comunicaWebSocketAsyncAction =
+      AsyncAction('TransacaoTefBase.comunicaWebSocket', context: context);
 
   @override
   Future<void> comunicaWebSocket(BuildContext context) {
@@ -48,8 +50,8 @@ mixin _$TransacaoTefController on TransacaoTefBase, Store {
         .run(() => super.comunicaWebSocket(context));
   }
 
-  final _$TransacaoTefBaseActionController =
-  ActionController(name: 'TransacaoTefBase');
+  late final _$TransacaoTefBaseActionController =
+      ActionController(name: 'TransacaoTefBase', context: context);
 
   @override
   dynamic atualizaBuffer(String value) {

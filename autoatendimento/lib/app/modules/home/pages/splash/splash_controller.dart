@@ -82,9 +82,9 @@ abstract class SplashBase with Store {
       _concluir();
     } catch (e) {
       print(e);
-      if (e is WaybeException && e.exception != null) {
+      if (e is WaybeException) {
         changeBotaoDetalhesErro(true, e.mensagem);
-        return changeStatus('$erro_base \n\n ${e.exception.message}');
+        return changeStatus('$erro_base \n\n ${(e.exception != null) ? e.exception.message : ""}');
       }
     }
   }
@@ -133,7 +133,7 @@ abstract class SplashBase with Store {
         appController.token = dto.servicoAutoAtendimento!.token!;
       } else {
         throw WaybeException('Problema ao realizar login na API',
-            exception: response.body as PwsException);
+            exception: response.content);
       }
     });
 

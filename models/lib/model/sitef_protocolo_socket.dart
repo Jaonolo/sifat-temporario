@@ -7,8 +7,7 @@ class SitefProtocoloSocket {
   SitefProtocoloSocket(); //CREDITO ou DEBITO
 
   String toJson() {
-    return '{"funcao": "${this.funcao}"${param != null ? ', "param": ${param!
-        .toJson()}' : ''}}';
+    return '{"funcao": "${this.funcao}"${param != null ? ', "param": ${(param != null) ? param!.toJson() : ''}' : ''}}';
   }
 }
 
@@ -20,10 +19,10 @@ class SitefProtocoloSocketParam {
 
   String toJson() {
     return '{"'
-        "cupomFiscal: ${this.cupomFiscal}, "
-        "confirmaTransacao: ${this.confirmaTransacao}, "
-        "valor: ${this.valor},"
-        "tipoPagamentoTEF: ${this.tipoPagamentoTEF}"
+        'cupomFiscal": "${this.cupomFiscal}"'
+        '${this.confirmaTransacao != null ? ',"confirmaTransacao": "${this.confirmaTransacao}"' : ''}'
+        '${this.valor != null ? ',"valor": ${this.valor}' : ''}'
+        '${this.tipoPagamentoTEF != null ? ',"tipoPagamentoTEF": "${this.tipoPagamentoTEF}"' : ''}'
         '}';
   }
 }
