@@ -9,6 +9,7 @@ import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 import 'package:utils/utils/string_utils.dart';
 
@@ -60,8 +61,7 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
                 Expanded(
                     flex: 12,
                     child: (widget.produtoCarrinho.notaItem.produtoEmpresa!
-                        .produto!.pacote ==
-                        "NENHUM" ||
+                        .produto!.pacote.equals(TipoPacote.NENHUM) ||
                         widget.produtoCarrinho.notaItem.produtoEmpresa!
                             .produto!.grades.isEmpty)
                         ? const SizedBox()
@@ -200,18 +200,19 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
           ProdutoAdicionalPage(vendaController.itensLancados[widget.index]));
       return;
     }
-    switch (widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote!
-        .toUpperCase()) {
-      case "ADICIONAIS":
+    switch (widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote) {
+      case TipoPacote.ADICIONAIS:
         homeController.habilitarCarrinho = true;
         homeController.addPalco(
             ProdutoAdicionalPage(vendaController.itensLancados[widget.index]));
         break;
-      case "COMBO":
+      case TipoPacote.COMBO:
         homeController.habilitarCarrinho = true;
         homeController.addPalco(
             ProdutoComboPage(vendaController.itensLancados[widget.index]));
         break;
+      default:
+        throw Exception("TipoPacote não implementado na edicão");
     }
   }
 

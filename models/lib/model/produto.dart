@@ -63,9 +63,8 @@ class Produto {
 
   BigDecimal? pesoBruto = BigDecimal.ZERO();
 
-  String? pacote;
-
-  //enum pacoteEnum {  Nenhum,  Combo,  Composto,  Rodízio,  Cesta/Kit,  Adicionais,  };{
+  @JsonKey(defaultValue: TipoPacote.NENHUM)
+  TipoPacote pacote = TipoPacote.NENHUM;
 
   String? grade;
 
@@ -116,6 +115,15 @@ class Produto {
         principal = element;
     });
     return principal;
+  }
+
+  String get imagemPrincipal {
+    ProdutoArquivo? arquivo = arquivoPrincipal();
+    if (arquivo != null) {
+      return arquivo.link!;
+    } else {
+      return "";
+    }
   }
 
   Grade? get getGradePadrao {

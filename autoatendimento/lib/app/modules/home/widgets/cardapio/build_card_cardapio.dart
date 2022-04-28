@@ -76,7 +76,7 @@ class BuildCardCardapio {
   static Widget _createCardFinal(ProdutoEmpresa produtoEmpresa,
       GradeEmpresa gradeEmpresa, BuildContext context) {
     String price;
-    if (produtoEmpresa.produto!.pacote == "COMBO") {
+    if (produtoEmpresa.produto!.pacote.equals(TipoPacote.COMBO)) {
       price =
       "A partir de R\$ ${gradeEmpresa.precoVenda(appController.tabelaPreco.id!)
           .toStringAsFixed(2)}";
@@ -118,8 +118,8 @@ class BuildCardCardapio {
           await vendaController.insereNotaAPI(context);
         }
         appController.reiniciaTimer();
-        switch (produtoEmpresa.produto!.pacote!.toUpperCase()) {
-          case "NENHUM":
+        switch (produtoEmpresa.produto!.pacote) {
+          case TipoPacote.NENHUM:
             GradeEmpresa? grade = gradeTamanho != null
                 ? gradeTamanho
                 : produtoEmpresa.gradePadrao;
@@ -141,7 +141,7 @@ class BuildCardCardapio {
 
             vendaController.adicionarProdutoCarrinho(ProdutoCarrinho(notaItem));
             break;
-          case "ADICIONAIS":
+          case TipoPacote.ADICIONAIS:
             homeController.habilitarCarrinho = true;
             GradeEmpresa? grade = gradeTamanho != null
                 ? gradeTamanho
@@ -154,13 +154,16 @@ class BuildCardCardapio {
             homeController
                 .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
             break;
-          case "COMBO":
+          case TipoPacote.COMBO:
             homeController.habilitarCarrinho = true;
             var notaItem = NotaItemUtils.instanciar(vendaController.nota.id!,
                 TipoItem.COMBO, produtoEmpresa, appController.tabelaPreco.id!);
             homeController
                 .addPalco(ProdutoComboPage(ProdutoCarrinho(notaItem)));
             break;
+
+          default:
+            throw Exception("TipoPacote não implementado");
         }
       } catch (e, s) {
         print('## [ERRO] _functionCardFinal');

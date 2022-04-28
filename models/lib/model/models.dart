@@ -35,6 +35,7 @@ part 'enum/visao_foto.dart';
 
 part 'enum/formato_arquivo.dart';
 
+part 'enum/tipo_pacote.dart';
 
 //#################### OBJECT  ########################
 part 'big_decimal.dart';
