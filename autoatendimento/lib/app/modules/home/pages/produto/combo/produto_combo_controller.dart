@@ -12,35 +12,16 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
-import '../abstract/controller_produto_generico_abstact.dart';
+import '../abstract/produto_generico_abstact_controller.dart';
 
 part "produto_combo_controller.g.dart";
 
-
-
 class ProdutoComboController = ProdutoComboBase with _$ProdutoComboController;
 
-abstract class ProdutoComboBase extends ControllerProdutoGenericoAbstract with Store {
+abstract class ProdutoComboBase extends ProdutoGenericoAbstractController with Store {
   AppController appController = Modular.get();
   VendaController vendaController = Modular.get();
   HomeController homeController = Modular.get();
-
-  ProdutoCarrinho produtoCarrinhoOriginal = ProdutoCarrinho(NotaItem());
-
-  @observable
-  TipoBotaoMenus tipoBotaoMenus = TipoBotaoMenus.PROXIMO;
-
-  @observable
-  ProdutoCarrinho produtoCarrinho = ProdutoCarrinho(NotaItem());
-
-  @observable
-  ProdutoMenu? produtoMenu;
-
-  @observable
-  ProdutoMenu? proximoMenu;
-
-  @observable
-  ProdutoMenu? anteriorMenu;
 
   @observable
   NotaItem? menu;
@@ -131,60 +112,5 @@ abstract class ProdutoComboBase extends ControllerProdutoGenericoAbstract with S
       NotaItemUtils.atualizaTotais(produtoCarrinho.notaItem);
     }
     proximo();
-  }
-
-  //Paginação (PageController)
-
-  late int index;
-  late PageController pageController;
-
-  Future<void> proximo() async {
-    await Future.delayed(const Duration(milliseconds: 100));
-    pageController.nextPage(
-        duration: const Duration(milliseconds: 200), curve: Curves.ease);
-  }
-
-  void anterior() {
-    pageController.previousPage(
-        duration: const Duration(milliseconds: 200), curve: Curves.ease);
-  }
-
-  @action
-  void atualizaTipoBotaoMenus(
-      {bool revisao = false, bool escolheuCompomenteExtra = false}) {
-    if (revisao) {
-      tipoBotaoMenus = TipoBotaoMenus.REVISAO;
-    } else if (escolheuCompomenteExtra) {
-      tipoBotaoMenus = TipoBotaoMenus.EXTRA_ESCOLHEU;
-    } else if (produtoMenu == null) {
-      tipoBotaoMenus = TipoBotaoMenus.ADICIONAR_CARRINHO;
-    } else if (proximoMenu != null) {
-      tipoBotaoMenus = TipoBotaoMenus.PROXIMO;
-      if (proximoMenu!.tipo == "COMPONENTE_EXTRA") {
-        tipoBotaoMenus = TipoBotaoMenus.EXTRA_NAO_ESCOLHEU;
-      }
-    }
-  }
-
-  Future<void> atualizaMenus(int index) async {
-    this.index = index;
-
-    produtoMenu = (index <
-        produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index]
-        : null;
-    proximoMenu = (index + 1 <
-        produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index + 1]
-        : null;
-    anteriorMenu = (index > 0)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index - 1]
-        : null;
-
-    _changeNotaItemMenu();
-    produtoCarrinho.notaItem.produtoEmpresa!.produto!
-        .menus.length == index;
-
-    atualizaTipoBotaoMenus(revisao: produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length - 1 == index);
   }
 }

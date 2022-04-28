@@ -1,5 +1,5 @@
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/abstract/controller_produto_generico_abstact.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/abstract/produto_generico_abstact_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/enum/tipo_botao.dart';
@@ -25,7 +25,7 @@ class PalcoProdutoGenerico extends StatefulWidget {
 class _PalcoProdutoGenericoState extends State<PalcoProdutoGenerico> {
   final HomeController homeController = Modular.get();
   late TipoPacote tipoPacote;
-  late ControllerProdutoGenericoAbstract controller;
+  late ProdutoGenericoAbstractController controller;
 
   @override
   void initState() {

@@ -10,35 +10,18 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 
-import '../abstract/controller_produto_generico_abstact.dart';
+import '../abstract/produto_generico_abstact_controller.dart';
 
 part "produto_adicional_controller.g.dart";
 
 class ProdutoAdicionalController = ProdutoAdicionalBase
     with _$ProdutoAdicionalController;
 
-abstract class ProdutoAdicionalBase extends ControllerProdutoGenericoAbstract with Store  {
+abstract class ProdutoAdicionalBase extends ProdutoGenericoAbstractController with Store  {
   HomeController homeController = Modular.get();
   VendaController vendaController = Modular.get();
   AppController appController = Modular.get();
-
   ProdutoComboController produtoComboController = Modular.get();
-  ProdutoCarrinho produtoCarrinhoOriginal = ProdutoCarrinho(NotaItem());
-
-  @observable
-  TipoBotaoMenus tipoBotaoMenus = TipoBotaoMenus.PROXIMO;
-
-  @observable
-  ProdutoCarrinho produtoCarrinho = ProdutoCarrinho(NotaItem());
-
-  @observable
-  ProdutoMenu? produtoMenu;
-
-  @observable
-  ProdutoMenu? proximoMenu;
-
-  @observable
-  ProdutoMenu? anteriorMenu;
 
   @observable
   int radiovalue = 0;
@@ -79,28 +62,6 @@ abstract class ProdutoAdicionalBase extends ControllerProdutoGenericoAbstract wi
   }
 
   @action
-  Future<void> atualizaMenus(int index) async {
-    //menu atual
-    produtoMenu = (index <
-        produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index]
-        : null;
-
-    //o proximo menu
-    proximoMenu =
-    (index + 1 < produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index + 1]
-        : null;
-
-    //o menu anterior
-    anteriorMenu = (index > 0)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index - 1]
-        : null;
-
-    atualizaTipoBotaoMenus();
-  }
-
-  @action
   changeProdutoCarrinho(ProdutoCarrinho value) {
     produtoCarrinho = value;
   }
@@ -108,29 +69,5 @@ abstract class ProdutoAdicionalBase extends ControllerProdutoGenericoAbstract wi
   @action
   void selecaoRadio(int n) {
     radiovalue = n;
-  }
-
-  //Paginação (PageController)
-  int index = 0;
-  late PageController pageController;
-
-  Future<void> proximo() async {
-    await Future.delayed(const Duration(milliseconds: 100));
-    pageController.nextPage(
-        duration: const Duration(milliseconds: 200), curve: Curves.ease);
-  }
-
-  void anterior() {
-    pageController.previousPage(
-        duration: const Duration(milliseconds: 200), curve: Curves.ease);
-  }
-
-  @action
-  void atualizaTipoBotaoMenus({bool revisao = false, bool escolheuCompomenteExtra = false}){
-    if (proximoMenu == null) {
-      tipoBotaoMenus = TipoBotaoMenus.ADICIONAR_CARRINHO;
-    } else if (proximoMenu != null) {
-      tipoBotaoMenus = TipoBotaoMenus.PROXIMO;
-    }
   }
 }

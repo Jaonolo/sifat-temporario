@@ -1,4 +1,4 @@
-import 'package:autoatendimento/app/modules/home/pages/produto/abstract/controller_produto_generico_abstact.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/abstract/produto_generico_abstact_controller.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_primario.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_secundario.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
@@ -33,7 +33,7 @@ extension TipoBotaoMenusExtension on TipoBotaoMenus{
     }
   }
 
-  Function acaoBotao(ControllerProdutoGenericoAbstract abstract){
+  Function acaoBotao(ProdutoGenericoAbstractController abstract){
     switch (this) {
       case TipoBotaoMenus.PROXIMO:
       case TipoBotaoMenus.EXTRA_ESCOLHEU:
@@ -45,7 +45,7 @@ extension TipoBotaoMenusExtension on TipoBotaoMenus{
     }
   }
 
-  Widget botaoPronto(BuildContext context, ControllerProdutoGenericoAbstract abstract){
+  Widget botaoPronto(BuildContext context, ProdutoGenericoAbstractController abstract){
     switch(this){
       case TipoBotaoMenus.EXTRA_NAO_ESCOLHEU:
         return BotaoSecundario(

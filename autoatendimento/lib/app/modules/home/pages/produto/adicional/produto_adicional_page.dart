@@ -34,7 +34,6 @@ class ProdutoAdicionalPage extends StatefulWidget {
 
     controller.produtoCarrinho = produtoCarrinhoClone;
     controller.atualizaMenus(0);
-    controller.index = 0;
   }
 
   @override
@@ -46,8 +45,8 @@ class _ProdutoAdicionalPageState extends State<ProdutoAdicionalPage>
 
   @override
   void initState() {
-    controller.pageController = PageController(initialPage: controller.index);
-    controller.atualizaMenus(controller.index);
+    controller.pageController = PageController(initialPage: 0);
+    controller.atualizaMenus(0);
     super.initState();
   }
 

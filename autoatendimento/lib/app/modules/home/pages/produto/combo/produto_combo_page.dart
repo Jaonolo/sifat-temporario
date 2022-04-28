@@ -33,7 +33,6 @@ class ProdutoComboPage extends StatefulWidget {
     controller.produtoCarrinho = produtoCarrinhoClone;
     controller.proximoMenu =
     produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[0];
-    controller.index = 0;
   }
 
   @override
@@ -45,7 +44,7 @@ class _ProdutoComboPageState extends State<ProdutoComboPage>
 
   @override
   void initState() {
-    controller.pageController = PageController(initialPage: controller.index);
+    controller.pageController = PageController(initialPage: 0);
     super.initState();
   }
 
