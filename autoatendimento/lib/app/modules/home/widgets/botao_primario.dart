@@ -28,9 +28,6 @@ class BotaoPrimario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppController appController = Modular.get();
-    Orientation orientation = MediaQuery
-        .of(context)
-        .orientation;
     heightScreen = MediaQuery
         .of(context)
         .size
@@ -52,9 +49,7 @@ class BotaoPrimario extends StatelessWidget {
             Text(descricao,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: orientation == Orientation.landscape
-                        ? FontUtils.h2(context)
-                        : FontUtils.h3(context))),
+                    fontSize: FontUtils.h2(context))),
             if (iconData != null)
               Icon(
                 iconData,

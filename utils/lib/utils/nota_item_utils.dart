@@ -146,7 +146,7 @@ class NotaItemUtils {
 //
   static NotaItem itemComboToNotaItem(int idNota,
       ProdutoMenuComponente componente, int idEmpresa, int idTabelaPreco,
-      {int? idVendedor, int? idUsuario}) {
+      {BigDecimal? quantidade,int? idVendedor, int? idUsuario}) {
     ProdutoMenuComponenteEmpresa componenteEmpresa = componente
         .componenteEmpresas
         .firstWhere((ce) => ce.idEmpresa == idEmpresa);
@@ -166,7 +166,7 @@ class NotaItemUtils {
 //    item.idEstacao = AppConfig.application.estacao.id;
     item.idVendedor = idVendedor;
     item.idUsuario = idUsuario;
-    item.quantidade = componente.quantidade;
+    item.quantidade = quantidade ?? componente.quantidade;
     item.idGrade = gradeEmpresa.id;
     item.grade = gradeEmpresa;
     item.precoUnitario =

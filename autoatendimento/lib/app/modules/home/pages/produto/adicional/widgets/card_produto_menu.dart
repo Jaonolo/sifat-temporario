@@ -1,5 +1,6 @@
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,12 +28,10 @@ class CardProdutoMenu extends StatefulWidget {
 class _CardProdutoMenuState extends State<CardProdutoMenu> {
   final AppController appController = Modular.get();
   final ProdutoAdicionalController produtoAdicionalController = Modular.get();
+  final ProdutoComboController produtoComboController = Modular.get();
 
   @override
   Widget build(BuildContext context) {
-    Orientation orientation = MediaQuery
-        .of(context)
-        .orientation;
     return Column(
       children: [
         Expanded(
@@ -42,9 +41,7 @@ class _CardProdutoMenuState extends State<CardProdutoMenu> {
                   child: Text(
                     widget.produtoMenu.descricao!.toUpperCase(),
                     style: TextStyle(
-                        fontSize: orientation == Orientation.landscape
-                            ? FontUtils.h3(context)
-                            : FontUtils.h3(context)),
+                        fontSize:  FontUtils.h3(context)),
                   )),
               _mostrarQuantidade(),
               _listGenerate(),
@@ -56,8 +53,7 @@ class _CardProdutoMenuState extends State<CardProdutoMenu> {
   }
 
   Widget _mostrarQuantidade() {
-    if (widget.produtoMenu.tipo == 'COMPONENTE_EXTRA' &&
-        widget.produtoMenu.quantidadeMaxima != 0) {
+    if (widget.produtoMenu.quantidadeMaxima != 0) {
       return Center(
         child: Text(
             (widget.produtoMenu.quantidadeMaxima == 1)
@@ -85,8 +81,8 @@ class _CardProdutoMenuState extends State<CardProdutoMenu> {
         }));
   }
 
-  //veriica se é menu extra ou observaçao
-  _extraOuObservacao(int index) {
+  //verifica se é menu extra ou observaçao
+  Widget _extraOuObservacao(int index) {
     NotaItem? notaitem;
     switch (widget.produtoMenu.tipo) {
       case "OBSERVACAO":
@@ -118,6 +114,28 @@ class _CardProdutoMenuState extends State<CardProdutoMenu> {
 
         return CardProdutoExtra(notaitem, widget.produtoMenu,
             widget.produtoMenu.componentes[index]);
+
+      case "COMPONENTE_FIXO":
+      //Verifica se já tem algum subitem desse componente lançado no item principal
+        notaitem = NotaItemUtils.localizaSubitemJaLancado(
+            produtoAdicionalController.produtoCarrinho.notaItem,
+            widget.produtoMenu,
+            widget.produtoMenu.componentes[index]);
+
+        if (notaitem == null) {
+          notaitem = NotaItemUtils.itemComboToNotaItem(
+              produtoComboController.produtoCarrinho.notaItem.idNota!,
+              widget.produtoMenu.componentes[index],
+              produtoComboController.produtoCarrinho.notaItem.produtoEmpresa!
+                  .idEmpresa!,
+              appController.tabelaPreco.id!,
+              quantidade: BigDecimal.ZERO());
+        }
+
+        return CardProdutoExtra(notaitem, widget.produtoMenu,
+            widget.produtoMenu.componentes[index]);
+
     }
+    return SizedBox();
   }
 }

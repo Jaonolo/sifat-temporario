@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_page.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/enum/tipo_botao.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
@@ -11,24 +12,34 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
+import '../abstract/controller_produto_generico_abstact.dart';
 
 part "produto_combo_controller.g.dart";
 
+
+
 class ProdutoComboController = ProdutoComboBase with _$ProdutoComboController;
 
-abstract class ProdutoComboBase with Store {
+abstract class ProdutoComboBase extends ControllerProdutoGenericoAbstract with Store {
   AppController appController = Modular.get();
   VendaController vendaController = Modular.get();
   HomeController homeController = Modular.get();
 
   ProdutoCarrinho produtoCarrinhoOriginal = ProdutoCarrinho(NotaItem());
 
+  @observable
+  TipoBotaoMenus tipoBotaoMenus = TipoBotaoMenus.PROXIMO;
+
+  @observable
   ProdutoCarrinho produtoCarrinho = ProdutoCarrinho(NotaItem());
 
+  @observable
   ProdutoMenu? produtoMenu;
 
+  @observable
   ProdutoMenu? proximoMenu;
 
+  @observable
   ProdutoMenu? anteriorMenu;
 
   @observable
@@ -90,7 +101,7 @@ abstract class ProdutoComboBase with Store {
     bool temMenuObservacao = item.produtoEmpresa!.produto!.menus
         .any((element) => element.tipo == "OBSERVACAO");
 
-    if (item.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
+    if (item.produtoEmpresa!.produto!.pacote.equals(TipoPacote.ADICIONAIS) ||
         temMenuObservacao) {
       homeController.addPalco(ProdutoAdicionalPage(ProdutoCarrinho(item)));
       return;
@@ -128,9 +139,6 @@ abstract class ProdutoComboBase with Store {
   late PageController pageController;
 
   Future<void> proximo() async {
-    // if (produtoMenu != null && produtoMenu.tipo == "COMPONENTE_FIXO" && (menu == null || menu.subitens.isEmpty)) {
-    //   return;
-    // }
     await Future.delayed(const Duration(milliseconds: 100));
     pageController.nextPage(
         duration: const Duration(milliseconds: 200), curve: Curves.ease);
@@ -141,7 +149,24 @@ abstract class ProdutoComboBase with Store {
         duration: const Duration(milliseconds: 200), curve: Curves.ease);
   }
 
-  void atualizaMenus(int index) {
+  @action
+  void atualizaTipoBotaoMenus(
+      {bool revisao = false, bool escolheuCompomenteExtra = false}) {
+    if (revisao) {
+      tipoBotaoMenus = TipoBotaoMenus.REVISAO;
+    } else if (escolheuCompomenteExtra) {
+      tipoBotaoMenus = TipoBotaoMenus.EXTRA_ESCOLHEU;
+    } else if (produtoMenu == null) {
+      tipoBotaoMenus = TipoBotaoMenus.ADICIONAR_CARRINHO;
+    } else if (proximoMenu != null) {
+      tipoBotaoMenus = TipoBotaoMenus.PROXIMO;
+      if (proximoMenu!.tipo == "COMPONENTE_EXTRA") {
+        tipoBotaoMenus = TipoBotaoMenus.EXTRA_NAO_ESCOLHEU;
+      }
+    }
+  }
+
+  Future<void> atualizaMenus(int index) async {
     this.index = index;
 
     produtoMenu = (index <
@@ -157,5 +182,9 @@ abstract class ProdutoComboBase with Store {
         : null;
 
     _changeNotaItemMenu();
+    produtoCarrinho.notaItem.produtoEmpresa!.produto!
+        .menus.length == index;
+
+    atualizaTipoBotaoMenus(revisao: produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length - 1 == index);
   }
 }

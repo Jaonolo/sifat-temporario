@@ -14,86 +14,50 @@ class FontUtils {
   */
 
   static double h1(BuildContext context) {
-    var aspectRatio = MediaQuery
-        .of(context)
-        .size
-        .aspectRatio;
+    var aspectRatio = MediaQuery.of(context).size.aspectRatio;
     var diffAspectRatio = (aspectRatioPerfeito - aspectRatio) * 10;
     double retorno =
-        (MediaQuery
-            .of(context)
-            .size
-            .width / 18) + (diffAspectRatio);
+        (MediaQuery.of(context).size.width / 18) + (diffAspectRatio);
     return retorno;
   }
 
   static double h2(BuildContext context) {
-    var aspectRatio = MediaQuery
-        .of(context)
-        .size
-        .aspectRatio;
+    var aspectRatio = MediaQuery.of(context).size.aspectRatio;
     var diffAspectRatio = (aspectRatioPerfeito - aspectRatio) * 10;
-    double retorno =
-        (MediaQuery
-            .of(context)
-            .size
-            .width / 36) + (diffAspectRatio);
+    double retorno = (MediaQuery.of(context).size.width / 36) + (diffAspectRatio);
+    if(MediaQuery.of(context).orientation == Orientation.landscape){
+      retorno = retorno * 1;
+    }
+
     return retorno;
   }
 
   static double h3(BuildContext context) {
-    var aspectRatio = MediaQuery
-        .of(context)
-        .size
-        .aspectRatio;
+    var aspectRatio = MediaQuery.of(context).size.aspectRatio;
     var diffAspectRatio = (aspectRatioPerfeito - aspectRatio) * 10;
     double retorno =
-        (MediaQuery
-            .of(context)
-            .size
-            .width / 45) + (diffAspectRatio);
+        (MediaQuery.of(context).size.width / 45) + (diffAspectRatio);
     return retorno;
   }
 
   static double h4(BuildContext context) {
-    var aspectRatio = MediaQuery
-        .of(context)
-        .size
-        .aspectRatio;
+    var aspectRatio = MediaQuery.of(context).size.aspectRatio;
     var diffAspectRatio = (aspectRatioPerfeito - aspectRatio) * 10;
     double retorno =
-        (MediaQuery
-            .of(context)
-            .size
-            .width / 60) + (diffAspectRatio);
+        (MediaQuery.of(context).size.width / 60) + (diffAspectRatio);
     return retorno;
   }
 
   static void debugFonts(BuildContext context) {
-    var aspectRatio = MediaQuery
-        .of(context)
-        .size
-        .aspectRatio;
+    var aspectRatio = MediaQuery.of(context).size.aspectRatio;
     var diffAspectRatio = (aspectRatioPerfeito - aspectRatio) * 10;
     print(
-        'Font H1: ${(MediaQuery
-            .of(context)
-            .size
-            .width / 15) + (diffAspectRatio)}');
+        'Font H1: ${(MediaQuery.of(context).size.width / 15) + (diffAspectRatio)}');
     print(
-        'Font H2: ${(MediaQuery
-            .of(context)
-            .size
-            .width / 24) + (diffAspectRatio)}');
+        'Font H2: ${(MediaQuery.of(context).size.width / 24) + (diffAspectRatio)}');
     print(
-        'Font H3: ${(MediaQuery
-            .of(context)
-            .size
-            .width / 38) + (diffAspectRatio)}');
+        'Font H3: ${(MediaQuery.of(context).size.width / 38) + (diffAspectRatio)}');
     print(
-        'Font H4: ${(MediaQuery
-            .of(context)
-            .size
-            .width / 60) + (diffAspectRatio)}');
+        'Font H4: ${(MediaQuery.of(context).size.width / 60) + (diffAspectRatio)}');
   }
 }

@@ -1,6 +1,7 @@
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/enum/tipo_botao.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
@@ -9,18 +10,23 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 
+import '../abstract/controller_produto_generico_abstact.dart';
+
 part "produto_adicional_controller.g.dart";
 
 class ProdutoAdicionalController = ProdutoAdicionalBase
     with _$ProdutoAdicionalController;
 
-abstract class ProdutoAdicionalBase with Store {
+abstract class ProdutoAdicionalBase extends ControllerProdutoGenericoAbstract with Store  {
   HomeController homeController = Modular.get();
   VendaController vendaController = Modular.get();
   AppController appController = Modular.get();
 
   ProdutoComboController produtoComboController = Modular.get();
   ProdutoCarrinho produtoCarrinhoOriginal = ProdutoCarrinho(NotaItem());
+
+  @observable
+  TipoBotaoMenus tipoBotaoMenus = TipoBotaoMenus.PROXIMO;
 
   @observable
   ProdutoCarrinho produtoCarrinho = ProdutoCarrinho(NotaItem());
@@ -90,6 +96,8 @@ abstract class ProdutoAdicionalBase with Store {
     anteriorMenu = (index > 0)
         ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index - 1]
         : null;
+
+    atualizaTipoBotaoMenus();
   }
 
   @action
@@ -115,5 +123,14 @@ abstract class ProdutoAdicionalBase with Store {
   void anterior() {
     pageController.previousPage(
         duration: const Duration(milliseconds: 200), curve: Curves.ease);
+  }
+
+  @action
+  void atualizaTipoBotaoMenus({bool revisao = false, bool escolheuCompomenteExtra = false}){
+    if (proximoMenu == null) {
+      tipoBotaoMenus = TipoBotaoMenus.ADICIONAR_CARRINHO;
+    } else if (proximoMenu != null) {
+      tipoBotaoMenus = TipoBotaoMenus.PROXIMO;
+    }
   }
 }

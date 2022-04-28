@@ -1,8 +1,8 @@
-// ignore_for_file: unnecessary_null_comparison
-
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/adicional/widgets/card_produto_menu.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/widgets/palco_produto_generico.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_primario.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
+import 'package:collection/collection.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
 class ProdutoComboComponent {
@@ -20,131 +21,13 @@ class ProdutoComboComponent {
   final HomeController homeController = Modular.get();
   final VendaController vendaController = Modular.get();
   final ProdutoComboController controller = Modular.get();
-  late Orientation orientation;
 
   initialize(BuildContext context) {
-    orientation = MediaQuery
-        .of(context)
-        .orientation;
-
     this.context = context;
   }
 
-  body() {
-    return Column(
-      children: [
-        Expanded(
-          flex: 2,
-          child: Container(),
-        ),
-        Expanded(
-          flex: 96,
-          child: _card(),
-        ),
-        Expanded(
-          flex: 2,
-          child: Container(),
-        ),
-      ],
-    );
-  }
-
-  Widget _card() {
-    return Row(
-      children: [
-        Expanded(flex: 1, child: Container()),
-        Expanded(
-          flex: 90,
-          child: Card(
-            elevation: 5,
-            child: Column(
-              children: [
-                Expanded(
-                  child: Container(),
-                ),
-                Expanded(flex: 10, child: _cabecalhoCard()),
-                Expanded(
-                  child: Container(),
-                ),
-                Expanded(
-                  flex: 90,
-                  child: _bordasPageView(),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Expanded(flex: 1, child: Container()),
-      ],
-    );
-  }
-
-  Widget _cabecalhoCard() {
-    return Row(
-      children: [
-        Expanded(
-            flex: 20,
-            child: BotaoSetaVoltar(function: () {
-              if (controller.anteriorMenu == null) {
-                homeController.removePalco();
-                homeController.habilitarCarrinho = false;
-              } else {
-                controller.anterior();
-              }
-            })),
-        Expanded(flex: 60, child: _txtTitulo()),
-        Expanded(flex: 20, child: Container()),
-      ],
-    );
-  }
-
-  Widget _txtTitulo() {
-    return orientation == Orientation.landscape
-        ? InkWell(
-      // onTap: () {
-      //   print('------- ${controller.produtoCarrinho.notaItem.descricao} -------');
-      //   controller.produtoCarrinho.notaItem.subitens.forEach((element) {
-      //     print('-- ${element.descricao}');
-      //     element.subitens.forEach((itemCombo) {
-      //       print(
-      //           '---- ${itemCombo.descricao}  |qtde: ${itemCombo.quantidade}|unitario: ${itemCombo.precoUnitario}|total: ${itemCombo.precoTotal}|');
-      //     });
-      //   });
-      // },
-      child: Text(
-        controller.produtoCarrinho.notaItem.descricao!.toUpperCase(),
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: FontUtils.h3(context) * 1.5),
-      ),
-    )
-        : InkWell(
-      // onTap: () {
-      //   print('------- ${controller.produtoCarrinho.notaItem.descricao} -------');
-      //   controller.produtoCarrinho.notaItem.subitens.forEach((element) {
-      //     print('-- ${element.descricao}');
-      //     element.subitens.forEach((itemCombo) {
-      //       print(
-      //           '---- ${itemCombo.descricao}  |qtde: ${itemCombo.quantidade}|unitario: ${itemCombo.precoUnitario}|total: ${itemCombo.precoTotal}|');
-      //     });
-      //   });
-      // },
-      child: Text(
-        controller.produtoCarrinho.notaItem.descricao!.toUpperCase(),
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: FontUtils.h2(context) * 1.5),
-      ),
-    );
-  }
-
-  //monta os opcionais ou extras chama o CardMenu para escoher ente o CardMenuComponent ou CardMenuComponentObservacao
-  Widget _bordasPageView() {
-    return Row(
-      children: [
-        const Expanded(flex: 8, child: SizedBox()),
-        Expanded(flex: 84, child: _pageView()),
-        const Expanded(flex: 8, child: SizedBox()),
-      ],
-    );
+  Widget body() {
+    return PalcoProdutoGenerico(controller.produtoCarrinho, _pageView());
   }
 
   //pageView com os menus do produto e uma pageView a mais com a revisao
@@ -153,14 +36,13 @@ class ProdutoComboComponent {
         physics: const NeverScrollableScrollPhysics(),
         controller: controller.pageController,
         itemCount: (controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!
-            .menus.length +
-            1),
+                .menus.length + 1),
         itemBuilder: (BuildContext context, int index) {
           controller.atualizaMenus(index);
           if (controller.produtoMenu != null) {
             return _pageViewMenu(index);
           } else {
-            return _pageViewRevisao(index);
+            return _pageViewRevisao();
           }
         });
   }
@@ -200,7 +82,6 @@ class ProdutoComboComponent {
             if (isVisible) ...[
               Expanded(
                 child: BotaoPrimario(
-
                   descricao: descricaoBotao,
                   function: () => controller.proximo(),
                   altura: FontUtils.h2(context) * 1.01,
@@ -215,7 +96,6 @@ class ProdutoComboComponent {
             if (isOpcional) ...[
               Expanded(
                 child: BotaoPrimario(
-
                   descricao: "NÃO OBRIGADO",
                   function: () => controller.limparItem(),
                   altura: FontUtils.h2(context) * 1.01,
@@ -242,24 +122,40 @@ class ProdutoComboComponent {
             flex: 6,
             child: Text("${(index + 1)}º Passo: ",
                 style: TextStyle(
-                    fontSize: orientation == Orientation.landscape
-                        ? FontUtils.h2(context) * 1
-                        : FontUtils.h2(context),
+                    fontSize: FontUtils.h2(context),
                     color: DefaultTheme.accentColor))),
         Expanded(
             flex: 6,
             child: Text("${controller.produtoMenu!.descricao}",
                 style: TextStyle(
-                    fontSize: orientation == Orientation.landscape
-                        ? FontUtils.h2(context) * 1
-                        : FontUtils.h2(context),
+                    fontSize: FontUtils.h2(context),
                     color: DefaultTheme.accentColor))),
+        Expanded(flex: 6, child: _infoQuantidades()),
         Expanded(
-            flex: 78, child: _listViewComponentesMenu(controller.produtoMenu!)),
-        Expanded(flex: 8, child: _botaoProximoMenu()),
-        const Expanded(flex: 2, child: SizedBox())
+          flex: 72,
+          child: CardProdutoMenu(controller.produtoMenu!,
+              controller.anteriorMenu, controller.proximoMenu),
+
+          // _listViewComponentesMenu(controller.produtoMenu!)
+        ),
+        // Expanded(flex: 8, child: _botaoProximoMenu()),
+        const Expanded(flex: 10, child: SizedBox())
       ],
     );
+  }
+
+  Text _infoQuantidades(){
+    String info = "";
+    if (controller.produtoMenu!.quantidadeMinima != 0) {
+      info += 'Escolha no minino ${controller.produtoMenu!
+          .quantidadeMinima} opç ${(controller.produtoMenu!.quantidadeMinima! > 1) ? 'ões' : "ão"} \n';
+    }
+    if (controller.produtoMenu!.quantidadeMaxima != 0) {
+      info += 'Escolha no máximo ${controller.produtoMenu!
+          .quantidadeMaxima} opç${(controller.produtoMenu!.quantidadeMaxima! > 1) ? 'ões' : "ão"}';
+    }
+    return Text(info, style: TextStyle(fontSize: FontUtils.h3(context)));
+
   }
 
   //listView com os produtoMenuCompomente do menu do produto
@@ -294,28 +190,16 @@ class ProdutoComboComponent {
   }
 
   //monta o item para escolha de um produto do combo
-  Widget _cardComponente(ProdutoMenu produtoMenu,
-      ProdutoMenuComponente compomente) {
+  Widget _cardComponente(
+      ProdutoMenu produtoMenu, ProdutoMenuComponente compomente) {
     ProdutoMenuComponenteEmpresa componenteEmpresa =
-    compomente.componenteEmpresas.firstWhere(
+        compomente.componenteEmpresas.firstWhere(
             (ce) =>
-        ce.idEmpresa ==
-            controller.produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa,
-        orElse: () => ProdutoMenuComponenteEmpresa());
+                ce.idEmpresa ==
+                controller.produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa,
+            orElse:() => throw Exception("ProdutoCompementeEmpresa não encontrado"));
 
-    String url_imagem;
-    if (componenteEmpresa.id != null) {
-      url_imagem = componenteEmpresa.gradeEmpresa!.produtoEmpresa!.produto
-          ?.arquivoPrincipal() !=
-          null
-          ? componenteEmpresa.gradeEmpresa!.produtoEmpresa!.produto!
-          .arquivoPrincipal()!
-          .link!
-          : "";
-    } else {
-      url_imagem = "";
-    }
-
+    String url_imagem = componenteEmpresa.gradeEmpresa!.produtoEmpresa!.produto!.imagemPrincipal;
 
     return Observer(builder: (_) {
       bool selecionado = false;
@@ -331,11 +215,11 @@ class ProdutoComboComponent {
           case "COMPONENTE_FIXO":
             valorAdicional = compomente
                 .getValorComponente(appController.estacaoTrabalho.idEmpresa!,
-                appController.tabelaPreco.id!)!
+                    appController.tabelaPreco.id!)!
                 .subtrair(NotaItemUtils.verificaDiferencaCombo(
-                produtoMenu,
-                appController.estacaoTrabalho.idEmpresa!,
-                appController.tabelaPreco.id!));
+                    produtoMenu,
+                    appController.estacaoTrabalho.idEmpresa!,
+                    appController.tabelaPreco.id!));
             break;
           case "COMPONENTE_EXTRA":
             valorAdicional = componenteEmpresa.gradeEmpresa!
@@ -344,8 +228,7 @@ class ProdutoComboComponent {
         }
       }
 
-      return orientation == Orientation.landscape
-          ? InkWell(
+      return InkWell(
         onTap: () {
           controller.criaItemCombo(compomente);
         },
@@ -353,8 +236,7 @@ class ProdutoComboComponent {
           decoration: BoxDecoration(
             border: Border.all(
               width: 2,
-              color:
-              selecionado ? DefaultTheme.accentColor : Colors.black,
+              color: selecionado ? DefaultTheme.accentColor : Colors.black,
             ),
             borderRadius: const BorderRadius.all(
               Radius.circular(15),
@@ -367,27 +249,25 @@ class ProdutoComboComponent {
               children: [
                 Expanded(
                   flex: 20,
-                  child: (url_imagem != null && url_imagem.isNotEmpty)
+                  child: (url_imagem.isNotEmpty)
                       ? Center(
-                    child: Image.network(
-                      url_imagem,
-                      fit: BoxFit.cover,
-                      width: FontUtils.h1(context) * 1.5,
-                    ),
-                  )
+                          child: Image.network(
+                            url_imagem,
+                            fit: BoxFit.cover,
+                            width: FontUtils.h1(context) * 1.5,
+                          ),
+                        )
                       : Center(
-                    child: Icon(
-                      Icons.image,
-                      color: DefaultTheme.cinza,
-                    ),
-                  ),
+                          child: Icon(
+                            Icons.image,
+                            color: DefaultTheme.cinza,
+                          ),
+                        ),
                 ),
                 Expanded(
                   flex: 60,
                   child: Text(
-                      "${compomente.descricao!.toUpperCase()} ${(compomente
-                          .grade?.tamanho != null) ? compomente.grade!.tamanho!
-                          .descricao!.toUpperCase() : ""}",
+                      "${compomente.descricao!.toUpperCase()} ${(compomente.grade?.tamanho != null) ? compomente.grade!.tamanho!.descricao!.toUpperCase() : ""}",
                       style: TextStyle(fontSize: FontUtils.h3(context))),
                 ),
                 Expanded(
@@ -403,67 +283,7 @@ class ProdutoComboComponent {
             ),
           ),
         ),
-      )
-          : InkWell(
-          onTap: () {
-            controller.criaItemCombo(compomente);
-          },
-          child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 2,
-                  color:
-                  selecionado ? DefaultTheme.accentColor : Colors.black,
-                ),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(15),
-                ),
-              ),
-              child: SizedBox(
-                height: FontUtils.h1(context) * 1.2,
-                width: FontUtils.h1(context),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 20,
-                      child: (url_imagem != null && url_imagem.isNotEmpty)
-                          ? Center(
-                        child: Image.network(
-                          url_imagem,
-                          fit: BoxFit.cover,
-                          width: FontUtils.h1(context) * 1.5,
-                        ),
-                      )
-                          : Center(
-                        child: Icon(
-                          Icons.image,
-                          color: DefaultTheme.cinza,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 60,
-                      child: Text(
-                        "${compomente.descricao!.toUpperCase()} ${(compomente
-                            .grade?.tamanho != null) ? compomente.grade!
-                            .tamanho!.descricao!.toUpperCase() : ""}",
-                        style: TextStyle(
-                            fontSize: FontUtils.h2(context) * 0.75),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 20,
-                      child: Text(
-                        (valorAdicional.compareTo(BigDecimal.ZERO()) > 0)
-                            ? "+ R\$" + valorAdicional.toStringAsFixed(2)
-                            : "",
-                        style: TextStyle(
-                            fontSize: FontUtils.h2(context) * 0.60),
-                      ),
-                    ),
-                  ],
-                ),
-              )));
+      );
     });
   }
 
@@ -472,14 +292,13 @@ class ProdutoComboComponent {
    */
 
   //pageView contendo a revisao do combo
-  Widget _pageViewRevisao(int index) {
+  Widget _pageViewRevisao() {
     return Column(
       children: [
         Expanded(flex: 78, child: _listViewRevisao()),
         Expanded(
           flex: 8,
           child: BotaoPrimario(
-
             descricao: "ADICIONAR AO CARRINHO",
             function: () {
               controller.adicionarAoCarrinho();
@@ -496,7 +315,7 @@ class ProdutoComboComponent {
   //tela de revisao compartilhada
   Widget _listViewRevisao() {
     List<NotaItem> itensVendidos =
-    NotaItemUtils.getItensCombo(controller.produtoCarrinho.notaItem);
+        NotaItemUtils.getItensCombo(controller.produtoCarrinho.notaItem);
 
     return Column(
       children: [
@@ -518,8 +337,7 @@ class ProdutoComboComponent {
         Expanded(child: Container()),
         Center(
           child: Text(
-            'TOTAL R\$ ${NotaItemUtils.getSubtotal(
-                controller.produtoCarrinho.notaItem).toStringAsFixed(2)} ',
+            'TOTAL R\$ ${NotaItemUtils.getSubtotal(controller.produtoCarrinho.notaItem).toStringAsFixed(2)} ',
             style: TextStyle(fontSize: FontUtils.h2(context)),
           ),
         ),
@@ -530,8 +348,7 @@ class ProdutoComboComponent {
 
   //card revisao com todos os item escolhidos do combo
   Widget _cardNotaItemRevisao(NotaItem subItens) {
-    return orientation == Orientation.landscape
-        ? Column(
+    return Column(
       children: [
         Row(
           children: [
@@ -560,50 +377,6 @@ class ProdutoComboComponent {
                   child: Text(
                     'R\$ ${subItens.precoTotal!.toStringAsFixed(2)}',
                     style: TextStyle(fontSize: FontUtils.h3(context)),
-                  ),
-                )),
-          ],
-        ),
-      ],
-    )
-        : Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-                flex: 1,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 30),
-                  child: Text(
-                    '${subItens.quantidade} UN',
-                    style: TextStyle(
-                        fontSize: orientation == Orientation.landscape
-                            ? FontUtils.h2(context)
-                            : FontUtils.h3(context)),
-                  ),
-                )),
-            Expanded(
-                flex: 7,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 30),
-                  child: Text(
-                    subItens.descricao!.toUpperCase(),
-                    style: TextStyle(
-                        fontSize: orientation == Orientation.landscape
-                            ? FontUtils.h2(context)
-                            : FontUtils.h3(context)),
-                  ),
-                )),
-            Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 30),
-                  child: Text(
-                    'R\$ ${subItens.precoTotal!.toStringAsFixed(2)}',
-                    style: TextStyle(
-                        fontSize: orientation == Orientation.landscape
-                            ? FontUtils.h2(context)
-                            : FontUtils.h3(context)),
                   ),
                 )),
           ],

@@ -9,6 +9,22 @@ part of 'produto_adicional_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ProdutoAdicionalController on ProdutoAdicionalBase, Store {
+  late final _$tipoBotaoMenusAtom =
+      Atom(name: 'ProdutoAdicionalBase.tipoBotaoMenus', context: context);
+
+  @override
+  TipoBotaoMenus get tipoBotaoMenus {
+    _$tipoBotaoMenusAtom.reportRead();
+    return super.tipoBotaoMenus;
+  }
+
+  @override
+  set tipoBotaoMenus(TipoBotaoMenus value) {
+    _$tipoBotaoMenusAtom.reportWrite(value, super.tipoBotaoMenus, () {
+      super.tipoBotaoMenus = value;
+    });
+  }
+
   late final _$produtoCarrinhoAtom =
       Atom(name: 'ProdutoAdicionalBase.produtoCarrinho', context: context);
 
@@ -123,8 +139,22 @@ mixin _$ProdutoAdicionalController on ProdutoAdicionalBase, Store {
   }
 
   @override
+  void atualizaTipoBotaoMenus(
+      {bool revisao = false, bool escolheuCompomenteExtra = false}) {
+    final _$actionInfo = _$ProdutoAdicionalBaseActionController.startAction(
+        name: 'ProdutoAdicionalBase.atualizaTipoBotaoMenus');
+    try {
+      return super.atualizaTipoBotaoMenus(
+          revisao: revisao, escolheuCompomenteExtra: escolheuCompomenteExtra);
+    } finally {
+      _$ProdutoAdicionalBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
+tipoBotaoMenus: ${tipoBotaoMenus},
 produtoCarrinho: ${produtoCarrinho},
 produtoMenu: ${produtoMenu},
 proximoMenu: ${proximoMenu},

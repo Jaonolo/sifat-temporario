@@ -56,58 +56,36 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
   }
 
   Widget _txtDescricao() {
-    Orientation orientation = MediaQuery
-        .of(context)
-        .orientation;
 
     return Padding(
       padding: const EdgeInsets.only(left: 2),
       child: Text(
         widget.notaItem.descricao!.toUpperCase(),
         style: TextStyle(
-            fontSize: orientation == Orientation.landscape
-                ? FontUtils.h3(context)
-                : FontUtils.h4(context)),
+            fontSize:FontUtils.h3(context)),
       ),
     );
   }
 
   Widget _txtPreco() {
-    Orientation orientation = MediaQuery
-        .of(context)
-        .orientation;
 
     return Text(
       '+ R\$ ${widget.notaItem.precoUnitario!.toStringAsFixed(2)}',
       style: TextStyle(
-          fontSize: orientation == Orientation.landscape
-              ? FontUtils.h3(context)
-              : FontUtils.h4(context)),
+          fontSize: FontUtils.h3(context)),
     );
   }
 
   Widget _txtQuantidadeLancada() {
-    Orientation orientation = MediaQuery
-        .of(context)
-        .orientation;
-
     return Text('${widget.notaItem.quantidade} UN',
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: orientation == Orientation.landscape
-                ? FontUtils.h3(context)
-                : FontUtils.h4(context)));
+            fontSize: FontUtils.h4(context)));
   }
 
   Widget _btnAdicionar() {
-    Orientation orientation = MediaQuery
-        .of(context)
-        .orientation;
-
     return SizedBox(
-      height: orientation == Orientation.landscape
-          ? FontUtils.h2(context)
-          : FontUtils.h3(context) * 1.4,
+      height: FontUtils.h2(context),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           primary: DefaultTheme.accentColor,
@@ -119,23 +97,15 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
         onPressed: _podeAdicionar() ? () => _adicionar() : null,
         child: Icon(
           Icons.add,
-          size: orientation == Orientation.landscape
-              ? FontUtils.h2(context)
-              : FontUtils.h3(context),
+          size: FontUtils.h2(context),
         ),
       ),
     );
   }
 
   Widget _btnRemover() {
-    Orientation orientation = MediaQuery
-        .of(context)
-        .orientation;
-
     return SizedBox(
-      height: orientation == Orientation.landscape
-          ? FontUtils.h2(context)
-          : FontUtils.h3(context) * 1.4,
+      height: FontUtils.h2(context),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           primary: DefaultTheme.accentColor,
@@ -147,9 +117,7 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
         onPressed: _podeRemover() ? () => _remover() : null,
         child: Icon(
           Icons.remove,
-          size: orientation == Orientation.landscape
-              ? FontUtils.h2(context)
-              : FontUtils.h3(context),
+          size: FontUtils.h2(context),
         ),
       ),
     );
