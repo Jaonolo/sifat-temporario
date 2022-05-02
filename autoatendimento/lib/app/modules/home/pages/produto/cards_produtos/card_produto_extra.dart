@@ -1,4 +1,5 @@
-import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
+import 'package:autoatendimento/app/app_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
@@ -13,17 +14,17 @@ class CardProdutoExtra extends StatefulWidget {
   ProdutoMenu produtoMenu;
   ProdutoMenuComponente produtoMenuComponente;
 
-  CardProdutoExtra(this.notaItem, this.produtoMenu, this.produtoMenuComponente,
-      {Key? key})
-      : super(key: key);
+  CardProdutoExtra(this.notaItem, this.produtoMenu, this.produtoMenuComponente);
 
   @override
   _CardProdutoExtraState createState() => _CardProdutoExtraState();
 }
 
 class _CardProdutoExtraState extends State<CardProdutoExtra> {
-  final ProdutoAdicionalController produtoAdicionalController = Modular.get();
+  final ProdutoController controller = Modular.get();
   final VendaController vendaController = Modular.get();
+  final AppController appController = Modular.get();
+
 
   @override
   Widget build(BuildContext c) {
@@ -33,6 +34,7 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
   Widget _body() {
     return Container(
       height: FontUtils.h1(context),
+      padding: EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         border: Border.all(
             width: 2,
@@ -68,11 +70,43 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
   }
 
   Widget _txtPreco() {
+    String preco = "+ R\$" + widget.notaItem.precoUnitario!.toStringAsFixed(2);
+    if (controller.tipoPacote.equals(TipoPacote.COMBO)) {
+      BigDecimal valorAdicional = BigDecimal.ZERO();
+      switch (controller.produtoMenu!.tipo) {
+        case "COMPONENTE_FIXO":
+          valorAdicional = widget.produtoMenuComponente
+              .getValorComponente(
+              appController.servicoAutoAtendimento.idEmpresa!,
+              appController.tabelaPreco.id!)!
+              .subtrair(NotaItemUtils.verificaDiferencaCombo(
+              controller.produtoMenu!,
+              appController.servicoAutoAtendimento.idEmpresa!,
+              appController.tabelaPreco.id!));
+          break;
+        case "COMPONENTE_EXTRA":
+          ProdutoMenuComponenteEmpresa componenteEmpresa =
+          widget.produtoMenuComponente.componenteEmpresas.firstWhere(
+                  (ce) =>
+              ce.idEmpresa ==
+                  controller
+                      .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+              orElse: () => throw Exception("compomente não encotrado"));
+
+          valorAdicional = componenteEmpresa.gradeEmpresa!
+              .precoVenda(appController.tabelaPreco.id!);
+          break;
+      }
+      if (valorAdicional.compareTo(BigDecimal.ZERO()) > 0) {
+        preco = "+ R\$" + valorAdicional.toStringAsFixed(2);
+      } else {
+        preco = "";
+      }
+    }
 
     return Text(
-      '+ R\$ ${widget.notaItem.precoUnitario!.toStringAsFixed(2)}',
-      style: TextStyle(
-          fontSize: FontUtils.h3(context)),
+      preco,
+      style: TextStyle(fontSize: FontUtils.h3(context)),
     );
   }
 
@@ -80,7 +114,7 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
     return Text('${widget.notaItem.quantidade} UN',
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: FontUtils.h4(context)));
+            fontSize: FontUtils.h3(context)));
   }
 
   Widget _btnAdicionar() {
@@ -151,7 +185,7 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
 
     //Valida a quantidade máxima por menu (Precisa localizar o menu novamente para atualizar as qtdes)
     NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
-        produtoAdicionalController.produtoCarrinho.notaItem,
+        controller.produtoCarrinho.notaItem,
         widget.produtoMenu);
     if (menu != null && podeAdd) {
       BigDecimal qtdeItensDoMenu = BigDecimal.ZERO();
@@ -172,20 +206,20 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
   void _atualizaNotaItem() {
     try {
       NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
-          produtoAdicionalController.produtoCarrinho.notaItem,
+          controller.produtoCarrinho.notaItem,
           widget.produtoMenu);
 
       //Se não localizou um menu lançado, vai criar um novo e add o subitem
       if (menu == null) {
         menu = NotaItemUtils.menuToNotaItem(
-            produtoAdicionalController.produtoCarrinho.notaItem.idNota!,
+            controller.produtoCarrinho.notaItem.idNota!,
             widget.produtoMenu);
         menu.subitens.add(widget.notaItem);
-        produtoAdicionalController.produtoCarrinho.notaItem.subitens.add(menu);
+        controller.produtoCarrinho.notaItem.subitens.add(menu);
       } else {
         //Se tem menu, verifica se já tem algum subitem desse componente lançado para remover
         NotaItem? itemJaLancado = NotaItemUtils.localizaSubitemJaLancado(
-            produtoAdicionalController.produtoCarrinho.notaItem,
+            controller.produtoCarrinho.notaItem,
             widget.produtoMenu,
             widget.produtoMenuComponente);
 
@@ -197,16 +231,17 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
           //Caso a quantidade do item for 0 siginica que está removendo
           //Verifica se o menu tem subitens, caso não, remove ele também
           if (menu.subitens.isEmpty) {
-            produtoAdicionalController.produtoCarrinho.notaItem.subitens
+            controller.produtoCarrinho.notaItem.subitens
                 .remove(menu);
           }
         }
       }
 
       NotaItemUtils.atualizaTotais(
-          produtoAdicionalController.produtoCarrinho.notaItem);
-      produtoAdicionalController
-          .changeProdutoCarrinho(produtoAdicionalController.produtoCarrinho);
+          controller.produtoCarrinho.notaItem);
+      controller
+          .changeProdutoCarrinho(controller.produtoCarrinho);
+      controller.onLiberaBotaoMenus();
 
       setState(() {
         _body();

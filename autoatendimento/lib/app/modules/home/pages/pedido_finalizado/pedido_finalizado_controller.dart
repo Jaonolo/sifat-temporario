@@ -29,7 +29,6 @@ abstract class PedidoFinalizadoBase with Store {
   @action
   void fazerOutroPedido() {
     timer.cancel();
-    homeController.palco = ObservableList();
     homeController.changeMenuSelecionado(CardapioMenu());
     vendaController.descartarNota();
     Modular.to.popAndPushNamed("/home");

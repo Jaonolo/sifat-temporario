@@ -12,7 +12,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:models/model/sitef_protocolo_socket.dart';
-
 import 'package:web_socket_channel/html.dart';
 
 part "transacao_tef_controller.g.dart";
@@ -88,7 +87,7 @@ abstract class TransacaoTefBase with Store {
         }
       }
     }).onError((e) {
-      atualizaPermiteCancelar(false);
+      atualizaPermiteCancelar(true);
       atualizaBuffer("Problema ao transacionar o cartão: \n$e");
     });
   }
@@ -195,7 +194,7 @@ abstract class TransacaoTefBase with Store {
       //Confirmar transação TEF
       await finalizar(vendaController.nota.id!, true);
     } catch (e) {
-      atualizaPermiteCancelar(false);
+      atualizaPermiteCancelar(true);
       atualizaBuffer(
           'Desculpe! \n\n Ocorreu um problema na finalização do pedido: \n\n  [${e.toString()}]');
       print('[ERRO - tratativasPosTransacao]: ${e.toString()}');

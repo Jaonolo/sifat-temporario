@@ -1,4 +1,4 @@
-import 'package:autoatendimento/app/modules/home/pages/produto/abstract/produto_generico_abstact_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_primario.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_secundario.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
@@ -33,7 +33,7 @@ extension TipoBotaoMenusExtension on TipoBotaoMenus{
     }
   }
 
-  Function acaoBotao(ProdutoGenericoAbstractController abstract){
+  Function acaoBotao(ProdutoController abstract){
     switch (this) {
       case TipoBotaoMenus.PROXIMO:
       case TipoBotaoMenus.EXTRA_ESCOLHEU:
@@ -45,21 +45,21 @@ extension TipoBotaoMenusExtension on TipoBotaoMenus{
     }
   }
 
-  Widget botaoPronto(BuildContext context, ProdutoGenericoAbstractController abstract){
+  Widget botaoPronto(BuildContext context, ProdutoController controller){
     switch(this){
       case TipoBotaoMenus.EXTRA_NAO_ESCOLHEU:
         return BotaoSecundario(
           descricao: descricao,
           context: context,
-          function: () => acaoBotao(abstract).call(),
+          function:  controller.liberaBotaoMenus ? () => acaoBotao(controller).call() : null,
           altura: FontUtils.h2(context) * 1.01,
           largura: FontUtils.h2(context) * 10,
         );
       case TipoBotaoMenus.PROXIMO:
       case TipoBotaoMenus.EXTRA_ESCOLHEU:
       return BotaoPrimario(
-        descricao: abstract.proximoMenu!.descricao!.toUpperCase(),
-        function: () => acaoBotao(abstract).call(),
+        descricao: controller.proximoMenu!.descricao!.toUpperCase(),
+        function: controller.liberaBotaoMenus ? () => acaoBotao(controller).call() : null,
         altura: FontUtils.h2(context) * 1.01,
         largura: FontUtils.h2(context) * 10,
       );
@@ -67,7 +67,7 @@ extension TipoBotaoMenusExtension on TipoBotaoMenus{
       case TipoBotaoMenus.ADICIONAR_CARRINHO:
       return BotaoPrimario(
         descricao: descricao,
-        function: () => acaoBotao(abstract).call(),
+        function: controller.liberaBotaoMenus ? () => acaoBotao(controller).call() : null,
         altura: FontUtils.h2(context) * 1.01,
         largura: FontUtils.h2(context) * 10,
       );

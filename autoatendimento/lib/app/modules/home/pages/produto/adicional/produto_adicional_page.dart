@@ -1,5 +1,5 @@
-import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adiocinal_component.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,8 @@ class ProdutoAdicionalPage extends StatefulWidget {
   }
 
   atualizaController() {
-    ProdutoAdicionalController controller = Modular.get();
+    ProdutoController controller = Modular.get();
+    controller.tipoPacote =  produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote;
 
     controller.produtoCarrinhoOriginal = produtoCarrinho;
     ProdutoCarrinho produtoCarrinhoClone =
@@ -46,7 +47,6 @@ class _ProdutoAdicionalPageState extends State<ProdutoAdicionalPage>
   @override
   void initState() {
     controller.pageController = PageController(initialPage: 0);
-    controller.atualizaMenus(0);
     super.initState();
   }
 

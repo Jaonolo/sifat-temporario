@@ -25,7 +25,7 @@ abstract class PagamentosBase with Store {
 
       switch (finalizadoraEmpresa.finalizadora!.finalizadoraRFB) {
         case "DINHEIRO":
-          avancar();
+          avancar(context);
           break;
         case "CARTAO_CREDITO":
           _transacaoTEF("CREDITO", context);
@@ -45,7 +45,13 @@ abstract class PagamentosBase with Store {
         tipoPagamentoTEF, vendaController.nota.id!);
   }
 
-  void avancar() {
+  Future<void> avancar(BuildContext context) async {
+    //Insere os itens
+    await vendaController.insereItensAPI();
+
+    //Receber venda
+    await vendaController.receberVendaAPI(context);
+
     Modular.to.pushNamed("/finalizado");
   }
 

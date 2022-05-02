@@ -1,16 +1,17 @@
 import 'dart:async';
+
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/utils/autoatendimento_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:models/model/models.dart';
 import 'package:models/model/enum/client.dart' as c;
-
+import 'package:models/model/models.dart';
 import 'package:requester/config/pws_config.dart';
 import 'package:requester/requester/gerenciador_requester.dart';
 import 'package:requester/requester/servico_auto_atendimento_requester.dart';
 import 'package:requester/requester/tabela_preco_requester.dart';
+
 import 'model/cardapio_dto.dart';
 import 'repositories/cardapio_repository.dart';
 import 'repositories/config_repository.dart';
@@ -151,6 +152,10 @@ abstract class SplashBase with Store {
       appController.listFormaPagamento.add(
           appController.servicoAutoAtendimento.finalizadoraCredito!);
     }
+
+
+    //Transforma a finalizadora de credito em dinheiro para finalizar a venda sem tipo tef //todo apenas testes
+    // appController.servicoAutoAtendimento.finalizadoraCredito!.finalizadora!.finalizadoraRFB = "DINHEIRO";
 
     if (appController.listFormaPagamento.isEmpty) {
       throw WaybeException(

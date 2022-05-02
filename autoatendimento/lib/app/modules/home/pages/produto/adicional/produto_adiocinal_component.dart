@@ -1,7 +1,7 @@
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/adicional/widgets/card_produto_menu.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/widgets/palco_produto_generico.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/cards_produtos//card_produto_menu.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/palco_produto_generico.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +11,10 @@ class ProdutoAdicionalComponent {
   late BuildContext context;
   final HomeController homeController = Modular.get();
   final VendaController vendaController = Modular.get();
-  final ProdutoAdicionalController controller = Modular.get();
-  late Orientation orientation;
+  final ProdutoController controller = Modular.get();
 
   initialize(BuildContext context) {
     this.context = context;
-    orientation = MediaQuery
-        .of(context)
-        .orientation;
   }
 
   Widget body() {
@@ -26,27 +22,18 @@ class ProdutoAdicionalComponent {
   }
 
   Widget _adicionalConteudo() {
-    return Row(
-      children: [
-        Expanded(flex: 14, child: Container()),
-        Expanded(
-          flex: 140,
-          child: Column(children: [
-            Expanded(flex: 20, child: _imagem()),
-            Expanded(
-                flex: 5,
-                child: (controller.produtoCarrinho.notaItem
-                    .produtoEmpresa!.produto!.detalhes !=
-                    null)
-                    ? _detalhes()
-                    : Container()),
-            const Expanded(child: SizedBox()),
-            Expanded(flex: 60, child: _pageViewBuilder())
-          ]),
-        ),
-        Expanded(flex: 14, child: Container()),
-      ],
-    );
+    return Column(children: [
+      Expanded(flex: 20, child: _imagem()),
+      Expanded(
+          flex: 5,
+          child: (controller.produtoCarrinho.notaItem
+              .produtoEmpresa!.produto!.detalhes !=
+              null)
+              ? _detalhes()
+              : Container()),
+      const Expanded(child: SizedBox()),
+      Expanded(flex: 60, child: _pageViewBuilder())
+    ]);
   }
 
   Widget _imagem() {
@@ -83,8 +70,8 @@ class ProdutoAdicionalComponent {
         controller: controller.pageController,
         itemCount: controller
             .produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length,
-        onPageChanged: (index) => controller.atualizaMenus(index),
         itemBuilder: (BuildContext context, int index) {
+          controller.atualizaMenus(index);
           return CardProdutoMenu(controller.produtoMenu!,
               controller.anteriorMenu, controller.proximoMenu);
         });

@@ -1,7 +1,5 @@
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/abstract/produto_generico_abstact_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/enum/tipo_botao.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
@@ -24,25 +22,11 @@ class PalcoProdutoGenerico extends StatefulWidget {
 
 class _PalcoProdutoGenericoState extends State<PalcoProdutoGenerico> {
   final HomeController homeController = Modular.get();
-  late TipoPacote tipoPacote;
-  late ProdutoGenericoAbstractController controller;
+  final ProdutoController controller = Modular.get();
+
 
   @override
   void initState() {
-    tipoPacote =
-        widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote;
-    switch (tipoPacote) {
-      case TipoPacote.ADICIONAIS:
-        ProdutoAdicionalController produtoAdicionalController = Modular.get();
-        controller = produtoAdicionalController;
-        break;
-      case TipoPacote.COMBO:
-        ProdutoComboController produtoComboController = Modular.get();
-        controller = produtoComboController;
-        break;
-      default:
-        throw Exception("Pacote ainda não implementado");
-    }
     super.initState();
   }
 
@@ -82,16 +66,19 @@ class _PalcoProdutoGenericoState extends State<PalcoProdutoGenerico> {
                 Expanded(
                   child: Container(),
                 ),
-                Expanded(flex: 13, child: _cabecalhoCard()),
+                Expanded(flex: 10, child: _cabecalhoCard()),
                 Expanded(
                   child: Container(),
                 ),
                 Expanded(
                   flex: 74,
-                  child: widget.conteudoPrincipal,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: widget.conteudoPrincipal,
+                  ),
                 ),
-                Expanded(flex: 13, child: _rodapeCard()),
-                const Expanded(flex: 2, child: SizedBox()),
+                Expanded(flex: 15, child: _rodapeCard()),
+                const Expanded(flex: 1, child: SizedBox()),
               ],
             ),
           ),
@@ -105,30 +92,27 @@ class _PalcoProdutoGenericoState extends State<PalcoProdutoGenerico> {
   }
 
   Widget _cabecalhoCard() {
-    return Row(
+    return Stack(
       children: [
-        Expanded(
-            flex: 20,
-            child: Observer(builder: (_) {
-              return BotaoSetaVoltar(
-                function: (controller.anteriorMenu == null)
-                    ? () {
-                        homeController.removePalco();
-                        homeController.habilitarCarrinho = false;
-                      }
-                    : () => controller.anterior(),
-              );
-            })),
-        Expanded(
-          flex: 70,
-          child: Center(child: _adicionalTitulo()),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Observer(builder: (_) {
+            return BotaoSetaVoltar(
+              function: (controller.anteriorMenu == null)
+                  ? () {
+                      homeController.removePalco();
+                      homeController.habilitarCarrinho = false;
+                    }
+                  : () => controller.anterior(),
+            );
+          }),
         ),
-        Expanded(flex: 10, child: Container()),
+        Align(alignment: Alignment.center, child: _title()),
       ],
     );
   }
 
-  Widget _adicionalTitulo() {
+  Widget _title() {
     return InkWell(
         //################# DEBUG ################################
         // onTap: () {
@@ -184,7 +168,7 @@ class _PalcoProdutoGenericoState extends State<PalcoProdutoGenerico> {
   }
 
   Widget _txtSubTotal() {
-    if (tipoPacote.equals(TipoPacote.ADICIONAIS)) {
+    if (controller.tipoPacote.equals(TipoPacote.ADICIONAIS)) {
       return Observer(builder: (_) {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -20,8 +20,8 @@ class SitefProtocoloSocketParam {
   String toJson() {
     return '{"'
         'cupomFiscal": "${this.cupomFiscal}"'
-        '${this.confirmaTransacao != null ? ',"confirmaTransacao": "${this.confirmaTransacao}"' : ''}'
-        '${this.valor != null ? ',"valor": ${this.valor}' : ''}'
+        ',"confirmaTransacao": "${this.confirmaTransacao}"'
+        ',"valor": ${this.valor}'
         '${this.tipoPagamentoTEF != null ? ',"tipoPagamentoTEF": "${this.tipoPagamentoTEF}"' : ''}'
         '}';
   }

@@ -1,4 +1,4 @@
-import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:flutter/material.dart';
@@ -25,11 +25,11 @@ class CardProdutoObservacaoRadio extends StatefulWidget {
 
 class _CardProdutoObservacaoRadioState
     extends State<CardProdutoObservacaoRadio> {
-  final ProdutoAdicionalController produtoAdicionalController = Modular.get();
+  final ProdutoController controller = Modular.get();
 
   @override
   void initState() {
-    if (widget.index == produtoAdicionalController.radiovalue) {
+    if (widget.index == controller.radiovalue) {
       _adicionaObservacao();
     }
     super.initState();
@@ -43,7 +43,7 @@ class _CardProdutoObservacaoRadioState
           decoration: BoxDecoration(
             border: Border.all(
                 width: 2,
-                color: produtoAdicionalController.radiovalue == widget.index
+                color: controller.radiovalue == widget.index
                     ? DefaultTheme.accentColor
                     : DefaultTheme.preto),
             borderRadius: const BorderRadius.all(
@@ -69,28 +69,28 @@ class _CardProdutoObservacaoRadioState
                     : FontUtils.h4(context))),
         controlAffinity: ListTileControlAffinity.leading,
         value: widget.index,
-        groupValue: produtoAdicionalController.radiovalue,
+        groupValue: controller.radiovalue,
         onChanged: (int? n) {
           _adicionaObservacao();
-          produtoAdicionalController.selecaoRadio(n!);
+          controller.selecaoRadio(n!);
         });
   }
 
   void _adicionaObservacao() {
     NotaItem notaItem = NotaItemUtils.observacaoToNotaItem(
-        produtoAdicionalController.produtoCarrinho.notaItem.idNota!,
+        controller.produtoCarrinho.notaItem.idNota!,
         widget.produtoMenuComponente);
 
     NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
-        produtoAdicionalController.produtoCarrinho.notaItem,
+        controller.produtoCarrinho.notaItem,
         widget.produtoMenu);
 
     if (menu == null) {
       menu = NotaItemUtils.menuToNotaItem(
-          produtoAdicionalController.produtoCarrinho.notaItem.idNota!,
+          controller.produtoCarrinho.notaItem.idNota!,
           widget.produtoMenu);
       menu.subitens.add(notaItem);
-      produtoAdicionalController.produtoCarrinho.notaItem.subitens.add(menu);
+      controller.produtoCarrinho.notaItem.subitens.add(menu);
     } else {
       menu.subitens.clear();
       menu.subitens.add(notaItem);
