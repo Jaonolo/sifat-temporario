@@ -1,4 +1,5 @@
 import 'package:autoatendimento/app/app_controller.dart';
+import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
@@ -24,6 +25,7 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
   final ProdutoController controller = Modular.get();
   final VendaController vendaController = Modular.get();
   final AppController appController = Modular.get();
+  final HomeController homeController = Modular.get();
 
 
   @override
@@ -160,6 +162,18 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
   void _adicionar() {
     widget.notaItem.quantidade =
         widget.notaItem.quantidade!.somar(BigDecimal.ONE());
+
+    //Se tiver alguns observação ou adicionais abre a tela nova
+    bool temMenuObservacao = widget.notaItem.produtoEmpresa!.produto!.menus
+        .any((element) => element.tipo == "OBSERVACAO");
+
+    if (widget.notaItem.produtoEmpresa!.produto!.pacote.equals(TipoPacote.ADICIONAIS) ||
+        temMenuObservacao) {
+      controller.trocaPalcoParaSubItem(notaItemPai: controller.produtoCarrinho.notaItem, notaItemAtual: widget.notaItem, produtoMenuPai: widget.produtoMenu);
+      return;
+    }
+
+
     _atualizaNotaItem();
   }
 

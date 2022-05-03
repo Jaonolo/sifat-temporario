@@ -1,4 +1,7 @@
 import 'package:autoatendimento/app/app_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/cards_produtos/card_produto_extra.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/cards_produtos/card_produto_observacao_checkbox.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/cards_produtos/card_produto_observacao_radio.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/cards_produtos/card_produto_selecao_unica.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
@@ -8,15 +11,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
-import 'card_produto_extra.dart';
-import 'card_produto_observacao_checkbox.dart';
-import 'card_produto_observacao_radio.dart';
-
 class CardProdutoMenu extends StatefulWidget {
   final ProdutoMenu produtoMenu;
   final ProdutoMenu? menuProximo;
   final ProdutoMenu? menuAnterior;
-
 
   CardProdutoMenu(this.produtoMenu, this.menuAnterior, this.menuProximo);
 
@@ -37,10 +35,9 @@ class _CardProdutoMenuState extends State<CardProdutoMenu> {
             children: [
               Center(
                   child: Text(
-                    widget.produtoMenu.descricao!.toUpperCase(),
-                    style: TextStyle(
-                        fontSize:  FontUtils.h2(context)),
-                  )),
+                widget.produtoMenu.descricao!.toUpperCase(),
+                style: TextStyle(fontSize: FontUtils.h2(context)),
+              )),
               _mostrarQuantidade(),
               _listGenerate(),
             ],
@@ -95,15 +92,13 @@ class _CardProdutoMenuState extends State<CardProdutoMenu> {
       return valorCompomente1.compareTo(valorCompomente2);
     });
 
-
     return Column(
-        children:
-        List.generate(widget.produtoMenu.componentes.length, (index) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: _extraOuObservacao(index),
-          );
-        }));
+        children: List.generate(widget.produtoMenu.componentes.length, (index) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 5),
+        child: _extraOuObservacao(index),
+      );
+    }));
   }
 
   //verifica se é menu extra ou observaçao
@@ -113,37 +108,30 @@ class _CardProdutoMenuState extends State<CardProdutoMenu> {
       case "OBSERVACAO":
         if (widget.produtoMenu.quantidadeMinima! <= 1 &&
             widget.produtoMenu.quantidadeMaxima! <= 1) {
-          return CardProdutoObservacaoRadio(widget.produtoMenu,
-              widget.produtoMenu.componentes[index], index);
+          return CardProdutoObservacaoRadio(
+              widget.produtoMenu, widget.produtoMenu.componentes[index], index);
         } else {
           return CardProdutoObservacaoCheckbox(
               widget.produtoMenu, widget.produtoMenu.componentes[index]);
         }
 
       case "COMPONENTE_EXTRA":
-      case "COMPONENTE_FIXO":
-      //Verifica se já tem algum subitem desse componente lançado no item principal
+        //Verifica se já tem algum subitem desse componente lançado no item principal
         notaitem = NotaItemUtils.localizaSubitemJaLancado(
             controller.produtoCarrinho.notaItem,
             widget.produtoMenu,
             widget.produtoMenu.componentes[index]);
 
         if (notaitem == null) {
-          switch(controller.tipoPacote){
-            case TipoPacote.COMBO:
-              notaitem = NotaItemUtils.itemComboToNotaItem(
-                  controller.produtoCarrinho.notaItem.idNota!,
-                  widget.produtoMenu.componentes[index],
-                  controller.produtoCarrinho.notaItem.produtoEmpresa!
-                      .idEmpresa!,
-                  appController.tabelaPreco.id!,
-                  quantidade: BigDecimal.ZERO());
-              break;
+          switch (controller.tipoPacote) {
             case TipoPacote.ADICIONAIS:
+            case TipoPacote.COMBO:
+            case TipoPacote.COMPOSTO:
               notaitem = NotaItemUtils.adicionalToNotaItem(
                   controller.produtoCarrinho.notaItem.idNota!,
                   widget.produtoMenu.componentes[index],
-                  controller.produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+                  controller
+                      .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
                   appController.tabelaPreco.id!,
                   quantidade: BigDecimal.ZERO());
               break;
@@ -151,15 +139,57 @@ class _CardProdutoMenuState extends State<CardProdutoMenu> {
               throw Exception("TipoPacote não implementado");
           }
         }
+        break;
 
-        if(widget.produtoMenu.quantidadeMinima == 1 && widget.produtoMenu.quantidadeMaxima == 1){
-          return CardProdutoSelecaoUnica(notaitem, widget.produtoMenu,
-              widget.produtoMenu.componentes[index]);
-        }else{
-          return CardProdutoExtra(notaitem, widget.produtoMenu,
-              widget.produtoMenu.componentes[index]);
+      case "COMPONENTE_FIXO":
+        //Verifica se já tem algum subitem desse componente lançado no item principal
+        notaitem = NotaItemUtils.localizaSubitemJaLancado(
+            controller.produtoCarrinho.notaItem,
+            widget.produtoMenu,
+            widget.produtoMenu.componentes[index]);
+
+        if (notaitem == null) {
+          switch (controller.tipoPacote) {
+            case TipoPacote.COMBO:
+              notaitem = NotaItemUtils.itemComboToNotaItem(
+                  controller.produtoCarrinho.notaItem.idNota!,
+                  widget.produtoMenu.componentes[index],
+                  controller
+                      .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+                  appController.tabelaPreco.id!,
+                  quantidade: BigDecimal.ZERO());
+              break;
+            case TipoPacote.COMPOSTO:
+              notaitem = NotaItemUtils.itemCompostoToNotaItem(
+                  controller.produtoCarrinho.notaItem.idNota!,
+                  widget.produtoMenu.componentes[index],
+                  controller
+                      .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+                  appController.tabelaPreco.id!,
+                  quantidade: BigDecimal.ZERO());
+              break;
+            case TipoPacote.ADICIONAIS:
+              throw Exception(
+                  "TipoPacote ADICIONAIS não deveria ter COMPONENTE_FIXO");
+            default:
+              throw Exception(widget.produtoMenu.tipo! + " não implementado");
+          }
         }
+        break;
     }
-    return SizedBox();
+
+    if (notaitem == null) {
+      throw Exception(
+          "NotaItem do compomente ${widget.produtoMenu.componentes[index]}, não foi criado corretamente!");
+    }
+
+    if (widget.produtoMenu.quantidadeMinima == 1 &&
+        widget.produtoMenu.quantidadeMaxima == 1) {
+      return CardProdutoSelecaoUnica(notaitem, widget.produtoMenu,
+          widget.produtoMenu.componentes[index]);
+    } else {
+      return CardProdutoExtra(notaitem, widget.produtoMenu,
+          widget.produtoMenu.componentes[index]);
+    }
   }
 }

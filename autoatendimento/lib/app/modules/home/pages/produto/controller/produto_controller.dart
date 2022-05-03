@@ -1,4 +1,6 @@
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_page.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/enum/tipo_botao_navegacao_menu.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
@@ -8,15 +10,12 @@ import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
-import '../enum/tipo_botao.dart';
-
 part "produto_controller.g.dart";
 
 //Caso tenha alguma função rotina diferente, que precisa ser mudada de acordo com um
 //tipoPacote, transformar essa classe em abstract criando outro controller extendendo esse
 
-class ProdutoController = ProdutoControllerBase
-    with _$ProdutoController;
+class ProdutoController = ProdutoControllerBase with _$ProdutoController;
 
 abstract class ProdutoControllerBase with Store {
   PageController pageController = PageController(initialPage: 0);
@@ -25,10 +24,14 @@ abstract class ProdutoControllerBase with Store {
 
   late TipoPacote tipoPacote;
 
+  NotaItem? notaItemPai;
+  ProdutoMenu? produtoMenuPai;
+
   ProdutoCarrinho produtoCarrinhoOriginal = ProdutoCarrinho(NotaItem());
 
   @observable
-  TipoBotaoMenus tipoBotaoMenus = TipoBotaoMenus.PROXIMO;
+  TipoBotaoNavegacaoMenu tipoBotaoNavegacaoMenus =
+      TipoBotaoNavegacaoMenu.PROXIMO;
 
   @observable
   ProdutoCarrinho produtoCarrinho = ProdutoCarrinho(NotaItem());
@@ -51,16 +54,55 @@ abstract class ProdutoControllerBase with Store {
   @observable
   bool liberaBotaoMenus = false;
 
+  void trocaPalcoParaSubItem(
+      {required NotaItem notaItemPai,
+       required NotaItem notaItemAtual,
+       required  ProdutoMenu produtoMenuPai}){
+    //populo as variaveis de controle
+    this.notaItemPai = notaItemPai;
+    this.produtoMenuPai = produtoMenuPai;
+    //coloco o palco com o subItem
+    homeController.addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItemAtual)));
+  }
+
+  void _adicionarSubItemAoItemPai() {
+    //busca se o menu ja foi lançado
+    NotaItem? menuDoItemPai = NotaItemUtils.localizaMenuJaLancado(
+        notaItemPai!, produtoMenuPai!);
+
+    //Caso ainda não foi crio ele
+    if(menuDoItemPai == null){
+      menuDoItemPai = NotaItemUtils.menuToNotaItem(produtoCarrinho.notaItem.idNota!, produtoMenuPai!);
+    }
+
+    //adiciono o item no menu
+    menuDoItemPai.subitens.add(produtoCarrinho.notaItem);
+
+    //adiciono o menu no itemPai
+    notaItemPai!.subitens.add(menuDoItemPai);
+    //coloco o itemPai como o principal novamente
+    produtoCarrinho.notaItem = notaItemPai!;
+    //zero as variaveis de controlle
+    notaItemPai = null;
+    produtoMenu = null;
+    tipoPacote = produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote;
+  }
+
   void adicionarAoCarrinho() {
     try {
       //Pré validações
       ProdutoCarrinhoUtils.atualizaProdutoCarrinho(
           produtoCarrinhoOriginal, produtoCarrinho);
 
-      //Ação de adicionar o produto carrinho
-      //Caso o produto carrinho já possuir indice, a atualização é feita por referencia no passo anterior "atualizaProdutoCarrinho"
-
-      vendaController.adicionarProdutoCarrinho(produtoCarrinho);
+      if (notaItemPai != null) {
+        //Caso seja um subItem deverivado de algum compomente do menu adiciona ao notaItemPai e retorna para o menu
+        _adicionarSubItemAoItemPai();
+        return;
+      } else {
+        //Ação de adicionar o produto carrinho
+        //Caso o produto carrinho já possuir indice, a atualização é feita por referencia no passo anterior "atualizaProdutoCarrinho"
+        vendaController.adicionarProdutoCarrinho(produtoCarrinho);
+      }
     } catch (e) {
       print(e);
     } finally {
@@ -84,7 +126,7 @@ abstract class ProdutoControllerBase with Store {
     liberaBotaoMenus = false;
 
     //REVISAO
-    if(produtoMenu == null){
+    if (produtoMenu == null) {
       liberaBotaoMenus = true;
       return;
     }
@@ -100,13 +142,13 @@ abstract class ProdutoControllerBase with Store {
         produtoCarrinho.notaItem, produtoMenu!);
 
     //não encontrou = não lançou
-    if(menu == null){
+    if (menu == null) {
       liberaBotaoMenus = false;
       return;
     }
 
     //verifica quantos ja lançou
-    BigDecimal qtdeItensDoMenu = menu.subitens.map((e) => e.quantidade).fold(BigDecimal.ZERO(), (previousValue, element) => previousValue + element);
+    BigDecimal qtdeItensDoMenu = NotaItemUtils.quantidadeSelecionadaMenu(menu);
 
     //caso tenha lançado a quantidade minina libera o botao
     if (qtdeItensDoMenu.toInt() >= produtoMenu!.quantidadeMinima!) {
@@ -131,14 +173,14 @@ abstract class ProdutoControllerBase with Store {
   @action
   void atualizaMenus(int index) {
     //menu atual
-    produtoMenu = (index <
-        produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index]
-        : null;
+    produtoMenu =
+        (index < produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
+            ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index]
+            : null;
 
     //o proximo menu
-    proximoMenu =
-    (index + 1 < produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
+    proximoMenu = (index + 1 <
+            produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
         ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index + 1]
         : null;
 
@@ -150,35 +192,49 @@ abstract class ProdutoControllerBase with Store {
     onLiberaBotaoMenus();
 
     //Caso seja combo tem a aba de revisão para somente depois inserir o item
-    if(produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote.equals(TipoPacote.COMBO)){
-      atualizaTipoBotaoMenus(revisao: produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length - 1 == index);
-    }else{
-      atualizaTipoBotaoMenus();
+    if (produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote
+        .equals(TipoPacote.COMBO)) {
+      atualizaBotaoNavegacaoMenus(
+          revisao:
+              produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length -
+                      1 ==
+                  index);
+    } else {
+      atualizaBotaoNavegacaoMenus();
     }
   }
 
   @action
-  void atualizaTipoBotaoMenus({bool revisao = false, bool escolheuCompomenteExtra = false}){
-    switch(produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote){
+  void atualizaBotaoNavegacaoMenus(
+      {bool revisao = false, bool escolheuCompomenteExtra = false}) {
+    //Se for um subItem no caso adicional ou observação dentro de um compomente de um menu não muda o botao
+    if (notaItemPai != null) {
+      tipoBotaoNavegacaoMenus = TipoBotaoNavegacaoMenu.SUB_ITEM_INTO_ITEM;
+      return;
+    }
+
+    switch (tipoPacote) {
       case TipoPacote.COMBO:
+      case TipoPacote.COMPOSTO:
         if (revisao) {
-          tipoBotaoMenus = TipoBotaoMenus.REVISAO;
+          tipoBotaoNavegacaoMenus = TipoBotaoNavegacaoMenu.REVISAO;
         } else if (escolheuCompomenteExtra) {
-          tipoBotaoMenus = TipoBotaoMenus.EXTRA_ESCOLHEU;
+          tipoBotaoNavegacaoMenus = TipoBotaoNavegacaoMenu.EXTRA_ESCOLHEU;
         } else if (produtoMenu == null) {
-          tipoBotaoMenus = TipoBotaoMenus.ADICIONAR_CARRINHO;
+          tipoBotaoNavegacaoMenus = TipoBotaoNavegacaoMenu.ADICIONAR_CARRINHO;
         } else if (proximoMenu != null) {
-          tipoBotaoMenus = TipoBotaoMenus.PROXIMO;
+          tipoBotaoNavegacaoMenus = TipoBotaoNavegacaoMenu.PROXIMO;
           if (proximoMenu!.tipo == "COMPONENTE_EXTRA") {
-            tipoBotaoMenus = TipoBotaoMenus.EXTRA_NAO_ESCOLHEU;
+            tipoBotaoNavegacaoMenus = TipoBotaoNavegacaoMenu.EXTRA_NAO_ESCOLHEU;
           }
         }
         break;
       case TipoPacote.ADICIONAIS:
+      case TipoPacote.NENHUM:
         if (proximoMenu == null) {
-          tipoBotaoMenus = TipoBotaoMenus.ADICIONAR_CARRINHO;
+          tipoBotaoNavegacaoMenus = TipoBotaoNavegacaoMenu.ADICIONAR_CARRINHO;
         } else if (proximoMenu != null) {
-          tipoBotaoMenus = TipoBotaoMenus.PROXIMO;
+          tipoBotaoNavegacaoMenus = TipoBotaoNavegacaoMenu.PROXIMO;
         }
         break;
       default:
@@ -187,7 +243,6 @@ abstract class ProdutoControllerBase with Store {
   }
 
   //Paginação (PageController)
-
   Future<void> proximo() async {
     pageController.nextPage(
         duration: const Duration(milliseconds: 200), curve: Curves.ease);

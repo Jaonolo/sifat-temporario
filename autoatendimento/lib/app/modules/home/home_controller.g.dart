@@ -120,7 +120,7 @@ mixin _$HomeController on HomeBase, Store {
   }
 
   @override
-  dynamic recomecar() {
+  void recomecar() {
     final _$actionInfo =
         _$HomeBaseActionController.startAction(name: 'HomeBase.recomecar');
     try {

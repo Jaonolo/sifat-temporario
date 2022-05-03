@@ -2,12 +2,10 @@ import 'package:autoatendimento/app/modules/home/pages/produto/card_produto_menu
 import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/palco_produto_generico.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/revisao/card_revisao.dart';
-import 'package:autoatendimento/app/theme/default_theme.dart';
-import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class ProdutoComboComponent {
+class ProdutoComposotCompement{
   late BuildContext context;
   final ProdutoController controller = Modular.get();
 
@@ -25,7 +23,7 @@ class ProdutoComboComponent {
         physics: const NeverScrollableScrollPhysics(),
         controller: controller.pageController,
         itemCount: (controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!
-                .menus.length + 1),
+            .menus.length + 1),
         itemBuilder: (BuildContext context, int index) {
           controller.atualizaMenus(index);
           if (controller.produtoMenu != null) {
@@ -44,17 +42,11 @@ class ProdutoComboComponent {
     return Column(
       children: [
         Expanded(
-            flex: 8,
-            child: Text("${(index + 1)}º Passo: ",
-                style: TextStyle(
-                    fontSize: FontUtils.h2(context),
-                    color: DefaultTheme.accentColor))),
-        Expanded(
-          flex: 98,
           child: CardProdutoMenu(controller.produtoMenu!,
               controller.anteriorMenu, controller.proximoMenu),
         ),
       ],
     );
   }
+
 }

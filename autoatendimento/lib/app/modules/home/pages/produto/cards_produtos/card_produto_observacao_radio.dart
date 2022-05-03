@@ -89,11 +89,14 @@ class _CardProdutoObservacaoRadioState
       menu = NotaItemUtils.menuToNotaItem(
           controller.produtoCarrinho.notaItem.idNota!,
           widget.produtoMenu);
+      notaItem.quantidade = BigDecimal.ONE();
       menu.subitens.add(notaItem);
       controller.produtoCarrinho.notaItem.subitens.add(menu);
     } else {
       menu.subitens.clear();
       menu.subitens.add(notaItem);
     }
+
+    controller.onLiberaBotaoMenus();
   }
 }

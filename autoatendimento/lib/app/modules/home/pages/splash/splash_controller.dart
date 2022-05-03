@@ -114,6 +114,10 @@ abstract class SplashBase with Store {
       throw WaybeException('Nome da estação não localizado.',
           exception: PwsException(pws));
     }
+    //todo retirar isso JOSE
+    if(nomeEstacao == "DSV11"){
+         nomeEstacao =  nomeEstacao! + "_autoAtendimento";
+    }
   }
 
   Future<void> _loginAPI() async {

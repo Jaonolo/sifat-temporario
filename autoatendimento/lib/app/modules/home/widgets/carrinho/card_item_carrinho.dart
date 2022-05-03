@@ -196,15 +196,13 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
     if (widget.produtoCarrinho.notaItem.produtoEmpresa!.gradesAtivas.length >
         1) {
       homeController.habilitarCarrinho = true;
-      homeController.addPalco(
-          ProdutoAdicionalPage(vendaController.itensLancados[widget.index]));
+      homeController.addPalco(ProdutoAdicionalPage(vendaController.itensLancados[widget.index]));
       return;
     }
     switch (widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote) {
       case TipoPacote.ADICIONAIS:
         homeController.habilitarCarrinho = true;
-        homeController.addPalco(
-            ProdutoAdicionalPage(vendaController.itensLancados[widget.index]));
+        homeController.addPalco(ProdutoAdicionalPage(vendaController.itensLancados[widget.index]));
         break;
       case TipoPacote.COMBO:
         homeController.habilitarCarrinho = true;

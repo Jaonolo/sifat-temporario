@@ -1,4 +1,4 @@
-import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adiocinal_component.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/composto/produto_composto_component.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
@@ -7,17 +7,16 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
-// ignore: must_be_immutable
-class ProdutoAdicionalPage extends StatefulWidget {
+class ProdutoCompostoPage extends StatefulWidget {
   ProdutoCarrinho produtoCarrinho;
 
-  ProdutoAdicionalPage(this.produtoCarrinho, {Key? key}) : super(key: key) {
+  ProdutoCompostoPage(this.produtoCarrinho, {Key? key}) : super(key: key) {
     atualizaController();
   }
 
   atualizaController() {
     ProdutoController controller = Modular.get();
-    controller.tipoPacote = produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote;
+    controller.tipoPacote =  produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote;
 
     controller.produtoCarrinhoOriginal = produtoCarrinho;
     ProdutoCarrinho produtoCarrinhoClone =
@@ -38,12 +37,10 @@ class ProdutoAdicionalPage extends StatefulWidget {
   }
 
   @override
-  _ProdutoAdicionalPageState createState() => _ProdutoAdicionalPageState();
+  State<ProdutoCompostoPage> createState() => _ProdutoCompostoPageState();
 }
 
-class _ProdutoAdicionalPageState extends State<ProdutoAdicionalPage>
-    with ProdutoAdicionalComponent {
-
+class _ProdutoCompostoPageState extends State<ProdutoCompostoPage> with ProdutoComposotCompement{
   @override
   void initState() {
     controller.pageController = PageController(initialPage: 0);

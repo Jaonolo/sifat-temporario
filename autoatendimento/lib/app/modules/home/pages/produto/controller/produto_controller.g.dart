@@ -9,19 +9,20 @@ part of 'produto_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ProdutoController on ProdutoControllerBase, Store {
-  late final _$tipoBotaoMenusAtom =
-      Atom(name: 'ProdutoControllerBase.tipoBotaoMenus', context: context);
+  late final _$tipoBotaoNavegacaoMenusAtom = Atom(
+      name: 'ProdutoControllerBase.tipoBotaoNavegacaoMenus', context: context);
 
   @override
-  TipoBotaoMenus get tipoBotaoMenus {
-    _$tipoBotaoMenusAtom.reportRead();
-    return super.tipoBotaoMenus;
+  TipoBotaoNavegacaoMenu get tipoBotaoNavegacaoMenus {
+    _$tipoBotaoNavegacaoMenusAtom.reportRead();
+    return super.tipoBotaoNavegacaoMenus;
   }
 
   @override
-  set tipoBotaoMenus(TipoBotaoMenus value) {
-    _$tipoBotaoMenusAtom.reportWrite(value, super.tipoBotaoMenus, () {
-      super.tipoBotaoMenus = value;
+  set tipoBotaoNavegacaoMenus(TipoBotaoNavegacaoMenu value) {
+    _$tipoBotaoNavegacaoMenusAtom
+        .reportWrite(value, super.tipoBotaoNavegacaoMenus, () {
+      super.tipoBotaoNavegacaoMenus = value;
     });
   }
 
@@ -185,12 +186,12 @@ mixin _$ProdutoController on ProdutoControllerBase, Store {
   }
 
   @override
-  void atualizaTipoBotaoMenus(
+  void atualizaBotaoNavegacaoMenus(
       {bool revisao = false, bool escolheuCompomenteExtra = false}) {
     final _$actionInfo = _$ProdutoControllerBaseActionController.startAction(
-        name: 'ProdutoControllerBase.atualizaTipoBotaoMenus');
+        name: 'ProdutoControllerBase.atualizaBotaoNavegacaoMenus');
     try {
-      return super.atualizaTipoBotaoMenus(
+      return super.atualizaBotaoNavegacaoMenus(
           revisao: revisao, escolheuCompomenteExtra: escolheuCompomenteExtra);
     } finally {
       _$ProdutoControllerBaseActionController.endAction(_$actionInfo);
@@ -200,7 +201,7 @@ mixin _$ProdutoController on ProdutoControllerBase, Store {
   @override
   String toString() {
     return '''
-tipoBotaoMenus: ${tipoBotaoMenus},
+tipoBotaoNavegacaoMenus: ${tipoBotaoNavegacaoMenus},
 produtoCarrinho: ${produtoCarrinho},
 produtoMenu: ${produtoMenu},
 proximoMenu: ${proximoMenu},

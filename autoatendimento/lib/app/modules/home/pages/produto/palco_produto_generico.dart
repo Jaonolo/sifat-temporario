@@ -1,6 +1,6 @@
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/enum/tipo_botao.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/enum/tipo_botao_navegacao_menu.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
@@ -163,7 +163,7 @@ class _PalcoProdutoGenericoState extends State<PalcoProdutoGenerico> {
 
   Widget _botaoNavegacao() {
     return Observer(builder: (_) {
-      return controller.tipoBotaoMenus.botaoPronto(context, controller);
+      return controller.tipoBotaoNavegacaoMenus.retornaBtnPronto(context, controller);
     });
   }
 

@@ -1,16 +1,12 @@
-import 'package:autoatendimento/app/modules/home/home_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/cards_produtos//card_produto_menu.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/card_produto_menu.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/palco_produto_generico.dart';
-import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ProdutoAdicionalComponent {
   late BuildContext context;
-  final HomeController homeController = Modular.get();
-  final VendaController vendaController = Modular.get();
   final ProdutoController controller = Modular.get();
 
   initialize(BuildContext context) {

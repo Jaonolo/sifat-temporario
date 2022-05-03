@@ -1,4 +1,5 @@
 import 'package:autoatendimento/app/app_controller.dart';
+import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
@@ -24,6 +25,7 @@ class _CardProdutoSelecaoUnicaState extends State<CardProdutoSelecaoUnica> {
   bool selecionado = false;
   final ProdutoController controller = Modular.get();
   final AppController appController = Modular.get();
+  final HomeController homeController = Modular.get();
 
   @override
   Widget build(BuildContext c) {
@@ -125,6 +127,10 @@ class _CardProdutoSelecaoUnicaState extends State<CardProdutoSelecaoUnica> {
       }
     }
 
+    if(preco.isEmpty || preco == "0.00"){
+      return SizedBox();
+    }
+
     return Text(
       '+ R\$ $preco',
       style: TextStyle(fontSize: FontUtils.h3(context)),
@@ -133,6 +139,10 @@ class _CardProdutoSelecaoUnicaState extends State<CardProdutoSelecaoUnica> {
 
   void _adicionar() {
     try {
+      //Se tiver alguns observação ou adicionais abre a tela nova
+      bool temMenuObservacao = widget.notaItem.produtoEmpresa!.produto!.menus
+          .any((element) => element.tipo == "OBSERVACAO");
+
       NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
           controller.produtoCarrinho.notaItem, widget.produtoMenu);
 
@@ -140,7 +150,12 @@ class _CardProdutoSelecaoUnicaState extends State<CardProdutoSelecaoUnica> {
       if (menu == null) {
         menu = NotaItemUtils.menuToNotaItem(
             controller.produtoCarrinho.notaItem.idNota!, widget.produtoMenu);
+        widget.notaItem.quantidade = BigDecimal.ONE();
         menu.subitens.add(widget.notaItem);
+        if (widget.notaItem.produtoEmpresa!.produto!.pacote.equals(TipoPacote.ADICIONAIS) || temMenuObservacao) {
+          controller.trocaPalcoParaSubItem(notaItemPai: controller.produtoCarrinho.notaItem, notaItemAtual:  widget.notaItem, produtoMenuPai: widget.produtoMenu);
+          return;
+        }
         controller.produtoCarrinho.notaItem.subitens.add(menu);
       } else {
         //Se tem menu, verifica se já tem algum subitem desse componente lançado para remover
@@ -151,25 +166,23 @@ class _CardProdutoSelecaoUnicaState extends State<CardProdutoSelecaoUnica> {
 
         if (itemJaLancado != null) menu.subitens.remove(itemJaLancado);
 
-        if (widget.notaItem.quantidade!.compareTo(BigDecimal.ZERO()) > 0) {
-          menu.subitens.add(widget.notaItem);
-        } else {
-          //Caso a quantidade do item for 0 siginica que está removendo
           //Verifica se o menu tem subitens, caso não, remove ele também
           if (menu.subitens.isEmpty) {
             controller.produtoCarrinho.notaItem.subitens.remove(menu);
-          }
         }
+
+        widget.notaItem.quantidade = BigDecimal.ZERO();
       }
 
       NotaItemUtils.atualizaTotais(controller.produtoCarrinho.notaItem);
       controller.changeProdutoCarrinho(controller.produtoCarrinho);
+      controller.onLiberaBotaoMenus();
 
       setState(() {
         _body();
       });
       //selecao unica ja passa para o proximo menu automatico
-      controller.proximo();
+      // controller.proximo();
     } catch (e, s) {
       print(s);
     }

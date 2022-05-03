@@ -1,7 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:models/model/enum/tipo_item.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/string_utils.dart';
-import 'package:collection/collection.dart';
 
 class NotaItemUtils {
   //Criação de objetos
@@ -143,7 +143,7 @@ class NotaItemUtils {
     return item;
   }
 
-//
+
   static NotaItem itemComboToNotaItem(int idNota,
       ProdutoMenuComponente componente, int idEmpresa, int idTabelaPreco,
       {BigDecimal? quantidade,int? idVendedor, int? idUsuario}) {
@@ -178,40 +178,40 @@ class NotaItemUtils {
     return item;
   }
 
-//   static NotaItem itemCompostoToNotaItem(int idNota,
-//       ProdutoMenuComponente componente, int idEmpresa, int idTabelaPreco,
-//       {int idVendedor, int idUsuario}) {
-//     ProdutoMenuComponenteEmpresa componenteEmpresa = componente
-//         .componenteEmpresas
-//         .firstWhere((ce) => ce.idEmpresa == idEmpresa);
-//     GradeEmpresa gradeEmpresa = componenteEmpresa.gradeEmpresa;
-//     ProdutoEmpresa produtoEmpresa = gradeEmpresa.produtoEmpresa;
-//
-//     String descricao = produtoEmpresa.produto.descricao;
-//     if (produtoEmpresa.produto.grade != "NENHUMA")
-//       descricao += " (${gradeEmpresa.grade.tamanho.descricao})";
-//
-//     NotaItem item = NotaItem();
-//     item.idNota = idNota;
-//     item.descricao = descricao;
-//     item.idProdutoEmpresa = produtoEmpresa.id;
-//     item.produtoEmpresa = produtoEmpresa;
-//     item.tipo = StringUtils.getEnumValue(TipoItem.ITEM_COMPOSTO);
-// //    item.idEstacao = AppConfig.application.estacao.id;
-//     item.idVendedor = idVendedor;
-//     item.idUsuario = idUsuario;
-//     item.quantidade = componente.quantidade;
-//     item.idGrade = gradeEmpresa.id;
-//     item.grade = gradeEmpresa;
-//     item.precoUnitario =
-//         componente.getValorComponente(idEmpresa, idTabelaPreco);
-//     item.precoTotal = item.quantidade.multiplicar(item.precoUnitario);
-//     item.subitens = [];
-//     item.dataLancamento = DateTime.now();
-//     item.idTabelaPreco = idTabelaPreco;
-//     return item;
-//   }
-//
+  static NotaItem itemCompostoToNotaItem(int idNota,
+      ProdutoMenuComponente componente, int idEmpresa, int idTabelaPreco,
+      {BigDecimal? quantidade,int? idVendedor, int? idUsuario}) {
+    ProdutoMenuComponenteEmpresa componenteEmpresa = componente
+        .componenteEmpresas
+        .firstWhere((ce) => ce.idEmpresa == idEmpresa, orElse: () => throw Exception("compromenteEmpresa não encontrado item composto"));
+    GradeEmpresa gradeEmpresa = componenteEmpresa.gradeEmpresa!;
+    ProdutoEmpresa produtoEmpresa = gradeEmpresa.produtoEmpresa!;
+
+    String descricao = produtoEmpresa.produto!.descricao!;
+    if (produtoEmpresa.produto!.grade != "NENHUMA" && gradeEmpresa.grade != null && gradeEmpresa.grade!.tamanho != null)
+      descricao += " (${gradeEmpresa.grade!.tamanho!.descricao!})";
+
+    NotaItem item = NotaItem();
+    item.idNota = idNota;
+    item.descricao = descricao;
+    item.idProdutoEmpresa = produtoEmpresa.id;
+    item.produtoEmpresa = produtoEmpresa;
+    item.tipo = StringUtils.getEnumValue(TipoItem.ITEM_COMPOSTO);
+//    item.idEstacao = AppConfig.application.estacao.id;
+    item.idVendedor = idVendedor;
+    item.idUsuario = idUsuario;
+    item.quantidade = quantidade ?? componente.quantidade;
+    item.idGrade = gradeEmpresa.id;
+    item.grade = gradeEmpresa;
+    item.precoUnitario =
+        componente.getValorComponente(idEmpresa, idTabelaPreco);
+    item.precoTotal = item.quantidade!.multiplicar(item.precoUnitario);
+    item.subitens = [];
+    item.dataLancamento = DateTime.now();
+    item.idTabelaPreco = idTabelaPreco;
+    return item;
+  }
+
 //   static NotaItem itemRodizioToNotaItem(int idNota,
 //       ProdutoMenuComponente componente, int idEmpresa, int idTabelaPreco,
 //       {int idVendedor, int idUsuario}) {
@@ -437,20 +437,20 @@ class NotaItemUtils {
 //     }
 //   }
 //
-//   static BigDecimal quantidadeSelecionadaMenu(NotaItem itemMenu) {
-//     BigDecimal qtdeSelecionada = BigDecimal.ZERO();
-//     if (itemMenu != null) {
-//       itemMenu.subitens.forEach((ni) {
-//         if (ni.tipo != "OBSERVACAO") {
-//           if (ni.cancelado == null || !ni.cancelado)
-//             qtdeSelecionada = qtdeSelecionada.somar(ni.quantidade);
-//         } else {
-//           qtdeSelecionada = qtdeSelecionada.somar(BigDecimal.ONE());
-//         }
-//       });
-//     }
-//     return qtdeSelecionada;
-//   }
+  static BigDecimal quantidadeSelecionadaMenu(NotaItem itemMenu) {
+    BigDecimal qtdeSelecionada = BigDecimal.ZERO();
+    if (itemMenu != null) {
+      itemMenu.subitens.forEach((ni) {
+        if (ni.tipo != "OBSERVACAO") {
+          if (ni.cancelado == null || !ni.cancelado)
+            qtdeSelecionada = qtdeSelecionada.somar(ni.quantidade);
+        } else {
+          qtdeSelecionada = qtdeSelecionada.somar(BigDecimal.ONE());
+        }
+      });
+    }
+    return qtdeSelecionada;
+  }
 //
 //   static BigDecimal quantidadeSelecionadaComponente(
 //       NotaItem itemMenu, ProdutoMenuComponenteEmpresa componente) {
