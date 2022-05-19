@@ -7,6 +7,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
+// ignore: must_be_immutable
 class ProdutoCompostoPage extends StatefulWidget {
   ProdutoCarrinho produtoCarrinho;
 

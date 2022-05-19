@@ -159,7 +159,7 @@ abstract class SplashBase with Store {
 
 
     //Transforma a finalizadora de credito em dinheiro para finalizar a venda sem tipo tef //todo apenas testes
-    // appController.servicoAutoAtendimento.finalizadoraCredito!.finalizadora!.finalizadoraRFB = "DINHEIRO";
+    appController.servicoAutoAtendimento.finalizadoraCredito!.finalizadora!.finalizadoraRFB = "DINHEIRO";
 
     if (appController.listFormaPagamento.isEmpty) {
       throw WaybeException(

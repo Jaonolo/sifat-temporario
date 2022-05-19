@@ -6,7 +6,7 @@ part of 'produto_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ProdutoController on ProdutoControllerBase, Store {
   late final _$tipoBotaoNavegacaoMenusAtom = Atom(
@@ -138,6 +138,14 @@ mixin _$ProdutoController on ProdutoControllerBase, Store {
     });
   }
 
+  late final _$atualizaMenusAsyncAction =
+      AsyncAction('ProdutoControllerBase.atualizaMenus', context: context);
+
+  @override
+  Future<void> atualizaMenus(int index) {
+    return _$atualizaMenusAsyncAction.run(() => super.atualizaMenus(index));
+  }
+
   late final _$ProdutoControllerBaseActionController =
       ActionController(name: 'ProdutoControllerBase', context: context);
 
@@ -169,17 +177,6 @@ mixin _$ProdutoController on ProdutoControllerBase, Store {
         name: 'ProdutoControllerBase.selecaoRadio');
     try {
       return super.selecaoRadio(n);
-    } finally {
-      _$ProdutoControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void atualizaMenus(int index) {
-    final _$actionInfo = _$ProdutoControllerBaseActionController.startAction(
-        name: 'ProdutoControllerBase.atualizaMenus');
-    try {
-      return super.atualizaMenus(index);
     } finally {
       _$ProdutoControllerBaseActionController.endAction(_$actionInfo);
     }

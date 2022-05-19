@@ -439,16 +439,14 @@ class NotaItemUtils {
 //
   static BigDecimal quantidadeSelecionadaMenu(NotaItem itemMenu) {
     BigDecimal qtdeSelecionada = BigDecimal.ZERO();
-    if (itemMenu != null) {
       itemMenu.subitens.forEach((ni) {
         if (ni.tipo != "OBSERVACAO") {
-          if (ni.cancelado == null || !ni.cancelado)
+          if (!ni.cancelado)
             qtdeSelecionada = qtdeSelecionada.somar(ni.quantidade);
         } else {
           qtdeSelecionada = qtdeSelecionada.somar(BigDecimal.ONE());
         }
       });
-    }
     return qtdeSelecionada;
   }
 //
@@ -636,15 +634,15 @@ class NotaItemUtils {
   }
 
 
-  static List<NotaItem> getItensCombo(NotaItem notaItem) {
+  static List<NotaItem> getItensComboComposto(NotaItem notaItem) {
     List<NotaItem> list = [];
 
-    if (notaItem.tipo == "ITEM_COMBO" || notaItem.tipo == "ADICIONAL")
+    if (notaItem.tipo == "ITEM_COMBO" || notaItem.tipo == "ADICIONAL" || notaItem.tipo == "ITEM_COMPOSTO")
       list.add(notaItem);
 
     if (notaItem.subitens.isNotEmpty)
       notaItem.subitens.forEach((element) {
-        var itensCombo = getItensCombo(element);
+        var itensCombo = getItensComboComposto(element);
         list.addAll(itensCombo);
       });
 

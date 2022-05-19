@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CountDownTimer extends StatefulWidget {
@@ -49,7 +50,7 @@ class _CountDownTimerState extends State<CountDownTimer>
     );
 
     started = false;
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.autoStart) {
         start();
         started = true;

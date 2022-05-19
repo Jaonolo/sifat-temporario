@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
+// ignore: must_be_immutable
 class CardRevisao extends StatelessWidget {
   final ProdutoController controller = Modular.get();
   late BuildContext context;
@@ -26,7 +27,7 @@ class CardRevisao extends StatelessWidget {
   //tela de revisao compartilhada
   Widget _listViewRevisao() {
     List<NotaItem> itensVendidos =
-    NotaItemUtils.getItensCombo(controller.produtoCarrinho.notaItem);
+    NotaItemUtils.getItensComboComposto(controller.produtoCarrinho.notaItem);
 
     return Column(
       children: [

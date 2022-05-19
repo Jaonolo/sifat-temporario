@@ -55,7 +55,7 @@ extension TipoBotaoNavegacaoMenusExtension on TipoBotaoNavegacaoMenu{
         return BotaoSecundario(
           descricao: descricao,
           context: context,
-          function:  controller.liberaBotaoMenus ? () => onActionBtn(controller).call() : null,
+          function: controller.liberaBotaoMenus ? () => onActionBtn(controller).call() : null,
           altura: FontUtils.h2(context) * 1.01,
           largura: FontUtils.h2(context) * 10,
         );

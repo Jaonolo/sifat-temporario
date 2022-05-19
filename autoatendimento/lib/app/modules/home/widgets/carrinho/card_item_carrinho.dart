@@ -27,8 +27,6 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
   final VendaController vendaController = Modular.get();
   final HomeController homeController = Modular.get();
   late Orientation orientation;
-  late double heightBtn;
-  late double widthBtn;
 
   @override
   void initState() {
@@ -37,15 +35,14 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
 
   @override
   Widget build(BuildContext context) {
-    this.orientation = MediaQuery
-        .of(context)
-        .orientation;
-    this.heightBtn = orientation == Orientation.landscape
-        ? FontUtils.h3(context)
-        : FontUtils.h2(context) * 1.4;
-    this.widthBtn = orientation == Orientation.landscape
-        ? FontUtils.h3(context)
-        : FontUtils.h2(context) * 1.4;
+    bool podeEditar = false;
+
+    if (widget.produtoCarrinho.notaItem.produtoEmpresa != null) {
+      if (!widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote.equals(TipoPacote.NENHUM) || widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.grades.isNotEmpty) {
+        podeEditar = true;
+      }
+    }
+
     return Card(
       elevation: 5,
       child: Padding(
@@ -60,12 +57,9 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
                 Expanded(flex: 54, child: _txtDescricao()),
                 Expanded(
                     flex: 12,
-                    child: (widget.produtoCarrinho.notaItem.produtoEmpresa!
-                        .produto!.pacote.equals(TipoPacote.NENHUM) ||
-                        widget.produtoCarrinho.notaItem.produtoEmpresa!
-                            .produto!.grades.isEmpty)
-                        ? const SizedBox()
-                        : _botaoEditar()),
+                    child: podeEditar
+                        ? _botaoEditar()
+                        :const SizedBox()),
                 Expanded(flex: 14, child: _txtValor()),
                 Expanded(
                   child: Container(),
@@ -82,8 +76,6 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
 
   Widget _botaoAdd() {
     return SizedBox(
-      height: heightBtn,
-      width: widthBtn,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           primary: DefaultTheme.accentColor,
@@ -115,8 +107,6 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
 
   Widget _botaoRemove() {
     return SizedBox(
-      height: heightBtn,
-      width: widthBtn,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           primary: DefaultTheme.accentColor,
@@ -150,45 +140,17 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
   }
 
   Widget _botaoEditar() {
-    double larguraTela = MediaQuery
-        .of(context)
-        .size
-        .width;
-    double alturaTela = MediaQuery
-        .of(context)
-        .size
-        .height;
-
-    return orientation == Orientation.landscape
-        ? Center(
+    return Center(
         child: SizedBox(
-            height: alturaTela * 0.1,
-            width: larguraTela * 0.1,
+            height: FontUtils.h2(context) * 1,
+            width: FontUtils.h2(context) * 8,
             child: IconButton(
               onPressed: onEditar,
               icon: Icon(
                 Icons.edit,
                 color: Colors.black,
               ),
-            )))
-        : Center(
-      child: SizedBox(
-          height: FontUtils.h2(context) * 1,
-          width: FontUtils.h2(context) * 8,
-          child: ElevatedButton(
-            onPressed: onEditar,
-            child: Text('EDITAR',
-                style: TextStyle(
-                    fontSize: FontUtils.h4(context), color: Colors.black)),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              elevation: 4.0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(90.0),
-                  side: const BorderSide(width: 3, color: Colors.grey)),
-            ),
-          )),
-    );
+            )));
   }
 
   void onEditar() {

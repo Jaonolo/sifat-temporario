@@ -24,8 +24,9 @@ abstract class ProdutoControllerBase with Store {
 
   late TipoPacote tipoPacote;
 
-  NotaItem? notaItemPai;
-  ProdutoMenu? produtoMenuPai;
+  NotaItem? _notaItemPai;
+  ProdutoMenu? _produtoMenuPai;
+  int? _indexAnteriorPai;
 
   ProdutoCarrinho produtoCarrinhoOriginal = ProdutoCarrinho(NotaItem());
 
@@ -59,8 +60,9 @@ abstract class ProdutoControllerBase with Store {
        required NotaItem notaItemAtual,
        required  ProdutoMenu produtoMenuPai}){
     //populo as variaveis de controle
-    this.notaItemPai = notaItemPai;
-    this.produtoMenuPai = produtoMenuPai;
+    this._notaItemPai = notaItemPai;
+    this._produtoMenuPai = produtoMenuPai;
+
     //coloco o palco com o subItem
     homeController.addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItemAtual)));
   }
@@ -68,23 +70,32 @@ abstract class ProdutoControllerBase with Store {
   void _adicionarSubItemAoItemPai() {
     //busca se o menu ja foi lançado
     NotaItem? menuDoItemPai = NotaItemUtils.localizaMenuJaLancado(
-        notaItemPai!, produtoMenuPai!);
+        _notaItemPai!, _produtoMenuPai!);
 
-    //Caso ainda não foi crio ele
-    if(menuDoItemPai == null){
-      menuDoItemPai = NotaItemUtils.menuToNotaItem(produtoCarrinho.notaItem.idNota!, produtoMenuPai!);
+    if (menuDoItemPai == null) {
+      //Caso ainda não foi crio ele
+      menuDoItemPai = NotaItemUtils.menuToNotaItem(
+          produtoCarrinho.notaItem.idNota!, _produtoMenuPai!);
+
+      //adiciono o item no menu
+      menuDoItemPai.subitens.add(produtoCarrinho.notaItem);
+
+      //adiciono o menu no itemPai
+      _notaItemPai!.subitens.add(menuDoItemPai);
+    } else {
+      //adiciono o item no menu
+      menuDoItemPai.subitens.add(produtoCarrinho.notaItem);
     }
 
-    //adiciono o item no menu
-    menuDoItemPai.subitens.add(produtoCarrinho.notaItem);
-
-    //adiciono o menu no itemPai
-    notaItemPai!.subitens.add(menuDoItemPai);
     //coloco o itemPai como o principal novamente
-    produtoCarrinho.notaItem = notaItemPai!;
+    produtoCarrinho.notaItem = _notaItemPai!;
+
+    //guardo a variavel par aatualizar os menus depois
+    _indexAnteriorPai = _notaItemPai!.produtoEmpresa!.produto!.menus.indexOf(_produtoMenuPai!);
+
     //zero as variaveis de controlle
-    notaItemPai = null;
-    produtoMenu = null;
+    _notaItemPai = null;
+    _produtoMenuPai = null;
     tipoPacote = produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote;
   }
 
@@ -94,7 +105,7 @@ abstract class ProdutoControllerBase with Store {
       ProdutoCarrinhoUtils.atualizaProdutoCarrinho(
           produtoCarrinhoOriginal, produtoCarrinho);
 
-      if (notaItemPai != null) {
+      if (_notaItemPai != null) {
         //Caso seja um subItem deverivado de algum compomente do menu adiciona ao notaItemPai e retorna para o menu
         _adicionarSubItemAoItemPai();
         return;
@@ -171,7 +182,8 @@ abstract class ProdutoControllerBase with Store {
   }
 
   @action
-  void atualizaMenus(int index) {
+  Future<void> atualizaMenus(int index) async {
+
     //menu atual
     produtoMenu =
         (index < produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
@@ -196,19 +208,26 @@ abstract class ProdutoControllerBase with Store {
         .equals(TipoPacote.COMBO)) {
       atualizaBotaoNavegacaoMenus(
           revisao:
-              produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length -
-                      1 ==
-                  index);
+              produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length - 1 == index);
     } else {
       atualizaBotaoNavegacaoMenus();
     }
+
+    //Caso o _indexAnteriorPai estiver != null quer dizer que tinha um item > abriu a tela de um subItem e esta voltando
+    //para a tela do itemPrincipal, esse metodo é responsavel por voltar no menu correto
+    if(_indexAnteriorPai != null) {
+      await Future.delayed(const Duration(microseconds: 300000)); //0,3s
+      pageController.jumpToPage(_indexAnteriorPai!);
+      _indexAnteriorPai = null;
+    }
+
   }
 
   @action
   void atualizaBotaoNavegacaoMenus(
       {bool revisao = false, bool escolheuCompomenteExtra = false}) {
     //Se for um subItem no caso adicional ou observação dentro de um compomente de um menu não muda o botao
-    if (notaItemPai != null) {
+    if (_notaItemPai != null) {
       tipoBotaoNavegacaoMenus = TipoBotaoNavegacaoMenu.SUB_ITEM_INTO_ITEM;
       return;
     }
