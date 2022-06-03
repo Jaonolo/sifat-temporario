@@ -136,6 +136,8 @@ abstract class SplashBase with Store {
 
         appController.servicoAutoAtendimento = dto.servicoAutoAtendimento!;
         appController.token = dto.servicoAutoAtendimento!.token!;
+      } else if (response.status == 204) {
+        throw WaybeException('Estação de trabalho não encontrada');
       } else {
         throw WaybeException('Problema ao realizar login na API',
             exception: response.content);
