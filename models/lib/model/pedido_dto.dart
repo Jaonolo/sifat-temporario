@@ -14,6 +14,7 @@ class PedidoDTO {
 
   // enum Origem {WAITER, WAITER_MOBILE, ALFA_SYNC, IFOOD, RAPPI, WABIZ, FOURALL, CONCENTRADOR, WAYMENU, OUTRO,}
 
+  @JsonKey(defaultValue: [])
   List<PedidoItemDTO> pedidoItemDTOList = [];
 
   PedidoDTO();

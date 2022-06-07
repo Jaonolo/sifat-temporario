@@ -32,8 +32,10 @@ class ApuracaoRoyalty {
 
   BigDecimal? valorMarketing;
 
+  @JsonKey(defaultValue: [])
   List<ApuracaoRoyaltyLoja> lojas = [];
 
+  @JsonKey(defaultValue: [])
   List<Conta> contas = [];
 
   ApuracaoRoyalty();

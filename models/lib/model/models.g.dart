@@ -308,11 +308,12 @@ CadastroEstacaoTrabalhoDTO _$CadastroEstacaoTrabalhoDTOFromJson(
           ? null
           : EquipamentoImpressao.fromJson(
               json['impressoraGeral'] as Map<String, dynamic>)
-      ..listImpressorasProducao = (json['listImpressorasProducao']
-              as List<dynamic>)
-          .map((e) =>
-              CadastroImpressoraProducaoDto.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..listImpressorasProducao =
+          (json['listImpressorasProducao'] as List<dynamic>?)
+                  ?.map((e) => CadastroImpressoraProducaoDto.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList() ??
+              [];
 
 Map<String, dynamic> _$CadastroEstacaoTrabalhoDTOToJson(
         CadastroEstacaoTrabalhoDTO instance) =>
@@ -456,7 +457,8 @@ Client _$ClientFromJson(Map<String, dynamic> json) => Client()
   ..servico = json['servico'] as String?
   ..ativo = json['ativo'] as bool?
   ..segmentos =
-      (json['segmentos'] as List<dynamic>).map((e) => e as String).toList();
+      (json['segmentos'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          [];
 
 Map<String, dynamic> _$ClientToJson(Client instance) => <String, dynamic>{
       'id': instance.id,
@@ -631,12 +633,14 @@ ClienteQuestDTO _$ClienteQuestDTOFromJson(Map<String, dynamic> json) =>
       ..notaQuest = json['notaQuest'] == null
           ? null
           : NotaQuest.fromJson(json['notaQuest'] as Map<String, dynamic>)
-      ..campanhas = (json['campanhas'] as List<dynamic>)
-          .map((e) => Campanha.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..historicoCompras = (json['historicoCompras'] as List<dynamic>)
-          .map((e) => HistoricoCompras.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..campanhas = (json['campanhas'] as List<dynamic>?)
+              ?.map((e) => Campanha.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+      ..historicoCompras = (json['historicoCompras'] as List<dynamic>?)
+              ?.map((e) => HistoricoCompras.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$ClienteQuestDTOToJson(ClienteQuestDTO instance) =>
     <String, dynamic>{
@@ -772,14 +776,16 @@ Consumo _$ConsumoFromJson(Map<String, dynamic> json) => Consumo()
   ..mesa = json['mesa'] as int?
   ..tipoDesconto = json['tipoDesconto'] as String
   ..preDesconto = BigDecimal.fromJson(json['preDesconto'])
-  ..consumosJuntados = (json['consumosJuntados'] as List<dynamic>)
-      .map((e) => Consumo.fromJson(e as Map<String, dynamic>))
-      .toList()
+  ..consumosJuntados = (json['consumosJuntados'] as List<dynamic>?)
+          ?.map((e) => Consumo.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
   ..idConsumoOrigemRecebimento = json['idConsumoOrigemRecebimento'] as int?
   ..consumosOrigemRecebimentos =
-      (json['consumosOrigemRecebimentos'] as List<dynamic>)
-          .map((e) => Consumo.fromJson(e as Map<String, dynamic>))
-          .toList()
+      (json['consumosOrigemRecebimentos'] as List<dynamic>?)
+              ?.map((e) => Consumo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
   ..evento = json['evento'] == null
       ? null
       : Evento.fromJson(json['evento'] as Map<String, dynamic>?)
@@ -981,12 +987,14 @@ DtoNota _$DtoNotaFromJson(Map<String, dynamic> json) => DtoNota()
   ..nota = json['nota'] == null
       ? null
       : Nota.fromJson(json['nota'] as Map<String, dynamic>)
-  ..notaItemList = (json['notaItemList'] as List<dynamic>)
-      .map((e) => NotaItem.fromJson(e as Map<String, dynamic>))
-      .toList()
-  ..notaFinalizadoraList = (json['notaFinalizadoraList'] as List<dynamic>)
-      .map((e) => NotaFinalizadora.fromJson(e as Map<String, dynamic>))
-      .toList();
+  ..notaItemList = (json['notaItemList'] as List<dynamic>?)
+          ?.map((e) => NotaItem.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
+  ..notaFinalizadoraList = (json['notaFinalizadoraList'] as List<dynamic>?)
+          ?.map((e) => NotaFinalizadora.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      [];
 
 Map<String, dynamic> _$DtoNotaToJson(DtoNota instance) => <String, dynamic>{
       'nota': instance.nota,
@@ -1528,19 +1536,24 @@ EstacaoPreCadastroDTO _$EstacaoPreCadastroDTOFromJson(
         Map<String, dynamic> json) =>
     EstacaoPreCadastroDTO()
       ..numeroCaixa = json['numeroCaixa'] as int?
-      ..emissorFiscalList = (json['emissorFiscalList'] as List<dynamic>)
-          .map((e) => EmissorFiscal.fromJson(e as Map<String, dynamic>?))
-          .toList()
-      ..moduloList = (json['moduloList'] as List<dynamic>)
-          .map((e) => Modulo.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..equipamentoImpressaoList = (json['equipamentoImpressaoList']
-              as List<dynamic>)
-          .map((e) => EquipamentoImpressao.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..localProducaoList = (json['localProducaoList'] as List<dynamic>)
-          .map((e) => LocalProducao.fromJson(e as Map<String, dynamic>?))
-          .toList()
+      ..emissorFiscalList = (json['emissorFiscalList'] as List<dynamic>?)
+              ?.map((e) => EmissorFiscal.fromJson(e as Map<String, dynamic>?))
+              .toList() ??
+          []
+      ..moduloList = (json['moduloList'] as List<dynamic>?)
+              ?.map((e) => Modulo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+      ..equipamentoImpressaoList =
+          (json['equipamentoImpressaoList'] as List<dynamic>?)
+                  ?.map((e) =>
+                      EquipamentoImpressao.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              []
+      ..localProducaoList = (json['localProducaoList'] as List<dynamic>?)
+              ?.map((e) => LocalProducao.fromJson(e as Map<String, dynamic>?))
+              .toList() ??
+          []
       ..modoHibrido = json['modoHibrido'] as bool?;
 
 Map<String, dynamic> _$EstacaoPreCadastroDTOToJson(
@@ -2051,12 +2064,14 @@ GrupoEstacao _$GrupoEstacaoFromJson(Map<String, dynamic> json) => GrupoEstacao()
   ..id = json['id'] as int?
   ..idEmpresa = json['idEmpresa'] as int?
   ..descricao = json['descricao'] as String?
-  ..modulos = (json['modulos'] as List<dynamic>)
-      .map((e) => Modulo.fromJson(e as Map<String, dynamic>))
-      .toList()
-  ..impressoras = (json['impressoras'] as List<dynamic>)
-      .map((e) => GrupoImpressora.fromJson(e as Map<String, dynamic>))
-      .toList();
+  ..modulos = (json['modulos'] as List<dynamic>?)
+          ?.map((e) => Modulo.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
+  ..impressoras = (json['impressoras'] as List<dynamic>?)
+          ?.map((e) => GrupoImpressora.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      [];
 
 Map<String, dynamic> _$GrupoEstacaoToJson(GrupoEstacao instance) =>
     <String, dynamic>{
@@ -2914,9 +2929,10 @@ NovaEmpresaDTO _$NovaEmpresaDTOFromJson(Map<String, dynamic> json) =>
       ..empresa = json['empresa'] == null
           ? null
           : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
-      ..modulos = (json['modulos'] as List<dynamic>)
-          .map((e) => Modulo.fromJson(e as Map<String, dynamic>))
-          .toList()
+      ..modulos = (json['modulos'] as List<dynamic>?)
+              ?.map((e) => Modulo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..estacaoTrabalho = json['estacaoTrabalho'] == null
           ? null
           : EstacaoTrabalho.fromJson(
@@ -3017,9 +3033,10 @@ Map<String, dynamic> _$OperacaoFinalizadoraToJson(
 
 Participante _$ParticipanteFromJson(Map<String, dynamic> json) => Participante()
   ..cpfCnpjParticipante = json['cpfCnpjParticipante'] as String?
-  ..telefones = (json['telefones'] as List<dynamic>)
-      .map((e) => ParticipanteTelefone.fromJson(e as Map<String, dynamic>))
-      .toList()
+  ..telefones = (json['telefones'] as List<dynamic>?)
+          ?.map((e) => ParticipanteTelefone.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
   ..email = json['email'] as String?
   ..nome = json['nome'] as String?
   ..saldoDisponivelPontos = json['saldoDisponivelPontos'] == null
@@ -3440,12 +3457,14 @@ ProdutoGrupo _$ProdutoGrupoFromJson(Map<String, dynamic> json) => ProdutoGrupo()
   ..ecommerce = json['ecommerce'] as bool?
   ..idGrupoPai = json['idGrupoPai'] as int?
   ..padraoSistema = json['padraoSistema'] as bool?
-  ..subgrupos = (json['subgrupos'] as List<dynamic>)
-      .map((e) => ProdutoGrupo.fromJson(e as Map<String, dynamic>))
-      .toList()
-  ..produtos = (json['produtos'] as List<dynamic>)
-      .map((e) => ProdutoEmpresa.fromJson(e as Map<String, dynamic>))
-      .toList()
+  ..subgrupos = (json['subgrupos'] as List<dynamic>?)
+          ?.map((e) => ProdutoGrupo.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
+  ..produtos = (json['produtos'] as List<dynamic>?)
+          ?.map((e) => ProdutoEmpresa.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
   ..versao = json['versao'] as int?;
 
 Map<String, dynamic> _$ProdutoGrupoToJson(ProdutoGrupo instance) =>
@@ -3671,8 +3690,9 @@ Regiao _$RegiaoFromJson(Map<String, dynamic> json) => Regiao()
       ? null
       : Cidade.fromJson(json['cidade'] as Map<String, dynamic>?)
   ..regioesEmpresa = (json['regioesEmpresa'] as List<dynamic>?)
-      ?.map((e) => RegiaoEmpresa.fromJson(e as Map<String, dynamic>))
-      .toList()
+          ?.map((e) => RegiaoEmpresa.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
   ..versao = json['versao'] as int?;
 
 Map<String, dynamic> _$RegiaoToJson(Regiao instance) => <String, dynamic>{
@@ -3796,8 +3816,8 @@ TabelaPreco _$TabelaPrecoFromJson(Map<String, dynamic> json) => TabelaPreco()
       : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
   ..codigo = json['codigo'] as int?
   ..descricao = json['descricao'] as String?
-  ..padrao = json['padrao'] as bool
-  ..ativo = json['ativo'] as bool
+  ..padrao = json['padrao'] as bool? ?? false
+  ..ativo = json['ativo'] as bool? ?? true
   ..empresas = (json['empresas'] as List<dynamic>?)
           ?.map((e) => Empresa.fromJson(e as Map<String, dynamic>))
           .toList() ??
@@ -4554,36 +4574,46 @@ ConferenciaCaixaDTO _$ConferenciaCaixaDTOFromJson(Map<String, dynamic> json) =>
           : ExtratoTurnoDTO.fromJson(
               json['extratoTurnoDTO'] as Map<String, dynamic>)
       ..vendas = (json['vendas'] as List<dynamic>?)
-          ?.map((e) => NotaSimplificadaDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) =>
+                  NotaSimplificadaDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..vendasCanceladas = (json['vendasCanceladas'] as List<dynamic>?)
-          ?.map((e) => NotaSimplificadaDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..taxaServicoGracomDTOList = (json['taxaServicoGracomDTOList']
-              as List<dynamic>?)
-          ?.map((e) => TaxaServicoGracomDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) =>
+                  NotaSimplificadaDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+      ..taxaServicoGracomDTOList =
+          (json['taxaServicoGracomDTOList'] as List<dynamic>?)
+                  ?.map((e) =>
+                      TaxaServicoGracomDTO.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              []
       ..desdobramentoVendaDTO = json['desdobramentoVendaDTO'] == null
           ? null
           : DesdobramentoVendaDTO.fromJson(
               json['desdobramentoVendaDTO'] as Map<String, dynamic>)
       ..vendasModuloDTOList = (json['vendasModuloDTOList'] as List<dynamic>?)
-          ?.map((e) => VendasModuloDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) => VendasModuloDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..desdobramentoGrupoProdutosDTOList =
           (json['desdobramentoGrupoProdutosDTOList'] as List<dynamic>?)
-              ?.map((e) => DesdobramentoGrupoProdutosDTO.fromJson(
-                  e as Map<String, dynamic>))
-              .toList()
+                  ?.map((e) => DesdobramentoGrupoProdutosDTO.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList() ??
+              []
       ..pacotesVendidos = (json['pacotesVendidos'] as List<dynamic>?)
-          ?.map((e) =>
-              DesdobramentoProdutoDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..totalRecebimentoParcial = (json['totalRecebimentoParcial']
-              as List<dynamic>?)
-          ?.map((e) =>
-              TotalRecebimentoParcialDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) =>
+                  DesdobramentoProdutoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+      ..totalRecebimentoParcial =
+          (json['totalRecebimentoParcial'] as List<dynamic>?)
+                  ?.map((e) => TotalRecebimentoParcialDTO.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList() ??
+              []
       ..saldo =
           json['saldo'] == null ? null : BigDecimal.fromJson(json['saldo'])
       ..pendenciaEmissaoFiscal = json['pendenciaEmissaoFiscal'] as int?;
@@ -4677,22 +4707,29 @@ Map<String, dynamic> _$OperacaoDTOToJson(OperacaoDTO instance) =>
 
 ExtratoTurnoDTO _$ExtratoTurnoDTOFromJson(Map<String, dynamic> json) =>
     ExtratoTurnoDTO()
-      ..vendasPorFormaDePagamento = (json['vendasPorFormaDePagamento']
-              as List<dynamic>?)
-          ?.map((e) => TotalFinalizadoraDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+      ..vendasPorFormaDePagamento =
+          (json['vendasPorFormaDePagamento'] as List<dynamic>?)
+                  ?.map((e) =>
+                      TotalFinalizadoraDTO.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              []
       ..suprimentos = (json['suprimentos'] as List<dynamic>?)
-          ?.map((e) => OperacaoDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) => OperacaoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..sangrias = (json['sangrias'] as List<dynamic>?)
-          ?.map((e) => OperacaoDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) => OperacaoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..recebimentos = (json['recebimentos'] as List<dynamic>?)
-          ?.map((e) => OperacaoDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) => OperacaoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..fechamentos = (json['fechamentos'] as List<dynamic>?)
-          ?.map((e) => TurnoFechamentoDTO.fromJson(e as Map<String, dynamic>))
-          .toList();
+              ?.map(
+                  (e) => TurnoFechamentoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$ExtratoTurnoDTOToJson(ExtratoTurnoDTO instance) =>
     <String, dynamic>{
@@ -4839,11 +4876,12 @@ DesdobramentoGrupoProdutosDTO _$DesdobramentoGrupoProdutosDTOFromJson(
       ..ticketMedio = json['ticketMedio'] == null
           ? null
           : BigDecimal.fromJson(json['ticketMedio'])
-      ..desdobramentoProdutoDTOList =
-          (json['desdobramentoProdutoDTOList'] as List<dynamic>?)
+      ..desdobramentoProdutoDTOList = (json['desdobramentoProdutoDTOList']
+                  as List<dynamic>?)
               ?.map((e) =>
                   DesdobramentoProdutoDTO.fromJson(e as Map<String, dynamic>))
-              .toList();
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$DesdobramentoGrupoProdutosDTOToJson(
         DesdobramentoGrupoProdutosDTO instance) =>
@@ -4961,9 +4999,10 @@ HistoricoPedidoDTO _$HistoricoPedidoDTOFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['dataUltimoPedido'] as String)
       ..tempoMedioExpedicao = json['tempoMedioExpedicao'] as String?
-      ..pedidoDTOList = (json['pedidoDTOList'] as List<dynamic>)
-          .map((e) => PedidoDTO.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..pedidoDTOList = (json['pedidoDTOList'] as List<dynamic>?)
+              ?.map((e) => PedidoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$HistoricoPedidoDTOToJson(HistoricoPedidoDTO instance) =>
     <String, dynamic>{
@@ -4980,9 +5019,10 @@ PedidoDTO _$PedidoDTOFromJson(Map<String, dynamic> json) => PedidoDTO()
   ..numeroPedido = json['numeroPedido'] as int?
   ..total = json['total'] == null ? null : BigDecimal.fromJson(json['total'])
   ..origem = json['origem'] as String?
-  ..pedidoItemDTOList = (json['pedidoItemDTOList'] as List<dynamic>)
-      .map((e) => PedidoItemDTO.fromJson(e as Map<String, dynamic>))
-      .toList();
+  ..pedidoItemDTOList = (json['pedidoItemDTOList'] as List<dynamic>?)
+          ?.map((e) => PedidoItemDTO.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      [];
 
 Map<String, dynamic> _$PedidoDTOToJson(PedidoDTO instance) => <String, dynamic>{
       'idNota': instance.idNota,
@@ -5004,9 +5044,10 @@ PedidoItemDTO _$PedidoItemDTOFromJson(Map<String, dynamic> json) =>
           : BigDecimal.fromJson(json['quantidade'])
       ..total =
           json['total'] == null ? null : BigDecimal.fromJson(json['total'])
-      ..subitens = (json['subitens'] as List<dynamic>)
-          .map((e) => PedidoItemDTO.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..subitens = (json['subitens'] as List<dynamic>?)
+              ?.map((e) => PedidoItemDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$PedidoItemDTOToJson(PedidoItemDTO instance) =>
     <String, dynamic>{
@@ -5052,9 +5093,10 @@ ClienteExtratoDTO _$ClienteExtratoDTOFromJson(Map<String, dynamic> json) =>
       ..limiteDisponivel = json['limiteDisponivel'] == null
           ? null
           : BigDecimal.fromJson(json['limiteDisponivel'])
-      ..contas = (json['contas'] as List<dynamic>)
-          .map((e) => ClienteConta.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..contas = (json['contas'] as List<dynamic>?)
+              ?.map((e) => ClienteConta.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$ClienteExtratoDTOToJson(ClienteExtratoDTO instance) =>
     <String, dynamic>{
@@ -5150,12 +5192,14 @@ ClienteFatura _$ClienteFaturaFromJson(Map<String, dynamic> json) =>
       ..dataCancelamento = json['dataCancelamento'] == null
           ? null
           : DateTime.parse(json['dataCancelamento'] as String)
-      ..contas = (json['contas'] as List<dynamic>)
-          .map((e) => Conta.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..clienteContas = (json['clienteContas'] as List<dynamic>)
-          .map((e) => ClienteConta.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..contas = (json['contas'] as List<dynamic>?)
+              ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+      ..clienteContas = (json['clienteContas'] as List<dynamic>?)
+              ?.map((e) => ClienteConta.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$ClienteFaturaToJson(ClienteFatura instance) =>
     <String, dynamic>{
@@ -5266,19 +5310,22 @@ Conta _$ContaFromJson(Map<String, dynamic> json) => Conta()
       ? null
       : Conta.fromJson(json['contaOrigem'] as Map<String, dynamic>)
   ..pagamentosParciais = (json['pagamentosParciais'] as List<dynamic>?)
-      ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
-      .toList()
+          ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
   ..transferencia = json['transferencia'] as bool?
   ..automatico = json['automatico'] as bool?
   ..pago = json['pago'] as bool?
   ..parcial = json['parcial'] as bool?
   ..cancelado = json['cancelado'] as bool?
-  ..classificacoes = (json['classificacoes'] as List<dynamic>)
-      .map((e) => ContaClassificacao.fromJson(e as Map<String, dynamic>))
-      .toList()
-  ..centroCustos = (json['centroCustos'] as List<dynamic>)
-      .map((e) => ContaCentroCusto.fromJson(e as Map<String, dynamic>))
-      .toList()
+  ..classificacoes = (json['classificacoes'] as List<dynamic>?)
+          ?.map((e) => ContaClassificacao.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
+  ..centroCustos = (json['centroCustos'] as List<dynamic>?)
+          ?.map((e) => ContaCentroCusto.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
   ..idNota = json['idNota'] as int?
   ..idContaLote = json['idContaLote'] as int?
   ..contaLote = json['contaLote'] == null
@@ -5553,8 +5600,9 @@ Contalote _$ContaloteFromJson(Map<String, dynamic> json) => Contalote()
       : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
   ..numeroParcelas = json['numeroParcelas'] as int?
   ..parcelas = (json['parcelas'] as List<dynamic>?)
-      ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
-      .toList();
+          ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      [];
 
 Map<String, dynamic> _$ContaloteToJson(Contalote instance) => <String, dynamic>{
       'id': instance.id,
@@ -5583,15 +5631,18 @@ LoteControleCartao _$LoteControleCartaoFromJson(Map<String, dynamic> json) =>
       ..observacao = json['observacao'] as String?
       ..tipoLoteControleCartao = json['tipoLoteControleCartao'] as String?
       ..transacoes = (json['transacoes'] as List<dynamic>?)
-          ?.map((e) => TransacaoCartao.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) => TransacaoCartao.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..titulosDesmembramento =
           (json['titulosDesmembramento'] as List<dynamic>?)
-              ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
-              .toList()
+                  ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              []
       ..titulosQuitacao = (json['titulosQuitacao'] as List<dynamic>?)
-          ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
-          .toList();
+              ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$LoteControleCartaoToJson(LoteControleCartao instance) =>
     <String, dynamic>{
@@ -5680,12 +5731,15 @@ ApuracaoRoyalty _$ApuracaoRoyaltyFromJson(Map<String, dynamic> json) =>
       ..valorMarketing = json['valorMarketing'] == null
           ? null
           : BigDecimal.fromJson(json['valorMarketing'])
-      ..lojas = (json['lojas'] as List<dynamic>)
-          .map((e) => ApuracaoRoyaltyLoja.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..contas = (json['contas'] as List<dynamic>)
-          .map((e) => Conta.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..lojas = (json['lojas'] as List<dynamic>?)
+              ?.map((e) =>
+                  ApuracaoRoyaltyLoja.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+      ..contas = (json['contas'] as List<dynamic>?)
+              ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$ApuracaoRoyaltyToJson(ApuracaoRoyalty instance) =>
     <String, dynamic>{
@@ -5874,9 +5928,10 @@ PlanoConta _$PlanoContaFromJson(Map<String, dynamic> json) => PlanoConta()
       : PlanoConta.fromJson(json['planoContaPai'] as Map<String, dynamic>)
   ..classificacao = json['classificacao'] as String?
   ..compraRevenda = json['compraRevenda'] as bool?
-  ..subitens = (json['subitens'] as List<dynamic>)
-      .map((e) => PlanoConta.fromJson(e as Map<String, dynamic>))
-      .toList();
+  ..subitens = (json['subitens'] as List<dynamic>?)
+          ?.map((e) => PlanoConta.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      [];
 
 Map<String, dynamic> _$PlanoContaToJson(PlanoConta instance) =>
     <String, dynamic>{
@@ -5947,10 +6002,12 @@ LayoutControle _$LayoutControleFromJson(Map<String, dynamic> json) =>
       ..id = json['id'] as int?
       ..idEmpresa = json['idEmpresa'] as int?
       ..descricao = json['descricao'] as String?
-      ..layoutControleTempoList = (json['layoutControleTempoList']
-              as List<dynamic>)
-          .map((e) => LayoutControleTempo.fromJson(e as Map<String, dynamic>))
-          .toList()
+      ..layoutControleTempoList =
+          (json['layoutControleTempoList'] as List<dynamic>?)
+                  ?.map((e) =>
+                      LayoutControleTempo.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              []
       ..padrao = json['padrao'] as bool?;
 
 Map<String, dynamic> _$LayoutControleToJson(LayoutControle instance) =>

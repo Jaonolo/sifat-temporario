@@ -2,15 +2,20 @@ part of openapi.api;
 
 @JsonSerializable()
 class ExtratoTurnoDTO {
-  List<TotalFinalizadoraDTO>? vendasPorFormaDePagamento;
+  @JsonKey(defaultValue: [])
+  List<TotalFinalizadoraDTO> vendasPorFormaDePagamento = [];
 
-  List<OperacaoDTO>? suprimentos;
+  @JsonKey(defaultValue: [])
+  List<OperacaoDTO> suprimentos = [];
 
-  List<OperacaoDTO>? sangrias;
+  @JsonKey(defaultValue: [])
+  List<OperacaoDTO> sangrias = [];
 
-  List<OperacaoDTO>? recebimentos;
+  @JsonKey(defaultValue: [])
+  List<OperacaoDTO> recebimentos = [];
 
-  List<TurnoFechamentoDTO>? fechamentos;
+  @JsonKey(defaultValue: [])
+  List<TurnoFechamentoDTO> fechamentos = [];
 
   ExtratoTurnoDTO();
 
@@ -47,7 +52,7 @@ class ExtratoTurnoDTO {
 
   List<TotalFinalizadoraDTO> getTotalFinalizadoras() {
     List<TotalFinalizadoraDTO> totais = [];
-    vendasPorFormaDePagamento!.forEach((e) {
+    vendasPorFormaDePagamento.forEach((e) {
       TotalFinalizadoraDTO totalFinalizadoraDTO = TotalFinalizadoraDTO();
 
       totalFinalizadoraDTO.idFinalizadora = e.idFinalizadora;
@@ -59,7 +64,7 @@ class ExtratoTurnoDTO {
     });
 
     //SANGRIA
-    for (OperacaoDTO sangria in sangrias!) {
+    for (OperacaoDTO sangria in sangrias) {
       TotalFinalizadoraDTO? first;
       if (totais.isNotEmpty) {
         first = totais
@@ -82,7 +87,7 @@ class ExtratoTurnoDTO {
     }
 
     //SUPRIMENTO
-    for (OperacaoDTO suprimento in suprimentos!) {
+    for (OperacaoDTO suprimento in suprimentos) {
       TotalFinalizadoraDTO? first;
       if (totais.length > 0) {
         first = totais
@@ -104,7 +109,7 @@ class ExtratoTurnoDTO {
     }
 
     //RECEBIMENTOS
-    for (OperacaoDTO recebimento in recebimentos!) {
+    for (OperacaoDTO recebimento in recebimentos) {
       TotalFinalizadoraDTO? first;
       if (totais.length > 0) {
         first = totais

@@ -8,6 +8,7 @@ class LayoutControle {
 
   String? descricao;
 
+  @JsonKey(defaultValue: [])
   List<LayoutControleTempo> layoutControleTempoList = [];
 
   bool? padrao = false;

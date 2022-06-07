@@ -17,6 +17,7 @@ class Client {
 
   bool? ativo;
 
+  @JsonKey(defaultValue: [])
   List<String> segmentos = [];
 
   //enum segmentosEnum {  SORVETERIAS_ACAITERIA,  LANCHONETES,  RESTAURANTES,  CAFETERIAS,  CHURRASCARIAS,  PADARIAS,  PIZZARIAS,  TABACARIAS,  FRIOS_LATICINIOS,  EMPORIOS,  MARMITARIA,  OUTROS,  };{

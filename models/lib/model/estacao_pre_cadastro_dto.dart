@@ -5,12 +5,16 @@ class EstacaoPreCadastroDTO {
 
   int? numeroCaixa;
 
+  @JsonKey(defaultValue: [])
   List<EmissorFiscal> emissorFiscalList = [];
 
+  @JsonKey(defaultValue: [])
   List<Modulo> moduloList = [];
 
+  @JsonKey(defaultValue: [])
   List<EquipamentoImpressao> equipamentoImpressaoList = [];
 
+  @JsonKey(defaultValue: [])
   List<LocalProducao> localProducaoList = [];
 
   bool? modoHibrido;
