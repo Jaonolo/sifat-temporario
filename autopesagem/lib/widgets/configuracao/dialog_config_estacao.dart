@@ -367,7 +367,7 @@ class _DialogConfigEstacaoState extends State<DialogConfigEstacao> {
 
     AutoPesagemUtils.showProgress(context);
 
-    EstacaoTrabalhoRequester.atualizarEstacao(AppConfig.application.pwsConfig,
+    EstacaoTrabalhoRequester.atualizarEstacao(AppConfig.application.pwsConfigWaychef,
         AppConfig.token, dto, AppConfig.estacaoTrabalho.id!)
         .then((response) {
       if (response.status == 204) {

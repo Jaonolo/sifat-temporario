@@ -11,7 +11,7 @@ class MetodoLogin {
   late SharedPreferences _prefs;
 
   Future login(Usuario user, BuildContext _context) async {
-    await WaycardRequester.login(AppConfig.application.pwsConfig, user)
+    await WaycardRequester.login(AppConfig.application.pwsConfigWaychef, user)
         .then((response) {
       Usuario usuario = user;
       if (response.isSuccess) {

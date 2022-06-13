@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:autopesagem/config/app_config.dart';
 import 'package:autopesagem/utils/auto_pesagem_utils.dart';
+import 'package:flutter/material.dart';
 import 'package:models/model/enum/client.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
@@ -22,7 +23,7 @@ abstract class SplashControllerBase with Store {
     this.onErrorLogin = onError;
 
     //Verifica se possui os dados
-    if (AppConfig.urlApi.isEmpty || AppConfig.clientSecret.isEmpty) {
+    if (AppConfig.urlApiWaychef.isEmpty || AppConfig.clientSecret.isEmpty) {
       onErrorLogin.call("Por favor, informe os dados!");
     } else {
       realizaLogin();
@@ -31,11 +32,17 @@ abstract class SplashControllerBase with Store {
 
   Future<void> realizaLogin() async {
     try {
-      //Configura PWS
-      AutoPesagemUtils.criarClientPWS(AppConfig.urlApi);
+      //Configura PWSWAYCEHF
+      AutoPesagemUtils.criarClientPWSWaychef(AppConfig.urlApiWaychef);
+
+      //Configura PWSGATEWAY
+      AutoPesagemUtils.criarClientPWSGateway(AppConfig.urlApiGateway);
 
       //Cria a comunicação com a balança
       AutoPesagemUtils.criaComunicacaoBalanca();
+
+      //Cria Sessao client
+      print('UrlGateway: ' + AppConfig.urlApiGateway);
 
       //Login
       await login();
@@ -64,7 +71,7 @@ abstract class SplashControllerBase with Store {
 
   Future<void> login() async {
     await ServicoAutoPesagemRequester.login(
-        AppConfig.application.pwsConfig,
+        AppConfig.application.pwsConfigWaychef,
         AppConfig.token,
         AppConfig.clientSecret,
         AppConfig.application.client!
@@ -101,7 +108,7 @@ abstract class SplashControllerBase with Store {
 
   Future<void> carregaDrivers() async {
     await DriverImpressoraRequester.listar(
-        AppConfig.application.pwsConfig, AppConfig.token)
+        AppConfig.application.pwsConfigWaychef, AppConfig.token)
         .then((response) {
       if (response.status == 200) {
         AppConfig.driversImpressora = response.content;
@@ -113,7 +120,7 @@ abstract class SplashControllerBase with Store {
 
   static void _atualizaSessao(Timer timer) {
     UsuarioRequester.atualizarSessao(
-        AppConfig.application.pwsConfig, AppConfig.token)
+        AppConfig.application.pwsConfigWaychef, AppConfig.token)
         .then((response) {
       if (response.isSuccess) {
         print("Sessão atualizada");

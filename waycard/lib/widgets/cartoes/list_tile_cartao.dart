@@ -181,11 +181,11 @@ class ListTileCartao extends StatelessWidget {
 
   void _onTap(BuildContext context) {
     WaycardRequester.listarCartoes(
-        AppConfig.application.pwsConfig, AppConfig.application.token)
+        AppConfig.application.pwsConfigWaychef, AppConfig.application.token)
         .then((response) async {
       if (response.status == 401) {
         await WaycardRequester.login(
-            AppConfig.application.pwsConfig, AppConfig.application.user!)
+            AppConfig.application.pwsConfigWaychef, AppConfig.application.user!)
             .then((response) async {
           if (response.isSuccess) {
             AppConfig.application.token = response.headers['token'];
@@ -206,7 +206,7 @@ class ListTileCartao extends StatelessWidget {
 
   void _onGerarToken(BuildContext ctx) {
     WayCardUtils.showProgress();
-    WaycardRequester.gerarToken(AppConfig.application.pwsConfig,
+    WaycardRequester.gerarToken(AppConfig.application.pwsConfigWaychef,
         AppConfig.application.token, cartao.id!)
         .then((response) {
       if (response.isSuccess) {
@@ -221,7 +221,7 @@ class ListTileCartao extends StatelessWidget {
       } else if (response.status == 401) {
         WayCardUtils.closeProgress();
         WaycardRequester.login(
-            AppConfig.application.pwsConfig, AppConfig.application.user!)
+            AppConfig.application.pwsConfigWaychef, AppConfig.application.user!)
             .then((response) async {
           if (response.isSuccess) {
             AppConfig.application.token = response.headers['token'];

@@ -38,7 +38,7 @@ class DropdownFaturas extends StatelessWidget {
   }
 
   Future _carregarFaturas() async {
-    await WaycardRequester.listarFaturas(AppConfig.application.pwsConfig,
+    await WaycardRequester.listarFaturas(AppConfig.application.pwsConfigWaychef,
         AppConfig.application.token, cartao.id!)
         .then((response) async {
       if (response.isSuccess) {
@@ -46,7 +46,7 @@ class DropdownFaturas extends StatelessWidget {
       } else if (response.status == 401) {
         WayCardUtils.closeProgress();
         await WaycardRequester.login(
-            AppConfig.application.pwsConfig, AppConfig.application.user!)
+            AppConfig.application.pwsConfigWaychef, AppConfig.application.user!)
             .then((response) async {
           if (response.isSuccess) {
             AppConfig.application.token = response.headers['token'];

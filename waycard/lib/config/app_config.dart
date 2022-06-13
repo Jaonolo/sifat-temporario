@@ -12,7 +12,7 @@ class AppConfig {
 
   static Application application = Application.getInstance()
     ..client = Client.WAYCARD
-    ..pwsConfig = PWSConfig(
+    ..pwsConfigWaychef = PWSConfig(
         urlBase: "http://api.jose/api",
         client: Client.WAYCARD,
         clientSecret: Client.WAYCARD.clientKey

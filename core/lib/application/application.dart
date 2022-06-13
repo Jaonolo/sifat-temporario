@@ -16,7 +16,8 @@ class Application {
   c.Client? client;
   late Empresa empresa;
   Quest? quest;
-  late PWSConfig pwsConfig;
+  late PWSConfig pwsConfigWaychef;
+  late PWSConfig pwsConfigGateway;
   Movimento? movimento;
   Funcionario? vendedor;
   List<NotaItem>? itens;
@@ -104,6 +105,6 @@ class Application {
 
   void setVerificaPermissaoService(UsuarioPerfilEmpresa usuarioPerfilEmpresa) {
     verificaPermissaoService =
-        VerificaPermissaoService(pwsConfig, token, usuarioPerfilEmpresa);
+        VerificaPermissaoService(pwsConfigWaychef, token, usuarioPerfilEmpresa);
   }
 }

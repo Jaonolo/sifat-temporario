@@ -16,7 +16,8 @@ class AppConfig {
   static EstacaoImpressora impressoraPadrao = EstacaoImpressora();
 
   //Tela configuração
-  static String urlApi = "api.gui";
+  static String urlApiWaychef = "";
+  static String urlApiGateway = '';
   static String clientSecret = "";
   static String nomeEstacao = '';
 

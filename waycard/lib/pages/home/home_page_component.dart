@@ -130,13 +130,13 @@ class HomePageComponent {
   Future _carregarCartoes() async {
     _cartoes = [];
     await WaycardRequester.listarCartoes(
-        AppConfig.application.pwsConfig, AppConfig.application.token)
+        AppConfig.application.pwsConfigWaychef, AppConfig.application.token)
         .then((response) async {
       if (response.isSuccess) {
         if (response.hasContent) _cartoes = response.content;
       } else if (response.status == 401) {
         await WaycardRequester.login(
-            AppConfig.application.pwsConfig, AppConfig.application.user!)
+            AppConfig.application.pwsConfigWaychef, AppConfig.application.user!)
             .then((response) async {
           if (response.isSuccess) {
             AppConfig.application.token = response.headers['token'];
