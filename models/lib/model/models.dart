@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:rational/rational.dart';
+import 'enum/clients.dart';
 
 
 //#################### EXCEPTION ########################
@@ -498,9 +499,9 @@ part 'centro_custo.dart';
 
 part 'plano_conta.dart';
 
-part 'login_auto_pesagem_dto.dart';
+part 'configuracoes_auto_pesagem_dto.dart';
 
-part 'servico_auto_pesagem.dart';
+part 'client_auto_pesagem.dart';
 
 part 'layout_controle.dart';
 
@@ -519,3 +520,7 @@ part 'servico_auto_atendimento.dart';
 part 'arquivo_auto_atendimento.dart';
 
 part 'login_auto_atendimento_dto.dart';
+
+part 'login_client_dto.dart';
+
+part 'token_dto.dart';

@@ -5,7 +5,7 @@ import 'package:autoatendimento/app/utils/autoatendimento_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:models/model/enum/client.dart' as c;
+import 'package:models/model/enum/clients.dart' as c;
 import 'package:models/model/models.dart';
 import 'package:requester/config/pws_config.dart';
 import 'package:requester/requester/gerenciador_requester.dart';
@@ -93,14 +93,14 @@ abstract class SplashBase with Store {
   void inicializaClientPWSSpring() {
     appController.pwsConfigLocal = PWSConfig(
         urlBase: "http://localhost:8080",
-        client: c.Client.AUTOATENDIMENTO,
+        client: c.Clients.AUTOATENDIMENTO,
         clientSecret: "");
   }
 
   void _inicializaClientPWS() {
     appController.pwsConfig = PWSConfig(
       urlBase: dto!.host.toString(),
-      client: c.Client.AUTOATENDIMENTO,
+      client: c.Clients.AUTOATENDIMENTO,
       clientSecret: dto!.clientSecret.toString(),
     );
   }

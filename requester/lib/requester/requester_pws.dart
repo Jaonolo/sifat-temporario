@@ -70,8 +70,6 @@ class RequesterPws {
 
     if (debug) {
       print('URL: $url');
-      print('Header: $headerParams');
-      print('Tamanho Body: ${jsonEncode(body).length}');
     }
 
     http.Response? response;

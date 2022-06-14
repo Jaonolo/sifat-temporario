@@ -93,18 +93,18 @@ class LancaItemUtils {
     notaItem.idEstacao = AppConfig.estacaoTrabalho.id;
 
     notaItem.produtoEmpresa =
-        AppConfig.servicoAutoPesagem.gradeEmpresa!.produtoEmpresa;
+        AppConfig.clientAutoPesagem.gradeEmpresa!.produtoEmpresa;
     notaItem.idProdutoEmpresa =
-        AppConfig.servicoAutoPesagem.gradeEmpresa!.produtoEmpresa!.id;
+        AppConfig.clientAutoPesagem.gradeEmpresa!.produtoEmpresa!.id;
 
     notaItem.descricao = AppConfig
-        .servicoAutoPesagem.gradeEmpresa!.produtoEmpresa!.produto!.descricao;
+        .clientAutoPesagem.gradeEmpresa!.produtoEmpresa!.produto!.descricao;
     notaItem.quantidade = pesoAtual;
-    notaItem.grade = AppConfig.servicoAutoPesagem.gradeEmpresa;
-    notaItem.idGrade = AppConfig.servicoAutoPesagem.gradeEmpresa!.id;
+    notaItem.grade = AppConfig.clientAutoPesagem.gradeEmpresa;
+    notaItem.idGrade = AppConfig.clientAutoPesagem.gradeEmpresa!.id;
     notaItem.precoCusto = notaItem.grade!.precoCustoCompra;
     notaItem.precoUnitario =
-        AppConfig.servicoAutoPesagem.gradeEmpresa!.getPrecoVenda;
+        AppConfig.clientAutoPesagem.gradeEmpresa!.getPrecoVenda;
     notaItem.precoTotal = totalAtual;
     notaItem.consumoItem!.confirmado = true;
     notaItem.consumoItem!.dataConfirmacao = DateTime.now();

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:models/model/models.dart';
 import 'package:requester/requester/estacao_trabalho_requester.dart';
-import 'package:requester/requester/servico_auto_pesagem_requester.dart';
+import 'package:requester/requester/client_auto_pesagem_requester.dart';
 import 'package:requester/response/response_pws.dart';
 
 class DialogConfigEstacao extends StatefulWidget {
@@ -80,7 +80,7 @@ class _DialogConfigEstacaoState extends State<DialogConfigEstacao> {
           Row(
             children: [
               configBalanca(),
-              if (AppConfig.servicoAutoPesagem.imprimirPeso) ...[
+              if (AppConfig.clientAutoPesagem.imprimirPeso) ...[
                 const SizedBox(width: 100),
                 configImpressora(),
               ],
@@ -309,7 +309,7 @@ class _DialogConfigEstacaoState extends State<DialogConfigEstacao> {
     });
 
     try {
-      ResponsePws lerPeso = await ServicoAutoPesagemRequester.lerPeso(
+      ResponsePws lerPeso = await ClientAutoPesagemRequester.lerPeso(
         AppConfig.pwsUtils,
         porta,
         baudRate,

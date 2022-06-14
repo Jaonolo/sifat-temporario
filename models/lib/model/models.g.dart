@@ -5950,12 +5950,13 @@ Map<String, dynamic> _$PlanoContaToJson(PlanoConta instance) =>
       'subitens': instance.subitens,
     };
 
-LoginAutoPesagemDTO _$LoginAutoPesagemDTOFromJson(Map<String, dynamic> json) =>
-    LoginAutoPesagemDTO()
-      ..servicoAutoPesagem = json['servicoAutoPesagem'] == null
+ConfiguracoesAutoPesagemDTO _$ConfiguracoesAutoPesagemDTOFromJson(
+        Map<String, dynamic> json) =>
+    ConfiguracoesAutoPesagemDTO()
+      ..clientAutoPesagem = json['clientAutoPesagem'] == null
           ? null
-          : ServicoAutoPesagem.fromJson(
-              json['servicoAutoPesagem'] as Map<String, dynamic>)
+          : ClientAutoPesagem.fromJson(
+              json['clientAutoPesagem'] as Map<String, dynamic>)
       ..estacaoTrabalho = json['estacaoTrabalho'] == null
           ? null
           : EstacaoTrabalho.fromJson(
@@ -5964,16 +5965,16 @@ LoginAutoPesagemDTO _$LoginAutoPesagemDTOFromJson(Map<String, dynamic> json) =>
           ? null
           : Empresa.fromJson(json['empresa'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$LoginAutoPesagemDTOToJson(
-        LoginAutoPesagemDTO instance) =>
+Map<String, dynamic> _$ConfiguracoesAutoPesagemDTOToJson(
+        ConfiguracoesAutoPesagemDTO instance) =>
     <String, dynamic>{
-      'servicoAutoPesagem': instance.servicoAutoPesagem,
+      'clientAutoPesagem': instance.clientAutoPesagem,
       'estacaoTrabalho': instance.estacaoTrabalho,
       'empresa': instance.empresa,
     };
 
-ServicoAutoPesagem _$ServicoAutoPesagemFromJson(Map<String, dynamic> json) =>
-    ServicoAutoPesagem()
+ClientAutoPesagem _$ClientAutoPesagemFromJson(Map<String, dynamic> json) =>
+    ClientAutoPesagem()
       ..id = json['id'] as int?
       ..idEmpresa = json['idEmpresa'] as int?
       ..idGradeEmpresa = json['idGradeEmpresa'] as int?
@@ -5981,18 +5982,16 @@ ServicoAutoPesagem _$ServicoAutoPesagemFromJson(Map<String, dynamic> json) =>
       ..gradeEmpresa = json['gradeEmpresa'] == null
           ? null
           : GradeEmpresa.fromJson(json['gradeEmpresa'] as Map<String, dynamic>)
-      ..token = json['token'] as String?
       ..imprimirPeso = json['imprimirPeso'] as bool
       ..lancamentoAutomatico = json['lancamentoAutomatico'] as String?;
 
-Map<String, dynamic> _$ServicoAutoPesagemToJson(ServicoAutoPesagem instance) =>
+Map<String, dynamic> _$ClientAutoPesagemToJson(ClientAutoPesagem instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'idGradeEmpresa': instance.idGradeEmpresa,
       'tara': instance.tara,
       'gradeEmpresa': instance.gradeEmpresa,
-      'token': instance.token,
       'imprimirPeso': instance.imprimirPeso,
       'lancamentoAutomatico': instance.lancamentoAutomatico,
     };
@@ -6471,4 +6470,38 @@ Map<String, dynamic> _$LoginAutoAtendimentoDTOToJson(
       'servicoAutoAtendimento': instance.servicoAutoAtendimento,
       'estacaoTrabalho': instance.estacaoTrabalho,
       'empresa': instance.empresa,
+    };
+
+LoginClientDTO _$LoginClientDTOFromJson(Map<String, dynamic> json) =>
+    LoginClientDTO()
+      ..client = $enumDecodeNullable(_$ClientsEnumMap, json['client']) ??
+          Clients.WAITER_MOBILE
+      ..clientKey = json['clientKey'] as String?
+      ..clientSecret = json['clientSecret'] as String?
+      ..versao = json['versao'] as String?
+      ..nomeEstacao = json['nomeEstacao'] as String?;
+
+Map<String, dynamic> _$LoginClientDTOToJson(LoginClientDTO instance) =>
+    <String, dynamic>{
+      'client': _$ClientsEnumMap[instance.client],
+      'clientKey': instance.clientKey,
+      'clientSecret': instance.clientSecret,
+      'versao': instance.versao,
+      'nomeEstacao': instance.nomeEstacao,
+    };
+
+const _$ClientsEnumMap = {
+  Clients.WAITER_MOBILE: 'WAITER_MOBILE',
+  Clients.WAYCARD: 'WAYCARD',
+  Clients.AUTOATENDIMENTO: 'AUTOATENDIMENTO',
+  Clients.AUTOPESAGEM: 'AUTOPESAGEM',
+};
+
+TokenDTO _$TokenDTOFromJson(Map<String, dynamic> json) => TokenDTO()
+  ..token = json['token'] as String?
+  ..type = json['type'] as String;
+
+Map<String, dynamic> _$TokenDTOToJson(TokenDTO instance) => <String, dynamic>{
+      'token': instance.token,
+      'type': instance.type,
     };

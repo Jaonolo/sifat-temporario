@@ -13,7 +13,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  ServicoAutoPesagem servicoAutoPesagem = AppConfig.servicoAutoPesagem;
+  ClientAutoPesagem servicoAutoPesagem = AppConfig.clientAutoPesagem;
   HomeController controller = HomeController();
   GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
 
