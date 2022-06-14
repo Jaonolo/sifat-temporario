@@ -32,6 +32,7 @@ class _DialogConfigAppState extends State<DialogConfigApp> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+
       backgroundColor: Color.fromRGBO(43, 49, 53, 1),
       title: Text("Configuração API", style: TextStyle(color: Colors.white)),
       content: Container(

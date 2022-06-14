@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:autopesagem/config/app_config.dart';
 import 'package:autopesagem/utils/auto_pesagem_utils.dart';
+import 'package:autopesagem/widgets/configuracao/dialog_config_app.dart';
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/enum/clients.dart' as enumClient;
 import 'package:models/model/models.dart';
@@ -54,7 +56,7 @@ abstract class SplashControllerBase with Store {
 
       //Rotina de atualiza sessao
       AppConfig.timerAtualizaSessao =
-          Timer.periodic(Duration(seconds: 10), (_) => _atualizaSessao());
+          Timer.periodic(Duration(hours: 4), (_) => _atualizaSessao());
 
       //Deu tudo certo manda para tela de home
       onSucess.call();
@@ -133,14 +135,14 @@ abstract class SplashControllerBase with Store {
   void _atualizaSessao() {
     SessaoClientRequest.atualizarSessao(
         AppConfig.application.pwsConfigGateway, AppConfig.token)
-        .then((response) {
+        .then((response) async {
       if (response.status == 200) {
         AppConfig.token = response.content!.token;
       } else {
-
         print('Ocorreu um erro ao atualizar a sessao: ${response.content}');
         AppConfig.timerAtualizaSessao!.cancel();
-        onErrorLogin.call('por favor refaça o login!');
+        await showDialog( barrierDismissible: false, context: AppConfig.globalKey
+            .currentContext!, builder: (_) => DialogConfigApp());
       }
     });
   }

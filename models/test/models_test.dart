@@ -18,8 +18,6 @@ void main() {
 
     BigDecimal result = b.dividir(a);
     print(result);
-
-    BigDecimal erro = result.multiplicar(BigDecimal.ONE());
   });
 
   test("description", () {
