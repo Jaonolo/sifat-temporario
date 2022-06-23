@@ -1,6 +1,4 @@
-import 'package:autoatendimento/app/app_controller.dart';
-import 'package:autoatendimento/app/modules/home/home_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
@@ -22,11 +20,8 @@ class CardProdutoExtra extends StatefulWidget {
 }
 
 class _CardProdutoExtraState extends State<CardProdutoExtra> {
-  final ProdutoController controller = Modular.get();
+  final ProdutoAdicionalController produtoAdicionalController = Modular.get();
   final VendaController vendaController = Modular.get();
-  final AppController appController = Modular.get();
-  final HomeController homeController = Modular.get();
-
 
   @override
   Widget build(BuildContext c) {
@@ -36,14 +31,13 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
   Widget _body() {
     return Container(
       height: FontUtils.h1(context),
-      padding: EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         border: Border.all(
             width: 2,
             color: widget.notaItem.quantidade!.compareTo(BigDecimal.ZERO()) > 0
                 ? DefaultTheme.accentColor
                 : DefaultTheme.preto),
-        borderRadius: const BorderRadius.all(
+        borderRadius: BorderRadius.all(
           Radius.circular(10),
         ),
       ),
@@ -60,101 +54,87 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
   }
 
   Widget _txtDescricao() {
+    Orientation orientation = MediaQuery.of(context).orientation;
 
     return Padding(
       padding: const EdgeInsets.only(left: 2),
       child: Text(
         widget.notaItem.descricao!.toUpperCase(),
         style: TextStyle(
-            fontSize:FontUtils.h3(context)),
+            fontSize: orientation == Orientation.landscape
+                ? FontUtils.h3(context)
+                : FontUtils.h4(context)),
       ),
     );
   }
 
   Widget _txtPreco() {
-    String preco = "+ R\$" + widget.notaItem.precoUnitario!.toStringAsFixed(2);
-    if (controller.tipoPacote.equals(TipoPacote.COMBO)) {
-      BigDecimal valorAdicional = BigDecimal.ZERO();
-      switch (controller.produtoMenu!.tipo) {
-        case "COMPONENTE_FIXO":
-          valorAdicional = widget.produtoMenuComponente
-              .getValorComponente(
-              appController.servicoAutoAtendimento.idEmpresa!,
-              appController.tabelaPreco.id!)!
-              .subtrair(NotaItemUtils.verificaDiferencaCombo(
-              controller.produtoMenu!,
-              appController.servicoAutoAtendimento.idEmpresa!,
-              appController.tabelaPreco.id!));
-          break;
-        case "COMPONENTE_EXTRA":
-          ProdutoMenuComponenteEmpresa componenteEmpresa =
-          widget.produtoMenuComponente.componenteEmpresas.firstWhere(
-                  (ce) =>
-              ce.idEmpresa ==
-                  controller
-                      .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
-              orElse: () => throw Exception("compomente não encotrado"));
-
-          valorAdicional = componenteEmpresa.gradeEmpresa!
-              .precoVenda(appController.tabelaPreco.id!);
-          break;
-      }
-      if (valorAdicional.compareTo(BigDecimal.ZERO()) > 0) {
-        preco = "+ R\$" + valorAdicional.toStringAsFixed(2);
-      } else {
-        preco = "";
-      }
-    }
+    Orientation orientation = MediaQuery.of(context).orientation;
 
     return Text(
-      preco,
-      style: TextStyle(fontSize: FontUtils.h3(context)),
+      '+ R\$ ${widget.notaItem.precoUnitario!.toStringAsFixed(2)}',
+      style: TextStyle(
+          fontSize: orientation == Orientation.landscape
+              ? FontUtils.h3(context)
+              : FontUtils.h4(context)),
     );
   }
 
   Widget _txtQuantidadeLancada() {
+    Orientation orientation = MediaQuery.of(context).orientation;
+
     return Text('${widget.notaItem.quantidade} UN',
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: FontUtils.h3(context)));
+            fontSize: orientation == Orientation.landscape
+                ? FontUtils.h3(context)
+                : FontUtils.h4(context)));
   }
 
   Widget _btnAdicionar() {
+    Orientation orientation = MediaQuery.of(context).orientation;
+
     return SizedBox(
-      height: FontUtils.h2(context),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: DefaultTheme.accentColor,
-          onPrimary: Colors.white,
-          elevation: 4.0,
-          shape: const CircleBorder(),
-          //splashColor: Colors.grey, Desabilitado pelo uso do elevatedButton
-        ),
+      height: orientation == Orientation.landscape
+          ? FontUtils.h2(context)
+          : FontUtils.h3(context) * 1.4,
+      child: RaisedButton(
+        color: DefaultTheme.accentColor,
+        textColor: Colors.white,
         onPressed: _podeAdicionar() ? () => _adicionar() : null,
         child: Icon(
           Icons.add,
-          size: FontUtils.h2(context),
+          size: orientation == Orientation.landscape
+              ? FontUtils.h2(context)
+              : FontUtils.h3(context),
         ),
+        elevation: 4.0,
+        shape: CircleBorder(),
+        splashColor: Colors.grey,
       ),
     );
   }
 
   Widget _btnRemover() {
+    Orientation orientation = MediaQuery.of(context).orientation;
+
     return SizedBox(
-      height: FontUtils.h2(context),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: DefaultTheme.accentColor,
-          onPrimary: Colors.white,
-          elevation: 4.0,
-          shape: const CircleBorder(),
-          //splashColor: Colors.grey, Desabilitado pelo uso do ElevatedButton
-        ),
+      height: orientation == Orientation.landscape
+          ? FontUtils.h2(context)
+          : FontUtils.h3(context) * 1.4,
+      child: RaisedButton(
+        color: DefaultTheme.accentColor,
+        textColor: Colors.white,
         onPressed: _podeRemover() ? () => _remover() : null,
         child: Icon(
           Icons.remove,
-          size: FontUtils.h2(context),
+          size: orientation == Orientation.landscape
+              ? FontUtils.h2(context)
+              : FontUtils.h3(context),
         ),
+        elevation: 4.0,
+        shape: CircleBorder(),
+        splashColor: Colors.grey,
       ),
     );
   }
@@ -162,18 +142,6 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
   void _adicionar() {
     widget.notaItem.quantidade =
         widget.notaItem.quantidade!.somar(BigDecimal.ONE());
-
-    //Se tiver alguns observação ou adicionais abre a tela nova
-    bool temMenuObservacao = widget.notaItem.produtoEmpresa!.produto!.menus
-        .any((element) => element.tipo == "OBSERVACAO");
-
-    if (widget.notaItem.produtoEmpresa!.produto!.pacote.equals(TipoPacote.ADICIONAIS) ||
-        temMenuObservacao) {
-      controller.trocaPalcoParaSubItem(notaItemPai: controller.produtoCarrinho.notaItem, notaItemAtual: widget.notaItem, produtoMenuPai: widget.produtoMenu);
-      return;
-    }
-
-
     _atualizaNotaItem();
   }
 
@@ -190,24 +158,22 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
     bool podeAdd = false;
 
     //Valida a quantidade máxima por item
-    if (widget.produtoMenuComponente.quantidadeMaxima == 0) {
+    if (widget.produtoMenuComponente.quantidadeMaxima == 0)
       podeAdd = true;
-    } else {
+    else
       podeAdd = (widget.notaItem.quantidade!.toInt() <
           widget.produtoMenuComponente.quantidadeMaxima!);
-    }
 
     //Valida a quantidade máxima por menu (Precisa localizar o menu novamente para atualizar as qtdes)
     NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
-        controller.produtoCarrinho.notaItem,
+        produtoAdicionalController.produtoCarrinho.notaItem,
         widget.produtoMenu);
     if (menu != null && podeAdd) {
       BigDecimal qtdeItensDoMenu = BigDecimal.ZERO();
       menu.subitens.forEach((element) {
         qtdeItensDoMenu = qtdeItensDoMenu.somar(element.quantidade);
       });
-      podeAdd =
-      (qtdeItensDoMenu.toInt() < widget.produtoMenu.quantidadeMaxima!);
+      podeAdd = (qtdeItensDoMenu.toInt() < widget.produtoMenu.quantidadeMaxima!);
     }
 
     return podeAdd;
@@ -220,20 +186,20 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
   void _atualizaNotaItem() {
     try {
       NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
-          controller.produtoCarrinho.notaItem,
+          produtoAdicionalController.produtoCarrinho.notaItem,
           widget.produtoMenu);
 
       //Se não localizou um menu lançado, vai criar um novo e add o subitem
       if (menu == null) {
         menu = NotaItemUtils.menuToNotaItem(
-            controller.produtoCarrinho.notaItem.idNota!,
+            produtoAdicionalController.produtoCarrinho.notaItem.idNota!,
             widget.produtoMenu);
         menu.subitens.add(widget.notaItem);
-        controller.produtoCarrinho.notaItem.subitens.add(menu);
+        produtoAdicionalController.produtoCarrinho.notaItem.subitens.add(menu);
       } else {
         //Se tem menu, verifica se já tem algum subitem desse componente lançado para remover
         NotaItem? itemJaLancado = NotaItemUtils.localizaSubitemJaLancado(
-            controller.produtoCarrinho.notaItem,
+            produtoAdicionalController.produtoCarrinho.notaItem,
             widget.produtoMenu,
             widget.produtoMenuComponente);
 
@@ -244,18 +210,16 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
         } else {
           //Caso a quantidade do item for 0 siginica que está removendo
           //Verifica se o menu tem subitens, caso não, remove ele também
-          if (menu.subitens.isEmpty) {
-            controller.produtoCarrinho.notaItem.subitens
+          if (menu.subitens.isEmpty)
+            produtoAdicionalController.produtoCarrinho.notaItem.subitens
                 .remove(menu);
-          }
         }
       }
 
       NotaItemUtils.atualizaTotais(
-          controller.produtoCarrinho.notaItem);
-      controller
-          .changeProdutoCarrinho(controller.produtoCarrinho);
-      controller.onLiberaBotaoMenus();
+          produtoAdicionalController.produtoCarrinho.notaItem);
+      produtoAdicionalController
+          .changeProdutoCarrinho(produtoAdicionalController.produtoCarrinho);
 
       setState(() {
         _body();

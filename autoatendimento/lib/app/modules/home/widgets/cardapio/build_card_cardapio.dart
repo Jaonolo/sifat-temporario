@@ -3,7 +3,6 @@ import 'package:autoatendimento/app/modules/home/home_component.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_page.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/composto/produto_composto_page.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
@@ -162,12 +161,11 @@ class BuildCardCardapio {
             homeController
                 .addPalco(ProdutoComboPage(ProdutoCarrinho(notaItem)));
             break;
-          case TipoPacote.COMPOSTO:
-            homeController.habilitarCarrinho = true;
-            var notaItem = NotaItemUtils.instanciar(vendaController.nota.id!,
-                TipoItem.COMPOSTO, produtoEmpresa, appController.tabelaPreco.id!);
-            homeController
-                .addPalco(ProdutoCompostoPage(ProdutoCarrinho(notaItem)));
+          // case TipoPacote.COMPOSTO:
+          //   homeController.habilitarCarrinho = true;
+          //   var notaItem = NotaItemUtils.instanciar(vendaController.nota.id!,
+          //       TipoItem.COMPOSTO, produtoEmpresa, appController.tabelaPreco.id!);
+          //   homeController.addPalco(ProdutoCompostoPage(ProdutoCarrinho(notaItem)));
             break;
 
           default:

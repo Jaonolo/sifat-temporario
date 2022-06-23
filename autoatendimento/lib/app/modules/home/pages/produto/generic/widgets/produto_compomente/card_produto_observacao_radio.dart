@@ -1,4 +1,4 @@
-import 'package:autoatendimento/app/modules/home/pages/produto/controller/produto_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +7,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
-
 class CardProdutoObservacaoRadio extends StatefulWidget {
-  final ProdutoMenu produtoMenu;
-  final ProdutoMenuComponente produtoMenuComponente;
-  final int index;
+  ProdutoMenu produtoMenu;
+  ProdutoMenuComponente produtoMenuComponente;
+  int index;
 
-  CardProdutoObservacaoRadio(this.produtoMenu, this.produtoMenuComponente,
-      this.index,
-      {Key? key})
-      : super(key: key);
+  CardProdutoObservacaoRadio(
+      this.produtoMenu, this.produtoMenuComponente, this.index);
 
   @override
   _CardProdutoObservacaoRadioState createState() =>
@@ -25,14 +22,12 @@ class CardProdutoObservacaoRadio extends StatefulWidget {
 
 class _CardProdutoObservacaoRadioState
     extends State<CardProdutoObservacaoRadio> {
-  final ProdutoController controller = Modular.get();
+  final ProdutoAdicionalController produtoAdicionalController = Modular.get();
 
   @override
   void initState() {
-    if (widget.index == controller.radiovalue) {
+    if (widget.index == produtoAdicionalController.radiovalue)
       _adicionaObservacao();
-    }
-    super.initState();
   }
 
   @override
@@ -43,10 +38,10 @@ class _CardProdutoObservacaoRadioState
           decoration: BoxDecoration(
             border: Border.all(
                 width: 2,
-                color: controller.radiovalue == widget.index
+                color: produtoAdicionalController.radiovalue == widget.index
                     ? DefaultTheme.accentColor
                     : DefaultTheme.preto),
-            borderRadius: const BorderRadius.all(
+            borderRadius: BorderRadius.all(
               Radius.circular(10),
             ),
           ),
@@ -57,9 +52,7 @@ class _CardProdutoObservacaoRadioState
   }
 
   Widget _radio() {
-    Orientation orientation = MediaQuery
-        .of(context)
-        .orientation;
+    Orientation orientation = MediaQuery.of(context).orientation;
     return RadioListTile(
         activeColor: DefaultTheme.accentColor,
         title: Text(widget.produtoMenuComponente.descricao!.toUpperCase(),
@@ -69,34 +62,31 @@ class _CardProdutoObservacaoRadioState
                     : FontUtils.h4(context))),
         controlAffinity: ListTileControlAffinity.leading,
         value: widget.index,
-        groupValue: controller.radiovalue,
+        groupValue: produtoAdicionalController.radiovalue,
         onChanged: (int? n) {
           _adicionaObservacao();
-          controller.selecaoRadio(n!);
+          produtoAdicionalController.selecaoRadio(n!);
         });
   }
 
   void _adicionaObservacao() {
-    NotaItem notaItem = NotaItemUtils.observacaoToNotaItem(
-        controller.produtoCarrinho.notaItem.idNota!,
+    NotaItem? notaItem = NotaItemUtils.observacaoToNotaItem(
+        produtoAdicionalController.produtoCarrinho.notaItem.idNota!,
         widget.produtoMenuComponente);
 
     NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
-        controller.produtoCarrinho.notaItem,
+        produtoAdicionalController.produtoCarrinho.notaItem,
         widget.produtoMenu);
 
     if (menu == null) {
       menu = NotaItemUtils.menuToNotaItem(
-          controller.produtoCarrinho.notaItem.idNota!,
+          produtoAdicionalController.produtoCarrinho.notaItem.idNota!,
           widget.produtoMenu);
-      notaItem.quantidade = BigDecimal.ONE();
       menu.subitens.add(notaItem);
-      controller.produtoCarrinho.notaItem.subitens.add(menu);
+      produtoAdicionalController.produtoCarrinho.notaItem.subitens.add(menu);
     } else {
       menu.subitens.clear();
       menu.subitens.add(notaItem);
     }
-
-    controller.onLiberaBotaoMenus();
   }
 }
