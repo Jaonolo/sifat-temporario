@@ -1,48 +1,33 @@
-import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/abstract/controller_abstract.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
-class CardProdutoObservacaoCheckbox extends StatefulWidget {
-  ProdutoMenu produtoMenu;
+
+class CardProdutoObservacaoCheckbox extends StatelessWidget {
+  ControllerAbstract controllerAbstract;
   ProdutoMenuComponente produtoMenuComponente;
   NotaItem? notaItem;
-
-  CardProdutoObservacaoCheckbox(this.produtoMenu, this.produtoMenuComponente);
-
-  @override
-  _CardProdutoObservacaoCheckboxState createState() =>
-      _CardProdutoObservacaoCheckboxState();
-}
-
-class _CardProdutoObservacaoCheckboxState
-    extends State<CardProdutoObservacaoCheckbox> {
-  final ProdutoAdicionalController produtoAdicionalController = Modular.get();
   bool selecionado = false;
 
-  @override
-  void initState() {
-    //Verifica se já tem alguma observação desse componente lançado no item principal
-    widget.notaItem = NotaItemUtils.localizaObservacaoJaLancada(
-        produtoAdicionalController.produtoCarrinho.notaItem,
-        widget.produtoMenu,
-        widget.produtoMenuComponente);
-
-    selecionado = widget.notaItem != null;
+  CardProdutoObservacaoCheckbox(this.notaItem, this.controllerAbstract, this.produtoMenuComponente){
+    selecionado = notaItem != null;
   }
 
+  late BuildContext context;
+
+  @override
   Widget build(BuildContext context) {
+    this.context = context;
     return Container(
         height: FontUtils.h1(context),
         decoration: BoxDecoration(
           border: Border.all(
               width: 2,
               color:
-                  selecionado ? DefaultTheme.accentColor : DefaultTheme.preto),
+              selecionado ? DefaultTheme.accentColor : DefaultTheme.preto),
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
@@ -51,57 +36,55 @@ class _CardProdutoObservacaoCheckboxState
   }
 
   Widget _checkBox() {
-    Orientation orientation = MediaQuery.of(context).orientation;
 
     return CheckboxListTile(
-        title: Text(widget.produtoMenuComponente.descricao!.toUpperCase(),
+        title: Text(produtoMenuComponente.descricao!.toUpperCase(),
             style: TextStyle(
-                fontSize: orientation == Orientation.landscape
-                    ? FontUtils.h3(context)
-                    : FontUtils.h4(context))),
+                fontSize: FontUtils.h4(context))),
         controlAffinity: ListTileControlAffinity.leading,
         activeColor: DefaultTheme.accentColor,
         dense: true,
         value: selecionado,
         onChanged: (bool? newValue) {
           newValue! ? _adicionaObservacao() : _removeObservacao();
-          setState(() {
-            selecionado = newValue;
-          });
         });
   }
 
   void _adicionaObservacao() {
-    widget.notaItem = NotaItemUtils.observacaoToNotaItem(
-        produtoAdicionalController.produtoCarrinho.notaItem.idNota!,
-        widget.produtoMenuComponente);
+    notaItem = NotaItemUtils.observacaoToNotaItem(
+        controllerAbstract.produtoCarrinho.notaItem.idNota!,
+        produtoMenuComponente);
 
     NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
-        produtoAdicionalController.produtoCarrinho.notaItem,
-        widget.produtoMenu);
+        controllerAbstract.produtoCarrinho.notaItem,
+        controllerAbstract.produtoMenu!);
 
     if (menu == null) {
       menu = NotaItemUtils.menuToNotaItem(
-          produtoAdicionalController.produtoCarrinho.notaItem.idNota!,
-          widget.produtoMenu);
-      menu.subitens.add(widget.notaItem!);
-      produtoAdicionalController.produtoCarrinho.notaItem.subitens.add(menu);
+          controllerAbstract.produtoCarrinho.notaItem.idNota!,
+          controllerAbstract.produtoMenu!);
+      menu.subitens.add(notaItem!);
+      controllerAbstract.produtoCarrinho.notaItem.subitens.add(menu);
     } else {
-      menu.subitens.add(widget.notaItem!);
+      menu.subitens.add(notaItem!);
     }
+
+    controllerAbstract.changeProdutoCarrinho( controllerAbstract.produtoCarrinho);
   }
 
   void _removeObservacao() {
     NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
-        produtoAdicionalController.produtoCarrinho.notaItem,
-        widget.produtoMenu);
-    menu!.subitens.remove(widget.notaItem);
+        controllerAbstract.produtoCarrinho.notaItem,
+        controllerAbstract.produtoMenu!);
+    menu!.subitens.remove(notaItem);
 
     //Caso a quantidade do item for 0 siginica que está removendo
     //Verifica se o menu tem subitens, caso não, remove ele também
     if (menu.subitens.isEmpty)
-      produtoAdicionalController.produtoCarrinho.notaItem.subitens.remove(menu);
+      controllerAbstract.produtoCarrinho.notaItem.subitens.remove(menu);
 
-    widget.notaItem = null;
+    notaItem = null;
+
+    controllerAbstract.changeProdutoCarrinho(controllerAbstract.produtoCarrinho);
   }
 }

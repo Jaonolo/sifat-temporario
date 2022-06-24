@@ -15,5 +15,11 @@ abstract class ControllerAbstract {
   ProdutoMenu? proximoMenu;
   ProdutoMenu? anteriorMenu;
   int radiovalue = 0;
+
+  // ------------------------ Variaveis usada apenas no combo rever isso aqui
   NotaItem? menu;
+
+  // ------------------------ Metodos compartilhados
+  void changeProdutoCarrinho(ProdutoCarrinho value);
+  void selecaoRadio(int n);
 }

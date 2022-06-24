@@ -152,6 +152,11 @@ abstract class ProdutoComboBase extends ControllerAbstract with Store  {
     proximo();
   }
 
+  @action
+  void changeProdutoCarrinho(ProdutoCarrinho value) {
+    produtoCarrinho = value;
+  }
+
   // ------------------------ Metodos da Paginação (PageController)
   int index = 0;
   late PageController pageController;

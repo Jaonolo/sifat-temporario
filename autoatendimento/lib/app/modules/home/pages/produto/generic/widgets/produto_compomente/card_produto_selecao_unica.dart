@@ -1,35 +1,30 @@
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/abstract/controller_abstract.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_page.dart';
+import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
+import 'package:utils/utils/nota_item_utils.dart';
 
-class CardProdutoSelecaoUnica extends StatefulWidget {
-  final NotaItem notaItem;
-  final ProdutoMenu produtoMenu;
-  final ProdutoMenuComponente produtoMenuComponente;
+class CardProdutoSelecaoUnica extends StatelessWidget {
+  NotaItem notaItem;
+  ControllerAbstract controllerAbstract;
+  ProdutoMenuComponente produtoMenuComponente;
 
   CardProdutoSelecaoUnica(
-      this.notaItem, this.produtoMenu, this.produtoMenuComponente);
+      this.notaItem, this.controllerAbstract, this.produtoMenuComponente);
+
+  late BuildContext context;
+  AppController appController = Modular.get();
+  HomeController homeController = Modular.get();
 
   @override
-  State<CardProdutoSelecaoUnica> createState() =>
-      _CardProdutoSelecaoUnicaState();
-}
-
-class _CardProdutoSelecaoUnicaState extends State<CardProdutoSelecaoUnica> {
-  bool selecionado = false;
-  final AppController appController = Modular.get();
-  final HomeController homeController = Modular.get();
-
-  @override
-  Widget build(BuildContext c) {
-    return _body();
-  }
-
-  Widget _body() {
+  Widget build(BuildContext context) {
+    this.context = context;
     return InkWell(
       onTap: () {
         _adicionar.call();
@@ -39,10 +34,9 @@ class _CardProdutoSelecaoUnicaState extends State<CardProdutoSelecaoUnica> {
         decoration: BoxDecoration(
           border: Border.all(
               width: 2,
-              color:
-                  widget.notaItem.quantidade!.compareTo(BigDecimal.ZERO()) > 0
-                      ? DefaultTheme.accentColor
-                      : DefaultTheme.preto),
+              color: notaItem.quantidade!.compareTo(BigDecimal.ZERO()) > 0
+                  ? DefaultTheme.accentColor
+                  : DefaultTheme.preto),
           borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),
@@ -59,8 +53,7 @@ class _CardProdutoSelecaoUnicaState extends State<CardProdutoSelecaoUnica> {
   }
 
   Widget _imagem() {
-    String url_imagem =
-        widget.notaItem.produtoEmpresa!.produto!.imagemPrincipal;
+    String url_imagem = notaItem.produtoEmpresa!.produto!.imagemPrincipal;
     if (url_imagem.isNotEmpty) {
       return Center(
         child: Image.network(
@@ -83,107 +76,97 @@ class _CardProdutoSelecaoUnicaState extends State<CardProdutoSelecaoUnica> {
     return Padding(
       padding: const EdgeInsets.only(left: 2),
       child: Text(
-        widget.notaItem.descricao!.toUpperCase(),
+        notaItem.descricao!.toUpperCase(),
         style: TextStyle(fontSize: FontUtils.h3(context)),
       ),
     );
   }
 
   Widget _txtPreco() {
-    String preco = widget.notaItem.precoUnitario!.toStringAsFixed(2);
-    // if (controller.tipoPacote.equals(TipoPacote.COMBO)) {
-    //   BigDecimal valorAdicional = BigDecimal.ZERO();
-    //   switch (controller.produtoMenu!.tipo) {
-    //     case "COMPONENTE_FIXO":
-    //       valorAdicional = widget.produtoMenuComponente
-    //           .getValorComponente(
-    //               appController.servicoAutoAtendimento.idEmpresa!,
-    //               appController.tabelaPreco.id!)!
-    //           .subtrair(NotaItemUtils.verificaDiferencaCombo(
-    //               controller.produtoMenu!,
-    //               appController.servicoAutoAtendimento.idEmpresa!,
-    //               appController.tabelaPreco.id!));
-    //       break;
-    //     case "COMPONENTE_EXTRA":
-    //       ProdutoMenuComponenteEmpresa componenteEmpresa =
-    //           widget.produtoMenuComponente.componenteEmpresas.firstWhere(
-    //               (ce) =>
-    //                   ce.idEmpresa ==
-    //                   controller
-    //                       .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
-    //               orElse: () => throw Exception("compomente não encotrado"));
-    //
-    //       valorAdicional = componenteEmpresa.gradeEmpresa!
-    //           .precoVenda(appController.tabelaPreco.id!);
-    //       break;
-    //   }
-    //   if (valorAdicional.compareTo(BigDecimal.ZERO()) > 0) {
-    //     preco = valorAdicional.toStringAsFixed(2);
-    //   } else {
-    //     preco = "";
-    //   }
-    // }
+    BigDecimal valorAdicional = notaItem.precoUnitario!;
 
-    if(preco.isEmpty || preco == "0.00"){
-      return SizedBox();
+    if (controllerAbstract.produtoMenu != null &&
+        controllerAbstract.produtoCarrinho.notaItem.tipo == "ITEM_COMBO") {
+      ProdutoMenuComponenteEmpresa componenteEmpresa =
+          produtoMenuComponente.componenteEmpresas.firstWhere(
+              (ce) =>
+                  ce.idEmpresa ==
+                  controllerAbstract
+                      .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa,
+              orElse: () =>
+                  throw Exception("CompomeenteEmpresa não encontrado"));
+
+      switch (controllerAbstract.produtoMenu!.tipo) {
+        case "COMPONENTE_FIXO":
+          valorAdicional = produtoMenuComponente
+              .getValorComponente(appController.estacaoTrabalho.idEmpresa!,
+                  appController.tabelaPreco.id!)!
+              .subtrair(NotaItemUtils.verificaDiferencaCombo(
+                  controllerAbstract.produtoMenu!,
+                  appController.estacaoTrabalho.idEmpresa!,
+                  appController.tabelaPreco.id!));
+          break;
+        case "COMPONENTE_EXTRA":
+          valorAdicional = componenteEmpresa.gradeEmpresa!
+              .precoVenda(appController.tabelaPreco.id!);
+          break;
+      }
     }
 
     return Text(
-      '+ R\$ $preco',
+      '+ R\$ $valorAdicional',
       style: TextStyle(fontSize: FontUtils.h3(context)),
     );
   }
 
   void _adicionar() {
-    // try {
-    //   //Se tiver alguns observação ou adicionais abre a tela nova
-    //   bool temMenuObservacao = widget.notaItem.produtoEmpresa!.produto!.menus
-    //       .any((element) => element.tipo == "OBSERVACAO");
-    //
-    //   NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
-    //       controller.produtoCarrinho.notaItem, widget.produtoMenu);
-    //
-    //   //Se não localizou um menu lançado, vai criar um novo e add o subitem
-    //   if (menu == null) {
-    //     menu = NotaItemUtils.menuToNotaItem(
-    //         controller.produtoCarrinho.notaItem.idNota!, widget.produtoMenu);
-    //     widget.notaItem.quantidade = BigDecimal.ONE();
-    //     menu.subitens.add(widget.notaItem);
-    //     if (widget.notaItem.produtoEmpresa!.produto!.pacote.equals(TipoPacote.ADICIONAIS) || temMenuObservacao) {
-    //       controller.trocaPalcoParaSubItem(notaItemPai: controller.produtoCarrinho.notaItem, notaItemAtual:  widget.notaItem, produtoMenuPai: widget.produtoMenu);
-    //       return;
-    //     }
-    //     controller.produtoCarrinho.notaItem.subitens.add(menu);
-    //   } else {
-    //     //Se tem menu, verifica se já tem algum subitem desse componente lançado para remover
-    //     NotaItem? itemJaLancado = NotaItemUtils.localizaSubitemJaLancado(
-    //         controller.produtoCarrinho.notaItem,
-    //         widget.produtoMenu,
-    //         widget.produtoMenuComponente);
-    //
-    //     if (itemJaLancado != null) menu.subitens.remove(itemJaLancado);
-    //
-    //       //Verifica se o menu tem subitens, caso não, remove ele também
-    //       if (menu.subitens.isEmpty) {
-    //         controller.produtoCarrinho.notaItem.subitens.remove(menu);
-    //     }
-    //
-    //     widget.notaItem.quantidade = BigDecimal.ZERO();
-    //   }
-    //
-    //   NotaItemUtils.atualizaTotais(controller.produtoCarrinho.notaItem);
-    //   controller.changeProdutoCarrinho(controller.produtoCarrinho);
-    //   controller.onLiberaBotaoMenus();
-    //
-    //   controller.atualizaBotaoNavegacaoMenus(escolheuCompomenteExtra: widget.notaItem.quantidade!.compareTo(BigDecimal.ONE()) > 0);
-    //
-    //   setState(() {
-    //     _body();
-    //   });
-    //   //selecao unica ja passa para o proximo menu automatico
-    //   // controller.proximo();
-    // } catch (e, s) {
-    //   print(s);
-    // }
+    try {
+      //Se tiver alguns observação ou adicionais abre a tela nova
+      bool temMenuObservacao = notaItem.produtoEmpresa!.produto!.menus
+          .any((element) => element.tipo == "OBSERVACAO");
+
+      NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
+          controllerAbstract.produtoCarrinho.notaItem,
+          controllerAbstract.produtoMenu!);
+
+      //Se não localizou um menu lançado, vai criar um novo e add o subitem
+      if (menu == null) {
+        menu = NotaItemUtils.menuToNotaItem(
+            controllerAbstract.produtoCarrinho.notaItem.idNota!,
+            controllerAbstract.produtoMenu!);
+        notaItem.quantidade = BigDecimal.ONE();
+        menu.subitens.add(notaItem);
+        controllerAbstract.produtoCarrinho.notaItem.subitens.add(menu);
+      } else {
+        //Se tem menu, verifica se já tem algum subitem desse componente lançado para remover
+        NotaItem? itemJaLancado = NotaItemUtils.localizaSubitemJaLancado(
+            controllerAbstract.produtoCarrinho.notaItem,
+            controllerAbstract.produtoMenu!,
+            produtoMenuComponente);
+
+        if (itemJaLancado != null) menu.subitens.remove(itemJaLancado);
+
+        //Verifica se o menu tem subitens, caso não, remove ele também
+        if (menu.subitens.isEmpty) {
+          controllerAbstract.produtoCarrinho.notaItem.subitens.remove(menu);
+        }
+
+        notaItem.quantidade = BigDecimal.ZERO();
+      }
+
+      if (controllerAbstract.produtoCarrinho.notaItem.tipo == "ITEM_COMBO" &&
+          (notaItem.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
+              temMenuObservacao)) {
+        homeController
+            .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
+        return;
+      }
+
+      NotaItemUtils.atualizaTotais(controllerAbstract.produtoCarrinho.notaItem);
+      controllerAbstract
+          .changeProdutoCarrinho(controllerAbstract.produtoCarrinho);
+    } catch (e, s) {
+      print(s);
+    }
   }
 }

@@ -79,7 +79,7 @@ abstract class ProdutoAdicionalBase extends ControllerAbstract with Store {
   }
 
   @action
-  changeProdutoCarrinho(ProdutoCarrinho value) {
+  void changeProdutoCarrinho(ProdutoCarrinho value) {
     produtoCarrinho = value;
   }
 
