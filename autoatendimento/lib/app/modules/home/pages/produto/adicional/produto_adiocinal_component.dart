@@ -1,6 +1,7 @@
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/adicional/widget/card_produto_menu.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/generic/widgets/mostra_quantidade.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/generic/widgets/produto_compomente/list_view_compomentes.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_primario.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
@@ -186,7 +187,24 @@ class ProdutoAdicionalComponent {
         itemBuilder: (BuildContext context, int index) {
           controller.atualizaMenus(index);
 
-          return CardProdutoMenu();
+          return  Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  children: [
+                    Center(
+                        child: Text(
+                          controller.produtoMenu!.descricao!.toUpperCase(),
+                          style: TextStyle(
+                              fontSize: FontUtils.h3(context)),
+                        )),
+                    MostraQuantidade(controller),
+                    ListViewCompomentes(controller),
+                  ],
+                ),
+              ),
+            ],
+          );
         });
   }
 

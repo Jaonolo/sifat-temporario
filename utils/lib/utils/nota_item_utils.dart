@@ -605,6 +605,22 @@ class NotaItemUtils {
         ni.consumoItem != null && ni.consumoItem!.idMenu == produtoMenu.id);
   }
 
+  static int quantidadeLancadaDoMenu(NotaItem itemOriginal,
+      ProdutoMenu produtoMenu) {
+      int total = 0;
+
+    if (itemOriginal.subitens.isEmpty)
+      return 0;
+
+    List<NotaItem> menus = itemOriginal.subitens.where((ni) => ni.consumoItem != null && ni.consumoItem!.idMenu == produtoMenu.id).toList();
+
+    for(NotaItem menu in menus)
+      for(NotaItem item in menu.subitens)
+        total += item.quantidade!.toInt();
+
+      return total;
+  }
+
   static NotaItem? localizaObservacaoJaLancada(NotaItem itemOriginal,
       ProdutoMenu produtoMenu, ProdutoMenuComponente produtoMenuComponente) {
     NotaItem? menuLocalizado = localizaMenuJaLancado(itemOriginal, produtoMenu);

@@ -81,6 +81,7 @@ abstract class ProdutoAdicionalBase extends ControllerAbstract with Store {
   @action
   void changeProdutoCarrinho(ProdutoCarrinho value) {
     produtoCarrinho = value;
+    produtoMenu = produtoMenu;
   }
 
   @action
@@ -112,14 +113,12 @@ abstract class ProdutoAdicionalBase extends ControllerAbstract with Store {
   int index = 0;
   late PageController pageController;
 
-  @override
   Future<void> proximo() async {
     await new Future.delayed(const Duration(milliseconds: 100));
     pageController.nextPage(
         duration: const Duration(milliseconds: 200), curve: Curves.ease);
   }
 
-  @override
   void anterior() {
     pageController.previousPage(
         duration: const Duration(milliseconds: 200), curve: Curves.ease);

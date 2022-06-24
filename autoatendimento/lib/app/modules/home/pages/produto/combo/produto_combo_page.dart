@@ -42,9 +42,11 @@ class ProdutoComboPage extends StatefulWidget {
 
 class _ProdutoComboPageState extends State<ProdutoComboPage>
     with ProdutoComboComponent {
+
   @override
   void initState() {
     controller.pageController = PageController(initialPage: controller.index);
+    super.initState();
   }
 
   @override

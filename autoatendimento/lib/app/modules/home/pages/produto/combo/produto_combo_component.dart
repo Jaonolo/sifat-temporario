@@ -1,9 +1,8 @@
-import 'package:autoatendimento/app/app_controller.dart';
-import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/generic/widgets/mostra_quantidade.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/generic/widgets/produto_compomente/list_view_compomentes.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_primario.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
-import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
+import 'package:utils/utils/string_utils.dart';
 
 class ProdutoComboComponent {
   late BuildContext context;
@@ -89,23 +89,23 @@ class ProdutoComboComponent {
   }
 
   Widget _txtTitulo() {
-    return  InkWell(
-            // onTap: () {
-            //   print('------- ${controller.produtoCarrinho.notaItem.descricao} -------');
-            //   controller.produtoCarrinho.notaItem.subitens.forEach((element) {
-            //     print('-- ${element.descricao}');
-            //     element.subitens.forEach((itemCombo) {
-            //       print(
-            //           '---- ${itemCombo.descricao}  |qtde: ${itemCombo.quantidade}|unitario: ${itemCombo.precoUnitario}|total: ${itemCombo.precoTotal}|');
-            //     });
-            //   });
-            // },
-            child: Text(
-              controller.produtoCarrinho.notaItem.descricao!.toUpperCase(),
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: FontUtils.h2(context) * 1.5),
-            ),
-          );
+    return InkWell(
+      // onTap: () {
+      //   print('------- ${controller.produtoCarrinho.notaItem.descricao} -------');
+      //   controller.produtoCarrinho.notaItem.subitens.forEach((element) {
+      //     print('-- ${element.descricao}');
+      //     element.subitens.forEach((itemCombo) {
+      //       print(
+      //           '---- ${itemCombo.descricao}  |qtde: ${itemCombo.quantidade}|unitario: ${itemCombo.precoUnitario}|total: ${itemCombo.precoTotal}|');
+      //     });
+      //   });
+      // },
+      child: Text(
+        controller.produtoCarrinho.notaItem.descricao!.toUpperCase(),
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: FontUtils.h2(context) * 1.5),
+      ),
+    );
   }
 
   //monta os opcionais ou extras chama o CardMenu para escoher ente o CardMenuComponent ou CardMenuComponentObservacao
@@ -125,16 +125,14 @@ class ProdutoComboComponent {
       child: PageView.builder(
           physics: NeverScrollableScrollPhysics(),
           controller: controller.pageController,
-          itemCount: (controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!
-                  .menus.length +
+          itemCount: (controller.produtoCarrinho.notaItem.produtoEmpresa!
+                  .produto!.menus.length +
               1),
           itemBuilder: (BuildContext context, int index) {
             controller.atualizaMenus(index);
-            if (controller.produtoMenu != null) {
-              return _pageViewMenu(index);
-            } else {
-              return _pageViewRevisao(index);
-            }
+            if (controller.produtoMenu != null) return _pageViewMenu(index);
+
+            return _pageViewRevisao(index);
           }),
     );
   }
@@ -142,61 +140,31 @@ class ProdutoComboComponent {
   Widget _botaoProximoMenu() {
     return Observer(
       builder: (_) {
-        bool isVisible = true;
-        bool isOpcional = false;
+        bool isMostraBtn = false;
         if (controller.produtoMenu == null) return const SizedBox();
 
-        if (controller.produtoMenu != null &&
-            (controller.menu == null || controller.menu!.subitens.isEmpty)) {
-          isVisible = false;
-        }
-
-        //Tratativas para descrição do botão
-        String descricaoBotao = '';
-        switch (controller.produtoMenu!.tipo) {
-          case "COMPONENTE_FIXO":
-            if (controller.proximoMenu == null ||
-                controller.proximoMenu!.tipo == "COMPONENTE_EXTRA") {
-              descricaoBotao = "ADICIONAR";
-            } else {
-              descricaoBotao = controller.proximoMenu!.descricao!.toUpperCase();
-            }
-            break;
-          case "COMPONENTE_EXTRA":
-            descricaoBotao = "ADICIONAR";
-            isOpcional = true;
-            break;
-        }
+        if (controller.produtoMenu!.quantidadeMinima == 0)
+          isMostraBtn = true;
+        else if (controller.produtoMenu!.quantidadeMinima! <=
+            NotaItemUtils.quantidadeLancadaDoMenu(
+                controller.produtoCarrinho.notaItem, controller.produtoMenu!))
+          isMostraBtn = true;
 
         return Row(
           children: [
-            if (isVisible) ...[
+            if (isMostraBtn) ...[
               Expanded(
                 child: BotaoPrimario(
-                  descricao: descricaoBotao,
-                  function:
-                  () => controller.proximo(),
+                  descricao: (controller.proximoMenu == null)
+                      ? "Revisão"
+                      : controller.proximoMenu!.descricao!.toUpperCase(),
+                  function: () => controller.proximo(),
                   altura: FontUtils.h2(context) * 1.01,
                   largura: FontUtils.h2(context) * 20,
                   borderRadius: 10.0,
                 ),
               ),
             ],
-            if (isOpcional && isVisible) ...[
-              SizedBox(width: 20),
-            ],
-            if (isOpcional) ...[
-              Expanded(
-                child: BotaoPrimario(
-                 descricao:
-                  "NÃO OBRIGADO",
-                  function: () => controller.limparItem(),
-                  altura: FontUtils.h2(context) * 1.01,
-                  largura: FontUtils.h2(context) * 20,
-                  borderRadius: 10.0,
-                ),
-              ),
-            ]
           ],
         );
       },
@@ -223,8 +191,9 @@ class ProdutoComboComponent {
                 style: TextStyle(
                     fontSize: FontUtils.h2(context),
                     color: DefaultTheme.accentColor))),
+        Expanded(flex: 4, child: MostraQuantidade(controller)),
         Expanded(
-            flex: 78, child: _listViewComponentesMenu(controller.produtoMenu!)),
+            flex: 74, child: _listViewComponentesMenu(controller.produtoMenu!)),
         Expanded(flex: 8, child: _botaoProximoMenu()),
         Expanded(flex: 2, child: SizedBox())
       ],
@@ -250,123 +219,8 @@ class ProdutoComboComponent {
 
       return valorCompomente1.compareTo(valorCompomente2);
     });
-    return ListView.builder(
-        shrinkWrap: true,
-        itemCount: produtoMenu.componentes.length,
-        itemBuilder: (context, index) {
-          ProdutoMenuComponente compomente = produtoMenu.componentes[index];
-          return Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: _cardComponente(produtoMenu, compomente),
-          );
-        });
-  }
 
-  //monta o item para escolha de um produto do combo
-  Widget _cardComponente(
-      ProdutoMenu produtoMenu, ProdutoMenuComponente compomente) {
-    ProdutoMenuComponenteEmpresa componenteEmpresa =
-        compomente.componenteEmpresas.firstWhere(
-            (ce) =>
-                ce.idEmpresa ==
-                controller.produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa,
-            orElse: () => throw Exception("CompomeenteEmpresa não encontrado"));
-
-    String url_imagem;
-    url_imagem = componenteEmpresa.gradeEmpresa!.produtoEmpresa!.produto!
-                .arquivoPrincipal() !=
-            null
-        ? componenteEmpresa.gradeEmpresa!.produtoEmpresa!.produto!
-            .arquivoPrincipal()
-            !.link!
-        : "";
-
-    return Observer(builder: (_) {
-      bool selecionado = false;
-      BigDecimal valorAdicional = BigDecimal.ZERO();
-
-      if (controller.menu != null) {
-        selecionado = controller.menu!.subitens
-            .any((ni) => ni.idGrade == componenteEmpresa.idGradeEmpresa);
-      }
-
-      if (controller.produtoMenu != null) {
-        switch (controller.produtoMenu!.tipo) {
-          case "COMPONENTE_FIXO":
-            valorAdicional = compomente
-                .getValorComponente(controller.appController.estacaoTrabalho.idEmpresa!,
-                controller.appController.tabelaPreco.id!)!
-                .subtrair(NotaItemUtils.verificaDiferencaCombo(
-                    produtoMenu,
-                controller.appController.estacaoTrabalho.idEmpresa!,
-                controller.appController.tabelaPreco.id!));
-            break;
-          case "COMPONENTE_EXTRA":
-            valorAdicional = componenteEmpresa.gradeEmpresa!
-                .precoVenda(controller.appController.tabelaPreco.id!);
-            break;
-        }
-      }
-
-      return InkWell(
-              onTap: () {
-                controller.criaItemCombo(compomente);
-              },
-              child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 2,
-                      color:
-                          selecionado ? DefaultTheme.accentColor : Colors.black,
-                    ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
-                  child: SizedBox(
-                    height: FontUtils.h1(context) * 1.2,
-                    width: FontUtils.h1(context),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 20,
-                          child: (url_imagem != null && url_imagem.isNotEmpty)
-                              ? Center(
-                                  child: Image.network(
-                                    url_imagem,
-                                    fit: BoxFit.cover,
-                                    width: FontUtils.h1(context) * 1.5,
-                                  ),
-                                )
-                              : Center(
-                                  child: Icon(
-                                    Icons.image,
-                                    color: DefaultTheme.cinza,
-                                  ),
-                                ),
-                        ),
-                        Expanded(
-                          flex: 60,
-                          child: Text(
-                            "${compomente.descricao!.toUpperCase()} ${(compomente.grade?.tamanho != null) ? compomente.grade!.tamanho!.descricao!.toUpperCase() : ""}",
-                            style: TextStyle(
-                                fontSize: FontUtils.h2(context) * 0.75),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 20,
-                          child: Text(
-                            (valorAdicional.compareTo(BigDecimal.ZERO()) > 0)
-                                ? "+ R\$" + valorAdicional.toStringAsFixed(2)
-                                : "",
-                            style: TextStyle(
-                                fontSize: FontUtils.h2(context) * 0.60),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )));
-    });
+    return ListViewCompomentes(controller);
   }
 
   /*
@@ -381,8 +235,7 @@ class ProdutoComboComponent {
         Expanded(
           flex: 8,
           child: BotaoPrimario(
-            descricao:
-            "ADICIONAR AO CARRINHO",
+            descricao: "ADICIONAR AO CARRINHO",
             function: () {
               controller.adicionarAoCarrinho();
             },
@@ -397,8 +250,8 @@ class ProdutoComboComponent {
 
   //tela de revisao compartilhada
   Widget _listViewRevisao() {
-    List<NotaItem> itensVendidos =
-        NotaItemUtils.getItensComboComposto(controller.produtoCarrinho.notaItem);
+    List<NotaItem> itensVendidos = NotaItemUtils.getItensComboComposto(
+        controller.produtoCarrinho.notaItem);
 
     return Column(
       children: [
@@ -431,43 +284,66 @@ class ProdutoComboComponent {
 
   //card revisao com todos os item escolhidos do combo
   Widget _cardNotaItemRevisao(NotaItem subItens) {
-    return  Column(
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10, top: 30),
+                  child: Text(
+                    '${subItens.quantidade} UN',
+                    style: TextStyle(fontSize: FontUtils.h3(context)),
+                  ),
+                )),
+            Expanded(
+                flex: 7,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: Text(
+                    '${subItens.descricao!.toUpperCase()}',
+                    style: TextStyle(fontSize: FontUtils.h3(context)),
+                  ),
+                )),
+            Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: Text(
+                    'R\$ ${subItens.precoTotal!.toStringAsFixed(2)}',
+                    style: TextStyle(fontSize: FontUtils.h3(context)),
+                  ),
+                )),
+          ],
+        ),
+        if (subItens.subitens.isNotEmpty) ...[
+          Row(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 30),
-                        child: Text(
-                          '${subItens.quantidade} UN',
-                          style: TextStyle(
-                              fontSize:  FontUtils.h3(context)),
-                        ),
-                      )),
-                  Expanded(
-                      flex: 7,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 30),
-                        child: Text(
-                          '${subItens.descricao!.toUpperCase()}',
-                          style: TextStyle(
-                              fontSize:  FontUtils.h3(context)),
-                        ),
-                      )),
-                  Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 30),
-                        child: Text(
-                          'R\$ ${subItens.precoTotal!.toStringAsFixed(2)}',
-                          style: TextStyle(
-                              fontSize: FontUtils.h3(context)),
-                        ),
-                      )),
-                ],
+              Expanded(
+                flex: 14,
+                child: Container(),
               ),
+              Expanded(
+                flex: 74,
+                child: Wrap(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
+                    child: Text(
+                      StringUtils.montaDescricaoSubItensAuto(subItens, ignorarItemPrincipal: true),
+                      style: TextStyle(fontSize: FontUtils.h3(context)),
+                    ),
+                  )
+                ]),
+              ),
+              Expanded(
+                flex: 12,
+                child: Container(),
+              )
             ],
-          );
+          ),
+        ]
+      ],
+    );
   }
 }

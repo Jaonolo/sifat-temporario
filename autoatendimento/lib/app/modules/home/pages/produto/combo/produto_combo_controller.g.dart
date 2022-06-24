@@ -130,6 +130,28 @@ mixin _$ProdutoComboController on ProdutoComboBase, Store {
   }
 
   @override
+  void selecaoRadio(int n) {
+    final _$actionInfo = _$ProdutoComboBaseActionController.startAction(
+        name: 'ProdutoComboBase.selecaoRadio');
+    try {
+      return super.selecaoRadio(n);
+    } finally {
+      _$ProdutoComboBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeProdutoCarrinho(ProdutoCarrinho value) {
+    final _$actionInfo = _$ProdutoComboBaseActionController.startAction(
+        name: 'ProdutoComboBase.changeProdutoCarrinho');
+    try {
+      return super.changeProdutoCarrinho(value);
+    } finally {
+      _$ProdutoComboBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 produtoCarrinho: ${produtoCarrinho},

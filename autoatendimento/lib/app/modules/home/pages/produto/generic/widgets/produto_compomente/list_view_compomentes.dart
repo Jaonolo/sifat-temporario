@@ -11,18 +11,17 @@ import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
 class ListViewCompomentes extends StatelessWidget {
-  ControllerAbstract controllerAbstract;
+  final ControllerAbstract controllerAbstract;
 
   ListViewCompomentes(this.controllerAbstract);
 
-  AppController appController = Modular.get();
+  final AppController appController = Modular.get();
 
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      //If reponsavel por atualizar a tela NÃO RETIRAR
-      if(controllerAbstract.produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote.equals(TipoPacote.NENHUM))
-        throw Exception("Tipo pacote nenhum não veria estar aqui");
+      if(controllerAbstract.produtoMenu == null)
+        return SizedBox();
 
       return ListView.builder(
           shrinkWrap: true,

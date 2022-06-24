@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
-
+// ignore: must_be_immutable
 class CardProdutoObservacaoCheckbox extends StatelessWidget {
   ControllerAbstract controllerAbstract;
   ProdutoMenuComponente produtoMenuComponente;

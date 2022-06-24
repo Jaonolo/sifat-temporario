@@ -10,6 +10,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
+// ignore: must_be_immutable
 class CardProdutoSelecaoUnica extends StatelessWidget {
   NotaItem notaItem;
   ControllerAbstract controllerAbstract;
@@ -121,9 +122,7 @@ class CardProdutoSelecaoUnica extends StatelessWidget {
 
   void _adicionar() {
     try {
-      //Se tiver alguns observação ou adicionais abre a tela nova
-      bool temMenuObservacao = notaItem.produtoEmpresa!.produto!.menus
-          .any((element) => element.tipo == "OBSERVACAO");
+      bool removendo = false;
 
       NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
           controllerAbstract.produtoCarrinho.notaItem,
@@ -152,15 +151,23 @@ class CardProdutoSelecaoUnica extends StatelessWidget {
         }
 
         notaItem.quantidade = BigDecimal.ZERO();
+        removendo = true;
       }
 
-      if (controllerAbstract.produtoCarrinho.notaItem.tipo == "ITEM_COMBO" &&
-          (notaItem.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
-              temMenuObservacao)) {
-        homeController
-            .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
-        return;
+      if(!removendo) {
+        //Se tiver alguns observação ou adicionais abre a tela nova
+        bool temMenuObservacao = notaItem.produtoEmpresa!.produto!.menus
+            .any((element) => element.tipo == "OBSERVACAO");
+
+        if (controllerAbstract.produtoCarrinho.notaItem.tipo == "COMBO" &&
+            (notaItem.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
+                temMenuObservacao)) {
+          homeController
+              .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
+          return;
+        }
       }
+
 
       NotaItemUtils.atualizaTotais(controllerAbstract.produtoCarrinho.notaItem);
       controllerAbstract

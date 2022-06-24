@@ -7,6 +7,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
+// ignore: must_be_immutable
 class ProdutoAdicionalPage extends StatefulWidget {
   ProdutoCarrinho produtoCarrinho;
 
@@ -44,6 +45,7 @@ class _ProdutoAdicionalPageState extends State<ProdutoAdicionalPage>
   @override
   void initState() {
     controller.pageController = PageController(initialPage: controller.index);
+    super.initState();
   }
 
   @override

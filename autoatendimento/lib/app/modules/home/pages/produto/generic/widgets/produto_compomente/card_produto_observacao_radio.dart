@@ -1,20 +1,21 @@
 import 'package:autoatendimento/app/modules/home/pages/produto/abstract/controller_abstract.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
+// ignore: must_be_immutable
 class CardProdutoObservacaoRadio extends StatelessWidget {
   ControllerAbstract controllerAbstract;
   ProdutoMenuComponente produtoMenuComponente;
   int index;
 
   CardProdutoObservacaoRadio(
-      this.controllerAbstract, this.produtoMenuComponente, this.index);
+      this.controllerAbstract, this.produtoMenuComponente, this.index) {
+    if (index == controllerAbstract.radiovalue) _adicionaObservacao();
+  }
 
   late BuildContext context;
 
@@ -44,8 +45,7 @@ class CardProdutoObservacaoRadio extends StatelessWidget {
     return RadioListTile(
         activeColor: DefaultTheme.accentColor,
         title: Text(produtoMenuComponente.descricao!.toUpperCase(),
-            style: TextStyle(
-                fontSize: FontUtils.h4(context))),
+            style: TextStyle(fontSize: FontUtils.h4(context))),
         controlAffinity: ListTileControlAffinity.leading,
         value: index,
         groupValue: controllerAbstract.radiovalue,

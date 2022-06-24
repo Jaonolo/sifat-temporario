@@ -101,7 +101,7 @@ mixin _$ProdutoAdicionalController on ProdutoAdicionalBase, Store {
       ActionController(name: 'ProdutoAdicionalBase', context: context);
 
   @override
-  dynamic changeProdutoCarrinho(ProdutoCarrinho value) {
+  void changeProdutoCarrinho(ProdutoCarrinho value) {
     final _$actionInfo = _$ProdutoAdicionalBaseActionController.startAction(
         name: 'ProdutoAdicionalBase.changeProdutoCarrinho');
     try {

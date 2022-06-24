@@ -155,6 +155,7 @@ abstract class ProdutoComboBase extends ControllerAbstract with Store  {
   @action
   void changeProdutoCarrinho(ProdutoCarrinho value) {
     produtoCarrinho = value;
+    produtoMenu = produtoMenu;
   }
 
   // ------------------------ Metodos da Paginação (PageController)

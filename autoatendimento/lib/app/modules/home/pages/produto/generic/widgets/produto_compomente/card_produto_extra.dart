@@ -1,11 +1,15 @@
+import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/abstract/controller_abstract.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_page.dart';
+import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
-
+// ignore: must_be_immutable
 class CardProdutoExtra extends StatelessWidget {
    ControllerAbstract controllerAbstract;
    ProdutoMenuComponente produtoMenuComponente;
@@ -14,6 +18,7 @@ class CardProdutoExtra extends StatelessWidget {
   CardProdutoExtra(this.notaItem, this.produtoMenuComponente, this.controllerAbstract);
 
   late BuildContext context;
+  final HomeController homeController = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -80,54 +85,55 @@ class CardProdutoExtra extends StatelessWidget {
                 : FontUtils.h4(context)));
   }
 
-  Widget _btnAdicionar() {
-    Orientation orientation = MediaQuery.of(context).orientation;
+   Widget _btnAdicionar() {
+     Orientation orientation = MediaQuery.of(context).orientation;
+     return SizedBox(
+       height: orientation == Orientation.landscape
+           ? FontUtils.h2(context)
+           : FontUtils.h3(context) * 1.4,
+       child: ElevatedButton(
+         style: ElevatedButton.styleFrom(
+           primary: DefaultTheme.accentColor,
+           onPrimary: Colors.white,
+           elevation: 4.0,
+           shape: const CircleBorder(),
+           //splashColor: Colors.grey, Desabilitado pelo uso do elevatedButton
+         ),
+         onPressed: _podeAdicionar() ? () => _adicionar() : null,
+         child: Icon(
+           Icons.add,
+           size: orientation == Orientation.landscape
+               ? FontUtils.h2(context)
+               : FontUtils.h3(context),
+         ),
+       ),
+     );
+   }
 
-    return SizedBox(
-      height: orientation == Orientation.landscape
-          ? FontUtils.h2(context)
-          : FontUtils.h3(context) * 1.4,
-      child: RaisedButton(
-        color: DefaultTheme.accentColor,
-        textColor: Colors.white,
-        onPressed: _podeAdicionar() ? () => _adicionar() : null,
-        child: Icon(
-          Icons.add,
-          size: orientation == Orientation.landscape
-              ? FontUtils.h2(context)
-              : FontUtils.h3(context),
-        ),
-        elevation: 4.0,
-        shape: CircleBorder(),
-        splashColor: Colors.grey,
-      ),
-    );
-  }
-
-  Widget _btnRemover() {
-    Orientation orientation = MediaQuery.of(context).orientation;
-
-    return SizedBox(
-      height: orientation == Orientation.landscape
-          ? FontUtils.h2(context)
-          : FontUtils.h3(context) * 1.4,
-      child: RaisedButton(
-        color: DefaultTheme.accentColor,
-        textColor: Colors.white,
-        onPressed: _podeRemover() ? () => _remover() : null,
-        child: Icon(
-          Icons.remove,
-          size: orientation == Orientation.landscape
-              ? FontUtils.h2(context)
-              : FontUtils.h3(context),
-        ),
-        elevation: 4.0,
-        shape: CircleBorder(),
-        splashColor: Colors.grey,
-      ),
-    );
-  }
-
+   Widget _btnRemover() {
+     Orientation orientation = MediaQuery.of(context).orientation;
+     return SizedBox(
+       height: orientation == Orientation.landscape
+           ? FontUtils.h2(context)
+           : FontUtils.h3(context) * 1.4,
+       child: ElevatedButton(
+         style: ElevatedButton.styleFrom(
+           primary: DefaultTheme.accentColor,
+           onPrimary: Colors.white,
+           elevation: 4.0,
+           shape: const CircleBorder(),
+           //splashColor: Colors.grey, Desabilitado pelo uso do ElevatedButton
+         ),
+         onPressed: _podeRemover() ? () => _remover() : null,
+         child: Icon(
+           Icons.remove,
+           size: orientation == Orientation.landscape
+               ? FontUtils.h2(context)
+               : FontUtils.h3(context),
+         ),
+       ),
+     );
+   }
   void _adicionar() {
     notaItem.quantidade =
         notaItem.quantidade!.somar(BigDecimal.ONE());
@@ -140,7 +146,7 @@ class CardProdutoExtra extends StatelessWidget {
     notaItem.quantidade =
         notaItem.quantidade!.subtrair(BigDecimal.ONE());
 
-    _atualizaNotaItem();
+    _atualizaNotaItem(removendo: true);
   }
 
   bool _podeAdicionar() {
@@ -172,8 +178,9 @@ class CardProdutoExtra extends StatelessWidget {
     return notaItem.quantidade!.compareTo(BigDecimal.ZERO()) > 0;
   }
 
-  void _atualizaNotaItem() {
+  void _atualizaNotaItem({removendo = false}) {
     try {
+
       NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
           controllerAbstract.produtoCarrinho.notaItem,
           controllerAbstract.produtoMenu!);
@@ -204,6 +211,21 @@ class CardProdutoExtra extends StatelessWidget {
                 .remove(menu);
         }
       }
+
+      if(!removendo) {
+        //Se tiver alguns observação ou adicionais abre a tela nova
+        bool temMenuObservacao = notaItem.produtoEmpresa!.produto!.menus
+            .any((element) => element.tipo == "OBSERVACAO");
+
+        if (controllerAbstract.produtoCarrinho.notaItem.tipo == "COMBO" &&
+            (notaItem.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
+                temMenuObservacao)) {
+          homeController
+              .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
+          return;
+        }
+      }
+
 
       NotaItemUtils.atualizaTotais(
           controllerAbstract.produtoCarrinho.notaItem);
