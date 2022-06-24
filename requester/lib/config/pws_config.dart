@@ -1,8 +1,8 @@
-import 'package:models/model/enum/client.dart';
+import 'package:models/model/enum/clients.dart';
 
 class PWSConfig {
   String urlBase;
-  Client client;
+  Clients client;
   String clientSecret;
   String urlBaseSecundaria = "";
   bool utilizaUrlBaseSecundaria = false;

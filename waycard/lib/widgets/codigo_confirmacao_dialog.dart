@@ -133,7 +133,7 @@ class _CodigoConfirmacaoDialogState extends State<CodigoConfirmacaoDialog> {
   void _onEnviarEmailNovamente() {
     WayCardUtils.showProgress();
     WaycardRequester.reenviarCodigo(
-        AppConfig.application.pwsConfig, widget.user)
+        AppConfig.application.pwsConfigWaychef, widget.user)
         .then((response) {
       if (response.isSuccess) {
         WayCardUtils.closeProgress();
@@ -149,7 +149,7 @@ class _CodigoConfirmacaoDialogState extends State<CodigoConfirmacaoDialog> {
     var codigoVerificador = _controller.text;
     WayCardUtils.showProgress();
     WaycardRequester.confirmarUsuario(
-        AppConfig.application.pwsConfig, widget.user, codigoVerificador)
+        AppConfig.application.pwsConfigWaychef, widget.user, codigoVerificador)
         .then((response) async {
       if (response.status == 200) {
         WayCardUtils.closeProgress();

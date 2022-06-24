@@ -13,7 +13,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  ServicoAutoPesagem servicoAutoPesagem = AppConfig.servicoAutoPesagem;
+  ClientAutoPesagem clientAutoPesagem = AppConfig.clientAutoPesagem;
   HomeController controller = HomeController();
   GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
 
@@ -26,50 +26,53 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color.fromRGBO(43, 49, 53, 1),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(
-                flex: 3,
-                fit: FlexFit.tight,
-                child: CardsWidget(
-                    textCampo: "Tara do Prato",
-                    valor: servicoAutoPesagem.tara != null
-                        ? servicoAutoPesagem.tara!.toStringAsFixed(3)
-                        : "0",
-                    color: Color.fromRGBO(249, 77, 24, 1)),
-              ),
-              Flexible(
-                flex: 3,
-                fit: FlexFit.tight,
-                child: CardsWidget(
-                  textCampo: "Preço por KG",
-                  valor: servicoAutoPesagem.gradeEmpresa!.getPrecoVenda
-                      .toStringAsFixed(2),
-                  color: Color.fromRGBO(255, 129, 72, 1),
-                ),
-              ),
-              Observer(builder: (_) {
-                return Flexible(
+    return Scaffold(
+      key: key,
+      body: Container(
+        color: Color.fromRGBO(43, 49, 53, 1),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
                   flex: 3,
                   fit: FlexFit.tight,
                   child: CardsWidget(
-                    textCampo: "Peso do Prato",
-                    valor: controller.peso.toStringAsFixed(3),
-                    color: Color.fromRGBO(249, 77, 24, 1),
+                      textCampo: "Tara do Prato",
+                      valor: clientAutoPesagem.tara != null
+                          ? clientAutoPesagem.tara!.toStringAsFixed(3)
+                          : "0",
+                      color: Color.fromRGBO(249, 77, 24, 1)),
+                ),
+                Flexible(
+                  flex: 3,
+                  fit: FlexFit.tight,
+                  child: CardsWidget(
+                    textCampo: "Preço por KG",
+                    valor: clientAutoPesagem.gradeEmpresa!.getPrecoVenda
+                        .toStringAsFixed(2),
+                    color: Color.fromRGBO(255, 129, 72, 1),
                   ),
-                );
-              }),
-            ],
-          ),
-          centro(),
-          footerWidget(),
-        ],
+                ),
+                Observer(builder: (_) {
+                  return Flexible(
+                    flex: 3,
+                    fit: FlexFit.tight,
+                    child: CardsWidget(
+                      textCampo: "Peso do Prato",
+                      valor: controller.peso.toStringAsFixed(3),
+                      color: Color.fromRGBO(249, 77, 24, 1),
+                    ),
+                  );
+                }),
+              ],
+            ),
+            centro(),
+            footerWidget(),
+          ],
+        ),
       ),
     );
   }
@@ -157,7 +160,7 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> onConfigApp() {
-    return showDialog(context: context, builder: (_) => DialogConfigApp());
+    return showDialog( barrierDismissible: false, context: context, builder: (_) => DialogConfigApp());
   }
 
   Future<void> onConfigEstacao() async {

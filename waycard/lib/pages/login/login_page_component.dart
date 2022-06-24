@@ -411,7 +411,7 @@ class LoginPageComponent {
       user.email = _emailController.text.trim();
       user.password = StringUtils.stringToMd5(_senhaController.text.trim());
 
-      WaycardRequester.login(AppConfig.application.pwsConfig, user)
+      WaycardRequester.login(AppConfig.application.pwsConfigWaychef, user)
           .then((response) {
         if (response.isSuccess) {
           _bloc.changeLoginState(false);

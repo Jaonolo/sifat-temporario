@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:models/model/enum/client.dart' as c;
+import 'package:models/model/enum/clients.dart' as c;
 import 'package:models/model/models.dart';
 
 import 'home_controller.dart';
@@ -575,7 +575,7 @@ class HomeComponent {
               right: 16,
             ),
             child: Text(
-              " v.${c.Client.AUTOATENDIMENTO.versao}",
+              " v.${c.Clients.AUTOATENDIMENTO.versao}",
               style: TextStyle(
                   shadows: [StyleUtils.shadowDefault()],
                   fontSize: FontUtils.h4(context)),
