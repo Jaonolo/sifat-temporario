@@ -184,9 +184,7 @@ abstract class TransacaoTefBase with Store {
 
       if (appController.estacaoTrabalho.emissorFiscal != null) {
         //Emitir cupom fiscal
-        xml = (await vendaController.emitirFiscal().catchError((e, s) {
-          xml = null;
-        }))!;
+        xml = await vendaController.emitirFiscal();
       } else {
         xml = null;
       }
@@ -195,8 +193,17 @@ abstract class TransacaoTefBase with Store {
       await finalizar(vendaController.nota.id!, true);
     } catch (e) {
       atualizaPermiteCancelar(true);
+      String erro = e.toString();
+
+      if (e.runtimeType == PwsException) {
+        e as PwsException;
+        if (e.message != null) erro = e.message!;
+        if (e.pws != null && e.pws!.description != null)
+          erro += "\n" + e.pws!.description!;
+      }
+
       atualizaBuffer(
-          'Desculpe! \n\n Ocorreu um problema na finalização do pedido: \n\n  [${e.toString()}]');
+          'Desculpe! \n\n Ocorreu um problema na finalização do pedido: \n\n  [$erro]');
       print('[ERRO - tratativasPosTransacao]: ${e.toString()}');
     }
   }
