@@ -6,6 +6,7 @@ import 'package:autoatendimento/app/modules/home/pages/pedido_finalizado/pedido_
 import 'package:autoatendimento/app/modules/home/pages/pedido_viagem/pedido_viagem_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/composto/produto_composto_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/revisao_pedido/revisao_pedido_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/toque_comecar/toque_comecar_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/transacao_tef/transacao_tef_controller.dart';
@@ -31,6 +32,7 @@ class HomeModule extends Module {
         Bind.lazySingleton((i) => TransacaoTefController()),
         Bind.lazySingleton((i) => ProdutoAdicionalController()),
         Bind.lazySingleton((i) => ProdutoComboController()),
+        Bind.lazySingleton((i) => ProdutoCompostoController()),
         Bind.lazySingleton((i) => SplashController()),
         Bind.lazySingleton((i) => WizardController()),
       ];

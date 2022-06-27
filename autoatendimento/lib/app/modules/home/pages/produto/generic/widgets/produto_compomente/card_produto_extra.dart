@@ -63,14 +63,13 @@ class CardProdutoExtra extends StatelessWidget {
   }
 
   Widget _txtPreco() {
-    Orientation orientation = MediaQuery.of(context).orientation;
+    if(notaItem.precoUnitario!.compareTo(BigDecimal.ZERO()) == 0)
+      return const SizedBox();
 
     return Text(
       '+ R\$ ${notaItem.precoUnitario!.toStringAsFixed(2)}',
       style: TextStyle(
-          fontSize: orientation == Orientation.landscape
-              ? FontUtils.h3(context)
-              : FontUtils.h4(context)),
+          fontSize: FontUtils.h3(context)),
     );
   }
 

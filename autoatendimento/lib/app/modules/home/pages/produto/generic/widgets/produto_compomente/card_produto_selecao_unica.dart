@@ -114,6 +114,9 @@ class CardProdutoSelecaoUnica extends StatelessWidget {
       }
     }
 
+    if(valorAdicional.compareTo(BigDecimal.ZERO()) == 0)
+      return const SizedBox();
+
     return Text(
       '+ R\$ $valorAdicional',
       style: TextStyle(fontSize: FontUtils.h3(context)),
@@ -172,6 +175,10 @@ class CardProdutoSelecaoUnica extends StatelessWidget {
       NotaItemUtils.atualizaTotais(controllerAbstract.produtoCarrinho.notaItem);
       controllerAbstract
           .changeProdutoCarrinho(controllerAbstract.produtoCarrinho);
+
+      if(!removendo) {
+        controllerAbstract.proximo();
+      }
     } catch (e, s) {
       print(s);
     }

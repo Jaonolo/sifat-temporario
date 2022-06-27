@@ -17,4 +17,6 @@ abstract class ControllerAbstract {
   // ------------------------ Metodos compartilhados
   void changeProdutoCarrinho(ProdutoCarrinho value);
   void selecaoRadio(int n);
+  Future<void> proximo();
+  void anterior();
 }
