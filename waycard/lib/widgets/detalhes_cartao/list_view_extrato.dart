@@ -53,7 +53,7 @@ class ListViewExtrato extends StatelessWidget {
 
   Future _carregarExtratos() async {
     await WaycardRequester.listarExtratoFaturas(AppConfig.application.pwsConfigWaychef,
-        AppConfig.application.token, cartao.id!, fatura!.id!)
+        AppConfig.application.tokenUsuario, cartao.id!, fatura!.id!)
         .then((response) async {
       if (response.isSuccess) {
         if (response.hasContent) {
@@ -66,7 +66,7 @@ class ListViewExtrato extends StatelessWidget {
             AppConfig.application.pwsConfigWaychef, AppConfig.application.user!)
             .then((response) async {
           if (response.isSuccess) {
-            AppConfig.application.token = response.headers['token'];
+            AppConfig.application.tokenUsuario = response.headers['token'];
             await _carregarExtratos();
           } else {
             throw PwsException(response.content);

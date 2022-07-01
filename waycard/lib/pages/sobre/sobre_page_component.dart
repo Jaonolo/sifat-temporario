@@ -39,7 +39,7 @@ class SobrePageComponent {
 
   Widget _txtVersao() {
     return Text(
-      "Versão: ${AppConfig.application.client!.versao}",
+      "Versão: ${AppConfig.application.client.versao}",
       style: TextStyle(fontSize: 18),
       textAlign: TextAlign.center,
     );

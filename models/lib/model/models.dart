@@ -523,4 +523,8 @@ part 'login_auto_atendimento_dto.dart';
 
 part 'login_client_dto.dart';
 
+part 'login_usuario_dto.dart';
+
+part 'jwt_token_decode_dto.dart';
+
 part 'token_dto.dart';

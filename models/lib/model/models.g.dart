@@ -6497,6 +6497,53 @@ const _$ClientsEnumMap = {
   Clients.AUTOPESAGEM: 'AUTOPESAGEM',
 };
 
+LoginUsuarioDTO _$LoginUsuarioDTOFromJson(Map<String, dynamic> json) =>
+    LoginUsuarioDTO()
+      ..client = $enumDecodeNullable(_$ClientsEnumMap, json['client']) ??
+          Clients.WAITER_MOBILE
+      ..clientKey = json['clientKey'] as String?
+      ..clientSecret = json['clientSecret'] as String?
+      ..versao = json['versao'] as String?
+      ..nomeEstacao = json['nomeEstacao'] as String?
+      ..username = json['username'] as String?
+      ..password = json['password'] as String?
+      ..pin = json['pin'] as String?
+      ..uid = json['uid'] as String?;
+
+Map<String, dynamic> _$LoginUsuarioDTOToJson(LoginUsuarioDTO instance) =>
+    <String, dynamic>{
+      'client': _$ClientsEnumMap[instance.client],
+      'clientKey': instance.clientKey,
+      'clientSecret': instance.clientSecret,
+      'versao': instance.versao,
+      'nomeEstacao': instance.nomeEstacao,
+      'username': instance.username,
+      'password': instance.password,
+      'pin': instance.pin,
+      'uid': instance.uid,
+    };
+
+JwtTokenDecodeDTO _$JwtTokenDecodeDTOFromJson(Map<String, dynamic> json) =>
+    JwtTokenDecodeDTO()
+      ..idUsuarioEmpresa = json['idUsuarioEmpresa'] as String?
+      ..idEstacaoTrabalho = json['idEstacaoTrabalho'] as String?
+      ..idEmpresa = json['idEmpresa'] as String?
+      ..client = json['client'] as String?
+      ..idSessao = json['idSessao'] as String?
+      ..exp = json['exp'] as int?
+      ..iat = json['iat'] as int?;
+
+Map<String, dynamic> _$JwtTokenDecodeDTOToJson(JwtTokenDecodeDTO instance) =>
+    <String, dynamic>{
+      'idUsuarioEmpresa': instance.idUsuarioEmpresa,
+      'idEstacaoTrabalho': instance.idEstacaoTrabalho,
+      'idEmpresa': instance.idEmpresa,
+      'client': instance.client,
+      'idSessao': instance.idSessao,
+      'exp': instance.exp,
+      'iat': instance.iat,
+    };
+
 TokenDTO _$TokenDTOFromJson(Map<String, dynamic> json) => TokenDTO()
   ..token = json['token'] as String?
   ..type = json['type'] as String;

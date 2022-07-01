@@ -790,6 +790,30 @@ class UrlPws {
     _type = RequestType.POST;
   }
 
+  UrlPws.postNovaSessaoUsuario(){
+    _url = "/sessao/sessao-usuario/nova-sessao";
+    _type = RequestType.POST;
+  }
+  UrlPws.postEncerrarSessao(){
+    _url = "/sessao/sessao-usuario/encerrar-sessao";
+    _type = RequestType.POST;
+  }
+
+  UrlPws.postAtualizarSessaoUsuario(){
+    _url = "/sessao/sessao-usuario/atualizar-sessao";
+    _type = RequestType.POST;
+  }
+
+  UrlPws.getBuscarUsuarioEmpresaPorId(){
+    _url = "/v2/usuario/usuario-empresa/{idUsuarioEmpresa}";
+    _type = RequestType.GET;
+  }
+
+ UrlPws.getBuscarUsuarioById(){
+    _url = "/v2/usuario/usuario/{idUsuario}";
+    _type = RequestType.GET;
+  }
+
 
   RequestType? get type => _type;
 

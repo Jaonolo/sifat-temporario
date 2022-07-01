@@ -182,4 +182,25 @@ class UsuarioRequester {
     );
     return ResponsePws(response: response);
   }
+
+  static Future<ResponsePws> buscarUsuarioEmpresaPorId(String token, PWSConfig config, int idUsuarioEmpresa) async {
+    http.Response response = await RequesterPws(config: config).consome(
+        urlPws: UrlPws.getBuscarUsuarioEmpresaPorId(),
+        headerParams: { "token": token,},
+        pathParams: {"{idUsuarioEmpresa}": idUsuarioEmpresa.toString(),}
+    );
+
+    return ResponsePws(response: response , converter: (json) => UsuarioEmpresa.fromJson(json));
+  }
+
+  static Future<ResponsePws> buscarUsuarioById(String token, PWSConfig config, int idUsuario) async {
+    http.Response response = await RequesterPws(config: config).consome(
+        urlPws: UrlPws.getBuscarUsuarioById(),
+        headerParams: { "token": token,},
+        pathParams: {"{idUsuario}": idUsuario.toString(),}
+    );
+
+    return ResponsePws(response: response , converter: (json) => Usuario.fromJson(json));
+  }
+
 }
