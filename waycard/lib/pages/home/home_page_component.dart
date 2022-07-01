@@ -176,10 +176,6 @@ class HomePageComponent {
       SingInFacebook().logout();
       MetodoLogin().deslogar();
     }
-    await SessaoUsuarioRequester.encerrarSessao(AppConfig.application.pwsConfigGateway, AppConfig.application.tokenUsuario);
-
-    SessaoService.stopTimer();
-
     Navigator.pop(_context);
     showDialog(
         context: _context,
@@ -191,6 +187,10 @@ class HomePageComponent {
               onConfirm: () async {
                 var prefs = await SharedPreferences.getInstance();
                 prefs.setBool("manter_logado", false);
+                await SessaoUsuarioRequester.encerrarSessao(AppConfig.application.pwsConfigGateway, AppConfig.application.tokenUsuario);
+
+                SessaoService.stopTimer();
+
                 Navigator.pushReplacement(_context,
                     MaterialPageRoute(builder: (context) => LoginPage()));
               },

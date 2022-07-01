@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:models/model/models.dart';
-import 'package:requester/requester/micro-service/sessao/sessao_usuario_requester.dart';
 import 'package:utils/utils/funcoes.dart';
 import 'package:utils/utils/string_utils.dart';
 import 'package:utils/widgets/center_progress_indicator.dart';
