@@ -146,32 +146,32 @@ class StringUtils {
     return cnpjFormatado;
   }
 
-  static String montaDescricaoSubItensAuto(NotaItem notaItem) {
-    String descricaoSub = '';
-    notaItem.subitens.forEach((ni) {
-      if (ni.tipo == "MENU") {
-        ni.subitens.forEach((subitem) {
-          switch (subitem.tipo) {
-            case "OBSERVACAO":
-              if (descricaoSub.isNotEmpty) descricaoSub += " | ";
-              descricaoSub += subitem.descricao!;
-              break;
-            case "ADICIONAL":
-              if (descricaoSub.isNotEmpty) descricaoSub += " | ";
-              descricaoSub +=
-              '${subitem.descricao} +R\$ ${subitem.precoTotal!.toStringAsFixed(
-                  2)}';
-              break;
-            case "ITEM_COMBO":
-              if (descricaoSub.isNotEmpty) descricaoSub += " | ";
-              descricaoSub += "${subitem.descricao}";
-              descricaoSub +=
-              ' +R\$ ${NotaItemUtils.getSubtotal(subitem).toStringAsFixed(2)}';
-              break;
-          }
-        });
+  static String montaDescricaoSubItensAuto(NotaItem notaItem, {bool ignorarItemPrincipal = false}) {
+    String descricaoSub = "";
+
+    if(!ignorarItemPrincipal) {
+      switch (notaItem.tipo) {
+        case "OBSERVACAO":
+          if (descricaoSub.isNotEmpty) descricaoSub += " | ";
+          descricaoSub += notaItem.descricao!;
+          break;
+        case "ADICIONAL":
+          if (descricaoSub.isNotEmpty) descricaoSub += " | ";
+          descricaoSub +=
+              '${notaItem.descricao} +R\$ ${notaItem.precoTotal!.toStringAsFixed(2)}';
+          break;
+        case "ITEM_COMBO":
+          if (descricaoSub.isNotEmpty) descricaoSub += " | ";
+          descricaoSub += "${notaItem.descricao}";
+          descricaoSub +=
+              ' +R\$ ${NotaItemUtils.getSubtotal(notaItem).toStringAsFixed(2)}';
+          break;
       }
-    });
+    }
+
+    if (notaItem.subitens.isNotEmpty)
+      for (NotaItem ni in notaItem.subitens)
+        descricaoSub += montaDescricaoSubItensAuto(ni);
 
     return descricaoSub.toUpperCase();
   }

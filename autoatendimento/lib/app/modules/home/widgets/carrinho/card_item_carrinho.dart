@@ -1,6 +1,7 @@
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_page.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/composto/produto_composto_page.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
@@ -171,6 +172,11 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
         homeController.addPalco(
             ProdutoComboPage(vendaController.itensLancados[widget.index]));
         break;
+      case TipoPacote.COMPOSTO:
+        homeController.habilitarCarrinho = true;
+        homeController.addPalco(
+            ProdutoCompostoPage(vendaController.itensLancados[widget.index]));
+        break;
       default:
         throw Exception("TipoPacote não implementado na edicão");
     }
@@ -212,7 +218,7 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
                 StringUtils.montaDescricaoSubItensAuto(
-                    (widget.produtoCarrinho.notaItem)),
+                    widget.produtoCarrinho.notaItem),
                 style: TextStyle(fontSize: FontUtils.h4(context)),
               ),
             )

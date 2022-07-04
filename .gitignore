@@ -48,6 +48,8 @@
 /autopesagem/windows/flutter/generated_plugin_registrant.cc
 /autopesagem/windows/flutter/generated_plugin_registrant.h
 /autopesagem/windows/flutter/generated_plugins.cmake
-/autoatendimento/
 /waycard/linux/flutter/
 /waycard/windows/flutter/
+/autoatendimento/linux/flutter/
+/autoatendimento/macos/Flutter/
+/autoatendimento/windows/flutter/

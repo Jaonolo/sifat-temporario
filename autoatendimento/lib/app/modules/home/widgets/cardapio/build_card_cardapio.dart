@@ -166,8 +166,7 @@ class BuildCardCardapio {
             homeController.habilitarCarrinho = true;
             var notaItem = NotaItemUtils.instanciar(vendaController.nota.id!,
                 TipoItem.COMPOSTO, produtoEmpresa, appController.tabelaPreco.id!);
-            homeController
-                .addPalco(ProdutoCompostoPage(ProdutoCarrinho(notaItem)));
+            homeController.addPalco(ProdutoCompostoPage(ProdutoCarrinho(notaItem)));
             break;
 
           default:
