@@ -524,3 +524,5 @@ part 'login_auto_atendimento_dto.dart';
 part 'login_client_dto.dart';
 
 part 'token_dto.dart';
+
+part 'dados_sessao_dto.dart';

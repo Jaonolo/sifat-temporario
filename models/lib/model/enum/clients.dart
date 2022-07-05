@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 enum Clients {
   WAITER_MOBILE,
+  ERP,
   WAYCARD,
   AUTOATENDIMENTO,
   AUTOPESAGEM,
@@ -20,6 +21,8 @@ extension ClientExtension on Clients {
         return 7;
       case Clients.AUTOPESAGEM:
         return 9;
+      case Clients.ERP:
+        throw Exception("Client não possui id");
     }
   }
 
@@ -33,6 +36,8 @@ extension ClientExtension on Clients {
         return "3.0.00";
       case Clients.AUTOPESAGEM:
         return "3.0.00";
+      case Clients.ERP:
+        return "3.0.09";
     }
   }
 
@@ -46,6 +51,8 @@ extension ClientExtension on Clients {
         return "AUTOATENDIMENTO";
       case Clients.AUTOPESAGEM:
         return "AUTOPESAGEM";
+      case Clients.ERP:
+        return "ERP";
     }
   }
 
@@ -59,6 +66,8 @@ extension ClientExtension on Clients {
         return "8B419A5451C0AF6D1F8E564BD23E7387";
       case Clients.AUTOPESAGEM:
         return "18AED2DFE67F6BB92D2DA2B76F06DE51";
+      case Clients.ERP:
+        return "";
     }
   }
 }

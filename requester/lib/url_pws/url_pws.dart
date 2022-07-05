@@ -780,6 +780,8 @@ class UrlPws {
     _type = RequestType.PUT;
   }
 
+
+  // #####################  API SESSOES  #####################
   UrlPws.criarSessao(){
     _url = "/sessao/sessao-client/nova-sessao";
     _type = RequestType.POST;
@@ -788,6 +790,12 @@ class UrlPws {
   UrlPws.atualizarSessao(){
     _url = "/sessao/sessao-client/atualizar-sessao";
     _type = RequestType.POST;
+  }
+
+
+  UrlPws.getBuscarSessoes(){
+    _url = "/sessao/gerenciamento-sessao";
+    _type = RequestType.GET;
   }
 
 

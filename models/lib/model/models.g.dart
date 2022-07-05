@@ -6495,6 +6495,7 @@ const _$ClientsEnumMap = {
   Clients.WAYCARD: 'WAYCARD',
   Clients.AUTOATENDIMENTO: 'AUTOATENDIMENTO',
   Clients.AUTOPESAGEM: 'AUTOPESAGEM',
+  Clients.ERP: 'ERP',
 };
 
 TokenDTO _$TokenDTOFromJson(Map<String, dynamic> json) => TokenDTO()
@@ -6504,4 +6505,28 @@ TokenDTO _$TokenDTOFromJson(Map<String, dynamic> json) => TokenDTO()
 Map<String, dynamic> _$TokenDTOToJson(TokenDTO instance) => <String, dynamic>{
       'token': instance.token,
       'type': instance.type,
+    };
+
+DadosSessaoDTO _$DadosSessaoDTOFromJson(Map<String, dynamic> json) =>
+    DadosSessaoDTO()
+      ..nomeUsuario = json['nomeUsuario'] as String?
+      ..nomeEstacao = json['nomeEstacao'] as String?
+      ..client = $enumDecodeNullable(_$ClientsEnumMap, json['client'])
+      ..dataAbertura = json['dataAbertura'] == null
+          ? null
+          : DateTime.parse(json['dataAbertura'] as String)
+      ..dataUltimaAtualizacao = json['dataUltimaAtualizacao'] == null
+          ? null
+          : DateTime.parse(json['dataUltimaAtualizacao'] as String)
+      ..token = json['token'] as String?;
+
+Map<String, dynamic> _$DadosSessaoDTOToJson(DadosSessaoDTO instance) =>
+    <String, dynamic>{
+      'nomeUsuario': instance.nomeUsuario,
+      'nomeEstacao': instance.nomeEstacao,
+      'client': _$ClientsEnumMap[instance.client],
+      'dataAbertura': instance.dataAbertura?.toIso8601String(),
+      'dataUltimaAtualizacao':
+          instance.dataUltimaAtualizacao?.toIso8601String(),
+      'token': instance.token,
     };
