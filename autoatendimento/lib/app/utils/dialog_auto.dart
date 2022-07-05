@@ -17,14 +17,13 @@ class DialogAuto extends StatelessWidget {
   final Color colorBtnNegativo;
   final Color colorTextPositivo;
   final Color colorTextNegativo;
-  final bool confirmaECancela;
 
   const DialogAuto({
     required this.title,
     required this.message,
     required this.onConfirm,
     this.onCancel,
-    this.showCancelButton = false,
+    this.showCancelButton = true,
     this.autoCloseable = true,
     this.txtConfirmar = "Confirmar",
     this.txtCancelar = "Cancelar",
@@ -32,14 +31,11 @@ class DialogAuto extends StatelessWidget {
     this.colorBtnNegativo = Colors.white,
     this.colorTextPositivo = Colors.black,
     this.colorTextNegativo = Colors.black,
-    this.confirmaECancela = true,
   });
 
   @override
   Widget build(BuildContext context) {
-    Orientation orientation = MediaQuery
-        .of(context)
-        .orientation;
+    Orientation orientation = MediaQuery.of(context).orientation;
 
     return AlertDialog(
       shape: const RoundedRectangleBorder(
@@ -48,14 +44,14 @@ class DialogAuto extends StatelessWidget {
       ),
       title: title != null
           ? Center(
-        child: Text(
-          title!,
-          style: TextStyle(
-              fontSize: orientation == Orientation.landscape
-                  ? FontUtils.h2(context)
-                  : FontUtils.h3(context) * 1.1),
-        ),
-      )
+              child: Text(
+                title!,
+                style: TextStyle(
+                    fontSize: orientation == Orientation.landscape
+                        ? FontUtils.h2(context)
+                        : FontUtils.h3(context) * 1.1),
+              ),
+            )
           : null,
       content: SingleChildScrollView(
         child: Column(
@@ -69,57 +65,39 @@ class DialogAuto extends StatelessWidget {
         ),
       ),
       actions: [
-        confirmaECancela == true
-            ? Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: SizedBox(
-                width: FontUtils.h1(context) * 4.5,
-                child: BotaoSecundario(
-                  context: context,
-                  descricao: txtConfirmar,
-                  function: () {
-                    if (autoCloseable) close(context);
-                    onConfirm();
-                  },
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: SizedBox(
+            if (showCancelButton) ...[
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: SizedBox(
                   width: FontUtils.h1(context) * 4.5,
-                  child: BotaoPrimario(
-
-                    descricao: txtCancelar,
-                    function: () {
-                      if (autoCloseable) close(context);
-                      onCancel!();
-                    },
-                  )),
-            )
-          ],
-        )
-            : Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: SizedBox(
-                  width: FontUtils.h1(context) * 4.5,
-                  child: BotaoPrimario(
-
+                  child: BotaoSecundario(
+                    context: context,
                     descricao: txtConfirmar,
                     function: () {
                       if (autoCloseable) close(context);
                       onConfirm();
                     },
+                  ),
+                ),
+              ),
+            ],
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: SizedBox(
+                  width: FontUtils.h1(context) * 4.5,
+                  child: BotaoPrimario(
+                    descricao: txtCancelar,
+                    function: () {
+                      if (autoCloseable) close(context);
+                      if (onCancel != null) onCancel!();
+                    },
                   )),
-            ),
+            )
           ],
-        )
+        ),
       ],
     );
   }
