@@ -43,3 +43,13 @@
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 /autopesagem/build/
 */.metadata
+/autopesagem/lib/generated_plugin_registrant.dart
+/waycard/lib/generated_plugin_registrant.dart
+/autopesagem/windows/flutter/generated_plugin_registrant.cc
+/autopesagem/windows/flutter/generated_plugin_registrant.h
+/autopesagem/windows/flutter/generated_plugins.cmake
+/waycard/linux/flutter/
+/waycard/windows/flutter/
+/autoatendimento/linux/flutter/
+/autoatendimento/macos/Flutter/
+/autoatendimento/windows/flutter/

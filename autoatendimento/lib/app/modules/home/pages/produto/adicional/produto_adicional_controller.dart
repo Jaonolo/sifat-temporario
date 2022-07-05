@@ -1,6 +1,7 @@
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/abstract/controller_abstract.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
@@ -14,13 +15,16 @@ part "produto_adicional_controller.g.dart";
 class ProdutoAdicionalController = ProdutoAdicionalBase
     with _$ProdutoAdicionalController;
 
-abstract class ProdutoAdicionalBase with Store {
+abstract class ProdutoAdicionalBase extends ControllerAbstract with Store {
+  // ------------------------ Variaveis
+  ProdutoComboController produtoComboController = Modular.get();
   HomeController homeController = Modular.get();
   VendaController vendaController = Modular.get();
   AppController appController = Modular.get();
 
-  ProdutoComboController produtoComboController = Modular.get();
   ProdutoCarrinho produtoCarrinhoOriginal = ProdutoCarrinho(NotaItem());
+
+  // ------------------------ Variaveis Observable
 
   @observable
   ProdutoCarrinho produtoCarrinho = ProdutoCarrinho(NotaItem());
@@ -36,6 +40,8 @@ abstract class ProdutoAdicionalBase with Store {
 
   @observable
   int radiovalue = 0;
+
+  // ------------------------ Metodos
 
   void adicionarAoCarrinho() {
     try {
@@ -73,16 +79,27 @@ abstract class ProdutoAdicionalBase with Store {
   }
 
   @action
+  void changeProdutoCarrinho(ProdutoCarrinho value) {
+    produtoCarrinho = value;
+    produtoMenu = produtoMenu;
+  }
+
+  @action
+  void selecaoRadio(int n) {
+    this.radiovalue = n;
+  }
+
+  @action
   Future<void> atualizaMenus(int index) async {
     //menu atual
-    produtoMenu = (index <
-        produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
+    produtoMenu =
+    (index < produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
         ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index]
         : null;
 
     //o proximo menu
-    proximoMenu =
-    (index + 1 < produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
+    proximoMenu = (index + 1 <
+        produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
         ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index + 1]
         : null;
 
@@ -92,22 +109,12 @@ abstract class ProdutoAdicionalBase with Store {
         : null;
   }
 
-  @action
-  changeProdutoCarrinho(ProdutoCarrinho value) {
-    produtoCarrinho = value;
-  }
-
-  @action
-  void selecaoRadio(int n) {
-    radiovalue = n;
-  }
-
-  //Paginação (PageController)
+// ------------------------ Metodos da Paginação (PageController)
   int index = 0;
   late PageController pageController;
 
   Future<void> proximo() async {
-    await Future.delayed(const Duration(milliseconds: 100));
+    await new Future.delayed(const Duration(milliseconds: 100));
     pageController.nextPage(
         duration: const Duration(milliseconds: 200), curve: Curves.ease);
   }

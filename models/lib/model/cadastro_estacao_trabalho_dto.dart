@@ -7,6 +7,7 @@ class CadastroEstacaoTrabalhoDTO {
 
   EquipamentoImpressao? impressoraGeral;
 
+  @JsonKey(defaultValue: [])
   List<CadastroImpressoraProducaoDto> listImpressorasProducao = [];
 
   CadastroEstacaoTrabalhoDTO();

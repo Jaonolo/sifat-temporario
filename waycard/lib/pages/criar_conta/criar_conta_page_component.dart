@@ -372,7 +372,7 @@ class CriarContaPageComponent {
           StringUtils.removeMascaraTelefone(_celularController.text.trim());
       user.email = _emailController.text.trim();
 
-      WaycardRequester.inserirUsuario(AppConfig.application.pwsConfig, user)
+      WaycardRequester.inserirUsuario(AppConfig.application.pwsConfigWaychef, user)
           .then((response) async {
         if (response.isSuccess) {
           _bloc.changeLoadState(false);

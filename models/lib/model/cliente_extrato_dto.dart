@@ -12,6 +12,7 @@ class ClienteExtratoDTO {
 
   BigDecimal? limiteDisponivel = BigDecimal.ZERO();
 
+  @JsonKey(defaultValue: [])
   List<ClienteConta> contas = [];
 
   ClienteExtratoDTO();

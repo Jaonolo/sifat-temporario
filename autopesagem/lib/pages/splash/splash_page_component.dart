@@ -49,7 +49,7 @@ class SplashPageComponent {
             _context, MaterialPageRoute(builder: (context) => Home()));
 
     Function(String msg) onError = (msg) {
-      WidgetsBinding.instance!.addPostFrameCallback(
+      WidgetsBinding.instance.addPostFrameCallback(
             (_) async {
           await showDialog(
               context: context,

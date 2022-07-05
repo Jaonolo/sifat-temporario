@@ -4,6 +4,7 @@ part of openapi.api;
 class Participante {
   String? cpfCnpjParticipante;
 
+  @JsonKey(defaultValue: [])
   List<ParticipanteTelefone> telefones = [];
 
   String? email;

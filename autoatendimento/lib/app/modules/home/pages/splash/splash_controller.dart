@@ -1,16 +1,17 @@
 import 'dart:async';
+
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/utils/autoatendimento_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:models/model/enum/clients.dart';
 import 'package:models/model/models.dart';
-import 'package:models/model/enum/client.dart' as c;
-
 import 'package:requester/config/pws_config.dart';
 import 'package:requester/requester/gerenciador_requester.dart';
 import 'package:requester/requester/servico_auto_atendimento_requester.dart';
 import 'package:requester/requester/tabela_preco_requester.dart';
+
 import 'model/cardapio_dto.dart';
 import 'repositories/cardapio_repository.dart';
 import 'repositories/config_repository.dart';
@@ -82,9 +83,9 @@ abstract class SplashBase with Store {
       _concluir();
     } catch (e) {
       print(e);
-      if (e is WaybeException && e.exception != null) {
+      if (e is WaybeException) {
         changeBotaoDetalhesErro(true, e.mensagem);
-        return changeStatus('$erro_base \n\n ${e.exception.message}');
+        return changeStatus('$erro_base \n\n ${(e.exception != null) ? e.exception.message : ""}');
       }
     }
   }
@@ -92,14 +93,14 @@ abstract class SplashBase with Store {
   void inicializaClientPWSSpring() {
     appController.pwsConfigLocal = PWSConfig(
         urlBase: "http://localhost:8080",
-        client: c.Client.AUTOATENDIMENTO,
+        client: Clients.AUTOATENDIMENTO,
         clientSecret: "");
   }
 
   void _inicializaClientPWS() {
     appController.pwsConfig = PWSConfig(
       urlBase: dto!.host.toString(),
-      client: c.Client.AUTOATENDIMENTO,
+      client: Clients.AUTOATENDIMENTO,
       clientSecret: dto!.clientSecret.toString(),
     );
   }
@@ -112,6 +113,10 @@ abstract class SplashBase with Store {
       pws.message = 'Nome da estação não localizado';
       throw WaybeException('Nome da estação não localizado.',
           exception: PwsException(pws));
+    }
+    //todo retirar isso JOSE
+    if(nomeEstacao == "DSV11"){
+         nomeEstacao =  nomeEstacao! + "_autoAtendimento";
     }
   }
 
@@ -131,9 +136,11 @@ abstract class SplashBase with Store {
 
         appController.servicoAutoAtendimento = dto.servicoAutoAtendimento!;
         appController.token = dto.servicoAutoAtendimento!.token!;
+      } else if (response.status == 204) {
+        throw WaybeException('Estação de trabalho não encontrada');
       } else {
         throw WaybeException('Problema ao realizar login na API',
-            exception: response.body as PwsException);
+            exception: response.content);
       }
     });
 
@@ -151,6 +158,10 @@ abstract class SplashBase with Store {
       appController.listFormaPagamento.add(
           appController.servicoAutoAtendimento.finalizadoraCredito!);
     }
+
+
+    //Transforma a finalizadora de credito em dinheiro para finalizar a venda sem tipo tef //todo apenas testes
+    // appController.servicoAutoAtendimento.finalizadoraCredito!.finalizadora!.finalizadoraRFB = "DINHEIRO";
 
     if (appController.listFormaPagamento.isEmpty) {
       throw WaybeException(

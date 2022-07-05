@@ -10,7 +10,8 @@ class DesdobramentoGrupoProdutosDTO {
 
   BigDecimal? ticketMedio;
 
-  List<DesdobramentoProdutoDTO>? desdobramentoProdutoDTOList;
+  @JsonKey(defaultValue: [])
+  List<DesdobramentoProdutoDTO> desdobramentoProdutoDTOList = [];
 
   DesdobramentoGrupoProdutosDTO();
 

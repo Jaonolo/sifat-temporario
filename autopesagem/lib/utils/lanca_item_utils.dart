@@ -14,7 +14,7 @@ class LancaItemUtils {
     //Caso nao cria a nota e inseri
     //Adiciona o item
     ResponsePws buscarConsumos = await ConsumoRequester.buscarConsumos(
-        AppConfig.application.pwsConfig, AppConfig.token,
+        AppConfig.application.pwsConfigWaychef, AppConfig.token,
         modulos: [Modulo()
           ..tipo = modulo
         ], comanda: comanda);
@@ -29,7 +29,7 @@ class LancaItemUtils {
       nota = _criaNota(modulo, comanda);
 
       ResponsePws inserirNota = await ConsumoRequester.inserir(
-          AppConfig.application.pwsConfig, AppConfig.token, nota);
+          AppConfig.application.pwsConfigWaychef, AppConfig.token, nota);
 
       if (inserirNota.status == 201) {
         nota = inserirNota.content;
@@ -42,17 +42,17 @@ class LancaItemUtils {
 
     if (nota.status == "FECHADA") {
       await ConsumoRequester.reabrir(
-          AppConfig.application.pwsConfig, AppConfig.token, nota);
+          AppConfig.application.pwsConfigWaychef, AppConfig.token, nota);
     }
 
     notaItem = await _criaNotaItem(nota, totalAtual, pesoAtual);
 
     ResponsePws inserirItem = await ConsumoRequester.inserirItem(
-        AppConfig.application.pwsConfig, AppConfig.token, notaItem);
+        AppConfig.application.pwsConfigWaychef, AppConfig.token, notaItem);
 
     if (inserirItem.status == 201) {
       ResponsePws buscandoItens = await ConsumoRequester.buscarItens(
-          AppConfig.application.pwsConfig, AppConfig.token, nota.id!);
+          AppConfig.application.pwsConfigWaychef, AppConfig.token, nota.id!);
 
       if (buscandoItens.isSuccess) {
         List<NotaItem> itens = buscandoItens.content;
@@ -93,18 +93,18 @@ class LancaItemUtils {
     notaItem.idEstacao = AppConfig.estacaoTrabalho.id;
 
     notaItem.produtoEmpresa =
-        AppConfig.servicoAutoPesagem.gradeEmpresa!.produtoEmpresa;
+        AppConfig.clientAutoPesagem.gradeEmpresa!.produtoEmpresa;
     notaItem.idProdutoEmpresa =
-        AppConfig.servicoAutoPesagem.gradeEmpresa!.produtoEmpresa!.id;
+        AppConfig.clientAutoPesagem.gradeEmpresa!.produtoEmpresa!.id;
 
     notaItem.descricao = AppConfig
-        .servicoAutoPesagem.gradeEmpresa!.produtoEmpresa!.produto!.descricao;
+        .clientAutoPesagem.gradeEmpresa!.produtoEmpresa!.produto!.descricao;
     notaItem.quantidade = pesoAtual;
-    notaItem.grade = AppConfig.servicoAutoPesagem.gradeEmpresa;
-    notaItem.idGrade = AppConfig.servicoAutoPesagem.gradeEmpresa!.id;
+    notaItem.grade = AppConfig.clientAutoPesagem.gradeEmpresa;
+    notaItem.idGrade = AppConfig.clientAutoPesagem.gradeEmpresa!.id;
     notaItem.precoCusto = notaItem.grade!.precoCustoCompra;
     notaItem.precoUnitario =
-        AppConfig.servicoAutoPesagem.gradeEmpresa!.getPrecoVenda;
+        AppConfig.clientAutoPesagem.gradeEmpresa!.getPrecoVenda;
     notaItem.precoTotal = totalAtual;
     notaItem.consumoItem!.confirmado = true;
     notaItem.consumoItem!.dataConfirmacao = DateTime.now();

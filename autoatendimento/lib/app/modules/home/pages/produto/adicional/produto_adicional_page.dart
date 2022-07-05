@@ -11,7 +11,7 @@ import 'package:utils/utils/nota_item_utils.dart';
 class ProdutoAdicionalPage extends StatefulWidget {
   ProdutoCarrinho produtoCarrinho;
 
-  ProdutoAdicionalPage(this.produtoCarrinho, {Key? key}) : super(key: key) {
+  ProdutoAdicionalPage(this.produtoCarrinho) {
     atualizaController();
   }
 
@@ -20,7 +20,7 @@ class ProdutoAdicionalPage extends StatefulWidget {
 
     controller.produtoCarrinhoOriginal = produtoCarrinho;
     ProdutoCarrinho produtoCarrinhoClone =
-    ProdutoCarrinhoUtils.clone(produtoCarrinho);
+        ProdutoCarrinhoUtils.clone(this.produtoCarrinho);
 
     //Edição do item
     //caso tiver mais de uma unidade aparecer somente os itens de um pedido
@@ -37,17 +37,14 @@ class ProdutoAdicionalPage extends StatefulWidget {
     controller.index = 0;
   }
 
-  @override
   _ProdutoAdicionalPageState createState() => _ProdutoAdicionalPageState();
 }
 
 class _ProdutoAdicionalPageState extends State<ProdutoAdicionalPage>
     with ProdutoAdicionalComponent {
-
   @override
   void initState() {
     controller.pageController = PageController(initialPage: controller.index);
-    controller.atualizaMenus(controller.index);
     super.initState();
   }
 

@@ -5,20 +5,17 @@ import 'package:requester/response/response_pws.dart';
 import 'package:requester/url_pws/url_pws.dart';
 import 'package:http/http.dart' as http;
 
-class ServicoAutoPesagemRequester {
-  static Future<ResponsePws> login(PWSConfig pwsConfig, String token,
-      String clientSecret, String clientKey, String nomeEstacao) async {
+class ClientAutoPesagemRequester {
+  static Future<ResponsePws> buscaConfiguracoes(PWSConfig pwsConfig, String token,) async {
     http.Response response = await RequesterPws(config: pwsConfig).consome(
-        urlPws: UrlPws.putAutoPesagemLogin(),
-        formParams: {
-          "clientSecret": clientSecret,
-          "clientKey": clientKey,
-          "nomeEstacao": nomeEstacao
+        urlPws: UrlPws.putBuscarConfiguracoesAutoPesagem(),
+        headerParams: {
+          "token" :  token
         });
 
     return ResponsePws(
         response: response,
-        converter: (json) => LoginAutoPesagemDTO.fromJson(json));
+        converter: (json) => ConfiguracoesAutoPesagemDTO.fromJson(json));
   }
 
   static Future<ResponsePws> lerPeso(PWSConfig pwsConfig, String portaSerial,

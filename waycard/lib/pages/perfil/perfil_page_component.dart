@@ -235,7 +235,7 @@ class PerfilPageComponent {
     WayCardUtils.showProgress();
     //se tiver mudança no email sera enviado email de confirmação
     if (_user.email != _emailController.text) {
-      WaycardRequester.reenviarCodigo(AppConfig.application.pwsConfig, _user)
+      WaycardRequester.reenviarCodigo(AppConfig.application.pwsConfigWaychef, _user)
           .then((response) async {
         WayCardUtils.closeProgress();
         if (response.status == 204) {
@@ -264,7 +264,7 @@ class PerfilPageComponent {
   }
 
   atualiza() {
-    UsuarioRequester.atualizarDados(AppConfig.application.pwsConfig, _user)
+    UsuarioRequester.atualizarDados(AppConfig.application.pwsConfigWaychef, _user)
         .then((response) async {
       WayCardUtils.closeProgress();
       if (response.isSuccess) {

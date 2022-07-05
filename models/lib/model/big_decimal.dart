@@ -59,7 +59,7 @@ class BigDecimal {
     Decimal base = Decimal.parse(valor);
     Decimal parametro = Decimal.parse(bigDecimal.valor);
     Rational retornoRational = base / parametro;
-    Decimal result = retornoRational.toDecimal();
+    Decimal result = retornoRational.toDecimal(scaleOnInfinitePrecision: 8);
 
     return BigDecimal(result.toString());
   }

@@ -49,7 +49,7 @@ abstract class HomeBase with Store {
   }
 
   @action
-  recomecar() {
+  void recomecar() {
     palco = ObservableList();
     changeMenuSelecionado(CardapioMenu());
     vendaController.descartarNota();
