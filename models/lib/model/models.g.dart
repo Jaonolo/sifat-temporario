@@ -6491,11 +6491,17 @@ Map<String, dynamic> _$LoginClientDTOToJson(LoginClientDTO instance) =>
     };
 
 const _$ClientsEnumMap = {
+  Clients.ALFA_SYNC: 'ALFA_SYNC',
+  Clients.WAITER: 'WAITER',
   Clients.WAITER_MOBILE: 'WAITER_MOBILE',
+  Clients.CONCENTRADOR: 'CONCENTRADOR',
+  Clients.ERP: 'ERP',
+  Clients.API: 'API',
   Clients.WAYCARD: 'WAYCARD',
   Clients.AUTOATENDIMENTO: 'AUTOATENDIMENTO',
+  Clients.WAYMENU_SERVICE: 'WAYMENU_SERVICE',
+  Clients.GERENCIADOR_IMPRESSAO: 'GERENCIADOR_IMPRESSAO',
   Clients.AUTOPESAGEM: 'AUTOPESAGEM',
-  Clients.ERP: 'ERP',
 };
 
 TokenDTO _$TokenDTOFromJson(Map<String, dynamic> json) => TokenDTO()
