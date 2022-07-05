@@ -22,14 +22,14 @@ class ToqueComecarComponent {
         .orientation;
     String image = '';
     ArquivoAutoAtendimento? first;
-    if (appController.servicoAutoAtendimento.arquivos.length == 1) {
-      first = appController.servicoAutoAtendimento.arquivos.first;
+    if (appController.clientAutoAtendimento.arquivos.length == 1) {
+      first = appController.clientAutoAtendimento.arquivos.first;
     } else if (position == Orientation.landscape) {
-      first = appController.servicoAutoAtendimento.arquivos
+      first = appController.clientAutoAtendimento.arquivos
           .firstWhereOrNull((element) =>
           VisaoFoto.LANDSCAPE.equals(element.visaoFoto!));
     } else {
-      first = appController.servicoAutoAtendimento.arquivos
+      first = appController.clientAutoAtendimento.arquivos
           .firstWhereOrNull((element) =>
           VisaoFoto.PORTRAIT.equals(element.visaoFoto!));
     }

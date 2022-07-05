@@ -814,6 +814,11 @@ class UrlPws {
     _type = RequestType.GET;
   }
 
+  UrlPws.putBuscarConfiguracoes(){
+    _url = "/v2/client-autoatendimento/buscar-configuracoes";
+    _type = RequestType.PUT;
+  }
+
 
   RequestType? get type => _type;
 

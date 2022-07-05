@@ -63,7 +63,9 @@ class ConfigRepository {
     var split = base64.split("\n");
     split.forEach((element) {
       if (element.startsWith('cnpj')) dto.cnpj = element.split(' = ')[1];
-      if (element.startsWith('host')) dto.host = element.split(' = ')[1];
+      //Epspaço no host para diferenciar do gateway
+      if (element.startsWith('host ')) dto.host = element.split('= ')[1];
+      if (element.startsWith('hostGateway')) dto.hostGateway = element.split(' = ')[1];
       if (element.startsWith('clientSecret')) {
         dto.clientSecret = element.split(' = ')[1];
       }
@@ -77,6 +79,11 @@ class ConfigRepository {
     if (dto.host == null) {
       throw WaybeException(
           'Não foi possível localizar o host no arquivo de configurações');
+    }
+
+    if (dto.hostGateway == null) {
+      throw WaybeException(
+          'Não foi possível localizar o host gateway no arquivo de configurações');
     }
 
     if (dto.clientSecret == null) {

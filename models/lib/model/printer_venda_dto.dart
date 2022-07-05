@@ -7,7 +7,7 @@ class PrinterVendaDTO {
   String? mensagemRodape = "";
   EquipamentoImpressao? equipamentoImpressao;
   bool? cancelamento = false;
-  ServicoAutoAtendimento? servicoAutoAtendimento;
+  ClientAutoAtendimento? clientAutoAtendimento;
 
   PrinterVendaDTO();
 

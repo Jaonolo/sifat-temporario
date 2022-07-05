@@ -1,6 +1,7 @@
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
+import 'package:autoatendimento/app/utils/timer_tempo_ocioso_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -69,9 +70,9 @@ class BotaoPrimario extends StatelessWidget {
           if (function != null) {
             function!.call();
           }
-          if (appController.timer != null) {
+          if (appController.timerTempoOcioso != null) {
             //toda vez que aperta reinica o time ocioso da tela
-            appController.reiniciaTimer();
+            TimerTempoOciosoUtils.reiniciaTimer();
           }
         },
       ),

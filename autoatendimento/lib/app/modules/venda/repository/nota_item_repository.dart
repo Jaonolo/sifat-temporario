@@ -8,7 +8,7 @@ class NotaItemRepository {
 
   static Future<List<NotaItem>> inserir(List<NotaItem> listItens) async {
     return await ConsumoRequester.inserirItens(
-        appController.pwsConfig, appController.token, listItens)
+        appController.pwsConfig, appController.tokenClient, listItens)
         .then((response) {
       if (response.isSuccess) {
         List<NotaItem> list = response.content;

@@ -5,7 +5,7 @@ import 'package:requester/response/response_pws.dart';
 import 'package:requester/url_pws/url_pws.dart';
 import 'package:http/http.dart' as http;
 
-class ServicoAutoAtendimentoRequester {
+class ClientAutoAtendimentoRequester {
   static Future<ResponsePws> login(PWSConfig config, String clientSecret,
       String clientKey, String nomeEstacao) async {
     http.Response response = await RequesterPws(config: config).consome(
@@ -17,7 +17,17 @@ class ServicoAutoAtendimentoRequester {
         });
     return ResponsePws(
       response: response,
-      converter: (json) => LoginAutoAtendimentoDTO.fromJson(json),
+      converter: (json) => ConfiguracoesAutoAtendimentoDTO.fromJson(json),
+    );
+  }
+
+  static Future<ResponsePws> buscarConfiguracoes(PWSConfig config, String token) async {
+    http.Response response = await RequesterPws(config: config).consome(
+        urlPws: UrlPws.putBuscarConfiguracoes(),
+       headerParams: {"token": token});
+    return ResponsePws(
+      response: response,
+      converter: (json) => ConfiguracoesAutoAtendimentoDTO.fromJson(json),
     );
   }
 }

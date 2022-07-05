@@ -1,5 +1,6 @@
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/toque_comecar/toque_comecar_component.dart';
+import 'package:autoatendimento/app/utils/timer_tempo_ocioso_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -16,7 +17,7 @@ class _ToqueComecarPageState extends State<ToqueComecarPage>
 
   @override
   void initState() {
-    appController.desligaTimer();
+    TimerTempoOciosoUtils.desligaTimerOcioso();
     super.initState();
   }
 

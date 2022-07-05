@@ -3,7 +3,7 @@ part of openapi.api;
 @JsonSerializable()
 class ArquivoAutoAtendimento {
   int? id;
-  int? idServicoAutoAtendimento;
+  int? idClientAutoAtendimento;
   TipoArquivo? tipoArquivo;
   VisaoFoto? visaoFoto;
   FormatoArquivo? formatoArquivo;
@@ -14,7 +14,7 @@ class ArquivoAutoAtendimento {
 
   @override
   String toString() {
-    return 'ArquivoAutoAtendimento{id: $id, idServicoAutoAtendimento: $idServicoAutoAtendimento, tipoArquivo: $tipoArquivo, visaoFoto: $visaoFoto, formatoArquivo: $formatoArquivo, descricao: $descricao, link: $link}';
+    return 'ArquivoAutoAtendimento{id: $id, idClientAutoAtendimento: $idClientAutoAtendimento, tipoArquivo: $tipoArquivo, visaoFoto: $visaoFoto, formatoArquivo: $formatoArquivo, descricao: $descricao, link: $link}';
   }
 
   factory ArquivoAutoAtendimento.fromJson(Map<String, dynamic> json) =>

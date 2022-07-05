@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/utils/timer_tempo_ocioso_utils.dart';
 import 'package:flutter/material.dart';
 
 import 'home_component.dart';
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> with HomeComponent {
   @override
   void initState() {
     appController.maiorIdade = false;
-    appController.reiniciaTimer();
+    TimerTempoOciosoUtils.reiniciaTimer();
     controller.changeMenuSelecionado(appController.listCardapioMenu.first);
     super.initState();
   }

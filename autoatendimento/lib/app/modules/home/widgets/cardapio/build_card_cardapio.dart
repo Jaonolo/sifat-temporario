@@ -7,6 +7,7 @@ import 'package:autoatendimento/app/modules/home/pages/produto/composto/produto_
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
+import 'package:autoatendimento/app/utils/timer_tempo_ocioso_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/enum/tipo_item.dart';
@@ -118,7 +119,7 @@ class BuildCardCardapio {
         if (vendaController.nota.id == null) {
           await vendaController.insereNotaAPI(context);
         }
-        appController.reiniciaTimer();
+        TimerTempoOciosoUtils.reiniciaTimer();
         switch (produtoEmpresa.produto!.pacote) {
           case TipoPacote.NENHUM:
             GradeEmpresa? grade = gradeTamanho != null

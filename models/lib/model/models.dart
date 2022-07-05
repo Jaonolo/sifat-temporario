@@ -515,11 +515,11 @@ part 'ticket_impressao_dto.dart';
 
 part 'item_dto.dart';
 
-part 'servico_auto_atendimento.dart';
+part 'client_auto_atendimento.dart';
 
 part 'arquivo_auto_atendimento.dart';
 
-part 'login_auto_atendimento_dto.dart';
+part 'configuracoes_auto_atendimento_dto.dart';
 
 part 'login_client_dto.dart';
 
