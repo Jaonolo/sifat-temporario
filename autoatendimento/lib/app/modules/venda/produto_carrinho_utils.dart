@@ -17,7 +17,7 @@ class ProdutoCarrinhoUtils {
       ProdutoCarrinho produtoCarrinho) async {
     if (NotaItemUtils.verificaAlcoolica(produtoCarrinho.notaItem)) {
       bool permitido =
-      await podeVenderBebidaAlcoolica(produtoCarrinho.notaItem);
+          await podeVenderBebidaAlcoolica(produtoCarrinho.notaItem);
       if (!permitido) {
         throw Exception('Venda de bebida alcoolica não permitida');
       }

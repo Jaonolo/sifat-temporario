@@ -108,13 +108,9 @@ abstract class TransacaoTefBase with Store {
     SitefProtocoloSocket sitefProtocoloSocket = SitefProtocoloSocket();
     sitefProtocoloSocket.funcao = "abortar";
     channel.sink.add(sitefProtocoloSocket.toJson());
-    recomecar();
-  }
-
-  Future<void> recomecar() async {
     atualizaBuffer("Transação cancelada...");
     await Future.delayed(const Duration(seconds: 2));
-    homeController.recomecar();
+    naoTentarNovamente();
   }
 
   void tentarNovamente() {
