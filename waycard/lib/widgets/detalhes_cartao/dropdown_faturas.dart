@@ -39,7 +39,7 @@ class DropdownFaturas extends StatelessWidget {
 
   Future _carregarFaturas() async {
     await WaycardRequester.listarFaturas(AppConfig.application.pwsConfigWaychef,
-        AppConfig.application.token, cartao.id!)
+        AppConfig.application.tokenUsuario, cartao.id!)
         .then((response) async {
       if (response.isSuccess) {
         if (response.hasContent) _faturas = response.content;
@@ -49,7 +49,7 @@ class DropdownFaturas extends StatelessWidget {
             AppConfig.application.pwsConfigWaychef, AppConfig.application.user!)
             .then((response) async {
           if (response.isSuccess) {
-            AppConfig.application.token = response.headers['token'];
+            AppConfig.application.tokenUsuario = response.headers['token'];
             return await _carregarFaturas();
           } else {
             throw PwsException(response.content);

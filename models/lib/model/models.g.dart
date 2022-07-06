@@ -4534,10 +4534,10 @@ PrinterVendaDTO _$PrinterVendaDTOFromJson(Map<String, dynamic> json) =>
           : EquipamentoImpressao.fromJson(
               json['equipamentoImpressao'] as Map<String, dynamic>)
       ..cancelamento = json['cancelamento'] as bool?
-      ..servicoAutoAtendimento = json['servicoAutoAtendimento'] == null
+      ..clientAutoAtendimento = json['clientAutoAtendimento'] == null
           ? null
-          : ServicoAutoAtendimento.fromJson(
-              json['servicoAutoAtendimento'] as Map<String, dynamic>);
+          : ClientAutoAtendimento.fromJson(
+              json['clientAutoAtendimento'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$PrinterVendaDTOToJson(PrinterVendaDTO instance) =>
     <String, dynamic>{
@@ -4546,14 +4546,15 @@ Map<String, dynamic> _$PrinterVendaDTOToJson(PrinterVendaDTO instance) =>
       'mensagemRodape': instance.mensagemRodape,
       'equipamentoImpressao': instance.equipamentoImpressao,
       'cancelamento': instance.cancelamento,
-      'servicoAutoAtendimento': instance.servicoAutoAtendimento,
+      'clientAutoAtendimento': instance.clientAutoAtendimento,
     };
 
 ConfigPropertiesDTO _$ConfigPropertiesDTOFromJson(Map<String, dynamic> json) =>
     ConfigPropertiesDTO()
       ..cnpj = json['cnpj'] as String?
       ..clientSecret = json['clientSecret'] as String?
-      ..host = json['host'] as String?;
+      ..host = json['host'] as String?
+      ..hostGateway = json['hostGateway'] as String?;
 
 Map<String, dynamic> _$ConfigPropertiesDTOToJson(
         ConfigPropertiesDTO instance) =>
@@ -4561,6 +4562,7 @@ Map<String, dynamic> _$ConfigPropertiesDTOToJson(
       'cnpj': instance.cnpj,
       'clientSecret': instance.clientSecret,
       'host': instance.host,
+      'hostGateway': instance.hostGateway,
     };
 
 ConferenciaCaixaDTO _$ConferenciaCaixaDTOFromJson(Map<String, dynamic> json) =>
@@ -6330,9 +6332,9 @@ Map<String, dynamic> _$ItemDTOToJson(ItemDTO instance) => <String, dynamic>{
       'valor': instance.valor,
     };
 
-ServicoAutoAtendimento _$ServicoAutoAtendimentoFromJson(
+ClientAutoAtendimento _$ClientAutoAtendimentoFromJson(
         Map<String, dynamic> json) =>
-    ServicoAutoAtendimento()
+    ClientAutoAtendimento()
       ..id = json['id'] as int?
       ..idEmpresa = json['idEmpresa'] as int?
       ..ativo = json['ativo'] as bool? ?? false
@@ -6361,8 +6363,8 @@ ServicoAutoAtendimento _$ServicoAutoAtendimentoFromJson(
               .toList() ??
           [];
 
-Map<String, dynamic> _$ServicoAutoAtendimentoToJson(
-        ServicoAutoAtendimento instance) =>
+Map<String, dynamic> _$ClientAutoAtendimentoToJson(
+        ClientAutoAtendimento instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
@@ -6403,7 +6405,7 @@ ArquivoAutoAtendimento _$ArquivoAutoAtendimentoFromJson(
         Map<String, dynamic> json) =>
     ArquivoAutoAtendimento()
       ..id = json['id'] as int?
-      ..idServicoAutoAtendimento = json['idServicoAutoAtendimento'] as int?
+      ..idClientAutoAtendimento = json['idClientAutoAtendimento'] as int?
       ..tipoArquivo =
           $enumDecodeNullable(_$TipoArquivoEnumMap, json['tipoArquivo'])
       ..visaoFoto = $enumDecodeNullable(_$VisaoFotoEnumMap, json['visaoFoto'])
@@ -6416,7 +6418,7 @@ Map<String, dynamic> _$ArquivoAutoAtendimentoToJson(
         ArquivoAutoAtendimento instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'idServicoAutoAtendimento': instance.idServicoAutoAtendimento,
+      'idClientAutoAtendimento': instance.idClientAutoAtendimento,
       'tipoArquivo': _$TipoArquivoEnumMap[instance.tipoArquivo],
       'visaoFoto': _$VisaoFotoEnumMap[instance.visaoFoto],
       'formatoArquivo': _$FormatoArquivoEnumMap[instance.formatoArquivo],
@@ -6449,13 +6451,13 @@ const _$FormatoArquivoEnumMap = {
   FormatoArquivo.RAR: 'RAR',
 };
 
-LoginAutoAtendimentoDTO _$LoginAutoAtendimentoDTOFromJson(
+ConfiguracoesAutoAtendimentoDTO _$ConfiguracoesAutoAtendimentoDTOFromJson(
         Map<String, dynamic> json) =>
-    LoginAutoAtendimentoDTO()
-      ..servicoAutoAtendimento = json['servicoAutoAtendimento'] == null
+    ConfiguracoesAutoAtendimentoDTO()
+      ..clientAutoAtendimento = json['clientAutoAtendimento'] == null
           ? null
-          : ServicoAutoAtendimento.fromJson(
-              json['servicoAutoAtendimento'] as Map<String, dynamic>)
+          : ClientAutoAtendimento.fromJson(
+              json['clientAutoAtendimento'] as Map<String, dynamic>)
       ..estacaoTrabalho = json['estacaoTrabalho'] == null
           ? null
           : EstacaoTrabalho.fromJson(
@@ -6464,10 +6466,10 @@ LoginAutoAtendimentoDTO _$LoginAutoAtendimentoDTOFromJson(
           ? null
           : Empresa.fromJson(json['empresa'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$LoginAutoAtendimentoDTOToJson(
-        LoginAutoAtendimentoDTO instance) =>
+Map<String, dynamic> _$ConfiguracoesAutoAtendimentoDTOToJson(
+        ConfiguracoesAutoAtendimentoDTO instance) =>
     <String, dynamic>{
-      'servicoAutoAtendimento': instance.servicoAutoAtendimento,
+      'clientAutoAtendimento': instance.clientAutoAtendimento,
       'estacaoTrabalho': instance.estacaoTrabalho,
       'empresa': instance.empresa,
     };
@@ -6503,6 +6505,53 @@ const _$ClientsEnumMap = {
   Clients.GERENCIADOR_IMPRESSAO: 'GERENCIADOR_IMPRESSAO',
   Clients.AUTOPESAGEM: 'AUTOPESAGEM',
 };
+
+LoginUsuarioDTO _$LoginUsuarioDTOFromJson(Map<String, dynamic> json) =>
+    LoginUsuarioDTO()
+      ..client = $enumDecodeNullable(_$ClientsEnumMap, json['client']) ??
+          Clients.WAITER_MOBILE
+      ..clientKey = json['clientKey'] as String?
+      ..clientSecret = json['clientSecret'] as String?
+      ..versao = json['versao'] as String?
+      ..nomeEstacao = json['nomeEstacao'] as String?
+      ..username = json['username'] as String?
+      ..password = json['password'] as String?
+      ..pin = json['pin'] as String?
+      ..uid = json['uid'] as String?;
+
+Map<String, dynamic> _$LoginUsuarioDTOToJson(LoginUsuarioDTO instance) =>
+    <String, dynamic>{
+      'client': _$ClientsEnumMap[instance.client],
+      'clientKey': instance.clientKey,
+      'clientSecret': instance.clientSecret,
+      'versao': instance.versao,
+      'nomeEstacao': instance.nomeEstacao,
+      'username': instance.username,
+      'password': instance.password,
+      'pin': instance.pin,
+      'uid': instance.uid,
+    };
+
+JwtTokenDecodeDTO _$JwtTokenDecodeDTOFromJson(Map<String, dynamic> json) =>
+    JwtTokenDecodeDTO()
+      ..idUsuarioEmpresa = json['idUsuarioEmpresa'] as String?
+      ..idEstacaoTrabalho = json['idEstacaoTrabalho'] as String?
+      ..idEmpresa = json['idEmpresa'] as String?
+      ..client = json['client'] as String?
+      ..idSessao = json['idSessao'] as String?
+      ..exp = json['exp'] as int?
+      ..iat = json['iat'] as int?;
+
+Map<String, dynamic> _$JwtTokenDecodeDTOToJson(JwtTokenDecodeDTO instance) =>
+    <String, dynamic>{
+      'idUsuarioEmpresa': instance.idUsuarioEmpresa,
+      'idEstacaoTrabalho': instance.idEstacaoTrabalho,
+      'idEmpresa': instance.idEmpresa,
+      'client': instance.client,
+      'idSessao': instance.idSessao,
+      'exp': instance.exp,
+      'iat': instance.iat,
+    };
 
 TokenDTO _$TokenDTOFromJson(Map<String, dynamic> json) => TokenDTO()
   ..token = json['token'] as String?

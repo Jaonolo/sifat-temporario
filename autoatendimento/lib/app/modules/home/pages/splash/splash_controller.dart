@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:autoatendimento/app/app_controller.dart';
+import 'package:autoatendimento/app/utils/atualizar_sessao_client_utils.dart';
 import 'package:autoatendimento/app/utils/autoatendimento_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -8,8 +9,8 @@ import 'package:mobx/mobx.dart';
 import 'package:models/model/enum/clients.dart';
 import 'package:models/model/models.dart';
 import 'package:requester/config/pws_config.dart';
-import 'package:requester/requester/gerenciador_requester.dart';
-import 'package:requester/requester/servico_auto_atendimento_requester.dart';
+import 'package:requester/requester/micro-service/sessao/sessao_client_requester.dart';
+import 'package:requester/requester/client_auto_atendimento_requester.dart';
 import 'package:requester/requester/tabela_preco_requester.dart';
 
 import 'model/cardapio_dto.dart';
@@ -56,25 +57,25 @@ abstract class SplashBase with Store {
     });
   }
 
-  void _atualizarSessao() {
-    appController.timer = Timer.periodic(const Duration(seconds: 20), (timer) {
-      GerenciadorRequester.atualizaSessao(
-          appController.pwsConfig, appController.token);
-    });
-  }
 
   Future<void> _carregarDadosIniciaisAPI(BuildContext context) async {
     _inicializaClientPWS();
+
+    _inicializaClientPWSGateway();
+
     changeStatus("Fazendo login com a API");
 
     try {
       await _carregaNomeEstacao();
 
-      await _loginAPI();
+      //Cria Sessao client
+      await _criarSessaoClient();
+
+      await _buscarClientAutoAtendimento();
 
       await _carregaModuloEFormasPagamento();
 
-      await _carregaTef();
+      // await _carregaTef();
 
       await _carregaCardapio();
 
@@ -105,6 +106,14 @@ abstract class SplashBase with Store {
     );
   }
 
+  void _inicializaClientPWSGateway() {
+    appController.pwsConfigGateway = PWSConfig(
+      urlBase: dto!.hostGateway.toString(),
+      client: Clients.AUTOATENDIMENTO,
+      clientSecret: dto!.clientSecret.toString(),
+    );
+  }
+
   Future<void> _carregaNomeEstacao() async {
     nomeEstacao =
     await ConfigRepository.carregaNomeEstacao(appController.pwsConfigLocal);
@@ -120,22 +129,39 @@ abstract class SplashBase with Store {
     }
   }
 
-  Future<void> _loginAPI() async {
-    await ServicoAutoAtendimentoRequester.login(
-        appController.pwsConfig,
-        appController.pwsConfig.clientSecret,
-        appController.pwsConfig.client.clientKey,
-        nomeEstacao!)
+  Future<void> _criarSessaoClient() async {
+    LoginClientDTO loginClientDTO = new LoginClientDTO();
+    loginClientDTO.client = Clients.AUTOATENDIMENTO;
+    loginClientDTO.clientKey = Clients.AUTOATENDIMENTO.clientKey;
+    loginClientDTO.versao = Clients.AUTOATENDIMENTO.versao;
+    loginClientDTO.clientSecret = dto!.clientSecret.toString();
+    loginClientDTO.nomeEstacao = nomeEstacao;
+
+    await SessaoClientRequest.criarSessao(
+        appController.pwsConfigGateway,  loginClientDTO)
         .then((response) {
       if (response.status == 200) {
-        LoginAutoAtendimentoDTO dto = response.content;
+        appController.tokenClient = response.content!.token;
+        print("TOKEN: Bearer ${appController.tokenClient}");
+      } else {
+        throw WaybeException('Problema ao realizar login na API',
+                    exception: response.content);
+      }
+    });
+  }
+
+  Future<void> _buscarClientAutoAtendimento() async {
+    await ClientAutoAtendimentoRequester.buscarConfiguracoes(
+        appController.pwsConfig, appController.tokenClient)
+        .then((response) {
+      if (response.status == 200) {
+        ConfiguracoesAutoAtendimentoDTO dto = response.content;
         appController.estacaoTrabalho = dto.estacaoTrabalho!;
-        if (dto.servicoAutoAtendimento == null) {
+        if (dto.clientAutoAtendimento == null) {
           throw WaybeException('Serviço Autoatendimento não localizado');
         }
 
-        appController.servicoAutoAtendimento = dto.servicoAutoAtendimento!;
-        appController.token = dto.servicoAutoAtendimento!.token!;
+        appController.clientAutoAtendimento = dto.clientAutoAtendimento!;
       } else if (response.status == 204) {
         throw WaybeException('Estação de trabalho não encontrada');
       } else {
@@ -149,19 +175,19 @@ abstract class SplashBase with Store {
 
   Future<void> _carregaModuloEFormasPagamento() async {
     //Mapeia o módulo e as formas de pagamento
-    if (appController.servicoAutoAtendimento.finalizadoraDebito != null) {
+    if (appController.clientAutoAtendimento.finalizadoraDebito != null) {
       appController.listFormaPagamento
-          .add(appController.servicoAutoAtendimento.finalizadoraDebito!);
+          .add(appController.clientAutoAtendimento.finalizadoraDebito!);
     }
 
-    if (appController.servicoAutoAtendimento.finalizadoraCredito != null) {
+    if (appController.clientAutoAtendimento.finalizadoraCredito != null) {
       appController.listFormaPagamento.add(
-          appController.servicoAutoAtendimento.finalizadoraCredito!);
+          appController.clientAutoAtendimento.finalizadoraCredito!);
     }
 
 
     //Transforma a finalizadora de credito em dinheiro para finalizar a venda sem tipo tef //todo apenas testes
-    // appController.servicoAutoAtendimento.finalizadoraCredito!.finalizadora!.finalizadoraRFB = "DINHEIRO";
+    // appController.clientAutoAtendimento.finalizadoraCredito!.finalizadora!.finalizadoraRFB = "DINHEIRO";
 
     if (appController.listFormaPagamento.isEmpty) {
       throw WaybeException(
@@ -179,7 +205,7 @@ abstract class SplashBase with Store {
       await SitefRepository.startSitef(
           appController.pwsConfigLocal,
           appController.pwsConfig,
-          appController.token,
+          appController.tokenClient,
           '${appController.estacaoTrabalho.numeroCaixa}',
           dto!.cnpj.toString());
     }
@@ -191,7 +217,7 @@ abstract class SplashBase with Store {
     changeStatus("Carregando cardápio");
     CardapioDTO dto = await CardapioRepository.obterCardapioTipoItens(
         appController.pwsConfig,
-        appController.token,
+        appController.tokenClient,
         appController.estacaoTrabalho.cardapio!.id.toString());
 
     appController.listCardapioMenu = dto.listCardapioMenu;
@@ -204,7 +230,7 @@ abstract class SplashBase with Store {
     changeStatus("Carregando tabela de preço");
     TabelaPreco? _tabelaPreco;
     TabelaPrecoRequester.buscarTodos(
-        appController.pwsConfig, appController.token)
+        appController.pwsConfig, appController.tokenClient)
         .then((value) {
       if (value.isSuccess) {
         List<TabelaPreco> tabelas = value.content ?? [];
@@ -228,6 +254,10 @@ abstract class SplashBase with Store {
     _atualizarSessao();
     await Future.delayed(const Duration(seconds: 2));
     Modular.to.pushReplacementNamed("/comecar");
+  }
+
+  void _atualizarSessao() {
+    AtualizarSessaoClientUtils.startAtualizaSessaoClient();
   }
 
   Future<void> _abreWizard() async {

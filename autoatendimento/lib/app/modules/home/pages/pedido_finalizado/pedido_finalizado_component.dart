@@ -62,7 +62,7 @@ class PedidoFinalizadoComponent {
                     Align(
                         alignment: Alignment.center,
                         child: Text(
-                          appController.servicoAutoAtendimento
+                          appController.clientAutoAtendimento
                               .mensagemFinalAtendimento ?? "",
                           textAlign: TextAlign.center,
                           style: TextStyle(

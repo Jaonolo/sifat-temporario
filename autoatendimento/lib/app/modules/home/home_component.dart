@@ -8,6 +8,7 @@ import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:autoatendimento/app/utils/style_utils.dart';
+import 'package:autoatendimento/app/utils/timer_tempo_ocioso_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -166,7 +167,7 @@ class HomeComponent {
       onTap: () {
         if (controller.palco.isNotEmpty) controller.palco.clear();
         controller.habilitarCarrinho = false;
-        appController.reiniciaTimer();
+        TimerTempoOciosoUtils.reiniciaTimer();
         controller.changeMenuSelecionado(menu);
         controller.addPalco(
           cardapio(c: context),

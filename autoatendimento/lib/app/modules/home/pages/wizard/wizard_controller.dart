@@ -24,6 +24,7 @@ abstract class WizardBase with Store {
     ConfigPropertiesDTO dto = ConfigPropertiesDTO();
     dto.cnpj = StringUtils.removeMascaraInscricaoFederal(controllerCNPJ.text);
     dto.host = 'http://${controllerUrlApi.text}/api';
+    dto.hostGateway = 'http://${controllerUrlApi.text}:8081';
     dto.clientSecret = controllerClientSecret.text;
     splashController.inicializaClientPWSSpring();
 

@@ -15,7 +15,7 @@ class NotaRepository {
   static Future<Nota> inserir(Nota nota, BuildContext context) async {
     AutoatendimentoUtils.showProgress(context: context);
     return await ConsumoRequester.inserir(
-        appController.pwsConfig, appController.token, nota)
+        appController.pwsConfig, appController.tokenClient, nota)
         .then((response) {
       AutoatendimentoUtils.closeProgress(context: context);
       if (response.isSuccess) {
@@ -32,7 +32,7 @@ class NotaRepository {
   static Future<Nota> receber(Nota nota, BuildContext context) async {
     //Não possui permissaão para limiteExcedente em debitar do cliente
     return await ConsumoRequester.receber(
-        appController.pwsConfig, appController.token, nota, false)
+        appController.pwsConfig, appController.tokenClient, nota, false)
         .then((response) {
       if (response.isSuccess) {
         Nota nota = response.content;
@@ -78,23 +78,23 @@ class NotaRepository {
   // ignore: unused_element
   static Future<ResponsePws> _carregar(num idNota) {
     return NotaRequester.carregar(
-        appController.pwsConfig, appController.token, idNota);
+        appController.pwsConfig, appController.tokenClient, idNota);
   }
 
   static Future<ResponsePws> _calcularImpostos(Nota nota) {
     return NotaRequester.calcularImpostos(
-        appController.pwsConfig, appController.token, nota);
+        appController.pwsConfig, appController.tokenClient, nota);
   }
 
   static Future<ResponsePws> _montarNFCe(Nota nota) {
     return NotaRequester.montarNFCe(
-        appController.pwsConfig, appController.token, nota);
+        appController.pwsConfig, appController.tokenClient, nota);
   }
 
   static Future<ResponsePws> _emitirNFCe(Nota nota,
       {bool gerarImpressao = false}) {
     return NotaRequester.emitirNFCe(
-        appController.pwsConfig, appController.token, nota,
+        appController.pwsConfig, appController.tokenClient, nota,
         gerarImpressao: gerarImpressao);
   }
 }

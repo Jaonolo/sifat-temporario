@@ -208,7 +208,7 @@ abstract class TransacaoTefBase with Store {
         await PrinterRepository.printerVenda(
             appController.pwsConfigLocal,
             vendaController.nota,
-            appController.servicoAutoAtendimento,
+            appController.clientAutoAtendimento,
             itens,
             appController.getImpressoraVenda().impressora!,
             senha: vendaController.nota.consumo!.comanda.toString(),
@@ -221,7 +221,7 @@ abstract class TransacaoTefBase with Store {
             mensagemRodape: viaCliente);
       }
 
-      if (appController.servicoAutoAtendimento.impressaoVenda
+      if (appController.clientAutoAtendimento.impressaoVenda
           .equals(ImpressaoVenda.IMPRIME)) {
         _printConsumo(context);
       } else {
@@ -239,7 +239,7 @@ abstract class TransacaoTefBase with Store {
 
   Future<void> _printConsumo(BuildContext context) async {
     try {
-      if (appController.servicoAutoAtendimento.impressaoVenda
+      if (appController.clientAutoAtendimento.impressaoVenda
           .equals(ImpressaoVenda.IMPRIME)) {
         List<NotaItem> itens = [];
         for (var ni in vendaController.itensLancados) {
@@ -248,7 +248,7 @@ abstract class TransacaoTefBase with Store {
         await PrinterRepository.printerConsumo(
             appController.pwsConfigLocal,
             vendaController.nota,
-            appController.servicoAutoAtendimento,
+            appController.clientAutoAtendimento,
             itens,
             appController.getImpressoraVenda().impressora!,
             senha: vendaController.nota.consumo!.comanda.toString(),

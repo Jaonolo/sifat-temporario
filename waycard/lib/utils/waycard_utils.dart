@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/funcoes.dart';
+import 'package:utils/utils/string_utils.dart';
 import 'package:utils/widgets/center_progress_indicator.dart';
 import 'package:waycard/config/app_config.dart';
+import 'package:waycard/pages/login_app/metodo_login/metodo_login.dart';
 
 class WayCardUtils {
   static showProgress({BuildContext? context}) {
@@ -20,6 +22,14 @@ class WayCardUtils {
 
   static Future catchError(error, stackTrace,
       {bool closeable = false, BuildContext? context}) async {
+    if (error is PwsException){
+      if(error.pws!.code == 401){
+
+        MetodoLogin.login(AppConfig.application.user!, false, StringUtils.stringToMd5(AppConfig.application.user!.password.toString()), context != null ? context : AppConfig.globalKey.currentContext!);
+        return;
+      }
+    }
+
     print('----> $error'
         '\n $stackTrace');
     if (closeable) Navigator.of(

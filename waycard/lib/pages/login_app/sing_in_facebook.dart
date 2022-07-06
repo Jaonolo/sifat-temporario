@@ -44,7 +44,7 @@ class SingInFacebook {
         _user.password = StringUtils.stringToMd5(user.uid);
         //verifica se a conta ja existe no banco de dados ou nao
         // se ja for cadastrado manda pra tela inicial se nao for pra tela de cadastro
-        MetodoLogin().login(_user, context);
+        MetodoLogin.login(_user,false, user.uid, context);
 
         break;
       case FacebookLoginStatus.cancel:
