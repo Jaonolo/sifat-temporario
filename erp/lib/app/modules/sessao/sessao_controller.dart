@@ -4,11 +4,13 @@ import 'package:erp/app/utils/snack_bar_utils.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:requester/requester/micro-service/sessao/gerenciamento_sessoes_requester.dart';
+import 'package:requester/requester/micro-service/sessao/sessao_servico_requester.dart';
 import 'package:requester/requester/micro-service/sessao/sessao_usuario_requester.dart';
 
-part 'sessao_controller.g.dart';
+part "sessao_controller.g.dart";
 
-class SessaoController = SessaoBase with _$SessaoController;
+class SessaoController = SessaoBase
+    with _$SessaoController;
 
 abstract class SessaoBase with Store {
   @observable
@@ -18,15 +20,13 @@ abstract class SessaoBase with Store {
 
   @action
   Future<void> buscarSessoes() async {
-    carregando = true;
-
-    await Duration(seconds: 5);
-
     await GerenciamentoSessoesRequester.buscarSessoes(
-            Application.pwsConfigGateway, Application.tokenUsuario)
+        Application.pwsConfigGateway, Application.tokenUsuario)
         .then((response) {
-      if (response.status == 200 || response.status == 204)
+      if (response.status == 200)
         dadosSessoes = response.content;
+      else if(response.status == 204)
+        dadosSessoes = [];
       else
         throw PwsException(response.content);
     }).catchError((e, s) {
@@ -36,24 +36,26 @@ abstract class SessaoBase with Store {
     carregando = false;
   }
 
+  @action
   Future<void> encerrarSessao(DadosSessaoDTO dto) async {
     bool sucess = true;
 
     if (dto.servico != null)
-    // await SessaoServicoRequest.encerrarSessao(Application.pwsConfigGateway, dto.token!).catchError((e, s) {
-    //   sucess = false;
-    //   ErroUtils.catchError(e, s);
-    // });
+    await SessaoServicoRequest.encerrarSessao(Application.pwsConfigGateway, dto.token!).catchError((e, s) {
+      sucess = false;
+      ErroUtils.catchError(e, s);
+    });
     if (dto.nomeUsuario != null)
-      await SessaoUsuarioRequester.encerrarSessao(
-              Application.pwsConfigGateway, dto.token!)
-          .catchError((e, s) {
-        ErroUtils.catchError(e, s);
-        sucess = false;
-      });
+    await SessaoUsuarioRequester.encerrarSessao(
+            Application.pwsConfigGateway, dto.token!)
+        .catchError((e, s) {
+      ErroUtils.catchError(e, s);
+      sucess = false;
+    });
 
     if (sucess) {
       SnackBarUtils.exibir("Sessao encerrada com sucesso!");
+      carregando = true;
       buscarSessoes();
     }
   }
