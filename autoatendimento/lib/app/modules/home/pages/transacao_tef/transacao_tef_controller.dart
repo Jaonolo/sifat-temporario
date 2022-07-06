@@ -111,6 +111,8 @@ abstract class TransacaoTefBase with Store {
     atualizaBuffer("Transação cancelada...");
     await Future.delayed(const Duration(seconds: 2));
     naoTentarNovamente();
+    //limpando variaveis
+    atualizaBuffer("");
   }
 
   void tentarNovamente() {
@@ -157,7 +159,6 @@ abstract class TransacaoTefBase with Store {
         context: context,
         barrierDismissible: false,
         builder: (context) => DialogAuto(
-              showCancelButton: false,
               title: "Pagamento não aprovado",
               message: '$motivoTratado \n\n Tentar novamente ?',
               txtConfirmar: "Sim",
@@ -278,7 +279,6 @@ abstract class TransacaoTefBase with Store {
         context: context,
         barrierDismissible: false,
         builder: (c) => DialogAuto(
-              showCancelButton: true,
               title: title,
               message: "",
               txtConfirmar: "Tentar novamente",

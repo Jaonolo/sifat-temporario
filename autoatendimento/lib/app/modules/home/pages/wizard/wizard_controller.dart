@@ -35,7 +35,7 @@ abstract class WizardBase with Store {
           barrierDismissible: true,
           builder: (context) =>
               DialogAuto(
-                confirmaECancela: false,
+                showCancelButton: false,
                 title: "Configurações",
                 message:
                 "O arquivo de configurações foi criado, o aplicativo será reiniciado.",
