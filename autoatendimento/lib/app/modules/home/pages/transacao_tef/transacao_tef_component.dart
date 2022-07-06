@@ -19,7 +19,7 @@ class TransacaoTefComponent {
     this.context = context;
   }
 
-  body() {
+ Widget body() {
     return Observer(
       builder: (_) {
         return Container(
@@ -30,22 +30,23 @@ class TransacaoTefComponent {
           ),
           child: (controller.bufferSitef != null)
               ? Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Expanded(flex: 15, child: AppBarImage()),
-              Expanded(
-                flex: 75,
-                child: Center(
-                  child: Text(
-                    controller.bufferSitef!,
-                    style: TextStyle(fontSize: FontUtils.h2(context)),
-                  ),
-                ),
-              ),
-              Expanded(flex: 10, child: _botaoCancelar()),
-            ],
-          )
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Expanded(flex: 15, child: AppBarImage()),
+                    Expanded(
+                      flex: 75,
+                      child: Center(
+                        child: Text(
+                          controller.bufferSitef!,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: FontUtils.h2(context)),
+                        ),
+                      ),
+                    ),
+                    Expanded(flex: 10, child: _botaoCancelar()),
+                  ],
+                )
               : Container(),
         );
       },
@@ -65,8 +66,7 @@ class TransacaoTefComponent {
                   showDialog(
                       context: context,
                       barrierDismissible: false,
-                      builder: (context) =>
-                          DialogAuto(
+                      builder: (context) => DialogAuto(
                             title: "Cancelar transação",
                             message: "Deseja realmente cancelar a transação ?",
                             txtConfirmar: "SIM",
