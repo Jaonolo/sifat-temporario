@@ -22,7 +22,7 @@ class SessaoUsuarioRequester {
 
   static Future<ResponsePws> encerrarSessao(PWSConfig clientSessao, String token) async {
     Response response = await RequesterPws(config: clientSessao).consome(
-        urlPws: UrlPws.postEncerrarSessao(),
+        urlPws: UrlPws.postEncerrarSessaoUsuario(),
         headerParams: {"Authorization": "Bearer " + token,}
     );
     return ResponsePws(response: response);

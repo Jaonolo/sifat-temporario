@@ -6,7 +6,7 @@ class NotFoundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black,
+      color: Colors.amberAccent,
       child: Center(child: Text("PAGINA NÂO ENCONTRADA")),
     );
   }

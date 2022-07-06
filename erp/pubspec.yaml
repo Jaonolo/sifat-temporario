@@ -9,15 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_web_plugins:
-    sdk: flutter
-
-  core:
-    path: ../core
   models:
     path: ../models
-  utils:
-    path: ../utils
   requester:
     path: ../requester
 

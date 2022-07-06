@@ -12,6 +12,7 @@ class SessaoPage extends StatelessWidget with SessaoPageCompoment {
 
   @override
   Widget build(BuildContext context) {
+    initialize();
     return Scaffold(
       body: body(),
     );

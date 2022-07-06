@@ -6516,8 +6516,7 @@ LoginUsuarioDTO _$LoginUsuarioDTOFromJson(Map<String, dynamic> json) =>
       ..nomeEstacao = json['nomeEstacao'] as String?
       ..username = json['username'] as String?
       ..password = json['password'] as String?
-      ..pin = json['pin'] as String?
-      ..uid = json['uid'] as String?;
+      ..pin = json['pin'] as String?;
 
 Map<String, dynamic> _$LoginUsuarioDTOToJson(LoginUsuarioDTO instance) =>
     <String, dynamic>{
@@ -6529,7 +6528,6 @@ Map<String, dynamic> _$LoginUsuarioDTOToJson(LoginUsuarioDTO instance) =>
       'username': instance.username,
       'password': instance.password,
       'pin': instance.pin,
-      'uid': instance.uid,
     };
 
 JwtTokenDecodeDTO _$JwtTokenDecodeDTOFromJson(Map<String, dynamic> json) =>
@@ -6566,6 +6564,7 @@ DadosSessaoDTO _$DadosSessaoDTOFromJson(Map<String, dynamic> json) =>
     DadosSessaoDTO()
       ..nomeUsuario = json['nomeUsuario'] as String?
       ..nomeEstacao = json['nomeEstacao'] as String?
+      ..servico = $enumDecodeNullable(_$ServicoEnumMap, json['servico'])
       ..client = $enumDecodeNullable(_$ClientsEnumMap, json['client'])
       ..dataAbertura = json['dataAbertura'] == null
           ? null
@@ -6579,9 +6578,34 @@ Map<String, dynamic> _$DadosSessaoDTOToJson(DadosSessaoDTO instance) =>
     <String, dynamic>{
       'nomeUsuario': instance.nomeUsuario,
       'nomeEstacao': instance.nomeEstacao,
+      'servico': _$ServicoEnumMap[instance.servico],
       'client': _$ClientsEnumMap[instance.client],
       'dataAbertura': instance.dataAbertura?.toIso8601String(),
       'dataUltimaAtualizacao':
           instance.dataUltimaAtualizacao?.toIso8601String(),
       'token': instance.token,
     };
+
+const _$ServicoEnumMap = {
+  Servico.NENHUM: 'NENHUM',
+  Servico.IFOOD: 'IFOOD',
+  Servico.IMPRESSAO: 'IMPRESSAO',
+  Servico.CATRACA: 'CATRACA',
+  Servico.ALFA_SYNC: 'ALFA_SYNC',
+  Servico.FOUR_ALL: 'FOUR_ALL',
+  Servico.SITEF: 'SITEF',
+  Servico.PAYGO: 'PAYGO',
+  Servico.REDE: 'REDE',
+  Servico.CIELO_LIO: 'CIELO_LIO',
+  Servico.QUEST: 'QUEST',
+  Servico.WABIZ: 'WABIZ',
+  Servico.TRACKAPP: 'TRACKAPP',
+  Servico.WAYMENU: 'WAYMENU',
+  Servico.NAPP: 'NAPP',
+  Servico.NFSE: 'NFSE',
+  Servico.GIG: 'GIG',
+  Servico.AUTO_PESAGEM: 'AUTO_PESAGEM',
+  Servico.AUTO_ATENDIMENTO: 'AUTO_ATENDIMENTO',
+  Servico.MFE: 'MFE',
+  Servico.ELGIN_PAY: 'ELGIN_PAY',
+};

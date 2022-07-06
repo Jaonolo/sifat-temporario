@@ -7,6 +7,8 @@ class DadosSessaoDTO {
 
   String? nomeEstacao;
 
+  Servico? servico;
+
   Clients? client;
 
   DateTime? dataAbertura;

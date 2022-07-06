@@ -10,16 +10,23 @@ import 'package:flutter/widgets.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   var routingData = settings.name!.getRoutingData; // Get the routing Data
 
-  switch (routingData.route) {// Switch on the path from the data
-    case HomeRoute:
-      return _getPageRoute(HomePage(), settings);
-    case SessaoRoute:
-      return _getPageRoute(SessaoPage(routingData["token"]), settings);
-    case ContratoRoute:
-      return _getPageRoute(ContratoPage(), settings);
+  try {
+    switch (routingData.route) {
+      // Switch on the path from the data
+      case HomeRoute:
+        return _getPageRoute(HomePage(), settings);
+      case SessaoRoute:
+        return _getPageRoute(SessaoPage(routingData["token"]), settings);
+      case ContratoRoute:
+        return _getPageRoute(ContratoPage(), settings);
 
-    default:
-      return _getPageRoute(NotFoundPage(), settings);
+      default:
+        return _getPageRoute(NotFoundPage(), settings);
+    }
+  } catch (e, s) {
+    print('Ocorreu um erro ao acessar o path: ${routingData.route}');
+    // s.printStackTrace();
+    throw e;
   }
 }
 
@@ -30,6 +37,7 @@ PageRoute _getPageRoute(Widget child, RouteSettings settings) {
 class _FadeRoute extends PageRouteBuilder {
   final Widget child;
   final String routeName;
+
   _FadeRoute({required this.child, required this.routeName})
       : super(
           settings: RouteSettings(name: routeName),

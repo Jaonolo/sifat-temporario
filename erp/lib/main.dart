@@ -2,15 +2,13 @@ import 'package:erp/app/config/application.dart';
 import 'package:erp/app/rotas/route_names.dart';
 import 'package:erp/app/rotas/router.dart';
 import 'package:erp/app/services/navigation_service.dart';
-import 'package:erp/layout_template.dart';
+import 'package:erp/app/modules/layout_template/layout_template.dart';
 import 'package:erp/locator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:models/model/enum/clients.dart';
 import 'package:requester/config/pws_config.dart';
 
 void main() {
-  setUrlStrategy(PathUrlStrategy());//tira o # da url
   setupLocator();
   runApp(MyApp());
 }
@@ -30,7 +28,7 @@ class MyApp extends StatelessWidget {
       key: locator<NavigationService>().navigatorKey,
       scaffoldMessengerKey: locator<NavigationService>().snackbarGlobalKey,
       onGenerateRoute: generateRoute,
-      initialRoute: HomeRoute,
+      initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJpZFNlc3NhbyI6IjBhN2EzMzUxLTA2Y2ItNGM5Ni05YjY3LWQ3NWNlYmI3OGUwYiIsImNsaWVudCI6IkVSUCIsImV4cCI6MTY1NzEyNzg0MiwiaWF0IjoxNjU3MTEzNDQyfQ.GRqkdoWNnTXOxnr5SCD7pgJnvvqK_QoVtp24taVSvaEVtD19Y3VypwhkZuzSW1HFsyNnwz6RBfcW0Nwew7RRVw",
     );
   }
 

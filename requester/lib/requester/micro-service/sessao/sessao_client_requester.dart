@@ -9,7 +9,7 @@ class SessaoClientRequest {
   static Future<ResponsePws> criarSessao(
       PWSConfig pwsConfig, LoginClientDTO loginClientDTO) async {
     http.Response response = await RequesterPws(config: pwsConfig).consome(
-      urlPws: UrlPws.criarSessao(),
+      urlPws: UrlPws.criarSessaoClient(),
       body: loginClientDTO,
     );
     return ResponsePws(
@@ -19,7 +19,7 @@ class SessaoClientRequest {
   static Future<ResponsePws> atualizarSessao(
       PWSConfig pwsConfig, String token) async {
     http.Response response = await RequesterPws(config: pwsConfig).consome(
-      urlPws: UrlPws.atualizarSessao(),
+      urlPws: UrlPws.atualizarSessaoClient(),
       headerParams: {
         "Authorization": "Bearer $token",
       },

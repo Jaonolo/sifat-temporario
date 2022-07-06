@@ -1,61 +1,62 @@
 import 'package:erp/app/modules/sessao/sessao_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:models/model/enum/clients.dart';
-import 'package:models/model/models.dart';
 
 class SessaoPageCompoment {
   //-------------------------------------------------- VARIAVEIS ------------------------------------------------------------
   SessaoController controller = SessaoController();
 
-
   //-------------------------------------------------- WIDGETS --------------------------------------------------------------
   Widget body() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: FutureBuilder<List<DadosSessaoDTO>>(
-        future: controller.buscarSessoes(),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
+    return Observer(builder: (_) {
+      print('AQUI!!! ${controller.carregando}');
 
-            default:
-              if (snapshot.hasError) return _createDataTable([]);
+      if (controller.carregando) return Center(child: CircularProgressIndicator());
 
-              return ListView(
-                children: [
-                  _createDataTable(snapshot.data!)
-                ],
-              );
-          }
-        },
-      ),
-    );
+      return ListView(
+        children: [_createDataTable()],
+      );
+    });
   }
 
-  DataTable _createDataTable(List<DadosSessaoDTO> dados) {
-    return DataTable(columns: _createColumns(), rows: _createRows(dados));
+  DataTable _createDataTable() {
+    return DataTable(columns: _createColumns(), rows: _createRows());
   }
 
   List<DataColumn> _createColumns() {
     return [
       DataColumn(label: Text('Usuário')),
+      DataColumn(label: Text('Estação')),
       DataColumn(label: Text('Aplicativo')),
+      DataColumn(label: Text('Servico')),
       DataColumn(label: Text('Abertura')),
       DataColumn(label: Text('Ultima comunicação')),
       DataColumn(label: Center(child: Text('Encerrar sessão'))),
     ];
   }
-  List<DataRow> _createRows(List<DadosSessaoDTO> dados) {
-    return dados
+
+  List<DataRow> _createRows() {
+    return controller.dadosSessoes
         .map((d) => DataRow(cells: [
-      DataCell(Text(d.nomeUsuario ?? "")),
-      DataCell(Text(d.client!.descricao)),
-      DataCell(Text(d.dataAbertura.toString())),
-      DataCell(Text(d.dataUltimaAtualizacao.toString())),
-      DataCell(IconButton(onPressed: (){}, icon: Icon(Icons.close), tooltip: "Encerrar está sessao",))
-    ]))
+              DataCell(Text(d.nomeUsuario ?? "-----")),
+              DataCell(Text(d.nomeEstacao ?? "-----")),
+              DataCell(Text(d.client!.descricao)),
+              DataCell(
+                  Text(d.servico != null ? d.servico!.descricao : "-----")),
+              DataCell(Text(d.dataAbertura.toString())),
+              DataCell(Text(d.dataUltimaAtualizacao.toString())),
+              DataCell(IconButton(
+                onPressed: () => controller.encerrarSessao(d),
+                icon: Icon(Icons.close),
+                tooltip: "Encerrar está sessao",
+              ))
+            ]))
         .toList();
+  }
+
+//-------------------------------------------------- FUNÇÕES ------------------------------------------------------------
+  void initialize() {
+    controller.buscarSessoes();
   }
 }

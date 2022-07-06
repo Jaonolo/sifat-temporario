@@ -1,5 +1,6 @@
 import 'package:erp/app/extensions/stack_trace_extension.dart';
 import 'package:erp/app/services/navigation_service.dart';
+import 'package:erp/app/utils/snack_bar_utils.dart';
 import 'package:erp/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:models/model/models.dart';
@@ -17,14 +18,6 @@ class ErroUtils {
     else
       msg = error.toString();
 
-    SnackBar snackBar = SnackBar(
-      duration: Duration(seconds: 15),
-      content: Text(msg),
-    );
-
-
-    locator<NavigationService>().snackbarGlobalKey.currentState!
-      ..hideCurrentSnackBar()
-      ..showSnackBar(snackBar);
+    SnackBarUtils.exibir(msg);
   }
 }

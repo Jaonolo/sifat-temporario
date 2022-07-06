@@ -782,27 +782,36 @@ class UrlPws {
 
 
   // #####################  API SESSOES  #####################
-  UrlPws.criarSessao(){
+  //        CLient
+  UrlPws.criarSessaoClient(){
     _url = "/sessao/sessao-client/nova-sessao";
     _type = RequestType.POST;
   }
 
-  UrlPws.atualizarSessao(){
+  UrlPws.atualizarSessaoClient(){
     _url = "/sessao/sessao-client/atualizar-sessao";
     _type = RequestType.POST;
   }
 
+  //        Usuario
   UrlPws.postNovaSessaoUsuario(){
     _url = "/sessao/sessao-usuario/nova-sessao";
     _type = RequestType.POST;
   }
-  UrlPws.postEncerrarSessao(){
+
+  UrlPws.postEncerrarSessaoUsuario(){
     _url = "/sessao/sessao-usuario/encerrar-sessao";
     _type = RequestType.POST;
   }
 
   UrlPws.postAtualizarSessaoUsuario(){
     _url = "/sessao/sessao-usuario/atualizar-sessao";
+    _type = RequestType.POST;
+  }
+
+  //        Servico
+  UrlPws.postEncerrarSessaoServico(){
+    _url = "/sessao/sessao-servico/encerrar-sessao";
     _type = RequestType.POST;
   }
 
