@@ -30,7 +30,6 @@ class SessaoPageCompoment {
   Widget _createDataTable() {
     return DataTableCustom<DadosSessaoDTO>(
         cabecalho: Text("Sessões"),
-        multiSelecao: true,
         columns: [
           DataColumn(label: Text('Usuário')),
           DataColumn(label: Text('Estação')),
