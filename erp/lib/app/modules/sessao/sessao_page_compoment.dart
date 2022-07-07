@@ -1,5 +1,7 @@
 import 'package:erp/app/modules/sessao/sessao_controller.dart';
 import 'package:erp/app/widgets/confirmation_dialog.dart';
+import 'package:erp/app/widgets/data_table/data_table_custom.dart';
+import 'package:erp/app/widgets/data_table/models/row_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:models/model/enum/clients.dart';
@@ -21,48 +23,45 @@ class SessaoPageCompoment {
           child: Text("Nenhuma sessão encontrada"),
         );
 
-      return ListView(
-        children: [_createDataTable()],
-      );
+      return _createDataTable();
     });
   }
 
-  DataTable _createDataTable() {
-    return DataTable(
-      columns: _createColumns(),
-      rows: _createRows(),
-    );
-  }
-
-  List<DataColumn> _createColumns() {
-    return [
-      DataColumn(label: Text('Usuário')),
-      DataColumn(label: Text('Estação')),
-      DataColumn(label: Text('Aplicativo')),
-      DataColumn(label: Text('Servico')),
-      DataColumn(label: Text('Abertura')),
-      DataColumn(label: Text('Ultima comunicação')),
-      DataColumn(label: Center(child: Text('Encerrar sessão'))),
-    ];
-  }
-
-  List<DataRow> _createRows() {
-      return controller.dadosSessoes
-          .map((d) => DataRow(cells: [
-                DataCell(Text(d.nomeUsuario ?? "-----")),
-                DataCell(Text(d.nomeEstacao ?? "-----")),
-                DataCell(Text(d.client!.descricao)),
-                DataCell(
-                    Text(d.servico != null ? d.servico!.descricao : "-----")),
-                DataCell(Text(d.dataAbertura.toString())),
-                DataCell(Text(d.dataUltimaAtualizacao.toString())),
-                DataCell(IconButton(
-                  onPressed: () => onEncerrarSessao(d),
-                  icon: Icon(Icons.close),
-                  tooltip: "Encerrar está sessao",
-                ))
-              ]))
-          .toList();
+  Widget _createDataTable() {
+    return DataTableCustom<DadosSessaoDTO>(
+        cabecalho: Text("Sessões"),
+        multiSelecao: true,
+        columns: [
+          DataColumn(label: Text('Usuário')),
+          DataColumn(label: Text('Estação')),
+          DataColumn(label: Text('Aplicativo')),
+          DataColumn(label: Text('Servico')),
+          DataColumn(label: Text('Abertura')),
+          DataColumn(label: Text('Ultima comunicação')),
+          DataColumn(label: Center(child: Text('Encerrar sessão'))),
+        ],
+        rows: controller.dadosSessoes
+            .map((d) => [
+                  RowCustom(child: Text(d.nomeUsuario ?? "-----"), object: d),
+                  RowCustom(child: Text(d.nomeEstacao ?? "-----"), object: d),
+                  RowCustom(child: Text(d.client!.descricao), object: d),
+                  RowCustom(
+                      child: Text(
+                          d.servico != null ? d.servico!.descricao : "-----"),
+                      object: d),
+                  RowCustom(child: Text(d.dataAbertura.toString()), object: d),
+                  RowCustom(
+                      child: Text(d.dataUltimaAtualizacao.toString()),
+                      object: d),
+                  RowCustom(
+                      child: IconButton(
+                        onPressed: () => onEncerrarSessao(d),
+                        icon: Icon(Icons.close),
+                        tooltip: "Encerrar está sessao",
+                      ),
+                      object: d),
+                ])
+            .toList());
   }
 
 //-------------------------------------------------- FUNÇÕES ------------------------------------------------------------
