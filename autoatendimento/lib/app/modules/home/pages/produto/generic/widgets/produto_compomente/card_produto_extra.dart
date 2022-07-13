@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/abstract/controller_abstract.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_page.dart';
@@ -19,6 +20,7 @@ class CardProdutoExtra extends StatelessWidget {
 
   late BuildContext context;
   final HomeController homeController = Modular.get();
+  final AppController appController = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +77,20 @@ class CardProdutoExtra extends StatelessWidget {
 
   Widget _txtQuantidadeLancada() {
     Orientation orientation = MediaQuery.of(context).orientation;
+    NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
+        controllerAbstract.produtoCarrinho.notaItem,
+        controllerAbstract.produtoMenu!);
 
-    return Text('${notaItem.quantidade} UN',
+    BigDecimal qtde = notaItem.quantidade ?? BigDecimal.ZERO();
+
+    if(menu != null) {
+      qtde = menu.subitens.where((e) =>
+      e.idProdutoEmpresa == notaItem.idProdutoEmpresa).fold(
+          BigDecimal.ZERO(), (value, element) => value + element.quantidade);
+    }
+
+
+    return Text('$qtde UN',
         textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: orientation == Orientation.landscape
@@ -134,18 +148,13 @@ class CardProdutoExtra extends StatelessWidget {
      );
    }
   void _adicionar() {
-    notaItem.quantidade =
-        notaItem.quantidade!.somar(BigDecimal.ONE());
-    _atualizaNotaItem();
+    _atualizaNotaItem(false);
   }
 
   void _remover() {
     if (notaItem.quantidade!.compareTo(BigDecimal.ZERO()) <= 0) return;
 
-    notaItem.quantidade =
-        notaItem.quantidade!.subtrair(BigDecimal.ONE());
-
-    _atualizaNotaItem(removendo: true);
+    _atualizaNotaItem(true);
   }
 
   bool _podeAdicionar() {
@@ -177,54 +186,67 @@ class CardProdutoExtra extends StatelessWidget {
     return notaItem.quantidade!.compareTo(BigDecimal.ZERO()) > 0;
   }
 
-  void _atualizaNotaItem({removendo = false}) {
+  void _atualizaNotaItem(bool removendo) {
     try {
 
       NotaItem? menu = NotaItemUtils.localizaMenuJaLancado(
           controllerAbstract.produtoCarrinho.notaItem,
           controllerAbstract.produtoMenu!);
 
-      //Se não localizou um menu lançado, vai criar um novo e add o subitem
-      if (menu == null) {
-        menu = NotaItemUtils.menuToNotaItem(
-            controllerAbstract.produtoCarrinho.notaItem.idNota!,
-            controllerAbstract.produtoMenu!);
-        menu.subitens.add(notaItem);
-        controllerAbstract.produtoCarrinho.notaItem.subitens.add(menu);
-      } else {
+      if (removendo) {
         //Se tem menu, verifica se já tem algum subitem desse componente lançado para remover
         NotaItem? itemJaLancado = NotaItemUtils.localizaSubitemJaLancado(
             controllerAbstract.produtoCarrinho.notaItem,
             controllerAbstract.produtoMenu!,
             produtoMenuComponente);
 
-        if (itemJaLancado != null) menu.subitens.remove(itemJaLancado);
+        if (menu == null || itemJaLancado == null)
+          throw Exception(
+              "Ao remover um item deve ter o menu ja lançado e o item nesse. Menu != null: ${menu == null}, ItemJaLancado != null: ${itemJaLancado == null} [DEV]");
 
-        if (notaItem.quantidade!.compareTo(BigDecimal.ZERO()) > 0) {
+        itemJaLancado.quantidade =
+            itemJaLancado.quantidade!.subtrair(BigDecimal.ONE());
+
+        if (itemJaLancado.quantidade!.compareTo(BigDecimal.ZERO()) <= 0)
+          menu.subitens.remove(itemJaLancado);
+
+      } else {
+
+        //Se não localizou um menu lançado, vai criar um novo e add o subitem
+        if (menu == null) {
+          menu = NotaItemUtils.menuToNotaItem(
+              controllerAbstract.produtoCarrinho.notaItem.idNota!,
+              controllerAbstract.produtoMenu!);
+
+          notaItem.quantidade = notaItem.quantidade!.somar(BigDecimal.ONE());
+
+          if (isAbrirTelaAdcional()) {
+            homeController
+                .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
+            return;
+          }
+
           menu.subitens.add(notaItem);
+          controllerAbstract.produtoCarrinho.notaItem.subitens.add(menu);
         } else {
-          //Caso a quantidade do item for 0 siginica que está removendo
-          //Verifica se o menu tem subitens, caso não, remove ele também
-          if (menu.subitens.isEmpty)
-            controllerAbstract.produtoCarrinho.notaItem.subitens
-                .remove(menu);
+
+          if (isAbrirTelaAdcional()) {
+            NotaItem ni = NotaItemUtils.itemComboToNotaItem(
+                controllerAbstract.produtoCarrinho.notaItem.idNota!,
+                produtoMenuComponente,
+                controllerAbstract
+                    .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+                appController.tabelaPreco.id!,
+                quantidade: BigDecimal.ONE());
+
+            homeController
+                .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(ni)));
+            return;
+          }
+
+          notaItem.quantidade = notaItem.quantidade!.somar(BigDecimal.ONE());
         }
       }
-
-      if(!removendo) {
-        //Se tiver alguns observação ou adicionais abre a tela nova
-        bool temMenuObservacao = notaItem.produtoEmpresa!.produto!.menus
-            .any((element) => element.tipo == "OBSERVACAO");
-
-        if (controllerAbstract.produtoCarrinho.notaItem.tipo == "COMBO" &&
-            (notaItem.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
-                temMenuObservacao)) {
-          homeController
-              .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
-          return;
-        }
-      }
-
 
       NotaItemUtils.atualizaTotais(
           controllerAbstract.produtoCarrinho.notaItem);
@@ -234,4 +256,19 @@ class CardProdutoExtra extends StatelessWidget {
       print(s);
     }
   }
+
+  bool isAbrirTelaAdcional(){
+    //Se tiver alguns observação ou adicionais abre a tela nova
+    bool temMenuObservacao = notaItem.produtoEmpresa!.produto!.menus
+        .any((element) => element.tipo == "OBSERVACAO");
+
+    if (controllerAbstract.produtoCarrinho.notaItem.tipo == "COMBO" &&
+        (notaItem.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
+            temMenuObservacao)) {
+      return true;
+    }
+
+    return false;
+  }
+
 }
