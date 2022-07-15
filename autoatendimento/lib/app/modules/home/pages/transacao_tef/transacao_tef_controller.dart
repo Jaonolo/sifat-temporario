@@ -193,7 +193,6 @@ abstract class TransacaoTefBase with Store {
       //Confirmar transação TEF
       await finalizar(vendaController.nota.id!, true);
     } catch (e) {
-      atualizaPermiteCancelar(true);
       String erro = e.toString();
 
       if (e.runtimeType == PwsException) {
@@ -203,9 +202,16 @@ abstract class TransacaoTefBase with Store {
           erro += "\n" + e.pws!.description!;
       }
 
-      atualizaBuffer(
-          'Desculpe! \n\n Ocorreu um problema na finalização do pedido: \n\n  [$erro]');
       print('[ERRO - tratativasPosTransacao]: ${e.toString()}');
+
+      _tentarNovamentePrinter(
+          "Desculpe! \n\n Ocorreu um problema na finalização do pedido:\n\n [$erro] \n\n"
+              " Caso queira solicitar cupom fiscal, favor dirigir-se ao caixa.",
+              () => _printConsumo(context),
+              () => {_avancar()},
+          txt: "Continuar",
+          showCancelBtn: false,
+          context);
     }
   }
 
@@ -278,17 +284,18 @@ abstract class TransacaoTefBase with Store {
   }
 
   void _tentarNovamentePrinter(String title, Function onConfirmar,
-      Function onCancelar, BuildContext context) {
+      Function onCancelar, BuildContext context , { bool showCancelBtn = true ,  String txt = ""}) {
     showDialog(
         context: context,
         barrierDismissible: false,
         builder: (c) => DialogAuto(
-              title: title,
-              message: "",
-              txtConfirmar: "Tentar novamente",
-              onConfirm: onConfirmar,
-              onCancel: onCancelar,
-            ));
+          title: title,
+          message: "",
+          txtConfirmar: txt != null ? txt :"Tentar novamente" ,
+          onConfirm: onConfirmar,
+          onCancel: onCancelar,
+          showCancelButton: showCancelBtn,
+        ));
   }
 
   void _avancar() {
