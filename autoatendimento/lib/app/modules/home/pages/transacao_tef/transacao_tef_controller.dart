@@ -208,7 +208,7 @@ abstract class TransacaoTefBase with Store {
           "Desculpe! \n\n Ocorreu um problema na finalização do pedido:\n\n [$erro] \n\n"
               " Caso queira solicitar cupom fiscal, favor dirigir-se ao caixa.",
               () => _printConsumo(context),
-              () => {},
+              () => {_avancar()},
           txt: "Continuar",
           showCancelBtn: false,
           context);

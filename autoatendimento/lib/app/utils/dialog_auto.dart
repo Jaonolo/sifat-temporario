@@ -74,29 +74,29 @@ class DialogAuto extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: SizedBox(
-                  width: FontUtils.h1(context) * 4.5,
-                  child: BotaoSecundario(
-                    context: context,
-                    descricao: txtConfirmar,
-                    function: () {
-                      if (autoCloseable) close(context);
-                      onConfirm();
-                    },
-                  ),
-                ),
-              ),
+                    width: FontUtils.h1(context) * 4.5,
+                    child: BotaoSecundario(
+                      context: context,
+                      descricao: txtCancelar,
+                      function: () {
+                        if (autoCloseable) close(context);
+                        if (onCancel != null) onCancel!();
+                      },
+                    )),
+              )
             ],
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: SizedBox(
-                  width: FontUtils.h1(context) * 4.5,
-                  child: BotaoPrimario(
-                    descricao: txtCancelar,
-                    function: () {
-                      if (autoCloseable) close(context);
-                      if (onCancel != null) onCancel!();
-                    },
-                  )),
+                width: FontUtils.h1(context) * 4.5,
+                child: BotaoPrimario(
+                  descricao: txtConfirmar,
+                  function: () {
+                    if (autoCloseable) close(context);
+                    onConfirm();
+                  },
+                ),
+              ),
             )
           ],
         ),
