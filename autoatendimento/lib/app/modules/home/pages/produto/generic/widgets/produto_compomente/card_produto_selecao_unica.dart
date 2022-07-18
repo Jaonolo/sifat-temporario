@@ -138,6 +138,19 @@ class CardProdutoSelecaoUnica extends StatelessWidget {
             controllerAbstract.produtoMenu!);
         notaItem.quantidade = BigDecimal.ONE();
         menu.subitens.add(notaItem);
+
+        //Se tiver alguns observação ou adicionais abre a tela nova
+        bool temMenuObservacao = notaItem.produtoEmpresa!.produto!.menus
+            .any((element) => element.tipo == "OBSERVACAO");
+
+        if (controllerAbstract.produtoCarrinho.notaItem.tipo == "COMBO" &&
+            (notaItem.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
+                temMenuObservacao)) {
+          homeController
+              .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
+          return;
+        }
+
         controllerAbstract.produtoCarrinho.notaItem.subitens.add(menu);
       } else {
         //Se tem menu, verifica se já tem algum subitem desse componente lançado para remover
@@ -156,21 +169,6 @@ class CardProdutoSelecaoUnica extends StatelessWidget {
         notaItem.quantidade = BigDecimal.ZERO();
         removendo = true;
       }
-
-      if(!removendo) {
-        //Se tiver alguns observação ou adicionais abre a tela nova
-        bool temMenuObservacao = notaItem.produtoEmpresa!.produto!.menus
-            .any((element) => element.tipo == "OBSERVACAO");
-
-        if (controllerAbstract.produtoCarrinho.notaItem.tipo == "COMBO" &&
-            (notaItem.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
-                temMenuObservacao)) {
-          homeController
-              .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
-          return;
-        }
-      }
-
 
       NotaItemUtils.atualizaTotais(controllerAbstract.produtoCarrinho.notaItem);
       controllerAbstract

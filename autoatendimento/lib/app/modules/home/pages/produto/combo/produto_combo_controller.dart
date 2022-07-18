@@ -115,7 +115,6 @@ abstract class ProdutoComboBase extends ControllerAbstract with Store  {
       menu!.subitens.add(itemCombo);
       produtoCarrinho.notaItem.subitens.add(menu!);
     } else {
-      menu!.subitens.clear();
       menu!.subitens.add(itemCombo);
     }
     NotaItemUtils.atualizaTotais(produtoCarrinho.notaItem);
