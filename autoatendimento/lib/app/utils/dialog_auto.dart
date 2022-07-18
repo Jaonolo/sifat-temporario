@@ -97,7 +97,7 @@ class DialogAuto extends StatelessWidget {
                   },
                 ),
               ),
-            )
+            ),
           ],
         ),
       ],
