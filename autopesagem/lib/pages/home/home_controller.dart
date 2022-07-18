@@ -27,7 +27,7 @@ abstract class HomeControllerBase with Store {
   late Timer timer;
 
   Future<void> iniciaTimer(BuildContext context) async {
-    timer = Timer.periodic(Duration(seconds: 1), (time) async {
+    timer = Timer.periodic(Duration(seconds: 3), (time) async {
       try {
         await lerPeso(context);
       } catch (e) {}
@@ -87,7 +87,6 @@ abstract class HomeControllerBase with Store {
 
             //Indepedente do que acontecer ele reinicia o time
             reiniciaTimer(context);
-
             AutoPesagemUtils.closeProgress(context);
           };
 
