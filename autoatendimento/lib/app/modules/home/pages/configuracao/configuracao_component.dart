@@ -25,12 +25,12 @@ class ConfiguracaoPageComponent {
               Expanded(
                 flex: 20,
                 child: _cardOpcao(Icon(Icons.card_giftcard),
-                    "TEF ADMINISTRATIVO", () => controller.goAdministrativo()),
+                    "TEF ADMINISTRATIVO", controller.goAdministrativo),
               ),
               Expanded(
                 flex: 20,
                 child: _cardOpcao(Icon(Icons.adjust), "PENDENCIA FISCAL",
-                    () => controller.goPendenciaFiscal()),
+                     controller.goPendenciaFiscal),
               ),
             ],
           ),
@@ -66,7 +66,8 @@ class ConfiguracaoPageComponent {
             Expanded(flex: 6, child: Container()),
           ],
         ),
-        onPressed: onpressed(),
+        onPressed: () =>
+          onpressed.call(),
       ),
     );
   }

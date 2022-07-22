@@ -40,8 +40,50 @@ class CancelamentoTefComponent {
             default:
               List<TransacaoCartao> transacoes =
                   snapshot.data as List<TransacaoCartao>;
-              return Text(transacoes.length.toString());
+              print("AQUIIIIIIIIIIII");
+              print(transacoes);
+              return listaTransacoes(transacoes);
           }
         });
+  }
+
+  Widget listaTransacoes(List<TransacaoCartao> transacoes) {
+    return Container(
+      width: 400,
+      child: DataTable(
+          border: TableBorder.all(
+              color: Colors.black, borderRadius: BorderRadius.circular(10)),
+          columns: [
+            DataColumn(label: Text("DATA"), numeric: true),
+            DataColumn(
+              label: Text("VALOR"),
+              numeric: true,
+            ),
+            DataColumn(label: Text("BANDEIRA"), numeric: false)
+          ],
+          rows: transacoes
+              .map((transacaoCartao) => DataRow(cells: [
+                    DataCell(
+                      TextButton(
+                        child: Text(transacaoCartao.data.toString()),
+                        onPressed: () {},
+                      ),
+                    ),
+                    DataCell(
+                      TextButton(
+                        child: Text(transacaoCartao.valor.toString()),
+                        onPressed: () {},
+                      ),
+                    ),
+                    DataCell(
+                      TextButton(
+                        child: Text(
+                            transacaoCartao.bandeira!.descricao.toString()),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ]))
+              .toList()),
+    );
   }
 }
