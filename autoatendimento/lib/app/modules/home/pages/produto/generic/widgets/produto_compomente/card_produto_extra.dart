@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
+import 'package:collection/collection.dart';
 
 // ignore: must_be_immutable
 class CardProdutoExtra extends StatelessWidget {
@@ -244,7 +245,15 @@ class CardProdutoExtra extends StatelessWidget {
             return;
           }
 
-          notaItem.quantidade = notaItem.quantidade!.somar(BigDecimal.ONE());
+          //Utilizando referencia das classe
+          NotaItem? ni = menu.subitens.firstWhereOrNull((element) => element.idProdutoEmpresa == notaItem.idProdutoEmpresa);
+
+          if (ni != null) {
+            ni.quantidade = ni.quantidade!.somar(BigDecimal.ONE());
+          } else {
+            notaItem.quantidade = notaItem.quantidade!.somar(BigDecimal.ONE());
+            menu.subitens.add(notaItem);
+          }
         }
       }
 
