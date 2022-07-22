@@ -1,4 +1,4 @@
-import 'package:autoatendimento/app/modules/home/pages/transacao_tef/transacao_tef_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/tef/transacao_tef/transacao_tef_controller.dart';
 import 'package:autoatendimento/app/modules/home/widgets/app_bar_image.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_secundario.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';

@@ -14,7 +14,7 @@ import 'package:models/model/models.dart';
 import 'package:models/model/sitef_protocolo_socket.dart';
 import 'package:web_socket_channel/html.dart';
 
-part "transacao_tef_controller.g.dart";
+part 'transacao_tef_controller.g.dart';
 
 class TransacaoTefController = TransacaoTefBase with _$TransacaoTefController;
 

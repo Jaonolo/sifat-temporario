@@ -1,4 +1,4 @@
-import 'package:autoatendimento/app/modules/home/pages/transacao_tef/transacao_tef_component.dart';
+import 'package:autoatendimento/app/modules/home/pages/tef/transacao_tef/transacao_tef_component.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
