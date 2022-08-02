@@ -153,7 +153,7 @@ class StringUtils {
       switch (notaItem.tipo) {
         case "OBSERVACAO":
           if (descricaoSub.isNotEmpty) descricaoSub += " | ";
-          descricaoSub += '${notaItem.descricao!}';
+          descricaoSub += '${notaItem.descricao!}\n';
           break;
         case "ADICIONAL":
           if (descricaoSub.isNotEmpty) descricaoSub += " | ";
