@@ -46,6 +46,7 @@ class DialogAuto extends StatelessWidget {
           ? Center(
               child: Text(
                 title!,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: orientation == Orientation.landscape
                         ? FontUtils.h2(context)
@@ -57,6 +58,7 @@ class DialogAuto extends StatelessWidget {
         child: Column(
           children: [
             Text(message,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: orientation == Orientation.landscape
                         ? FontUtils.h2(context)
