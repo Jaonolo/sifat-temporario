@@ -25,6 +25,7 @@ class ListViewCompomentes extends StatelessWidget {
 
       return ListView.builder(
           shrinkWrap: true,
+          scrollDirection: Axis.vertical,
           itemCount: controllerAbstract.produtoMenu!.componentes.length,
           itemBuilder: (context, index) {
             return Padding(
