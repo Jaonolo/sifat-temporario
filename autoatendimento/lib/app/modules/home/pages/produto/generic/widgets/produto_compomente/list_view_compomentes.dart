@@ -23,16 +23,18 @@ class ListViewCompomentes extends StatelessWidget {
       if(controllerAbstract.produtoMenu == null)
         return SizedBox();
 
-      return ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemCount: controllerAbstract.produtoMenu!.componentes.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 5),
-              child: devolveCardProdutoCompomente(index),
-            );
-          });
+      return SingleChildScrollView(
+        child: ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: controllerAbstract.produtoMenu!.componentes.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: devolveCardProdutoCompomente(index),
+              );
+            }),
+      );
     });
   }
 
