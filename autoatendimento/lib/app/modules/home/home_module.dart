@@ -6,6 +6,7 @@ import 'package:autoatendimento/app/modules/home/pages/cpf/cpf_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/pagamentos/pagamentos_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/pedido_finalizado/pedido_finalizado_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/pedido_viagem/pedido_viagem_page.dart';
+import 'package:autoatendimento/app/modules/home/pages/pendencia_fiscal/pendencia_fiscal_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/composto/produto_composto_controller.dart';
@@ -23,6 +24,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'home_controller.dart';
 import 'home_page.dart';
+import 'pages/bloqueio_admnistrativo/bloqueio_administrativo_page.dart';
 import 'pages/pendencia_fiscal/pendencia_fiscal_page.dart';
 import 'pages/splash/splash_controller.dart';
 import 'pages/splash/splash_page.dart';
@@ -47,6 +49,8 @@ class HomeModule extends Module {
         Bind.lazySingleton((i) => ConfiguracaoController()),
         Bind.lazySingleton((i) => AdministrativoTefController()),
         Bind.lazySingleton((i) => CancelamentoTefController()),
+        Bind.lazySingleton((i) => PendenciaFiscalController()),
+
 
 
 
@@ -67,6 +71,7 @@ class HomeModule extends Module {
         ChildRoute("/aviso", child: (_, args) => AvisoIdadePage()),
         ChildRoute("/transacao", child: (_, args) => TransacaoTefPage()),
         ChildRoute("/wizard", child: (_, args) => WizardPage()),
+        ChildRoute("/bloqueio", child: (_, args) => BloqueioAdministrativoPage()),
         ChildRoute("/configuracao", child: (_, args) => ConfiguracaoPage()),
         ChildRoute("/administrativo_tef", child: (_, args) => AdministrativoTefPage()),
         ChildRoute("/cancelamento_tef", child: (_, args) => CancelamentoTefPage()),

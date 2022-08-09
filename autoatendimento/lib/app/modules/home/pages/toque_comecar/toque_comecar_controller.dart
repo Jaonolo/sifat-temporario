@@ -11,6 +11,6 @@ abstract class ToqueComecarBase with Store {
     Modular.to.pushNamed("/home");
   }
   void configurar() {
-    Modular.to.pushNamed("/configuracao");
+    Modular.to.pushNamed("/bloqueio");
   }
 }

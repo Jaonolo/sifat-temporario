@@ -115,7 +115,7 @@ abstract class SplashBase with Store {
           exception: PwsException(pws));
     }
     //todo retirar isso JOSE
-    if(nomeEstacao == "DSV11"){
+    if(nomeEstacao == "DESKTOP-C2U01ML"){
          nomeEstacao =  nomeEstacao! + "_autoAtendimento";
     }
   }

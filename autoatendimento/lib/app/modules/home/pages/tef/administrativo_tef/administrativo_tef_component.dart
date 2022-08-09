@@ -1,5 +1,6 @@
 import 'package:autoatendimento/app/modules/home/pages/tef/administrativo_tef/administrativo_tef_controller.dart';
 import 'package:autoatendimento/app/modules/home/widgets/app_bar_image.dart';
+import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
 import 'package:autoatendimento/app/utils/style_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -29,6 +30,13 @@ class AdministrativoTefComponent {
   Widget opcoes() {
     return Row(
       children: [
+        Expanded(
+            flex: 20,
+            child: BotaoSetaVoltar(
+              function: () {
+                Modular.to.pushNamed('/comecar');
+              },
+            )),
         InkWell(
           child: TextButton(
             child: Text("Cancelamento TEF"),

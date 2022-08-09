@@ -104,6 +104,22 @@ abstract class TransacaoTefBase with Store {
     channel.sink.add(sitefProtocoloSocket.toJson());
   }
 
+  Future<void> cancelarTransacao(BigDecimal valorTotal, String tipoPagamentoTEF,
+      int identificadorTransacao) async {
+    print(channel);
+    sitefProtocoloSocket = SitefProtocoloSocket();
+    sitefProtocoloSocket.funcao = "cancelar";
+    sitefProtocoloSocket.param = SitefProtocoloSocketParam();
+    sitefProtocoloSocket.param!.confirmaTransacao = false;
+    sitefProtocoloSocket.param!.valor = valorTotal;
+    sitefProtocoloSocket.param!.cupomFiscal = identificadorTransacao;
+    sitefProtocoloSocket.param!.tipoPagamentoTEF = tipoPagamentoTEF;
+    print(sitefProtocoloSocket.toString());
+
+    channel.sink.add(sitefProtocoloSocket.toJson());
+  }
+
+
   Future<void> cancelar() async {
     SitefProtocoloSocket sitefProtocoloSocket = SitefProtocoloSocket();
     sitefProtocoloSocket.funcao = "abortar";
