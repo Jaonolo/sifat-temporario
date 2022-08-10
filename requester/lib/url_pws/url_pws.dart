@@ -719,6 +719,11 @@ class UrlPws {
     _type = RequestType.PUT;
   }
 
+  UrlPws.putNotaPerdenciaArquivar() {
+    _url = "/notas/{idNota}/arquivar-pendencia";
+    _type = RequestType.PUT;
+  }
+
   UrlPws.getBuscarIntegrador() {
     _url = "/v2/empresa/integrador/{idIntegrador}";
     _type = RequestType.GET;

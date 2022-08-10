@@ -118,6 +118,9 @@ abstract class SplashBase with Store {
     if(nomeEstacao == "DESKTOP-C2U01ML"){
          nomeEstacao =  nomeEstacao! + "_autoAtendimento";
     }
+    if(nomeEstacao == "DSV11"){
+      nomeEstacao =  nomeEstacao! + "_autoAtendimento";
+    }
   }
 
   Future<void> _loginAPI() async {

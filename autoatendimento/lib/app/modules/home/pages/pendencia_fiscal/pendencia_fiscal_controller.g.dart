@@ -34,12 +34,12 @@ mixin _$PendenciaFiscalController on PendenciaFiscalBase, Store {
         .run(() => super.adicionarPendencias(pendencia));
   }
 
-  late final _$carregaPendenciasAsyncAction =
-      AsyncAction('PendenciaFiscalBase.carregaPendencias', context: context);
+  late final _$existePendenciaAsyncAction =
+      AsyncAction('PendenciaFiscalBase.existePendencia', context: context);
 
   @override
-  Future<List<Pendencia>> carregaPendencias() {
-    return _$carregaPendenciasAsyncAction.run(() => super.carregaPendencias());
+  Future existePendencia() {
+    return _$existePendenciaAsyncAction.run(() => super.existePendencia());
   }
 
   @override
