@@ -57,7 +57,6 @@ class PendenciaFiscalComponent {
         });
   }
 
-  @observable
   Widget listaTransacoes(List<Pendencia> pendencias) {
     return Observer(builder: (_) {
       return SingleChildScrollView(
