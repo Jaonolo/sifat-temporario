@@ -146,32 +146,32 @@ class StringUtils {
     return cnpjFormatado;
   }
 
-  static String montaDescricaoSubItensAuto(NotaItem notaItem, {bool ignorarItemPrincipal = false}) {
+  static String montaDescricaoSubItensAuto(NotaItem notaItem, {bool ignorarItemPrincipal = false, bool isValorItemTotal = true}) {
     String descricaoSub = "";
 
     if(!ignorarItemPrincipal) {
       switch (notaItem.tipo) {
         case "OBSERVACAO":
           if (descricaoSub.isNotEmpty) descricaoSub += " | ";
-          descricaoSub += notaItem.descricao!;
+          descricaoSub += '${notaItem.descricao!}\n';
           break;
         case "ADICIONAL":
           if (descricaoSub.isNotEmpty) descricaoSub += " | ";
           descricaoSub +=
-              '${notaItem.descricao} +R\$ ${notaItem.precoTotal!.toStringAsFixed(2)}';
+              '${notaItem.quantidade} UN ${notaItem.descricao}   R\$ ${notaItem.precoTotal!.toStringAsFixed(2)}\n';
           break;
         case "ITEM_COMBO":
           if (descricaoSub.isNotEmpty) descricaoSub += " | ";
-          descricaoSub += "${notaItem.descricao}";
+          descricaoSub += "${notaItem.quantidade} UN  ${notaItem.descricao}";
           descricaoSub +=
-              ' +R\$ ${NotaItemUtils.getSubtotal(notaItem).toStringAsFixed(2)}';
+              '  R\$ ${isValorItemTotal ? NotaItemUtils.getSubtotal(notaItem).toStringAsFixed(2) : notaItem.precoTotal!.toStringAsFixed(2)}\n';
           break;
       }
     }
 
     if (notaItem.subitens.isNotEmpty)
       for (NotaItem ni in notaItem.subitens)
-        descricaoSub += montaDescricaoSubItensAuto(ni);
+        descricaoSub += montaDescricaoSubItensAuto(ni,isValorItemTotal: isValorItemTotal);
 
     return descricaoSub.toUpperCase();
   }

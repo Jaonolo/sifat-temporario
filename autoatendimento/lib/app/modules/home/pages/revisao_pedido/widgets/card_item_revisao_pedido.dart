@@ -85,7 +85,7 @@ class _CardItemRevisaoPedidoState extends State<CardItemRevisaoPedido> {
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: Text(
-                        StringUtils.montaDescricaoSubItensAuto(widget.notaItem),
+                        StringUtils.montaDescricaoSubItensAuto(widget.notaItem, isValorItemTotal: false),
                         style: TextStyle(
                             fontSize: orientation == Orientation.landscape
                                 ? FontUtils.h2(context)

@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
+import 'package:collection/collection.dart';
 
 // ignore: must_be_immutable
 class CardProdutoExtra extends StatelessWidget {
@@ -85,7 +86,7 @@ class CardProdutoExtra extends StatelessWidget {
 
     if(menu != null) {
       qtde = menu.subitens.where((e) =>
-      e.idProdutoEmpresa == notaItem.idProdutoEmpresa).fold(
+      e.idProdutoEmpresa == notaItem.idProdutoEmpresa && e.idGrade == notaItem.idGrade).fold(
           BigDecimal.ZERO(), (value, element) => value + element.quantidade);
     }
 
@@ -221,8 +222,9 @@ class CardProdutoExtra extends StatelessWidget {
           notaItem.quantidade = notaItem.quantidade!.somar(BigDecimal.ONE());
 
           if (isAbrirTelaAdcional()) {
-            homeController
-                .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
+
+            abreTelaAdicional(menu);
+
             return;
           }
 
@@ -231,20 +233,21 @@ class CardProdutoExtra extends StatelessWidget {
         } else {
 
           if (isAbrirTelaAdcional()) {
-            NotaItem ni = NotaItemUtils.itemComboToNotaItem(
-                controllerAbstract.produtoCarrinho.notaItem.idNota!,
-                produtoMenuComponente,
-                controllerAbstract
-                    .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
-                appController.tabelaPreco.id!,
-                quantidade: BigDecimal.ONE());
 
-            homeController
-                .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(ni)));
+            abreTelaAdicional(menu);
+
             return;
           }
 
-          notaItem.quantidade = notaItem.quantidade!.somar(BigDecimal.ONE());
+          //Utilizando referencia das classe
+          NotaItem? ni = menu.subitens.firstWhereOrNull((element) => element.idProdutoEmpresa == notaItem.idProdutoEmpresa && element.idGrade == notaItem.idGrade);
+
+          if (ni != null) {
+            ni.quantidade = ni.quantidade!.somar(BigDecimal.ONE());
+          } else {
+            notaItem.quantidade = notaItem.quantidade!.somar(BigDecimal.ONE());
+            menu.subitens.add(notaItem);
+          }
         }
       }
 
@@ -263,7 +266,7 @@ class CardProdutoExtra extends StatelessWidget {
         .any((element) => element.tipo == "OBSERVACAO");
 
     if (controllerAbstract.produtoCarrinho.notaItem.tipo == "COMBO" &&
-        (notaItem.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
+        (notaItem.produtoEmpresa!.produto!.pacote.equals(TipoPacote.ADICIONAIS) ||
             temMenuObservacao)) {
       return true;
     }
@@ -271,4 +274,19 @@ class CardProdutoExtra extends StatelessWidget {
     return false;
   }
 
+   void abreTelaAdicional(NotaItem? menu ){
+    //cria noaItem como itemCOMBO
+     NotaItem ni = NotaItemUtils.itemComboToNotaItem(
+         controllerAbstract.produtoCarrinho.notaItem.idNota!,
+         produtoMenuComponente,
+         controllerAbstract
+             .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+         appController.tabelaPreco.id!,
+         //VALIDA SE FOR COMPONENTE FIXO NÃO TEM VALOR PARA PEGAR SE FOR DIFERENTE TEM
+         adcionalDoItemDoCombo: menu!.consumoItem!.menu!.tipo == "COMPONENTE_FIXO" ? false : true);
+
+     homeController
+         .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(ni)));
+     return;
+   }
 }
