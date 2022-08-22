@@ -2727,10 +2727,10 @@ NotaItem _$NotaItemFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['dataLancamento'] as String)
       ..idTurno = json['idTurno'] as int?
       ..idProdutoEmpresa = json['idProdutoEmpresa'] as int?
-      ..produtoEmpresa = json['produtoEmpresa'] == null
-          ? null
-          : ProdutoEmpresa.fromJson(
-          json['produtoEmpresa'] as Map<String, dynamic>)
+      // ..produtoEmpresa = json['produtoEmpresa'] == null
+      //     ? null
+      //     : ProdutoEmpresa.fromJson(
+      //     json['produtoEmpresa'] as Map<String, dynamic>)
       ..idGrade = json['idGrade'] as int?
       ..grade = json['grade'] == null
           ? null
@@ -2829,7 +2829,7 @@ Map<String, dynamic> _$NotaItemToJson(NotaItem instance) =>
       'dataLancamento': instance.dataLancamento?.toIso8601String(),
       'idTurno': instance.idTurno,
       'idProdutoEmpresa': instance.idProdutoEmpresa,
-      'produtoEmpresa': instance.produtoEmpresa,
+      // 'produtoEmpresa': instance.produtoEmpresa,
       'idGrade': instance.idGrade,
       'grade': instance.grade,
       'indice': instance.indice,

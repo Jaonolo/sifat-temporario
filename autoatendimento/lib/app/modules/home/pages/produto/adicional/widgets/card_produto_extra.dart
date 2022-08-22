@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
@@ -24,6 +25,7 @@ class CardProdutoExtra extends StatefulWidget {
 class _CardProdutoExtraState extends State<CardProdutoExtra> {
   final ProdutoAdicionalController produtoAdicionalController = Modular.get();
   final VendaController vendaController = Modular.get();
+  final AppController appController = Modular.get();
 
   @override
   Widget build(BuildContext c) {
@@ -219,7 +221,9 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
         NotaItem? itemJaLancado = NotaItemUtils.localizaSubitemJaLancado(
             produtoAdicionalController.produtoCarrinho.notaItem,
             widget.produtoMenu,
-            widget.produtoMenuComponente);
+            widget.produtoMenuComponente, (idProdutoEmpresa){
+          return appController.mapProdutos[idProdutoEmpresa];
+        });
 
         if (itemJaLancado != null) menu.subitens.remove(itemJaLancado);
 
@@ -236,7 +240,9 @@ class _CardProdutoExtraState extends State<CardProdutoExtra> {
       }
 
       NotaItemUtils.atualizaTotais(
-          produtoAdicionalController.produtoCarrinho.notaItem);
+          produtoAdicionalController.produtoCarrinho.notaItem, (idProdutoEmpresa){
+        return appController.mapProdutos[idProdutoEmpresa];
+      });
       produtoAdicionalController
           .changeProdutoCarrinho(produtoAdicionalController.produtoCarrinho);
 

@@ -55,7 +55,9 @@ abstract class ProdutoComboBase with Store {
     try {
       //Pré validações
       produtoCarrinho = await ProdutoCarrinhoUtils.atualizaProdutoCarrinho(
-          produtoCarrinhoOriginal, produtoCarrinho);
+          produtoCarrinhoOriginal, produtoCarrinho, (idProdutoEmpresa){
+            return appController.mapProdutos[idProdutoEmpresa];
+      });
 
       //Ação de adicionar o produto carrinho
       //Caso o produto carrinho já possuir indice, a atualização é feita por referencia no passo anterior "atualizaProdutoCarrinho"
@@ -77,20 +79,24 @@ abstract class ProdutoComboBase with Store {
       item = NotaItemUtils.itemComboToNotaItem(
           produtoCarrinho.notaItem.idNota!,
           produtoMenuComponente,
-          produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+          appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
+              .idEmpresa!,
           appController.tabelaPreco.id!);
     } else if (produtoMenu!.tipo == "COMPONENTE_EXTRA") {
       item = NotaItemUtils.adicionalToNotaItem(
           produtoCarrinho.notaItem.idNota!,
           produtoMenuComponente,
-          produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+          appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
+              .idEmpresa!,
           appController.tabelaPreco.id!);
     }
 
-    bool temMenuObservacao = item.produtoEmpresa!.produto!.menus
+    bool temMenuObservacao = appController
+        .mapProdutos[item.idProdutoEmpresa]!.produto!.menus
         .any((element) => element.tipo == "OBSERVACAO");
 
-    if (item.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
+    if (appController.mapProdutos[item.idProdutoEmpresa]!.produto!.pacote ==
+            "ADICIONAIS" ||
         temMenuObservacao) {
       homeController.addPalco(ProdutoAdicionalPage(ProdutoCarrinho(item)));
       return;
@@ -109,7 +115,9 @@ abstract class ProdutoComboBase with Store {
       menu!.subitens.clear();
       menu!.subitens.add(itemCombo);
     }
-    NotaItemUtils.atualizaTotais(produtoCarrinho.notaItem);
+    NotaItemUtils.atualizaTotais(produtoCarrinho.notaItem, (idProdutoEmpresa) {
+      return appController.mapProdutos[idProdutoEmpresa];
+    });
     _changeNotaItemMenu();
     proximo();
   }
@@ -117,7 +125,10 @@ abstract class ProdutoComboBase with Store {
   void limparItem() {
     if (menu != null) {
       menu!.subitens.clear();
-      NotaItemUtils.atualizaTotais(produtoCarrinho.notaItem);
+      NotaItemUtils.atualizaTotais(produtoCarrinho.notaItem,
+          (idProdutoEmpresa) {
+        return appController.mapProdutos[idProdutoEmpresa];
+      });
     }
     proximo();
   }
@@ -145,15 +156,26 @@ abstract class ProdutoComboBase with Store {
     this.index = index;
 
     produtoMenu = (index <
-        produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index]
+            appController
+                .mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
+                .produto!
+                .menus
+                .length)
+        ? appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
+            .produto!.menus[index]
         : null;
     proximoMenu = (index + 1 <
-        produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index + 1]
+            appController
+                .mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
+                .produto!
+                .menus
+                .length)
+        ? appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
+            .produto!.menus[index + 1]
         : null;
     anteriorMenu = (index > 0)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index - 1]
+        ? appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
+            .produto!.menus[index - 1]
         : null;
 
     _changeNotaItemMenu();

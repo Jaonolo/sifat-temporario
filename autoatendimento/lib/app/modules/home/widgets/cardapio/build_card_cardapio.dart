@@ -130,7 +130,9 @@ class BuildCardCardapio {
                 TipoItem.ITEM, produtoEmpresa, appController.tabelaPreco.id!,
                 gradeEmpresa: grade);
 
-            if (NotaItemUtils.verificaAlcoolica(notaItem)) {
+            if (NotaItemUtils.verificaAlcoolica(notaItem, (idProdutoEmpresa){
+              return appController.mapProdutos[idProdutoEmpresa];
+            })) {
               bool permitido =
               await ProdutoCarrinhoUtils.podeVenderBebidaAlcoolica(
                   notaItem);

@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adiocinal_component.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
@@ -10,6 +11,7 @@ import 'package:utils/utils/nota_item_utils.dart';
 // ignore: must_be_immutable
 class ProdutoAdicionalPage extends StatefulWidget {
   ProdutoCarrinho produtoCarrinho;
+  AppController appController = Modular.get();
 
   ProdutoAdicionalPage(this.produtoCarrinho, {Key? key}) : super(key: key) {
     atualizaController();
@@ -29,7 +31,9 @@ class ProdutoAdicionalPage extends StatefulWidget {
           produtoCarrinhoClone.notaItem,
           controller.produtoCarrinhoOriginal.notaItem.quantidade!,
           BigDecimal.ONE());
-      NotaItemUtils.atualizaTotais(produtoCarrinhoClone.notaItem);
+      NotaItemUtils.atualizaTotais(produtoCarrinhoClone.notaItem, (idProdutoEmpresa){
+        return appController.mapProdutos[idProdutoEmpresa];
+      });
     }
 
     controller.produtoCarrinho = produtoCarrinhoClone;

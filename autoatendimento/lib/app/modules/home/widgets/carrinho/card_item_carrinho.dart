@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_page.dart';
@@ -25,6 +26,7 @@ class CardItemCarrinho extends StatefulWidget {
 class _CardItemCarrinhoState extends State<CardItemCarrinho> {
   final VendaController vendaController = Modular.get();
   final HomeController homeController = Modular.get();
+  final AppController appController = Modular.get();
   late Orientation orientation;
   late double heightBtn;
   late double widthBtn;
@@ -36,9 +38,7 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
 
   @override
   Widget build(BuildContext context) {
-    this.orientation = MediaQuery
-        .of(context)
-        .orientation;
+    this.orientation = MediaQuery.of(context).orientation;
     this.heightBtn = orientation == Orientation.landscape
         ? FontUtils.h3(context)
         : FontUtils.h2(context) * 1.4;
@@ -59,11 +59,18 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
                 Expanded(flex: 54, child: _txtDescricao()),
                 Expanded(
                     flex: 12,
-                    child: (widget.produtoCarrinho.notaItem.produtoEmpresa!
-                        .produto!.pacote ==
-                        "NENHUM" ||
-                        widget.produtoCarrinho.notaItem.produtoEmpresa!
-                            .produto!.grades.isEmpty)
+                    child: (appController
+                                    .mapProdutos[widget.produtoCarrinho.notaItem
+                                        .idProdutoEmpresa]!
+                                    .produto!
+                                    .pacote ==
+                                "NENHUM" ||
+                            appController
+                                .mapProdutos[widget
+                                    .produtoCarrinho.notaItem.idProdutoEmpresa]!
+                                .produto!
+                                .grades
+                                .isEmpty)
                         ? const SizedBox()
                         : _botaoEditar()),
                 Expanded(flex: 14, child: _txtValor()),
@@ -128,18 +135,16 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
         onPressed: () {
           //se for o ultimo pedido aparece uma dialog de confirmação
           widget.produtoCarrinho.remover(
-              ultimoPedido: (index) =>
-                  showDialog(
-                      context: context,
-                      builder: (context) =>
-                          DialogAuto(
-                            message: "Deseja remover o item do carrinho?",
-                            txtConfirmar: "SIM",
-                            txtCancelar: "NÃO",
-                            onConfirm: () =>
-                                vendaController.removerProdutoCarrinho(index),
-                            title: '',
-                          )));
+              ultimoPedido: (index) => showDialog(
+                  context: context,
+                  builder: (context) => DialogAuto(
+                        message: "Deseja remover o item do carrinho?",
+                        txtConfirmar: "SIM",
+                        txtCancelar: "NÃO",
+                        onConfirm: () =>
+                            vendaController.removerProdutoCarrinho(index),
+                        title: '',
+                      )));
         },
         child: Icon(
           Icons.remove,
@@ -150,57 +155,58 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
   }
 
   Widget _botaoEditar() {
-    double larguraTela = MediaQuery
-        .of(context)
-        .size
-        .width;
-    double alturaTela = MediaQuery
-        .of(context)
-        .size
-        .height;
+    double larguraTela = MediaQuery.of(context).size.width;
+    double alturaTela = MediaQuery.of(context).size.height;
 
     return orientation == Orientation.landscape
         ? Center(
-        child: SizedBox(
-            height: alturaTela * 0.1,
-            width: larguraTela * 0.1,
-            child: IconButton(
-              onPressed: onEditar,
-              icon: Icon(
-                Icons.edit,
-                color: Colors.black,
-              ),
-            )))
+            child: SizedBox(
+                height: alturaTela * 0.1,
+                width: larguraTela * 0.1,
+                child: IconButton(
+                  onPressed: onEditar,
+                  icon: Icon(
+                    Icons.edit,
+                    color: Colors.black,
+                  ),
+                )))
         : Center(
-      child: SizedBox(
-          height: FontUtils.h2(context) * 1,
-          width: FontUtils.h2(context) * 8,
-          child: ElevatedButton(
-            onPressed: onEditar,
-            child: Text('EDITAR',
-                style: TextStyle(
-                    fontSize: FontUtils.h4(context), color: Colors.black)),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              elevation: 4.0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(90.0),
-                  side: const BorderSide(width: 3, color: Colors.grey)),
-            ),
-          )),
-    );
+            child: SizedBox(
+                height: FontUtils.h2(context) * 1,
+                width: FontUtils.h2(context) * 8,
+                child: ElevatedButton(
+                  onPressed: onEditar,
+                  child: Text('EDITAR',
+                      style: TextStyle(
+                          fontSize: FontUtils.h4(context),
+                          color: Colors.black)),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white,
+                    elevation: 4.0,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(90.0),
+                        side: const BorderSide(width: 3, color: Colors.grey)),
+                  ),
+                )),
+          );
   }
 
   void onEditar() {
     //caso o item tiver grade botao editar adiciona o palco do cardapio com a grade do produto
-    if (widget.produtoCarrinho.notaItem.produtoEmpresa!.gradesAtivas.length >
+    if (appController
+            .mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!
+            .gradesAtivas
+            .length >
         1) {
       homeController.habilitarCarrinho = true;
       homeController.addPalco(
           ProdutoAdicionalPage(vendaController.itensLancados[widget.index]));
       return;
     }
-    switch (widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote!
+    switch (appController
+        .mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!
+        .produto!
+        .pacote!
         .toUpperCase()) {
       case "ADICIONAIS":
         homeController.habilitarCarrinho = true;
@@ -219,7 +225,7 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
     return Text(
       "${widget.produtoCarrinho.notaItem.descricao!.toUpperCase()} ",
       style:
-      TextStyle(color: DefaultTheme.preto, fontSize: FontUtils.h3(context)),
+          TextStyle(color: DefaultTheme.preto, fontSize: FontUtils.h3(context)),
     );
   }
 
@@ -227,8 +233,7 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
     return Observer(builder: (_) {
       return Center(
         child: Text(
-          'R\$ ${NotaItemUtils.getSubtotal(widget.produtoCarrinho.notaItem)
-              .toStringAsFixed(2)}',
+          'R\$ ${NotaItemUtils.getSubtotal(widget.produtoCarrinho.notaItem).toStringAsFixed(2)}',
           textAlign: TextAlign.end,
           style: TextStyle(
               color: DefaultTheme.preto, fontSize: FontUtils.h3(context)),

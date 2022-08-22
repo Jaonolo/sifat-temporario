@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/widgets/card_produto_menu.dart';
@@ -17,12 +18,11 @@ class ProdutoAdicionalComponent {
   final VendaController vendaController = Modular.get();
   final ProdutoAdicionalController controller = Modular.get();
   late Orientation orientation;
+  AppController appController = Modular.get();
 
   initialize(BuildContext context) {
     this.context = context;
-    orientation = MediaQuery
-        .of(context)
-        .orientation;
+    orientation = MediaQuery.of(context).orientation;
   }
 
   Widget body() {
@@ -91,9 +91,9 @@ class ProdutoAdicionalComponent {
               return BotaoSetaVoltar(
                 function: (controller.anteriorMenu == null)
                     ? () {
-                  homeController.removePalco();
-                  homeController.habilitarCarrinho = false;
-                }
+                        homeController.removePalco();
+                        homeController.habilitarCarrinho = false;
+                      }
                     : () => controller.anterior(),
               );
             })),
@@ -133,72 +133,84 @@ class ProdutoAdicionalComponent {
   Widget _adicionalConteudo() {
     return orientation == Orientation.landscape
         ? Row(
-      children: [
-        Expanded(flex: 14, child: Container()),
-        Expanded(
-          flex: 140,
-          child: Column(children: [
-            Expanded(flex: 20, child: _imagem()),
-            Expanded(
-                flex: 5,
-                child: (controller.produtoCarrinho.notaItem
-                    .produtoEmpresa!.produto!.detalhes !=
-                    null)
-                    ? _detalhes()
-                    : Container()),
-            const Expanded(child: SizedBox()),
-            Expanded(flex: 60, child: _pageViewBuilder())
-          ]),
-        ),
-        Expanded(flex: 14, child: Container()),
-      ],
-    )
+            children: [
+              Expanded(flex: 14, child: Container()),
+              Expanded(
+                flex: 140,
+                child: Column(children: [
+                  Expanded(flex: 20, child: _imagem()),
+                  Expanded(
+                      flex: 5,
+                      child: (appController
+                                  .mapProdutos[controller.produtoCarrinho
+                                      .notaItem.idProdutoEmpresa]!
+                                  .produto!
+                                  .detalhes !=
+                              null)
+                          ? _detalhes()
+                          : Container()),
+                  const Expanded(child: SizedBox()),
+                  Expanded(flex: 60, child: _pageViewBuilder())
+                ]),
+              ),
+              Expanded(flex: 14, child: Container()),
+            ],
+          )
         : Row(
-      children: [
-        Expanded(flex: 14, child: Container()),
-        Expanded(
-          flex: 72,
-          child: Column(children: [
-            Expanded(flex: 35, child: _imagem()),
-            Expanded(
-                flex: 5,
-                child: (controller.produtoCarrinho.notaItem
-                    .produtoEmpresa!.produto!.detalhes !=
-                    null)
-                    ? _detalhes()
-                    : Container()),
-            const Expanded(child: SizedBox()),
-            Expanded(flex: 60, child: _pageViewBuilder())
-          ]),
-        ),
-        Expanded(flex: 14, child: Container()),
-      ],
-    );
+            children: [
+              Expanded(flex: 14, child: Container()),
+              Expanded(
+                flex: 72,
+                child: Column(children: [
+                  Expanded(flex: 35, child: _imagem()),
+                  Expanded(
+                      flex: 5,
+                      child: (appController
+                                  .mapProdutos[controller.produtoCarrinho
+                                      .notaItem.idProdutoEmpresa]!
+                                  .produto!
+                                  .detalhes !=
+                              null)
+                          ? _detalhes()
+                          : Container()),
+                  const Expanded(child: SizedBox()),
+                  Expanded(flex: 60, child: _pageViewBuilder())
+                ]),
+              ),
+              Expanded(flex: 14, child: Container()),
+            ],
+          );
   }
 
   Widget _imagem() {
     return SizedBox(
       height: FontUtils.h1(context) * 3,
-      child: (controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!
-          .arquivoPrincipal() !=
-          null)
+      child: (appController
+                  .mapProdutos[
+                      controller.produtoCarrinho.notaItem.idProdutoEmpresa]!
+                  .produto!
+                  .arquivoPrincipal() !=
+              null)
           ? Image.network(
-        controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!
-            .arquivoPrincipal()!
-            .link!,
-        fit: BoxFit.fill,
-      )
+              appController
+                  .mapProdutos[
+                      controller.produtoCarrinho.notaItem.idProdutoEmpresa]!
+                  .produto!
+                  .arquivoPrincipal()!
+                  .link!,
+              fit: BoxFit.fill,
+            )
           : Image.asset(
-        'assets/no-image.png',
-        fit: BoxFit.fill,
-      ),
+              'assets/no-image.png',
+              fit: BoxFit.fill,
+            ),
     );
   }
 
   Widget _detalhes() {
     return Wrap(children: [
-      Text(
-          controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!.detalhes!
+      Text(appController.mapProdutos[
+          controller.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.detalhes!
               .toUpperCase(),
           style: TextStyle(fontSize: FontUtils.h4(context)))
     ]);
@@ -208,8 +220,8 @@ class ProdutoAdicionalComponent {
     return PageView.builder(
         physics: const NeverScrollableScrollPhysics(),
         controller: controller.pageController,
-        itemCount: controller
-            .produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length,
+        itemCount: appController.mapProdutos[controller
+            .produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus.length,
         onPageChanged: (index) => controller.atualizaMenus(index),
         itemBuilder: (BuildContext context, int index) {
           return CardProdutoMenu(controller.produtoMenu!,
@@ -272,33 +284,28 @@ class ProdutoAdicionalComponent {
     return Observer(builder: (_) {
       return orientation == Orientation.landscape
           ? Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-              child: Text(
-                  'SUBTOTAL R\$ ${controller.produtoCarrinho.notaItem
-                      .precoTotal!.somar(NotaItemUtils.calcularAdicionais(
-                      controller.produtoCarrinho.notaItem)).toStringAsFixed(
-                      2)}',
-                  softWrap: false,
-                  style: TextStyle(fontSize: FontUtils.h2(context)))),
-        ],
-      )
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                    child: Text(
+                        'SUBTOTAL R\$ ${controller.produtoCarrinho.notaItem.precoTotal!.somar(NotaItemUtils.calcularAdicionais(controller.produtoCarrinho.notaItem)).toStringAsFixed(2)}',
+                        softWrap: false,
+                        style: TextStyle(fontSize: FontUtils.h2(context)))),
+              ],
+            )
           : Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Text(
-              'SUBTOTAL R\$ ${controller.produtoCarrinho.notaItem.precoTotal!
-                  .somar(NotaItemUtils.calcularAdicionais(
-                  controller.produtoCarrinho.notaItem)).toStringAsFixed(2)}',
-              style: TextStyle(
-                fontSize: FontUtils.h3(context),
-              ),
-            ),
-          ),
-        ],
-      );
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    'SUBTOTAL R\$ ${controller.produtoCarrinho.notaItem.precoTotal!.somar(NotaItemUtils.calcularAdicionais(controller.produtoCarrinho.notaItem)).toStringAsFixed(2)}',
+                    style: TextStyle(
+                      fontSize: FontUtils.h3(context),
+                    ),
+                  ),
+                ),
+              ],
+            );
     });
   }
 }

@@ -152,7 +152,7 @@ class ProdutoComboComponent {
     return PageView.builder(
         physics: const NeverScrollableScrollPhysics(),
         controller: controller.pageController,
-        itemCount: (controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!
+        itemCount: (appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!
             .menus.length +
             1),
         itemBuilder: (BuildContext context, int index) {
@@ -300,7 +300,7 @@ class ProdutoComboComponent {
     compomente.componenteEmpresas.firstWhere(
             (ce) =>
         ce.idEmpresa ==
-            controller.produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa,
+            appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!.idEmpresa,
         orElse: () => ProdutoMenuComponenteEmpresa());
 
     String url_imagem;

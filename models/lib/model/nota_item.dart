@@ -29,8 +29,8 @@ class NotaItem implements Cloneable {
   int? idTurno;
 
   int? idProdutoEmpresa;
-
-  ProdutoEmpresa? produtoEmpresa;
+  //
+  // ProdutoEmpresa? produtoEmpresa;
 
   int? idGrade;
 
@@ -107,7 +107,7 @@ class NotaItem implements Cloneable {
 
   @override
   String toString() {
-    return 'NotaItem[id=$id, idItemPai=$idItemPai, idNota=$idNota, nota=$nota, tipo=$tipo, idEstacao=$idEstacao, idVendedor=$idVendedor, vendedor=$vendedor, idUsuario=$idUsuario, usuario=$usuario, dataLancamento=$dataLancamento, idTurno=$idTurno, idProdutoEmpresa=$idProdutoEmpresa, produtoEmpresa=$produtoEmpresa, idGrade=$idGrade, grade=$grade, indice=$indice, descricao=$descricao, quantidade=$quantidade, precoCusto=$precoCusto, precoCMC=$precoCMC, precoUnitario=$precoUnitario, precoTotal=$precoTotal, taxaServico=$taxaServico, valorServico=$valorServico, valorDesconto=$valorDesconto, valorDescontoRateio=$valorDescontoRateio, valorLiquido=$valorLiquido, valorAcrescimoRateio=$valorAcrescimoRateio, valorFreteRateio=$valorFreteRateio, valorDespesaAcessoriaRateio=$valorDespesaAcessoriaRateio, promocao=$promocao, quantidadePromocao=$quantidadePromocao, precoPromocao=$precoPromocao, valorDescontoPromocao=$valorDescontoPromocao, cancelado=$cancelado, motivoCancelamento=$motivoCancelamento, observacao=$observacao, consumoItem=$consumoItem, subitens=$subitens, idConcentrador=$idConcentrador, idTabelaPreco=$idTabelaPreco, tabelaPreco=$tabelaPreco, notaItemFiscal=$notaItemFiscal, dadosIntegracao=$dadosIntegracao, roundingMode=$roundingMode, somaTotal=$somaTotal, ]';
+    return 'NotaItem[id=$id, idItemPai=$idItemPai, idNota=$idNota, nota=$nota, tipo=$tipo, idEstacao=$idEstacao, idVendedor=$idVendedor, vendedor=$vendedor, idUsuario=$idUsuario, usuario=$usuario, dataLancamento=$dataLancamento, idTurno=$idTurno, idProdutoEmpresa=$idProdutoEmpresa, idGrade=$idGrade, grade=$grade, indice=$indice, descricao=$descricao, quantidade=$quantidade, precoCusto=$precoCusto, precoCMC=$precoCMC, precoUnitario=$precoUnitario, precoTotal=$precoTotal, taxaServico=$taxaServico, valorServico=$valorServico, valorDesconto=$valorDesconto, valorDescontoRateio=$valorDescontoRateio, valorLiquido=$valorLiquido, valorAcrescimoRateio=$valorAcrescimoRateio, valorFreteRateio=$valorFreteRateio, valorDespesaAcessoriaRateio=$valorDespesaAcessoriaRateio, promocao=$promocao, quantidadePromocao=$quantidadePromocao, precoPromocao=$precoPromocao, valorDescontoPromocao=$valorDescontoPromocao, cancelado=$cancelado, motivoCancelamento=$motivoCancelamento, observacao=$observacao, consumoItem=$consumoItem, subitens=$subitens, idConcentrador=$idConcentrador, idTabelaPreco=$idTabelaPreco, tabelaPreco=$tabelaPreco, notaItemFiscal=$notaItemFiscal, dadosIntegracao=$dadosIntegracao, roundingMode=$roundingMode, somaTotal=$somaTotal, ]';
   }
 
   factory NotaItem.fromJson(Map<String, dynamic> json) =>

@@ -104,14 +104,16 @@ class _CardProdutoMenuState extends State<CardProdutoMenu> {
         notaitem = NotaItemUtils.localizaSubitemJaLancado(
             produtoAdicionalController.produtoCarrinho.notaItem,
             widget.produtoMenu,
-            widget.produtoMenu.componentes[index]);
+            widget.produtoMenu.componentes[index], (idProdutoEmpresa){
+          return appController.mapProdutos[idProdutoEmpresa];
+        });
 
         if (notaitem == null) {
           notaitem = NotaItemUtils.adicionalToNotaItem(
               produtoAdicionalController.produtoCarrinho.notaItem.idNota!,
               widget.produtoMenu.componentes[index],
-              produtoAdicionalController
-                  .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+              appController.mapProdutos[produtoAdicionalController
+                  .produtoCarrinho.notaItem.idProdutoEmpresa]!.idEmpresa!,
               appController.tabelaPreco.id!,
               quantidade: BigDecimal.ZERO());
         }

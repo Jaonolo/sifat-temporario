@@ -1044,7 +1044,7 @@ class ImpressaoPOSUtils {
 
         groupByPreco.forEach((preco, itens) {
           itens.forEach((item) {
-            var idProduto = item.produtoEmpresa!.produto!.id;
+            var idProduto = Application.getInstance().produtos[item.idProdutoEmpresa]!.produto!.id;
 
             if (notaItemPorProdutoEPreco.containsKey(idProduto)) {
               if (notaItemPorProdutoEPreco[idProduto]!.containsKey(preco)) {
@@ -1089,8 +1089,8 @@ class ImpressaoPOSUtils {
                   .toStringAsFixed(2)} \n";
             } else {
               impressao +=
-                  "${notaItem.descricao}   $quantidade X  ${notaItem
-                      .produtoEmpresa!.produto!.unidade}  " +
+                  "${notaItem.descricao}   $quantidade X  ${Application.getInstance().produtos[notaItem
+                      .idProdutoEmpresa]!.produto!.unidade}  " +
                       "${notaItem.precoUnitario!.toStringAsFixed(2)}  " +
                       "${notaItem.precoTotal!.toStringAsFixed(2)} \n";
             }
@@ -1144,7 +1144,7 @@ class ImpressaoPOSUtils {
             .toStringAsFixed(2)} \n";
       } else {
         impressao +=
-            "${notaItem.descricao}   $quantidade X  ${notaItem.produtoEmpresa!
+            "${notaItem.descricao}   $quantidade X  ${Application.getInstance().produtos[notaItem.idProdutoEmpresa]!
                 .produto!.unidade}  " +
                 "${notaItem.precoUnitario!.toStringAsFixed(2)}  " +
                 "${notaItem.precoTotal!.toStringAsFixed(2)} \n";
@@ -1387,7 +1387,7 @@ class ImpressaoPOSUtils {
         impressao += "${notaItem.descricao}   $quantidade   \n";
       } else {
         impressao +=
-        "${notaItem.descricao}   $quantidade X  ${notaItem.produtoEmpresa!
+        "${notaItem.descricao}   $quantidade X  ${Application.getInstance().produtos[notaItem.idProdutoEmpresa]!
             .produto!.unidade}  \n";
       }
 

@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_component.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
@@ -10,6 +11,7 @@ import 'produto_combo_controller.dart';
 class ProdutoComboPage extends StatefulWidget {
   final ProdutoCarrinho produtoCarrinho;
   final ProdutoComboController controller = Modular.get();
+  final AppController appController = Modular.get();
 
   ProdutoComboPage(this.produtoCarrinho) {
     atualizaController();
@@ -27,12 +29,14 @@ class ProdutoComboPage extends StatefulWidget {
           produtoCarrinhoClone.notaItem,
           controller.produtoCarrinhoOriginal.notaItem.quantidade!,
           BigDecimal.ONE());
-      NotaItemUtils.atualizaTotais(produtoCarrinhoClone.notaItem);
+      NotaItemUtils.atualizaTotais(produtoCarrinhoClone.notaItem, (idProdutoEmpresa){
+        return appController.mapProdutos[idProdutoEmpresa];
+      });
     }
 
     controller.produtoCarrinho = produtoCarrinhoClone;
     controller.proximoMenu =
-    produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[0];
+    appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus[0];
     controller.index = 0;
   }
 
