@@ -1,9 +1,11 @@
 import 'package:autoatendimento/app/modules/home/pages/tef/administrativo_tef/administrativo_tef_controller.dart';
 import 'package:autoatendimento/app/modules/home/widgets/app_bar_image.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
+import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/style_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/svg.dart';
 
 class AdministrativoTefComponent {
   AdministrativoTefController controller = Modular.get();
@@ -17,10 +19,25 @@ class AdministrativoTefComponent {
       ),
       child: Column(
         children: [
-          Expanded(flex: 15, child: const AppBarImage()),
+          Row(
+            children: [
+              Expanded(
+                  flex: 0,
+                  child: BotaoSetaVoltar(
+                    function: () {
+                      Modular.to.pushNamed('/configuracao');
+                    },
+                  )),
+              Expanded(flex: 15, child: const AppBarImage()),
+            ],
+          ),
           Expanded(
-            flex: 85,
+            flex: 70,
             child: opcoes(),
+          ),
+          Expanded(
+            child: SizedBox(),
+            flex: 15,
           )
         ],
       ),
@@ -31,25 +48,57 @@ class AdministrativoTefComponent {
     return Row(
       children: [
         Expanded(
-            flex: 20,
-            child: BotaoSetaVoltar(
-              function: () {
-                Modular.to.pushNamed('/comecar');
-              },
-            )),
-        InkWell(
-          child: TextButton(
-            child: Text("Cancelamento TEF"),
-            onPressed: () => controller.cancelamentoTef(),
-          ),
+          child: SizedBox(),
+          flex: 10,
         ),
-        InkWell(
-          child: TextButton(
-            child: Text("Reimpressão TEF"),
-            onPressed: null,
-          ),
-        ),
+        Expanded(
+            flex: 30,
+            child: _cardOpcao("cancelarTef.svg", "Cancelamento TEF",
+                () => controller.cancelamentoTef())),
+        Expanded(child: SizedBox(),flex: 10,),
+
+        Expanded(
+            flex: 30,
+            child:
+                _cardOpcao("impressora.svg", "Reimpressão TEF", () {})),
+        Expanded(flex: 10, child: SizedBox()),
       ],
+    );
+  }
+
+  Widget _cardOpcao(String icon, String texto, Function onpressed) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        width: 40,
+        height: 250,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: DefaultTheme.accentColor,
+          ),
+          child: Column(
+            children: [
+              Expanded(flex: 10, child: Container()),
+              Expanded(
+                  flex: 60,
+                  child: SvgPicture.asset(
+                    icon,
+                    color: Colors.white,
+                  )),
+              Expanded(
+                flex: 4,
+                child: Container(),
+              ),
+              Expanded(
+                  flex: 20,
+                  child: Text(texto,
+                      style: TextStyle(color: Colors.white, fontSize: 20.00))),
+              Expanded(flex: 6, child: Container()),
+            ],
+          ),
+          onPressed: () => onpressed.call(),
+        ),
+      ),
     );
   }
 }

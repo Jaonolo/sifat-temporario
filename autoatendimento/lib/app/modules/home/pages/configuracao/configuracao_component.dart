@@ -1,10 +1,12 @@
 import 'package:autoatendimento/app/modules/home/pages/configuracao/configuracao_controller.dart';
 import 'package:autoatendimento/app/modules/home/widgets/app_bar_image.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
-import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:autoatendimento/app/utils/style_utils.dart';
+import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class ConfiguracaoPageComponent {
   ConfiguracaoController controller = Modular.get();
@@ -19,55 +21,78 @@ class ConfiguracaoPageComponent {
       ),
       child: Column(
         children: [
-          Expanded(flex: 15, child: const AppBarImage()),
           Row(
             children: [
               Expanded(
-                flex: 20,
-                child: _cardOpcao(Icon(Icons.card_giftcard),
-                    "TEF ADMINISTRATIVO", controller.goAdministrativo),
-              ),
-              Expanded(
-                flex: 20,
-                child: _cardOpcao(Icon(Icons.adjust), "PENDENCIA FISCAL",
-                     controller.goPendenciaFiscal),
-              ),
+                  flex: 0,
+                  child: BotaoSetaVoltar(
+                    function: () {
+                      Modular.to.pushNamed('/comecar');
+                    },
+                  )),
+              Expanded(flex: 15, child: const AppBarImage()),
             ],
           ),
-          Expanded(flex: 65, child: SizedBox()),
+          Expanded(
+            flex: 70,
+            child: Row(
+              children: [
+                Expanded(
+                  child: SizedBox(),
+                  flex: 10,
+                ),
+                Expanded(
+                  flex: 30,
+                  child: _cardOpcao(
+                  "administrativoTEF.svg", "TEF ADMINISTRATIVO", controller.goAdministrativo),
+                ),
+                Expanded(child: SizedBox(),flex: 10,),
+                Expanded(
+                  flex: 30,
+                  child: _cardOpcao("pendenciaFiscal.svg", "PENDENCIA FISCAL",
+                      controller.goPendenciaFiscal),
+                ),
+                Expanded(
+                  child: SizedBox(),
+                  flex: 10,
+                ),
+              ],
+            ),
+          ),
+          Expanded(flex: 15, child: SizedBox()),
         ],
       ),
     );
   }
 
-  Widget _cardOpcao(Icon icon, String texto, Function onpressed) {
-    return SizedBox(
-      width: 20,
-      height: 40,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: DefaultTheme.accentColor,
-          shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(40.0),
+  Widget _cardOpcao( String icon, String texto, Function onpressed) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        width: 40,
+        height: 250,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: DefaultTheme.accentColor,
+                      ),
+          child: Column(
+            children: [
+              Expanded(flex: 10, child: Container()),
+              Expanded(flex: 60, child: SvgPicture.asset(icon, color: Colors.white,)),
+              Expanded(
+                flex: 4,
+                child: Container(),
+              ),
+              Expanded(
+                  flex: 20,
+                  child: Text(texto,
+                      style: TextStyle(color: Colors.white, fontSize: 20.00))),
+              Expanded(flex: 6, child: Container()),
+            ],
           ),
+          onPressed: () =>
+            onpressed.call(),
         ),
-        child: Column(
-          children: [
-            Expanded(flex: 10, child: Container()),
-            Expanded(flex: 60, child: icon),
-            Expanded(
-              flex: 4,
-              child: Container(),
-            ),
-            Expanded(
-                flex: 20,
-                child: Text(texto,
-                    style: TextStyle(color: Colors.white, fontSize: 10.00))),
-            Expanded(flex: 6, child: Container()),
-          ],
-        ),
-        onPressed: () =>
-          onpressed.call(),
       ),
     );
   }

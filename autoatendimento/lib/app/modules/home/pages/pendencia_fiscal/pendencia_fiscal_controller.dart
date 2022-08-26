@@ -42,7 +42,7 @@ abstract class PendenciaFiscalBase with Store {
       if (response.status == 200) {
         adicionarPendencias(response.content);
         print(pendencias.length);
-        lblTotal = "Total: ${pendencias.length.toString()} / ${totalPedidos}";
+        lblTotal = "TOTAL: ${pendencias.length.toString()} / ${totalPedidos}";
         return pendencias;
       } else if (response.status == 204) {
         print(response.content);
