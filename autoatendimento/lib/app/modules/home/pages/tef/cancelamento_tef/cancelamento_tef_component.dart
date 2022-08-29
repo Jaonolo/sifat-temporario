@@ -3,11 +3,12 @@ import 'package:autoatendimento/app/modules/home/pages/tef/transacao_tef/transac
 import 'package:autoatendimento/app/modules/home/widgets/app_bar_image.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
 import 'package:autoatendimento/app/utils/style_utils.dart';
-import 'package:core/application/application.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
+import '../../../../../utils/font_utils.dart';
+import '../../../widgets/botao_primario.dart';
 
 class CancelamentoTefComponent {
   CancelamentoTefController cancelamentoTefController = Modular.get();
@@ -51,7 +52,6 @@ class CancelamentoTefComponent {
             default:
               List<TransacaoCartao> transacoes =
                   snapshot.data as List<TransacaoCartao>;
-              print(transacoes);
               return listaTransacoes(transacoes, context);
           }
         });
@@ -59,16 +59,14 @@ class CancelamentoTefComponent {
 
   Widget listaTransacoes(List<TransacaoCartao> transacoes, BuildContext context) {
     return Container(
-      width: 400,
+      width: 600,
       child: DataTable(
           border: TableBorder.all(
               color: Colors.black, borderRadius: BorderRadius.circular(10)),
           columns: [
             DataColumn(label: Text("DATA"), numeric: true),
-            DataColumn(
-              label: Text("VALOR"),
-              numeric: true,
-            ),
+            DataColumn(label: Text("NSU"), numeric: true),
+            DataColumn(label: Text("VALOR"),numeric: true),
             DataColumn(label: Text("CANCELAR"), numeric: true)
           ],
           rows: transacoes
@@ -79,11 +77,18 @@ class CancelamentoTefComponent {
                       Text(transacaoCartao.data.toString()),
                     ),
                     DataCell(
+                      Text(transacaoCartao.nsu.toString()),
+                    ),
+                    DataCell(
                       Text(transacaoCartao.valor.toString()),
                     ),
                     DataCell(
                       TextButton(child:Text("Cancelar") ,onPressed: (){
-                        _cancelarTEF(transacoes,context);
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) =>  _cancelarTEF(context , transacaoCartao));
+
                       })
                       ,
                     ),
@@ -94,13 +99,71 @@ class CancelamentoTefComponent {
     );
 
   }
-  _cancelarTEF(List<TransacaoCartao> transacoes, BuildContext context) async {
-    transacaoTefController.comunicaWebSocket(context);
-    for(TransacaoCartao transacaoCartao in transacoes)
-    transacaoTefController.cancelarTransacao(transacaoCartao.valor!,
-        "CREDITO",transacaoCartao.id!);
-    print(transacoes);
-    print("AQUIIIIIIIIIIIIIIII");
+
+  Widget _cancelarTEF(BuildContext context, TransacaoCartao transacaoCartao) {
+    return AlertDialog(
+      shape: const RoundedRectangleBorder(
+        side: BorderSide(),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+      title: Center(
+        child: Text(
+          "Selecione o tipo de cancelamento",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: FontUtils.h2(context),
+          ),
+        ),
+      ),
+      content: SingleChildScrollView(
+        child: Column(
+          children: [
+
+            btnTipoCancelamento( "1 - Cancelamento de Cartao de Debito" ,context, transacaoCartao, "DEBITO"),
+            btnTipoCancelamento( "2 - Cancelamento de Cartao de Credito" ,context, transacaoCartao, "CREDITO"),
+            btnTipoCancelamento( "10 - Cancelamento Carteira Digital" ,context, transacaoCartao, "CARTEIRA_DIGITAL"),
+
+          ],
+        ),
+      ),
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: SizedBox(
+                width: FontUtils.h1(context) * 4.5,
+                child: BotaoPrimario(
+                  descricao: "Cancelar",
+                  function: () {
+                    Modular.to.pop();
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget btnTipoCancelamento(String descricao, BuildContext context, TransacaoCartao transacaoCartao, String tipo){
+    return SizedBox(
+      width: FontUtils.h1(context) * 8.40,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: BotaoPrimario(
+          descricao: descricao,
+          function: () {
+            Modular.to.pushNamed("/transacao");
+            transacaoTefController.comunicaWebSocket(context);
+            transacaoTefController.cancelarTransacao(transacaoCartao, tipo,
+            );
+          },
+        ),
+      ),
+    );
   }
 
 }
