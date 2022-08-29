@@ -232,10 +232,8 @@ class _BloqueioAdministrativoPageState
                 Expanded(
                   flex: 30,
                   child: Container(),
-                ),Expanded(
-                  flex: 4,
-                  child: Container(),
                 ),
+                apagarLetra(),
                 Expanded(
                   child: Container(),
                 ),
@@ -255,7 +253,6 @@ class _BloqueioAdministrativoPageState
                   child: Container(),
                 ),
               ],
-
             ),
             Expanded(
               child: Container(),
@@ -343,12 +340,41 @@ class _BloqueioAdministrativoPageState
           //splashColor: DefaultTheme.accentColor, Desativado pelo uso do ElevatedButton
         ),
         child: Icon(
-          Icons.backspace,
+          Icons.delete_forever,
           color: Colors.black,
           size: FontUtils.h3(context),
         ),
         onPressed: () {
           widget.senha.clear();
+        },
+      ),
+    );
+  }
+
+  Widget apagarLetra() {
+    return SizedBox(
+      height: FontUtils.h1(context) * 1.2,
+      width: FontUtils.h1(context) * 1.2,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.white,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(100.0),
+              side: const BorderSide(width: 3, color: Colors.black)),
+          //splashColor: DefaultTheme.accentColor, Desativado pelo uso do ElevatedButton
+        ),
+        child: Icon(
+          Icons.backspace,
+          color: Colors.black,
+          size: FontUtils.h3(context),
+        ),
+        onPressed: () {
+          setState(() {
+            if (widget.senha.text.length > 0) {
+              print(widget.senha.text.length);
+              widget.senha.text = widget.senha.text.substring(0,widget.senha.text.length - 1);
+            }
+          });
         },
       ),
     );

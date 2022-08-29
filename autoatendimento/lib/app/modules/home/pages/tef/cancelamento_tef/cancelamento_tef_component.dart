@@ -24,16 +24,23 @@ class CancelamentoTefComponent {
       child: Column(
         children: [
           Expanded(
-              flex: 20,
-              child: BotaoSetaVoltar(
-                function: () {
-                  Modular.to.pushNamed('/comecar');
-                },
+              flex: 10,
+              child: Row(
+                children: [
+                  BotaoSetaVoltar(function: () {
+                    Modular.to.pushNamed('/administrativo_tef');
+                  }),
+                  Expanded(child: Container()),
+                  Expanded(flex: 15, child: const AppBarImage()),
+                  Expanded(child: Container())
+                ],
               )),
-          Expanded(flex: 15, child: const AppBarImage()),
           Expanded(
-            flex: 85,
-            child: listTransacoes(),
+            flex: 80,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: listTransacoes(),
+            ),
           )
         ],
       ),
@@ -59,9 +66,8 @@ class CancelamentoTefComponent {
 
   Widget listaTransacoes(List<TransacaoCartao> transacoes, BuildContext context) {
     return Container(
-      width: 600,
       child: DataTable(
-          border: TableBorder.all(
+                  border: TableBorder.all(
               color: Colors.black, borderRadius: BorderRadius.circular(10)),
           columns: [
             DataColumn(label: Text("DATA"), numeric: true),
