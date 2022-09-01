@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../transacao_tef/transacao_tef_controller.dart';
+
 class AdministrativoTefComponent {
   AdministrativoTefController controller = Modular.get();
+  TransacaoTefController transacaoTefController = Modular.get();
 
   Widget body() {
     return Container(
@@ -52,16 +55,16 @@ class AdministrativoTefComponent {
           flex: 10,
         ),
         Expanded(
-            flex: 30,
+            flex: 10,
             child: _cardOpcao("cancelarTef.svg", "Cancelamento TEF",
                 () => controller.cancelamentoTef())),
         Expanded(child: SizedBox(),flex: 10,),
 
-        Expanded(
-            flex: 30,
-            child:
-                _cardOpcao("impressora.svg", "Reimpressão TEF", () {})),
-        Expanded(flex: 10, child: SizedBox()),
+        // Expanded(
+        //     flex: 30,
+        //     child:
+        //         _cardOpcao("impressora.svg", "Reimpressão TEF", () => { controller.reimpressaoTef(context)})),
+        // Expanded(flex: 10, child: SizedBox()),
       ],
     );
   }
@@ -101,4 +104,84 @@ class AdministrativoTefComponent {
       ),
     );
   }
+
+
+
+  //TESTANDO PARA REIMPRESSAO( NÃO ESTA FUNCIONANDO)
+  // Widget _reimprimirTEF() {
+  //   return Builder(
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         shape: const RoundedRectangleBorder(
+  //           side: BorderSide(),
+  //           borderRadius: BorderRadius.all(Radius.circular(8)),
+  //         ),
+  //         title: Center(
+  //           child: Text(
+  //             "Selecione o tipo de Reimpressao",
+  //             textAlign: TextAlign.center,
+  //             style: TextStyle(
+  //               fontSize: 8,
+  //             ),
+  //           ),
+  //         ),
+  //         content: SingleChildScrollView(
+  //           child: Column(
+  //             children: [
+  //               btnTipoReimpressao( "1 - Ultimo Comprovante" , "114"),
+  //               btnTipoReimpressao( "2 - Comprovante Específico" , "113"),
+  //             ],
+  //           ),
+  //         ),
+  //         actions: [
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             children: [
+  //               Padding(
+  //                 padding: const EdgeInsets.all(2.0),
+  //                 child: SizedBox(
+  //                   width: 4.5,
+  //                   child: BotaoPrimario(
+  //                     descricao: "Cancelar",
+  //                     function: () {
+  //                       Modular.to.pop();
+  //                     },
+  //                   ),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ],
+  //       );
+  //     }
+  //   );
+  // }
+  // Widget btnTipoReimpressao(String descricao, String tipo){
+  //   return Builder(
+  //     builder: (context) {
+  //       return SizedBox(
+  //         width: 8.40,
+  //         child: Padding(
+  //           padding: const EdgeInsets.all(8.0),
+  //           child: BotaoPrimario(
+  //             descricao: descricao,
+  //             function: () {
+  //               switch(tipo) {
+  //                 case "113":
+  //
+  //                   break;
+  //                 case "114":
+  //                   Modular.to.pushNamed("/transacao");
+  //                   transacaoTefController.comunicaWebSocket(context);
+  //                   transacaoTefController.reimprimirTransacao();
+  //                   break;
+  //               }
+  //             },
+  //           ),
+  //         ),
+  //       );
+  //     }
+  //   );
+  // }
+
 }

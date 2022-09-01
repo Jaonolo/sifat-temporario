@@ -38,6 +38,8 @@ abstract class TransacaoTefBase with Store {
 
   bool isCancelamento = false;
 
+  bool isReimpressao = false;
+
   TransacaoCartao? transacaoCancelamentoOrigem;
 
   @action
@@ -101,6 +103,7 @@ abstract class TransacaoTefBase with Store {
 
   Future<void> transacionar(BigDecimal valorTotal, String tipoPagamentoTEF,
       int identificadorTransacao) async {
+    this.isReimpressao = false;
     this.isCancelamento = false;
     sitefProtocoloSocket = SitefProtocoloSocket();
     sitefProtocoloSocket.funcao = "transacionar";
@@ -113,7 +116,7 @@ abstract class TransacaoTefBase with Store {
   }
 
   Future<void> cancelarTransacao(TransacaoCartao transacaoCartao, String tipoPagamentoTEF) async {
-
+    this.isReimpressao = false;
     this.isCancelamento = true;
     transacaoCancelamentoOrigem = transacaoCartao;
 
@@ -130,6 +133,21 @@ abstract class TransacaoTefBase with Store {
     channel.sink.add(sitefProtocoloSocket.toJson());
   }
 
+  Future<void> reimprimirTransacao() async {
+
+    // REIMPRESSÃO NÃO FUNCIONANDO
+
+    this.isCancelamento = false;
+    this.isReimpressao = true;
+    sitefProtocoloSocket = SitefProtocoloSocket();
+    sitefProtocoloSocket.funcao = "reimpressaoTransacao";
+    sitefProtocoloSocket.param = SitefProtocoloSocketParam();
+    sitefProtocoloSocket.param!.data = "20220829";
+    sitefProtocoloSocket.param!.nsu = "000290003";
+
+    channel.sink.add(sitefProtocoloSocket.toJson());
+  }
+
   Future<void> cancelar() async {
     SitefProtocoloSocket sitefProtocoloSocket = SitefProtocoloSocket();
     sitefProtocoloSocket.funcao = "abortar";
@@ -140,7 +158,10 @@ abstract class TransacaoTefBase with Store {
   Future<void> recomecar() async {
     atualizaBuffer("Transação cancelada...");
     await Future.delayed(const Duration(seconds: 2));
-    homeController.recomecar();
+    if(this.isCancelamento)
+      Modular.to.pushNamed("/cancelamento_tef");
+     else
+      homeController.recomecar();
     //limpando variaveis
     atualizaBuffer("");
   }
@@ -193,7 +214,9 @@ abstract class TransacaoTefBase with Store {
         TransacaoCartao transacaoCartao = TransacaoCartao.fromJson(valueMap);
         if(this.isCancelamento){
           _finalizaCancelamento(transacaoCartao,context);
-        }else {
+        }else if(this.isReimpressao) {
+          _printTefCancelamento(transacaoCartao, context);
+        } else{
           //Salvar a via do cliente em memória
           viaCliente = transacaoCartao.viaCliente!;
           vendaController.nota.finalizadoras[0].transacaoCartao = transacaoCartao;
@@ -364,14 +387,16 @@ abstract class TransacaoTefBase with Store {
         await PrinterRepository.printerTefCancelamento(
             appController.pwsConfigLocal,
             transacaoCartao.viaCliente!,
-            transacaoCartao.viaCaixa!,
+            transacaoCartao.viaCaixa == null ? "" : transacaoCartao.viaCaixa!,
             appController.servicoAutoAtendimento,
             appController.getImpressoraVenda().impressora!,);
       }
       _avancar();
     } catch (e) {
       _tentarNovamentePrinter(
-          "Desculpe, houve um problema na impressão na via de cancelamento",
+        this.isCancelamento
+            ? "Desculpe, houve um problema na impressão na via de cancelamento"
+            : "Desculpe, houve um problema na impressão na via" ,
           () => _printTefCancelamento(transacaoCartao,context),
           () => _avancar(),
           context);
@@ -397,7 +422,9 @@ abstract class TransacaoTefBase with Store {
   void _avancar() {
     if(this.isCancelamento) {
       Modular.to.pushNamed("/cancelamento_tef");
-    } else {
+    } else if(this.isReimpressao){
+      Modular.to.pushNamed("/administrativo_tef");
+    }else {
       Modular.to.popUntil(ModalRoute.withName('/home'));
       Modular.to.pushNamed("/finalizado");
     }
