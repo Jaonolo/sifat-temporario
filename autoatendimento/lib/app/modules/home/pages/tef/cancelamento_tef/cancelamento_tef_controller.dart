@@ -24,7 +24,7 @@ abstract class CancelamentoTefBase with Store {
   @action
   Future<List<TransacaoCartao>> carregaTransacoes() async {
     return await TransacaoCartaoRequester.buscarTransacoes(
-            appController.pwsConfig, appController.token, false, 5, "SITEF")
+            appController.pwsConfig, appController.token, false, 200, "SITEF")
         .then((response) {
       if (response.status == 200) {
         return response.content;
