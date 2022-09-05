@@ -125,7 +125,7 @@ abstract class TransacaoTefBase with Store {
     sitefProtocoloSocket.param = SitefProtocoloSocketParam();
     sitefProtocoloSocket.param!.confirmaTransacao = false;
     sitefProtocoloSocket.param!.data = DateTimeUtils.format(transacaoCartao.data, DateTimeUtils.dataFormat)?.replaceAll("/", "");
-    sitefProtocoloSocket.param!.nsu = transacaoCartao.nsu;
+    sitefProtocoloSocket.param!.nsu = transacaoCartao.nsu!.substring(3);
     sitefProtocoloSocket.param!.valor = transacaoCartao.valor!;
     sitefProtocoloSocket.param!.cupomFiscal = transacaoCartao.idTransacaoCancelamento;
     sitefProtocoloSocket.param!.tipoPagamentoTEF = tipoPagamentoTEF;
@@ -412,7 +412,7 @@ abstract class TransacaoTefBase with Store {
         builder: (c) => DialogAuto(
           title: title,
           message: "",
-          txtConfirmar: txt != null ? txt :"Tentar novamente" ,
+          txtConfirmar: "Tentar novamente" ,
           onConfirm: onConfirmar,
           onCancel: onCancelar,
           showCancelButton: showCancelBtn,
