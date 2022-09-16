@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
+import 'package:requester/response/response_pws.dart';
 import 'package:utils/utils/consumo_utils.dart';
 import 'package:utils/utils/nota_utils.dart';
 
@@ -108,6 +109,11 @@ abstract class VendaBase with Store {
 
   Future<String?> emitirFiscal() async {
     return await NotaRepository.emitirFiscal(nota, "NFCE")
+        .catchError((e) => throw e);
+  }
+
+  Future<ResponsePws> atualizarErroPendencia(String erro) async {
+    return await NotaRepository.atualizarErroPendencia(nota, erro, TipoPendencia.EMISSAO_NOTA)
         .catchError((e) => throw e);
   }
 }

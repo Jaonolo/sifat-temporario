@@ -58,6 +58,7 @@ class NotaRepository {
               return xml;
             } else {
               PwsAlert pws = response.content;
+              await atualizarErroPendencia(nota, pws.description!, TipoPendencia.EMISSAO_NOTA);
               throw PwsException(pws);
             }
           });
@@ -97,4 +98,9 @@ class NotaRepository {
         appController.pwsConfig, appController.token, nota,
         gerarImpressao: gerarImpressao);
   }
+
+  static Future<ResponsePws> atualizarErroPendencia(Nota nota, String erro, TipoPendencia tipoPendencia) {
+    return NotaRequester.atualizarErroPendencia(appController.pwsConfig, appController.token, nota.id!, tipoPendencia, erro);
+  }
+
 }

@@ -790,6 +790,10 @@ class UrlPws {
     _type = RequestType.POST;
   }
 
+  UrlPws.putNotaPendenciaAtualizarErro(){
+    _url = "/v1/notas/{idNota}/atualizar-pendencia";
+    _type = RequestType.PUT;
+  }
 
   RequestType? get type => _type;
 

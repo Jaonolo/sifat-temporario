@@ -322,4 +322,21 @@ class NotaRequester {
     );
     return ResponsePws(response: response);
   }
+  static Future<ResponsePws> atualizarErroPendencia(PWSConfig config,String token,
+      int idNota, TipoPendencia tipoPendencia, String erro) async {
+    Response response = await RequesterPws(config: config).consome(
+      urlPws: UrlPws.putNotaPendenciaAtualizarErro(),
+      headerParams: {
+        "token": token,
+      },
+      pathParams: {
+        "{idNota}": idNota.toString(),
+      },
+      queryParams: {
+        "tipoPendencia": tipoPendencia.name,
+        "erroPendencia": erro ,
+      },
+    );
+    return ResponsePws(response: response);
+  }
 }

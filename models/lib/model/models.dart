@@ -38,6 +38,8 @@ part 'enum/formato_arquivo.dart';
 
 part 'enum/tipo_pacote.dart';
 
+part 'enum/tipo_pendencia.dart';
+
 //#################### OBJECT  ########################
 part 'big_decimal.dart';
 
