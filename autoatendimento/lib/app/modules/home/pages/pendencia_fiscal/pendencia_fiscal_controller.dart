@@ -121,7 +121,7 @@ abstract class PendenciaFiscalBase with Store {
           (estacaoTrabalho.emissorFiscal != null &&
               nota.notaFiscal!.idEmissorFiscal ==
                   estacaoTrabalho.emissorFiscal!.id)) {
-        await _emitirFiscal(nota, context);
+        await _emitirFiscal(nota, pendencia!, context);
       } else {
         try {
           await verificaEmissaoNFCe(nota, context);
@@ -130,15 +130,19 @@ abstract class PendenciaFiscalBase with Store {
         }
       }
     } else {
-      await _emitirFiscal(nota, context);
+      await _emitirFiscal(nota, pendencia!, context);
     }
   }
 
-  Future<void> _emitirFiscal(Nota nota, BuildContext context) async {
+  Future _emitirFiscal(
+      Nota nota, Pendencia pendencia, BuildContext context) async {
     try {
       await emitirFiscal(nota);
-      await verificaEmissaoNFCe(nota, context);
-      AutoatendimentoUtils.showProgress(context: context);
+      AutoatendimentoUtils.closeProgress(context: context);
+
+      _tentarNovamentePrinter("Nota Emitida com sucesso", () async {
+        pendencias.remove(pendencia);
+      }, context, "Confirmar");
     } catch (e) {
       String erro = e.toString();
 
@@ -154,9 +158,11 @@ abstract class PendenciaFiscalBase with Store {
       _tentarNovamentePrinter(
           "Desculpe! \n\n Ocorreu um problema na finalização do pedido:\n\n [$erro]",
           () => carregaNotaParaEmissao(pendencia!, context),
-          context);
+          context,
+          "Tentar novamente");
     }
   }
+
 
   Future<void> emitirFiscal(Nota nota) async {
     await NotaRepository.emitirFiscal(nota, "NFCE").catchError((e) => throw e);
@@ -217,13 +223,14 @@ abstract class PendenciaFiscalBase with Store {
       _tentarNovamentePrinter(
           "Desculpe, houve um problema na impressão do cupom fiscal",
           () => _printerNFCe(xml, context, nota),
-          context);
+          context,
+          "Tentar novamente");
       return;
     }
   }
 
-  void _tentarNovamentePrinter(
-      String title, Function onConfirmar, BuildContext context,
+  void _tentarNovamentePrinter(String title, Function onConfirmar,
+      BuildContext context, String txtConfirmar,
       {String txt = ""}) {
     showDialog(
         context: context,
@@ -231,7 +238,7 @@ abstract class PendenciaFiscalBase with Store {
         builder: (c) => DialogAuto(
               title: title,
               message: "",
-              txtConfirmar: "Tentar novamente",
+              txtConfirmar: txtConfirmar,
               onConfirm: onConfirmar,
               showCancelButton: true,
             ));
