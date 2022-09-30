@@ -457,7 +457,7 @@ abstract class TransacaoTefBase with Store {
       return 'Insira, passe ou aproxime o cartão na leitora';
     }
 
-    if (message != null && message.toUpperCase().contains('SOLICITE') &&
+    if (message.toUpperCase().contains('SOLICITE') &&
         message.toUpperCase().contains('SENHA')) {
       return 'Informe a senha na leitora';
     }
