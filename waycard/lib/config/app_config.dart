@@ -1,6 +1,6 @@
 import 'package:core/application/application.dart';
 import 'package:flutter/material.dart';
-import 'package:models/model/enum/client.dart';
+import 'package:models/model/enum/clients.dart';
 import 'package:requester/config/pws_config.dart';
 import 'package:waycard/theme/default_theme.dart';
 
@@ -11,10 +11,10 @@ class AppConfig {
   static GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
 
   static Application application = Application.getInstance()
-    ..client = Client.WAYCARD
-    ..pwsConfig = PWSConfig(
+    ..client = Clients.WAYCARD
+    ..pwsConfigWaychef = PWSConfig(
         urlBase: "http://api.jose/api",
-        client: Client.WAYCARD,
-        clientSecret: Client.WAYCARD.clientKey
+        client: Clients.WAYCARD,
+        clientSecret: Clients.WAYCARD.clientKey
     );
 }

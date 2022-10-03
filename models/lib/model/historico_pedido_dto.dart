@@ -10,6 +10,7 @@ class HistoricoPedidoDTO {
 
   String? tempoMedioExpedicao;
 
+  @JsonKey(defaultValue: [])
   List<PedidoDTO> pedidoDTOList = [];
 
   HistoricoPedidoDTO();

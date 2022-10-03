@@ -6,11 +6,11 @@ part of 'produto_adicional_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ProdutoAdicionalController on ProdutoAdicionalBase, Store {
-  final _$produtoCarrinhoAtom =
-  Atom(name: 'ProdutoAdicionalBase.produtoCarrinho');
+  late final _$produtoCarrinhoAtom =
+      Atom(name: 'ProdutoAdicionalBase.produtoCarrinho', context: context);
 
   @override
   ProdutoCarrinho get produtoCarrinho {
@@ -25,7 +25,8 @@ mixin _$ProdutoAdicionalController on ProdutoAdicionalBase, Store {
     });
   }
 
-  final _$produtoMenuAtom = Atom(name: 'ProdutoAdicionalBase.produtoMenu');
+  late final _$produtoMenuAtom =
+      Atom(name: 'ProdutoAdicionalBase.produtoMenu', context: context);
 
   @override
   ProdutoMenu? get produtoMenu {
@@ -40,7 +41,8 @@ mixin _$ProdutoAdicionalController on ProdutoAdicionalBase, Store {
     });
   }
 
-  final _$proximoMenuAtom = Atom(name: 'ProdutoAdicionalBase.proximoMenu');
+  late final _$proximoMenuAtom =
+      Atom(name: 'ProdutoAdicionalBase.proximoMenu', context: context);
 
   @override
   ProdutoMenu? get proximoMenu {
@@ -55,7 +57,8 @@ mixin _$ProdutoAdicionalController on ProdutoAdicionalBase, Store {
     });
   }
 
-  final _$anteriorMenuAtom = Atom(name: 'ProdutoAdicionalBase.anteriorMenu');
+  late final _$anteriorMenuAtom =
+      Atom(name: 'ProdutoAdicionalBase.anteriorMenu', context: context);
 
   @override
   ProdutoMenu? get anteriorMenu {
@@ -70,7 +73,8 @@ mixin _$ProdutoAdicionalController on ProdutoAdicionalBase, Store {
     });
   }
 
-  final _$radiovalueAtom = Atom(name: 'ProdutoAdicionalBase.radiovalue');
+  late final _$radiovalueAtom =
+      Atom(name: 'ProdutoAdicionalBase.radiovalue', context: context);
 
   @override
   int get radiovalue {
@@ -85,19 +89,19 @@ mixin _$ProdutoAdicionalController on ProdutoAdicionalBase, Store {
     });
   }
 
-  final _$atualizaMenusAsyncAction =
-  AsyncAction('ProdutoAdicionalBase.atualizaMenus');
+  late final _$atualizaMenusAsyncAction =
+      AsyncAction('ProdutoAdicionalBase.atualizaMenus', context: context);
 
   @override
   Future<void> atualizaMenus(int index) {
     return _$atualizaMenusAsyncAction.run(() => super.atualizaMenus(index));
   }
 
-  final _$ProdutoAdicionalBaseActionController =
-  ActionController(name: 'ProdutoAdicionalBase');
+  late final _$ProdutoAdicionalBaseActionController =
+      ActionController(name: 'ProdutoAdicionalBase', context: context);
 
   @override
-  dynamic changeProdutoCarrinho(ProdutoCarrinho value) {
+  void changeProdutoCarrinho(ProdutoCarrinho value) {
     final _$actionInfo = _$ProdutoAdicionalBaseActionController.startAction(
         name: 'ProdutoAdicionalBase.changeProdutoCarrinho');
     try {

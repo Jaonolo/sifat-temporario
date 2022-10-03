@@ -3,6 +3,7 @@ import 'package:autoatendimento/app/modules/home/home_component.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_page.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/composto/produto_composto_page.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
@@ -76,7 +77,7 @@ class BuildCardCardapio {
   static Widget _createCardFinal(ProdutoEmpresa produtoEmpresa,
       GradeEmpresa gradeEmpresa, BuildContext context) {
     String price;
-    if (produtoEmpresa.produto!.pacote == "COMBO") {
+    if (produtoEmpresa.produto!.pacote.equals(TipoPacote.COMBO)) {
       price =
       "A partir de R\$ ${gradeEmpresa.precoVenda(appController.tabelaPreco.id!)
           .toStringAsFixed(2)}";
@@ -118,8 +119,8 @@ class BuildCardCardapio {
           await vendaController.insereNotaAPI(context);
         }
         appController.reiniciaTimer();
-        switch (produtoEmpresa.produto!.pacote!.toUpperCase()) {
-          case "NENHUM":
+        switch (produtoEmpresa.produto!.pacote) {
+          case TipoPacote.NENHUM:
             GradeEmpresa? grade = gradeTamanho != null
                 ? gradeTamanho
                 : produtoEmpresa.gradePadrao;
@@ -141,7 +142,7 @@ class BuildCardCardapio {
 
             vendaController.adicionarProdutoCarrinho(ProdutoCarrinho(notaItem));
             break;
-          case "ADICIONAIS":
+          case TipoPacote.ADICIONAIS:
             homeController.habilitarCarrinho = true;
             GradeEmpresa? grade = gradeTamanho != null
                 ? gradeTamanho
@@ -154,13 +155,22 @@ class BuildCardCardapio {
             homeController
                 .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
             break;
-          case "COMBO":
+          case TipoPacote.COMBO:
             homeController.habilitarCarrinho = true;
             var notaItem = NotaItemUtils.instanciar(vendaController.nota.id!,
                 TipoItem.COMBO, produtoEmpresa, appController.tabelaPreco.id!);
             homeController
                 .addPalco(ProdutoComboPage(ProdutoCarrinho(notaItem)));
             break;
+          case TipoPacote.COMPOSTO:
+            homeController.habilitarCarrinho = true;
+            var notaItem = NotaItemUtils.instanciar(vendaController.nota.id!,
+                TipoItem.COMPOSTO, produtoEmpresa, appController.tabelaPreco.id!);
+            homeController.addPalco(ProdutoCompostoPage(ProdutoCarrinho(notaItem)));
+            break;
+
+          default:
+            throw Exception("TipoPacote não implementado");
         }
       } catch (e, s) {
         print('## [ERRO] _functionCardFinal');

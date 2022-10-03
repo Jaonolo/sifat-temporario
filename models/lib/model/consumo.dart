@@ -33,10 +33,12 @@ class Consumo {
 
   BigDecimal preDesconto = BigDecimal.ZERO();
 
+  @JsonKey(defaultValue: [])
   List<Consumo> consumosJuntados = [];
 
   int? idConsumoOrigemRecebimento;
 
+  @JsonKey(defaultValue: [])
   List<Consumo> consumosOrigemRecebimentos = [];
 
   Evento? evento;

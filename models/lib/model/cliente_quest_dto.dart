@@ -9,8 +9,10 @@ class ClienteQuestDTO {
 
   NotaQuest? notaQuest;
 
+  @JsonKey(defaultValue: [])
   List<Campanha> campanhas = [];
 
+  @JsonKey(defaultValue: [])
   List<HistoricoCompras> historicoCompras = [];
 
   ClienteQuestDTO();

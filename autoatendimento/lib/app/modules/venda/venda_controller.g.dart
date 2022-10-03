@@ -6,10 +6,10 @@ part of 'venda_controller.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$VendaController on VendaBase, Store {
-  final _$notaAtom = Atom(name: 'VendaBase.nota');
+  late final _$notaAtom = Atom(name: 'VendaBase.nota', context: context);
 
   @override
   Nota get nota {
@@ -24,7 +24,8 @@ mixin _$VendaController on VendaBase, Store {
     });
   }
 
-  final _$itensLancadosAtom = Atom(name: 'VendaBase.itensLancados');
+  late final _$itensLancadosAtom =
+      Atom(name: 'VendaBase.itensLancados', context: context);
 
   @override
   ObservableList<ProdutoCarrinho> get itensLancados {
@@ -39,8 +40,8 @@ mixin _$VendaController on VendaBase, Store {
     });
   }
 
-  final _$adicionarProdutoCarrinhoAsyncAction =
-  AsyncAction('VendaBase.adicionarProdutoCarrinho');
+  late final _$adicionarProdutoCarrinhoAsyncAction =
+      AsyncAction('VendaBase.adicionarProdutoCarrinho', context: context);
 
   @override
   Future<void> adicionarProdutoCarrinho(ProdutoCarrinho value) {
@@ -48,12 +49,13 @@ mixin _$VendaController on VendaBase, Store {
         .run(() => super.adicionarProdutoCarrinho(value));
   }
 
-  final _$VendaBaseActionController = ActionController(name: 'VendaBase');
+  late final _$VendaBaseActionController =
+      ActionController(name: 'VendaBase', context: context);
 
   @override
   void novaNota() {
     final _$actionInfo =
-    _$VendaBaseActionController.startAction(name: 'VendaBase.novaNota');
+        _$VendaBaseActionController.startAction(name: 'VendaBase.novaNota');
     try {
       return super.novaNota();
     } finally {

@@ -734,8 +734,8 @@ class UrlPws {
     _type = RequestType.PUT;
   }
 
-  UrlPws.putAutoPesagemLogin() {
-    _url = "/v2/servico-auto-pesagem/login";
+  UrlPws.putBuscarConfiguracoesAutoPesagem() {
+    _url = "/v2/client-auto-pesagem/buscar-configuracoes";
     _type = RequestType.PUT;
   }
 
@@ -748,6 +748,7 @@ class UrlPws {
     _url = "/impressao/imprimir-ticket-autopesagem";
     _type = RequestType.POST;
   }
+
 
   UrlPws.putAtualizarEstacao() {
     _url = "/v1/estacoes/{idEstacao}";
@@ -777,6 +778,16 @@ class UrlPws {
   UrlPws.putAutoAtendimentoLogin(){
     _url = "/v2/servico-autoatendimento/login";
     _type = RequestType.PUT;
+  }
+
+  UrlPws.criarSessao(){
+    _url = "/sessao/sessao-client/nova-sessao";
+    _type = RequestType.POST;
+  }
+
+  UrlPws.atualizarSessao(){
+    _url = "/sessao/sessao-client/atualizar-sessao";
+    _type = RequestType.POST;
   }
 
 

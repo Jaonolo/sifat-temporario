@@ -12,8 +12,10 @@ class TabelaPreco {
 
   String? descricao;
 
+  @JsonKey(defaultValue: false)
   bool padrao = false;
 
+  @JsonKey(defaultValue: true)
   bool ativo = true;
 
   @JsonKey(defaultValue: [])

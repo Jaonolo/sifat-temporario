@@ -4,12 +4,12 @@ import 'package:requester/config/pws_config.dart';
 import 'package:requester/requester/requester_pws.dart';
 import 'package:requester/response/response_pws.dart';
 import 'package:requester/url_pws/url_pws.dart';
-import 'package:models/model/enum/client.dart' as c;
+import 'package:models/model/enum/clients.dart' as c;
 
 
 class ReceitawsRequester {
 
-  static Future<ResponsePws> buscar(c.Client app, String cnpj) async {
+  static Future<ResponsePws> buscar(c.Clients app, String cnpj) async {
     var pwsConfig = PWSConfig(
         urlBase: "",
         client: app,
