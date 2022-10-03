@@ -2,12 +2,14 @@ import 'package:autoatendimento/app/modules/home/pages/pendencia_fiscal/pendenci
 import 'package:autoatendimento/app/modules/home/widgets/app_bar_image.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_primario.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_secundario.dart';
+import 'package:autoatendimento/app/utils/autoatendimento_utils.dart';
 import 'package:autoatendimento/app/utils/style_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
 
 import '../../../../theme/default_theme.dart';
+import '../../../../utils/dialog_auto.dart';
 import '../../../../utils/font_utils.dart';
 import '../../widgets/botao_seta_voltar.dart';
 
@@ -54,22 +56,22 @@ class _PendenciaFiscalPageState extends State<PendenciaFiscalPage> {
           ),
           Row(
             children: [
-              Expanded(flex: 40,child: SizedBox()),
+              Expanded(flex: 40, child: SizedBox()),
               Expanded(
                   flex: 20,
-                  child:  Padding(
+                  child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: BotaoPrimario(
-                            largura: FontUtils.h2(context) * 20,
-                            altura: 0.08,
-                            descricao: "Ver Mais + ",
-                            function: () {
-                              setState(() {
-                                listPendencias;
-                              });
-                            }),
+                        largura: FontUtils.h2(context) * 20,
+                        altura: 0.08,
+                        descricao: "Ver Mais + ",
+                        function: () {
+                          setState(() {
+                            listPendencias;
+                          });
+                        }),
                   )),
-              Expanded(flex: 40,child: SizedBox())
+              Expanded(flex: 40, child: SizedBox())
             ],
           ),
         ],
@@ -132,15 +134,18 @@ class _PendenciaFiscalPageState extends State<PendenciaFiscalPage> {
                       dataCellPersoalizadoString(pendencia.numero!.toString()),
                       DataCell(Center(
                         child: BotaoSecundario(
-
-                            largura: 0.08,
-                            colorText: DefaultTheme.accentColor,
-                            descricao: "Emitir",
-                            function: () => {
-                                  widget.pendenciaFiscalController
-                                      .carregaNotaParaEmissao(
-                                          pendencia, context)
-                                }, context: context,),
+                          largura: 0.08,
+                          colorText: DefaultTheme.accentColor,
+                          descricao: "Emitir",
+                          function: ()  async {
+                           await widget.pendenciaFiscalController
+                                .carregaNotaParaEmissao(pendencia, context);
+                           await Future.delayed(Duration(seconds: 10) ,() =>{
+                             setState(() {
+                               listPendencias;
+                             })});},
+                          context: context,
+                        ),
                       ))
                     ]))
                 .toList()),
