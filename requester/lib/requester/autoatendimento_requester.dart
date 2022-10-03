@@ -75,4 +75,14 @@ class AutoatendimentoRequester {
     );
     return ResponsePws(response: response);
   }
+
+  static Future<ResponsePws> printTefCancelamento(PWSConfig config,
+      PrinterTefDTO dto) async {
+    Response response = await RequesterPws(config: config).consome(
+      urlPws: UrlPws.postAutoatendimentoPrintTefCancelamento(),
+      headerParams: {},
+      body: dto.toJson(),
+    );
+    return ResponsePws(response: response);
+  }
 }

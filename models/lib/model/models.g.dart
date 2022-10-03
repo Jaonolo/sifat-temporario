@@ -6505,3 +6505,24 @@ Map<String, dynamic> _$TokenDTOToJson(TokenDTO instance) => <String, dynamic>{
       'token': instance.token,
       'type': instance.type,
     };
+
+PrinterTefDTO _$PrinterTefDTOFromJson(Map<String, dynamic> json) =>
+    PrinterTefDTO()
+      ..viaCliente = json['viaCliente'] as String
+      ..viaCaixa = json['viaCaixa'] as String
+      ..equipamentoImpressao = json['equipamentoImpressao'] == null
+          ? null
+          : EquipamentoImpressao.fromJson(
+              json['equipamentoImpressao'] as Map<String, dynamic>)
+      ..servicoAutoAtendimento = json['servicoAutoAtendimento'] == null
+          ? null
+          : ServicoAutoAtendimento.fromJson(
+              json['servicoAutoAtendimento'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$PrinterTefDTOToJson(PrinterTefDTO instance) =>
+    <String, dynamic>{
+      'viaCliente': instance.viaCliente,
+      'viaCaixa': instance.viaCaixa,
+      'equipamentoImpressao': instance.equipamentoImpressao,
+      'servicoAutoAtendimento': instance.servicoAutoAtendimento,
+    };

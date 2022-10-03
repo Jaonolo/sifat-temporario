@@ -14,6 +14,7 @@ class BotaoSecundario extends StatelessWidget {
   double largura = 0.35;
   double altura = 0.050;
   BuildContext context;
+  Color colorText;
 
   BotaoSecundario({
     this.function,
@@ -21,6 +22,8 @@ class BotaoSecundario extends StatelessWidget {
     this.largura = 0.35,
     this.altura = 0.050,
     required this.context,
+    this.colorText = Colors.black,
+
   }) {
     _heightScreen = MediaQuery
         .of(context)
@@ -44,7 +47,7 @@ class BotaoSecundario extends StatelessWidget {
       height: _heightScreen! * altura,
       child: ElevatedButton(
         child: Text(descricao!,
-            style: TextStyle(color: Colors.black,
+            style: TextStyle(color: colorText,
                 fontSize: orientation == Orientation.landscape
                     ? FontUtils.h2(context)
                     : FontUtils.h3(context))),
