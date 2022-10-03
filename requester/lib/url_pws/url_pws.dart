@@ -512,6 +512,11 @@ class UrlPws {
     _type = RequestType.POST;
   }
 
+  UrlPws.postAutoatendimentoPrintTefCancelamento() {
+    _url = "/printer/tef/cancelamento";
+    _type = RequestType.POST;
+  }
+
   UrlPws.postAutoatendimentoPrintConsumo() {
     _url = "/printer/consumo";
     _type = RequestType.POST;
@@ -716,6 +721,11 @@ class UrlPws {
 
   UrlPws.putLiberarEmissorFiscal() {
     _url = "/v2/notas/{idNota}/liberar-emissor-fiscal";
+    _type = RequestType.PUT;
+  }
+
+  UrlPws.putNotaPerdenciaArquivar() {
+    _url = "/notas/{idNota}/arquivar-pendencia";
     _type = RequestType.PUT;
   }
 

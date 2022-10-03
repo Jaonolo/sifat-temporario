@@ -526,3 +526,5 @@ part 'login_auto_atendimento_dto.dart';
 part 'login_client_dto.dart';
 
 part 'token_dto.dart';
+
+part 'printer_tef_dto.dart';
