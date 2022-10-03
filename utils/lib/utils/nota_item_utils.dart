@@ -146,7 +146,7 @@ class NotaItemUtils {
 
   static NotaItem itemComboToNotaItem(int idNota,
       ProdutoMenuComponente componente, int idEmpresa, int idTabelaPreco,
-      {BigDecimal? quantidade,int? idVendedor, int? idUsuario}) {
+      {BigDecimal? quantidade,int? idVendedor, int? idUsuario, bool adcionalDoItemDoCombo = false}) {
     ProdutoMenuComponenteEmpresa componenteEmpresa = componente
         .componenteEmpresas
         .firstWhere((ce) => ce.idEmpresa == idEmpresa);
@@ -169,7 +169,7 @@ class NotaItemUtils {
     item.quantidade = quantidade ?? componente.quantidade;
     item.idGrade = gradeEmpresa.id;
     item.grade = gradeEmpresa;
-    item.precoUnitario =
+    item.precoUnitario = adcionalDoItemDoCombo? gradeEmpresa.precoVenda(idTabelaPreco):
         componente.getValorComponente(idEmpresa, idTabelaPreco);
     item.precoTotal = item.quantidade!.multiplicar(item.precoUnitario);
     item.subitens = [];
@@ -600,11 +600,40 @@ class NotaItemUtils {
       return null;
     }
 
+   // Caso duplique o menu dentro do itemOriginal ele pega e junta em um só menu
+    itemOriginal = tratativaMenuDuplicado(itemOriginal, produtoMenu);
+
+
     return itemOriginal.subitens.firstWhereOrNull(
             (ni) =>
         ni.consumoItem != null && ni.consumoItem!.idMenu == produtoMenu.id);
   }
 
+ static  NotaItem tratativaMenuDuplicado(NotaItem itemOriginal,
+       ProdutoMenu produtoMenu){
+    // cria uma lista dos duplicados
+     List<NotaItem> menus = itemOriginal.subitens.where((ni) => ni.consumoItem != null && ni.consumoItem!.idMenu == produtoMenu.id).toList();
+
+     //verifica se tem mais que 1 menu
+     if (menus != null && menus.length >= 2) {
+       //Pega o primeiro dos menu
+       NotaItem? pr = itemOriginal.subitens.firstWhereOrNull((ni) =>
+       ni.consumoItem != null && ni.consumoItem!.idMenu == produtoMenu.id);
+
+       // remove esse primeiro da lista
+       menus.remove(pr);
+       // remove do item original
+       itemOriginal.subitens.remove(pr);
+
+       // acha o menu e adciona os items do menu que foi removido no menu unico do itemOriginal
+       for (NotaItem nt in itemOriginal.subitens) {
+         if (nt.consumoItem?.idMenu == pr?.consumoItem?.idMenu) {
+           nt.subitens.addAll(pr!.subitens);
+         }
+       }
+     }
+     return itemOriginal;
+  }
   static int quantidadeLancadaDoMenu(NotaItem itemOriginal,
       ProdutoMenu produtoMenu) {
       int total = 0;

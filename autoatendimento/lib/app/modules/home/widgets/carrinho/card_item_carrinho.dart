@@ -218,7 +218,7 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
                 StringUtils.montaDescricaoSubItensAuto(
-                    widget.produtoCarrinho.notaItem),
+                    widget.produtoCarrinho.notaItem, isValorItemTotal: false),
                 style: TextStyle(fontSize: FontUtils.h4(context)),
               ),
             )
