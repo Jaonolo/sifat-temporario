@@ -145,19 +145,22 @@ abstract class PendenciaFiscalBase with Store {
       }, context, "Confirmar");
     } catch (e) {
       String erro = e.toString();
-
+      String description = "";
       if (e.runtimeType == PwsException) {
         e as PwsException;
         if (e.message != null) erro = e.message!;
         if (e.pws != null && e.pws!.description != null)
           erro += "\n" + e.pws!.description!;
+          description = e.pws!.description!;
       }
+
+      await atualizarErroPendencia(nota, description,TipoPendencia.EMISSAO_NOTA);
 
       print('[ERRO - tratativasPosTransacao]: ${e.toString()}');
       AutoatendimentoUtils.closeProgress(context: context);
       _tentarNovamentePrinter(
           "Desculpe! \n\n Ocorreu um problema na finalização do pedido:\n\n [$erro]",
-          () => carregaNotaParaEmissao(pendencia!, context),
+          () => carregaNotaParaEmissao(pendencia, context),
           context,
           "Tentar novamente");
     }
@@ -166,6 +169,10 @@ abstract class PendenciaFiscalBase with Store {
 
   Future<void> emitirFiscal(Nota nota) async {
     await NotaRepository.emitirFiscal(nota, "NFCE").catchError((e) => throw e);
+  }
+
+  Future<void> atualizarErroPendencia(Nota nota, String erro, TipoPendencia tipoPendencia) async {
+    await NotaRepository.atualizarErroPendencia(nota, erro,tipoPendencia).catchError((e) => throw e);
   }
 
   Future<void> verificaEmissaoNFCe(Nota nota, BuildContext context) async {
