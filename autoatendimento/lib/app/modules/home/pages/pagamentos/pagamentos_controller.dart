@@ -32,6 +32,7 @@ abstract class PagamentosBase with Store {
           break;
         case "CARTAO_DEBITO":
         case "VALE_REFEICAO":
+        case "VALE_ALIMENTACAO":
           _transacaoTEF("DEBITO", context);
           break;
       }

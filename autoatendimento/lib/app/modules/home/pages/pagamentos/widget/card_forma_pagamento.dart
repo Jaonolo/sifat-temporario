@@ -23,8 +23,8 @@ class _CardFormaPagamentoState extends State<CardFormaPagamento> {
         .orientation;
 
     return SizedBox(
-      width: FontUtils.h1(context) * 3,
-      height: FontUtils.h1(context) * 3,
+      width: FontUtils.h1(context) * 4,
+      height: FontUtils.h1(context) * 4,
       child: ElevatedButton(
         child: Column(
           children: [
@@ -77,6 +77,9 @@ class _CardFormaPagamentoState extends State<CardFormaPagamento> {
         param = 'assets/debito.png';
         break;
       case "VALE_REFEICAO":
+        param = 'assets/vale.png';
+        break;
+      case "VALE_ALIMENTACAO":
         param = 'assets/vale.png';
         break;
     }
