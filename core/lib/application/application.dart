@@ -1,6 +1,6 @@
 import 'package:models/model/enum/marca_pos.dart';
 import 'package:models/model/enum/tipo_estacao.dart';
-import 'package:models/model/enum/client.dart' as c;
+import 'package:models/model/enum/clients.dart' as c;
 import 'package:models/model/models.dart';
 import 'package:pos/pos/impressora/impressora_service.dart';
 import 'package:requester/config/pws_config.dart';
@@ -13,10 +13,11 @@ class Application {
   Turno? turno;
   late String token;
   Modulo? modulo;
-  c.Client? client;
+  c.Clients? client;
   late Empresa empresa;
   Quest? quest;
-  late PWSConfig pwsConfig;
+  late PWSConfig pwsConfigWaychef;
+  late PWSConfig pwsConfigGateway;
   Movimento? movimento;
   Funcionario? vendedor;
   List<NotaItem>? itens;
@@ -104,6 +105,6 @@ class Application {
 
   void setVerificaPermissaoService(UsuarioPerfilEmpresa usuarioPerfilEmpresa) {
     verificaPermissaoService =
-        VerificaPermissaoService(pwsConfig, token, usuarioPerfilEmpresa);
+        VerificaPermissaoService(pwsConfigWaychef, token, usuarioPerfilEmpresa);
   }
 }

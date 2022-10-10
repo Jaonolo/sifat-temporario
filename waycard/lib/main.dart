@@ -1,6 +1,6 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
-import 'package:models/model/enum/client.dart';
+import 'package:models/model/enum/clients.dart';
 import 'package:waycard/config/app_config.dart';
 import 'package:waycard/pages/atulizar_senha/atualizar_senha_bloc.dart';
 import 'package:waycard/pages/criar_conta/criar_conta_page_bloc.dart';

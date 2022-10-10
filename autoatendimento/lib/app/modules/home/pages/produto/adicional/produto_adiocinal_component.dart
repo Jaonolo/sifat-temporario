@@ -1,7 +1,7 @@
-import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/adicional/widgets/card_produto_menu.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/generic/widgets/mostra_quantidade.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/generic/widgets/produto_compomente/list_view_compomentes.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_primario.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
@@ -9,7 +9,6 @@ import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import 'package:utils/utils/nota_item_utils.dart';
 
 class ProdutoAdicionalComponent {
@@ -17,15 +16,12 @@ class ProdutoAdicionalComponent {
   final HomeController homeController = Modular.get();
   final VendaController vendaController = Modular.get();
   final ProdutoAdicionalController controller = Modular.get();
-  late Orientation orientation;
-  AppController appController = Modular.get();
 
   initialize(BuildContext context) {
     this.context = context;
-    orientation = MediaQuery.of(context).orientation;
   }
 
-  Widget body() {
+  body() {
     return Column(
       children: [
         Expanded(
@@ -65,11 +61,11 @@ class ProdutoAdicionalComponent {
                   child: Container(),
                 ),
                 Expanded(
-                  flex: 74,
+                  flex: 76,
                   child: _adicionalConteudo(),
                 ),
-                Expanded(flex: 13, child: _rodapeCard()),
-                const Expanded(flex: 2, child: SizedBox()),
+                Expanded(flex: 9, child: _rodapeCard()),
+                Expanded(flex: 2, child: SizedBox()),
               ],
             ),
           ),
@@ -121,96 +117,62 @@ class ProdutoAdicionalComponent {
       // },
       child: Text(
         controller.produtoCarrinho.notaItem.descricao!,
-        style: TextStyle(
-            fontSize: orientation == Orientation.landscape
-                ? FontUtils.h2(context)
-                : FontUtils.h1(context) * 0.8),
+        style: TextStyle(fontSize: FontUtils.h2(context)),
       ),
     );
   }
 
   //monta os opcionais ou extras chama o CardMenu para escoher ente o CardMenuComponent ou CardMenuComponentObservacao
   Widget _adicionalConteudo() {
-    return orientation == Orientation.landscape
-        ? Row(
-            children: [
-              Expanded(flex: 14, child: Container()),
+    return Row(
+      children: [
+        Expanded(flex: 14, child: Container()),
+        Expanded(
+          flex: 72,
+          child: Container(
+            child: Column(children: [
+              Expanded(flex: 35, child: _imagem()),
               Expanded(
-                flex: 140,
-                child: Column(children: [
-                  Expanded(flex: 20, child: _imagem()),
-                  Expanded(
-                      flex: 5,
-                      child: (appController
-                                  .mapProdutos[controller.produtoCarrinho
-                                      .notaItem.idProdutoEmpresa]!
-                                  .produto!
-                                  .detalhes !=
-                              null)
-                          ? _detalhes()
-                          : Container()),
-                  const Expanded(child: SizedBox()),
-                  Expanded(flex: 60, child: _pageViewBuilder())
-                ]),
-              ),
-              Expanded(flex: 14, child: Container()),
-            ],
-          )
-        : Row(
-            children: [
-              Expanded(flex: 14, child: Container()),
-              Expanded(
-                flex: 72,
-                child: Column(children: [
-                  Expanded(flex: 35, child: _imagem()),
-                  Expanded(
-                      flex: 5,
-                      child: (appController
-                                  .mapProdutos[controller.produtoCarrinho
-                                      .notaItem.idProdutoEmpresa]!
-                                  .produto!
-                                  .detalhes !=
-                              null)
-                          ? _detalhes()
-                          : Container()),
-                  const Expanded(child: SizedBox()),
-                  Expanded(flex: 60, child: _pageViewBuilder())
-                ]),
-              ),
-              Expanded(flex: 14, child: Container()),
-            ],
-          );
+                  flex: 5,
+                  child: (controller.produtoCarrinho.notaItem.produtoEmpresa!
+                              .produto!.detalhes !=
+                          null)
+                      ? _detalhes()
+                      : Container()),
+              Expanded(child: const SizedBox()),
+              Expanded(flex: 60, child: _pageViewBuilder())
+            ]),
+          ),
+        ),
+        Expanded(flex: 14, child: Container()),
+      ],
+    );
   }
 
   Widget _imagem() {
     return SizedBox(
-      height: FontUtils.h1(context) * 3,
-      child: (appController
-                  .mapProdutos[
-                      controller.produtoCarrinho.notaItem.idProdutoEmpresa]!
-                  .produto!
-                  .arquivoPrincipal() !=
-              null)
+      height: FontUtils.h1(context),
+      child: (controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!
+          .arquivoPrincipal() !=
+          null)
           ? Image.network(
-              appController
-                  .mapProdutos[
-                      controller.produtoCarrinho.notaItem.idProdutoEmpresa]!
-                  .produto!
-                  .arquivoPrincipal()!
-                  .link!,
-              fit: BoxFit.fill,
-            )
+        controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!
+            .arquivoPrincipal()!
+            .link!,
+        fit: BoxFit.fill,
+      )
           : Image.asset(
-              'assets/no-image.png',
-              fit: BoxFit.fill,
-            ),
+        'assets/no-image.png',
+        fit: BoxFit.fill,
+      ),
     );
   }
 
+  // todo Detalhes do produto, nao consigo pegar do erp porque ele nao é passado PRECISA ARRUMAR
   Widget _detalhes() {
     return Wrap(children: [
-      Text(appController.mapProdutos[
-          controller.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.detalhes!
+      Text(
+          controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!.detalhes!
               .toUpperCase(),
           style: TextStyle(fontSize: FontUtils.h4(context)))
     ]);
@@ -218,14 +180,31 @@ class ProdutoAdicionalComponent {
 
   Widget _pageViewBuilder() {
     return PageView.builder(
-        physics: const NeverScrollableScrollPhysics(),
+        physics: NeverScrollableScrollPhysics(),
         controller: controller.pageController,
-        itemCount: appController.mapProdutos[controller
-            .produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus.length,
-        onPageChanged: (index) => controller.atualizaMenus(index),
+        itemCount: controller
+            .produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length,
         itemBuilder: (BuildContext context, int index) {
-          return CardProdutoMenu(controller.produtoMenu!,
-              controller.anteriorMenu, controller.proximoMenu);
+          controller.atualizaMenus(index);
+
+          return  Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  children: [
+                    Center(
+                        child: Text(
+                          controller.produtoMenu!.descricao!.toUpperCase(),
+                          style: TextStyle(
+                              fontSize: FontUtils.h3(context)),
+                        )),
+                    MostraQuantidade(controller),
+                    ListViewCompomentes(controller),
+                  ],
+                ),
+              ),
+            ],
+          );
         });
   }
 
@@ -237,9 +216,9 @@ class ProdutoAdicionalComponent {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                const Expanded(child: SizedBox()),
+                Expanded(child: SizedBox()),
                 Expanded(child: _txtSubTotal()),
-                const Expanded(child: SizedBox()),
+                Expanded(child: SizedBox()),
               ],
             ),
           ),
@@ -247,9 +226,9 @@ class ProdutoAdicionalComponent {
         Expanded(
           child: Row(
             children: [
-              const Expanded(flex: 20, child: SizedBox()),
+              Expanded(flex: 20, child: SizedBox()),
               Expanded(flex: 60, child: _botaoNavegacao()),
-              const Expanded(flex: 20, child: SizedBox()),
+              Expanded(flex: 20, child: SizedBox()),
             ],
           ),
         ),
@@ -282,30 +261,19 @@ class ProdutoAdicionalComponent {
 
   Widget _txtSubTotal() {
     return Observer(builder: (_) {
-      return orientation == Orientation.landscape
-          ? Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                    child: Text(
-                        'SUBTOTAL R\$ ${controller.produtoCarrinho.notaItem.precoTotal!.somar(NotaItemUtils.calcularAdicionais(controller.produtoCarrinho.notaItem)).toStringAsFixed(2)}',
-                        softWrap: false,
-                        style: TextStyle(fontSize: FontUtils.h2(context)))),
-              ],
-            )
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Text(
-                    'SUBTOTAL R\$ ${controller.produtoCarrinho.notaItem.precoTotal!.somar(NotaItemUtils.calcularAdicionais(controller.produtoCarrinho.notaItem)).toStringAsFixed(2)}',
-                    style: TextStyle(
-                      fontSize: FontUtils.h3(context),
-                    ),
-                  ),
-                ),
-              ],
-            );
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Text(
+              'SUBTOTAL R\$ ${controller.produtoCarrinho.notaItem.precoTotal!.somar(NotaItemUtils.calcularAdicionais(controller.produtoCarrinho.notaItem)).toStringAsFixed(2)}',
+              style: TextStyle(
+                fontSize: FontUtils.h3(context),
+              ),
+            ),
+          ),
+        ],
+      );
     });
   }
 }

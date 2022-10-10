@@ -482,15 +482,15 @@ class ImpressaoPOSUtils {
     BigDecimal totalRecebimentos = BigDecimal.ZERO();
     BigDecimal totalEntradas = BigDecimal.ZERO();
 
-    for (var v in cfDTO.extratoTurnoDTO!.vendasPorFormaDePagamento!) {
+    for (var v in cfDTO.extratoTurnoDTO!.vendasPorFormaDePagamento) {
       totalVendas += v.total;
     }
 
-    for (var element in cfDTO.extratoTurnoDTO!.suprimentos!) {
+    for (var element in cfDTO.extratoTurnoDTO!.suprimentos) {
       totalSuprimentos += element.valor;
     }
 
-    for (var element in cfDTO.extratoTurnoDTO!.recebimentos!) {
+    for (var element in cfDTO.extratoTurnoDTO!.recebimentos) {
       totalRecebimentos += element.valor;
     }
 
@@ -500,7 +500,7 @@ class ImpressaoPOSUtils {
     BigDecimal totalSangrias = BigDecimal.ZERO();
     BigDecimal totalSaidas = BigDecimal.ZERO();
 
-    for (var s in cfDTO.extratoTurnoDTO!.sangrias!) {
+    for (var s in cfDTO.extratoTurnoDTO!.sangrias) {
       totalSangrias += s.valor;
     }
     totalSaidas = totalSangrias;
@@ -510,7 +510,7 @@ class ImpressaoPOSUtils {
     indice++;
     impressao += "$indice) Vendas\n";
 
-    cfDTO.extratoTurnoDTO!.vendasPorFormaDePagamento!.asMap().forEach((key, v) {
+    cfDTO.extratoTurnoDTO!.vendasPorFormaDePagamento.asMap().forEach((key, v) {
       impressao += "${v.descricao}   ${v.total!.toStringAsFixed(2)}\n";
     });
 
@@ -520,7 +520,7 @@ class ImpressaoPOSUtils {
     indice++;
     impressao += "$indice) Suprimentos\n";
 
-    cfDTO.extratoTurnoDTO!.suprimentos!.asMap().forEach((key, value) {
+    cfDTO.extratoTurnoDTO!.suprimentos.asMap().forEach((key, value) {
       impressao += "${value.historico}   ${value.valor!.toStringAsFixed(2)}\n";
     });
     impressao += "--------\n";
@@ -532,7 +532,7 @@ class ImpressaoPOSUtils {
     impressao += "\n";
     impressao += "$indice) Recebimentos\n";
 
-    cfDTO.extratoTurnoDTO!.recebimentos!.asMap().forEach((key, value) {
+    cfDTO.extratoTurnoDTO!.recebimentos.asMap().forEach((key, value) {
       impressao += "${value.favorecido}   ${value.valor!.toStringAsFixed(2)}\n";
     });
 
@@ -552,7 +552,7 @@ class ImpressaoPOSUtils {
 
     impressao += "$indice) Sangrias\n";
 
-    cfDTO.extratoTurnoDTO!.sangrias!.asMap().forEach((key, value) {
+    cfDTO.extratoTurnoDTO!.sangrias.asMap().forEach((key, value) {
       impressao += "${value.historico}   ${value.valor!.toStringAsFixed(2)}\n";
     });
 
@@ -632,7 +632,7 @@ class ImpressaoPOSUtils {
 
       //DEDUCAO
       BigDecimal totalCancelamentos = BigDecimal.ZERO();
-      cfDTO.vendasCanceladas!
+      cfDTO.vendasCanceladas
           .forEach((v) => totalCancelamentos += v.valorVenda);
       totalLiquido = totalLiquido - totalCancelamentos;
 
@@ -646,23 +646,22 @@ class ImpressaoPOSUtils {
       "(=)TOTAL LIQUIDO DE VENDAS  ${totalLiquido.toStringAsFixed(2)}\n";
     }
 
-    if (cfDTO.desdobramentoGrupoProdutosDTOList != null &&
-        cfDTO.desdobramentoGrupoProdutosDTOList!.length > 0) {
+    if (cfDTO.desdobramentoGrupoProdutosDTOList.length > 0) {
       impressao += "\n";
       impressao += "============================== \n";
       impressao += "DESDOBRAMENTO POR ITENS/GRUPO\n";
       impressao += "============================== \n";
 
       for (int i = 0;
-      i < cfDTO.desdobramentoGrupoProdutosDTOList!.length;
+      i < cfDTO.desdobramentoGrupoProdutosDTOList.length;
       i++) {
         DesdobramentoGrupoProdutosDTO dv =
-        cfDTO.desdobramentoGrupoProdutosDTOList![i];
+        cfDTO.desdobramentoGrupoProdutosDTOList[i];
 
         impressao += "\n";
         impressao += "GRUPO:  ${dv.descricaoGrupo}\n";
 
-        for (DesdobramentoProdutoDTO dp in dv.desdobramentoProdutoDTOList!) {
+        for (DesdobramentoProdutoDTO dp in dv.desdobramentoProdutoDTOList) {
           impressao += "PRODUTO  ${dp.descricao}\n";
           impressao += "QTDE ${dp.quantidadeVendida}" +
               " | " +
@@ -673,22 +672,21 @@ class ImpressaoPOSUtils {
         impressao += "SUBTOTAL:  ${dv.valorVendido!.toStringAsFixed(2)}\n";
         impressao += "TICKET MEDIO:  ${dv.ticketMedio!.toStringAsFixed(2)}\n";
 
-        if (i < (cfDTO.desdobramentoGrupoProdutosDTOList!.length - 1))
+        if (i < (cfDTO.desdobramentoGrupoProdutosDTOList.length - 1))
           impressao += "--------\n";
       }
     }
-    if (cfDTO.pacotesVendidos != null && cfDTO.pacotesVendidos!.length > 0) {
+    if (cfDTO.pacotesVendidos.length > 0) {
       impressao += "\n";
       impressao += "VENDA DE COMBOS/CESTAS PRODUTOS\n";
 
-      for (DesdobramentoProdutoDTO dp in cfDTO.pacotesVendidos!) {
+      for (DesdobramentoProdutoDTO dp in cfDTO.pacotesVendidos) {
         impressao += "PRODUTO  ${dp.descricao}\n";
         impressao += "QTDE  ${dp.quantidadeVendida!.toStringAsFixed(2)}\n";
       }
     }
 
-    if (cfDTO.taxaServicoGracomDTOList != null &&
-        cfDTO.taxaServicoGracomDTOList!.length > 0) {
+    if (cfDTO.taxaServicoGracomDTOList.length > 0) {
       impressao += "\n";
       impressao += "============================== \n";
       impressao += "DESDOBRAMENTO POR GARÇOM\n";
@@ -697,7 +695,7 @@ class ImpressaoPOSUtils {
       impressao += "GARÇONS\n-------\n";
       impressao += "Codigo   Nome\n";
 
-      cfDTO.taxaServicoGracomDTOList!.asMap().forEach((key, ds) {
+      cfDTO.taxaServicoGracomDTOList.asMap().forEach((key, ds) {
         impressao +=
         "[${(ds.codigo != null) ? ds.codigo : ""}]   ${ds.nome!
             .toUpperCase()}\n";
@@ -705,26 +703,25 @@ class ImpressaoPOSUtils {
 
       impressao += "VENDAS POR GARÇONS\n";
       impressao += "Garçom   BC        Serviço  \n";
-      cfDTO.taxaServicoGracomDTOList!.asMap().forEach((key, ds) {
+      cfDTO.taxaServicoGracomDTOList.asMap().forEach((key, ds) {
         impressao +=
         "[${(ds.codigo != null) ? ds.codigo : ""}]   ${ds
             .valorBaseCalculo}   ${ds.taxaServico}  -   \n";
 
-        if (key < cfDTO.taxaServicoGracomDTOList!.length - 1) impressao += "\n";
+        if (key < cfDTO.taxaServicoGracomDTOList.length - 1) impressao += "\n";
       });
     } else {
       impressao += "Nenhum garçom incluso nas vendas\n";
     }
 
-    if (cfDTO.vendasModuloDTOList != null) {
-      if (cfDTO.vendasModuloDTOList!.length > 0) {
+      if (cfDTO.vendasModuloDTOList.length > 0) {
         impressao += "\n";
         impressao += "============================== \n";
         impressao += "DESDOBRAMENTO POR MODULO\n";
         impressao += "============================== \n";
         impressao += "MÓDULOS\n-------\n";
         impressao += "Nome   Tx. Serviço   \n";
-        cfDTO.vendasModuloDTOList!.forEach((vd) {
+        cfDTO.vendasModuloDTOList.forEach((vd) {
           impressao +=
           "[${vd.tipoModulo}]   ${vd.valorServico!.toStringAsFixed(2)}\n";
         });
@@ -732,14 +729,14 @@ class ImpressaoPOSUtils {
         impressao += "VENDAS POR MÓDULO\n-----\n";
         impressao += "Módulo   Produto   Serviço   Total   %   \n";
         impressao += "------------------------------ \n";
-        cfDTO.vendasModuloDTOList!.forEach((vd) {
+        cfDTO.vendasModuloDTOList.forEach((vd) {
           impressao +=
           "[${vd.tipoModulo}]   ${vd.vendasProdutos}   ${vd.valorServico!
               .toStringAsFixed(2)}   ${(vd.vendasProdutos! + vd.valorServico)
               .toStringAsFixed(2)}   -   \n";
         });
       }
-    }
+
 
     _ticketPendenciaFiscal(cfDTO.pendenciaEmissaoFiscal!);
 
@@ -750,9 +747,9 @@ class ImpressaoPOSUtils {
 
     impressao += "CONTAGEM DO SISTEMA: \n";
 
-    int qtdeAtendimentos = cfDTO.vendas!.length;
+    int qtdeAtendimentos = cfDTO.vendas.length;
 
-    int qtdeCancelamentos = cfDTO.vendasCanceladas!.length;
+    int qtdeCancelamentos = cfDTO.vendasCanceladas.length;
 
     BigDecimal ticketMedio = BigDecimal.ZERO();
     if (totalVendas > BigDecimal.ZERO())
@@ -764,7 +761,7 @@ class ImpressaoPOSUtils {
 
     impressao += "Ticket Médio:  ${ticketMedio.toStringAsFixed(2)}\n\n";
 
-    cfDTO.extratoTurnoDTO!.fechamentos!.forEach((f) {
+    cfDTO.extratoTurnoDTO!.fechamentos.forEach((f) {
       impressao +=
       "${f.finalizadora}:  ${(f.valorApurado!.toStringAsFixed(2))}\n";
     });
@@ -773,7 +770,7 @@ class ImpressaoPOSUtils {
     impressao += "------------------------------ \n";
     impressao += "INFORMADO PELO OPERADOR:\n";
 
-    cfDTO.extratoTurnoDTO!.fechamentos!.forEach((tf) {
+    cfDTO.extratoTurnoDTO!.fechamentos.forEach((tf) {
       impressao +=
       "${tf.finalizadora}:  ${tf.valorDigitado!.toStringAsFixed(2)}\n";
     });
@@ -902,7 +899,7 @@ class ImpressaoPOSUtils {
     indice++;
     impressao += "$indice) Suprimentos\n\n";
 
-    cfDTO.extratoTurnoDTO!.suprimentos!.forEach((element) =>
+    cfDTO.extratoTurnoDTO!.suprimentos.forEach((element) =>
     impressao +=
     "${element.historico}   ${element.valor!.toStringAsFixed(2)}\n");
 
@@ -912,7 +909,7 @@ class ImpressaoPOSUtils {
 
     impressao += "$indice) Sangrias\n\n";
 
-    cfDTO.extratoTurnoDTO!.sangrias!.forEach((element) {
+    cfDTO.extratoTurnoDTO!.sangrias.forEach((element) {
       impressao +=
       "${element.historico}   ${element.valor!.toStringAsFixed(2)}\n";
     });
@@ -924,7 +921,7 @@ class ImpressaoPOSUtils {
     impressao += "CONTAGEM DO SISTEMA: \n";
     impressao += "\n";
 
-    cfDTO.extratoTurnoDTO!.fechamentos!.forEach((f) {
+    cfDTO.extratoTurnoDTO!.fechamentos.forEach((f) {
       impressao += "${f.finalizadora}:  (____)\n";
     });
 
@@ -933,7 +930,7 @@ class ImpressaoPOSUtils {
     impressao += "------------------------------ \n";
     impressao += "INFORMADO PELO OPERADOR:\n\n";
 
-    cfDTO.extratoTurnoDTO!.fechamentos!.forEach((tf) {
+    cfDTO.extratoTurnoDTO!.fechamentos.forEach((tf) {
       impressao +=
       "${tf.finalizadora}:  ${tf.valorDigitado!.toStringAsFixed(2)}\n";
     });

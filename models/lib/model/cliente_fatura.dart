@@ -3,16 +3,29 @@ part of openapi.api;
 @JsonSerializable()
 class ClienteFatura {
   int? id;
+
   DateTime? dataEmissao;
+
   int? idCliente;
+
   Cliente? cliente;
+
   BigDecimal? valor = BigDecimal.ZERO();
+
   int? idNota;
+
   Nota? nota;
+
   int? numeroFatura;
+
   String? observacao;
+
   DateTime? dataCancelamento;
+
+  @JsonKey(defaultValue: [])
   List<Conta> contas = [];
+
+  @JsonKey(defaultValue: [])
   List<ClienteConta> clienteContas = [];
 
   ClienteFatura();

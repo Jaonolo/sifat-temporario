@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:waycard/config/app_config.dart';
-import 'package:models/model/enum/client.dart';
+import 'package:models/model/enum/clients.dart';
 
 class SobrePageComponent {
 

@@ -37,7 +37,7 @@ abstract class _AppControllerBase with Store {
   }
 
   void iniciaTimer() {
-    timer = Timer.periodic(Duration(seconds: 30), (time) {
+    timer = Timer.periodic(Duration(minutes: servicoAutoAtendimento.avisoTempoOcioso!), (time) {
       warningTimer();
     });
   }

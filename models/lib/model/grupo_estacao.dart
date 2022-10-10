@@ -9,8 +9,10 @@ class GrupoEstacao {
 
   String? descricao;
 
+  @JsonKey(defaultValue: [])
   List<Modulo> modulos = [];
 
+  @JsonKey(defaultValue: [])
   List<GrupoImpressora> impressoras = [];
 
   GrupoEstacao();

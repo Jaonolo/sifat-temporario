@@ -55,7 +55,7 @@ class DefaultTheme {
         selectionColor: accentColor,
         selectionHandleColor: accentColor,
       ),
-      colorScheme: ColorScheme.fromSwatch().copyWith(secondary: accentColor),
+      colorScheme: ColorScheme.fromSwatch().copyWith(secondary: accentColor, primary: accentColor),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_page.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/abstract/controller_abstract.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
@@ -16,20 +17,29 @@ part "produto_combo_controller.g.dart";
 
 class ProdutoComboController = ProdutoComboBase with _$ProdutoComboController;
 
-abstract class ProdutoComboBase with Store {
-  AppController appController = Modular.get();
-  VendaController vendaController = Modular.get();
+abstract class ProdutoComboBase extends ControllerAbstract with Store  {
+  // ------------------------ Variaveis
   HomeController homeController = Modular.get();
+  VendaController vendaController = Modular.get();
+  AppController appController = Modular.get();
 
   ProdutoCarrinho produtoCarrinhoOriginal = ProdutoCarrinho(NotaItem());
 
+  // ------------------------ Variaveis Observable
+  @observable
   ProdutoCarrinho produtoCarrinho = ProdutoCarrinho(NotaItem());
 
+  @observable
   ProdutoMenu? produtoMenu;
 
+  @observable
   ProdutoMenu? proximoMenu;
 
+  @observable
   ProdutoMenu? anteriorMenu;
+
+  @observable
+  int radiovalue = 0;
 
   @observable
   NotaItem? menu;
@@ -50,14 +60,11 @@ abstract class ProdutoComboBase with Store {
   }
 
   //Adiciona o produto Combo no carrinho de compras (Finalização do combo)
-
   Future<void> adicionarAoCarrinho() async {
     try {
       //Pré validações
       produtoCarrinho = await ProdutoCarrinhoUtils.atualizaProdutoCarrinho(
-          produtoCarrinhoOriginal, produtoCarrinho, (idProdutoEmpresa){
-            return appController.mapProdutos[idProdutoEmpresa];
-      });
+          produtoCarrinhoOriginal, produtoCarrinho);
 
       //Ação de adicionar o produto carrinho
       //Caso o produto carrinho já possuir indice, a atualização é feita por referencia no passo anterior "atualizaProdutoCarrinho"
@@ -74,29 +81,25 @@ abstract class ProdutoComboBase with Store {
   //Métodos uteis para criação de nota item do tipo combo
 
   void criaItemCombo(ProdutoMenuComponente produtoMenuComponente) {
-    late NotaItem item;
+    NotaItem? item;
     if (produtoMenu!.tipo == "COMPONENTE_FIXO") {
       item = NotaItemUtils.itemComboToNotaItem(
           produtoCarrinho.notaItem.idNota!,
           produtoMenuComponente,
-          appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
-              .idEmpresa!,
+          produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
           appController.tabelaPreco.id!);
     } else if (produtoMenu!.tipo == "COMPONENTE_EXTRA") {
       item = NotaItemUtils.adicionalToNotaItem(
           produtoCarrinho.notaItem.idNota!,
           produtoMenuComponente,
-          appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
-              .idEmpresa!,
+          produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
           appController.tabelaPreco.id!);
     }
 
-    bool temMenuObservacao = appController
-        .mapProdutos[item.idProdutoEmpresa]!.produto!.menus
+    bool temMenuObservacao = item!.produtoEmpresa!.produto!.menus
         .any((element) => element.tipo == "OBSERVACAO");
 
-    if (appController.mapProdutos[item.idProdutoEmpresa]!.produto!.pacote ==
-            "ADICIONAIS" ||
+    if (item.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
         temMenuObservacao) {
       homeController.addPalco(ProdutoAdicionalPage(ProdutoCarrinho(item)));
       return;
@@ -112,72 +115,64 @@ abstract class ProdutoComboBase with Store {
       menu!.subitens.add(itemCombo);
       produtoCarrinho.notaItem.subitens.add(menu!);
     } else {
-      menu!.subitens.clear();
       menu!.subitens.add(itemCombo);
     }
-    NotaItemUtils.atualizaTotais(produtoCarrinho.notaItem, (idProdutoEmpresa) {
-      return appController.mapProdutos[idProdutoEmpresa];
-    });
+    NotaItemUtils.atualizaTotais(produtoCarrinho.notaItem);
     _changeNotaItemMenu();
-    proximo();
+  }
+
+  Future<void> atualizaMenus(int index) async {
+    this.index = index;
+    produtoMenu =
+    (index < produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
+        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index]
+        : null;
+    proximoMenu = (index + 1 <
+        produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
+        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index + 1]
+        : null;
+    anteriorMenu = (index > 0)
+        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index - 1]
+        : null;
+
+    _changeNotaItemMenu();
+  }
+
+  @action
+  void selecaoRadio(int n) {
+    this.radiovalue = n;
   }
 
   void limparItem() {
     if (menu != null) {
       menu!.subitens.clear();
-      NotaItemUtils.atualizaTotais(produtoCarrinho.notaItem,
-          (idProdutoEmpresa) {
-        return appController.mapProdutos[idProdutoEmpresa];
-      });
+      NotaItemUtils.atualizaTotais(produtoCarrinho.notaItem);
     }
     proximo();
   }
 
-  //Paginação (PageController)
+  @action
+  void changeProdutoCarrinho(ProdutoCarrinho value) {
+    produtoCarrinho = value;
+    produtoMenu = produtoMenu;
+  }
 
-  late int index;
+  // ------------------------ Metodos da Paginação (PageController)
+  int index = 0;
   late PageController pageController;
 
   Future<void> proximo() async {
     // if (produtoMenu != null && produtoMenu.tipo == "COMPONENTE_FIXO" && (menu == null || menu.subitens.isEmpty)) {
     //   return;
     // }
-    await Future.delayed(const Duration(milliseconds: 100));
+    await new Future.delayed(const Duration(milliseconds: 100));
     pageController.nextPage(
-        duration: const Duration(milliseconds: 200), curve: Curves.ease);
+        duration: Duration(milliseconds: 200), curve: Curves.ease);
   }
 
   void anterior() {
     pageController.previousPage(
-        duration: const Duration(milliseconds: 200), curve: Curves.ease);
+        duration: Duration(milliseconds: 200), curve: Curves.ease);
   }
 
-  void atualizaMenus(int index) {
-    this.index = index;
-
-    produtoMenu = (index <
-            appController
-                .mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
-                .produto!
-                .menus
-                .length)
-        ? appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
-            .produto!.menus[index]
-        : null;
-    proximoMenu = (index + 1 <
-            appController
-                .mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
-                .produto!
-                .menus
-                .length)
-        ? appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
-            .produto!.menus[index + 1]
-        : null;
-    anteriorMenu = (index > 0)
-        ? appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!
-            .produto!.menus[index - 1]
-        : null;
-
-    _changeNotaItemMenu();
-  }
 }

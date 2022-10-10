@@ -28,6 +28,7 @@ class PlanoConta {
 
   bool? compraRevenda = false;
 
+  @JsonKey(defaultValue: [])
   List<PlanoConta> subitens = [];
 
   PlanoConta();

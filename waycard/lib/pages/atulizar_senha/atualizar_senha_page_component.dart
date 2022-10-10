@@ -237,7 +237,7 @@ class AtualizarSenhaPageComponent {
           StringUtils.stringToMd5(_novaSenhaController.text.trim());
 
       WayCardUtils.showProgress();
-      UsuarioRequester.atualizarDados(AppConfig.application.pwsConfig, user)
+      UsuarioRequester.atualizarDados(AppConfig.application.pwsConfigWaychef, user)
           .then((response) async {
         if (response.isSuccess) {
           WayCardUtils.closeProgress();

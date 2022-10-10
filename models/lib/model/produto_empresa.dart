@@ -67,7 +67,8 @@ class ProdutoEmpresa implements Cloneable {
       });
 
   List<GradeEmpresa> get gradesAtivas =>
-      this.grades.where((ge) => ge.ativo! && ge.grade != null &&
+      this.grades.where((ge) =>
+      ge.ativo! && ge.grade != null &&
           ge.grade!.ativo!).toList();
 
   @override

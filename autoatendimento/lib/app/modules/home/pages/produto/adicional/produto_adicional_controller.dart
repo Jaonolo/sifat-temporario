@@ -1,6 +1,7 @@
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/abstract/controller_abstract.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
@@ -14,13 +15,16 @@ part "produto_adicional_controller.g.dart";
 class ProdutoAdicionalController = ProdutoAdicionalBase
     with _$ProdutoAdicionalController;
 
-abstract class ProdutoAdicionalBase with Store {
+abstract class ProdutoAdicionalBase extends ControllerAbstract with Store {
+  // ------------------------ Variaveis
+  ProdutoComboController produtoComboController = Modular.get();
   HomeController homeController = Modular.get();
   VendaController vendaController = Modular.get();
   AppController appController = Modular.get();
 
-  ProdutoComboController produtoComboController = Modular.get();
   ProdutoCarrinho produtoCarrinhoOriginal = ProdutoCarrinho(NotaItem());
+
+  // ------------------------ Variaveis Observable
 
   @observable
   ProdutoCarrinho produtoCarrinho = ProdutoCarrinho(NotaItem());
@@ -37,13 +41,13 @@ abstract class ProdutoAdicionalBase with Store {
   @observable
   int radiovalue = 0;
 
+  // ------------------------ Metodos
+
   void adicionarAoCarrinho() {
     try {
       //Pré validações
       ProdutoCarrinhoUtils.atualizaProdutoCarrinho(
-          produtoCarrinhoOriginal, produtoCarrinho, (idProdutoEmrpesa){
-            return appController.mapProdutos[idProdutoEmrpesa];
-      });
+          produtoCarrinhoOriginal, produtoCarrinho);
 
       //Ação de adicionar o produto carrinho
       //Caso o produto carrinho já possuir indice, a atualização é feita por referencia no passo anterior "atualizaProdutoCarrinho"
@@ -61,7 +65,7 @@ abstract class ProdutoAdicionalBase with Store {
     } finally {
       try {
         //Validações para voltar ao cardapio principal quando o item tiver grade => REMOVER OS DOIS ULTIMOS PALCOS
-        if (appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.gradesAtivas.isNotEmpty &&
+        if (produtoCarrinho.notaItem.produtoEmpresa!.gradesAtivas.isNotEmpty &&
             homeController.palco.length == 3 &&
             produtoCarrinho.notaItem.tipo == "ITEM") {
           homeController.removePalco();
@@ -75,41 +79,42 @@ abstract class ProdutoAdicionalBase with Store {
   }
 
   @action
-  Future<void> atualizaMenus(int index) async {
-    //menu atual
-    produtoMenu = (index <
-        appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus.length)
-        ? appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus[index]
-        : null;
-
-    //o proximo menu
-    proximoMenu =
-    (index + 1 < appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus.length)
-        ? appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus[index + 1]
-        : null;
-
-    //o menu anterior
-    anteriorMenu = (index > 0)
-        ? appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus[index - 1]
-        : null;
-  }
-
-  @action
-  changeProdutoCarrinho(ProdutoCarrinho value) {
+  void changeProdutoCarrinho(ProdutoCarrinho value) {
     produtoCarrinho = value;
+    produtoMenu = produtoMenu;
   }
 
   @action
   void selecaoRadio(int n) {
-    radiovalue = n;
+    this.radiovalue = n;
   }
 
-  //Paginação (PageController)
+  @action
+  Future<void> atualizaMenus(int index) async {
+    //menu atual
+    produtoMenu =
+    (index < produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
+        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index]
+        : null;
+
+    //o proximo menu
+    proximoMenu = (index + 1 <
+        produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
+        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index + 1]
+        : null;
+
+    //o menu anterior
+    anteriorMenu = (index > 0)
+        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index - 1]
+        : null;
+  }
+
+// ------------------------ Metodos da Paginação (PageController)
   int index = 0;
   late PageController pageController;
 
   Future<void> proximo() async {
-    await Future.delayed(const Duration(milliseconds: 100));
+    await new Future.delayed(const Duration(milliseconds: 100));
     pageController.nextPage(
         duration: const Duration(milliseconds: 200), curve: Curves.ease);
   }
