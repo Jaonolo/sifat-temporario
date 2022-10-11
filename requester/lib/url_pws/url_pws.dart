@@ -512,8 +512,8 @@ class UrlPws {
     _type = RequestType.POST;
   }
 
-  UrlPws.postAutoatendimentoPrintTefCancelamento() {
-    _url = "/printer/tef/cancelamento";
+  UrlPws.postAutoatendimentoPrintComprovanteTef() {
+    _url = "/printer/tef/comprovante";
     _type = RequestType.POST;
   }
 
