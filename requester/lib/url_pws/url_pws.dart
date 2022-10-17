@@ -800,8 +800,8 @@ class UrlPws {
     _type = RequestType.POST;
   }
 
-  UrlPws.putNotaPendenciaAtualizarErro(){
-    _url = "/v1/notas/{idNota}/atualizar-pendencia";
+  UrlPws.putNotaFiscalAtualizarErro(){
+    _url = "/v1/notas/{idNota}/atualizar-erro-emissao";
     _type = RequestType.PUT;
   }
 

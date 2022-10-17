@@ -113,7 +113,7 @@ abstract class VendaBase with Store {
   }
 
   Future<ResponsePws> atualizarErroPendencia(String erro) async {
-    return await NotaRepository.atualizarErroPendencia(nota, erro, TipoPendencia.EMISSAO_NOTA)
+    return await NotaRepository.atualizarErroPendencia(nota, erro)
         .catchError((e) => throw e);
   }
 }

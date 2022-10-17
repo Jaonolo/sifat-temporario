@@ -154,7 +154,7 @@ abstract class PendenciaFiscalBase with Store {
           description = e.pws!.description!;
       }
 
-      await atualizarErroPendencia(nota, description,TipoPendencia.EMISSAO_NOTA);
+      await atualizarErroPendencia(nota, description);
 
       print('[ERRO - tratativasPosTransacao]: ${e.toString()}');
       AutoatendimentoUtils.closeProgress(context: context);
@@ -171,8 +171,8 @@ abstract class PendenciaFiscalBase with Store {
     await NotaRepository.emitirFiscal(nota, "NFCE").catchError((e) => throw e);
   }
 
-  Future<void> atualizarErroPendencia(Nota nota, String erro, TipoPendencia tipoPendencia) async {
-    await NotaRepository.atualizarErroPendencia(nota, erro,tipoPendencia).catchError((e) => throw e);
+  Future<void> atualizarErroPendencia(Nota nota, String erro) async {
+    await NotaRepository.atualizarErroPendencia(nota, erro).catchError((e) => throw e);
   }
 
   Future<void> verificaEmissaoNFCe(Nota nota, BuildContext context) async {
