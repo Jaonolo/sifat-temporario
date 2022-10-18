@@ -91,15 +91,7 @@ abstract class TransacaoTefBase with Store {
           case "EFETUADA":
             //Imprimir Cupom Fiscal e Comprovante TEF
             atualizaBuffer("Imprimindo cupom fiscal");
-            _printerNFCe(xml ?? "", context);
-            atualizaBuffer("Imprimindo comprovante tef");
-            if(appController.servicoAutoAtendimento.impressaoTef
-                .equals(ImpressaoVenda.IMPRIME)){
-              _printTefComprovante(transacaoCartaoFinal!, context);
-            }else if(appController.servicoAutoAtendimento.impressaoTef
-                .equals(ImpressaoVenda.PERGUNTA)){
-              _dialogConfirmar("Transação cancelada", context, transacaoCartaoFinal!);
-            }
+             _printerNFCe(xml ?? "", context);
             break;
           case "CANC_PDV":
             break;
@@ -344,17 +336,20 @@ abstract class TransacaoTefBase with Store {
             itens,
             appController.getImpressoraVenda().impressora!,
             senha: vendaController.nota.consumo!.comanda.toString(),
-            mensagemRodape: viaCliente);
+            mensagemRodape: "");
       } else {
         await PrinterRepository.printerNFCe(appController.pwsConfigLocal, xml,
             appController.getImpressoraVenda().impressora!,
             senha: vendaController.nota.consumo!.senhaAtendimento ??
                 vendaController.nota.consumo!.comanda.toString(),
-            mensagemRodape: viaCliente);
+            mensagemRodape: "");
       }
 
-      if (appController.servicoAutoAtendimento.impressaoVenda
-          .equals(ImpressaoVenda.IMPRIME)) {
+      if (appController.servicoAutoAtendimento.impressaoTef.equals(ImpressaoVenda.IMPRIME)) {
+        _printTefComprovante(transacaoCartaoFinal!, context);
+      } else if (appController.servicoAutoAtendimento.impressaoTef .equals(ImpressaoVenda.PERGUNTA)) {
+        _dialogConfirmar("Transação efetuada", context, transacaoCartaoFinal!);
+      } else if (appController.servicoAutoAtendimento.impressaoVenda.equals(ImpressaoVenda.IMPRIME)) {
         _printConsumo(context);
       } else {
         _avancar();
@@ -362,8 +357,12 @@ abstract class TransacaoTefBase with Store {
     } catch (e) {
       _tentarNovamentePrinter(
           "Desculpe, houve um problema na impressão do cupom fiscal",
-          () => _printerNFCe(xml, context),
-          () => _printConsumo(context),
+              () => _printerNFCe(xml, context),
+              () => appController.servicoAutoAtendimento.impressaoTef.equals(ImpressaoVenda.IMPRIME)
+                  ? _printTefComprovante( transacaoCartaoFinal!, context)
+                  : (appController.servicoAutoAtendimento.impressaoTef.equals(ImpressaoVenda.PERGUNTA)
+                  ? _dialogConfirmar( "Transação efetuada", context, transacaoCartaoFinal!)
+                  : _printConsumo(context)),
           context);
       return;
     }
@@ -384,7 +383,7 @@ abstract class TransacaoTefBase with Store {
             itens,
             appController.getImpressoraVenda().impressora!,
             senha: vendaController.nota.consumo!.comanda.toString(),
-            mensagemRodape: viaCliente);
+            mensagemRodape: "");
       }
       _avancar();
     } catch (e) {
@@ -406,14 +405,21 @@ abstract class TransacaoTefBase with Store {
             appController.servicoAutoAtendimento,
             appController.getImpressoraVenda().impressora!,);
 
-      _avancar();
+        if (appController.servicoAutoAtendimento.impressaoVenda
+            .equals(ImpressaoVenda.IMPRIME)) {
+          _printConsumo(context);
+        } else {
+          _avancar();
+        }
     } catch (e) {
       _tentarNovamentePrinter(
         this.isCancelamento
             ? "Desculpe, houve um problema na impressão na via de cancelamento"
             : "Desculpe, houve um problema na impressão do comprovante" ,
           () => _printTefComprovante(transacaoCartao,context),
-          () => _avancar(),
+          () => appController.servicoAutoAtendimento.impressaoVenda.equals(ImpressaoVenda.IMPRIME)
+              ?  _printConsumo(context)
+              : _avancar() ,
           context);
       return;
     }
@@ -446,10 +452,10 @@ abstract class TransacaoTefBase with Store {
   }
 
   Future<void> _dialogConfirmar(String motivo, BuildContext context,TransacaoCartao transacaoCartao) async {
-    showDialog(
+   await showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => DialogAuto(
+        builder: (c) => DialogAuto(
           title: "$motivo \n",
           message: "Deseja imprimir o comprovante?",
           txtConfirmar: "Sim",
