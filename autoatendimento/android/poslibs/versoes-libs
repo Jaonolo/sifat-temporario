@@ -1,0 +1,24 @@
+//Gertec GPOS 700
+Versão clisitef produção: 7.0.116.7.r1
+Versão clisitef simulado: 7.0.116.7.r1
+
+Biblioteca compartilhada com a Software Express:
+-Release: ppcomp-release-1.15.0.181029
+-Debug: ppcomp-debug-1.15.0.181029
+Biblioteca para realizar operações da REDE: sdk-2.1-release.aar
+
+//Biblioteca gedi para acesso a funções do dispositivo: payment-1.14.10.181016.aar (descontinuada)
+
+//Ingênico APOS A8
+Versão clisitef produção: 7.0.116.1.rc3
+Versão clisitef simulado: 7.0.116.2.r1
+Biblioteca compartilhada com a Software Express: bcapos-3.10.aar
+Biblioteca gedi para acesso a funções do dispositivo: Binary_V1.2.jar
+Biblioteca gedi para acesso a funções do dispositivo: com.smartpos.epay.SystemStat.jar
+Biblioteca gedi para acesso a funções do dispositivo: FileUpgrade.jar
+Biblioteca gedi para acesso a funções do dispositivo: signpanel.jar
+Biblioteca gedi para acesso a funções do dispositivo: SilentInstallInterface.jar
+
+
+//Gertec GTouch
+Biblioteca para impressão: libescpos-release.aar

@@ -195,7 +195,6 @@ class NotaItemUtils {
     item.idNota = idNota;
     item.descricao = descricao;
     item.idProdutoEmpresa = produtoEmpresa.id;
-    item.produtoEmpresa = produtoEmpresa;
     item.tipo = StringUtils.getEnumValue(TipoItem.ITEM_COMPOSTO);
 //    item.idEstacao = AppConfig.application.estacao.id;
     item.idVendedor = idVendedor;

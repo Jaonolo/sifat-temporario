@@ -127,6 +127,7 @@ abstract class SplashBase with Store {
         appController.pwsConfig.client.clientKey,
         nomeEstacao!)
         .then((response) {
+          print(nomeEstacao);
       if (response.status == 200) {
         LoginAutoAtendimentoDTO dto = response.content;
         appController.estacaoTrabalho = dto.estacaoTrabalho!;
@@ -196,6 +197,7 @@ abstract class SplashBase with Store {
 
     appController.listCardapioMenu = dto.listCardapioMenu;
     appController.mapProdutos = dto.mapProdutos;
+    appController.mapMenus = dto.mapMenu;
 
     return Future.value();
   }

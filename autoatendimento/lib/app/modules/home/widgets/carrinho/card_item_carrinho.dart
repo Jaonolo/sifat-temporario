@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_page.dart';
@@ -17,6 +18,7 @@ import 'package:utils/utils/string_utils.dart';
 class CardItemCarrinho extends StatefulWidget {
   final int index;
   final ProdutoCarrinho produtoCarrinho;
+  final AppController appController = Modular.get();
 
   CardItemCarrinho(this.produtoCarrinho, this.index);
 
@@ -38,8 +40,9 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
   Widget build(BuildContext context) {
     bool podeEditar = false;
 
-    if (widget.produtoCarrinho.notaItem.produtoEmpresa != null) {
-      if (!widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote.equals(TipoPacote.NENHUM) || widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.grades.isNotEmpty) {
+    if (widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa] != null) {
+      if (!widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.pacote.equals(TipoPacote.NENHUM)
+          || widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.grades.isNotEmpty) {
         podeEditar = true;
       }
     }
@@ -156,13 +159,13 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
 
   void onEditar() {
     //caso o item tiver grade botao editar adiciona o palco do cardapio com a grade do produto
-    if (widget.produtoCarrinho.notaItem.produtoEmpresa!.gradesAtivas.length >
+    if (widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.gradesAtivas.length >
         1) {
       homeController.habilitarCarrinho = true;
       homeController.addPalco(ProdutoAdicionalPage(vendaController.itensLancados[widget.index]));
       return;
     }
-    switch (widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote) {
+    switch (widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.pacote) {
       case TipoPacote.ADICIONAIS:
         homeController.habilitarCarrinho = true;
         homeController.addPalco(ProdutoAdicionalPage(vendaController.itensLancados[widget.index]));

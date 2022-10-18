@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/generic/widgets/mostra_quantidade.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/generic/widgets/produto_compomente/list_view_compomentes.dart';
@@ -15,6 +16,7 @@ import 'package:utils/utils/string_utils.dart';
 class ProdutoComboComponent {
   late BuildContext context;
   final ProdutoComboController controller = Modular.get();
+  final AppController appController = Modular.get();
 
   initialize(BuildContext context) {
     this.context = context;
@@ -125,7 +127,7 @@ class ProdutoComboComponent {
       child: PageView.builder(
           physics: NeverScrollableScrollPhysics(),
           controller: controller.pageController,
-          itemCount: (controller.produtoCarrinho.notaItem.produtoEmpresa!
+          itemCount: (appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!
                   .produto!.menus.length +
               1),
           itemBuilder: (BuildContext context, int index) {

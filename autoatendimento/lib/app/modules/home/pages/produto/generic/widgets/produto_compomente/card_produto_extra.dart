@@ -199,7 +199,9 @@ class CardProdutoExtra extends StatelessWidget {
         NotaItem? itemJaLancado = NotaItemUtils.localizaSubitemJaLancado(
             controllerAbstract.produtoCarrinho.notaItem,
             controllerAbstract.produtoMenu!,
-            produtoMenuComponente);
+            produtoMenuComponente, (idProdutoEmpresa) {
+          return appController.mapProdutos[idProdutoEmpresa];
+        });
 
         if (menu == null || itemJaLancado == null)
           throw Exception(
@@ -252,7 +254,9 @@ class CardProdutoExtra extends StatelessWidget {
       }
 
       NotaItemUtils.atualizaTotais(
-          controllerAbstract.produtoCarrinho.notaItem);
+          controllerAbstract.produtoCarrinho.notaItem,  (idProdutoEmpresa) {
+        return appController.mapProdutos[idProdutoEmpresa];
+      });
       controllerAbstract
           .changeProdutoCarrinho(controllerAbstract.produtoCarrinho);
     } catch (e, s) {
@@ -262,11 +266,11 @@ class CardProdutoExtra extends StatelessWidget {
 
   bool isAbrirTelaAdcional(){
     //Se tiver alguns observação ou adicionais abre a tela nova
-    bool temMenuObservacao = notaItem.produtoEmpresa!.produto!.menus
+    bool temMenuObservacao = appController.mapProdutos[notaItem.idProdutoEmpresa]!.produto!.menus
         .any((element) => element.tipo == "OBSERVACAO");
 
     if (controllerAbstract.produtoCarrinho.notaItem.tipo == "COMBO" &&
-        (notaItem.produtoEmpresa!.produto!.pacote.equals(TipoPacote.ADICIONAIS) ||
+        (appController.mapProdutos[notaItem.idProdutoEmpresa]!.produto!.pacote.equals(TipoPacote.ADICIONAIS) ||
             temMenuObservacao)) {
       return true;
     }
@@ -279,11 +283,11 @@ class CardProdutoExtra extends StatelessWidget {
      NotaItem ni = NotaItemUtils.itemComboToNotaItem(
          controllerAbstract.produtoCarrinho.notaItem.idNota!,
          produtoMenuComponente,
-         controllerAbstract
-             .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+         appController.mapProdutos[controllerAbstract
+             .produtoCarrinho.notaItem.idProdutoEmpresa]!.idEmpresa!,
          appController.tabelaPreco.id!,
          //VALIDA SE FOR COMPONENTE FIXO NÃO TEM VALOR PARA PEGAR SE FOR DIFERENTE TEM
-         adcionalDoItemDoCombo: menu!.consumoItem!.menu!.tipo == "COMPONENTE_FIXO" ? false : true);
+         adcionalDoItemDoCombo: appController.mapMenus[menu!.consumoItem!.idMenu]!.tipo == "COMPONENTE_FIXO" ? false : true);
 
      homeController
          .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(ni)));

@@ -12,7 +12,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:models/model/sitef_protocolo_socket.dart';
-import 'package:web_socket_channel/html.dart';
+import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/status.dart' as status;
 
 part "transacao_tef_controller.g.dart";
 
@@ -24,7 +25,7 @@ abstract class TransacaoTefBase with Store {
   HomeController homeController = Modular.get();
   String viaCliente = "";
   String? xml;
-  late HtmlWebSocketChannel channel;
+  late IOWebSocketChannel channel;
   SitefProtocoloSocket sitefProtocoloSocket = SitefProtocoloSocket();
 
   @observable
@@ -50,7 +51,7 @@ abstract class TransacaoTefBase with Store {
     viaCliente = "";
     xml = "";
 
-    channel = HtmlWebSocketChannel.connect("ws://localhost:12345");
+    channel = IOWebSocketChannel.connect("ws://localhost:12345");
     channel.stream.listen((message) {
       print('--> $message');
 
@@ -185,7 +186,7 @@ abstract class TransacaoTefBase with Store {
 
       if (appController.estacaoTrabalho.emissorFiscal != null) {
         //Emitir cupom fiscal
-        xml = await vendaController.emitirFiscal();
+        xml = (await vendaController.emitirFiscal())!.xml;
       } else {
         xml = null;
       }

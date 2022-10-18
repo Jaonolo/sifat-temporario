@@ -1,0 +1,122 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 32
+    buildToolsVersion "30.0.0"
+
+    buildTypes {
+        release {}
+        debug {}
+    }
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions "equipamento", "firmware"
+    productFlavors {
+        standardSimulado {
+            dimension "equipamento"
+        }
+        standardProducao {
+            dimension "equipamento"
+        }
+
+        newlandProducao {
+            dimension "equipamento"
+        }
+        newlandSimulado {
+            dimension "equipamento"
+        }
+        elginPayProducao {
+            dimension "equipamento"
+        }
+        elginPaySimulado {
+            dimension "equipamento"
+        }
+        gertecGposSimulado {
+            dimension "equipamento"
+        }
+        gertecGposProducao {
+            dimension "equipamento"
+        }
+        ingenicoA8Simulado {
+            dimension "equipamento"
+        }
+        ingenicoA8Producao {
+            dimension "equipamento"
+        }
+
+        _all {
+            dimension "firmware"
+        }
+        _147_1 {
+            dimension "firmware"
+        }
+        _181_12 {
+            dimension "firmware"
+        }
+        _181B_2 {
+            dimension "firmware"
+        }
+    }
+
+    sourceSets {
+        standardSimulado {
+            jniLibs.srcDirs += 'src/main/jniLibs/standard/se-simulado'
+        }
+        standardProducao {
+            jniLibs.srcDirs += 'src/main/jniLibs/standard/se-producao'
+        }
+        newlandSimulado {
+            jniLibs.srcDirs += 'src/main/jniLibs/standard/se-simulado'
+        }
+        newlandProducao {
+            jniLibs.srcDirs += 'src/main/jniLibs/standard/se-producao'
+        }
+        elginPaySimulado {
+//            jniLibs.srcDirs += 'src/main/jniLibs/standard/se-simulado'
+        }
+        elginPayProducao {
+//            jniLibs.srcDirs += 'src/main/jniLibs/standard/se-producao'
+        }
+        gertecGposSimulado {
+            jniLibs.srcDirs += 'src/main/jniLibs/gertec/se-simulado'
+        }
+        gertecGposProducao {
+            jniLibs.srcDirs += 'src/main/jniLibs/gertec/se-producao'
+        }
+        ingenicoA8Simulado {
+            jniLibs.srcDirs += 'src/main/jniLibs/ingenico/se-simulado'
+        }
+        ingenicoA8Producao {
+            jniLibs.srcDirs += 'src/main/jniLibs/ingenico/se-producao'
+        }
+    }
+
+    // A opção abaixo é importante para manter o binário da clisitef íntegro,
+    // já que ele é assinado. A ausência dessa opção pode causar erro de
+    // assinatura ao iniciar a transação na CliSiTef.
+    packagingOptions { doNotStrip "**/libclisitef.so" }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    api 'io.reactivex.rxjava2:rxjava:2.1.6'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    api 'com.jakewharton.timber:timber:4.5.1'
+    api 'com.google.android.material:material:1.1.0'
+    api 'com.alibaba:fastjson:1.1.57.android'
+    api 'com.google.guava:guava:28.1-android'
+    api 'com.google.code.gson:gson:2.8.6'
+    api 'org.slf4j:slf4j-api:1.7.25'
+}

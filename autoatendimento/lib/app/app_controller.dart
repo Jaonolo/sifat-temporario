@@ -22,6 +22,7 @@ abstract class _AppControllerBase with Store {
   late ServicoAutoAtendimento servicoAutoAtendimento;
   late TabelaPreco tabelaPreco;
   late Map<num, ProdutoEmpresa> mapProdutos;
+  late Map<num, ProdutoMenu> mapMenus;
   List<CardapioMenu> listCardapioMenu = [];
   List<FinalizadoraEmpresa> listFormaPagamento = [];
   Timer? timer;
@@ -29,6 +30,8 @@ abstract class _AppControllerBase with Store {
   bool maiorIdade = false;
   CountDownController _controller = CountDownController();
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  TransacaoCartao? transacaoCartao;
+  List<Map<String, String?>?> transacoes = [];
 
   EstacaoImpressora getImpressoraVenda() {
     return estacaoTrabalho.impressoras.firstWhere((element) =>

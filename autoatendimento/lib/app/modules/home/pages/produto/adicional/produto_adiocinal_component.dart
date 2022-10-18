@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/generic/widgets/mostra_quantidade.dart';
@@ -16,6 +17,7 @@ class ProdutoAdicionalComponent {
   final HomeController homeController = Modular.get();
   final VendaController vendaController = Modular.get();
   final ProdutoAdicionalController controller = Modular.get();
+  final AppController appController = Modular.get();
 
   initialize(BuildContext context) {
     this.context = context;
@@ -134,7 +136,7 @@ class ProdutoAdicionalComponent {
               Expanded(flex: 35, child: _imagem()),
               Expanded(
                   flex: 5,
-                  child: (controller.produtoCarrinho.notaItem.produtoEmpresa!
+                  child: (appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!
                               .produto!.detalhes !=
                           null)
                       ? _detalhes()
@@ -152,11 +154,11 @@ class ProdutoAdicionalComponent {
   Widget _imagem() {
     return SizedBox(
       height: FontUtils.h1(context),
-      child: (controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!
+      child: (appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!
           .arquivoPrincipal() !=
           null)
           ? Image.network(
-        controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!
+        appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!
             .arquivoPrincipal()!
             .link!,
         fit: BoxFit.fill,
@@ -172,7 +174,7 @@ class ProdutoAdicionalComponent {
   Widget _detalhes() {
     return Wrap(children: [
       Text(
-          controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!.detalhes!
+          appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.detalhes!
               .toUpperCase(),
           style: TextStyle(fontSize: FontUtils.h4(context)))
     ]);
@@ -183,7 +185,7 @@ class ProdutoAdicionalComponent {
         physics: NeverScrollableScrollPhysics(),
         controller: controller.pageController,
         itemCount: controller
-            .produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length,
+            .appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus.length,
         itemBuilder: (BuildContext context, int index) {
           controller.atualizaMenus(index);
 
