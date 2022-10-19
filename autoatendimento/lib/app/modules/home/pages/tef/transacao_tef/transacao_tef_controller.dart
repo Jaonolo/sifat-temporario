@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/tef/cancelamento_tef/cancelamento_tef_controller.dart';
 import 'package:autoatendimento/app/modules/home/repositories/printer_repository.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/utils/dialog_auto.dart';
@@ -12,9 +13,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:models/model/sitef_protocolo_socket.dart';
+import 'package:utils/utils/date_time_utils.dart';
 import 'package:web_socket_channel/html.dart';
 
-part "transacao_tef_controller.g.dart";
+part 'transacao_tef_controller.g.dart';
 
 class TransacaoTefController = TransacaoTefBase with _$TransacaoTefController;
 
@@ -22,6 +24,7 @@ abstract class TransacaoTefBase with Store {
   VendaController vendaController = Modular.get();
   AppController appController = Modular.get();
   HomeController homeController = Modular.get();
+  CancelamentoTefController cancelamentoTefController = Modular.get();
   String viaCliente = "";
   String? xml;
   late HtmlWebSocketChannel channel;
@@ -32,6 +35,12 @@ abstract class TransacaoTefBase with Store {
 
   @observable
   bool permiteCancelar = true;
+
+  bool isCancelamento = false;
+
+  bool isReimpressao = false;
+
+  TransacaoCartao? transacaoCancelamentoOrigem;
 
   @action
   atualizaBuffer(String value) {
@@ -94,12 +103,47 @@ abstract class TransacaoTefBase with Store {
 
   Future<void> transacionar(BigDecimal valorTotal, String tipoPagamentoTEF,
       int identificadorTransacao) async {
+    this.isReimpressao = false;
+    this.isCancelamento = false;
     sitefProtocoloSocket = SitefProtocoloSocket();
     sitefProtocoloSocket.funcao = "transacionar";
     sitefProtocoloSocket.param = SitefProtocoloSocketParam();
     sitefProtocoloSocket.param!.valor = valorTotal;
     sitefProtocoloSocket.param!.cupomFiscal = identificadorTransacao;
     sitefProtocoloSocket.param!.tipoPagamentoTEF = tipoPagamentoTEF;
+
+    channel.sink.add(sitefProtocoloSocket.toJson());
+  }
+
+  Future<void> cancelarTransacao(TransacaoCartao transacaoCartao, String tipoPagamentoTEF) async {
+    this.isReimpressao = false;
+    this.isCancelamento = true;
+    transacaoCancelamentoOrigem = transacaoCartao;
+
+    sitefProtocoloSocket = SitefProtocoloSocket();
+    sitefProtocoloSocket.funcao = "cancelarTransacao";
+    sitefProtocoloSocket.param = SitefProtocoloSocketParam();
+    sitefProtocoloSocket.param!.confirmaTransacao = false;
+    sitefProtocoloSocket.param!.data = DateTimeUtils.format(transacaoCartao.data, DateTimeUtils.dataFormat)?.replaceAll("/", "");
+    sitefProtocoloSocket.param!.nsu = transacaoCartao.nsu!.substring(3);
+    sitefProtocoloSocket.param!.valor = transacaoCartao.valor!;
+    sitefProtocoloSocket.param!.cupomFiscal = transacaoCartao.idTransacaoCancelamento;
+    sitefProtocoloSocket.param!.tipoPagamentoTEF = tipoPagamentoTEF;
+
+    channel.sink.add(sitefProtocoloSocket.toJson());
+  }
+
+  Future<void> reimprimirTransacao() async {
+
+    // REIMPRESSÃO NÃO FUNCIONANDO
+
+    this.isCancelamento = false;
+    this.isReimpressao = true;
+    sitefProtocoloSocket = SitefProtocoloSocket();
+    sitefProtocoloSocket.funcao = "reimpressaoTransacao";
+    sitefProtocoloSocket.param = SitefProtocoloSocketParam();
+    sitefProtocoloSocket.param!.data = "20220829";
+    sitefProtocoloSocket.param!.nsu = "000290003";
 
     channel.sink.add(sitefProtocoloSocket.toJson());
   }
@@ -114,7 +158,10 @@ abstract class TransacaoTefBase with Store {
   Future<void> recomecar() async {
     atualizaBuffer("Transação cancelada...");
     await Future.delayed(const Duration(seconds: 2));
-    homeController.recomecar();
+    if(this.isCancelamento)
+      Modular.to.pushNamed("/cancelamento_tef");
+     else
+      homeController.recomecar();
     //limpando variaveis
     atualizaBuffer("");
   }
@@ -124,7 +171,10 @@ abstract class TransacaoTefBase with Store {
   }
 
   void naoTentarNovamente() {
-    vendaController.descartarNotaFinalizadoras();
+
+    if(!this.isCancelamento)
+      vendaController.descartarNotaFinalizadoras();
+
     Modular.to.pop();
   }
 
@@ -139,23 +189,43 @@ abstract class TransacaoTefBase with Store {
     channel.sink.add(sitefProtocoloSocket.toJson());
   }
 
-  //Tratativas retorno
+  Future<void> finalizarCancelamento(TransacaoCartao transacaoCartao) async {
+    print('TransacaoTefBase.finalizarCancelamento');
 
-  void _tratativasRetornoSucesso(String value, BuildContext context) {
-    //Responsabilidade do método:
-    //Capturar a transação cartão
-    //Salvar a via do cliente em memória
-    if (value.isNotEmpty) {
-      Map<String, dynamic> valueMap = json.decode(value);
-      TransacaoCartao transacaoCartao = TransacaoCartao.fromJson(valueMap);
-      viaCliente = transacaoCartao.viaCliente!;
-      vendaController.nota.finalizadoras[0].transacaoCartao = transacaoCartao;
-      _finalizaVenda(context);
-    }
+    SitefProtocoloSocket sitefProtocoloSocket = SitefProtocoloSocket();
+    sitefProtocoloSocket.funcao = "finalizarCancelamento";
+    sitefProtocoloSocket.param = SitefProtocoloSocketParam();
+    sitefProtocoloSocket.param!.data = DateTimeUtils.format(transacaoCartao.data, DateTimeUtils.dataFormat)?.replaceAll("/", "");
+    sitefProtocoloSocket.param!.nsu = transacaoCartao.nsu;
+    sitefProtocoloSocket.param!.valor = transacaoCartao.valor!;
+    sitefProtocoloSocket.param!.cupomFiscal = transacaoCartao.idTransacaoCancelamento;
+
+    channel.sink.add(sitefProtocoloSocket.toJson());
   }
 
-  Future<void> _tratativasRetornoFalha(
-      String motivo, BuildContext context) async {
+  //Tratativas retorno
+
+  Future<void> _tratativasRetornoSucesso(String value, BuildContext context) async {
+
+      //Responsabilidade do método:
+      //Capturar a transação cartão
+      if (value.isNotEmpty) {
+        Map<String, dynamic> valueMap = json.decode(value);
+        TransacaoCartao transacaoCartao = TransacaoCartao.fromJson(valueMap);
+        if(this.isCancelamento){
+          _finalizaCancelamento(transacaoCartao,context);
+        }else if(this.isReimpressao) {
+          _printTefCancelamento(transacaoCartao, context);
+        } else{
+          //Salvar a via do cliente em memória
+          viaCliente = transacaoCartao.viaCliente!;
+          vendaController.nota.finalizadoras[0].transacaoCartao = transacaoCartao;
+          _finalizaVenda(context);
+        }
+      }
+    }
+
+  Future<void> _tratativasRetornoFalha(String motivo, BuildContext context) async {
     String motivoTratado = (motivo.isNotEmpty ? 'Motivo: $motivo' : '');
 
     atualizaPermiteCancelar(false);
@@ -163,7 +233,7 @@ abstract class TransacaoTefBase with Store {
         context: context,
         barrierDismissible: false,
         builder: (context) => DialogAuto(
-              title: "Pagamento não aprovado",
+              title: isCancelamento ? "Não foi cancelada transação" : "Pagamento não aprovado",
               message: '$motivoTratado \n\n Tentar novamente ?',
               txtConfirmar: "Sim",
               txtCancelar: "Não",
@@ -214,6 +284,33 @@ abstract class TransacaoTefBase with Store {
           context);
     }
   }
+
+  Future<void> _finalizaCancelamento(TransacaoCartao transacaoCartao,BuildContext context) async {
+    atualizaBuffer("Finalizando cancelamento");
+    try {
+      //Confirmar transação TEF
+      await finalizarCancelamento(transacaoCartao);
+
+      //Insere a transação de cancelamento no banco
+      transacaoCartao.valor = this.transacaoCancelamentoOrigem!.valor;
+     await cancelamentoTefController.inserirTransacaoCancelamento(this.transacaoCancelamentoOrigem!, transacaoCartao, context);
+
+      _dialogConfirmar("Transação cancelada", context, transacaoCartao);
+    } catch (e) {
+      String erro = e.toString();
+
+      if (e.runtimeType == PwsException) {
+        e as PwsException;
+        if (e.message != null) erro = e.message!;
+        if (e.pws != null && e.pws!.description != null)
+          erro += "\n" + e.pws!.description!;
+      }
+
+      print('[ERRO - tratativasPosTransacao]: ${e.toString()}');
+    }
+  }
+
+  //Impressão
 
   Future<void> _printerNFCe(String xml, BuildContext context) async {
     try {
@@ -283,6 +380,30 @@ abstract class TransacaoTefBase with Store {
     }
   }
 
+  Future<void> _printTefCancelamento(TransacaoCartao transacaoCartao ,BuildContext context) async {
+    try {
+      if (appController.servicoAutoAtendimento.impressaoVenda
+          .equals(ImpressaoVenda.IMPRIME)) {
+        await PrinterRepository.printerTefCancelamento(
+            appController.pwsConfigLocal,
+            transacaoCartao.viaCliente!,
+            transacaoCartao.viaCaixa == null ? "" : transacaoCartao.viaCaixa!,
+            appController.servicoAutoAtendimento,
+            appController.getImpressoraVenda().impressora!,);
+      }
+      _avancar();
+    } catch (e) {
+      _tentarNovamentePrinter(
+        this.isCancelamento
+            ? "Desculpe, houve um problema na impressão na via de cancelamento"
+            : "Desculpe, houve um problema na impressão na via" ,
+          () => _printTefCancelamento(transacaoCartao,context),
+          () => _avancar(),
+          context);
+      return;
+    }
+  }
+
   void _tentarNovamentePrinter(String title, Function onConfirmar,
       Function onCancelar, BuildContext context , { bool showCancelBtn = true ,  String txt = ""}) {
     showDialog(
@@ -291,7 +412,7 @@ abstract class TransacaoTefBase with Store {
         builder: (c) => DialogAuto(
           title: title,
           message: "",
-          txtConfirmar: txt != null ? txt :"Tentar novamente" ,
+          txtConfirmar: "Tentar novamente" ,
           onConfirm: onConfirmar,
           onCancel: onCancelar,
           showCancelButton: showCancelBtn,
@@ -299,8 +420,28 @@ abstract class TransacaoTefBase with Store {
   }
 
   void _avancar() {
-    Modular.to.popUntil(ModalRoute.withName('/home'));
-    Modular.to.pushNamed("/finalizado");
+    if(this.isCancelamento) {
+      Modular.to.pushNamed("/cancelamento_tef");
+    } else if(this.isReimpressao){
+      Modular.to.pushNamed("/administrativo_tef");
+    }else {
+      Modular.to.popUntil(ModalRoute.withName('/home'));
+      Modular.to.pushNamed("/finalizado");
+    }
+  }
+
+  Future<void> _dialogConfirmar(String motivo, BuildContext context,TransacaoCartao transacaoCartao) async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => DialogAuto(
+          title: "$motivo \n",
+          message: 'Deseja imprimir a via de cancelamento?',
+          txtConfirmar: "Sim",
+          txtCancelar: "Não",
+          onConfirm: () => _printTefCancelamento(transacaoCartao, context),
+          onCancel: () => _avancar(),
+        ));
   }
 
   String _messageSitefTratada(String message) {
@@ -322,6 +463,20 @@ abstract class TransacaoTefBase with Store {
     }
 
     if (message.contains('Transacao Aprov.')) return 'Transação aprovada';
+
+    if(message.contains("Selecione o tipo de cancelamento")){
+      return "Aguarde, em processamento";
+    }
+
+    if(message.contains("Confirma Cancelamento")){
+      return "Confirmando Cancelamento";
+    }
+    if(message.contains("Cancelamento de Cartao de Debito") ||
+        message.contains("Debito") ||
+        message.contains("Credito") ||
+        message.contains("Carteira Digital") ){
+      return "Aguarde, em processamento";
+    }
 
     var split = message.split(']');
     return split[1];

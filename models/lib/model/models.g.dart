@@ -6346,6 +6346,7 @@ ServicoAutoAtendimento _$ServicoAutoAtendimentoFromJson(
           $enumDecode(_$SenhaAtendimentoEnumMap, json['senhaAtendimento'])
       ..idFinalizadoraDebito = json['idFinalizadoraDebito'] as int?
       ..idFinalizadoraCredito = json['idFinalizadoraCredito'] as int?
+      ..idFinalizadoraVale = json['idFinalizadoraVale'] as int?
       ..finalizadoraDebito = json['finalizadoraDebito'] == null
           ? null
           : FinalizadoraEmpresa.fromJson(
@@ -6354,6 +6355,10 @@ ServicoAutoAtendimento _$ServicoAutoAtendimentoFromJson(
           ? null
           : FinalizadoraEmpresa.fromJson(
               json['finalizadoraCredito'] as Map<String, dynamic>)
+      ..finalizadoraVale = json['finalizadoraVale'] == null
+          ? null
+          : FinalizadoraEmpresa.fromJson(
+              json['finalizadoraVale'] as Map<String, dynamic>)
       ..mensagemFinalAtendimento = json['mensagemFinalAtendimento'] as String?
       ..arquivos = (json['arquivos'] as List<dynamic>?)
               ?.map((e) =>
@@ -6374,8 +6379,10 @@ Map<String, dynamic> _$ServicoAutoAtendimentoToJson(
       'senhaAtendimento': _$SenhaAtendimentoEnumMap[instance.senhaAtendimento],
       'idFinalizadoraDebito': instance.idFinalizadoraDebito,
       'idFinalizadoraCredito': instance.idFinalizadoraCredito,
+      'idFinalizadoraVale': instance.idFinalizadoraVale,
       'finalizadoraDebito': instance.finalizadoraDebito,
       'finalizadoraCredito': instance.finalizadoraCredito,
+      'finalizadoraVale': instance.finalizadoraVale,
       'mensagemFinalAtendimento': instance.mensagemFinalAtendimento,
       'arquivos': instance.arquivos,
     };
@@ -6504,4 +6511,25 @@ TokenDTO _$TokenDTOFromJson(Map<String, dynamic> json) => TokenDTO()
 Map<String, dynamic> _$TokenDTOToJson(TokenDTO instance) => <String, dynamic>{
       'token': instance.token,
       'type': instance.type,
+    };
+
+PrinterTefDTO _$PrinterTefDTOFromJson(Map<String, dynamic> json) =>
+    PrinterTefDTO()
+      ..viaCliente = json['viaCliente'] as String
+      ..viaCaixa = json['viaCaixa'] as String
+      ..equipamentoImpressao = json['equipamentoImpressao'] == null
+          ? null
+          : EquipamentoImpressao.fromJson(
+              json['equipamentoImpressao'] as Map<String, dynamic>)
+      ..servicoAutoAtendimento = json['servicoAutoAtendimento'] == null
+          ? null
+          : ServicoAutoAtendimento.fromJson(
+              json['servicoAutoAtendimento'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$PrinterTefDTOToJson(PrinterTefDTO instance) =>
+    <String, dynamic>{
+      'viaCliente': instance.viaCliente,
+      'viaCaixa': instance.viaCaixa,
+      'equipamentoImpressao': instance.equipamentoImpressao,
+      'servicoAutoAtendimento': instance.servicoAutoAtendimento,
     };

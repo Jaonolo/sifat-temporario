@@ -1,6 +1,6 @@
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/transacao_tef/transacao_tef_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/tef/transacao_tef/transacao_tef_controller.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -32,6 +32,7 @@ abstract class PagamentosBase with Store {
           break;
         case "CARTAO_DEBITO":
         case "VALE_REFEICAO":
+        case "VALE_ALIMENTACAO":
           _transacaoTEF("DEBITO", context);
           break;
       }
