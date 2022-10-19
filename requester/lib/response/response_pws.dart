@@ -50,8 +50,14 @@ class ResponsePws {
         break;
 
       default:
-        if (body!.isNotEmpty)
-          this.content = PwsAlert.fromJson(jsonDecode(body!));
+        if (body != null && body!.isNotEmpty) {
+          Map<String, dynamic> json = jsonDecode(body!);
+          PwsAlert pws = PwsAlert();
+          pws.code = json['code'] != null ? json['code'].toString() : null;
+          pws.description = json['description'] ?? null;
+          pws.message = json['message'] ?? null;
+          this.content = pws;
+        };
     }
   }
 

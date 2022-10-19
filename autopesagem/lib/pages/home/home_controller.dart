@@ -7,7 +7,7 @@ import 'package:autopesagem/widgets/dialog_informar_comanda_modulo.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
-import 'package:requester/requester/servico_auto_pesagem_requester.dart';
+import 'package:requester/requester/client_auto_pesagem_requester.dart';
 import 'package:requester/response/response_pws.dart';
 
 part "home_controller.g.dart";
@@ -50,7 +50,7 @@ abstract class HomeControllerBase with Store {
         AppConfig.estacaoTrabalho.balanca!.modelo!.isEmpty) {
       return;
     }
-    ResponsePws lerPeso = await ServicoAutoPesagemRequester.lerPeso(
+    ResponsePws lerPeso = await ClientAutoPesagemRequester.lerPeso(
       AppConfig.pwsUtils,
       AppConfig.estacaoTrabalho.balanca!.portaSerial!,
       AppConfig.estacaoTrabalho.balanca!.baudrate.toString(),
@@ -68,7 +68,7 @@ abstract class HomeControllerBase with Store {
     } else {
       peso = BigDecimal.ZERO();
     }
-    valorTotal = AppConfig.servicoAutoPesagem.gradeEmpresa!.getPrecoVenda
+    valorTotal = AppConfig.clientAutoPesagem.gradeEmpresa!.getPrecoVenda
         .multiplicar(peso);
     if (peso.compareTo(BigDecimal.ZERO()) == 0) {
       controleBalanca = false;
@@ -90,7 +90,7 @@ abstract class HomeControllerBase with Store {
             AutoPesagemUtils.closeProgress(context);
           };
 
-          if (AppConfig.servicoAutoPesagem.lancamentoAutomatico != "NENHUM") {
+          if (AppConfig.clientAutoPesagem.lancamentoAutomatico != "NENHUM") {
             nota = await inserirComanda(context, valorTotal, peso);
             //cancelou na dialog de laçamento
             if (nota.consumo!.modulo == null) {
@@ -99,7 +99,7 @@ abstract class HomeControllerBase with Store {
             }
           }
 
-          if (AppConfig.servicoAutoPesagem.imprimirPeso) {
+          if (AppConfig.clientAutoPesagem.imprimirPeso) {
             await imprimir(context, nota);
           }
 
@@ -152,9 +152,9 @@ abstract class HomeControllerBase with Store {
         if (item.cancelado) {
           continue;
         }
-        if (AppConfig.servicoAutoPesagem.gradeEmpresa!.id == item.idGrade) {
+        if (AppConfig.clientAutoPesagem.gradeEmpresa!.id == item.idGrade) {
           ItemDTO dto = ItemDTO();
-          dto.codigoInterno = AppConfig.servicoAutoPesagem.gradeEmpresa!
+          dto.codigoInterno = AppConfig.clientAutoPesagem.gradeEmpresa!
               .produtoEmpresa!.produto!.codigoInterno
               .toString();
           dto.produtoDescricao = item.descricao;
@@ -171,12 +171,12 @@ abstract class HomeControllerBase with Store {
     } else {
       ItemDTO dto = ItemDTO();
       dto.produtoDescricao = AppConfig
-          .servicoAutoPesagem.gradeEmpresa!.produtoEmpresa!.produto!.descricao;
-      dto.codigoInterno = AppConfig.servicoAutoPesagem.gradeEmpresa!
+          .clientAutoPesagem.gradeEmpresa!.produtoEmpresa!.produto!.descricao;
+      dto.codigoInterno = AppConfig.clientAutoPesagem.gradeEmpresa!
           .produtoEmpresa!.produto!.codigoInterno
           .toString();
       dto.produtoValor =
-          AppConfig.servicoAutoPesagem.gradeEmpresa!.getPrecoVenda;
+          AppConfig.clientAutoPesagem.gradeEmpresa!.getPrecoVenda;
       dto.quantidade = peso;
       dto.valor = valorTotal;
       itens.add(dto);
@@ -184,7 +184,7 @@ abstract class HomeControllerBase with Store {
 
     ticket.itens = itens;
 
-    await ServicoAutoPesagemRequester.imprimir(AppConfig.pwsUtils, ticket);
+    await ClientAutoPesagemRequester.imprimir(AppConfig.pwsUtils, ticket);
   }
 
   Future<void> dialogInfo(BuildContext context, String error) {

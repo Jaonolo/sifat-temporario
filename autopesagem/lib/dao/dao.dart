@@ -5,7 +5,8 @@ class GetValue {
   static Future<void> getValuesFuncao() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    final hostValue = await prefs.getString("host");
+    final hostValueWaychef = await prefs.getString("hostWaychef");
+    final hostValueGateway = await prefs.getString("hostGateway");
     final clientSecretValue = await prefs.getString("clientSecret");
     AppConfig.urlApi = hostValue ?? '';
     AppConfig.clientSecret = clientSecretValue ?? '';
@@ -13,10 +14,12 @@ class GetValue {
 }
 
 class PutValue {
-  static Future<void> setValues(String host, String clientSecret) async {
+  static Future<void> setValues(String host,String hostGateway, String clientSecret) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    await prefs.setString("host", host);
+    await prefs.setString("hostWaychef", host);
+    await prefs.setString("hostGateway", hostGateway);
+    //salva o gateway
     await prefs.setString("clientSecret", clientSecret);
   }
 }

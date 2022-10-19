@@ -5,6 +5,7 @@ class NovaEmpresaDTO {
 
   Empresa? empresa;
 
+  @JsonKey(defaultValue: [])
   List<Modulo> modulos = [];
 
   EstacaoTrabalho? estacaoTrabalho;

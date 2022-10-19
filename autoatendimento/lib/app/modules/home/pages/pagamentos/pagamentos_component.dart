@@ -98,6 +98,7 @@ class PagamentosComponent {
                     })),
               ),
             ),
+
             Expanded(
               flex: 10,
               child: Container(),

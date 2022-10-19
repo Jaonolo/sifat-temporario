@@ -16,7 +16,8 @@ class Contalote {
 
   int? numeroParcelas;
 
-  List<Conta>? parcelas;
+  @JsonKey(defaultValue: [])
+  List<Conta> parcelas = [];
 
   Contalote();
 

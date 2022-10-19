@@ -7,21 +7,28 @@ class ConferenciaCaixaDTO {
 
   ExtratoTurnoDTO? extratoTurnoDTO = ExtratoTurnoDTO();
 
-  List<NotaSimplificadaDTO>? vendas;
+  @JsonKey(defaultValue: [])
+  List<NotaSimplificadaDTO> vendas = [];
 
-  List<NotaSimplificadaDTO>? vendasCanceladas;
+  @JsonKey(defaultValue: [])
+  List<NotaSimplificadaDTO> vendasCanceladas = [];
 
-  List<TaxaServicoGracomDTO>? taxaServicoGracomDTOList;
+  @JsonKey(defaultValue: [])
+  List<TaxaServicoGracomDTO> taxaServicoGracomDTOList = [];
 
   DesdobramentoVendaDTO? desdobramentoVendaDTO;
 
-  List<VendasModuloDTO>? vendasModuloDTOList;
+  @JsonKey(defaultValue: [])
+  List<VendasModuloDTO> vendasModuloDTOList = [];
 
-  List<DesdobramentoGrupoProdutosDTO>? desdobramentoGrupoProdutosDTOList;
+  @JsonKey(defaultValue: [])
+  List<DesdobramentoGrupoProdutosDTO> desdobramentoGrupoProdutosDTOList = [];
 
-  List<DesdobramentoProdutoDTO>? pacotesVendidos;
+  @JsonKey(defaultValue: [])
+  List<DesdobramentoProdutoDTO> pacotesVendidos = [];
 
-  List<TotalRecebimentoParcialDTO>? totalRecebimentoParcial;
+  @JsonKey(defaultValue: [])
+  List<TotalRecebimentoParcialDTO> totalRecebimentoParcial = [];
 
   BigDecimal? saldo = BigDecimal.ZERO();
 

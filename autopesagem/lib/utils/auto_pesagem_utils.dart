@@ -4,11 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:requester/config/pws_config.dart';
 
 class AutoPesagemUtils {
-  static void criarClientPWS(String url) {
+  static void criarClientPWSWaychef(String url) {
     //Seta na appConfig
     //Caso tenha uma nova url cria o client a partir dessa nova url e fica por responsabilidade da chamada salvar a url
-    AppConfig.application.pwsConfig = PWSConfig(
+    AppConfig.application.pwsConfigWaychef = PWSConfig(
         urlBase: "http://$url/api",
+        client: AppConfig.application.client!,
+        clientSecret: AppConfig.clientSecret);
+  }
+
+  static void criarClientPWSGateway(String url) {
+    //Seta na appConfig
+    //Caso tenha uma nova url cria o client a partir dessa nova url e fica por responsabilidade da chamada salvar a url
+    AppConfig.application.pwsConfigGateway = PWSConfig(
+        urlBase: "http://$url",
         client: AppConfig.application.client!,
         clientSecret: AppConfig.clientSecret);
   }

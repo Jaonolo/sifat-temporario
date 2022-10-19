@@ -20,11 +20,14 @@ class LoteControleCartao {
 
   //enum {DESMEMBRAMENTO, QUITACAO}
 
-  List<TransacaoCartao>? transacoes;
+  @JsonKey(defaultValue: [])
+  List<TransacaoCartao> transacoes = [];
 
-  List<Conta>? titulosDesmembramento;
+  @JsonKey(defaultValue: [])
+  List<Conta> titulosDesmembramento = [];
 
-  List<Conta>? titulosQuitacao;
+  @JsonKey(defaultValue: [])
+  List<Conta> titulosQuitacao = [];
 
   LoteControleCartao();
 

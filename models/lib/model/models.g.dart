@@ -6,8 +6,7 @@ part of openapi.api;
 // JsonSerializableGenerator
 // **************************************************************************
 
-BigDecimal _$BigDecimalFromJson(Map<String, dynamic> json) =>
-    BigDecimal(
+BigDecimal _$BigDecimalFromJson(Map<String, dynamic> json) => BigDecimal(
       json['valor'] as String,
     );
 
@@ -16,27 +15,25 @@ Map<String, dynamic> _$BigDecimalToJson(BigDecimal instance) =>
       'valor': instance.valor,
     };
 
-AlfaSync _$AlfaSyncFromJson(Map<String, dynamic> json) =>
-    AlfaSync()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..empresa = json['empresa'] == null
-          ? null
-          : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
-      ..intervaloExecucao = json['intervaloExecucao'] as int?
-      ..sincronizaGrupo = json['sincronizaGrupo'] as bool?
-      ..sincronizaProduto = json['sincronizaProduto'] as bool?
-      ..sincronizaCliente = json['sincronizaCliente'] as bool?
-      ..sincronizaFinalizadora = json['sincronizaFinalizadora'] as bool?
-      ..sincronizaVenda = json['sincronizaVenda'] as bool?
-      ..idGrupoPadraoSistema = json['idGrupoPadraoSistema'] as int?
-      ..sincronizarApartirDe = json['sincronizarApartirDe'] == null
-          ? null
-          : DateTime.parse(json['sincronizarApartirDe'] as String)
-      ..ativo = json['ativo'] as bool?;
+AlfaSync _$AlfaSyncFromJson(Map<String, dynamic> json) => AlfaSync()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..empresa = json['empresa'] == null
+      ? null
+      : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
+  ..intervaloExecucao = json['intervaloExecucao'] as int?
+  ..sincronizaGrupo = json['sincronizaGrupo'] as bool?
+  ..sincronizaProduto = json['sincronizaProduto'] as bool?
+  ..sincronizaCliente = json['sincronizaCliente'] as bool?
+  ..sincronizaFinalizadora = json['sincronizaFinalizadora'] as bool?
+  ..sincronizaVenda = json['sincronizaVenda'] as bool?
+  ..idGrupoPadraoSistema = json['idGrupoPadraoSistema'] as int?
+  ..sincronizarApartirDe = json['sincronizarApartirDe'] == null
+      ? null
+      : DateTime.parse(json['sincronizarApartirDe'] as String)
+  ..ativo = json['ativo'] as bool?;
 
-Map<String, dynamic> _$AlfaSyncToJson(AlfaSync instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AlfaSyncToJson(AlfaSync instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'empresa': instance.empresa,
@@ -55,7 +52,7 @@ AplicativoVersao _$AplicativoVersaoFromJson(Map<String, dynamic> json) =>
     AplicativoVersao()
       ..id = json['id'] as int?
       ..data =
-      json['data'] == null ? null : DateTime.parse(json['data'] as String)
+          json['data'] == null ? null : DateTime.parse(json['data'] as String)
       ..client = json['client'] as String?
       ..versao = json['versao'] as String?
       ..link = json['link'] as String?
@@ -65,9 +62,9 @@ AplicativoVersao _$AplicativoVersaoFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['dataLancamento'] as String)
       ..detalhes = (json['detalhes'] as List<dynamic>?)
-          ?.map((e) =>
-          AplicativoVersaoDetalhe.fromJson(e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) =>
+                  AplicativoVersaoDetalhe.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           [];
 
 Map<String, dynamic> _$AplicativoVersaoToJson(AplicativoVersao instance) =>
@@ -84,19 +81,19 @@ Map<String, dynamic> _$AplicativoVersaoToJson(AplicativoVersao instance) =>
     };
 
 AplicativoVersaoDetalhe _$AplicativoVersaoDetalheFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     AplicativoVersaoDetalhe()
       ..id = json['id'] as int?
       ..idAplicativoVersao = json['idAplicativoVersao'] as int?
       ..aplicativoVersao = json['aplicativoVersao'] == null
           ? null
           : AplicativoVersao.fromJson(
-          json['aplicativoVersao'] as Map<String, dynamic>)
+              json['aplicativoVersao'] as Map<String, dynamic>)
       ..detalhes = json['detalhes'] as String?
       ..termoTecnico = json['termoTecnico'] as bool?;
 
 Map<String, dynamic> _$AplicativoVersaoDetalheToJson(
-    AplicativoVersaoDetalhe instance) =>
+        AplicativoVersaoDetalhe instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idAplicativoVersao': instance.idAplicativoVersao,
@@ -106,7 +103,7 @@ Map<String, dynamic> _$AplicativoVersaoDetalheToJson(
     };
 
 AtribuirProdutoEmpresaDTO _$AtribuirProdutoEmpresaDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     AtribuirProdutoEmpresaDTO()
       ..cnpj = json['cnpj'] as String?
       ..precoCusto = json['precoCusto'] == null
@@ -119,10 +116,10 @@ AtribuirProdutoEmpresaDTO _$AtribuirProdutoEmpresaDTOFromJson(
       ..produtoEmpresa = json['produtoEmpresa'] == null
           ? null
           : ProdutoEmpresa.fromJson(
-          json['produtoEmpresa'] as Map<String, dynamic>);
+              json['produtoEmpresa'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$AtribuirProdutoEmpresaDTOToJson(
-    AtribuirProdutoEmpresaDTO instance) =>
+        AtribuirProdutoEmpresaDTO instance) =>
     <String, dynamic>{
       'cnpj': instance.cnpj,
       'precoCusto': instance.precoCusto,
@@ -172,18 +169,18 @@ AuxiliarProducao _$AuxiliarProducaoFromJson(Map<String, dynamic> json) =>
       ..localProducao = json['localProducao'] == null
           ? null
           : LocalProducao.fromJson(
-          json['localProducao'] as Map<String, dynamic>?)
+              json['localProducao'] as Map<String, dynamic>?)
       ..modulo = json['modulo'] as String?
       ..idUsuarioEmpresa = json['idUsuarioEmpresa'] as int?
       ..usuarioEmpresa = json['usuarioEmpresa'] == null
           ? null
           : UsuarioEmpresa.fromJson(
-          json['usuarioEmpresa'] as Map<String, dynamic>)
+              json['usuarioEmpresa'] as Map<String, dynamic>)
       ..fechamento = json['fechamento'] as bool?
       ..mensagem = json['mensagem'] as String?
       ..impresso = json['impresso'] as bool?
       ..data =
-      json['data'] == null ? null : DateTime.parse(json['data'] as String)
+          json['data'] == null ? null : DateTime.parse(json['data'] as String)
       ..tentativasImpressao = json['tentativasImpressao'] as int?;
 
 Map<String, dynamic> _$AuxiliarProducaoToJson(AuxiliarProducao instance) =>
@@ -206,34 +203,30 @@ Map<String, dynamic> _$AuxiliarProducaoToJson(AuxiliarProducao instance) =>
       'tentativasImpressao': instance.tentativasImpressao,
     };
 
-Bairro _$BairroFromJson(Map<String, dynamic> json) =>
-    Bairro()
-      ..id = json['id'] as int?
-      ..nome = json['nome'] as String?
-      ..nomeAbreviado = json['nomeAbreviado'] as String?
-      ..cidade = json['cidade'] == null
-          ? null
-          : Cidade.fromJson(json['cidade'] as Map<String, dynamic>?);
+Bairro _$BairroFromJson(Map<String, dynamic> json) => Bairro()
+  ..id = json['id'] as int?
+  ..nome = json['nome'] as String?
+  ..nomeAbreviado = json['nomeAbreviado'] as String?
+  ..cidade = json['cidade'] == null
+      ? null
+      : Cidade.fromJson(json['cidade'] as Map<String, dynamic>?);
 
-Map<String, dynamic> _$BairroToJson(Bairro instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$BairroToJson(Bairro instance) => <String, dynamic>{
       'id': instance.id,
       'nome': instance.nome,
       'nomeAbreviado': instance.nomeAbreviado,
       'cidade': instance.cidade,
     };
 
-Banco _$BancoFromJson(Map<String, dynamic> json) =>
-    Banco()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..nome = json['nome'] as String?
-      ..codigoBanco = json['codigoBanco'] as String?
-      ..site = json['site'] as String?
-      ..versao = json['versao'] as int?;
+Banco _$BancoFromJson(Map<String, dynamic> json) => Banco()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..nome = json['nome'] as String?
+  ..codigoBanco = json['codigoBanco'] as String?
+  ..site = json['site'] as String?
+  ..versao = json['versao'] as int?;
 
-Map<String, dynamic> _$BancoToJson(Banco instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$BancoToJson(Banco instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'nome': instance.nome,
@@ -256,10 +249,9 @@ BandeiraCartao _$BandeiraCartaoFromJson(Map<String, dynamic> json) =>
       ..tipoTransacao = json['tipoTransacao'] as String?
       ..codificacaoFiscal = json['codificacaoFiscal'] as String?
       ..dadosIntegracao = (json['dadosIntegracao'] as List<dynamic>?)
-          ?.map((e) =>
-          BandeiraCartaoDadosIntegracao.fromJson(
-              e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) => BandeiraCartaoDadosIntegracao.fromJson(
+                  e as Map<String, dynamic>))
+              .toList() ??
           []
       ..versao = json['versao'] as int?
       ..tipoTEF = json['tipoTEF'] as String?
@@ -283,7 +275,7 @@ Map<String, dynamic> _$BandeiraCartaoToJson(BandeiraCartao instance) =>
     };
 
 BandeiraCartaoDadosIntegracao _$BandeiraCartaoDadosIntegracaoFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     BandeiraCartaoDadosIntegracao()
       ..id = json['id'] as int?
       ..idBandeira = json['idBandeira'] as int?
@@ -294,7 +286,7 @@ BandeiraCartaoDadosIntegracao _$BandeiraCartaoDadosIntegracaoFromJson(
       ..observacao = json['observacao'] as String?;
 
 Map<String, dynamic> _$BandeiraCartaoDadosIntegracaoToJson(
-    BandeiraCartaoDadosIntegracao instance) =>
+        BandeiraCartaoDadosIntegracao instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idBandeira': instance.idBandeira,
@@ -306,24 +298,25 @@ Map<String, dynamic> _$BandeiraCartaoDadosIntegracaoToJson(
     };
 
 CadastroEstacaoTrabalhoDTO _$CadastroEstacaoTrabalhoDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     CadastroEstacaoTrabalhoDTO()
       ..estacaoTrabalho = json['estacaoTrabalho'] == null
           ? null
           : EstacaoTrabalho.fromJson(
-          json['estacaoTrabalho'] as Map<String, dynamic>)
+              json['estacaoTrabalho'] as Map<String, dynamic>)
       ..impressoraGeral = json['impressoraGeral'] == null
           ? null
           : EquipamentoImpressao.fromJson(
-          json['impressoraGeral'] as Map<String, dynamic>)
-      ..listImpressorasProducao = (json['listImpressorasProducao']
-      as List<dynamic>)
-          .map((e) =>
-          CadastroImpressoraProducaoDto.fromJson(e as Map<String, dynamic>))
-          .toList();
+              json['impressoraGeral'] as Map<String, dynamic>)
+      ..listImpressorasProducao =
+          (json['listImpressorasProducao'] as List<dynamic>?)
+                  ?.map((e) => CadastroImpressoraProducaoDto.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList() ??
+              [];
 
 Map<String, dynamic> _$CadastroEstacaoTrabalhoDTOToJson(
-    CadastroEstacaoTrabalhoDTO instance) =>
+        CadastroEstacaoTrabalhoDTO instance) =>
     <String, dynamic>{
       'estacaoTrabalho': instance.estacaoTrabalho,
       'impressoraGeral': instance.impressoraGeral,
@@ -331,90 +324,85 @@ Map<String, dynamic> _$CadastroEstacaoTrabalhoDTOToJson(
     };
 
 CadastroImpressoraProducaoDto _$CadastroImpressoraProducaoDtoFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     CadastroImpressoraProducaoDto()
       ..localProducao = json['localProducao'] == null
           ? null
           : LocalProducao.fromJson(
-          json['localProducao'] as Map<String, dynamic>?)
+              json['localProducao'] as Map<String, dynamic>?)
       ..impressora = json['impressora'] == null
           ? null
           : EquipamentoImpressao.fromJson(
-          json['impressora'] as Map<String, dynamic>);
+              json['impressora'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$CadastroImpressoraProducaoDtoToJson(
-    CadastroImpressoraProducaoDto instance) =>
+        CadastroImpressoraProducaoDto instance) =>
     <String, dynamic>{
       'localProducao': instance.localProducao,
       'impressora': instance.impressora,
     };
 
-Campanha _$CampanhaFromJson(Map<String, dynamic> json) =>
-    Campanha()
-      ..ID = json['ID'] as int?
-      ..descricao = json['descricao'] as String?;
+Campanha _$CampanhaFromJson(Map<String, dynamic> json) => Campanha()
+  ..ID = json['ID'] as int?
+  ..descricao = json['descricao'] as String?;
 
-Map<String, dynamic> _$CampanhaToJson(Campanha instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$CampanhaToJson(Campanha instance) => <String, dynamic>{
       'ID': instance.ID,
       'descricao': instance.descricao,
     };
 
-Cardapio _$CardapioFromJson(Map<String, dynamic> json) =>
-    Cardapio()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..descricao = json['descricao'] as String?
-      ..versao = json['versao'] as int?;
+Cardapio _$CardapioFromJson(Map<String, dynamic> json) => Cardapio()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..descricao = json['descricao'] as String?
+  ..versao = json['versao'] as int?;
 
-Map<String, dynamic> _$CardapioToJson(Cardapio instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$CardapioToJson(Cardapio instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'descricao': instance.descricao,
       'versao': instance.versao,
     };
 
-CardapioMenu _$CardapioMenuFromJson(Map<String, dynamic> json) =>
-    CardapioMenu()
-      ..id = json['id'] as int?
-      ..tipo = json['tipo'] as String?
-      ..precoCombinado = json['precoCombinado'] as String?
-      ..idProdutoEmpresa = json['idProdutoEmpresa'] as int?
-      ..produto = json['produto'] == null
-          ? null
-          : ProdutoEmpresa.fromJson(json['produto'] as Map<String, dynamic>)
-      ..idProdutoGrupo = json['idProdutoGrupo'] as int?
-      ..grupo = json['grupo'] == null
-          ? null
-          : ProdutoGrupo.fromJson(json['grupo'] as Map<String, dynamic>)
-      ..indice = json['indice'] as int?
-      ..descricao = json['descricao'] as String?
-      ..backcolor = json['backcolor'] as String?
-      ..fontColor = json['fontColor'] as String?
-      ..fontBold = json['fontBold'] as bool?
-      ..fontItalic = json['fontItalic'] as bool?
-      ..fontSize = json['fontSize'] as int?
-      ..icon = json['icon'] as String?
-      ..tabelaPrecos = (json['tabelaPrecos'] as List<dynamic>?)
+CardapioMenu _$CardapioMenuFromJson(Map<String, dynamic> json) => CardapioMenu()
+  ..id = json['id'] as int?
+  ..tipo = json['tipo'] as String?
+  ..precoCombinado = json['precoCombinado'] as String?
+  ..idProdutoEmpresa = json['idProdutoEmpresa'] as int?
+  ..produto = json['produto'] == null
+      ? null
+      : ProdutoEmpresa.fromJson(json['produto'] as Map<String, dynamic>)
+  ..idProdutoGrupo = json['idProdutoGrupo'] as int?
+  ..grupo = json['grupo'] == null
+      ? null
+      : ProdutoGrupo.fromJson(json['grupo'] as Map<String, dynamic>)
+  ..indice = json['indice'] as int?
+  ..descricao = json['descricao'] as String?
+  ..backcolor = json['backcolor'] as String?
+  ..fontColor = json['fontColor'] as String?
+  ..fontBold = json['fontBold'] as bool?
+  ..fontItalic = json['fontItalic'] as bool?
+  ..fontSize = json['fontSize'] as int?
+  ..icon = json['icon'] as String?
+  ..tabelaPrecos = (json['tabelaPrecos'] as List<dynamic>?)
           ?.map((e) => TabelaPreco.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..combinadoTamanhos = (json['combinadoTamanhos'] as List<dynamic>?)
+      []
+  ..combinadoTamanhos = (json['combinadoTamanhos'] as List<dynamic>?)
           ?.map((e) => CombinadoTamanho.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..combinadoSabores = (json['combinadoSabores'] as List<dynamic>?)
+      []
+  ..combinadoSabores = (json['combinadoSabores'] as List<dynamic>?)
           ?.map((e) => ProdutoEmpresa.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..itens = (json['itens'] as List<dynamic>?)
+      []
+  ..itens = (json['itens'] as List<dynamic>?)
           ?.map((e) => ProdutoEmpresa.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..icone = json['icone'] == null
-          ? null
-          : BibliotecaIcone.fromJson(json['icone'] as Map<String, dynamic>);
+      []
+  ..icone = json['icone'] == null
+      ? null
+      : BibliotecaIcone.fromJson(json['icone'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$CardapioMenuToJson(CardapioMenu instance) =>
     <String, dynamic>{
@@ -461,19 +449,18 @@ Map<String, dynamic> _$ClassificacaoToJson(Classificacao instance) =>
       'versao': instance.versao,
     };
 
-Client _$ClientFromJson(Map<String, dynamic> json) =>
-    Client()
-      ..id = json['id'] as int?
-      ..nome = json['nome'] as String?
-      ..clientKey = json['clientKey'] as String?
-      ..descricao = json['descricao'] as String?
-      ..servico = json['servico'] as String?
-      ..ativo = json['ativo'] as bool?
-      ..segmentos =
-      (json['segmentos'] as List<dynamic>).map((e) => e as String).toList();
+Client _$ClientFromJson(Map<String, dynamic> json) => Client()
+  ..id = json['id'] as int?
+  ..nome = json['nome'] as String?
+  ..clientKey = json['clientKey'] as String?
+  ..descricao = json['descricao'] as String?
+  ..servico = json['servico'] as String?
+  ..ativo = json['ativo'] as bool?
+  ..segmentos =
+      (json['segmentos'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          [];
 
-Map<String, dynamic> _$ClientToJson(Client instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ClientToJson(Client instance) => <String, dynamic>{
       'id': instance.id,
       'nome': instance.nome,
       'clientKey': instance.clientKey,
@@ -508,48 +495,44 @@ Map<String, dynamic> _$ClientEmpresaToJson(ClientEmpresa instance) =>
       'ultimaComunicacao': instance.ultimaComunicacao?.toIso8601String(),
     };
 
-Cliente _$ClienteFromJson(Map<String, dynamic> json) =>
-    Cliente()
-      ..idPessoa = json['idPessoa'] as int?
-      ..pessoa = json['pessoa'] == null
-          ? null
-          : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
-      ..senha = json['senha'] as String?
-      ..mensagemEletronica = json['mensagemEletronica'] as bool?
-      ..restricaoAcesso = json['restricaoAcesso'] as bool?
-      ..classificacao = json['classificacao'] == null
-          ? null
-          : Classificacao.fromJson(
-          json['classificacao'] as Map<String, dynamic>)
-      ..observacao = json['observacao'] as String?
-      ..historico = json['historico'] as String?
-      ..tipoContribuinte = json['tipoContribuinte'] as String?
-      ..versao = json['versao'] as int?
-      ..autorizados = (json['autorizados'] as List<dynamic>?)
+Cliente _$ClienteFromJson(Map<String, dynamic> json) => Cliente()
+  ..idPessoa = json['idPessoa'] as int?
+  ..pessoa = json['pessoa'] == null
+      ? null
+      : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
+  ..senha = json['senha'] as String?
+  ..mensagemEletronica = json['mensagemEletronica'] as bool?
+  ..restricaoAcesso = json['restricaoAcesso'] as bool?
+  ..classificacao = json['classificacao'] == null
+      ? null
+      : Classificacao.fromJson(json['classificacao'] as Map<String, dynamic>)
+  ..observacao = json['observacao'] as String?
+  ..historico = json['historico'] as String?
+  ..tipoContribuinte = json['tipoContribuinte'] as String?
+  ..versao = json['versao'] as int?
+  ..autorizados = (json['autorizados'] as List<dynamic>?)
           ?.map((e) => ClienteAutorizado.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..ocorrencias = (json['ocorrencias'] as List<dynamic>?)
+      []
+  ..ocorrencias = (json['ocorrencias'] as List<dynamic>?)
           ?.map((e) => ClienteOcorrencia.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..vinculo = json['vinculo'] == null
-          ? null
-          : ClienteVinculo.fromJson(json['vinculo'] as Map<String, dynamic>?)
-      ..crediario = json['crediario'] == null
-          ? null
-          : ClienteCrediario.fromJson(json['crediario'] as Map<String, dynamic>)
-      ..mensalista = json['mensalista'] == null
-          ? null
-          : ClienteMensalista.fromJson(
-          json['mensalista'] as Map<String, dynamic>?)
-      ..controleCadastro = json['controleCadastro'] == null
-          ? null
-          : ControleCadastro.fromJson(
+      []
+  ..vinculo = json['vinculo'] == null
+      ? null
+      : ClienteVinculo.fromJson(json['vinculo'] as Map<String, dynamic>?)
+  ..crediario = json['crediario'] == null
+      ? null
+      : ClienteCrediario.fromJson(json['crediario'] as Map<String, dynamic>)
+  ..mensalista = json['mensalista'] == null
+      ? null
+      : ClienteMensalista.fromJson(json['mensalista'] as Map<String, dynamic>?)
+  ..controleCadastro = json['controleCadastro'] == null
+      ? null
+      : ControleCadastro.fromJson(
           json['controleCadastro'] as Map<String, dynamic>?);
 
-Map<String, dynamic> _$ClienteToJson(Cliente instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ClienteToJson(Cliente instance) => <String, dynamic>{
       'idPessoa': instance.idPessoa,
       'pessoa': instance.pessoa,
       'senha': instance.senha,
@@ -582,9 +565,9 @@ ClienteCartao _$ClienteCartaoFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['validade'] as String)
       ..vencimento = json['vencimento'] as int?
       ..limite =
-      json['limite'] == null ? null : BigDecimal.fromJson(json['limite'])
+          json['limite'] == null ? null : BigDecimal.fromJson(json['limite'])
       ..saldo =
-      json['saldo'] == null ? null : BigDecimal.fromJson(json['saldo'])
+          json['saldo'] == null ? null : BigDecimal.fromJson(json['saldo'])
       ..token = json['token'] as int?;
 
 Map<String, dynamic> _$ClienteCartaoToJson(ClienteCartao instance) =>
@@ -622,7 +605,7 @@ ClienteCrediario _$ClienteCrediarioFromJson(Map<String, dynamic> json) =>
       ..statusCredito = json['statusCredito'] == null
           ? null
           : StatusCredito.fromJson(
-          json['statusCredito'] as Map<String, dynamic>?);
+              json['statusCredito'] as Map<String, dynamic>?);
 
 Map<String, dynamic> _$ClienteCrediarioToJson(ClienteCrediario instance) =>
     <String, dynamic>{
@@ -650,12 +633,14 @@ ClienteQuestDTO _$ClienteQuestDTOFromJson(Map<String, dynamic> json) =>
       ..notaQuest = json['notaQuest'] == null
           ? null
           : NotaQuest.fromJson(json['notaQuest'] as Map<String, dynamic>)
-      ..campanhas = (json['campanhas'] as List<dynamic>)
-          .map((e) => Campanha.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..historicoCompras = (json['historicoCompras'] as List<dynamic>)
-          .map((e) => HistoricoCompras.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..campanhas = (json['campanhas'] as List<dynamic>?)
+              ?.map((e) => Campanha.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+      ..historicoCompras = (json['historicoCompras'] as List<dynamic>?)
+              ?.map((e) => HistoricoCompras.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$ClienteQuestDTOToJson(ClienteQuestDTO instance) =>
     <String, dynamic>{
@@ -680,13 +665,13 @@ CondicaoPagamento _$CondicaoPagamentoFromJson(Map<String, dynamic> json) =>
       ..finalizadoraEmpresa = json['finalizadoraEmpresa'] == null
           ? null
           : FinalizadoraEmpresa.fromJson(
-          json['finalizadoraEmpresa'] as Map<String, dynamic>)
+              json['finalizadoraEmpresa'] as Map<String, dynamic>)
       ..operacao = json['operacao'] as String?
       ..acrescimoDesconto = json['acrescimoDesconto'] as String?
       ..percentualAcrescimoDesconto =
-      json['percentualAcrescimoDesconto'] == null
-          ? null
-          : BigDecimal.fromJson(json['percentualAcrescimoDesconto'])
+          json['percentualAcrescimoDesconto'] == null
+              ? null
+              : BigDecimal.fromJson(json['percentualAcrescimoDesconto'])
       ..percentualEntradaMinima = json['percentualEntradaMinima'] == null
           ? null
           : BigDecimal.fromJson(json['percentualEntradaMinima'])
@@ -717,43 +702,42 @@ ConferenciaCaixa _$ConferenciaCaixaFromJson(Map<String, dynamic> json) =>
           ? null
           : Turno.fromJson(json['turno'] as Map<String, dynamic>)
       ..listaNota = (json['listaNota'] as List<dynamic>?)
-          ?.map((e) => Nota.fromJson(e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) => Nota.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           []
       ..finalizadoraVendas =
-      (json['finalizadoraVendas'] as Map<String, dynamic>).map(
-            (k, e) => MapEntry(k, BigDecimal.fromJson(e)),
+          (json['finalizadoraVendas'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, BigDecimal.fromJson(e)),
       )
       ..produtosVendidos =
-      (json['produtosVendidos'] as Map<String, dynamic>).map(
-            (k, e) => MapEntry(k, BigDecimal.fromJson(e)),
+          (json['produtosVendidos'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, BigDecimal.fromJson(e)),
       )
       ..listaOperacoes = (json['listaOperacoes'] as List<dynamic>?)
-          ?.map((e) => Operacao.fromJson(e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) => Operacao.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           []
       ..desdobramentoGarcom = (json['desdobramentoGarcom'] as List<dynamic>?)
-          ?.map((e) =>
-          DesdobramentoGarcom.fromJson(e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) =>
+                  DesdobramentoGarcom.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           []
       ..desdobramentoVenda = json['desdobramentoVenda'] == null
           ? null
           : DesdobramentoVenda.fromJson(
-          json['desdobramentoVenda'] as Map<String, dynamic>)
+              json['desdobramentoVenda'] as Map<String, dynamic>)
       ..desdobramentoModulo = (json['desdobramentoModulo'] as List<dynamic>?)
-          ?.map((e) =>
-          DesdobramentoModulo.fromJson(e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) =>
+                  DesdobramentoModulo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           []
       ..saldo =
-      json['saldo'] == null ? null : BigDecimal.fromJson(json['saldo'])
+          json['saldo'] == null ? null : BigDecimal.fromJson(json['saldo'])
       ..totalRecebimentoParcial =
           (json['totalRecebimentoParcial'] as List<dynamic>?)
-              ?.map((e) =>
-              TotalRecebimentoParcialDTO.fromJson(
-                  e as Map<String, dynamic>))
-              .toList() ??
+                  ?.map((e) => TotalRecebimentoParcialDTO.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList() ??
               [];
 
 Map<String, dynamic> _$ConferenciaCaixaToJson(ConferenciaCaixa instance) =>
@@ -770,53 +754,52 @@ Map<String, dynamic> _$ConferenciaCaixaToJson(ConferenciaCaixa instance) =>
       'totalRecebimentoParcial': instance.totalRecebimentoParcial,
     };
 
-Consumo _$ConsumoFromJson(Map<String, dynamic> json) =>
-    Consumo()
-      ..id = json['id'] as int?
-      ..modulo = json['modulo'] as String?
-      ..dataAbertura = json['dataAbertura'] == null
-          ? null
-          : DateTime.parse(json['dataAbertura'] as String)
-      ..dataAtualizacao = json['dataAtualizacao'] == null
-          ? null
-          : DateTime.parse(json['dataAtualizacao'] as String)
-      ..dataFechamento = json['dataFechamento'] == null
-          ? null
-          : DateTime.parse(json['dataFechamento'] as String)
-      ..dataEntrega = json['dataEntrega'] == null
-          ? null
-          : DateTime.parse(json['dataEntrega'] as String)
-      ..comanda = json['comanda'] as int?
-      ..senhaAtendimento = json['senhaAtendimento'] as String?
-      ..pessoas = json['pessoas'] as int?
-      ..observacao = json['observacao'] as String?
-      ..mesa = json['mesa'] as int?
-      ..tipoDesconto = json['tipoDesconto'] as String
-      ..preDesconto = BigDecimal.fromJson(json['preDesconto'])
-      ..consumosJuntados = (json['consumosJuntados'] as List<dynamic>)
-          .map((e) => Consumo.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..idConsumoOrigemRecebimento = json['idConsumoOrigemRecebimento'] as int?
-      ..consumosOrigemRecebimentos =
-      (json['consumosOrigemRecebimentos'] as List<dynamic>)
-          .map((e) => Consumo.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..evento = json['evento'] == null
-          ? null
-          : Evento.fromJson(json['evento'] as Map<String, dynamic>?)
-      ..perfil = json['perfil'] == null
-          ? null
-          : Perfil.fromJson(json['perfil'] as Map<String, dynamic>)
-      ..promoter = json['promoter'] == null
-          ? null
-          : Funcionario.fromJson(json['promoter'] as Map<String, dynamic>)
-      ..limite = json['limite'] == null ? null : BigDecimal.fromJson(
-          json['limite'])
-      ..tipoEntrega = json['tipoEntrega'] as String?
-      ..entregue = json['entregue'] as bool?;
+Consumo _$ConsumoFromJson(Map<String, dynamic> json) => Consumo()
+  ..id = json['id'] as int?
+  ..modulo = json['modulo'] as String?
+  ..dataAbertura = json['dataAbertura'] == null
+      ? null
+      : DateTime.parse(json['dataAbertura'] as String)
+  ..dataAtualizacao = json['dataAtualizacao'] == null
+      ? null
+      : DateTime.parse(json['dataAtualizacao'] as String)
+  ..dataFechamento = json['dataFechamento'] == null
+      ? null
+      : DateTime.parse(json['dataFechamento'] as String)
+  ..dataEntrega = json['dataEntrega'] == null
+      ? null
+      : DateTime.parse(json['dataEntrega'] as String)
+  ..comanda = json['comanda'] as int?
+  ..senhaAtendimento = json['senhaAtendimento'] as String?
+  ..pessoas = json['pessoas'] as int?
+  ..observacao = json['observacao'] as String?
+  ..mesa = json['mesa'] as int?
+  ..tipoDesconto = json['tipoDesconto'] as String
+  ..preDesconto = BigDecimal.fromJson(json['preDesconto'])
+  ..consumosJuntados = (json['consumosJuntados'] as List<dynamic>?)
+          ?.map((e) => Consumo.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
+  ..idConsumoOrigemRecebimento = json['idConsumoOrigemRecebimento'] as int?
+  ..consumosOrigemRecebimentos =
+      (json['consumosOrigemRecebimentos'] as List<dynamic>?)
+              ?.map((e) => Consumo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+  ..evento = json['evento'] == null
+      ? null
+      : Evento.fromJson(json['evento'] as Map<String, dynamic>?)
+  ..perfil = json['perfil'] == null
+      ? null
+      : Perfil.fromJson(json['perfil'] as Map<String, dynamic>)
+  ..promoter = json['promoter'] == null
+      ? null
+      : Funcionario.fromJson(json['promoter'] as Map<String, dynamic>)
+  ..limite = json['limite'] == null ? null : BigDecimal.fromJson(json['limite'])
+  ..tipoEntrega = json['tipoEntrega'] as String?
+  ..entregue = json['entregue'] as bool?;
 
-Map<String, dynamic> _$ConsumoToJson(Consumo instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ConsumoToJson(Consumo instance) => <String, dynamic>{
       'id': instance.id,
       'modulo': instance.modulo,
       'dataAbertura': instance.dataAbertura?.toIso8601String(),
@@ -860,7 +843,7 @@ ContaCorrente _$ContaCorrenteFromJson(Map<String, dynamic> json) =>
           ? null
           : Banco.fromJson(json['banco'] as Map<String, dynamic>)
       ..saldo =
-      json['saldo'] == null ? null : BigDecimal.fromJson(json['saldo'])
+          json['saldo'] == null ? null : BigDecimal.fromJson(json['saldo'])
       ..padrao = json['padrao'] as bool?
       ..versao = json['versao'] as int?;
 
@@ -891,7 +874,7 @@ ContratoExtra _$ContratoExtraFromJson(Map<String, dynamic> json) =>
       ..gratuito = json['gratuito'] as bool?
       ..disponivel = json['disponivel'] as bool?
       ..valor =
-      json['valor'] == null ? null : BigDecimal.fromJson(json['valor']);
+          json['valor'] == null ? null : BigDecimal.fromJson(json['valor']);
 
 Map<String, dynamic> _$ContratoExtraToJson(ContratoExtra instance) =>
     <String, dynamic>{
@@ -916,7 +899,7 @@ DesdobramentoGarcom _$DesdobramentoGarcomFromJson(Map<String, dynamic> json) =>
           : BigDecimal.fromJson(json['vendasServico']);
 
 Map<String, dynamic> _$DesdobramentoGarcomToJson(
-    DesdobramentoGarcom instance) =>
+        DesdobramentoGarcom instance) =>
     <String, dynamic>{
       'vendedor': instance.vendedor,
       'vendasProduto': instance.vendasProduto,
@@ -937,7 +920,7 @@ DesdobramentoModulo _$DesdobramentoModuloFromJson(Map<String, dynamic> json) =>
           : BigDecimal.fromJson(json['vendasServico']);
 
 Map<String, dynamic> _$DesdobramentoModuloToJson(
-    DesdobramentoModulo instance) =>
+        DesdobramentoModulo instance) =>
     <String, dynamic>{
       'modulo': instance.modulo,
       'taxaServico': instance.taxaServico,
@@ -1000,20 +983,20 @@ Map<String, dynamic> _$DesdobramentoVendaToJson(DesdobramentoVenda instance) =>
       'vendaBruta': instance.vendaBruta,
     };
 
-DtoNota _$DtoNotaFromJson(Map<String, dynamic> json) =>
-    DtoNota()
-      ..nota = json['nota'] == null
-          ? null
-          : Nota.fromJson(json['nota'] as Map<String, dynamic>)
-      ..notaItemList = (json['notaItemList'] as List<dynamic>)
-          .map((e) => NotaItem.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..notaFinalizadoraList = (json['notaFinalizadoraList'] as List<dynamic>)
-          .map((e) => NotaFinalizadora.fromJson(e as Map<String, dynamic>))
-          .toList();
+DtoNota _$DtoNotaFromJson(Map<String, dynamic> json) => DtoNota()
+  ..nota = json['nota'] == null
+      ? null
+      : Nota.fromJson(json['nota'] as Map<String, dynamic>)
+  ..notaItemList = (json['notaItemList'] as List<dynamic>?)
+          ?.map((e) => NotaItem.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
+  ..notaFinalizadoraList = (json['notaFinalizadoraList'] as List<dynamic>?)
+          ?.map((e) => NotaFinalizadora.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      [];
 
-Map<String, dynamic> _$DtoNotaToJson(DtoNota instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DtoNotaToJson(DtoNota instance) => <String, dynamic>{
       'nota': instance.nota,
       'notaItemList': instance.notaItemList,
       'notaFinalizadoraList': instance.notaFinalizadoraList,
@@ -1026,17 +1009,17 @@ EmitenteCheque _$EmitenteChequeFromJson(Map<String, dynamic> json) =>
           ? null
           : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
       ..limite =
-      json['limite'] == null ? null : BigDecimal.fromJson(json['limite'])
+          json['limite'] == null ? null : BigDecimal.fromJson(json['limite'])
       ..observacao = json['observacao'] as String?
       ..statusCredito = json['statusCredito'] == null
           ? null
           : StatusCredito.fromJson(
-          json['statusCredito'] as Map<String, dynamic>?)
+              json['statusCredito'] as Map<String, dynamic>?)
       ..versao = json['versao'] as int?
       ..controleCadastro = json['controleCadastro'] == null
           ? null
           : ControleCadastro.fromJson(
-          json['controleCadastro'] as Map<String, dynamic>?);
+              json['controleCadastro'] as Map<String, dynamic>?);
 
 Map<String, dynamic> _$EmitenteChequeToJson(EmitenteCheque instance) =>
     <String, dynamic>{
@@ -1049,91 +1032,89 @@ Map<String, dynamic> _$EmitenteChequeToJson(EmitenteCheque instance) =>
       'controleCadastro': instance.controleCadastro,
     };
 
-Empresa _$EmpresaFromJson(Map<String, dynamic> json) =>
-    Empresa()
-      ..id = json['id'] as int?
-      ..pessoa = json['pessoa'] == null
-          ? null
-          : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
-      ..numeroLoja = json['numeroLoja'] as int?
-      ..codificacaoEAN = json['codificacaoEAN'] as bool?
-      ..sugestaoCodigo = json['sugestaoCodigo'] as String?
-      ..tipoEmpresa = json['tipoEmpresa'] as String?
-      ..idMatriz = json['idMatriz'] as int?
-      ..matriz = json['matriz'] == null
-          ? null
-          : Empresa.fromJson(json['matriz'] as Map<String, dynamic>)
-      ..idIntegrador = json['idIntegrador'] as int?
-      ..integrador = json['integrador'] == null
-          ? null
-          : Empresa.fromJson(json['integrador'] as Map<String, dynamic>)
-      ..licencaChave = json['licencaChave'] as String?
-      ..controleCadastro = json['controleCadastro'] == null
-          ? null
-          : ControleCadastro.fromJson(
+Empresa _$EmpresaFromJson(Map<String, dynamic> json) => Empresa()
+  ..id = json['id'] as int?
+  ..pessoa = json['pessoa'] == null
+      ? null
+      : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
+  ..numeroLoja = json['numeroLoja'] as int?
+  ..codificacaoEAN = json['codificacaoEAN'] as bool?
+  ..sugestaoCodigo = json['sugestaoCodigo'] as String?
+  ..tipoEmpresa = json['tipoEmpresa'] as String?
+  ..idMatriz = json['idMatriz'] as int?
+  ..matriz = json['matriz'] == null
+      ? null
+      : Empresa.fromJson(json['matriz'] as Map<String, dynamic>)
+  ..idIntegrador = json['idIntegrador'] as int?
+  ..integrador = json['integrador'] == null
+      ? null
+      : Empresa.fromJson(json['integrador'] as Map<String, dynamic>)
+  ..licencaChave = json['licencaChave'] as String?
+  ..controleCadastro = json['controleCadastro'] == null
+      ? null
+      : ControleCadastro.fromJson(
           json['controleCadastro'] as Map<String, dynamic>?)
-      ..condicaoPagamentoPadrao = json['condicaoPagamentoPadrao'] == null
-          ? null
-          : CondicaoPagamento.fromJson(
+  ..condicaoPagamentoPadrao = json['condicaoPagamentoPadrao'] == null
+      ? null
+      : CondicaoPagamento.fromJson(
           json['condicaoPagamentoPadrao'] as Map<String, dynamic>)
-      ..statusCreditoPadrao = json['statusCreditoPadrao'] == null
-          ? null
-          : StatusCredito.fromJson(
+  ..statusCreditoPadrao = json['statusCreditoPadrao'] == null
+      ? null
+      : StatusCredito.fromJson(
           json['statusCreditoPadrao'] as Map<String, dynamic>?)
-      ..venda = json['venda'] == null
-          ? null
-          : EmpresaVenda.fromJson(json['venda'] as Map<String, dynamic>)
-      ..fiscal = json['fiscal'] == null
-          ? null
-          : EmpresaFiscal.fromJson(json['fiscal'] as Map<String, dynamic>?)
-      ..empresaIntegrador = json['empresaIntegrador'] == null
-          ? null
-          : EmpresaIntegrador.fromJson(
+  ..venda = json['venda'] == null
+      ? null
+      : EmpresaVenda.fromJson(json['venda'] as Map<String, dynamic>)
+  ..fiscal = json['fiscal'] == null
+      ? null
+      : EmpresaFiscal.fromJson(json['fiscal'] as Map<String, dynamic>?)
+  ..empresaIntegrador = json['empresaIntegrador'] == null
+      ? null
+      : EmpresaIntegrador.fromJson(
           json['empresaIntegrador'] as Map<String, dynamic>)
-      ..contadorVenda = json['contadorVenda'] as int?
-      ..modoValorizacaoEstoque = json['modoValorizacaoEstoque'] as String?
-      ..taxaRoyalty = json['taxaRoyalty'] == null
-          ? null
-          : BigDecimal.fromJson(json['taxaRoyalty'])
-      ..taxaMarketing = json['taxaMarketing'] == null
-          ? null
-          : BigDecimal.fromJson(json['taxaMarketing'])
-      ..versao = json['versao'] as int?
-      ..credenciaisIfood = json['credenciaisIfood'] == null
-          ? null
-          : CredenciaisIfood.fromJson(
+  ..contadorVenda = json['contadorVenda'] as int?
+  ..modoValorizacaoEstoque = json['modoValorizacaoEstoque'] as String?
+  ..taxaRoyalty = json['taxaRoyalty'] == null
+      ? null
+      : BigDecimal.fromJson(json['taxaRoyalty'])
+  ..taxaMarketing = json['taxaMarketing'] == null
+      ? null
+      : BigDecimal.fromJson(json['taxaMarketing'])
+  ..versao = json['versao'] as int?
+  ..credenciaisIfood = json['credenciaisIfood'] == null
+      ? null
+      : CredenciaisIfood.fromJson(
           json['credenciaisIfood'] as Map<String, dynamic>?)
-      ..segmento = json['segmento'] as String?
-      ..mixImportado = json['mixImportado'] as bool?
-      ..empresaContratos = (json['empresaContratos'] as List<dynamic>?)
+  ..segmento = json['segmento'] as String?
+  ..mixImportado = json['mixImportado'] as bool?
+  ..empresaContratos = (json['empresaContratos'] as List<dynamic>?)
           ?.map((e) => EmpresaContrato.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..fusoHorario = json['fusoHorario'] == null
-          ? null
-          : EmpresaFusoHorario.fromJson(
+      []
+  ..fusoHorario = json['fusoHorario'] == null
+      ? null
+      : EmpresaFusoHorario.fromJson(
           json['fusoHorario'] as Map<String, dynamic>?)
-      ..idConsultor = json['idConsultor'] as int?
-      ..idRegiao = json['idRegiao'] as int?
-      ..confirmado = json['confirmado'] as bool?
-      ..testando = json['testando'] as bool?
-      ..vencimentoTeste = json['vencimentoTeste'] == null
-          ? null
-          : DateTime.parse(json['vencimentoTeste'] as String)
-      ..idFlowdesk = json['idFlowdesk'] as int?
-      ..ondeNosConheceu = json['ondeNosConheceu'] as String?
-      ..empresaContrato = json['empresaContrato'] == null
-          ? null
-          : EmpresaContrato.fromJson(
+  ..idConsultor = json['idConsultor'] as int?
+  ..idRegiao = json['idRegiao'] as int?
+  ..confirmado = json['confirmado'] as bool?
+  ..testando = json['testando'] as bool?
+  ..vencimentoTeste = json['vencimentoTeste'] == null
+      ? null
+      : DateTime.parse(json['vencimentoTeste'] as String)
+  ..idFlowdesk = json['idFlowdesk'] as int?
+  ..ondeNosConheceu = json['ondeNosConheceu'] as String?
+  ..empresaContrato = json['empresaContrato'] == null
+      ? null
+      : EmpresaContrato.fromJson(
           json['empresaContrato'] as Map<String, dynamic>)
-      ..proximoContrato = json['proximoContrato'] == null
-          ? null
-          : EmpresaContrato.fromJson(
+  ..proximoContrato = json['proximoContrato'] == null
+      ? null
+      : EmpresaContrato.fromJson(
           json['proximoContrato'] as Map<String, dynamic>)
-      ..controleTurno = json['controleTurno'] as String?;
+  ..controleTurno = json['controleTurno'] as String?;
 
-Map<String, dynamic> _$EmpresaToJson(Empresa instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$EmpresaToJson(Empresa instance) => <String, dynamic>{
       'id': instance.id,
       'pessoa': instance.pessoa,
       'numeroLoja': instance.numeroLoja,
@@ -1227,9 +1208,9 @@ EmpresaContrato _$EmpresaContratoFromJson(Map<String, dynamic> json) =>
       ..contratoCancelado = json['contratoCancelado'] as bool?
       ..exibirAletaVencimento = json['exibirAletaVencimento'] as bool?
       ..contratoExtra = (json['contratoExtra'] as List<dynamic>?)
-          ?.map((e) =>
-          EmpresaContratoExtra.fromJson(e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) =>
+                  EmpresaContratoExtra.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           []
       ..limiteProdutos = json['limiteProdutos'] as int?
       ..limiteFaturamento = json['limiteFaturamento'] == null
@@ -1284,7 +1265,7 @@ Map<String, dynamic> _$EmpresaContratoToJson(EmpresaContrato instance) =>
       'valorContrato': instance.valorContrato,
       'valorTotalContrato': instance.valorTotalContrato,
       'dataPrimeiraAssinatura':
-      instance.dataPrimeiraAssinatura?.toIso8601String(),
+          instance.dataPrimeiraAssinatura?.toIso8601String(),
       'vencimentoContrato': instance.vencimentoContrato?.toIso8601String(),
       'dataContratacao': instance.dataContratacao?.toIso8601String(),
       'dataCancelamento': instance.dataCancelamento?.toIso8601String(),
@@ -1308,14 +1289,14 @@ Map<String, dynamic> _$EmpresaContratoToJson(EmpresaContrato instance) =>
     };
 
 EmpresaContratoExtra _$EmpresaContratoExtraFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     EmpresaContratoExtra()
       ..id = json['id'] as int?
       ..idEmpresaContrato = json['idEmpresaContrato'] as int?
       ..contratoExtra = json['contratoExtra'] == null
           ? null
           : ContratoExtra.fromJson(
-          json['contratoExtra'] as Map<String, dynamic>)
+              json['contratoExtra'] as Map<String, dynamic>)
       ..valorUnitario = json['valorUnitario'] == null
           ? null
           : BigDecimal.fromJson(json['valorUnitario'])
@@ -1325,7 +1306,7 @@ EmpresaContratoExtra _$EmpresaContratoExtraFromJson(
           : BigDecimal.fromJson(json['valorTotal']);
 
 Map<String, dynamic> _$EmpresaContratoExtraToJson(
-    EmpresaContratoExtra instance) =>
+        EmpresaContratoExtra instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idEmpresaContrato': instance.idEmpresaContrato,
@@ -1335,29 +1316,28 @@ Map<String, dynamic> _$EmpresaContratoExtraToJson(
       'valorTotal': instance.valorTotal,
     };
 
-EmpresaDTO _$EmpresaDTOFromJson(Map<String, dynamic> json) =>
-    EmpresaDTO()
-      ..id = json['id'] as int?
-      ..razaoSocial = json['razaoSocial'] as String?
-      ..nomaFantasia = json['nomaFantasia'] as String?
-      ..numeroLoja = json['numeroLoja'] as int?
-      ..inscricaoFederal = json['inscricaoFederal'] as String?
-      ..variacao = json['variacao'] as int?
-      ..logo = json['logo'] as String?
-      ..empresaContrato = json['empresaContrato'] == null
-          ? null
-          : EmpresaContrato.fromJson(
+EmpresaDTO _$EmpresaDTOFromJson(Map<String, dynamic> json) => EmpresaDTO()
+  ..id = json['id'] as int?
+  ..razaoSocial = json['razaoSocial'] as String?
+  ..nomaFantasia = json['nomaFantasia'] as String?
+  ..numeroLoja = json['numeroLoja'] as int?
+  ..inscricaoFederal = json['inscricaoFederal'] as String?
+  ..variacao = json['variacao'] as int?
+  ..logo = json['logo'] as String?
+  ..empresaContrato = json['empresaContrato'] == null
+      ? null
+      : EmpresaContrato.fromJson(
           json['empresaContrato'] as Map<String, dynamic>)
-      ..testando = json['testando'] as bool?
-      ..vencimentoTeste = json['vencimentoTeste'] == null
-          ? null
-          : DateTime.parse(json['vencimentoTeste'] as String)
-      ..empresaVenda = json['empresaVenda'] == null
-          ? null
-          : EmpresaVenda.fromJson(json['empresaVenda'] as Map<String, dynamic>)
-      ..quest = json['quest'] == null
-          ? null
-          : Quest.fromJson(json['quest'] as Map<String, dynamic>?);
+  ..testando = json['testando'] as bool?
+  ..vencimentoTeste = json['vencimentoTeste'] == null
+      ? null
+      : DateTime.parse(json['vencimentoTeste'] as String)
+  ..empresaVenda = json['empresaVenda'] == null
+      ? null
+      : EmpresaVenda.fromJson(json['empresaVenda'] as Map<String, dynamic>)
+  ..quest = json['quest'] == null
+      ? null
+      : Quest.fromJson(json['quest'] as Map<String, dynamic>?);
 
 Map<String, dynamic> _$EmpresaDTOToJson(EmpresaDTO instance) =>
     <String, dynamic>{
@@ -1375,32 +1355,30 @@ Map<String, dynamic> _$EmpresaDTOToJson(EmpresaDTO instance) =>
       'quest': instance.quest,
     };
 
-EmpresaVenda _$EmpresaVendaFromJson(Map<String, dynamic> json) =>
-    EmpresaVenda()
-      ..confirmarValorSuperior = json['confirmarValorSuperior'] == null
-          ? null
-          : BigDecimal.fromJson(json['confirmarValorSuperior'])
-      ..confirmarQuantidadeSuperior = json['confirmarQuantidadeSuperior'] ==
-          null
-          ? null
-          : BigDecimal.fromJson(json['confirmarQuantidadeSuperior'])
-      ..informarObservacaoItem = json['informarObservacaoItem'] as bool?
-      ..impressaoVenda = json['impressaoVenda'] as String?
-      ..percentualDescontoVenda = json['percentualDescontoVenda'] == null
-          ? null
-          : BigDecimal.fromJson(json['percentualDescontoVenda'])
-      ..percentualDescontoItem = json['percentualDescontoItem'] == null
-          ? null
-          : BigDecimal.fromJson(json['percentualDescontoItem'])
-      ..descontoExcedenteVenda = json['descontoExcedenteVenda'] as String?
-      ..descontoExcedenteItem = json['descontoExcedenteItem'] as String?
-      ..origemDesconto = json['origemDesconto'] as String?
-      ..imporMaximoDescontoItemSupervisor =
+EmpresaVenda _$EmpresaVendaFromJson(Map<String, dynamic> json) => EmpresaVenda()
+  ..confirmarValorSuperior = json['confirmarValorSuperior'] == null
+      ? null
+      : BigDecimal.fromJson(json['confirmarValorSuperior'])
+  ..confirmarQuantidadeSuperior = json['confirmarQuantidadeSuperior'] == null
+      ? null
+      : BigDecimal.fromJson(json['confirmarQuantidadeSuperior'])
+  ..informarObservacaoItem = json['informarObservacaoItem'] as bool?
+  ..impressaoVenda = json['impressaoVenda'] as String?
+  ..percentualDescontoVenda = json['percentualDescontoVenda'] == null
+      ? null
+      : BigDecimal.fromJson(json['percentualDescontoVenda'])
+  ..percentualDescontoItem = json['percentualDescontoItem'] == null
+      ? null
+      : BigDecimal.fromJson(json['percentualDescontoItem'])
+  ..descontoExcedenteVenda = json['descontoExcedenteVenda'] as String?
+  ..descontoExcedenteItem = json['descontoExcedenteItem'] as String?
+  ..origemDesconto = json['origemDesconto'] as String?
+  ..imporMaximoDescontoItemSupervisor =
       json['imporMaximoDescontoItemSupervisor'] as bool?
-      ..codigoBalanca = json['codigoBalanca'] as String?
-      ..digitosProduto = json['digitosProduto'] as int?
-      ..vendaPromocao = json['vendaPromocao'] as String?
-      ..mensagemRodape = json['mensagemRodape'] as String?;
+  ..codigoBalanca = json['codigoBalanca'] as String?
+  ..digitosProduto = json['digitosProduto'] as int?
+  ..vendaPromocao = json['vendaPromocao'] as String?
+  ..mensagemRodape = json['mensagemRodape'] as String?;
 
 Map<String, dynamic> _$EmpresaVendaToJson(EmpresaVenda instance) =>
     <String, dynamic>{
@@ -1414,43 +1392,41 @@ Map<String, dynamic> _$EmpresaVendaToJson(EmpresaVenda instance) =>
       'descontoExcedenteItem': instance.descontoExcedenteItem,
       'origemDesconto': instance.origemDesconto,
       'imporMaximoDescontoItemSupervisor':
-      instance.imporMaximoDescontoItemSupervisor,
+          instance.imporMaximoDescontoItemSupervisor,
       'codigoBalanca': instance.codigoBalanca,
       'digitosProduto': instance.digitosProduto,
       'vendaPromocao': instance.vendaPromocao,
       'mensagemRodape': instance.mensagemRodape,
     };
 
-Endereco _$EnderecoFromJson(Map<String, dynamic> json) =>
-    Endereco()
-      ..id = json['id'] as int?
-      ..idPessoa = json['idPessoa'] as int?
-      ..descricao = json['descricao'] as String?
-      ..logradouro = json['logradouro'] as String?
-      ..numero = json['numero'] as String?
-      ..complemento = json['complemento'] as String?
-      ..bairro = json['bairro'] as String?
-      ..cep = json['cep'] as String?
-      ..caixaPostal = json['caixaPostal'] as String?
-      ..pontoReferencia = json['pontoReferencia'] as String?
-      ..cidade = json['cidade'] == null
-          ? null
-          : Cidade.fromJson(json['cidade'] as Map<String, dynamic>?)
-      ..regiao = json['regiao'] == null
-          ? null
-          : Regiao.fromJson(json['regiao'] as Map<String, dynamic>)
-      ..principal = json['principal'] as bool
-      ..idConcentrador = json['idConcentrador'] as int?
-      ..versao = json['versao'] as int?
-      ..ativo = json['ativo'] as bool
-      ..dadosIntegracao = (json['dadosIntegracao'] as List<dynamic>?)
+Endereco _$EnderecoFromJson(Map<String, dynamic> json) => Endereco()
+  ..id = json['id'] as int?
+  ..idPessoa = json['idPessoa'] as int?
+  ..descricao = json['descricao'] as String?
+  ..logradouro = json['logradouro'] as String?
+  ..numero = json['numero'] as String?
+  ..complemento = json['complemento'] as String?
+  ..bairro = json['bairro'] as String?
+  ..cep = json['cep'] as String?
+  ..caixaPostal = json['caixaPostal'] as String?
+  ..pontoReferencia = json['pontoReferencia'] as String?
+  ..cidade = json['cidade'] == null
+      ? null
+      : Cidade.fromJson(json['cidade'] as Map<String, dynamic>?)
+  ..regiao = json['regiao'] == null
+      ? null
+      : Regiao.fromJson(json['regiao'] as Map<String, dynamic>)
+  ..principal = json['principal'] as bool
+  ..idConcentrador = json['idConcentrador'] as int?
+  ..versao = json['versao'] as int?
+  ..ativo = json['ativo'] as bool
+  ..dadosIntegracao = (json['dadosIntegracao'] as List<dynamic>?)
           ?.map((e) =>
-          EnderecoDadosIntegracao.fromJson(e as Map<String, dynamic>))
+              EnderecoDadosIntegracao.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          [];
+      [];
 
-Map<String, dynamic> _$EnderecoToJson(Endereco instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$EnderecoToJson(Endereco instance) => <String, dynamic>{
       'id': instance.id,
       'idPessoa': instance.idPessoa,
       'descricao': instance.descricao,
@@ -1471,7 +1447,7 @@ Map<String, dynamic> _$EnderecoToJson(Endereco instance) =>
     };
 
 EquipamentoImpressao _$EquipamentoImpressaoFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     EquipamentoImpressao()
       ..id = json['id'] as int?
       ..idEmpresa = json['idEmpresa'] as int?
@@ -1487,7 +1463,7 @@ EquipamentoImpressao _$EquipamentoImpressaoFromJson(
       ..ipAddress = json['ipAddress'] as String?;
 
 Map<String, dynamic> _$EquipamentoImpressaoToJson(
-    EquipamentoImpressao instance) =>
+        EquipamentoImpressao instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
@@ -1542,7 +1518,7 @@ EstacaoBalanca _$EstacaoBalancaFromJson(Map<String, dynamic> json) =>
       ..portaSerial = json['portaSerial'] as String?
       ..baudrate = json['baudrate'] as int?
       ..timeout =
-      json['timeout'] == null ? null : BigDecimal.fromJson(json['timeout'])
+          json['timeout'] == null ? null : BigDecimal.fromJson(json['timeout'])
       ..bytesProtocolo = json['bytesProtocolo'] as int?
       ..tentativas = json['tentativas'] as int?;
 
@@ -1557,26 +1533,31 @@ Map<String, dynamic> _$EstacaoBalancaToJson(EstacaoBalanca instance) =>
     };
 
 EstacaoPreCadastroDTO _$EstacaoPreCadastroDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     EstacaoPreCadastroDTO()
       ..numeroCaixa = json['numeroCaixa'] as int?
-      ..emissorFiscalList = (json['emissorFiscalList'] as List<dynamic>)
-          .map((e) => EmissorFiscal.fromJson(e as Map<String, dynamic>?))
-          .toList()
-      ..moduloList = (json['moduloList'] as List<dynamic>)
-          .map((e) => Modulo.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..equipamentoImpressaoList = (json['equipamentoImpressaoList']
-      as List<dynamic>)
-          .map((e) => EquipamentoImpressao.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..localProducaoList = (json['localProducaoList'] as List<dynamic>)
-          .map((e) => LocalProducao.fromJson(e as Map<String, dynamic>?))
-          .toList()
+      ..emissorFiscalList = (json['emissorFiscalList'] as List<dynamic>?)
+              ?.map((e) => EmissorFiscal.fromJson(e as Map<String, dynamic>?))
+              .toList() ??
+          []
+      ..moduloList = (json['moduloList'] as List<dynamic>?)
+              ?.map((e) => Modulo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+      ..equipamentoImpressaoList =
+          (json['equipamentoImpressaoList'] as List<dynamic>?)
+                  ?.map((e) =>
+                      EquipamentoImpressao.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              []
+      ..localProducaoList = (json['localProducaoList'] as List<dynamic>?)
+              ?.map((e) => LocalProducao.fromJson(e as Map<String, dynamic>?))
+              .toList() ??
+          []
       ..modoHibrido = json['modoHibrido'] as bool?;
 
 Map<String, dynamic> _$EstacaoPreCadastroDTOToJson(
-    EstacaoPreCadastroDTO instance) =>
+        EstacaoPreCadastroDTO instance) =>
     <String, dynamic>{
       'numeroCaixa': instance.numeroCaixa,
       'emissorFiscalList': instance.emissorFiscalList,
@@ -1618,7 +1599,7 @@ EstacaoTrabalho _$EstacaoTrabalhoFromJson(Map<String, dynamic> json) =>
       ..emissorFiscal = json['emissorFiscal'] == null
           ? null
           : EmissorFiscal.fromJson(
-          json['emissorFiscal'] as Map<String, dynamic>?)
+              json['emissorFiscal'] as Map<String, dynamic>?)
       ..concentradorHost = json['concentradorHost'] as String?
       ..concentradorPorta = json['concentradorPorta'] as int?
       ..modoHibrido = json['modoHibrido'] as bool?
@@ -1636,34 +1617,34 @@ EstacaoTrabalho _$EstacaoTrabalhoFromJson(Map<String, dynamic> json) =>
           ? null
           : EstacaoLeitor.fromJson(json['leitor'] as Map<String, dynamic>?)
       ..modulos = (json['modulos'] as List<dynamic>?)
-          ?.map((e) => Modulo.fromJson(e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) => Modulo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           []
       ..impressoras = (json['impressoras'] as List<dynamic>?)
-          ?.map(
-              (e) => EstacaoImpressora.fromJson(e as Map<String, dynamic>?))
-          .toList() ??
+              ?.map(
+                  (e) => EstacaoImpressora.fromJson(e as Map<String, dynamic>?))
+              .toList() ??
           []
       ..servicoImpressao = json['servicoImpressao'] == null
           ? null
           : ServicoImpressao.fromJson(
-          json['servicoImpressao'] as Map<String, dynamic>?)
+              json['servicoImpressao'] as Map<String, dynamic>?)
       ..servicoIfood = json['servicoIfood'] == null
           ? null
           : ServicoIfood.fromJson(json['servicoIfood'] as Map<String, dynamic>?)
       ..servicoCatraca = json['servicoCatraca'] == null
           ? null
           : ServicoCatraca.fromJson(
-          json['servicoCatraca'] as Map<String, dynamic>?)
+              json['servicoCatraca'] as Map<String, dynamic>?)
       ..servicoFourAll = json['servicoFourAll'] == null
           ? null
           : ServicoFourAll.fromJson(
-          json['servicoFourAll'] as Map<String, dynamic>?)
+              json['servicoFourAll'] as Map<String, dynamic>?)
       ..idContaCorrente = json['idContaCorrente'] as int?
       ..contaCorrente = json['contaCorrente'] == null
           ? null
           : ContaCorrente.fromJson(
-          json['contaCorrente'] as Map<String, dynamic>)
+              json['contaCorrente'] as Map<String, dynamic>)
       ..versao = json['versao'] as int?
       ..tipoTEF = json['tipoTEF'] as String?
       ..modoPesquisa = json['modoPesquisa'] as String?
@@ -1671,7 +1652,7 @@ EstacaoTrabalho _$EstacaoTrabalhoFromJson(Map<String, dynamic> json) =>
       ..controleCadastro = json['controleCadastro'] == null
           ? null
           : ControleCadastro.fromJson(
-          json['controleCadastro'] as Map<String, dynamic>?);
+              json['controleCadastro'] as Map<String, dynamic>?);
 
 Map<String, dynamic> _$EstacaoTrabalhoToJson(EstacaoTrabalho instance) =>
     <String, dynamic>{
@@ -1724,20 +1705,19 @@ Map<String, dynamic> _$EstacaoTrabalhoToJson(EstacaoTrabalho instance) =>
       'controleCadastro': instance.controleCadastro,
     };
 
-Finalizadora _$FinalizadoraFromJson(Map<String, dynamic> json) =>
-    Finalizadora()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..codigo = json['codigo'] as int?
-      ..descricao = json['descricao'] as String?
-      ..tipo = json['tipo'] as String?
-      ..valorMaximo = json['valorMaximo'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorMaximo'])
-      ..tipoPagamento = json['tipoPagamento'] as String?
-      ..tipoCartao = json['tipoCartao'] as String?
-      ..finalizadoraRFB = json['finalizadoraRFB'] as String?
-      ..versao = json['versao'] as int?;
+Finalizadora _$FinalizadoraFromJson(Map<String, dynamic> json) => Finalizadora()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..codigo = json['codigo'] as int?
+  ..descricao = json['descricao'] as String?
+  ..tipo = json['tipo'] as String?
+  ..valorMaximo = json['valorMaximo'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorMaximo'])
+  ..tipoPagamento = json['tipoPagamento'] as String?
+  ..tipoCartao = json['tipoCartao'] as String?
+  ..finalizadoraRFB = json['finalizadoraRFB'] as String?
+  ..versao = json['versao'] as int?;
 
 Map<String, dynamic> _$FinalizadoraToJson(Finalizadora instance) =>
     <String, dynamic>{
@@ -1778,7 +1758,7 @@ FinalizadoraEmpresa _$FinalizadoraEmpresaFromJson(Map<String, dynamic> json) =>
       ..especieTitulo = json['especieTitulo'] == null
           ? null
           : EspecieTitulo.fromJson(
-          json['especieTitulo'] as Map<String, dynamic>)
+              json['especieTitulo'] as Map<String, dynamic>)
       ..sugestaoDias = json['sugestaoDias'] as int?
       ..sugestaoParcelas = json['sugestaoParcelas'] as int?
       ..maximoParcelas = json['maximoParcelas'] as int?
@@ -1787,7 +1767,7 @@ FinalizadoraEmpresa _$FinalizadoraEmpresaFromJson(Map<String, dynamic> json) =>
           : BigDecimal.fromJson(json['valorMinimoParcela']);
 
 Map<String, dynamic> _$FinalizadoraEmpresaToJson(
-    FinalizadoraEmpresa instance) =>
+        FinalizadoraEmpresa instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idFinalizadora': instance.idFinalizadora,
@@ -1814,18 +1794,17 @@ Map<String, dynamic> _$FinalizadoraEmpresaToJson(
       'valorMinimoParcela': instance.valorMinimoParcela,
     };
 
-FoxConsumo _$FoxConsumoFromJson(Map<String, dynamic> json) =>
-    FoxConsumo()
-      ..id = json['id'] as int?
-      ..modulo = json['modulo'] as String?
-      ..valorTotal = json['valorTotal'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorTotal'])
-      ..quantidadeComandas = json['quantidadeComandas'] as int?
-      ..dataEnvio = json['dataEnvio'] == null
-          ? null
-          : DateTime.parse(json['dataEnvio'] as String)
-      ..idEmpresa = json['idEmpresa'] as int?;
+FoxConsumo _$FoxConsumoFromJson(Map<String, dynamic> json) => FoxConsumo()
+  ..id = json['id'] as int?
+  ..modulo = json['modulo'] as String?
+  ..valorTotal = json['valorTotal'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorTotal'])
+  ..quantidadeComandas = json['quantidadeComandas'] as int?
+  ..dataEnvio = json['dataEnvio'] == null
+      ? null
+      : DateTime.parse(json['dataEnvio'] as String)
+  ..idEmpresa = json['idEmpresa'] as int?;
 
 Map<String, dynamic> _$FoxConsumoToJson(FoxConsumo instance) =>
     <String, dynamic>{
@@ -1837,76 +1816,75 @@ Map<String, dynamic> _$FoxConsumoToJson(FoxConsumo instance) =>
       'idEmpresa': instance.idEmpresa,
     };
 
-Funcionario _$FuncionarioFromJson(Map<String, dynamic> json) =>
-    Funcionario()
-      ..id = json['id'] as int?
-      ..idPessoa = json['idPessoa'] as int?
-      ..pessoa = json['pessoa'] == null
-          ? null
-          : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..numeroPis = json['numeroPis'] as String?
-      ..numeroCtps = json['numeroCtps'] as String?
-      ..setor = json['setor'] == null
-          ? null
-          : Setor.fromJson(json['setor'] as Map<String, dynamic>)
-      ..regiaoTrabalho = json['regiaoTrabalho'] == null
-          ? null
-          : Regiao.fromJson(json['regiaoTrabalho'] as Map<String, dynamic>)
-      ..localTrabalho = json['localTrabalho'] as String?
-      ..cargo = json['cargo'] as String?
-      ..valorPisoSalarial = json['valorPisoSalarial'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorPisoSalarial'])
-      ..valorSalario = json['valorSalario'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorSalario'])
-      ..valorTransporte = json['valorTransporte'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorTransporte'])
-      ..valorTicket = json['valorTicket'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorTicket'])
-      ..valorSeguro = json['valorSeguro'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorSeguro'])
-      ..valorRendimentos = json['valorRendimentos'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorRendimentos'])
-      ..valorContribuicoes = json['valorContribuicoes'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorContribuicoes'])
-      ..valorDescontos = json['valorDescontos'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorDescontos'])
-      ..percentualAdiantamento = json['percentualAdiantamento'] == null
-          ? null
-          : BigDecimal.fromJson(json['percentualAdiantamento'])
-      ..numeroDependentes = json['numeroDependentes'] as int?
-      ..dataAdmissao = json['dataAdmissao'] == null
-          ? null
-          : DateTime.parse(json['dataAdmissao'] as String)
-      ..dataDemissao = json['dataDemissao'] == null
-          ? null
-          : DateTime.parse(json['dataDemissao'] as String)
-      ..motivoDemissao = json['motivoDemissao'] as String?
-      ..observacao = json['observacao'] as String?
-      ..tecnico = json['tecnico'] as bool?
-      ..motorista = json['motorista'] as bool?
-      ..auxiliarMotorista = json['auxiliarMotorista'] as bool?
-      ..montador = json['montador'] as bool?
-      ..entregador = json['entregador'] as bool?
-      ..promoter = json['promoter'] as bool?
-      ..vendedor = json['vendedor'] as bool?
-      ..historico = json['historico'] as String?
-      ..versao = json['versao'] as int?
-      ..controleCadastro = json['controleCadastro'] == null
-          ? null
-          : ControleCadastro.fromJson(
+Funcionario _$FuncionarioFromJson(Map<String, dynamic> json) => Funcionario()
+  ..id = json['id'] as int?
+  ..idPessoa = json['idPessoa'] as int?
+  ..pessoa = json['pessoa'] == null
+      ? null
+      : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..numeroPis = json['numeroPis'] as String?
+  ..numeroCtps = json['numeroCtps'] as String?
+  ..setor = json['setor'] == null
+      ? null
+      : Setor.fromJson(json['setor'] as Map<String, dynamic>)
+  ..regiaoTrabalho = json['regiaoTrabalho'] == null
+      ? null
+      : Regiao.fromJson(json['regiaoTrabalho'] as Map<String, dynamic>)
+  ..localTrabalho = json['localTrabalho'] as String?
+  ..cargo = json['cargo'] as String?
+  ..valorPisoSalarial = json['valorPisoSalarial'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorPisoSalarial'])
+  ..valorSalario = json['valorSalario'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorSalario'])
+  ..valorTransporte = json['valorTransporte'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorTransporte'])
+  ..valorTicket = json['valorTicket'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorTicket'])
+  ..valorSeguro = json['valorSeguro'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorSeguro'])
+  ..valorRendimentos = json['valorRendimentos'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorRendimentos'])
+  ..valorContribuicoes = json['valorContribuicoes'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorContribuicoes'])
+  ..valorDescontos = json['valorDescontos'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorDescontos'])
+  ..percentualAdiantamento = json['percentualAdiantamento'] == null
+      ? null
+      : BigDecimal.fromJson(json['percentualAdiantamento'])
+  ..numeroDependentes = json['numeroDependentes'] as int?
+  ..dataAdmissao = json['dataAdmissao'] == null
+      ? null
+      : DateTime.parse(json['dataAdmissao'] as String)
+  ..dataDemissao = json['dataDemissao'] == null
+      ? null
+      : DateTime.parse(json['dataDemissao'] as String)
+  ..motivoDemissao = json['motivoDemissao'] as String?
+  ..observacao = json['observacao'] as String?
+  ..tecnico = json['tecnico'] as bool?
+  ..motorista = json['motorista'] as bool?
+  ..auxiliarMotorista = json['auxiliarMotorista'] as bool?
+  ..montador = json['montador'] as bool?
+  ..entregador = json['entregador'] as bool?
+  ..promoter = json['promoter'] as bool?
+  ..vendedor = json['vendedor'] as bool?
+  ..historico = json['historico'] as String?
+  ..versao = json['versao'] as int?
+  ..controleCadastro = json['controleCadastro'] == null
+      ? null
+      : ControleCadastro.fromJson(
           json['controleCadastro'] as Map<String, dynamic>?)
-      ..dadosVendedor = json['dadosVendedor'] == null
-          ? null
-          : Vendedor.fromJson(json['dadosVendedor'] as Map<String, dynamic>);
+  ..dadosVendedor = json['dadosVendedor'] == null
+      ? null
+      : Vendedor.fromJson(json['dadosVendedor'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$FuncionarioToJson(Funcionario instance) =>
     <String, dynamic>{
@@ -1947,28 +1925,26 @@ Map<String, dynamic> _$FuncionarioToJson(Funcionario instance) =>
       'dadosVendedor': instance.dadosVendedor,
     };
 
-Grade _$GradeFromJson(Map<String, dynamic> json) =>
-    Grade()
-      ..id = json['id'] as int?
-      ..indice = json['indice'] as int?
-      ..idProduto = json['idProduto'] as int?
-      ..codigoInterno = json['codigoInterno'] as int?
-      ..codigo = json['codigo'] as String?
-      ..referencia = json['referencia'] as String?
-      ..tamanho = json['tamanho'] == null
-          ? null
-          : Tamanho.fromJson(json['tamanho'] as Map<String, dynamic>?)
-      ..cor = json['cor'] == null
-          ? null
-          : Cor.fromJson(json['cor'] as Map<String, dynamic>?)
-      ..colecao = json['colecao'] == null
-          ? null
-          : Colecao.fromJson(json['colecao'] as Map<String, dynamic>?)
-      ..ativo = json['ativo'] as bool?
-      ..padrao = json['padrao'] as bool?;
+Grade _$GradeFromJson(Map<String, dynamic> json) => Grade()
+  ..id = json['id'] as int?
+  ..indice = json['indice'] as int?
+  ..idProduto = json['idProduto'] as int?
+  ..codigoInterno = json['codigoInterno'] as int?
+  ..codigo = json['codigo'] as String?
+  ..referencia = json['referencia'] as String?
+  ..tamanho = json['tamanho'] == null
+      ? null
+      : Tamanho.fromJson(json['tamanho'] as Map<String, dynamic>?)
+  ..cor = json['cor'] == null
+      ? null
+      : Cor.fromJson(json['cor'] as Map<String, dynamic>?)
+  ..colecao = json['colecao'] == null
+      ? null
+      : Colecao.fromJson(json['colecao'] as Map<String, dynamic>?)
+  ..ativo = json['ativo'] as bool?
+  ..padrao = json['padrao'] as bool?;
 
-Map<String, dynamic> _$GradeToJson(Grade instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$GradeToJson(Grade instance) => <String, dynamic>{
       'id': instance.id,
       'indice': instance.indice,
       'idProduto': instance.idProduto,
@@ -1982,79 +1958,76 @@ Map<String, dynamic> _$GradeToJson(Grade instance) =>
       'padrao': instance.padrao,
     };
 
-GradeEmpresa _$GradeEmpresaFromJson(Map<String, dynamic> json) =>
-    GradeEmpresa()
-      ..id = json['id'] as int?
-      ..idGrade = json['idGrade'] as int?
-      ..grade = json['grade'] == null
-          ? null
-          : Grade.fromJson(json['grade'] as Map<String, dynamic>)
-      ..idProdutoEmpresa = json['idProdutoEmpresa'] as int?
-      ..produtoEmpresa = json['produtoEmpresa'] == null
-          ? null
-          : ProdutoEmpresa.fromJson(
-          json['produtoEmpresa'] as Map<String, dynamic>)
-      ..lote = json['lote'] as String?
-      ..serie = json['serie'] as String?
-      ..promocao = json['promocao'] == null
-          ? null
-          : Promocao.fromJson(json['promocao'] as Map<String, dynamic>)
-      ..precoCustoCompra = json['precoCustoCompra'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoCustoCompra'])
-      ..precoCustoContabil = json['precoCustoContabil'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoCustoContabil'])
-      ..precoCustoFixo = json['precoCustoFixo'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoCustoFixo'])
-      ..precoCMC =
+GradeEmpresa _$GradeEmpresaFromJson(Map<String, dynamic> json) => GradeEmpresa()
+  ..id = json['id'] as int?
+  ..idGrade = json['idGrade'] as int?
+  ..grade = json['grade'] == null
+      ? null
+      : Grade.fromJson(json['grade'] as Map<String, dynamic>)
+  ..idProdutoEmpresa = json['idProdutoEmpresa'] as int?
+  ..produtoEmpresa = json['produtoEmpresa'] == null
+      ? null
+      : ProdutoEmpresa.fromJson(json['produtoEmpresa'] as Map<String, dynamic>)
+  ..lote = json['lote'] as String?
+  ..serie = json['serie'] as String?
+  ..promocao = json['promocao'] == null
+      ? null
+      : Promocao.fromJson(json['promocao'] as Map<String, dynamic>)
+  ..precoCustoCompra = json['precoCustoCompra'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoCustoCompra'])
+  ..precoCustoContabil = json['precoCustoContabil'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoCustoContabil'])
+  ..precoCustoFixo = json['precoCustoFixo'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoCustoFixo'])
+  ..precoCMC =
       json['precoCMC'] == null ? null : BigDecimal.fromJson(json['precoCMC'])
-      ..precoCustoAnterior = json['precoCustoAnterior'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoCustoAnterior'])
-      ..precoCustoMedio = json['precoCustoMedio'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoCustoMedio'])
-      ..precoCustoPromocional = json['precoCustoPromocional'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoCustoPromocional'])
-      ..precoCustoMontagem = json['precoCustoMontagem'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoCustoMontagem'])
-      ..precoUnitario = json['precoUnitario'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoUnitario'])
-      ..precoPromocional = json['precoPromocional'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoPromocional'])
-      ..percentualComissaoVendedor = json['percentualComissaoVendedor'] == null
-          ? null
-          : BigDecimal.fromJson(json['percentualComissaoVendedor'])
-      ..percentualDesconto = json['percentualDesconto'] == null
-          ? null
-          : BigDecimal.fromJson(json['percentualDesconto'])
-      ..percentualDescontoSupervisor = json['percentualDescontoSupervisor'] ==
-          null
-          ? null
-          : BigDecimal.fromJson(json['percentualDescontoSupervisor'])
-      ..estoqueMinimo = json['estoqueMinimo'] == null
-          ? null
-          : BigDecimal.fromJson(json['estoqueMinimo'])
-      ..estoqueMaximo = json['estoqueMaximo'] == null
-          ? null
-          : BigDecimal.fromJson(json['estoqueMaximo'])
-      ..proporcaoBaixa = json['proporcaoBaixa'] == null
-          ? null
-          : BigDecimal.fromJson(json['proporcaoBaixa'])
-      ..percentualQuebra = json['percentualQuebra'] == null
-          ? null
-          : BigDecimal.fromJson(json['percentualQuebra'])
-      ..precos = (json['precos'] as List<dynamic>?)
+  ..precoCustoAnterior = json['precoCustoAnterior'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoCustoAnterior'])
+  ..precoCustoMedio = json['precoCustoMedio'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoCustoMedio'])
+  ..precoCustoPromocional = json['precoCustoPromocional'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoCustoPromocional'])
+  ..precoCustoMontagem = json['precoCustoMontagem'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoCustoMontagem'])
+  ..precoUnitario = json['precoUnitario'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoUnitario'])
+  ..precoPromocional = json['precoPromocional'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoPromocional'])
+  ..percentualComissaoVendedor = json['percentualComissaoVendedor'] == null
+      ? null
+      : BigDecimal.fromJson(json['percentualComissaoVendedor'])
+  ..percentualDesconto = json['percentualDesconto'] == null
+      ? null
+      : BigDecimal.fromJson(json['percentualDesconto'])
+  ..percentualDescontoSupervisor = json['percentualDescontoSupervisor'] == null
+      ? null
+      : BigDecimal.fromJson(json['percentualDescontoSupervisor'])
+  ..estoqueMinimo = json['estoqueMinimo'] == null
+      ? null
+      : BigDecimal.fromJson(json['estoqueMinimo'])
+  ..estoqueMaximo = json['estoqueMaximo'] == null
+      ? null
+      : BigDecimal.fromJson(json['estoqueMaximo'])
+  ..proporcaoBaixa = json['proporcaoBaixa'] == null
+      ? null
+      : BigDecimal.fromJson(json['proporcaoBaixa'])
+  ..percentualQuebra = json['percentualQuebra'] == null
+      ? null
+      : BigDecimal.fromJson(json['percentualQuebra'])
+  ..precos = (json['precos'] as List<dynamic>?)
           ?.map((e) => GradeEmpresaPreco.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..ativo = json['ativo'] as bool?;
+      []
+  ..ativo = json['ativo'] as bool?;
 
 Map<String, dynamic> _$GradeEmpresaToJson(GradeEmpresa instance) =>
     <String, dynamic>{
@@ -2087,17 +2060,18 @@ Map<String, dynamic> _$GradeEmpresaToJson(GradeEmpresa instance) =>
       'ativo': instance.ativo,
     };
 
-GrupoEstacao _$GrupoEstacaoFromJson(Map<String, dynamic> json) =>
-    GrupoEstacao()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..descricao = json['descricao'] as String?
-      ..modulos = (json['modulos'] as List<dynamic>)
-          .map((e) => Modulo.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..impressoras = (json['impressoras'] as List<dynamic>)
-          .map((e) => GrupoImpressora.fromJson(e as Map<String, dynamic>))
-          .toList();
+GrupoEstacao _$GrupoEstacaoFromJson(Map<String, dynamic> json) => GrupoEstacao()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..descricao = json['descricao'] as String?
+  ..modulos = (json['modulos'] as List<dynamic>?)
+          ?.map((e) => Modulo.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
+  ..impressoras = (json['impressoras'] as List<dynamic>?)
+          ?.map((e) => GrupoImpressora.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      [];
 
 Map<String, dynamic> _$GrupoEstacaoToJson(GrupoEstacao instance) =>
     <String, dynamic>{
@@ -2112,7 +2086,7 @@ HistoricoCompras _$HistoricoComprasFromJson(Map<String, dynamic> json) =>
     HistoricoCompras()
       ..produto = json['produto'] as String?
       ..compras =
-      json['compras'] == null ? null : BigDecimal.fromJson(json['compras']);
+          json['compras'] == null ? null : BigDecimal.fromJson(json['compras']);
 
 Map<String, dynamic> _$HistoricoComprasToJson(HistoricoCompras instance) =>
     <String, dynamic>{
@@ -2120,33 +2094,31 @@ Map<String, dynamic> _$HistoricoComprasToJson(HistoricoCompras instance) =>
       'compras': instance.compras,
     };
 
-Ibpt _$IbptFromJson(Map<String, dynamic> json) =>
-    Ibpt()
-      ..id = json['id'] as int?
-      ..uf = json['uf'] as String?
-      ..codigo = json['codigo'] as String?
-      ..ex = json['ex'] as int?
-      ..tipo = json['tipo'] as int?
-      ..descricao = json['descricao'] as String?
-      ..nacionalFederal = json['nacionalFederal'] == null
-          ? null
-          : BigDecimal.fromJson(json['nacionalFederal'])
-      ..importadosFederal = json['importadosFederal'] == null
-          ? null
-          : BigDecimal.fromJson(json['importadosFederal'])
-      ..estadual =
+Ibpt _$IbptFromJson(Map<String, dynamic> json) => Ibpt()
+  ..id = json['id'] as int?
+  ..uf = json['uf'] as String?
+  ..codigo = json['codigo'] as String?
+  ..ex = json['ex'] as int?
+  ..tipo = json['tipo'] as int?
+  ..descricao = json['descricao'] as String?
+  ..nacionalFederal = json['nacionalFederal'] == null
+      ? null
+      : BigDecimal.fromJson(json['nacionalFederal'])
+  ..importadosFederal = json['importadosFederal'] == null
+      ? null
+      : BigDecimal.fromJson(json['importadosFederal'])
+  ..estadual =
       json['estadual'] == null ? null : BigDecimal.fromJson(json['estadual'])
-      ..municipal =
+  ..municipal =
       json['municipal'] == null ? null : BigDecimal.fromJson(json['municipal'])
-      ..vigenciaInicio = json['vigenciaInicio'] == null
-          ? null
-          : DateTime.parse(json['vigenciaInicio'] as String)
-      ..vigenciaFim = json['vigenciaFim'] == null
-          ? null
-          : DateTime.parse(json['vigenciaFim'] as String);
+  ..vigenciaInicio = json['vigenciaInicio'] == null
+      ? null
+      : DateTime.parse(json['vigenciaInicio'] as String)
+  ..vigenciaFim = json['vigenciaFim'] == null
+      ? null
+      : DateTime.parse(json['vigenciaFim'] as String);
 
-Map<String, dynamic> _$IbptToJson(Ibpt instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$IbptToJson(Ibpt instance) => <String, dynamic>{
       'id': instance.id,
       'uf': instance.uf,
       'codigo': instance.codigo,
@@ -2161,35 +2133,33 @@ Map<String, dynamic> _$IbptToJson(Ibpt instance) =>
       'vigenciaFim': instance.vigenciaFim?.toIso8601String(),
     };
 
-Icms _$IcmsFromJson(Map<String, dynamic> json) =>
-    Icms()
-      ..id = json['id'] as int?
-      ..ufOrigem = json['ufOrigem'] as String?
-      ..ufDestino = json['ufDestino'] as String?
-      ..codigoNCM = json['codigoNCM'] as String?
-      ..ncm = json['ncm'] == null
-          ? null
-          : Ncm.fromJson(json['ncm'] as Map<String, dynamic>?)
-      ..cstIcms = json['cstIcms'] == null
-          ? null
-          : CstIcms.fromJson(json['cstIcms'] as Map<String, dynamic>?)
-      ..csosnIcms = json['csosnIcms'] == null
-          ? null
-          : CsosnIcms.fromJson(json['csosnIcms'] as Map<String, dynamic>?)
-      ..aliquotaIcms = json['aliquotaIcms'] == null
-          ? null
-          : BigDecimal.fromJson(json['aliquotaIcms'])
-      ..percentualBaseCalculo = json['percentualBaseCalculo'] == null
-          ? null
-          : BigDecimal.fromJson(json['percentualBaseCalculo'])
-      ..aliquotaIcmsFinal = json['aliquotaIcmsFinal'] == null
-          ? null
-          : BigDecimal.fromJson(json['aliquotaIcmsFinal'])
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..tipoContribuinte = json['tipoContribuinte'] as String?;
+Icms _$IcmsFromJson(Map<String, dynamic> json) => Icms()
+  ..id = json['id'] as int?
+  ..ufOrigem = json['ufOrigem'] as String?
+  ..ufDestino = json['ufDestino'] as String?
+  ..codigoNCM = json['codigoNCM'] as String?
+  ..ncm = json['ncm'] == null
+      ? null
+      : Ncm.fromJson(json['ncm'] as Map<String, dynamic>?)
+  ..cstIcms = json['cstIcms'] == null
+      ? null
+      : CstIcms.fromJson(json['cstIcms'] as Map<String, dynamic>?)
+  ..csosnIcms = json['csosnIcms'] == null
+      ? null
+      : CsosnIcms.fromJson(json['csosnIcms'] as Map<String, dynamic>?)
+  ..aliquotaIcms = json['aliquotaIcms'] == null
+      ? null
+      : BigDecimal.fromJson(json['aliquotaIcms'])
+  ..percentualBaseCalculo = json['percentualBaseCalculo'] == null
+      ? null
+      : BigDecimal.fromJson(json['percentualBaseCalculo'])
+  ..aliquotaIcmsFinal = json['aliquotaIcmsFinal'] == null
+      ? null
+      : BigDecimal.fromJson(json['aliquotaIcmsFinal'])
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..tipoContribuinte = json['tipoContribuinte'] as String?;
 
-Map<String, dynamic> _$IcmsToJson(Icms instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$IcmsToJson(Icms instance) => <String, dynamic>{
       'id': instance.id,
       'ufOrigem': instance.ufOrigem,
       'ufDestino': instance.ufDestino,
@@ -2210,7 +2180,7 @@ LocalEstocado _$LocalEstocadoFromJson(Map<String, dynamic> json) =>
       ..idGrade = json['idGrade'] as int?
       ..idEndereco = json['idEndereco'] as int?
       ..estoque =
-      json['estoque'] == null ? null : BigDecimal.fromJson(json['estoque'])
+          json['estoque'] == null ? null : BigDecimal.fromJson(json['estoque'])
       ..estoqueAlocado = json['estoqueAlocado'] == null
           ? null
           : BigDecimal.fromJson(json['estoqueAlocado'])
@@ -2226,24 +2196,22 @@ Map<String, dynamic> _$LocalEstocadoToJson(LocalEstocado instance) =>
       'padraoVenda': instance.padraoVenda,
     };
 
-Lojista _$LojistaFromJson(Map<String, dynamic> json) =>
-    Lojista()
-      ..idPessoa = json['idPessoa'] as int?
-      ..pessoa = json['pessoa'] == null
-          ? null
-          : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
-      ..bandeiras = (json['bandeiras'] as List<dynamic>?)
+Lojista _$LojistaFromJson(Map<String, dynamic> json) => Lojista()
+  ..idPessoa = json['idPessoa'] as int?
+  ..pessoa = json['pessoa'] == null
+      ? null
+      : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
+  ..bandeiras = (json['bandeiras'] as List<dynamic>?)
           ?.map((e) => BandeiraCartao.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..versao = json['versao'] as int?
-      ..controleCadastro = json['controleCadastro'] == null
-          ? null
-          : ControleCadastro.fromJson(
+      []
+  ..versao = json['versao'] as int?
+  ..controleCadastro = json['controleCadastro'] == null
+      ? null
+      : ControleCadastro.fromJson(
           json['controleCadastro'] as Map<String, dynamic>?);
 
-Map<String, dynamic> _$LojistaToJson(Lojista instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$LojistaToJson(Lojista instance) => <String, dynamic>{
       'idPessoa': instance.idPessoa,
       'pessoa': instance.pessoa,
       'bandeiras': instance.bandeiras,
@@ -2251,74 +2219,71 @@ Map<String, dynamic> _$LojistaToJson(Lojista instance) =>
       'controleCadastro': instance.controleCadastro,
     };
 
-Modulo _$ModuloFromJson(Map<String, dynamic> json) =>
-    Modulo()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..tipo = json['tipo'] as String?
-      ..comissaoVendedor = json['comissaoVendedor'] as String?
-      ..sequencia = json['sequencia'] as int?
-      ..moduloPessoas = json['moduloPessoas'] as String?
-      ..avisoTempoOcioso = json['avisoTempoOcioso'] as int
-      ..ticketConsumo = json['ticketConsumo'] as String?
-      ..impressaoVenda = json['impressaoVenda'] as String?
-      ..imprimeVendaVias = json['imprimeVendaVias'] as int?
-      ..senhaAtendimento = json['senhaAtendimento'] as String?
-      ..dicaVenda = json['dicaVenda'] as String?
-      ..pedidosCalculoExpedicao = json['pedidosCalculoExpedicao'] as int?
-      ..denominacaoServico = json['denominacaoServico'] as String?
-      ..produtoServico = json['produtoServico'] == null
-          ? null
-          : ProdutoEmpresa.fromJson(
-          json['produtoServico'] as Map<String, dynamic>)
-      ..taxaServico = json['taxaServico'] == null
-          ? null
-          : BigDecimal.fromJson(json['taxaServico'])
-      ..identificaGarcom = json['identificaGarcom'] as bool?
-      ..identificaCliente = json['identificaCliente'] as bool?
-      ..ticketReduzido = json['ticketReduzido'] as bool?
-      ..informaMotivoCancelamentoPedido =
+Modulo _$ModuloFromJson(Map<String, dynamic> json) => Modulo()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..tipo = json['tipo'] as String?
+  ..comissaoVendedor = json['comissaoVendedor'] as String?
+  ..sequencia = json['sequencia'] as int?
+  ..moduloPessoas = json['moduloPessoas'] as String?
+  ..avisoTempoOcioso = json['avisoTempoOcioso'] as int
+  ..ticketConsumo = json['ticketConsumo'] as String?
+  ..impressaoVenda = json['impressaoVenda'] as String?
+  ..imprimeVendaVias = json['imprimeVendaVias'] as int?
+  ..senhaAtendimento = json['senhaAtendimento'] as String?
+  ..dicaVenda = json['dicaVenda'] as String?
+  ..pedidosCalculoExpedicao = json['pedidosCalculoExpedicao'] as int?
+  ..denominacaoServico = json['denominacaoServico'] as String?
+  ..produtoServico = json['produtoServico'] == null
+      ? null
+      : ProdutoEmpresa.fromJson(json['produtoServico'] as Map<String, dynamic>)
+  ..taxaServico = json['taxaServico'] == null
+      ? null
+      : BigDecimal.fromJson(json['taxaServico'])
+  ..identificaGarcom = json['identificaGarcom'] as bool?
+  ..identificaCliente = json['identificaCliente'] as bool?
+  ..ticketReduzido = json['ticketReduzido'] as bool?
+  ..informaMotivoCancelamentoPedido =
       json['informaMotivoCancelamentoPedido'] as bool?
-      ..informaMotivoCancelamentoItem =
+  ..informaMotivoCancelamentoItem =
       json['informaMotivoCancelamentoItem'] as bool?
-      ..imprimeItensPagamento = json['imprimeItensPagamento'] as bool?
-      ..imprimeCancelamentoItem = json['imprimeCancelamentoItem'] as bool?
-      ..imprimeFichaConsumo = json['imprimeFichaConsumo'] as bool?
-      ..controlaSequenciaComanda = json['controlaSequenciaComanda'] as bool?
-      ..reutilizaFichas = json['reutilizaFichas'] as bool?
-      ..permiteSuspender = json['permiteSuspender'] as bool?
-      ..enviaSMS = json['enviaSMS'] as bool?
-      ..cartaoCampoNascimento = json['cartaoCampoNascimento'] as bool?
-      ..cartaoCampoTelefone = json['cartaoCampoTelefone'] as bool?
-      ..cartaoCampoEndereco = json['cartaoCampoEndereco'] as bool?
-      ..cartaoCampoEstado = json['cartaoCampoEstado'] as bool?
-      ..cartaoCampoCidade = json['cartaoCampoCidade'] as bool?
-      ..cartaoCampoCep = json['cartaoCampoCep'] as bool?
-      ..cartaoCampoEmail = json['cartaoCampoEmail'] as bool?
-      ..cartaoCampoSMS = json['cartaoCampoSMS'] as bool?
-      ..finalizadoraDebito = json['finalizadoraDebito'] == null
-          ? null
-          : FinalizadoraEmpresa.fromJson(
+  ..imprimeItensPagamento = json['imprimeItensPagamento'] as bool?
+  ..imprimeCancelamentoItem = json['imprimeCancelamentoItem'] as bool?
+  ..imprimeFichaConsumo = json['imprimeFichaConsumo'] as bool?
+  ..controlaSequenciaComanda = json['controlaSequenciaComanda'] as bool?
+  ..reutilizaFichas = json['reutilizaFichas'] as bool?
+  ..permiteSuspender = json['permiteSuspender'] as bool?
+  ..enviaSMS = json['enviaSMS'] as bool?
+  ..cartaoCampoNascimento = json['cartaoCampoNascimento'] as bool?
+  ..cartaoCampoTelefone = json['cartaoCampoTelefone'] as bool?
+  ..cartaoCampoEndereco = json['cartaoCampoEndereco'] as bool?
+  ..cartaoCampoEstado = json['cartaoCampoEstado'] as bool?
+  ..cartaoCampoCidade = json['cartaoCampoCidade'] as bool?
+  ..cartaoCampoCep = json['cartaoCampoCep'] as bool?
+  ..cartaoCampoEmail = json['cartaoCampoEmail'] as bool?
+  ..cartaoCampoSMS = json['cartaoCampoSMS'] as bool?
+  ..finalizadoraDebito = json['finalizadoraDebito'] == null
+      ? null
+      : FinalizadoraEmpresa.fromJson(
           json['finalizadoraDebito'] as Map<String, dynamic>)
-      ..finalizadoraCredito = json['finalizadoraCredito'] == null
-          ? null
-          : FinalizadoraEmpresa.fromJson(
+  ..finalizadoraCredito = json['finalizadoraCredito'] == null
+      ? null
+      : FinalizadoraEmpresa.fromJson(
           json['finalizadoraCredito'] as Map<String, dynamic>)
-      ..finalizadoraDinheiro = json['finalizadoraDinheiro'] == null
-          ? null
-          : FinalizadoraEmpresa.fromJson(
+  ..finalizadoraDinheiro = json['finalizadoraDinheiro'] == null
+      ? null
+      : FinalizadoraEmpresa.fromJson(
           json['finalizadoraDinheiro'] as Map<String, dynamic>)
-      ..multiplasFinalizadoras = json['multiplasFinalizadoras'] as bool?
-      ..ativo = json['ativo'] as bool?
-      ..controleTempoProducao = json['controleTempoProducao'] as bool?
-      ..mensagemFinalAtendimento = json['mensagemFinalAtendimento'] as String?
-      ..listMapeamento = (json['listMapeamento'] as List<dynamic>?)
+  ..multiplasFinalizadoras = json['multiplasFinalizadoras'] as bool?
+  ..ativo = json['ativo'] as bool?
+  ..controleTempoProducao = json['controleTempoProducao'] as bool?
+  ..mensagemFinalAtendimento = json['mensagemFinalAtendimento'] as String?
+  ..listMapeamento = (json['listMapeamento'] as List<dynamic>?)
           ?.map((e) => ModuloMapeamento.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          [];
+      [];
 
-Map<String, dynamic> _$ModuloToJson(Modulo instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ModuloToJson(Modulo instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'tipo': instance.tipo,
@@ -2339,7 +2304,7 @@ Map<String, dynamic> _$ModuloToJson(Modulo instance) =>
       'identificaCliente': instance.identificaCliente,
       'ticketReduzido': instance.ticketReduzido,
       'informaMotivoCancelamentoPedido':
-      instance.informaMotivoCancelamentoPedido,
+          instance.informaMotivoCancelamentoPedido,
       'informaMotivoCancelamentoItem': instance.informaMotivoCancelamentoItem,
       'imprimeItensPagamento': instance.imprimeItensPagamento,
       'imprimeCancelamentoItem': instance.imprimeCancelamentoItem,
@@ -2401,139 +2366,137 @@ Map<String, dynamic> _$ModuloMapeamentoToJson(ModuloMapeamento instance) =>
       'ativa': instance.ativa,
     };
 
-Nota _$NotaFromJson(Map<String, dynamic> json) =>
-    Nota()
-      ..id = json['id'] as int?
-      ..operacao = json['operacao'] as String?
-      ..modelo = json['modelo'] as String?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..empresa = json['empresa'] == null
-          ? null
-          : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
-      ..idCaixa = json['idCaixa'] as int?
-      ..numero = json['numero'] as int?
-      ..serie = json['serie'] as String?
-      ..subSerie = json['subSerie'] as String?
-      ..dataEmissao = json['dataEmissao'] == null
-          ? null
-          : DateTime.parse(json['dataEmissao'] as String)
-      ..dataLancamento = json['dataLancamento'] == null
-          ? null
-          : DateTime.parse(json['dataLancamento'] as String)
-      ..dataSaida = json['dataSaida'] == null
-          ? null
-          : DateTime.parse(json['dataSaida'] as String)
-      ..idVendedor = json['idVendedor'] as int?
-      ..idTurno = json['idTurno'] as int?
-      ..cop = json['cop'] == null
-          ? null
-          : COP.fromJson(json['cop'] as Map<String, dynamic>?)
-      ..idCliente = json['idCliente'] as int?
-      ..idClienteAutorizado = json['idClienteAutorizado'] as int?
-      ..clienteAutorizado = json['clienteAutorizado'] == null
-          ? null
-          : ClienteAutorizado.fromJson(
+Nota _$NotaFromJson(Map<String, dynamic> json) => Nota()
+  ..id = json['id'] as int?
+  ..operacao = json['operacao'] as String?
+  ..modelo = json['modelo'] as String?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..empresa = json['empresa'] == null
+      ? null
+      : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
+  ..idCaixa = json['idCaixa'] as int?
+  ..numero = json['numero'] as int?
+  ..serie = json['serie'] as String?
+  ..subSerie = json['subSerie'] as String?
+  ..dataEmissao = json['dataEmissao'] == null
+      ? null
+      : DateTime.parse(json['dataEmissao'] as String)
+  ..dataLancamento = json['dataLancamento'] == null
+      ? null
+      : DateTime.parse(json['dataLancamento'] as String)
+  ..dataSaida = json['dataSaida'] == null
+      ? null
+      : DateTime.parse(json['dataSaida'] as String)
+  ..idVendedor = json['idVendedor'] as int?
+  ..idTurno = json['idTurno'] as int?
+  ..cop = json['cop'] == null
+      ? null
+      : COP.fromJson(json['cop'] as Map<String, dynamic>?)
+  ..idCliente = json['idCliente'] as int?
+  ..idClienteAutorizado = json['idClienteAutorizado'] as int?
+  ..clienteAutorizado = json['clienteAutorizado'] == null
+      ? null
+      : ClienteAutorizado.fromJson(
           json['clienteAutorizado'] as Map<String, dynamic>)
-      ..idFornecedor = json['idFornecedor'] as int?
-      ..fornecedor = json['fornecedor'] == null
-          ? null
-          : Fornecedor.fromJson(json['fornecedor'] as Map<String, dynamic>?)
-      ..idEndereco = json['idEndereco'] as int?
-      ..valorSubTotal = json['valorSubTotal'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorSubTotal'])
-      ..valorTotal = json['valorTotal'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorTotal'])
-      ..valorAcrescimo = json['valorAcrescimo'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorAcrescimo'])
-      ..valorDesconto = json['valorDesconto'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorDesconto'])
-      ..valorDescontoItens = json['valorDescontoItens'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorDescontoItens'])
-      ..valorTotalServico = json['valorTotalServico'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorTotalServico'])
-      ..valorIsencaoServico = json['valorIsencaoServico'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorIsencaoServico'])
-      ..valorFrete = json['valorFrete'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorFrete'])
-      ..valorDespesaAcessoria = json['valorDespesaAcessoria'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorDespesaAcessoria'])
-      ..valorIcmsSt = json['valorIcmsSt'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorIcmsSt'])
-      ..descontoPromocao = json['descontoPromocao'] as bool? ?? false
-      ..status = json['status'] as String?
-      ..dataStatus = json['dataStatus'] == null
-          ? null
-          : DateTime.parse(json['dataStatus'] as String)
-      ..statusExpedicao = json['statusExpedicao'] as String?
-      ..idEntregador = json['idEntregador'] as int?
-      ..dataCombinada = json['dataCombinada'] == null
-          ? null
-          : DateTime.parse(json['dataCombinada'] as String)
-      ..consumidorDocumento = json['consumidorDocumento'] as String?
-      ..consumidorNome = json['consumidorNome'] as String?
-      ..motivoCancelamento = json['motivoCancelamento'] as String?
-      ..consumo = json['consumo'] == null
-          ? null
-          : Consumo.fromJson(json['consumo'] as Map<String, dynamic>)
-      ..quest = json['quest'] == null
-          ? null
-          : NotaQuest.fromJson(json['quest'] as Map<String, dynamic>)
-      ..notaFiscal = json['notaFiscal'] == null
-          ? null
-          : NotaFiscal.fromJson(json['notaFiscal'] as Map<String, dynamic>)
-      ..tokenSessao = json['tokenSessao'] as String?
-      ..idConcentrador = json['idConcentrador'] as int?
-      ..itens = (json['itens'] as List<dynamic>?)
+  ..idFornecedor = json['idFornecedor'] as int?
+  ..fornecedor = json['fornecedor'] == null
+      ? null
+      : Fornecedor.fromJson(json['fornecedor'] as Map<String, dynamic>?)
+  ..idEndereco = json['idEndereco'] as int?
+  ..valorSubTotal = json['valorSubTotal'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorSubTotal'])
+  ..valorTotal = json['valorTotal'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorTotal'])
+  ..valorAcrescimo = json['valorAcrescimo'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorAcrescimo'])
+  ..valorDesconto = json['valorDesconto'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorDesconto'])
+  ..valorDescontoItens = json['valorDescontoItens'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorDescontoItens'])
+  ..valorTotalServico = json['valorTotalServico'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorTotalServico'])
+  ..valorIsencaoServico = json['valorIsencaoServico'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorIsencaoServico'])
+  ..valorFrete = json['valorFrete'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorFrete'])
+  ..valorDespesaAcessoria = json['valorDespesaAcessoria'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorDespesaAcessoria'])
+  ..valorIcmsSt = json['valorIcmsSt'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorIcmsSt'])
+  ..descontoPromocao = json['descontoPromocao'] as bool? ?? false
+  ..status = json['status'] as String?
+  ..dataStatus = json['dataStatus'] == null
+      ? null
+      : DateTime.parse(json['dataStatus'] as String)
+  ..statusExpedicao = json['statusExpedicao'] as String?
+  ..idEntregador = json['idEntregador'] as int?
+  ..dataCombinada = json['dataCombinada'] == null
+      ? null
+      : DateTime.parse(json['dataCombinada'] as String)
+  ..consumidorDocumento = json['consumidorDocumento'] as String?
+  ..consumidorNome = json['consumidorNome'] as String?
+  ..motivoCancelamento = json['motivoCancelamento'] as String?
+  ..consumo = json['consumo'] == null
+      ? null
+      : Consumo.fromJson(json['consumo'] as Map<String, dynamic>)
+  ..quest = json['quest'] == null
+      ? null
+      : NotaQuest.fromJson(json['quest'] as Map<String, dynamic>)
+  ..notaFiscal = json['notaFiscal'] == null
+      ? null
+      : NotaFiscal.fromJson(json['notaFiscal'] as Map<String, dynamic>)
+  ..tokenSessao = json['tokenSessao'] as String?
+  ..idConcentrador = json['idConcentrador'] as int?
+  ..itens = (json['itens'] as List<dynamic>?)
           ?.map((e) => NotaItem.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..finalizadoras = (json['finalizadoras'] as List<dynamic>?)
+      []
+  ..finalizadoras = (json['finalizadoras'] as List<dynamic>?)
           ?.map((e) => NotaFinalizadora.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..dadosIntegrador = (json['dadosIntegrador'] as List<dynamic>?)
+      []
+  ..dadosIntegrador = (json['dadosIntegrador'] as List<dynamic>?)
           ?.map((e) => NotaDadosIntegrador.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..eventos = (json['eventos'] as List<dynamic>?)
+      []
+  ..eventos = (json['eventos'] as List<dynamic>?)
           ?.map((e) => NotaEvento.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..contas = (json['contas'] as List<dynamic>?)
+      []
+  ..contas = (json['contas'] as List<dynamic>?)
           ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..clienteContas = (json['clienteContas'] as List<dynamic>?)
+      []
+  ..clienteContas = (json['clienteContas'] as List<dynamic>?)
           ?.map((e) => ClienteConta.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..documentosVinculados = (json['documentosVinculados'] as List<dynamic>?)
+      []
+  ..documentosVinculados = (json['documentosVinculados'] as List<dynamic>?)
           ?.map((e) => Nota.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..idCanalVenda = json['idCanalVenda'] as int?
-      ..canalVenda = json['canalVenda'] == null
-          ? null
-          : CanalVenda.fromJson(json['canalVenda'] as Map<String, dynamic>)
-      ..usaConsumo = json['usaConsumo'] as bool?
-      ..versao =
+      []
+  ..idCanalVenda = json['idCanalVenda'] as int?
+  ..canalVenda = json['canalVenda'] == null
+      ? null
+      : CanalVenda.fromJson(json['canalVenda'] as Map<String, dynamic>)
+  ..usaConsumo = json['usaConsumo'] as bool?
+  ..versao =
       json['versao'] == null ? null : DateTime.parse(json['versao'] as String)
-      ..cliente = json['cliente'] == null
-          ? null
-          : Cliente.fromJson(json['cliente'] as Map<String, dynamic>);
+  ..cliente = json['cliente'] == null
+      ? null
+      : Cliente.fromJson(json['cliente'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$NotaToJson(Nota instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$NotaToJson(Nota instance) => <String, dynamic>{
       'id': instance.id,
       'operacao': instance.operacao,
       'modelo': instance.modelo,
@@ -2582,12 +2545,12 @@ Map<String, dynamic> _$NotaToJson(Nota instance) =>
       'itens': instance.itens.map((e) => e.toJson()).toList(),
       'finalizadoras': instance.finalizadoras.map((e) => e.toJson()).toList(),
       'dadosIntegrador':
-      instance.dadosIntegrador.map((e) => e.toJson()).toList(),
+          instance.dadosIntegrador.map((e) => e.toJson()).toList(),
       'eventos': instance.eventos.map((e) => e.toJson()).toList(),
       'contas': instance.contas.map((e) => e.toJson()).toList(),
       'clienteContas': instance.clienteContas.map((e) => e.toJson()).toList(),
       'documentosVinculados':
-      instance.documentosVinculados.map((e) => e.toJson()).toList(),
+          instance.documentosVinculados.map((e) => e.toJson()).toList(),
       'idCanalVenda': instance.idCanalVenda,
       'canalVenda': instance.canalVenda?.toJson(),
       'usaConsumo': instance.usaConsumo,
@@ -2606,7 +2569,7 @@ NotaDadosIntegrador _$NotaDadosIntegradorFromJson(Map<String, dynamic> json) =>
       ..observacao = json['observacao'] as String?;
 
 Map<String, dynamic> _$NotaDadosIntegradorToJson(
-    NotaDadosIntegrador instance) =>
+        NotaDadosIntegrador instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idNota': instance.idNota,
@@ -2636,13 +2599,13 @@ NotaFinalizadora _$NotaFinalizadoraFromJson(Map<String, dynamic> json) =>
       ..idNota = json['idNota'] as int?
       ..idFinalizadora = json['idFinalizadora'] as int?
       ..valor =
-      json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
+          json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
       ..troco =
-      json['troco'] == null ? null : BigDecimal.fromJson(json['troco'])
+          json['troco'] == null ? null : BigDecimal.fromJson(json['troco'])
       ..transacaoCartao = json['transacaoCartao'] == null
           ? null
           : TransacaoCartao.fromJson(
-          json['transacaoCartao'] as Map<String, dynamic>)
+              json['transacaoCartao'] as Map<String, dynamic>)
       ..cancelada = json['cancelada'] as bool?
       ..lancamentoManual = json['lancamentoManual'] as bool?
       ..alteracaoManual = json['alteracaoManual'] as bool?;
@@ -2660,30 +2623,29 @@ Map<String, dynamic> _$NotaFinalizadoraToJson(NotaFinalizadora instance) =>
       'alteracaoManual': instance.alteracaoManual,
     };
 
-NotaFiscal _$NotaFiscalFromJson(Map<String, dynamic> json) =>
-    NotaFiscal()
-      ..id = json['id'] as int?
-      ..chave = json['chave'] as String?
-      ..chaveCancelamento = json['chaveCancelamento'] as String?
-      ..protocolo = json['protocolo'] as String?
-      ..modeloFiscal = json['modeloFiscal'] as String?
-      ..numeroSerie = json['numeroSerie'] as int?
-      ..numeroCfe = json['numeroCfe'] as int?
-      ..codigoUf = json['codigoUf'] as int?
-      ..dataEmissao = json['dataEmissao'] == null
-          ? null
-          : DateTime.parse(json['dataEmissao'] as String)
-      ..idEmissorFiscal = json['idEmissorFiscal'] as int?
-      ..qrCode = json['qrCode'] as String?
-      ..notaXml = json['notaXml'] == null
-          ? null
-          : NotaXml.fromJson(json['notaXml'] as Map<String, dynamic>)
-      ..contingenciaFiscal = json['contingenciaFiscal'] == null
-          ? null
-          : ContingenciaFiscal.fromJson(
+NotaFiscal _$NotaFiscalFromJson(Map<String, dynamic> json) => NotaFiscal()
+  ..id = json['id'] as int?
+  ..chave = json['chave'] as String?
+  ..chaveCancelamento = json['chaveCancelamento'] as String?
+  ..protocolo = json['protocolo'] as String?
+  ..modeloFiscal = json['modeloFiscal'] as String?
+  ..numeroSerie = json['numeroSerie'] as int?
+  ..numeroCfe = json['numeroCfe'] as int?
+  ..codigoUf = json['codigoUf'] as int?
+  ..dataEmissao = json['dataEmissao'] == null
+      ? null
+      : DateTime.parse(json['dataEmissao'] as String)
+  ..idEmissorFiscal = json['idEmissorFiscal'] as int?
+  ..qrCode = json['qrCode'] as String?
+  ..notaXml = json['notaXml'] == null
+      ? null
+      : NotaXml.fromJson(json['notaXml'] as Map<String, dynamic>)
+  ..contingenciaFiscal = json['contingenciaFiscal'] == null
+      ? null
+      : ContingenciaFiscal.fromJson(
           json['contingenciaFiscal'] as Map<String, dynamic>)
-      ..erroEmissao = json['erroEmissao'] as String?
-      ..idNotaXml = json['idNotaXml'] as int?;
+  ..erroEmissao = json['erroEmissao'] as String?
+  ..idNotaXml = json['idNotaXml'] as int?;
 
 Map<String, dynamic> _$NotaFiscalToJson(NotaFiscal instance) =>
     <String, dynamic>{
@@ -2704,118 +2666,113 @@ Map<String, dynamic> _$NotaFiscalToJson(NotaFiscal instance) =>
       'idNotaXml': instance.idNotaXml,
     };
 
-NotaItem _$NotaItemFromJson(Map<String, dynamic> json) =>
-    NotaItem()
-      ..id = json['id'] as int?
-      ..idItemPai = json['idItemPai'] as int?
-      ..idNota = json['idNota'] as int?
-      ..nota = json['nota'] == null
-          ? null
-          : Nota.fromJson(json['nota'] as Map<String, dynamic>)
-      ..tipo = json['tipo'] as String?
-      ..idEstacao = json['idEstacao'] as int?
-      ..idVendedor = json['idVendedor'] as int?
-      ..vendedor = json['vendedor'] == null
-          ? null
-          : Funcionario.fromJson(json['vendedor'] as Map<String, dynamic>)
-      ..idUsuario = json['idUsuario'] as int?
-      ..usuario = json['usuario'] == null
-          ? null
-          : Usuario.fromJson(json['usuario'] as Map<String, dynamic>)
-      ..dataLancamento = json['dataLancamento'] == null
-          ? null
-          : DateTime.parse(json['dataLancamento'] as String)
-      ..idTurno = json['idTurno'] as int?
-      ..idProdutoEmpresa = json['idProdutoEmpresa'] as int?
-      ..produtoEmpresa = json['produtoEmpresa'] == null
-          ? null
-          : ProdutoEmpresa.fromJson(
-          json['produtoEmpresa'] as Map<String, dynamic>)
-      ..idGrade = json['idGrade'] as int?
-      ..grade = json['grade'] == null
-          ? null
-          : GradeEmpresa.fromJson(json['grade'] as Map<String, dynamic>)
-      ..indice = json['indice'] as int?
-      ..descricao = json['descricao'] as String?
-      ..quantidade = json['quantidade'] == null
-          ? null
-          : BigDecimal.fromJson(json['quantidade'])
-      ..precoCusto = json['precoCusto'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoCusto'])
-      ..precoCMC =
+NotaItem _$NotaItemFromJson(Map<String, dynamic> json) => NotaItem()
+  ..id = json['id'] as int?
+  ..idItemPai = json['idItemPai'] as int?
+  ..idNota = json['idNota'] as int?
+  ..nota = json['nota'] == null
+      ? null
+      : Nota.fromJson(json['nota'] as Map<String, dynamic>)
+  ..tipo = json['tipo'] as String?
+  ..idEstacao = json['idEstacao'] as int?
+  ..idVendedor = json['idVendedor'] as int?
+  ..vendedor = json['vendedor'] == null
+      ? null
+      : Funcionario.fromJson(json['vendedor'] as Map<String, dynamic>)
+  ..idUsuario = json['idUsuario'] as int?
+  ..usuario = json['usuario'] == null
+      ? null
+      : Usuario.fromJson(json['usuario'] as Map<String, dynamic>)
+  ..dataLancamento = json['dataLancamento'] == null
+      ? null
+      : DateTime.parse(json['dataLancamento'] as String)
+  ..idTurno = json['idTurno'] as int?
+  ..idProdutoEmpresa = json['idProdutoEmpresa'] as int?
+  ..produtoEmpresa = json['produtoEmpresa'] == null
+      ? null
+      : ProdutoEmpresa.fromJson(json['produtoEmpresa'] as Map<String, dynamic>)
+  ..idGrade = json['idGrade'] as int?
+  ..grade = json['grade'] == null
+      ? null
+      : GradeEmpresa.fromJson(json['grade'] as Map<String, dynamic>)
+  ..indice = json['indice'] as int?
+  ..descricao = json['descricao'] as String?
+  ..quantidade = json['quantidade'] == null
+      ? null
+      : BigDecimal.fromJson(json['quantidade'])
+  ..precoCusto = json['precoCusto'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoCusto'])
+  ..precoCMC =
       json['precoCMC'] == null ? null : BigDecimal.fromJson(json['precoCMC'])
-      ..precoUnitario = json['precoUnitario'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoUnitario'])
-      ..precoTotal = json['precoTotal'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoTotal'])
-      ..taxaServico = json['taxaServico'] == null
-          ? null
-          : BigDecimal.fromJson(json['taxaServico'])
-      ..valorServico = json['valorServico'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorServico'])
-      ..valorDesconto = json['valorDesconto'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorDesconto'])
-      ..valorDescontoRateio = json['valorDescontoRateio'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorDescontoRateio'])
-      ..valorLiquido = json['valorLiquido'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorLiquido'])
-      ..valorAcrescimoRateio = json['valorAcrescimoRateio'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorAcrescimoRateio'])
-      ..valorFreteRateio = json['valorFreteRateio'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorFreteRateio'])
-      ..valorDespesaAcessoriaRateio = json['valorDespesaAcessoriaRateio'] ==
-          null
-          ? null
-          : BigDecimal.fromJson(json['valorDespesaAcessoriaRateio'])
-      ..promocao = json['promocao'] == null
-          ? null
-          : Promocao.fromJson(json['promocao'] as Map<String, dynamic>)
-      ..quantidadePromocao = json['quantidadePromocao'] as int?
-      ..precoPromocao = json['precoPromocao'] == null
-          ? null
-          : BigDecimal.fromJson(json['precoPromocao'])
-      ..valorDescontoPromocao = json['valorDescontoPromocao'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorDescontoPromocao'])
-      ..cancelado = json['cancelado'] as bool? ?? false
-      ..motivoCancelamento = json['motivoCancelamento'] as String?
-      ..observacao = json['observacao'] as String?
-      ..consumoItem = json['consumoItem'] == null
-          ? null
-          : ConsumoItem.fromJson(json['consumoItem'] as Map<String, dynamic>?)
-      ..subitens = (json['subitens'] as List<dynamic>?)
+  ..precoUnitario = json['precoUnitario'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoUnitario'])
+  ..precoTotal = json['precoTotal'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoTotal'])
+  ..taxaServico = json['taxaServico'] == null
+      ? null
+      : BigDecimal.fromJson(json['taxaServico'])
+  ..valorServico = json['valorServico'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorServico'])
+  ..valorDesconto = json['valorDesconto'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorDesconto'])
+  ..valorDescontoRateio = json['valorDescontoRateio'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorDescontoRateio'])
+  ..valorLiquido = json['valorLiquido'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorLiquido'])
+  ..valorAcrescimoRateio = json['valorAcrescimoRateio'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorAcrescimoRateio'])
+  ..valorFreteRateio = json['valorFreteRateio'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorFreteRateio'])
+  ..valorDespesaAcessoriaRateio = json['valorDespesaAcessoriaRateio'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorDespesaAcessoriaRateio'])
+  ..promocao = json['promocao'] == null
+      ? null
+      : Promocao.fromJson(json['promocao'] as Map<String, dynamic>)
+  ..quantidadePromocao = json['quantidadePromocao'] as int?
+  ..precoPromocao = json['precoPromocao'] == null
+      ? null
+      : BigDecimal.fromJson(json['precoPromocao'])
+  ..valorDescontoPromocao = json['valorDescontoPromocao'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorDescontoPromocao'])
+  ..cancelado = json['cancelado'] as bool? ?? false
+  ..motivoCancelamento = json['motivoCancelamento'] as String?
+  ..observacao = json['observacao'] as String?
+  ..consumoItem = json['consumoItem'] == null
+      ? null
+      : ConsumoItem.fromJson(json['consumoItem'] as Map<String, dynamic>?)
+  ..subitens = (json['subitens'] as List<dynamic>?)
           ?.map((e) => NotaItem.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..idConcentrador = json['idConcentrador'] as int?
-      ..idTabelaPreco = json['idTabelaPreco'] as int?
-      ..tabelaPreco = json['tabelaPreco'] == null
-          ? null
-          : TabelaPreco.fromJson(json['tabelaPreco'] as Map<String, dynamic>)
-      ..notaItemFiscal = json['notaItemFiscal'] == null
-          ? null
-          : NotaItemFiscal.fromJson(
-          json['notaItemFiscal'] as Map<String, dynamic>)
-      ..dadosIntegracao = (json['dadosIntegracao'] as List<dynamic>?)
+      []
+  ..idConcentrador = json['idConcentrador'] as int?
+  ..idTabelaPreco = json['idTabelaPreco'] as int?
+  ..tabelaPreco = json['tabelaPreco'] == null
+      ? null
+      : TabelaPreco.fromJson(json['tabelaPreco'] as Map<String, dynamic>)
+  ..notaItemFiscal = json['notaItemFiscal'] == null
+      ? null
+      : NotaItemFiscal.fromJson(json['notaItemFiscal'] as Map<String, dynamic>)
+  ..dadosIntegracao = (json['dadosIntegracao'] as List<dynamic>?)
           ?.map((e) =>
-          NotaItemDadosIntegracao.fromJson(e as Map<String, dynamic>))
+              NotaItemDadosIntegracao.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..roundingMode = json['roundingMode'] as String?
-      ..somaTotal =
+      []
+  ..roundingMode = json['roundingMode'] as String?
+  ..somaTotal =
       json['somaTotal'] == null ? null : BigDecimal.fromJson(json['somaTotal']);
 
-Map<String, dynamic> _$NotaItemToJson(NotaItem instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$NotaItemToJson(NotaItem instance) => <String, dynamic>{
       'id': instance.id,
       'idItemPai': instance.idItemPai,
       'idNota': instance.idNota,
@@ -2946,21 +2903,18 @@ Map<String, dynamic> _$NotaItemFiscalToJson(NotaItemFiscal instance) =>
       'impostoMunicipal': instance.impostoMunicipal,
     };
 
-NotaQuest _$NotaQuestFromJson(Map<String, dynamic> json) =>
-    NotaQuest()
-      ..id = json['id'] as int?
-      ..idParticipanteQuest = json['idParticipanteQuest'] as int?
-      ..participanteQuest = json['participanteQuest'] == null
-          ? null
-          : Cliente.fromJson(json['participanteQuest'] as Map<String, dynamic>)
-      ..idTransacao = json['idTransacao'] as int?
-      ..pontos = json['pontos'] == null ? null : BigDecimal.fromJson(
-          json['pontos'])
-      ..token = json['token'] as String?
-      ..status = json['status'] as String?;
+NotaQuest _$NotaQuestFromJson(Map<String, dynamic> json) => NotaQuest()
+  ..id = json['id'] as int?
+  ..idParticipanteQuest = json['idParticipanteQuest'] as int?
+  ..participanteQuest = json['participanteQuest'] == null
+      ? null
+      : Cliente.fromJson(json['participanteQuest'] as Map<String, dynamic>)
+  ..idTransacao = json['idTransacao'] as int?
+  ..pontos = json['pontos'] == null ? null : BigDecimal.fromJson(json['pontos'])
+  ..token = json['token'] as String?
+  ..status = json['status'] as String?;
 
-Map<String, dynamic> _$NotaQuestToJson(NotaQuest instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$NotaQuestToJson(NotaQuest instance) => <String, dynamic>{
       'id': instance.id,
       'idParticipanteQuest': instance.idParticipanteQuest,
       'participanteQuest': instance.participanteQuest,
@@ -2975,17 +2929,18 @@ NovaEmpresaDTO _$NovaEmpresaDTOFromJson(Map<String, dynamic> json) =>
       ..empresa = json['empresa'] == null
           ? null
           : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
-      ..modulos = (json['modulos'] as List<dynamic>)
-          .map((e) => Modulo.fromJson(e as Map<String, dynamic>))
-          .toList()
+      ..modulos = (json['modulos'] as List<dynamic>?)
+              ?.map((e) => Modulo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..estacaoTrabalho = json['estacaoTrabalho'] == null
           ? null
           : EstacaoTrabalho.fromJson(
-          json['estacaoTrabalho'] as Map<String, dynamic>)
+              json['estacaoTrabalho'] as Map<String, dynamic>)
       ..contratoConfiguracao = json['contratoConfiguracao'] == null
           ? null
           : ContratoConfiguracao.fromJson(
-          json['contratoConfiguracao'] as Map<String, dynamic>);
+              json['contratoConfiguracao'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$NovaEmpresaDTOToJson(NovaEmpresaDTO instance) =>
     <String, dynamic>{
@@ -2995,49 +2950,44 @@ Map<String, dynamic> _$NovaEmpresaDTOToJson(NovaEmpresaDTO instance) =>
       'contratoConfiguracao': instance.contratoConfiguracao,
     };
 
-Operacao _$OperacaoFromJson(Map<String, dynamic> json) =>
-    Operacao()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..tipo = json['tipo'] as String?
-      ..data = json['data'] == null ? null : DateTime.parse(
-          json['data'] as String)
-      ..valor = json['valor'] == null ? null : BigDecimal.fromJson(
-          json['valor'])
-      ..turno = json['turno'] == null
-          ? null
-          : Turno.fromJson(json['turno'] as Map<String, dynamic>)
-      ..cliente = json['cliente'] == null
-          ? null
-          : Cliente.fromJson(json['cliente'] as Map<String, dynamic>)
-      ..favorecido = json['favorecido'] as String?
-      ..finalizadoras = (json['finalizadoras'] as List<dynamic>?)
+Operacao _$OperacaoFromJson(Map<String, dynamic> json) => Operacao()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..tipo = json['tipo'] as String?
+  ..data = json['data'] == null ? null : DateTime.parse(json['data'] as String)
+  ..valor = json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
+  ..turno = json['turno'] == null
+      ? null
+      : Turno.fromJson(json['turno'] as Map<String, dynamic>)
+  ..cliente = json['cliente'] == null
+      ? null
+      : Cliente.fromJson(json['cliente'] as Map<String, dynamic>)
+  ..favorecido = json['favorecido'] as String?
+  ..finalizadoras = (json['finalizadoras'] as List<dynamic>?)
           ?.map((e) => OperacaoFinalizadora.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..idConcentrador = json['idConcentrador'] as int?
-      ..historico = json['historico'] as String?
-      ..clienteConta = json['clienteConta'] == null
-          ? null
-          : ClienteConta.fromJson(json['clienteConta'] as Map<String, dynamic>)
-      ..idNota = json['idNota'] as int?
-      ..nota = json['nota'] == null
-          ? null
-          : Nota.fromJson(json['nota'] as Map<String, dynamic>)
-      ..idUsuarioAlteracaoManual = json['idUsuarioAlteracaoManual'] as int?
-      ..usuarioAlteracaoManual = json['usuarioAlteracaoManual'] == null
-          ? null
-          : Usuario.fromJson(
-          json['usuarioAlteracaoManual'] as Map<String, dynamic>)
-      ..idOrigemDaOperacao = json['idOrigemDaOperacao'] as int?
-      ..origemDaOperacao = json['origemDaOperacao'] == null
-          ? null
-          : Operacao.fromJson(json['origemDaOperacao'] as Map<String, dynamic>)
-      ..cancelado = json['cancelado'] as bool?
-      ..conferido = json['conferido'] as bool?;
+      []
+  ..idConcentrador = json['idConcentrador'] as int?
+  ..historico = json['historico'] as String?
+  ..clienteConta = json['clienteConta'] == null
+      ? null
+      : ClienteConta.fromJson(json['clienteConta'] as Map<String, dynamic>)
+  ..idNota = json['idNota'] as int?
+  ..nota = json['nota'] == null
+      ? null
+      : Nota.fromJson(json['nota'] as Map<String, dynamic>)
+  ..idUsuarioAlteracaoManual = json['idUsuarioAlteracaoManual'] as int?
+  ..usuarioAlteracaoManual = json['usuarioAlteracaoManual'] == null
+      ? null
+      : Usuario.fromJson(json['usuarioAlteracaoManual'] as Map<String, dynamic>)
+  ..idOrigemDaOperacao = json['idOrigemDaOperacao'] as int?
+  ..origemDaOperacao = json['origemDaOperacao'] == null
+      ? null
+      : Operacao.fromJson(json['origemDaOperacao'] as Map<String, dynamic>)
+  ..cancelado = json['cancelado'] as bool?
+  ..conferido = json['conferido'] as bool?;
 
-Map<String, dynamic> _$OperacaoToJson(Operacao instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$OperacaoToJson(Operacao instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'tipo': instance.tipo,
@@ -3061,7 +3011,7 @@ Map<String, dynamic> _$OperacaoToJson(Operacao instance) =>
     };
 
 OperacaoFinalizadora _$OperacaoFinalizadoraFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     OperacaoFinalizadora()
       ..id = json['id'] == null
           ? null
@@ -3069,32 +3019,32 @@ OperacaoFinalizadora _$OperacaoFinalizadoraFromJson(
       ..finalizadoraEmpresa = json['finalizadoraEmpresa'] == null
           ? null
           : FinalizadoraEmpresa.fromJson(
-          json['finalizadoraEmpresa'] as Map<String, dynamic>)
+              json['finalizadoraEmpresa'] as Map<String, dynamic>)
       ..valor =
-      json['valor'] == null ? null : BigDecimal.fromJson(json['valor']);
+          json['valor'] == null ? null : BigDecimal.fromJson(json['valor']);
 
 Map<String, dynamic> _$OperacaoFinalizadoraToJson(
-    OperacaoFinalizadora instance) =>
+        OperacaoFinalizadora instance) =>
     <String, dynamic>{
       'id': instance.id,
       'finalizadoraEmpresa': instance.finalizadoraEmpresa,
       'valor': instance.valor,
     };
 
-Participante _$ParticipanteFromJson(Map<String, dynamic> json) =>
-    Participante()
-      ..cpfCnpjParticipante = json['cpfCnpjParticipante'] as String?
-      ..telefones = (json['telefones'] as List<dynamic>)
-          .map((e) => ParticipanteTelefone.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..email = json['email'] as String?
-      ..nome = json['nome'] as String?
-      ..saldoDisponivelPontos = json['saldoDisponivelPontos'] == null
-          ? null
-          : BigDecimal.fromJson(json['saldoDisponivelPontos'])
-      ..saldoDisponivelValor = json['saldoDisponivelValor'] == null
-          ? null
-          : BigDecimal.fromJson(json['saldoDisponivelValor']);
+Participante _$ParticipanteFromJson(Map<String, dynamic> json) => Participante()
+  ..cpfCnpjParticipante = json['cpfCnpjParticipante'] as String?
+  ..telefones = (json['telefones'] as List<dynamic>?)
+          ?.map((e) => ParticipanteTelefone.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
+  ..email = json['email'] as String?
+  ..nome = json['nome'] as String?
+  ..saldoDisponivelPontos = json['saldoDisponivelPontos'] == null
+      ? null
+      : BigDecimal.fromJson(json['saldoDisponivelPontos'])
+  ..saldoDisponivelValor = json['saldoDisponivelValor'] == null
+      ? null
+      : BigDecimal.fromJson(json['saldoDisponivelValor']);
 
 Map<String, dynamic> _$ParticipanteToJson(Participante instance) =>
     <String, dynamic>{
@@ -3106,49 +3056,46 @@ Map<String, dynamic> _$ParticipanteToJson(Participante instance) =>
       'saldoDisponivelValor': instance.saldoDisponivelValor,
     };
 
-Perfil _$PerfilFromJson(Map<String, dynamic> json) =>
-    Perfil()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..descricao = json['descricao'] as String?
-      ..checkIn = json['checkIn'] as String?
-      ..genero = json['genero'] as String?
-      ..idadeMinima = json['idadeMinima'] as int?
-      ..valorLimiteCartao = json['valorLimiteCartao'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorLimiteCartao'])
-      ..valorConsumacao = json['valorConsumacao'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorConsumacao'])
-      ..taxaEntrada = json['taxaEntrada'] == null
-          ? null
-          : BigDecimal.fromJson(json['taxaEntrada'])
-      ..percentualServico = json['percentualServico'] == null
-          ? null
-          : BigDecimal.fromJson(json['percentualServico'])
-      ..produtoServico = json['produtoServico'] == null
-          ? null
-          : ProdutoEmpresa.fromJson(
-          json['produtoServico'] as Map<String, dynamic>)
-      ..cartaoPrePago = json['cartaoPrePago'] as bool?
-      ..finalizadoraEmpresaPrePago = json['finalizadoraEmpresaPrePago'] == null
-          ? null
-          : FinalizadoraEmpresa.fromJson(
+Perfil _$PerfilFromJson(Map<String, dynamic> json) => Perfil()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..descricao = json['descricao'] as String?
+  ..checkIn = json['checkIn'] as String?
+  ..genero = json['genero'] as String?
+  ..idadeMinima = json['idadeMinima'] as int?
+  ..valorLimiteCartao = json['valorLimiteCartao'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorLimiteCartao'])
+  ..valorConsumacao = json['valorConsumacao'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorConsumacao'])
+  ..taxaEntrada = json['taxaEntrada'] == null
+      ? null
+      : BigDecimal.fromJson(json['taxaEntrada'])
+  ..percentualServico = json['percentualServico'] == null
+      ? null
+      : BigDecimal.fromJson(json['percentualServico'])
+  ..produtoServico = json['produtoServico'] == null
+      ? null
+      : ProdutoEmpresa.fromJson(json['produtoServico'] as Map<String, dynamic>)
+  ..cartaoPrePago = json['cartaoPrePago'] as bool?
+  ..finalizadoraEmpresaPrePago = json['finalizadoraEmpresaPrePago'] == null
+      ? null
+      : FinalizadoraEmpresa.fromJson(
           json['finalizadoraEmpresaPrePago'] as Map<String, dynamic>)
-      ..modoConsumoCumulativo = json['modoConsumoCumulativo'] as bool?
-      ..validadeInicio = json['validadeInicio'] == null
-          ? null
-          : DateTime.parse(json['validadeInicio'] as String)
-      ..validadeTermino = json['validadeTermino'] == null
-          ? null
-          : DateTime.parse(json['validadeTermino'] as String)
-      ..cartaoInicial = json['cartaoInicial'] as int?
-      ..cartaoFinal = json['cartaoFinal'] as int?
-      ..informarPromoter = json['informarPromoter'] as bool?
-      ..ativo = json['ativo'] as bool?;
+  ..modoConsumoCumulativo = json['modoConsumoCumulativo'] as bool?
+  ..validadeInicio = json['validadeInicio'] == null
+      ? null
+      : DateTime.parse(json['validadeInicio'] as String)
+  ..validadeTermino = json['validadeTermino'] == null
+      ? null
+      : DateTime.parse(json['validadeTermino'] as String)
+  ..cartaoInicial = json['cartaoInicial'] as int?
+  ..cartaoFinal = json['cartaoFinal'] as int?
+  ..informarPromoter = json['informarPromoter'] as bool?
+  ..ativo = json['ativo'] as bool?;
 
-Map<String, dynamic> _$PerfilToJson(Perfil instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PerfilToJson(Perfil instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'descricao': instance.descricao,
@@ -3171,43 +3118,40 @@ Map<String, dynamic> _$PerfilToJson(Perfil instance) =>
       'ativo': instance.ativo,
     };
 
-Pessoa _$PessoaFromJson(Map<String, dynamic> json) =>
-    Pessoa()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..codigo = json['codigo'] as int?
-      ..nome = json['nome'] as String?
-      ..apelido = json['apelido'] as String?
-      ..inscricaoFederal = json['inscricaoFederal'] as String?
-      ..inscricaoEstadual = json['inscricaoEstadual'] as String?
-      ..email = json['email'] as String?
-      ..site = json['site'] as String?
-      ..tipoPessoa = json['tipoPessoa'] as String?
-      ..todosEnderecos = (json['todosEnderecos'] as List<dynamic>?)
+Pessoa _$PessoaFromJson(Map<String, dynamic> json) => Pessoa()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..codigo = json['codigo'] as int?
+  ..nome = json['nome'] as String?
+  ..apelido = json['apelido'] as String?
+  ..inscricaoFederal = json['inscricaoFederal'] as String?
+  ..inscricaoEstadual = json['inscricaoEstadual'] as String?
+  ..email = json['email'] as String?
+  ..site = json['site'] as String?
+  ..tipoPessoa = json['tipoPessoa'] as String?
+  ..todosEnderecos = (json['todosEnderecos'] as List<dynamic>?)
           ?.map((e) => Endereco.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..telefones = (json['telefones'] as List<dynamic>?)
+      []
+  ..telefones = (json['telefones'] as List<dynamic>?)
           ?.map((e) => Telefone.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..pessoaJuridica = json['pessoaJuridica'] == null
-          ? null
-          : PessoaJuridica.fromJson(
-          json['pessoaJuridica'] as Map<String, dynamic>?)
-      ..pessoaFisica = json['pessoaFisica'] == null
-          ? null
-          : PessoaFisica.fromJson(json['pessoaFisica'] as Map<String, dynamic>)
-      ..idConcentrador = json['idConcentrador'] as int?
-      ..versao = json['versao'] as int?
-      ..dadosIntegracao = (json['dadosIntegracao'] as List<dynamic>?)
+      []
+  ..pessoaJuridica = json['pessoaJuridica'] == null
+      ? null
+      : PessoaJuridica.fromJson(json['pessoaJuridica'] as Map<String, dynamic>?)
+  ..pessoaFisica = json['pessoaFisica'] == null
+      ? null
+      : PessoaFisica.fromJson(json['pessoaFisica'] as Map<String, dynamic>)
+  ..idConcentrador = json['idConcentrador'] as int?
+  ..versao = json['versao'] as int?
+  ..dadosIntegracao = (json['dadosIntegracao'] as List<dynamic>?)
           ?.map(
               (e) => PessoaDadosIntegracao.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          [];
+      [];
 
-Map<String, dynamic> _$PessoaToJson(Pessoa instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PessoaToJson(Pessoa instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'codigo': instance.codigo,
@@ -3227,37 +3171,36 @@ Map<String, dynamic> _$PessoaToJson(Pessoa instance) =>
       'dadosIntegracao': instance.dadosIntegracao,
     };
 
-PessoaFisica _$PessoaFisicaFromJson(Map<String, dynamic> json) =>
-    PessoaFisica()
-      ..dataNascimento = json['dataNascimento'] == null
-          ? null
-          : DateTime.parse(json['dataNascimento'] as String)
-      ..numeroCnh = json['numeroCnh'] as String?
-      ..categoriaCnh = json['categoriaCnh'] as String?
-      ..validadeCnh = json['validadeCnh'] == null
-          ? null
-          : DateTime.parse(json['validadeCnh'] as String)
-      ..naturalidade = json['naturalidade'] as String?
-      ..nomePai = json['nomePai'] as String?
-      ..nomeMae = json['nomeMae'] as String?
-      ..genero = json['genero'] as String?
-      ..casaPropria = json['casaPropria'] as bool?
-      ..tempoMoradia = json['tempoMoradia'] as int?
-      ..estadoCivil = json['estadoCivil'] as String?
-      ..profissao = json['profissao'] as String?
-      ..rendaMensal = json['rendaMensal'] == null
-          ? null
-          : BigDecimal.fromJson(json['rendaMensal'])
-      ..trabalhoEmpresa = json['trabalhoEmpresa'] as String?
-      ..trabalhoSetor = json['trabalhoSetor'] as String?
-      ..trabalhoEndereco = json['trabalhoEndereco'] as String?
-      ..trabalhoTelefone = json['trabalhoTelefone'] as String?
-      ..trabalhoAdmissao = json['trabalhoAdmissao'] == null
-          ? null
-          : DateTime.parse(json['trabalhoAdmissao'] as String)
-      ..conjuge = json['conjuge'] == null
-          ? null
-          : Pessoa.fromJson(json['conjuge'] as Map<String, dynamic>);
+PessoaFisica _$PessoaFisicaFromJson(Map<String, dynamic> json) => PessoaFisica()
+  ..dataNascimento = json['dataNascimento'] == null
+      ? null
+      : DateTime.parse(json['dataNascimento'] as String)
+  ..numeroCnh = json['numeroCnh'] as String?
+  ..categoriaCnh = json['categoriaCnh'] as String?
+  ..validadeCnh = json['validadeCnh'] == null
+      ? null
+      : DateTime.parse(json['validadeCnh'] as String)
+  ..naturalidade = json['naturalidade'] as String?
+  ..nomePai = json['nomePai'] as String?
+  ..nomeMae = json['nomeMae'] as String?
+  ..genero = json['genero'] as String?
+  ..casaPropria = json['casaPropria'] as bool?
+  ..tempoMoradia = json['tempoMoradia'] as int?
+  ..estadoCivil = json['estadoCivil'] as String?
+  ..profissao = json['profissao'] as String?
+  ..rendaMensal = json['rendaMensal'] == null
+      ? null
+      : BigDecimal.fromJson(json['rendaMensal'])
+  ..trabalhoEmpresa = json['trabalhoEmpresa'] as String?
+  ..trabalhoSetor = json['trabalhoSetor'] as String?
+  ..trabalhoEndereco = json['trabalhoEndereco'] as String?
+  ..trabalhoTelefone = json['trabalhoTelefone'] as String?
+  ..trabalhoAdmissao = json['trabalhoAdmissao'] == null
+      ? null
+      : DateTime.parse(json['trabalhoAdmissao'] as String)
+  ..conjuge = json['conjuge'] == null
+      ? null
+      : Pessoa.fromJson(json['conjuge'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$PessoaFisicaToJson(PessoaFisica instance) =>
     <String, dynamic>{
@@ -3282,36 +3225,34 @@ Map<String, dynamic> _$PessoaFisicaToJson(PessoaFisica instance) =>
       'conjuge': instance.conjuge,
     };
 
-PisCofins _$PisCofinsFromJson(Map<String, dynamic> json) =>
-    PisCofins()
-      ..id = json['id'] as int?
-      ..codigoNCM = json['codigoNCM'] as String?
-      ..ncm = json['ncm'] == null
-          ? null
-          : Ncm.fromJson(json['ncm'] as Map<String, dynamic>?)
-      ..cstPis = json['cstPis'] == null
-          ? null
-          : CstPisCofins.fromJson(json['cstPis'] as Map<String, dynamic>?)
-      ..cstCofins = json['cstCofins'] == null
-          ? null
-          : CstPisCofins.fromJson(json['cstCofins'] as Map<String, dynamic>?)
-      ..tipoOperacao = json['tipoOperacao'] as String?
-      ..aliquotaPis = json['aliquotaPis'] == null
-          ? null
-          : BigDecimal.fromJson(json['aliquotaPis'])
-      ..baseCalculoPis = json['baseCalculoPis'] == null
-          ? null
-          : BigDecimal.fromJson(json['baseCalculoPis'])
-      ..aliquotaCofins = json['aliquotaCofins'] == null
-          ? null
-          : BigDecimal.fromJson(json['aliquotaCofins'])
-      ..baseCalculoCofins = json['baseCalculoCofins'] == null
-          ? null
-          : BigDecimal.fromJson(json['baseCalculoCofins'])
-      ..idEmpresa = json['idEmpresa'] as int?;
+PisCofins _$PisCofinsFromJson(Map<String, dynamic> json) => PisCofins()
+  ..id = json['id'] as int?
+  ..codigoNCM = json['codigoNCM'] as String?
+  ..ncm = json['ncm'] == null
+      ? null
+      : Ncm.fromJson(json['ncm'] as Map<String, dynamic>?)
+  ..cstPis = json['cstPis'] == null
+      ? null
+      : CstPisCofins.fromJson(json['cstPis'] as Map<String, dynamic>?)
+  ..cstCofins = json['cstCofins'] == null
+      ? null
+      : CstPisCofins.fromJson(json['cstCofins'] as Map<String, dynamic>?)
+  ..tipoOperacao = json['tipoOperacao'] as String?
+  ..aliquotaPis = json['aliquotaPis'] == null
+      ? null
+      : BigDecimal.fromJson(json['aliquotaPis'])
+  ..baseCalculoPis = json['baseCalculoPis'] == null
+      ? null
+      : BigDecimal.fromJson(json['baseCalculoPis'])
+  ..aliquotaCofins = json['aliquotaCofins'] == null
+      ? null
+      : BigDecimal.fromJson(json['aliquotaCofins'])
+  ..baseCalculoCofins = json['baseCalculoCofins'] == null
+      ? null
+      : BigDecimal.fromJson(json['baseCalculoCofins'])
+  ..idEmpresa = json['idEmpresa'] as int?;
 
-Map<String, dynamic> _$PisCofinsToJson(PisCofins instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PisCofinsToJson(PisCofins instance) => <String, dynamic>{
       'id': instance.id,
       'codigoNCM': instance.codigoNCM,
       'ncm': instance.ncm,
@@ -3325,71 +3266,69 @@ Map<String, dynamic> _$PisCofinsToJson(PisCofins instance) =>
       'idEmpresa': instance.idEmpresa,
     };
 
-Produto _$ProdutoFromJson(Map<String, dynamic> json) =>
-    Produto()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..codigoInterno = json['codigoInterno'] as int?
-      ..codigo = json['codigo'] as String?
-      ..descricao = json['descricao'] as String?
-      ..descricaoAbreviada = json['descricaoAbreviada'] as String?
-      ..referencia = json['referencia'] as String?
-      ..detalhes = json['detalhes'] as String?
-      ..mixPreco = json['mixPreco'] as String?
-      ..unidade = json['unidade'] as String?
-      ..tipo = json['tipo'] as String?
-      ..marca = json['marca'] == null
-          ? null
-          : ProdutoMarca.fromJson(json['marca'] as Map<String, dynamic>?)
-      ..idGrupo = json['idGrupo'] as int?
-      ..grupo = json['grupo'] == null
-          ? null
-          : ProdutoGrupo.fromJson(json['grupo'] as Map<String, dynamic>)
-      ..familia = json['familia'] == null
-          ? null
-          : ProdutoFamilia.fromJson(json['familia'] as Map<String, dynamic>?)
-      ..unidadeCompra = json['unidadeCompra'] as String?
-      ..quantidadeCompra = json['quantidadeCompra'] == null
-          ? null
-          : BigDecimal.fromJson(json['quantidadeCompra'])
-      ..validadeDias = json['validadeDias'] as int?
-      ..garantiaDias = json['garantiaDias'] as int?
-      ..dataForaLinha = json['dataForaLinha'] == null
-          ? null
-          : DateTime.parse(json['dataForaLinha'] as String)
-      ..largura =
+Produto _$ProdutoFromJson(Map<String, dynamic> json) => Produto()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..codigoInterno = json['codigoInterno'] as int?
+  ..codigo = json['codigo'] as String?
+  ..descricao = json['descricao'] as String?
+  ..descricaoAbreviada = json['descricaoAbreviada'] as String?
+  ..referencia = json['referencia'] as String?
+  ..detalhes = json['detalhes'] as String?
+  ..mixPreco = json['mixPreco'] as String?
+  ..unidade = json['unidade'] as String?
+  ..tipo = json['tipo'] as String?
+  ..marca = json['marca'] == null
+      ? null
+      : ProdutoMarca.fromJson(json['marca'] as Map<String, dynamic>?)
+  ..idGrupo = json['idGrupo'] as int?
+  ..grupo = json['grupo'] == null
+      ? null
+      : ProdutoGrupo.fromJson(json['grupo'] as Map<String, dynamic>)
+  ..familia = json['familia'] == null
+      ? null
+      : ProdutoFamilia.fromJson(json['familia'] as Map<String, dynamic>?)
+  ..unidadeCompra = json['unidadeCompra'] as String?
+  ..quantidadeCompra = json['quantidadeCompra'] == null
+      ? null
+      : BigDecimal.fromJson(json['quantidadeCompra'])
+  ..validadeDias = json['validadeDias'] as int?
+  ..garantiaDias = json['garantiaDias'] as int?
+  ..dataForaLinha = json['dataForaLinha'] == null
+      ? null
+      : DateTime.parse(json['dataForaLinha'] as String)
+  ..largura =
       json['largura'] == null ? null : BigDecimal.fromJson(json['largura'])
-      ..altura = json['altura'] == null ? null : BigDecimal.fromJson(
-          json['altura'])
-      ..comprimento = json['comprimento'] == null
-          ? null
-          : BigDecimal.fromJson(json['comprimento'])
-      ..cubagem =
+  ..altura = json['altura'] == null ? null : BigDecimal.fromJson(json['altura'])
+  ..comprimento = json['comprimento'] == null
+      ? null
+      : BigDecimal.fromJson(json['comprimento'])
+  ..cubagem =
       json['cubagem'] == null ? null : BigDecimal.fromJson(json['cubagem'])
-      ..volumes = json['volumes'] as int?
-      ..pesoBruto =
+  ..volumes = json['volumes'] as int?
+  ..pesoBruto =
       json['pesoBruto'] == null ? null : BigDecimal.fromJson(json['pesoBruto'])
-      ..pacote = json['pacote'] as String?
-      ..grade = json['grade'] as String?
-      ..fiscal = json['fiscal'] == null
-          ? null
-          : ProdutoFiscal.fromJson(json['fiscal'] as Map<String, dynamic>?)
-      ..grades = (json['grades'] as List<dynamic>?)
+  ..pacote = $enumDecodeNullable(_$TipoPacoteEnumMap, json['pacote']) ??
+      TipoPacote.NENHUM
+  ..grade = json['grade'] as String?
+  ..fiscal = json['fiscal'] == null
+      ? null
+      : ProdutoFiscal.fromJson(json['fiscal'] as Map<String, dynamic>?)
+  ..grades = (json['grades'] as List<dynamic>?)
           ?.map((e) => Grade.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..menus = (json['menus'] as List<dynamic>?)
+      []
+  ..menus = (json['menus'] as List<dynamic>?)
           ?.map((e) => ProdutoMenu.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..arquivos = (json['arquivos'] as List<dynamic>?)
+      []
+  ..arquivos = (json['arquivos'] as List<dynamic>?)
           ?.map((e) => ProdutoArquivo.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..versao = json['versao'] as int?;
+      []
+  ..versao = json['versao'] as int?;
 
-Map<String, dynamic> _$ProdutoToJson(Produto instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ProdutoToJson(Produto instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'codigoInterno': instance.codigoInterno,
@@ -3416,7 +3355,7 @@ Map<String, dynamic> _$ProdutoToJson(Produto instance) =>
       'cubagem': instance.cubagem,
       'volumes': instance.volumes,
       'pesoBruto': instance.pesoBruto,
-      'pacote': instance.pacote,
+      'pacote': _$TipoPacoteEnumMap[instance.pacote],
       'grade': instance.grade,
       'fiscal': instance.fiscal,
       'grades': instance.grades,
@@ -3424,6 +3363,15 @@ Map<String, dynamic> _$ProdutoToJson(Produto instance) =>
       'arquivos': instance.arquivos,
       'versao': instance.versao,
     };
+
+const _$TipoPacoteEnumMap = {
+  TipoPacote.NENHUM: 'NENHUM',
+  TipoPacote.COMBO: 'COMBO',
+  TipoPacote.COMPOSTO: 'COMPOSTO',
+  TipoPacote.RODIZIO: 'RODIZIO',
+  TipoPacote.CESTA_KIT: 'CESTA_KIT',
+  TipoPacote.ADICIONAIS: 'ADICIONAIS',
+};
 
 ProdutoEmpresa _$ProdutoEmpresaFromJson(Map<String, dynamic> json) =>
     ProdutoEmpresa()
@@ -3437,21 +3385,21 @@ ProdutoEmpresa _$ProdutoEmpresaFromJson(Map<String, dynamic> json) =>
       ..localProducao1 = json['localProducao1'] == null
           ? null
           : LocalProducao.fromJson(
-          json['localProducao1'] as Map<String, dynamic>?)
+              json['localProducao1'] as Map<String, dynamic>?)
       ..localProducao2 = json['localProducao2'] == null
           ? null
           : LocalProducao.fromJson(
-          json['localProducao2'] as Map<String, dynamic>?)
+              json['localProducao2'] as Map<String, dynamic>?)
       ..producaoDefinidoComponentes =
-      json['producaoDefinidoComponentes'] as bool?
+          json['producaoDefinidoComponentes'] as bool?
       ..controleCadastro = json['controleCadastro'] == null
           ? null
           : ControleCadastro.fromJson(
-          json['controleCadastro'] as Map<String, dynamic>?)
+              json['controleCadastro'] as Map<String, dynamic>?)
       ..informacaoNutricional = json['informacaoNutricional'] == null
           ? null
           : InformacaoNutricional.fromJson(
-          json['informacaoNutricional'] as Map<String, dynamic>?)
+              json['informacaoNutricional'] as Map<String, dynamic>?)
       ..tabelaPreco = json['tabelaPreco'] as bool?
       ..precoVariavel = json['precoVariavel'] as bool?
       ..multiplicao = json['multiplicao'] as bool?
@@ -3466,8 +3414,8 @@ ProdutoEmpresa _$ProdutoEmpresaFromJson(Map<String, dynamic> json) =>
       ..montagem = json['montagem'] as bool?
       ..enviarCarga = json['enviarCarga'] as bool?
       ..grades = (json['grades'] as List<dynamic>?)
-          ?.map((e) => GradeEmpresa.fromJson(e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) => GradeEmpresa.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           []
       ..getId = json['getId'] as int?
       ..versao = json['versao'] as int?;
@@ -3502,21 +3450,22 @@ Map<String, dynamic> _$ProdutoEmpresaToJson(ProdutoEmpresa instance) =>
       'versao': instance.versao,
     };
 
-ProdutoGrupo _$ProdutoGrupoFromJson(Map<String, dynamic> json) =>
-    ProdutoGrupo()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..descricao = json['descricao'] as String?
-      ..ecommerce = json['ecommerce'] as bool?
-      ..idGrupoPai = json['idGrupoPai'] as int?
-      ..padraoSistema = json['padraoSistema'] as bool?
-      ..subgrupos = (json['subgrupos'] as List<dynamic>)
-          .map((e) => ProdutoGrupo.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..produtos = (json['produtos'] as List<dynamic>)
-          .map((e) => ProdutoEmpresa.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..versao = json['versao'] as int?;
+ProdutoGrupo _$ProdutoGrupoFromJson(Map<String, dynamic> json) => ProdutoGrupo()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..descricao = json['descricao'] as String?
+  ..ecommerce = json['ecommerce'] as bool?
+  ..idGrupoPai = json['idGrupoPai'] as int?
+  ..padraoSistema = json['padraoSistema'] as bool?
+  ..subgrupos = (json['subgrupos'] as List<dynamic>?)
+          ?.map((e) => ProdutoGrupo.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
+  ..produtos = (json['produtos'] as List<dynamic>?)
+          ?.map((e) => ProdutoEmpresa.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
+  ..versao = json['versao'] as int?;
 
 Map<String, dynamic> _$ProdutoGrupoToJson(ProdutoGrupo instance) =>
     <String, dynamic>{
@@ -3531,25 +3480,24 @@ Map<String, dynamic> _$ProdutoGrupoToJson(ProdutoGrupo instance) =>
       'versao': instance.versao,
     };
 
-ProdutoMenu _$ProdutoMenuFromJson(Map<String, dynamic> json) =>
-    ProdutoMenu()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..descricao = json['descricao'] as String?
-      ..compartilhado = json['compartilhado'] as bool?
-      ..tipo = json['tipo'] as String?
-      ..indice = json['indice'] as int?
-      ..quantidadeMinima = json['quantidadeMinima'] as int?
-      ..quantidadeMaxima = json['quantidadeMaxima'] as int?
-      ..valorTotal = json['valorTotal'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorTotal'])
-      ..componentes = (json['componentes'] as List<dynamic>?)
+ProdutoMenu _$ProdutoMenuFromJson(Map<String, dynamic> json) => ProdutoMenu()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..descricao = json['descricao'] as String?
+  ..compartilhado = json['compartilhado'] as bool?
+  ..tipo = json['tipo'] as String?
+  ..indice = json['indice'] as int?
+  ..quantidadeMinima = json['quantidadeMinima'] as int?
+  ..quantidadeMaxima = json['quantidadeMaxima'] as int?
+  ..valorTotal = json['valorTotal'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorTotal'])
+  ..componentes = (json['componentes'] as List<dynamic>?)
           ?.map(
               (e) => ProdutoMenuComponente.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..versao = json['versao'] as int?;
+      []
+  ..versao = json['versao'] as int?;
 
 Map<String, dynamic> _$ProdutoMenuToJson(ProdutoMenu instance) =>
     <String, dynamic>{
@@ -3567,7 +3515,7 @@ Map<String, dynamic> _$ProdutoMenuToJson(ProdutoMenu instance) =>
     };
 
 ProdutoMenuComponente _$ProdutoMenuComponenteFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     ProdutoMenuComponente()
       ..id = json['id'] as int?
       ..descricao = json['descricao'] as String?
@@ -3586,11 +3534,11 @@ ProdutoMenuComponente _$ProdutoMenuComponenteFromJson(
       ..quantidadeMaxima = json['quantidadeMaxima'] as int?
       ..componenteEmpresas = (json['componenteEmpresas'] as List<dynamic>)
           .map((e) =>
-          ProdutoMenuComponenteEmpresa.fromJson(e as Map<String, dynamic>))
+              ProdutoMenuComponenteEmpresa.fromJson(e as Map<String, dynamic>))
           .toList();
 
 Map<String, dynamic> _$ProdutoMenuComponenteToJson(
-    ProdutoMenuComponente instance) =>
+        ProdutoMenuComponente instance) =>
     <String, dynamic>{
       'id': instance.id,
       'descricao': instance.descricao,
@@ -3605,7 +3553,7 @@ Map<String, dynamic> _$ProdutoMenuComponenteToJson(
     };
 
 ProdutoMenuComponenteEmpresa _$ProdutoMenuComponenteEmpresaFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     ProdutoMenuComponenteEmpresa()
       ..id = json['id'] as int?
       ..idProdutoMenuComponente = json['idProdutoMenuComponente'] as int?
@@ -3615,13 +3563,12 @@ ProdutoMenuComponenteEmpresa _$ProdutoMenuComponenteEmpresaFromJson(
           ? null
           : GradeEmpresa.fromJson(json['gradeEmpresa'] as Map<String, dynamic>)
       ..precos = (json['precos'] as List<dynamic>)
-          .map((e) =>
-          ProdutoMenuComponenteEmpresaPreco.fromJson(
+          .map((e) => ProdutoMenuComponenteEmpresaPreco.fromJson(
               e as Map<String, dynamic>))
           .toList();
 
 Map<String, dynamic> _$ProdutoMenuComponenteEmpresaToJson(
-    ProdutoMenuComponenteEmpresa instance) =>
+        ProdutoMenuComponenteEmpresa instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idProdutoMenuComponente': instance.idProdutoMenuComponente,
@@ -3631,55 +3578,53 @@ Map<String, dynamic> _$ProdutoMenuComponenteEmpresaToJson(
       'precos': instance.precos,
     };
 
-Promocao _$PromocaoFromJson(Map<String, dynamic> json) =>
-    Promocao()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..descricao = json['descricao'] as String?
-      ..dataCadastro = json['dataCadastro'] == null
-          ? null
-          : DateTime.parse(json['dataCadastro'] as String)
-      ..tipo = json['tipo'] as String?
-      ..modalidade = json['modalidade'] as String?
-      ..periodicidade = json['periodicidade'] as String?
-      ..dataInicial = json['dataInicial'] == null
-          ? null
-          : DateTime.parse(json['dataInicial'] as String)
-      ..dataFinal = json['dataFinal'] == null
-          ? null
-          : DateTime.parse(json['dataFinal'] as String)
-      ..horaInicial = json['horaInicial'] as String?
-      ..horaFinal = json['horaFinal'] as String?
-      ..segundaFeira = json['segundaFeira'] as bool?
-      ..tercaFeira = json['tercaFeira'] as bool?
-      ..quartaFeira = json['quartaFeira'] as bool?
-      ..quintaFeira = json['quintaFeira'] as bool?
-      ..sextaFeira = json['sextaFeira'] as bool?
-      ..sabado = json['sabado'] as bool?
-      ..domingo = json['domingo'] as bool?
-      ..percentualDesconto = json['percentualDesconto'] == null
-          ? null
-          : BigDecimal.fromJson(json['percentualDesconto'])
-      ..baseCalculoComissao = json['baseCalculoComissao'] == null
-          ? null
-          : BigDecimal.fromJson(json['baseCalculoComissao'])
-      ..valorPacote = json['valorPacote'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorPacote'])
-      ..compreQuantidade = json['compreQuantidade'] == null
-          ? null
-          : BigDecimal.fromJson(json['compreQuantidade'])
-      ..pagueQuantidade = json['pagueQuantidade'] == null
-          ? null
-          : BigDecimal.fromJson(json['pagueQuantidade'])
-      ..quantidadeMaximaItens = json['quantidadeMaximaItens'] as int?
-      ..custoDiferenciado = json['custoDiferenciado'] as bool?
-      ..suspensa = json['suspensa'] as bool?
-      ..modulosWaiter =
+Promocao _$PromocaoFromJson(Map<String, dynamic> json) => Promocao()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..descricao = json['descricao'] as String?
+  ..dataCadastro = json['dataCadastro'] == null
+      ? null
+      : DateTime.parse(json['dataCadastro'] as String)
+  ..tipo = json['tipo'] as String?
+  ..modalidade = json['modalidade'] as String?
+  ..periodicidade = json['periodicidade'] as String?
+  ..dataInicial = json['dataInicial'] == null
+      ? null
+      : DateTime.parse(json['dataInicial'] as String)
+  ..dataFinal = json['dataFinal'] == null
+      ? null
+      : DateTime.parse(json['dataFinal'] as String)
+  ..horaInicial = json['horaInicial'] as String?
+  ..horaFinal = json['horaFinal'] as String?
+  ..segundaFeira = json['segundaFeira'] as bool?
+  ..tercaFeira = json['tercaFeira'] as bool?
+  ..quartaFeira = json['quartaFeira'] as bool?
+  ..quintaFeira = json['quintaFeira'] as bool?
+  ..sextaFeira = json['sextaFeira'] as bool?
+  ..sabado = json['sabado'] as bool?
+  ..domingo = json['domingo'] as bool?
+  ..percentualDesconto = json['percentualDesconto'] == null
+      ? null
+      : BigDecimal.fromJson(json['percentualDesconto'])
+  ..baseCalculoComissao = json['baseCalculoComissao'] == null
+      ? null
+      : BigDecimal.fromJson(json['baseCalculoComissao'])
+  ..valorPacote = json['valorPacote'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorPacote'])
+  ..compreQuantidade = json['compreQuantidade'] == null
+      ? null
+      : BigDecimal.fromJson(json['compreQuantidade'])
+  ..pagueQuantidade = json['pagueQuantidade'] == null
+      ? null
+      : BigDecimal.fromJson(json['pagueQuantidade'])
+  ..quantidadeMaximaItens = json['quantidadeMaximaItens'] as int?
+  ..custoDiferenciado = json['custoDiferenciado'] as bool?
+  ..suspensa = json['suspensa'] as bool?
+  ..modulosWaiter =
       (json['modulosWaiter'] as List<dynamic>).map((e) => e as String).toList();
 
-Map<String, dynamic> _$PromocaoToJson(Promocao instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PromocaoToJson(Promocao instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'descricao': instance.descricao,
@@ -3716,12 +3661,12 @@ RecebimentoParcial _$RecebimentoParcialFromJson(Map<String, dynamic> json) =>
           : Nota.fromJson(json['nota'] as Map<String, dynamic>)
       ..tipoRecebimento = json['tipoRecebimento'] as String?
       ..finalizadoras = (json['finalizadoras'] as List<dynamic>?)
-          ?.map((e) => NotaFinalizadora.fromJson(e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) => NotaFinalizadora.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           []
       ..itens = (json['itens'] as List<dynamic>?)
-          ?.map((e) => NotaItem.fromJson(e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) => NotaItem.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           [];
 
 Map<String, dynamic> _$RecebimentoParcialToJson(RecebimentoParcial instance) =>
@@ -3732,27 +3677,25 @@ Map<String, dynamic> _$RecebimentoParcialToJson(RecebimentoParcial instance) =>
       'itens': instance.itens,
     };
 
-Regiao _$RegiaoFromJson(Map<String, dynamic> json) =>
-    Regiao()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..descricao = json['descricao'] as String?
-      ..pontoReferencia = json['pontoReferencia'] as String?
-      ..valor = json['valor'] == null ? null : BigDecimal.fromJson(
-          json['valor'])
-      ..itinerario = json['itinerario'] as int?
-      ..prazoEntregaDias = json['prazoEntregaDias'] as int?
-      ..tipoValor = json['tipoValor'] as String?
-      ..cidade = json['cidade'] == null
-          ? null
-          : Cidade.fromJson(json['cidade'] as Map<String, dynamic>?)
-      ..regioesEmpresa = (json['regioesEmpresa'] as List<dynamic>?)
+Regiao _$RegiaoFromJson(Map<String, dynamic> json) => Regiao()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..descricao = json['descricao'] as String?
+  ..pontoReferencia = json['pontoReferencia'] as String?
+  ..valor = json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
+  ..itinerario = json['itinerario'] as int?
+  ..prazoEntregaDias = json['prazoEntregaDias'] as int?
+  ..tipoValor = json['tipoValor'] as String?
+  ..cidade = json['cidade'] == null
+      ? null
+      : Cidade.fromJson(json['cidade'] as Map<String, dynamic>?)
+  ..regioesEmpresa = (json['regioesEmpresa'] as List<dynamic>?)
           ?.map((e) => RegiaoEmpresa.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..versao = json['versao'] as int?;
+          .toList() ??
+      []
+  ..versao = json['versao'] as int?;
 
-Map<String, dynamic> _$RegiaoToJson(Regiao instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$RegiaoToJson(Regiao instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'descricao': instance.descricao,
@@ -3766,18 +3709,16 @@ Map<String, dynamic> _$RegiaoToJson(Regiao instance) =>
       'versao': instance.versao,
     };
 
-ReservaMesa _$ReservaMesaFromJson(Map<String, dynamic> json) =>
-    ReservaMesa()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..idUsuario = json['idUsuario'] as int?
-      ..mesa = json['mesa'] as int?
-      ..data = json['data'] == null ? null : DateTime.parse(
-          json['data'] as String)
-      ..nome = json['nome'] as String?
-      ..pessoas = json['pessoas'] as int?
-      ..observacao = json['observacao'] as String?
-      ..statusReserva = json['statusReserva'] as String?;
+ReservaMesa _$ReservaMesaFromJson(Map<String, dynamic> json) => ReservaMesa()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..idUsuario = json['idUsuario'] as int?
+  ..mesa = json['mesa'] as int?
+  ..data = json['data'] == null ? null : DateTime.parse(json['data'] as String)
+  ..nome = json['nome'] as String?
+  ..pessoas = json['pessoas'] as int?
+  ..observacao = json['observacao'] as String?
+  ..statusReserva = json['statusReserva'] as String?;
 
 Map<String, dynamic> _$ReservaMesaToJson(ReservaMesa instance) =>
     <String, dynamic>{
@@ -3801,11 +3742,11 @@ ServicoImpressaoDTO _$ServicoImpressaoDTOFromJson(Map<String, dynamic> json) =>
       ..auxiliarProducao = json['auxiliarProducao'] == null
           ? null
           : AuxiliarProducao.fromJson(
-          json['auxiliarProducao'] as Map<String, dynamic>)
+              json['auxiliarProducao'] as Map<String, dynamic>)
       ..estacaoImpressora = json['estacaoImpressora'] == null
           ? null
           : EstacaoImpressora.fromJson(
-          json['estacaoImpressora'] as Map<String, dynamic>?)
+              json['estacaoImpressora'] as Map<String, dynamic>?)
       ..notaItems = (json['notaItems'] as List<dynamic>)
           .map((e) => NotaItem.fromJson(e as Map<String, dynamic>))
           .toList()
@@ -3815,10 +3756,10 @@ ServicoImpressaoDTO _$ServicoImpressaoDTOFromJson(Map<String, dynamic> json) =>
       ..estacaoTrabalho = json['estacaoTrabalho'] == null
           ? null
           : EstacaoTrabalho.fromJson(
-          json['estacaoTrabalho'] as Map<String, dynamic>);
+              json['estacaoTrabalho'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ServicoImpressaoDTOToJson(
-    ServicoImpressaoDTO instance) =>
+        ServicoImpressaoDTO instance) =>
     <String, dynamic>{
       'tipo': instance.tipo,
       'cabecalho': instance.cabecalho,
@@ -3829,32 +3770,29 @@ Map<String, dynamic> _$ServicoImpressaoDTOToJson(
       'estacaoTrabalho': instance.estacaoTrabalho,
     };
 
-Setor _$SetorFromJson(Map<String, dynamic> json) =>
-    Setor()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..nome = json['nome'] as String?
-      ..descricao = json['descricao'] as String?
-      ..idLayoutControle = json['idLayoutControle'] as int?
-      ..layoutControle = json['layoutControle'] == null
-          ? null
-          : LayoutControle.fromJson(
-          json['layoutControle'] as Map<String, dynamic>)
-      ..percentualComissao = json['percentualComissao'] == null
-          ? null
-          : BigDecimal.fromJson(json['percentualComissao'])
-      ..taxaServico = json['taxaServico'] as bool?
-      ..idLocal = json['idLocal'] as int?
-      ..ativo = json['ativo'] as bool?
-      ..padrao = json['padrao'] as bool?
-      ..enderecos = (json['enderecos'] as List<dynamic>?)
+Setor _$SetorFromJson(Map<String, dynamic> json) => Setor()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..nome = json['nome'] as String?
+  ..descricao = json['descricao'] as String?
+  ..idLayoutControle = json['idLayoutControle'] as int?
+  ..layoutControle = json['layoutControle'] == null
+      ? null
+      : LayoutControle.fromJson(json['layoutControle'] as Map<String, dynamic>)
+  ..percentualComissao = json['percentualComissao'] == null
+      ? null
+      : BigDecimal.fromJson(json['percentualComissao'])
+  ..taxaServico = json['taxaServico'] as bool?
+  ..idLocal = json['idLocal'] as int?
+  ..ativo = json['ativo'] as bool?
+  ..padrao = json['padrao'] as bool?
+  ..enderecos = (json['enderecos'] as List<dynamic>?)
           ?.map((e) => EnderecoEstoque.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          []
-      ..versao = json['versao'] as int?;
+      []
+  ..versao = json['versao'] as int?;
 
-Map<String, dynamic> _$SetorToJson(Setor instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$SetorToJson(Setor instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'nome': instance.nome,
@@ -3870,21 +3808,20 @@ Map<String, dynamic> _$SetorToJson(Setor instance) =>
       'versao': instance.versao,
     };
 
-TabelaPreco _$TabelaPrecoFromJson(Map<String, dynamic> json) =>
-    TabelaPreco()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..empresa = json['empresa'] == null
-          ? null
-          : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
-      ..codigo = json['codigo'] as int?
-      ..descricao = json['descricao'] as String?
-      ..padrao = json['padrao'] as bool
-      ..ativo = json['ativo'] as bool
-      ..empresas = (json['empresas'] as List<dynamic>?)
+TabelaPreco _$TabelaPrecoFromJson(Map<String, dynamic> json) => TabelaPreco()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..empresa = json['empresa'] == null
+      ? null
+      : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
+  ..codigo = json['codigo'] as int?
+  ..descricao = json['descricao'] as String?
+  ..padrao = json['padrao'] as bool? ?? false
+  ..ativo = json['ativo'] as bool? ?? true
+  ..empresas = (json['empresas'] as List<dynamic>?)
           ?.map((e) => Empresa.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          [];
+      [];
 
 Map<String, dynamic> _$TabelaPrecoToJson(TabelaPreco instance) =>
     <String, dynamic>{
@@ -3903,9 +3840,9 @@ TransacaoCartao _$TransacaoCartaoFromJson(Map<String, dynamic> json) =>
       ..id = json['id'] as int?
       ..idEmpresa = json['idEmpresa'] as int?
       ..data =
-      json['data'] == null ? null : DateTime.parse(json['data'] as String)
+          json['data'] == null ? null : DateTime.parse(json['data'] as String)
       ..valor =
-      json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
+          json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
       ..numeroParcelas = json['numeroParcelas'] as int?
       ..codigoAutorizacao = json['codigoAutorizacao'] as String?
       ..nsu = json['nsu'] as String?
@@ -3941,43 +3878,41 @@ Map<String, dynamic> _$TransacaoCartaoToJson(TransacaoCartao instance) =>
       'orderId': instance.orderId,
     };
 
-Turno _$TurnoFromJson(Map<String, dynamic> json) =>
-    Turno()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..idCaixa = json['idCaixa'] as int?
-      ..caixa = json['caixa'] == null
-          ? null
-          : EstacaoTrabalho.fromJson(json['caixa'] as Map<String, dynamic>)
-      ..movimento = json['movimento'] == null
-          ? null
-          : Movimento.fromJson(json['movimento'] as Map<String, dynamic>?)
-      ..chave = json['chave'] as String?
-      ..usuario = json['usuario'] == null
-          ? null
-          : Usuario.fromJson(json['usuario'] as Map<String, dynamic>)
-      ..status = json['status'] as String?
-      ..dataAbertura = json['dataAbertura'] == null
-          ? null
-          : DateTime.parse(json['dataAbertura'] as String)
-      ..dataFechamento = json['dataFechamento'] == null
-          ? null
-          : DateTime.parse(json['dataFechamento'] as String)
-      ..dataConferencia = json['dataConferencia'] == null
-          ? null
-          : DateTime.parse(json['dataConferencia'] as String)
-      ..observacao = json['observacao'] as String?
-      ..valorDiferenca = json['valorDiferenca'] == null
-          ? null
-          : BigDecimal.fromJson(json['valorDiferenca'])
-      ..sequencia = json['sequencia'] as int?
-      ..idConcentrador = json['idConcentrador'] as int?
-      ..fechamentos = (json['fechamentos'] as List<dynamic>)
-          .map((e) => TurnoFechamento.fromJson(e as Map<String, dynamic>))
-          .toList();
+Turno _$TurnoFromJson(Map<String, dynamic> json) => Turno()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..idCaixa = json['idCaixa'] as int?
+  ..caixa = json['caixa'] == null
+      ? null
+      : EstacaoTrabalho.fromJson(json['caixa'] as Map<String, dynamic>)
+  ..movimento = json['movimento'] == null
+      ? null
+      : Movimento.fromJson(json['movimento'] as Map<String, dynamic>?)
+  ..chave = json['chave'] as String?
+  ..usuario = json['usuario'] == null
+      ? null
+      : Usuario.fromJson(json['usuario'] as Map<String, dynamic>)
+  ..status = json['status'] as String?
+  ..dataAbertura = json['dataAbertura'] == null
+      ? null
+      : DateTime.parse(json['dataAbertura'] as String)
+  ..dataFechamento = json['dataFechamento'] == null
+      ? null
+      : DateTime.parse(json['dataFechamento'] as String)
+  ..dataConferencia = json['dataConferencia'] == null
+      ? null
+      : DateTime.parse(json['dataConferencia'] as String)
+  ..observacao = json['observacao'] as String?
+  ..valorDiferenca = json['valorDiferenca'] == null
+      ? null
+      : BigDecimal.fromJson(json['valorDiferenca'])
+  ..sequencia = json['sequencia'] as int?
+  ..idConcentrador = json['idConcentrador'] as int?
+  ..fechamentos = (json['fechamentos'] as List<dynamic>)
+      .map((e) => TurnoFechamento.fromJson(e as Map<String, dynamic>))
+      .toList();
 
-Map<String, dynamic> _$TurnoToJson(Turno instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$TurnoToJson(Turno instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'idCaixa': instance.idCaixa,
@@ -4004,11 +3939,11 @@ TurnoFechamento _$TurnoFechamentoFromJson(Map<String, dynamic> json) =>
       ..controleRegistro = json['controleRegistro'] == null
           ? null
           : ControleRegistro.fromJson(
-          json['controleRegistro'] as Map<String, dynamic>?)
+              json['controleRegistro'] as Map<String, dynamic>?)
       ..finalizadoraEmpresa = json['finalizadoraEmpresa'] == null
           ? null
           : FinalizadoraEmpresa.fromJson(
-          json['finalizadoraEmpresa'] as Map<String, dynamic>)
+              json['finalizadoraEmpresa'] as Map<String, dynamic>)
       ..valorDigitado = json['valorDigitado'] == null
           ? null
           : BigDecimal.fromJson(json['valorDigitado'])
@@ -4050,33 +3985,31 @@ Map<String, dynamic> _$UnidadeFederativaToJson(UnidadeFederativa instance) =>
       'pais': instance.pais,
     };
 
-Usuario _$UsuarioFromJson(Map<String, dynamic> json) =>
-    Usuario()
-      ..id = json['id'] as int?
-      ..uid = json['uid'] as String?
-      ..nome = json['nome'] as String?
-      ..cpf = json['cpf'] as String?
-      ..email = json['email'] as String?
-      ..telefone = json['telefone'] as String?
-      ..username = json['username'] as String?
-      ..password = json['password'] as String?
-      ..pin = json['pin'] as int?
-      ..confirmado = json['confirmado'] as bool?
-      ..tentativasLogin = json['tentativasLogin'] as int?
-      ..dataBloqueio = json['dataBloqueio'] == null
-          ? null
-          : DateTime.parse(json['dataBloqueio'] as String)
-      ..controleCadastro = json['controleCadastro'] == null
-          ? null
-          : ControleCadastro.fromJson(
+Usuario _$UsuarioFromJson(Map<String, dynamic> json) => Usuario()
+  ..id = json['id'] as int?
+  ..uid = json['uid'] as String?
+  ..nome = json['nome'] as String?
+  ..cpf = json['cpf'] as String?
+  ..email = json['email'] as String?
+  ..telefone = json['telefone'] as String?
+  ..username = json['username'] as String?
+  ..password = json['password'] as String?
+  ..pin = json['pin'] as int?
+  ..confirmado = json['confirmado'] as bool?
+  ..tentativasLogin = json['tentativasLogin'] as int?
+  ..dataBloqueio = json['dataBloqueio'] == null
+      ? null
+      : DateTime.parse(json['dataBloqueio'] as String)
+  ..controleCadastro = json['controleCadastro'] == null
+      ? null
+      : ControleCadastro.fromJson(
           json['controleCadastro'] as Map<String, dynamic>?)
-      ..genero = json['genero'] as String?
-      ..dataNascimento = json['dataNascimento'] == null
-          ? null
-          : DateTime.parse(json['dataNascimento'] as String);
+  ..genero = json['genero'] as String?
+  ..dataNascimento = json['dataNascimento'] == null
+      ? null
+      : DateTime.parse(json['dataNascimento'] as String);
 
-Map<String, dynamic> _$UsuarioToJson(Usuario instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$UsuarioToJson(Usuario instance) => <String, dynamic>{
       'id': instance.id,
       'uid': instance.uid,
       'nome': instance.nome,
@@ -4113,7 +4046,7 @@ UsuarioEmpresa _$UsuarioEmpresaFromJson(Map<String, dynamic> json) =>
       ..usuarioPerfilEmpresa = json['usuarioPerfilEmpresa'] == null
           ? null
           : UsuarioPerfilEmpresa.fromJson(
-          json['usuarioPerfilEmpresa'] as Map<String, dynamic>)
+              json['usuarioPerfilEmpresa'] as Map<String, dynamic>)
       ..ativo = json['ativo'] as bool?;
 
 Map<String, dynamic> _$UsuarioEmpresaToJson(UsuarioEmpresa instance) =>
@@ -4130,20 +4063,18 @@ Map<String, dynamic> _$UsuarioEmpresaToJson(UsuarioEmpresa instance) =>
       'ativo': instance.ativo,
     };
 
-Vendedor _$VendedorFromJson(Map<String, dynamic> json) =>
-    Vendedor()
-      ..codigoVenda = json['codigoVenda'] as int?
-      ..identfid = json['identfid'] as String?
-      ..percentualComissao = json['percentualComissao'] == null
-          ? null
-          : BigDecimal.fromJson(json['percentualComissao'])
-      ..tabelaPreco = json['tabelaPreco'] == null
-          ? null
-          : TabelaPreco.fromJson(json['tabelaPreco'] as Map<String, dynamic>)
-      ..tipoComissao = json['tipoComissao'] as String?;
+Vendedor _$VendedorFromJson(Map<String, dynamic> json) => Vendedor()
+  ..codigoVenda = json['codigoVenda'] as int?
+  ..identfid = json['identfid'] as String?
+  ..percentualComissao = json['percentualComissao'] == null
+      ? null
+      : BigDecimal.fromJson(json['percentualComissao'])
+  ..tabelaPreco = json['tabelaPreco'] == null
+      ? null
+      : TabelaPreco.fromJson(json['tabelaPreco'] as Map<String, dynamic>)
+  ..tipoComissao = json['tipoComissao'] as String?;
 
-Map<String, dynamic> _$VendedorToJson(Vendedor instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$VendedorToJson(Vendedor instance) => <String, dynamic>{
       'codigoVenda': instance.codigoVenda,
       'identfid': instance.identfid,
       'percentualComissao': instance.percentualComissao,
@@ -4152,16 +4083,16 @@ Map<String, dynamic> _$VendedorToJson(Vendedor instance) =>
     };
 
 WaycardAutorizacaoPgtoDTO _$WaycardAutorizacaoPgtoDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     WaycardAutorizacaoPgtoDTO()
       ..idEmpresa = json['idEmpresa'] as int?
       ..codigoAutorizacao = json['codigoAutorizacao'] as String?
       ..numeroVenda = json['numeroVenda'] as String?
       ..valor =
-      json['valor'] == null ? null : BigDecimal.fromJson(json['valor']);
+          json['valor'] == null ? null : BigDecimal.fromJson(json['valor']);
 
 Map<String, dynamic> _$WaycardAutorizacaoPgtoDTOToJson(
-    WaycardAutorizacaoPgtoDTO instance) =>
+        WaycardAutorizacaoPgtoDTO instance) =>
     <String, dynamic>{
       'idEmpresa': instance.idEmpresa,
       'codigoAutorizacao': instance.codigoAutorizacao,
@@ -4174,7 +4105,7 @@ WaycardFatura _$WaycardFaturaFromJson(Map<String, dynamic> json) =>
       ..id = json['id'] as int?
       ..idBandeira = json['idBandeira'] as int?
       ..valor =
-      json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
+          json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
       ..dataAbertura = json['dataAbertura'] == null
           ? null
           : DateTime.parse(json['dataAbertura'] as String)
@@ -4210,10 +4141,10 @@ WaycardTransacao _$WaycardTransacaoFromJson(Map<String, dynamic> json) =>
           ? null
           : Lojista.fromJson(json['lojista'] as Map<String, dynamic>)
       ..valor =
-      json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
+          json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
       ..numeroVenda = json['numeroVenda'] as String?
       ..data =
-      json['data'] == null ? null : DateTime.parse(json['data'] as String)
+          json['data'] == null ? null : DateTime.parse(json['data'] as String)
       ..status = json['status'] as String?
       ..nsu = json['nsu'] as String?;
 
@@ -4233,7 +4164,7 @@ Map<String, dynamic> _$WaycardTransacaoToJson(WaycardTransacao instance) =>
     };
 
 ContratoConfiguracao _$ContratoConfiguracaoFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     ContratoConfiguracao()
       ..tipoContrato = json['tipoContrato'] as String?
       ..diasTrial = json['diasTrial'] as int?
@@ -4284,7 +4215,7 @@ ContratoConfiguracao _$ContratoConfiguracaoFromJson(
       ..nfeEntrada = json['nfeEntrada'] as bool?;
 
 Map<String, dynamic> _$ContratoConfiguracaoToJson(
-    ContratoConfiguracao instance) =>
+        ContratoConfiguracao instance) =>
     <String, dynamic>{
       'tipoContrato': instance.tipoContrato,
       'diasTrial': instance.diasTrial,
@@ -4320,21 +4251,21 @@ Map<String, dynamic> _$ContratoConfiguracaoToJson(
     };
 
 WizardBuscarPlanosEnvelop _$WizardBuscarPlanosEnvelopFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     WizardBuscarPlanosEnvelop()
       ..contratoConfiguracaoList = (json['contratoConfiguracaoList']
-      as List<dynamic>?)
+              as List<dynamic>?)
           ?.map((e) => ContratoConfiguracao.fromJson(e as Map<String, dynamic>))
           .toList();
 
 Map<String, dynamic> _$WizardBuscarPlanosEnvelopToJson(
-    WizardBuscarPlanosEnvelop instance) =>
+        WizardBuscarPlanosEnvelop instance) =>
     <String, dynamic>{
       'contratoConfiguracaoList': instance.contratoConfiguracaoList,
     };
 
 WizardBuscarEmpresaEnvelop _$WizardBuscarEmpresaEnvelopFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     WizardBuscarEmpresaEnvelop()
       ..buscarEmpresaDTOList = (json['buscarEmpresaDTOList'] as List<dynamic>?)
           ?.map(
@@ -4342,13 +4273,13 @@ WizardBuscarEmpresaEnvelop _$WizardBuscarEmpresaEnvelopFromJson(
           .toList();
 
 Map<String, dynamic> _$WizardBuscarEmpresaEnvelopToJson(
-    WizardBuscarEmpresaEnvelop instance) =>
+        WizardBuscarEmpresaEnvelop instance) =>
     <String, dynamic>{
       'buscarEmpresaDTOList': instance.buscarEmpresaDTOList,
     };
 
 WizardBuscarEmpresaDTO _$WizardBuscarEmpresaDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     WizardBuscarEmpresaDTO()
       ..empresaDTO = json['empresaDTO'] == null
           ? null
@@ -4357,7 +4288,7 @@ WizardBuscarEmpresaDTO _$WizardBuscarEmpresaDTOFromJson(
       ..usaConcentrador = json['usaConcentrador'] as bool?;
 
 Map<String, dynamic> _$WizardBuscarEmpresaDTOToJson(
-    WizardBuscarEmpresaDTO instance) =>
+        WizardBuscarEmpresaDTO instance) =>
     <String, dynamic>{
       'empresaDTO': instance.empresaDTO,
       'emailMaster': instance.emailMaster,
@@ -4365,7 +4296,7 @@ Map<String, dynamic> _$WizardBuscarEmpresaDTOToJson(
     };
 
 WizardValidarMasterDTO _$WizardValidarMasterDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     WizardValidarMasterDTO()
       ..user = json['user'] == null
           ? null
@@ -4373,7 +4304,7 @@ WizardValidarMasterDTO _$WizardValidarMasterDTOFromJson(
       ..clientSecret = json['clientSecret'] as String?;
 
 Map<String, dynamic> _$WizardValidarMasterDTOToJson(
-    WizardValidarMasterDTO instance) =>
+        WizardValidarMasterDTO instance) =>
     <String, dynamic>{
       'user': instance.user,
       'clientSecret': instance.clientSecret,
@@ -4408,23 +4339,22 @@ Map<String, dynamic> _$ReceitawsEmpresaToJson(ReceitawsEmpresa instance) =>
       'complemento': instance.complemento,
     };
 
-CanalVenda _$CanalVendaFromJson(Map<String, dynamic> json) =>
-    CanalVenda()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..empresa = json['empresa'] == null
-          ? null
-          : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
-      ..descricao = json['descricao'] as String?
-      ..idTabelaPreco = json['idTabelaPreco'] as int?
-      ..tabelaPreco = json['tabelaPreco'] == null
-          ? null
-          : TabelaPreco.fromJson(json['tabelaPreco'] as Map<String, dynamic>)
-      ..padrao = json['padrao'] as bool
-      ..empresas = (json['empresas'] as List<dynamic>?)
+CanalVenda _$CanalVendaFromJson(Map<String, dynamic> json) => CanalVenda()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..empresa = json['empresa'] == null
+      ? null
+      : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
+  ..descricao = json['descricao'] as String?
+  ..idTabelaPreco = json['idTabelaPreco'] as int?
+  ..tabelaPreco = json['tabelaPreco'] == null
+      ? null
+      : TabelaPreco.fromJson(json['tabelaPreco'] as Map<String, dynamic>)
+  ..padrao = json['padrao'] as bool
+  ..empresas = (json['empresas'] as List<dynamic>?)
           ?.map((e) => CanalVendaEmpresa.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          [];
+      [];
 
 Map<String, dynamic> _$CanalVendaToJson(CanalVenda instance) =>
     <String, dynamic>{
@@ -4493,11 +4423,11 @@ Map<String, dynamic> _$GradeEmpresaPrecoToJson(GradeEmpresaPreco instance) =>
     };
 
 ProdutoMenuComponenteEmpresaPreco _$ProdutoMenuComponenteEmpresaPrecoFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     ProdutoMenuComponenteEmpresaPreco()
       ..id = json['id'] as int?
       ..idProdutoMenuComponenteEmpresa =
-      json['idProdutoMenuComponenteEmpresa'] as int?
+          json['idProdutoMenuComponenteEmpresa'] as int?
       ..idTabelaPreco = json['idTabelaPreco'] as int?
       ..tabelaPreco = json['tabelaPreco'] == null
           ? null
@@ -4507,7 +4437,7 @@ ProdutoMenuComponenteEmpresaPreco _$ProdutoMenuComponenteEmpresaPrecoFromJson(
           : BigDecimal.fromJson(json['valorComponente']);
 
 Map<String, dynamic> _$ProdutoMenuComponenteEmpresaPrecoToJson(
-    ProdutoMenuComponenteEmpresaPreco instance) =>
+        ProdutoMenuComponenteEmpresaPreco instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idProdutoMenuComponenteEmpresa': instance.idProdutoMenuComponenteEmpresa,
@@ -4517,14 +4447,14 @@ Map<String, dynamic> _$ProdutoMenuComponenteEmpresaPrecoToJson(
     };
 
 TotalRecebimentoParcialDTO _$TotalRecebimentoParcialDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     TotalRecebimentoParcialDTO()
       ..modulo = json['modulo'] as String?
       ..valor =
-      json['valor'] == null ? null : BigDecimal.fromJson(json['valor']);
+          json['valor'] == null ? null : BigDecimal.fromJson(json['valor']);
 
 Map<String, dynamic> _$TotalRecebimentoParcialDTOToJson(
-    TotalRecebimentoParcialDTO instance) =>
+        TotalRecebimentoParcialDTO instance) =>
     <String, dynamic>{
       'modulo': instance.modulo,
       'valor': instance.valor,
@@ -4580,7 +4510,7 @@ PrinterNFCeDTO _$PrinterNFCeDTOFromJson(Map<String, dynamic> json) =>
       ..equipamentoImpressao = json['equipamentoImpressao'] == null
           ? null
           : EquipamentoImpressao.fromJson(
-          json['equipamentoImpressao'] as Map<String, dynamic>)
+              json['equipamentoImpressao'] as Map<String, dynamic>)
       ..cancelamento = json['cancelamento'] as bool?;
 
 Map<String, dynamic> _$PrinterNFCeDTOToJson(PrinterNFCeDTO instance) =>
@@ -4602,12 +4532,12 @@ PrinterVendaDTO _$PrinterVendaDTOFromJson(Map<String, dynamic> json) =>
       ..equipamentoImpressao = json['equipamentoImpressao'] == null
           ? null
           : EquipamentoImpressao.fromJson(
-          json['equipamentoImpressao'] as Map<String, dynamic>)
+              json['equipamentoImpressao'] as Map<String, dynamic>)
       ..cancelamento = json['cancelamento'] as bool?
       ..servicoAutoAtendimento = json['servicoAutoAtendimento'] == null
           ? null
           : ServicoAutoAtendimento.fromJson(
-          json['servicoAutoAtendimento'] as Map<String, dynamic>);
+              json['servicoAutoAtendimento'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$PrinterVendaDTOToJson(PrinterVendaDTO instance) =>
     <String, dynamic>{
@@ -4626,7 +4556,7 @@ ConfigPropertiesDTO _$ConfigPropertiesDTOFromJson(Map<String, dynamic> json) =>
       ..host = json['host'] as String?;
 
 Map<String, dynamic> _$ConfigPropertiesDTOToJson(
-    ConfigPropertiesDTO instance) =>
+        ConfigPropertiesDTO instance) =>
     <String, dynamic>{
       'cnpj': instance.cnpj,
       'clientSecret': instance.clientSecret,
@@ -4638,49 +4568,58 @@ ConferenciaCaixaDTO _$ConferenciaCaixaDTOFromJson(Map<String, dynamic> json) =>
       ..turnoSimplificadoDTO = json['turnoSimplificadoDTO'] == null
           ? null
           : TurnoSimplificadoDTO.fromJson(
-          json['turnoSimplificadoDTO'] as Map<String, dynamic>)
+              json['turnoSimplificadoDTO'] as Map<String, dynamic>)
       ..extratoTurnoDTO = json['extratoTurnoDTO'] == null
           ? null
           : ExtratoTurnoDTO.fromJson(
-          json['extratoTurnoDTO'] as Map<String, dynamic>)
+              json['extratoTurnoDTO'] as Map<String, dynamic>)
       ..vendas = (json['vendas'] as List<dynamic>?)
-          ?.map((e) => NotaSimplificadaDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) =>
+                  NotaSimplificadaDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..vendasCanceladas = (json['vendasCanceladas'] as List<dynamic>?)
-          ?.map((e) => NotaSimplificadaDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..taxaServicoGracomDTOList = (json['taxaServicoGracomDTOList']
-      as List<dynamic>?)
-          ?.map((e) => TaxaServicoGracomDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) =>
+                  NotaSimplificadaDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+      ..taxaServicoGracomDTOList =
+          (json['taxaServicoGracomDTOList'] as List<dynamic>?)
+                  ?.map((e) =>
+                      TaxaServicoGracomDTO.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              []
       ..desdobramentoVendaDTO = json['desdobramentoVendaDTO'] == null
           ? null
           : DesdobramentoVendaDTO.fromJson(
-          json['desdobramentoVendaDTO'] as Map<String, dynamic>)
+              json['desdobramentoVendaDTO'] as Map<String, dynamic>)
       ..vendasModuloDTOList = (json['vendasModuloDTOList'] as List<dynamic>?)
-          ?.map((e) => VendasModuloDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) => VendasModuloDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..desdobramentoGrupoProdutosDTOList =
-      (json['desdobramentoGrupoProdutosDTOList'] as List<dynamic>?)
-          ?.map((e) =>
-          DesdobramentoGrupoProdutosDTO.fromJson(
-              e as Map<String, dynamic>))
-          .toList()
+          (json['desdobramentoGrupoProdutosDTOList'] as List<dynamic>?)
+                  ?.map((e) => DesdobramentoGrupoProdutosDTO.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList() ??
+              []
       ..pacotesVendidos = (json['pacotesVendidos'] as List<dynamic>?)
-          ?.map((e) =>
-          DesdobramentoProdutoDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..totalRecebimentoParcial = (json['totalRecebimentoParcial']
-      as List<dynamic>?)
-          ?.map((e) =>
-          TotalRecebimentoParcialDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) =>
+                  DesdobramentoProdutoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+      ..totalRecebimentoParcial =
+          (json['totalRecebimentoParcial'] as List<dynamic>?)
+                  ?.map((e) => TotalRecebimentoParcialDTO.fromJson(
+                      e as Map<String, dynamic>))
+                  .toList() ??
+              []
       ..saldo =
-      json['saldo'] == null ? null : BigDecimal.fromJson(json['saldo'])
+          json['saldo'] == null ? null : BigDecimal.fromJson(json['saldo'])
       ..pendenciaEmissaoFiscal = json['pendenciaEmissaoFiscal'] as int?;
 
 Map<String, dynamic> _$ConferenciaCaixaDTOToJson(
-    ConferenciaCaixaDTO instance) =>
+        ConferenciaCaixaDTO instance) =>
     <String, dynamic>{
       'turnoSimplificadoDTO': instance.turnoSimplificadoDTO,
       'extratoTurnoDTO': instance.extratoTurnoDTO,
@@ -4690,7 +4629,7 @@ Map<String, dynamic> _$ConferenciaCaixaDTOToJson(
       'desdobramentoVendaDTO': instance.desdobramentoVendaDTO,
       'vendasModuloDTOList': instance.vendasModuloDTOList,
       'desdobramentoGrupoProdutosDTOList':
-      instance.desdobramentoGrupoProdutosDTOList,
+          instance.desdobramentoGrupoProdutosDTOList,
       'pacotesVendidos': instance.pacotesVendidos,
       'totalRecebimentoParcial': instance.totalRecebimentoParcial,
       'saldo': instance.saldo,
@@ -4698,7 +4637,7 @@ Map<String, dynamic> _$ConferenciaCaixaDTOToJson(
     };
 
 TurnoSimplificadoDTO _$TurnoSimplificadoDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     TurnoSimplificadoDTO()
       ..idTurno = json['idTurno'] as int?
       ..idUsuario = json['idUsuario'] as int?
@@ -4714,7 +4653,7 @@ TurnoSimplificadoDTO _$TurnoSimplificadoDTOFromJson(
       ..observacao = json['observacao'] as String?;
 
 Map<String, dynamic> _$TurnoSimplificadoDTOToJson(
-    TurnoSimplificadoDTO instance) =>
+        TurnoSimplificadoDTO instance) =>
     <String, dynamic>{
       'idTurno': instance.idTurno,
       'idUsuario': instance.idUsuario,
@@ -4727,16 +4666,16 @@ Map<String, dynamic> _$TurnoSimplificadoDTOToJson(
     };
 
 TotalFinalizadoraDTO _$TotalFinalizadoraDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     TotalFinalizadoraDTO()
       ..idFinalizadora = json['idFinalizadora'] as int?
       ..codigo = json['codigo'] as int?
       ..descricao = json['descricao'] as String?
       ..total =
-      json['total'] == null ? null : BigDecimal.fromJson(json['total']);
+          json['total'] == null ? null : BigDecimal.fromJson(json['total']);
 
 Map<String, dynamic> _$TotalFinalizadoraDTOToJson(
-    TotalFinalizadoraDTO instance) =>
+        TotalFinalizadoraDTO instance) =>
     <String, dynamic>{
       'idFinalizadora': instance.idFinalizadora,
       'codigo': instance.codigo,
@@ -4744,18 +4683,15 @@ Map<String, dynamic> _$TotalFinalizadoraDTOToJson(
       'total': instance.total,
     };
 
-OperacaoDTO _$OperacaoDTOFromJson(Map<String, dynamic> json) =>
-    OperacaoDTO()
-      ..tipoOperacao = json['tipoOperacao'] as String?
-      ..data = json['data'] == null ? null : DateTime.parse(
-          json['data'] as String)
-      ..valor = json['valor'] == null ? null : BigDecimal.fromJson(
-          json['valor'])
-      ..favorecido = json['favorecido'] as String?
-      ..historico = json['historico'] as String?
-      ..idFinalizadora = json['idFinalizadora'] as int?
-      ..codigo = json['codigo'] as int?
-      ..descricaoFinalizadora = json['descricaoFinalizadora'] as String?;
+OperacaoDTO _$OperacaoDTOFromJson(Map<String, dynamic> json) => OperacaoDTO()
+  ..tipoOperacao = json['tipoOperacao'] as String?
+  ..data = json['data'] == null ? null : DateTime.parse(json['data'] as String)
+  ..valor = json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
+  ..favorecido = json['favorecido'] as String?
+  ..historico = json['historico'] as String?
+  ..idFinalizadora = json['idFinalizadora'] as int?
+  ..codigo = json['codigo'] as int?
+  ..descricaoFinalizadora = json['descricaoFinalizadora'] as String?;
 
 Map<String, dynamic> _$OperacaoDTOToJson(OperacaoDTO instance) =>
     <String, dynamic>{
@@ -4771,22 +4707,29 @@ Map<String, dynamic> _$OperacaoDTOToJson(OperacaoDTO instance) =>
 
 ExtratoTurnoDTO _$ExtratoTurnoDTOFromJson(Map<String, dynamic> json) =>
     ExtratoTurnoDTO()
-      ..vendasPorFormaDePagamento = (json['vendasPorFormaDePagamento']
-      as List<dynamic>?)
-          ?.map((e) => TotalFinalizadoraDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+      ..vendasPorFormaDePagamento =
+          (json['vendasPorFormaDePagamento'] as List<dynamic>?)
+                  ?.map((e) =>
+                      TotalFinalizadoraDTO.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              []
       ..suprimentos = (json['suprimentos'] as List<dynamic>?)
-          ?.map((e) => OperacaoDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) => OperacaoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..sangrias = (json['sangrias'] as List<dynamic>?)
-          ?.map((e) => OperacaoDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) => OperacaoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..recebimentos = (json['recebimentos'] as List<dynamic>?)
-          ?.map((e) => OperacaoDTO.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) => OperacaoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..fechamentos = (json['fechamentos'] as List<dynamic>?)
-          ?.map((e) => TurnoFechamentoDTO.fromJson(e as Map<String, dynamic>))
-          .toList();
+              ?.map(
+                  (e) => TurnoFechamentoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$ExtratoTurnoDTOToJson(ExtratoTurnoDTO instance) =>
     <String, dynamic>{
@@ -4806,10 +4749,10 @@ NotaSimplificadaDTO _$NotaSimplificadaDTOFromJson(Map<String, dynamic> json) =>
           : BigDecimal.fromJson(json['valorVenda'])
       ..numeroVenda = json['numeroVenda'] as int?
       ..data =
-      json['data'] == null ? null : DateTime.parse(json['data'] as String);
+          json['data'] == null ? null : DateTime.parse(json['data'] as String);
 
 Map<String, dynamic> _$NotaSimplificadaDTOToJson(
-    NotaSimplificadaDTO instance) =>
+        NotaSimplificadaDTO instance) =>
     <String, dynamic>{
       'idNota': instance.idNota,
       'statusVenda': instance.statusVenda,
@@ -4819,7 +4762,7 @@ Map<String, dynamic> _$NotaSimplificadaDTOToJson(
     };
 
 TaxaServicoGracomDTO _$TaxaServicoGracomDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     TaxaServicoGracomDTO()
       ..codigo = json['codigo'] as int?
       ..nome = json['nome'] as String?
@@ -4831,7 +4774,7 @@ TaxaServicoGracomDTO _$TaxaServicoGracomDTOFromJson(
           : BigDecimal.fromJson(json['taxaServico']);
 
 Map<String, dynamic> _$TaxaServicoGracomDTOToJson(
-    TaxaServicoGracomDTO instance) =>
+        TaxaServicoGracomDTO instance) =>
     <String, dynamic>{
       'codigo': instance.codigo,
       'nome': instance.nome,
@@ -4840,7 +4783,7 @@ Map<String, dynamic> _$TaxaServicoGracomDTOToJson(
     };
 
 DesdobramentoVendaDTO _$DesdobramentoVendaDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     DesdobramentoVendaDTO()
       ..vendaBruta = json['vendaBruta'] == null
           ? null
@@ -4868,7 +4811,7 @@ DesdobramentoVendaDTO _$DesdobramentoVendaDTOFromJson(
           : BigDecimal.fromJson(json['isencaoTaxaEntrega']);
 
 Map<String, dynamic> _$DesdobramentoVendaDTOToJson(
-    DesdobramentoVendaDTO instance) =>
+        DesdobramentoVendaDTO instance) =>
     <String, dynamic>{
       'vendaBruta': instance.vendaBruta,
       'acrescimo': instance.acrescimo,
@@ -4898,7 +4841,7 @@ Map<String, dynamic> _$VendasModuloDTOToJson(VendasModuloDTO instance) =>
     };
 
 DesdobramentoProdutoDTO _$DesdobramentoProdutoDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     DesdobramentoProdutoDTO()
       ..descricao = json['descricao'] as String?
       ..quantidadeVendida = json['quantidadeVendida'] == null
@@ -4911,7 +4854,7 @@ DesdobramentoProdutoDTO _$DesdobramentoProdutoDTOFromJson(
       ..idGrupo = json['idGrupo'] as int?;
 
 Map<String, dynamic> _$DesdobramentoProdutoDTOToJson(
-    DesdobramentoProdutoDTO instance) =>
+        DesdobramentoProdutoDTO instance) =>
     <String, dynamic>{
       'descricao': instance.descricao,
       'quantidadeVendida': instance.quantidadeVendida,
@@ -4921,7 +4864,7 @@ Map<String, dynamic> _$DesdobramentoProdutoDTOToJson(
     };
 
 DesdobramentoGrupoProdutosDTO _$DesdobramentoGrupoProdutosDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     DesdobramentoGrupoProdutosDTO()
       ..descricaoGrupo = json['descricaoGrupo'] as String?
       ..quantidadeVendida = json['quantidadeVendida'] == null
@@ -4933,14 +4876,15 @@ DesdobramentoGrupoProdutosDTO _$DesdobramentoGrupoProdutosDTOFromJson(
       ..ticketMedio = json['ticketMedio'] == null
           ? null
           : BigDecimal.fromJson(json['ticketMedio'])
-      ..desdobramentoProdutoDTOList =
-      (json['desdobramentoProdutoDTOList'] as List<dynamic>?)
-          ?.map((e) =>
-          DesdobramentoProdutoDTO.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..desdobramentoProdutoDTOList = (json['desdobramentoProdutoDTOList']
+                  as List<dynamic>?)
+              ?.map((e) =>
+                  DesdobramentoProdutoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$DesdobramentoGrupoProdutosDTOToJson(
-    DesdobramentoGrupoProdutosDTO instance) =>
+        DesdobramentoGrupoProdutosDTO instance) =>
     <String, dynamic>{
       'descricaoGrupo': instance.descricaoGrupo,
       'quantidadeVendida': instance.quantidadeVendida,
@@ -4996,7 +4940,7 @@ RegiaoEmpresa _$RegiaoEmpresaFromJson(Map<String, dynamic> json) =>
       ..id = json['id'] as int?
       ..idEmpresa = json['idEmpresa'] as int?
       ..valor =
-      json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
+          json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
       ..tipoValor = json['tipoValor'] as String?
       ..itinerario = json['itinerario'] as int?
       ..prazoEntregaDias = json['prazoEntregaDias'] as int?
@@ -5014,7 +4958,7 @@ Map<String, dynamic> _$RegiaoEmpresaToJson(RegiaoEmpresa instance) =>
     };
 
 ClienteSimplificadoDTO _$ClienteSimplificadoDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     ClienteSimplificadoDTO()
       ..id = json['id'] as int?
       ..apelido = json['apelido'] as String?
@@ -5022,7 +4966,7 @@ ClienteSimplificadoDTO _$ClienteSimplificadoDTOFromJson(
       ..telefone = json['telefone'] as String?;
 
 Map<String, dynamic> _$ClienteSimplificadoDTOToJson(
-    ClienteSimplificadoDTO instance) =>
+        ClienteSimplificadoDTO instance) =>
     <String, dynamic>{
       'id': instance.id,
       'apelido': instance.apelido,
@@ -5030,16 +4974,14 @@ Map<String, dynamic> _$ClienteSimplificadoDTOToJson(
       'telefone': instance.telefone,
     };
 
-NotaXml _$NotaXmlFromJson(Map<String, dynamic> json) =>
-    NotaXml()
-      ..id = json['id'] as int?
-      ..xmlEmissao = json['xmlEmissao'] as String?
-      ..xmlEnvio = json['xmlEnvio'] as String?
-      ..xmlCancelamento = json['xmlCancelamento'] as String?
-      ..xmlInutilizacao = json['xmlInutilizacao'] as String?;
+NotaXml _$NotaXmlFromJson(Map<String, dynamic> json) => NotaXml()
+  ..id = json['id'] as int?
+  ..xmlEmissao = json['xmlEmissao'] as String?
+  ..xmlEnvio = json['xmlEnvio'] as String?
+  ..xmlCancelamento = json['xmlCancelamento'] as String?
+  ..xmlInutilizacao = json['xmlInutilizacao'] as String?;
 
-Map<String, dynamic> _$NotaXmlToJson(NotaXml instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$NotaXmlToJson(NotaXml instance) => <String, dynamic>{
       'id': instance.id,
       'xmlEmissao': instance.xmlEmissao,
       'xmlEnvio': instance.xmlEnvio,
@@ -5057,9 +4999,10 @@ HistoricoPedidoDTO _$HistoricoPedidoDTOFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['dataUltimoPedido'] as String)
       ..tempoMedioExpedicao = json['tempoMedioExpedicao'] as String?
-      ..pedidoDTOList = (json['pedidoDTOList'] as List<dynamic>)
-          .map((e) => PedidoDTO.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..pedidoDTOList = (json['pedidoDTOList'] as List<dynamic>?)
+              ?.map((e) => PedidoDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$HistoricoPedidoDTOToJson(HistoricoPedidoDTO instance) =>
     <String, dynamic>{
@@ -5070,21 +5013,18 @@ Map<String, dynamic> _$HistoricoPedidoDTOToJson(HistoricoPedidoDTO instance) =>
       'pedidoDTOList': instance.pedidoDTOList,
     };
 
-PedidoDTO _$PedidoDTOFromJson(Map<String, dynamic> json) =>
-    PedidoDTO()
-      ..idNota = json['idNota'] as int?
-      ..data = json['data'] == null ? null : DateTime.parse(
-          json['data'] as String)
-      ..numeroPedido = json['numeroPedido'] as int?
-      ..total = json['total'] == null ? null : BigDecimal.fromJson(
-          json['total'])
-      ..origem = json['origem'] as String?
-      ..pedidoItemDTOList = (json['pedidoItemDTOList'] as List<dynamic>)
-          .map((e) => PedidoItemDTO.fromJson(e as Map<String, dynamic>))
-          .toList();
+PedidoDTO _$PedidoDTOFromJson(Map<String, dynamic> json) => PedidoDTO()
+  ..idNota = json['idNota'] as int?
+  ..data = json['data'] == null ? null : DateTime.parse(json['data'] as String)
+  ..numeroPedido = json['numeroPedido'] as int?
+  ..total = json['total'] == null ? null : BigDecimal.fromJson(json['total'])
+  ..origem = json['origem'] as String?
+  ..pedidoItemDTOList = (json['pedidoItemDTOList'] as List<dynamic>?)
+          ?.map((e) => PedidoItemDTO.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      [];
 
-Map<String, dynamic> _$PedidoDTOToJson(PedidoDTO instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PedidoDTOToJson(PedidoDTO instance) => <String, dynamic>{
       'idNota': instance.idNota,
       'data': instance.data?.toIso8601String(),
       'numeroPedido': instance.numeroPedido,
@@ -5103,10 +5043,11 @@ PedidoItemDTO _$PedidoItemDTOFromJson(Map<String, dynamic> json) =>
           ? null
           : BigDecimal.fromJson(json['quantidade'])
       ..total =
-      json['total'] == null ? null : BigDecimal.fromJson(json['total'])
-      ..subitens = (json['subitens'] as List<dynamic>)
-          .map((e) => PedidoItemDTO.fromJson(e as Map<String, dynamic>))
-          .toList();
+          json['total'] == null ? null : BigDecimal.fromJson(json['total'])
+      ..subitens = (json['subitens'] as List<dynamic>?)
+              ?.map((e) => PedidoItemDTO.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$PedidoItemDTOToJson(PedidoItemDTO instance) =>
     <String, dynamic>{
@@ -5142,7 +5083,7 @@ ClienteExtratoDTO _$ClienteExtratoDTOFromJson(Map<String, dynamic> json) =>
           ? null
           : Cliente.fromJson(json['cliente'] as Map<String, dynamic>)
       ..limite =
-      json['limite'] == null ? null : BigDecimal.fromJson(json['limite'])
+          json['limite'] == null ? null : BigDecimal.fromJson(json['limite'])
       ..titulosAbertos = json['titulosAbertos'] == null
           ? null
           : BigDecimal.fromJson(json['titulosAbertos'])
@@ -5152,9 +5093,10 @@ ClienteExtratoDTO _$ClienteExtratoDTOFromJson(Map<String, dynamic> json) =>
       ..limiteDisponivel = json['limiteDisponivel'] == null
           ? null
           : BigDecimal.fromJson(json['limiteDisponivel'])
-      ..contas = (json['contas'] as List<dynamic>)
-          .map((e) => ClienteConta.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..contas = (json['contas'] as List<dynamic>?)
+              ?.map((e) => ClienteConta.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$ClienteExtratoDTOToJson(ClienteExtratoDTO instance) =>
     <String, dynamic>{
@@ -5166,48 +5108,43 @@ Map<String, dynamic> _$ClienteExtratoDTOToJson(ClienteExtratoDTO instance) =>
       'contas': instance.contas,
     };
 
-ClienteConta _$ClienteContaFromJson(Map<String, dynamic> json) =>
-    ClienteConta()
-      ..id = json['id'] as int?
-      ..idCliente = json['idCliente'] as int?
-      ..cliente = json['cliente'] == null
-          ? null
-          : Cliente.fromJson(json['cliente'] as Map<String, dynamic>)
-      ..idAutorizado = json['idAutorizado'] as int?
-      ..autorizado = json['autorizado'] == null
-          ? null
-          : ClienteAutorizado.fromJson(
-          json['autorizado'] as Map<String, dynamic>)
-      ..dataLancamento = json['dataLancamento'] == null
-          ? null
-          : DateTime.parse(json['dataLancamento'] as String)
-      ..tipoOperacao = json['tipoOperacao'] as String?
-      ..valor = json['valor'] == null ? null : BigDecimal.fromJson(
-          json['valor'])
-      ..saldo = json['saldo'] == null ? null : BigDecimal.fromJson(
-          json['saldo'])
-      ..confirmado = json['confirmado'] as bool?
-      ..idNota = json['idNota'] as int?
-      ..nota = json['nota'] == null
-          ? null
-          : Nota.fromJson(json['nota'] as Map<String, dynamic>)
-      ..idOperacaoCaixa = json['idOperacaoCaixa'] as int?
-      ..operacaoCaixa = json['operacaoCaixa'] == null
-          ? null
-          : Operacao.fromJson(json['operacaoCaixa'] as Map<String, dynamic>)
-      ..idTurno = json['idTurno'] as int?
-      ..turno = json['turno'] == null
-          ? null
-          : Turno.fromJson(json['turno'] as Map<String, dynamic>)
-      ..idClienteFatura = json['idClienteFatura'] as int?
-      ..clienteFatura = json['clienteFatura'] == null
-          ? null
-          : ClienteFatura.fromJson(
-          json['clienteFatura'] as Map<String, dynamic>)
-      ..observacao = json['observacao'] as String?
-      ..clienteContaConcentrador = json['clienteContaConcentrador'] == null
-          ? null
-          : ClienteContaConcentrador.fromJson(
+ClienteConta _$ClienteContaFromJson(Map<String, dynamic> json) => ClienteConta()
+  ..id = json['id'] as int?
+  ..idCliente = json['idCliente'] as int?
+  ..cliente = json['cliente'] == null
+      ? null
+      : Cliente.fromJson(json['cliente'] as Map<String, dynamic>)
+  ..idAutorizado = json['idAutorizado'] as int?
+  ..autorizado = json['autorizado'] == null
+      ? null
+      : ClienteAutorizado.fromJson(json['autorizado'] as Map<String, dynamic>)
+  ..dataLancamento = json['dataLancamento'] == null
+      ? null
+      : DateTime.parse(json['dataLancamento'] as String)
+  ..tipoOperacao = json['tipoOperacao'] as String?
+  ..valor = json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
+  ..saldo = json['saldo'] == null ? null : BigDecimal.fromJson(json['saldo'])
+  ..confirmado = json['confirmado'] as bool?
+  ..idNota = json['idNota'] as int?
+  ..nota = json['nota'] == null
+      ? null
+      : Nota.fromJson(json['nota'] as Map<String, dynamic>)
+  ..idOperacaoCaixa = json['idOperacaoCaixa'] as int?
+  ..operacaoCaixa = json['operacaoCaixa'] == null
+      ? null
+      : Operacao.fromJson(json['operacaoCaixa'] as Map<String, dynamic>)
+  ..idTurno = json['idTurno'] as int?
+  ..turno = json['turno'] == null
+      ? null
+      : Turno.fromJson(json['turno'] as Map<String, dynamic>)
+  ..idClienteFatura = json['idClienteFatura'] as int?
+  ..clienteFatura = json['clienteFatura'] == null
+      ? null
+      : ClienteFatura.fromJson(json['clienteFatura'] as Map<String, dynamic>)
+  ..observacao = json['observacao'] as String?
+  ..clienteContaConcentrador = json['clienteContaConcentrador'] == null
+      ? null
+      : ClienteContaConcentrador.fromJson(
           json['clienteContaConcentrador'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ClienteContaToJson(ClienteConta instance) =>
@@ -5245,7 +5182,7 @@ ClienteFatura _$ClienteFaturaFromJson(Map<String, dynamic> json) =>
           ? null
           : Cliente.fromJson(json['cliente'] as Map<String, dynamic>)
       ..valor =
-      json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
+          json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
       ..idNota = json['idNota'] as int?
       ..nota = json['nota'] == null
           ? null
@@ -5255,12 +5192,14 @@ ClienteFatura _$ClienteFaturaFromJson(Map<String, dynamic> json) =>
       ..dataCancelamento = json['dataCancelamento'] == null
           ? null
           : DateTime.parse(json['dataCancelamento'] as String)
-      ..contas = (json['contas'] as List<dynamic>)
-          .map((e) => Conta.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..clienteContas = (json['clienteContas'] as List<dynamic>)
-          .map((e) => ClienteConta.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..contas = (json['contas'] as List<dynamic>?)
+              ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+      ..clienteContas = (json['clienteContas'] as List<dynamic>?)
+              ?.map((e) => ClienteConta.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$ClienteFaturaToJson(ClienteFatura instance) =>
     <String, dynamic>{
@@ -5279,7 +5218,7 @@ Map<String, dynamic> _$ClienteFaturaToJson(ClienteFatura instance) =>
     };
 
 ClienteContaConcentrador _$ClienteContaConcentradorFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     ClienteContaConcentrador()
       ..id = json['id'] as int?
       ..clienteConta = json['clienteConta'] == null
@@ -5290,7 +5229,7 @@ ClienteContaConcentrador _$ClienteContaConcentradorFromJson(
       ..erro = json['erro'] as String?;
 
 Map<String, dynamic> _$ClienteContaConcentradorToJson(
-    ClienteContaConcentrador instance) =>
+        ClienteContaConcentrador instance) =>
     <String, dynamic>{
       'id': instance.id,
       'clienteConta': instance.clienteConta,
@@ -5299,144 +5238,142 @@ Map<String, dynamic> _$ClienteContaConcentradorToJson(
       'erro': instance.erro,
     };
 
-Conta _$ContaFromJson(Map<String, dynamic> json) =>
-    Conta()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..empresa = json['empresa'] == null
-          ? null
-          : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
-      ..idPessoa = json['idPessoa'] as int?
-      ..pessoa = json['pessoa'] == null
-          ? null
-          : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
-      ..descricao = json['descricao'] as String?
-      ..observacao = json['observacao'] as String?
-      ..codigo = json['codigo'] as String?
-      ..numeroDocumento = json['numeroDocumento'] as String?
-      ..dataLancamento = json['dataLancamento'] == null
-          ? null
-          : DateTime.parse(json['dataLancamento'] as String)
-      ..dataEmissao = json['dataEmissao'] == null
-          ? null
-          : DateTime.parse(json['dataEmissao'] as String)
-      ..dataCompetencia = json['dataCompetencia'] == null
-          ? null
-          : DateTime.parse(json['dataCompetencia'] as String)
-      ..dataVencimento = json['dataVencimento'] == null
-          ? null
-          : DateTime.parse(json['dataVencimento'] as String)
-      ..idBanco = json['idBanco'] as int?
-      ..banco = json['banco'] == null
-          ? null
-          : Banco.fromJson(json['banco'] as Map<String, dynamic>)
-      ..numeroParcelas = json['numeroParcelas'] as int?
-      ..parcela = json['parcela'] as String?
-      ..descontoAntecipacao = json['descontoAntecipacao'] == null
-          ? null
-          : BigDecimal.fromJson(json['descontoAntecipacao'])
-      ..multaAtraso = json['multaAtraso'] == null
-          ? null
-          : BigDecimal.fromJson(json['multaAtraso'])
-      ..jurosDiario = json['jurosDiario'] == null
-          ? null
-          : BigDecimal.fromJson(json['jurosDiario'])
-      ..valor = json['valor'] == null ? null : BigDecimal.fromJson(
-          json['valor'])
-      ..desconto =
+Conta _$ContaFromJson(Map<String, dynamic> json) => Conta()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..empresa = json['empresa'] == null
+      ? null
+      : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
+  ..idPessoa = json['idPessoa'] as int?
+  ..pessoa = json['pessoa'] == null
+      ? null
+      : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
+  ..descricao = json['descricao'] as String?
+  ..observacao = json['observacao'] as String?
+  ..codigo = json['codigo'] as String?
+  ..numeroDocumento = json['numeroDocumento'] as String?
+  ..dataLancamento = json['dataLancamento'] == null
+      ? null
+      : DateTime.parse(json['dataLancamento'] as String)
+  ..dataEmissao = json['dataEmissao'] == null
+      ? null
+      : DateTime.parse(json['dataEmissao'] as String)
+  ..dataCompetencia = json['dataCompetencia'] == null
+      ? null
+      : DateTime.parse(json['dataCompetencia'] as String)
+  ..dataVencimento = json['dataVencimento'] == null
+      ? null
+      : DateTime.parse(json['dataVencimento'] as String)
+  ..idBanco = json['idBanco'] as int?
+  ..banco = json['banco'] == null
+      ? null
+      : Banco.fromJson(json['banco'] as Map<String, dynamic>)
+  ..numeroParcelas = json['numeroParcelas'] as int?
+  ..parcela = json['parcela'] as String?
+  ..descontoAntecipacao = json['descontoAntecipacao'] == null
+      ? null
+      : BigDecimal.fromJson(json['descontoAntecipacao'])
+  ..multaAtraso = json['multaAtraso'] == null
+      ? null
+      : BigDecimal.fromJson(json['multaAtraso'])
+  ..jurosDiario = json['jurosDiario'] == null
+      ? null
+      : BigDecimal.fromJson(json['jurosDiario'])
+  ..valor = json['valor'] == null ? null : BigDecimal.fromJson(json['valor'])
+  ..desconto =
       json['desconto'] == null ? null : BigDecimal.fromJson(json['desconto'])
-      ..jurosMulta = json['jurosMulta'] == null
-          ? null
-          : BigDecimal.fromJson(json['jurosMulta'])
-      ..tipoConta = json['tipoConta'] as String?
-      ..dataPagamento = json['dataPagamento'] == null
-          ? null
-          : DateTime.parse(json['dataPagamento'] as String)
-      ..valorPago =
+  ..jurosMulta = json['jurosMulta'] == null
+      ? null
+      : BigDecimal.fromJson(json['jurosMulta'])
+  ..tipoConta = json['tipoConta'] as String?
+  ..dataPagamento = json['dataPagamento'] == null
+      ? null
+      : DateTime.parse(json['dataPagamento'] as String)
+  ..valorPago =
       json['valorPago'] == null ? null : BigDecimal.fromJson(json['valorPago'])
-      ..idFinalizadora = json['idFinalizadora'] as int?
-      ..finalizadora = json['finalizadora'] == null
-          ? null
-          : Finalizadora.fromJson(json['finalizadora'] as Map<String, dynamic>)
-      ..idContaCorrente = json['idContaCorrente'] as int?
-      ..contaCorrente = json['contaCorrente'] == null
-          ? null
-          : ContaCorrente.fromJson(
-          json['contaCorrente'] as Map<String, dynamic>)
-      ..idContaCorrenteCarteira = json['idContaCorrenteCarteira'] as int?
-      ..contaCorrenteCarteira = json['contaCorrenteCarteira'] == null
-          ? null
-          : ContaCorrenteCarteira.fromJson(
+  ..idFinalizadora = json['idFinalizadora'] as int?
+  ..finalizadora = json['finalizadora'] == null
+      ? null
+      : Finalizadora.fromJson(json['finalizadora'] as Map<String, dynamic>)
+  ..idContaCorrente = json['idContaCorrente'] as int?
+  ..contaCorrente = json['contaCorrente'] == null
+      ? null
+      : ContaCorrente.fromJson(json['contaCorrente'] as Map<String, dynamic>)
+  ..idContaCorrenteCarteira = json['idContaCorrenteCarteira'] as int?
+  ..contaCorrenteCarteira = json['contaCorrenteCarteira'] == null
+      ? null
+      : ContaCorrenteCarteira.fromJson(
           json['contaCorrenteCarteira'] as Map<String, dynamic>)
-      ..nossoNumero = json['nossoNumero'] as int?
-      ..idContaOrigem = json['idContaOrigem'] as int?
-      ..contaOrigem = json['contaOrigem'] == null
-          ? null
-          : Conta.fromJson(json['contaOrigem'] as Map<String, dynamic>)
-      ..pagamentosParciais = (json['pagamentosParciais'] as List<dynamic>?)
+  ..nossoNumero = json['nossoNumero'] as int?
+  ..idContaOrigem = json['idContaOrigem'] as int?
+  ..contaOrigem = json['contaOrigem'] == null
+      ? null
+      : Conta.fromJson(json['contaOrigem'] as Map<String, dynamic>)
+  ..pagamentosParciais = (json['pagamentosParciais'] as List<dynamic>?)
           ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..transferencia = json['transferencia'] as bool?
-      ..automatico = json['automatico'] as bool?
-      ..pago = json['pago'] as bool?
-      ..parcial = json['parcial'] as bool?
-      ..cancelado = json['cancelado'] as bool?
-      ..classificacoes = (json['classificacoes'] as List<dynamic>)
-          .map((e) => ContaClassificacao.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..centroCustos = (json['centroCustos'] as List<dynamic>)
-          .map((e) => ContaCentroCusto.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..idNota = json['idNota'] as int?
-      ..idContaLote = json['idContaLote'] as int?
-      ..contaLote = json['contaLote'] == null
-          ? null
-          : Contalote.fromJson(json['contaLote'] as Map<String, dynamic>)
-      ..nota = json['nota'] == null
-          ? null
-          : Nota.fromJson(json['nota'] as Map<String, dynamic>)
-      ..idClienteFatura = json['idClienteFatura'] as int?
-      ..clienteFatura = json['clienteFatura'] == null
-          ? null
-          : ClienteFatura.fromJson(
-          json['clienteFatura'] as Map<String, dynamic>)
-      ..idLoteDesmembramento = json['idLoteDesmembramento'] as int?
-      ..loteDesmembramento = json['loteDesmembramento'] == null
-          ? null
-          : LoteControleCartao.fromJson(
+          .toList() ??
+      []
+  ..transferencia = json['transferencia'] as bool?
+  ..automatico = json['automatico'] as bool?
+  ..pago = json['pago'] as bool?
+  ..parcial = json['parcial'] as bool?
+  ..cancelado = json['cancelado'] as bool?
+  ..classificacoes = (json['classificacoes'] as List<dynamic>?)
+          ?.map((e) => ContaClassificacao.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
+  ..centroCustos = (json['centroCustos'] as List<dynamic>?)
+          ?.map((e) => ContaCentroCusto.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      []
+  ..idNota = json['idNota'] as int?
+  ..idContaLote = json['idContaLote'] as int?
+  ..contaLote = json['contaLote'] == null
+      ? null
+      : Contalote.fromJson(json['contaLote'] as Map<String, dynamic>)
+  ..nota = json['nota'] == null
+      ? null
+      : Nota.fromJson(json['nota'] as Map<String, dynamic>)
+  ..idClienteFatura = json['idClienteFatura'] as int?
+  ..clienteFatura = json['clienteFatura'] == null
+      ? null
+      : ClienteFatura.fromJson(json['clienteFatura'] as Map<String, dynamic>)
+  ..idLoteDesmembramento = json['idLoteDesmembramento'] as int?
+  ..loteDesmembramento = json['loteDesmembramento'] == null
+      ? null
+      : LoteControleCartao.fromJson(
           json['loteDesmembramento'] as Map<String, dynamic>)
-      ..idLoteQuitacao = json['idLoteQuitacao'] as int?
-      ..loteQuitacao = json['loteQuitacao'] == null
-          ? null
-          : LoteControleCartao.fromJson(
+  ..idLoteQuitacao = json['idLoteQuitacao'] as int?
+  ..loteQuitacao = json['loteQuitacao'] == null
+      ? null
+      : LoteControleCartao.fromJson(
           json['loteQuitacao'] as Map<String, dynamic>)
-      ..idTransacaoCartao = json['idTransacaoCartao'] as int?
-      ..transacaoCartao = json['transacaoCartao'] == null
-          ? null
-          : TransacaoCartao.fromJson(
+  ..idTransacaoCartao = json['idTransacaoCartao'] as int?
+  ..transacaoCartao = json['transacaoCartao'] == null
+      ? null
+      : TransacaoCartao.fromJson(
           json['transacaoCartao'] as Map<String, dynamic>)
-      ..idRemessaBancaria = json['idRemessaBancaria'] as int?
-      ..remessaBancaria = json['remessaBancaria'] == null
-          ? null
-          : RemessaBancaria.fromJson(
+  ..idRemessaBancaria = json['idRemessaBancaria'] as int?
+  ..remessaBancaria = json['remessaBancaria'] == null
+      ? null
+      : RemessaBancaria.fromJson(
           json['remessaBancaria'] as Map<String, dynamic>)
-      ..idApuracaoRoyalty = json['idApuracaoRoyalty'] as int?
-      ..apuracaoRoyalty = json['apuracaoRoyalty'] == null
-          ? null
-          : ApuracaoRoyalty.fromJson(
+  ..idApuracaoRoyalty = json['idApuracaoRoyalty'] as int?
+  ..apuracaoRoyalty = json['apuracaoRoyalty'] == null
+      ? null
+      : ApuracaoRoyalty.fromJson(
           json['apuracaoRoyalty'] as Map<String, dynamic>)
-      ..idTurno = json['idTurno'] as int?
-      ..turno = json['turno'] == null
-          ? null
-          : Turno.fromJson(json['turno'] as Map<String, dynamic>)
-      ..idOperacaoOrigem = json['idOperacaoOrigem'] as int?
-      ..operacaoOrigem = json['operacaoOrigem'] == null
-          ? null
-          : Operacao.fromJson(json['operacaoOrigem'] as Map<String, dynamic>)
-      ..tipoApuracao = json['tipoApuracao'] as String?;
+  ..idTurno = json['idTurno'] as int?
+  ..turno = json['turno'] == null
+      ? null
+      : Turno.fromJson(json['turno'] as Map<String, dynamic>)
+  ..idOperacaoOrigem = json['idOperacaoOrigem'] as int?
+  ..operacaoOrigem = json['operacaoOrigem'] == null
+      ? null
+      : Operacao.fromJson(json['operacaoOrigem'] as Map<String, dynamic>)
+  ..tipoApuracao = json['tipoApuracao'] as String?;
 
-Map<String, dynamic> _$ContaToJson(Conta instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ContaToJson(Conta instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'empresa': instance.empresa,
@@ -5504,7 +5441,7 @@ Map<String, dynamic> _$ContaToJson(Conta instance) =>
     };
 
 ContaCorrenteCarteira _$ContaCorrenteCarteiraFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     ContaCorrenteCarteira()
       ..id = json['id'] as int?
       ..idEmpresa = json['idEmpresa'] as int?
@@ -5515,7 +5452,7 @@ ContaCorrenteCarteira _$ContaCorrenteCarteiraFromJson(
       ..contaCorrente = json['contaCorrente'] == null
           ? null
           : ContaCorrente.fromJson(
-          json['contaCorrente'] as Map<String, dynamic>)
+              json['contaCorrente'] as Map<String, dynamic>)
       ..carteira = json['carteira'] as int?
       ..formaEmissaoBoleto = json['formaEmissaoBoleto'] as String?
       ..tipoCobranca = json['tipoCobranca'] as String?
@@ -5538,7 +5475,7 @@ ContaCorrenteCarteira _$ContaCorrenteCarteiraFromJson(
           ? null
           : BigDecimal.fromJson(json['moraDiaria'])
       ..multa =
-      json['multa'] == null ? null : BigDecimal.fromJson(json['multa'])
+          json['multa'] == null ? null : BigDecimal.fromJson(json['multa'])
       ..descontoAntecipacao = json['descontoAntecipacao'] == null
           ? null
           : BigDecimal.fromJson(json['descontoAntecipacao'])
@@ -5553,7 +5490,7 @@ ContaCorrenteCarteira _$ContaCorrenteCarteiraFromJson(
       ..ativa = json['ativa'] as bool?;
 
 Map<String, dynamic> _$ContaCorrenteCarteiraToJson(
-    ContaCorrenteCarteira instance) =>
+        ContaCorrenteCarteira instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
@@ -5648,27 +5585,26 @@ Map<String, dynamic> _$ContaCentroCustoToJson(ContaCentroCusto instance) =>
       'valorRateio': instance.valorRateio,
     };
 
-Contalote _$ContaloteFromJson(Map<String, dynamic> json) =>
-    Contalote()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..empresa = json['empresa'] == null
-          ? null
-          : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
-      ..dataCriacao = json['dataCriacao'] == null
-          ? null
-          : DateTime.parse(json['dataCriacao'] as String)
-      ..idPessoa = json['idPessoa'] as int?
-      ..pessoa = json['pessoa'] == null
-          ? null
-          : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
-      ..numeroParcelas = json['numeroParcelas'] as int?
-      ..parcelas = (json['parcelas'] as List<dynamic>?)
+Contalote _$ContaloteFromJson(Map<String, dynamic> json) => Contalote()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..empresa = json['empresa'] == null
+      ? null
+      : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
+  ..dataCriacao = json['dataCriacao'] == null
+      ? null
+      : DateTime.parse(json['dataCriacao'] as String)
+  ..idPessoa = json['idPessoa'] as int?
+  ..pessoa = json['pessoa'] == null
+      ? null
+      : Pessoa.fromJson(json['pessoa'] as Map<String, dynamic>)
+  ..numeroParcelas = json['numeroParcelas'] as int?
+  ..parcelas = (json['parcelas'] as List<dynamic>?)
           ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
-          .toList();
+          .toList() ??
+      [];
 
-Map<String, dynamic> _$ContaloteToJson(Contalote instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ContaloteToJson(Contalote instance) => <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'empresa': instance.empresa,
@@ -5687,7 +5623,7 @@ LoteControleCartao _$LoteControleCartaoFromJson(Map<String, dynamic> json) =>
           ? null
           : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
       ..data =
-      json['data'] == null ? null : DateTime.parse(json['data'] as String)
+          json['data'] == null ? null : DateTime.parse(json['data'] as String)
       ..idUser = json['idUser'] as int?
       ..user = json['user'] == null
           ? null
@@ -5695,15 +5631,18 @@ LoteControleCartao _$LoteControleCartaoFromJson(Map<String, dynamic> json) =>
       ..observacao = json['observacao'] as String?
       ..tipoLoteControleCartao = json['tipoLoteControleCartao'] as String?
       ..transacoes = (json['transacoes'] as List<dynamic>?)
-          ?.map((e) => TransacaoCartao.fromJson(e as Map<String, dynamic>))
-          .toList()
+              ?.map((e) => TransacaoCartao.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
       ..titulosDesmembramento =
-      (json['titulosDesmembramento'] as List<dynamic>?)
-          ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
-          .toList()
+          (json['titulosDesmembramento'] as List<dynamic>?)
+                  ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              []
       ..titulosQuitacao = (json['titulosQuitacao'] as List<dynamic>?)
-          ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
-          .toList();
+              ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$LoteControleCartaoToJson(LoteControleCartao instance) =>
     <String, dynamic>{
@@ -5731,19 +5670,19 @@ RemessaBancaria _$RemessaBancariaFromJson(Map<String, dynamic> json) =>
       ..contaCorrente = json['contaCorrente'] == null
           ? null
           : ContaCorrente.fromJson(
-          json['contaCorrente'] as Map<String, dynamic>)
+              json['contaCorrente'] as Map<String, dynamic>)
       ..idContaCorrenteCarteira = json['idContaCorrenteCarteira'] as int?
       ..contaCorrenteCarteira = json['contaCorrenteCarteira'] == null
           ? null
           : ContaCorrenteCarteira.fromJson(
-          json['contaCorrenteCarteira'] as Map<String, dynamic>)
+              json['contaCorrenteCarteira'] as Map<String, dynamic>)
       ..sequencia = json['sequencia'] as int?
       ..tipoRemessa = json['tipoRemessa'] as String?
       ..data =
-      json['data'] == null ? null : DateTime.parse(json['data'] as String)
+          json['data'] == null ? null : DateTime.parse(json['data'] as String)
       ..contas = (json['contas'] as List<dynamic>?)
-          ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           [];
 
 Map<String, dynamic> _$RemessaBancariaToJson(RemessaBancaria instance) =>
@@ -5792,12 +5731,15 @@ ApuracaoRoyalty _$ApuracaoRoyaltyFromJson(Map<String, dynamic> json) =>
       ..valorMarketing = json['valorMarketing'] == null
           ? null
           : BigDecimal.fromJson(json['valorMarketing'])
-      ..lojas = (json['lojas'] as List<dynamic>)
-          .map((e) => ApuracaoRoyaltyLoja.fromJson(e as Map<String, dynamic>))
-          .toList()
-      ..contas = (json['contas'] as List<dynamic>)
-          .map((e) => Conta.fromJson(e as Map<String, dynamic>))
-          .toList();
+      ..lojas = (json['lojas'] as List<dynamic>?)
+              ?.map((e) =>
+                  ApuracaoRoyaltyLoja.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          []
+      ..contas = (json['contas'] as List<dynamic>?)
+              ?.map((e) => Conta.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [];
 
 Map<String, dynamic> _$ApuracaoRoyaltyToJson(ApuracaoRoyalty instance) =>
     <String, dynamic>{
@@ -5827,13 +5769,13 @@ ApuracaoRoyaltyLoja _$ApuracaoRoyaltyLojaFromJson(Map<String, dynamic> json) =>
       ..apuracaoRoyalty = json['apuracaoRoyalty'] == null
           ? null
           : ApuracaoRoyalty.fromJson(
-          json['apuracaoRoyalty'] as Map<String, dynamic>)
+              json['apuracaoRoyalty'] as Map<String, dynamic>)
       ..idEmpresa = json['idEmpresa'] as int?
       ..empresa = json['empresa'] == null
           ? null
           : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
       ..data =
-      json['data'] == null ? null : DateTime.parse(json['data'] as String)
+          json['data'] == null ? null : DateTime.parse(json['data'] as String)
       ..vendaBruta = json['vendaBruta'] == null
           ? null
           : BigDecimal.fromJson(json['vendaBruta'])
@@ -5899,7 +5841,7 @@ ApuracaoRoyaltyLoja _$ApuracaoRoyaltyLojaFromJson(Map<String, dynamic> json) =>
           : Nota.fromJson(json['notaMarketing'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ApuracaoRoyaltyLojaToJson(
-    ApuracaoRoyaltyLoja instance) =>
+        ApuracaoRoyaltyLoja instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idApuracaoRoyalty': instance.idApuracaoRoyalty,
@@ -5932,28 +5874,26 @@ Map<String, dynamic> _$ApuracaoRoyaltyLojaToJson(
       'notaMarketing': instance.notaMarketing,
     };
 
-CentroCusto _$CentroCustoFromJson(Map<String, dynamic> json) =>
-    CentroCusto()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..empresa = json['empresa'] == null
-          ? null
-          : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
-      ..descricao = json['descricao'] as String?
-      ..codigo = json['codigo'] as String?
-      ..idCentroCustoRaiz = json['idCentroCustoRaiz'] as int?
-      ..centroCustoRaiz = json['centroCustoRaiz'] == null
-          ? null
-          : CentroCusto.fromJson(
-          json['centroCustoRaiz'] as Map<String, dynamic>)
-      ..idCentroCustoPai = json['idCentroCustoPai'] as int?
-      ..centroCustoPai = json['centroCustoPai'] == null
-          ? null
-          : CentroCusto.fromJson(json['centroCustoPai'] as Map<String, dynamic>)
-      ..subitens = (json['subitens'] as List<dynamic>?)
+CentroCusto _$CentroCustoFromJson(Map<String, dynamic> json) => CentroCusto()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..empresa = json['empresa'] == null
+      ? null
+      : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
+  ..descricao = json['descricao'] as String?
+  ..codigo = json['codigo'] as String?
+  ..idCentroCustoRaiz = json['idCentroCustoRaiz'] as int?
+  ..centroCustoRaiz = json['centroCustoRaiz'] == null
+      ? null
+      : CentroCusto.fromJson(json['centroCustoRaiz'] as Map<String, dynamic>)
+  ..idCentroCustoPai = json['idCentroCustoPai'] as int?
+  ..centroCustoPai = json['centroCustoPai'] == null
+      ? null
+      : CentroCusto.fromJson(json['centroCustoPai'] as Map<String, dynamic>)
+  ..subitens = (json['subitens'] as List<dynamic>?)
           ?.map((e) => CentroCusto.fromJson(e as Map<String, dynamic>))
           .toList() ??
-          [];
+      [];
 
 Map<String, dynamic> _$CentroCustoToJson(CentroCusto instance) =>
     <String, dynamic>{
@@ -5969,29 +5909,29 @@ Map<String, dynamic> _$CentroCustoToJson(CentroCusto instance) =>
       'subitens': instance.subitens,
     };
 
-PlanoConta _$PlanoContaFromJson(Map<String, dynamic> json) =>
-    PlanoConta()
-      ..id = json['id'] as int?
-      ..idEmpresa = json['idEmpresa'] as int?
-      ..empresa = json['empresa'] == null
-          ? null
-          : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
-      ..TipoMovimento = json['TipoMovimento'] as String?
-      ..descricao = json['descricao'] as String?
-      ..codigo = json['codigo'] as String?
-      ..idPlanoContaRaiz = json['idPlanoContaRaiz'] as int?
-      ..planoContaRaiz = json['planoContaRaiz'] == null
-          ? null
-          : PlanoConta.fromJson(json['planoContaRaiz'] as Map<String, dynamic>)
-      ..idPlanoContaPai = json['idPlanoContaPai'] as int?
-      ..planoContaPai = json['planoContaPai'] == null
-          ? null
-          : PlanoConta.fromJson(json['planoContaPai'] as Map<String, dynamic>)
-      ..classificacao = json['classificacao'] as String?
-      ..compraRevenda = json['compraRevenda'] as bool?
-      ..subitens = (json['subitens'] as List<dynamic>)
-          .map((e) => PlanoConta.fromJson(e as Map<String, dynamic>))
-          .toList();
+PlanoConta _$PlanoContaFromJson(Map<String, dynamic> json) => PlanoConta()
+  ..id = json['id'] as int?
+  ..idEmpresa = json['idEmpresa'] as int?
+  ..empresa = json['empresa'] == null
+      ? null
+      : Empresa.fromJson(json['empresa'] as Map<String, dynamic>)
+  ..TipoMovimento = json['TipoMovimento'] as String?
+  ..descricao = json['descricao'] as String?
+  ..codigo = json['codigo'] as String?
+  ..idPlanoContaRaiz = json['idPlanoContaRaiz'] as int?
+  ..planoContaRaiz = json['planoContaRaiz'] == null
+      ? null
+      : PlanoConta.fromJson(json['planoContaRaiz'] as Map<String, dynamic>)
+  ..idPlanoContaPai = json['idPlanoContaPai'] as int?
+  ..planoContaPai = json['planoContaPai'] == null
+      ? null
+      : PlanoConta.fromJson(json['planoContaPai'] as Map<String, dynamic>)
+  ..classificacao = json['classificacao'] as String?
+  ..compraRevenda = json['compraRevenda'] as bool?
+  ..subitens = (json['subitens'] as List<dynamic>?)
+          ?.map((e) => PlanoConta.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      [];
 
 Map<String, dynamic> _$PlanoContaToJson(PlanoConta instance) =>
     <String, dynamic>{
@@ -6010,30 +5950,31 @@ Map<String, dynamic> _$PlanoContaToJson(PlanoConta instance) =>
       'subitens': instance.subitens,
     };
 
-LoginAutoPesagemDTO _$LoginAutoPesagemDTOFromJson(Map<String, dynamic> json) =>
-    LoginAutoPesagemDTO()
-      ..servicoAutoPesagem = json['servicoAutoPesagem'] == null
+ConfiguracoesAutoPesagemDTO _$ConfiguracoesAutoPesagemDTOFromJson(
+        Map<String, dynamic> json) =>
+    ConfiguracoesAutoPesagemDTO()
+      ..clientAutoPesagem = json['clientAutoPesagem'] == null
           ? null
-          : ServicoAutoPesagem.fromJson(
-          json['servicoAutoPesagem'] as Map<String, dynamic>)
+          : ClientAutoPesagem.fromJson(
+              json['clientAutoPesagem'] as Map<String, dynamic>)
       ..estacaoTrabalho = json['estacaoTrabalho'] == null
           ? null
           : EstacaoTrabalho.fromJson(
-          json['estacaoTrabalho'] as Map<String, dynamic>)
+              json['estacaoTrabalho'] as Map<String, dynamic>)
       ..empresa = json['empresa'] == null
           ? null
           : Empresa.fromJson(json['empresa'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$LoginAutoPesagemDTOToJson(
-    LoginAutoPesagemDTO instance) =>
+Map<String, dynamic> _$ConfiguracoesAutoPesagemDTOToJson(
+        ConfiguracoesAutoPesagemDTO instance) =>
     <String, dynamic>{
-      'servicoAutoPesagem': instance.servicoAutoPesagem,
+      'clientAutoPesagem': instance.clientAutoPesagem,
       'estacaoTrabalho': instance.estacaoTrabalho,
       'empresa': instance.empresa,
     };
 
-ServicoAutoPesagem _$ServicoAutoPesagemFromJson(Map<String, dynamic> json) =>
-    ServicoAutoPesagem()
+ClientAutoPesagem _$ClientAutoPesagemFromJson(Map<String, dynamic> json) =>
+    ClientAutoPesagem()
       ..id = json['id'] as int?
       ..idEmpresa = json['idEmpresa'] as int?
       ..idGradeEmpresa = json['idGradeEmpresa'] as int?
@@ -6041,18 +5982,16 @@ ServicoAutoPesagem _$ServicoAutoPesagemFromJson(Map<String, dynamic> json) =>
       ..gradeEmpresa = json['gradeEmpresa'] == null
           ? null
           : GradeEmpresa.fromJson(json['gradeEmpresa'] as Map<String, dynamic>)
-      ..token = json['token'] as String?
       ..imprimirPeso = json['imprimirPeso'] as bool
       ..lancamentoAutomatico = json['lancamentoAutomatico'] as String?;
 
-Map<String, dynamic> _$ServicoAutoPesagemToJson(ServicoAutoPesagem instance) =>
+Map<String, dynamic> _$ClientAutoPesagemToJson(ClientAutoPesagem instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
       'idGradeEmpresa': instance.idGradeEmpresa,
       'tara': instance.tara,
       'gradeEmpresa': instance.gradeEmpresa,
-      'token': instance.token,
       'imprimirPeso': instance.imprimirPeso,
       'lancamentoAutomatico': instance.lancamentoAutomatico,
     };
@@ -6062,10 +6001,12 @@ LayoutControle _$LayoutControleFromJson(Map<String, dynamic> json) =>
       ..id = json['id'] as int?
       ..idEmpresa = json['idEmpresa'] as int?
       ..descricao = json['descricao'] as String?
-      ..layoutControleTempoList = (json['layoutControleTempoList']
-      as List<dynamic>)
-          .map((e) => LayoutControleTempo.fromJson(e as Map<String, dynamic>))
-          .toList()
+      ..layoutControleTempoList =
+          (json['layoutControleTempoList'] as List<dynamic>?)
+                  ?.map((e) =>
+                      LayoutControleTempo.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              []
       ..padrao = json['padrao'] as bool?;
 
 Map<String, dynamic> _$LayoutControleToJson(LayoutControle instance) =>
@@ -6088,7 +6029,7 @@ LayoutControleTempo _$LayoutControleTempoFromJson(Map<String, dynamic> json) =>
       ..horaFinal = json['horaFinal'] as int?;
 
 Map<String, dynamic> _$LayoutControleTempoToJson(
-    LayoutControleTempo instance) =>
+        LayoutControleTempo instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idLayoutControler': instance.idLayoutControler,
@@ -6106,36 +6047,35 @@ const _$TempoColorEnumMap = {
 };
 
 UsuarioPerfilEmpresa _$UsuarioPerfilEmpresaFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     UsuarioPerfilEmpresa()
       ..id = json['id'] as int?
       ..descricao = json['descricao'] as String?
       ..acessoERP = json['acessoERP'] as bool
       ..idEmpresa = json['idEmpresa'] as int?
       ..usuarioPerfilEmpresaPrivilegios =
-      (json['usuarioPerfilEmpresaPrivilegios'] as List<dynamic>)
-          .map((e) =>
-          UsuarioPerfilEmpresaPrivilegio.fromJson(
-              e as Map<String, dynamic>))
-          .toList()
+          (json['usuarioPerfilEmpresaPrivilegios'] as List<dynamic>)
+              .map((e) => UsuarioPerfilEmpresaPrivilegio.fromJson(
+                  e as Map<String, dynamic>))
+              .toList()
       ..master = json['master'] as bool?
       ..padrao = json['padrao'] as bool?;
 
 Map<String, dynamic> _$UsuarioPerfilEmpresaToJson(
-    UsuarioPerfilEmpresa instance) =>
+        UsuarioPerfilEmpresa instance) =>
     <String, dynamic>{
       'id': instance.id,
       'descricao': instance.descricao,
       'acessoERP': instance.acessoERP,
       'idEmpresa': instance.idEmpresa,
       'usuarioPerfilEmpresaPrivilegios':
-      instance.usuarioPerfilEmpresaPrivilegios,
+          instance.usuarioPerfilEmpresaPrivilegios,
       'master': instance.master,
       'padrao': instance.padrao,
     };
 
 UsuarioPerfilEmpresaPrivilegio _$UsuarioPerfilEmpresaPrivilegioFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     UsuarioPerfilEmpresaPrivilegio()
       ..id = json['id'] as int?
       ..idUsuarioPerfilEmpresa = json['idUsuarioPerfilEmpresa'] as int?
@@ -6145,7 +6085,7 @@ UsuarioPerfilEmpresaPrivilegio _$UsuarioPerfilEmpresaPrivilegioFromJson(
           _$NivelPrivilegioEnumMap, json['nivelPrivilegio']);
 
 Map<String, dynamic> _$UsuarioPerfilEmpresaPrivilegioToJson(
-    UsuarioPerfilEmpresaPrivilegio instance) =>
+        UsuarioPerfilEmpresaPrivilegio instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idUsuarioPerfilEmpresa': instance.idUsuarioPerfilEmpresa,
@@ -6176,9 +6116,9 @@ const _$PrivilegioCodigoEnumMap = {
   PrivilegioCodigo.PROD_CAD_DEP_FISCAL_ICMS: 'PROD_CAD_DEP_FISCAL_ICMS',
   PrivilegioCodigo.PROD_CAD_DEP_FISCAL_ISSQN: 'PROD_CAD_DEP_FISCAL_ISSQN',
   PrivilegioCodigo.PROD_CAD_DEP_FISCAL_PISCOFINS:
-  'PROD_CAD_DEP_FISCAL_PISCOFINS',
+      'PROD_CAD_DEP_FISCAL_PISCOFINS',
   PrivilegioCodigo.PROD_CAD_CLASS_FISCAL_CONTRIBUINTE:
-  'PROD_CAD_CLASS_FISCAL_CONTRIBUINTE',
+      'PROD_CAD_CLASS_FISCAL_CONTRIBUINTE',
   PrivilegioCodigo.PROD_CAD_TRIB_UF: 'PROD_CAD_TRIB_UF',
   PrivilegioCodigo.PROD_CAD_PROMOCAO: 'PROD_CAD_PROMOCAO',
   PrivilegioCodigo.PROD_CAD_PROMOCAO_ITEM: 'PROD_CAD_PROMOCAO_ITEM',
@@ -6210,7 +6150,7 @@ const _$PrivilegioCodigoEnumMap = {
   PrivilegioCodigo.FIN_FAT_CLI_DEBITAR_LIMITE: 'FIN_FAT_CLI_DEBITAR_LIMITE',
   PrivilegioCodigo.FIN_CAD_TIT_RECEBER: 'FIN_CAD_TIT_RECEBER',
   PrivilegioCodigo.FIN_RECEB_BAIXA_TITULO_RECEBER:
-  'FIN_RECEB_BAIXA_TITULO_RECEBER',
+      'FIN_RECEB_BAIXA_TITULO_RECEBER',
   PrivilegioCodigo.FIN_CAD_TIT_PAGAR: 'FIN_CAD_TIT_PAGAR',
   PrivilegioCodigo.FIN_RECEB_BAIXA_TITULO_PAGAR: 'FIN_RECEB_BAIXA_TITULO_PAGAR',
   PrivilegioCodigo.FIN_ESTORNO: 'FIN_ESTORNO',
@@ -6254,7 +6194,7 @@ const _$PrivilegioCodigoEnumMap = {
   PrivilegioCodigo.PARAM_CONTINGENCIA: 'PARAM_CONTINGENCIA',
   PrivilegioCodigo.PARAM_CAD_GERENCIADORES: 'PARAM_CAD_GERENCIADORES',
   PrivilegioCodigo.PARAM_GERENCIAR_SESSOES_EXTRAS:
-  'PARAM_GERENCIAR_SESSOES_EXTRAS',
+      'PARAM_GERENCIAR_SESSOES_EXTRAS',
   PrivilegioCodigo.PARAM_CAD_PLANO_PAGAMENTO: 'PARAM_CAD_PLANO_PAGAMENTO',
   PrivilegioCodigo.CONF_CAD_MODULO: 'CONF_CAD_MODULO',
   PrivilegioCodigo.CONF_CAD_MODULO_POSICAO: 'CONF_CAD_MODULO_POSICAO',
@@ -6298,11 +6238,11 @@ const _$PrivilegioCodigoEnumMap = {
   PrivilegioCodigo.VENDA_DEBITAR_CLIENTE: 'VENDA_DEBITAR_CLIENTE',
   PrivilegioCodigo.VENDA_PERMITIR_FINALIZADORA: 'VENDA_PERMITIR_FINALIZADORA',
   PrivilegioCodigo.VENDA_PERMITIR_DESCONTO_EXCEDENTE_VENDA:
-  'VENDA_PERMITIR_DESCONTO_EXCEDENTE_VENDA',
+      'VENDA_PERMITIR_DESCONTO_EXCEDENTE_VENDA',
   PrivilegioCodigo.VENDA_PERMITIR_DESCONTO_ITEM_GERAL:
-  'VENDA_PERMITIR_DESCONTO_ITEM_GERAL',
+      'VENDA_PERMITIR_DESCONTO_ITEM_GERAL',
   PrivilegioCodigo.VENDA_PERMITIR_DESCONTO_ITEM_ITEM:
-  'VENDA_PERMITIR_DESCONTO_ITEM_ITEM',
+      'VENDA_PERMITIR_DESCONTO_ITEM_ITEM',
   PrivilegioCodigo.VENDA_RECEBER_ITEM: 'VENDA_RECEBER_ITEM',
   PrivilegioCodigo.VENDA_CANCELA: 'VENDA_CANCELA',
   PrivilegioCodigo.VENDA_INFORMA_QTDE: 'VENDA_INFORMA_QTDE',
@@ -6325,10 +6265,10 @@ const _$PrivilegioCodigoEnumMap = {
   PrivilegioCodigo.PLAT_CAD_PERMISSOES_PADRAO: 'PLAT_CAD_PERMISSOES_PADRAO',
   PrivilegioCodigo.PLAT_TRANSACOES: 'PLAT_TRANSACOES',
   PrivilegioCodigo.PLAT_CAD_SITEF_REDES_ADQUIRENTES:
-  'PLAT_CAD_SITEF_REDES_ADQUIRENTES',
+      'PLAT_CAD_SITEF_REDES_ADQUIRENTES',
   PrivilegioCodigo.PLAT_CAD_SITEF_BANDEIRAS: 'PLAT_CAD_SITEF_BANDEIRAS',
   PrivilegioCodigo.PLAT_CAD_FISCAL_ORIGEM_MERCADORIA:
-  'PLAT_CAD_FISCAL_ORIGEM_MERCADORIA',
+      'PLAT_CAD_FISCAL_ORIGEM_MERCADORIA',
   PrivilegioCodigo.PLAT_CAD_FISCAL_CST: 'PLAT_CAD_FISCAL_CST',
   PrivilegioCodigo.PLAT_CAD_FISCAL_CSOSN: 'PLAT_CAD_FISCAL_CSOSN',
   PrivilegioCodigo.PLAT_CAD_FISCAL_PIS_COFINS: 'PLAT_CAD_FISCAL_PIS_COFINS',
@@ -6360,7 +6300,7 @@ TicketImpressaoDTO _$TicketImpressaoDTOFromJson(Map<String, dynamic> json) =>
       ..equipamentoImpressao = json['equipamentoImpressao'] == null
           ? null
           : EquipamentoImpressao.fromJson(
-          json['equipamentoImpressao'] as Map<String, dynamic>);
+              json['equipamentoImpressao'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$TicketImpressaoDTOToJson(TicketImpressaoDTO instance) =>
     <String, dynamic>{
@@ -6371,21 +6311,18 @@ Map<String, dynamic> _$TicketImpressaoDTOToJson(TicketImpressaoDTO instance) =>
       'equipamentoImpressao': instance.equipamentoImpressao,
     };
 
-ItemDTO _$ItemDTOFromJson(Map<String, dynamic> json) =>
-    ItemDTO()
-      ..produtoDescricao = json['produtoDescricao'] as String?
-      ..codigoInterno = json['codigoInterno'] as String?
-      ..produtoValor = json['produtoValor'] == null
-          ? null
-          : BigDecimal.fromJson(json['produtoValor'])
-      ..quantidade = json['quantidade'] == null
-          ? null
-          : BigDecimal.fromJson(json['quantidade'])
-      ..valor = json['valor'] == null ? null : BigDecimal.fromJson(
-          json['valor']);
+ItemDTO _$ItemDTOFromJson(Map<String, dynamic> json) => ItemDTO()
+  ..produtoDescricao = json['produtoDescricao'] as String?
+  ..codigoInterno = json['codigoInterno'] as String?
+  ..produtoValor = json['produtoValor'] == null
+      ? null
+      : BigDecimal.fromJson(json['produtoValor'])
+  ..quantidade = json['quantidade'] == null
+      ? null
+      : BigDecimal.fromJson(json['quantidade'])
+  ..valor = json['valor'] == null ? null : BigDecimal.fromJson(json['valor']);
 
-Map<String, dynamic> _$ItemDTOToJson(ItemDTO instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ItemDTOToJson(ItemDTO instance) => <String, dynamic>{
       'produtoDescricao': instance.produtoDescricao,
       'codigoInterno': instance.codigoInterno,
       'produtoValor': instance.produtoValor,
@@ -6394,38 +6331,43 @@ Map<String, dynamic> _$ItemDTOToJson(ItemDTO instance) =>
     };
 
 ServicoAutoAtendimento _$ServicoAutoAtendimentoFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     ServicoAutoAtendimento()
       ..id = json['id'] as int?
       ..idEmpresa = json['idEmpresa'] as int?
       ..ativo = json['ativo'] as bool? ?? false
       ..token = json['token'] as String?
       ..ticketConsumo =
-      $enumDecode(_$TicketConsumoEnumMap, json['ticketConsumo'])
+          $enumDecode(_$TicketConsumoEnumMap, json['ticketConsumo'])
       ..impressaoVenda =
-      $enumDecode(_$ImpressaoVendaEnumMap, json['impressaoVenda'])
+          $enumDecode(_$ImpressaoVendaEnumMap, json['impressaoVenda'])
       ..avisoTempoOcioso = json['avisoTempoOcioso'] as int?
       ..senhaAtendimento =
-      $enumDecode(_$SenhaAtendimentoEnumMap, json['senhaAtendimento'])
+          $enumDecode(_$SenhaAtendimentoEnumMap, json['senhaAtendimento'])
       ..idFinalizadoraDebito = json['idFinalizadoraDebito'] as int?
       ..idFinalizadoraCredito = json['idFinalizadoraCredito'] as int?
+      ..idFinalizadoraVale = json['idFinalizadoraVale'] as int?
       ..finalizadoraDebito = json['finalizadoraDebito'] == null
           ? null
           : FinalizadoraEmpresa.fromJson(
-          json['finalizadoraDebito'] as Map<String, dynamic>)
+              json['finalizadoraDebito'] as Map<String, dynamic>)
       ..finalizadoraCredito = json['finalizadoraCredito'] == null
           ? null
           : FinalizadoraEmpresa.fromJson(
-          json['finalizadoraCredito'] as Map<String, dynamic>)
+              json['finalizadoraCredito'] as Map<String, dynamic>)
+      ..finalizadoraVale = json['finalizadoraVale'] == null
+          ? null
+          : FinalizadoraEmpresa.fromJson(
+              json['finalizadoraVale'] as Map<String, dynamic>)
       ..mensagemFinalAtendimento = json['mensagemFinalAtendimento'] as String?
       ..arquivos = (json['arquivos'] as List<dynamic>?)
-          ?.map((e) =>
-          ArquivoAutoAtendimento.fromJson(e as Map<String, dynamic>))
-          .toList() ??
+              ?.map((e) =>
+                  ArquivoAutoAtendimento.fromJson(e as Map<String, dynamic>))
+              .toList() ??
           [];
 
 Map<String, dynamic> _$ServicoAutoAtendimentoToJson(
-    ServicoAutoAtendimento instance) =>
+        ServicoAutoAtendimento instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idEmpresa': instance.idEmpresa,
@@ -6437,8 +6379,10 @@ Map<String, dynamic> _$ServicoAutoAtendimentoToJson(
       'senhaAtendimento': _$SenhaAtendimentoEnumMap[instance.senhaAtendimento],
       'idFinalizadoraDebito': instance.idFinalizadoraDebito,
       'idFinalizadoraCredito': instance.idFinalizadoraCredito,
+      'idFinalizadoraVale': instance.idFinalizadoraVale,
       'finalizadoraDebito': instance.finalizadoraDebito,
       'finalizadoraCredito': instance.finalizadoraCredito,
+      'finalizadoraVale': instance.finalizadoraVale,
       'mensagemFinalAtendimento': instance.mensagemFinalAtendimento,
       'arquivos': instance.arquivos,
     };
@@ -6463,20 +6407,20 @@ const _$SenhaAtendimentoEnumMap = {
 };
 
 ArquivoAutoAtendimento _$ArquivoAutoAtendimentoFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     ArquivoAutoAtendimento()
       ..id = json['id'] as int?
       ..idServicoAutoAtendimento = json['idServicoAutoAtendimento'] as int?
       ..tipoArquivo =
-      $enumDecodeNullable(_$TipoArquivoEnumMap, json['tipoArquivo'])
+          $enumDecodeNullable(_$TipoArquivoEnumMap, json['tipoArquivo'])
       ..visaoFoto = $enumDecodeNullable(_$VisaoFotoEnumMap, json['visaoFoto'])
       ..formatoArquivo =
-      $enumDecodeNullable(_$FormatoArquivoEnumMap, json['formatoArquivo'])
+          $enumDecodeNullable(_$FormatoArquivoEnumMap, json['formatoArquivo'])
       ..descricao = json['descricao'] as String?
       ..link = json['link'] as String?;
 
 Map<String, dynamic> _$ArquivoAutoAtendimentoToJson(
-    ArquivoAutoAtendimento instance) =>
+        ArquivoAutoAtendimento instance) =>
     <String, dynamic>{
       'id': instance.id,
       'idServicoAutoAtendimento': instance.idServicoAutoAtendimento,
@@ -6513,24 +6457,79 @@ const _$FormatoArquivoEnumMap = {
 };
 
 LoginAutoAtendimentoDTO _$LoginAutoAtendimentoDTOFromJson(
-    Map<String, dynamic> json) =>
+        Map<String, dynamic> json) =>
     LoginAutoAtendimentoDTO()
       ..servicoAutoAtendimento = json['servicoAutoAtendimento'] == null
           ? null
           : ServicoAutoAtendimento.fromJson(
-          json['servicoAutoAtendimento'] as Map<String, dynamic>)
+              json['servicoAutoAtendimento'] as Map<String, dynamic>)
       ..estacaoTrabalho = json['estacaoTrabalho'] == null
           ? null
           : EstacaoTrabalho.fromJson(
-          json['estacaoTrabalho'] as Map<String, dynamic>)
+              json['estacaoTrabalho'] as Map<String, dynamic>)
       ..empresa = json['empresa'] == null
           ? null
           : Empresa.fromJson(json['empresa'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$LoginAutoAtendimentoDTOToJson(
-    LoginAutoAtendimentoDTO instance) =>
+        LoginAutoAtendimentoDTO instance) =>
     <String, dynamic>{
       'servicoAutoAtendimento': instance.servicoAutoAtendimento,
       'estacaoTrabalho': instance.estacaoTrabalho,
       'empresa': instance.empresa,
+    };
+
+LoginClientDTO _$LoginClientDTOFromJson(Map<String, dynamic> json) =>
+    LoginClientDTO()
+      ..client = $enumDecodeNullable(_$ClientsEnumMap, json['client']) ??
+          Clients.WAITER_MOBILE
+      ..clientKey = json['clientKey'] as String?
+      ..clientSecret = json['clientSecret'] as String?
+      ..versao = json['versao'] as String?
+      ..nomeEstacao = json['nomeEstacao'] as String?;
+
+Map<String, dynamic> _$LoginClientDTOToJson(LoginClientDTO instance) =>
+    <String, dynamic>{
+      'client': _$ClientsEnumMap[instance.client],
+      'clientKey': instance.clientKey,
+      'clientSecret': instance.clientSecret,
+      'versao': instance.versao,
+      'nomeEstacao': instance.nomeEstacao,
+    };
+
+const _$ClientsEnumMap = {
+  Clients.WAITER_MOBILE: 'WAITER_MOBILE',
+  Clients.WAYCARD: 'WAYCARD',
+  Clients.AUTOATENDIMENTO: 'AUTOATENDIMENTO',
+  Clients.AUTOPESAGEM: 'AUTOPESAGEM',
+};
+
+TokenDTO _$TokenDTOFromJson(Map<String, dynamic> json) => TokenDTO()
+  ..token = json['token'] as String?
+  ..type = json['type'] as String;
+
+Map<String, dynamic> _$TokenDTOToJson(TokenDTO instance) => <String, dynamic>{
+      'token': instance.token,
+      'type': instance.type,
+    };
+
+PrinterTefDTO _$PrinterTefDTOFromJson(Map<String, dynamic> json) =>
+    PrinterTefDTO()
+      ..viaCliente = json['viaCliente'] as String
+      ..viaCaixa = json['viaCaixa'] as String
+      ..equipamentoImpressao = json['equipamentoImpressao'] == null
+          ? null
+          : EquipamentoImpressao.fromJson(
+              json['equipamentoImpressao'] as Map<String, dynamic>)
+      ..servicoAutoAtendimento = json['servicoAutoAtendimento'] == null
+          ? null
+          : ServicoAutoAtendimento.fromJson(
+              json['servicoAutoAtendimento'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$PrinterTefDTOToJson(PrinterTefDTO instance) =>
+    <String, dynamic>{
+      'viaCliente': instance.viaCliente,
+      'viaCaixa': instance.viaCaixa,
+      'equipamentoImpressao': instance.equipamentoImpressao,
+      'servicoAutoAtendimento': instance.servicoAutoAtendimento,
     };

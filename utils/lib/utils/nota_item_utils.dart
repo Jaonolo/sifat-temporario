@@ -1,7 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:models/model/enum/tipo_item.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/string_utils.dart';
-import 'package:collection/collection.dart';
 
 class NotaItemUtils {
   //Criação de objetos
@@ -143,10 +143,10 @@ class NotaItemUtils {
     return item;
   }
 
-//
+
   static NotaItem itemComboToNotaItem(int idNota,
       ProdutoMenuComponente componente, int idEmpresa, int idTabelaPreco,
-      {int? idVendedor, int? idUsuario}) {
+      {BigDecimal? quantidade,int? idVendedor, int? idUsuario, bool adcionalDoItemDoCombo = false}) {
     ProdutoMenuComponenteEmpresa componenteEmpresa = componente
         .componenteEmpresas
         .firstWhere((ce) => ce.idEmpresa == idEmpresa);
@@ -166,7 +166,41 @@ class NotaItemUtils {
 //    item.idEstacao = AppConfig.application.estacao.id;
     item.idVendedor = idVendedor;
     item.idUsuario = idUsuario;
-    item.quantidade = componente.quantidade;
+    item.quantidade = quantidade ?? componente.quantidade;
+    item.idGrade = gradeEmpresa.id;
+    item.grade = gradeEmpresa;
+    item.precoUnitario = adcionalDoItemDoCombo? gradeEmpresa.precoVenda(idTabelaPreco):
+        componente.getValorComponente(idEmpresa, idTabelaPreco);
+    item.precoTotal = item.quantidade!.multiplicar(item.precoUnitario);
+    item.subitens = [];
+    item.dataLancamento = DateTime.now();
+    item.idTabelaPreco = idTabelaPreco;
+    return item;
+  }
+
+  static NotaItem itemCompostoToNotaItem(int idNota,
+      ProdutoMenuComponente componente, int idEmpresa, int idTabelaPreco,
+      {BigDecimal? quantidade,int? idVendedor, int? idUsuario}) {
+    ProdutoMenuComponenteEmpresa componenteEmpresa = componente
+        .componenteEmpresas
+        .firstWhere((ce) => ce.idEmpresa == idEmpresa, orElse: () => throw Exception("compromenteEmpresa não encontrado item composto"));
+    GradeEmpresa gradeEmpresa = componenteEmpresa.gradeEmpresa!;
+    ProdutoEmpresa produtoEmpresa = gradeEmpresa.produtoEmpresa!;
+
+    String descricao = produtoEmpresa.produto!.descricao!;
+    if (produtoEmpresa.produto!.grade != "NENHUMA" && gradeEmpresa.grade != null && gradeEmpresa.grade!.tamanho != null)
+      descricao += " (${gradeEmpresa.grade!.tamanho!.descricao!})";
+
+    NotaItem item = NotaItem();
+    item.idNota = idNota;
+    item.descricao = descricao;
+    item.idProdutoEmpresa = produtoEmpresa.id;
+    item.produtoEmpresa = produtoEmpresa;
+    item.tipo = StringUtils.getEnumValue(TipoItem.ITEM_COMPOSTO);
+//    item.idEstacao = AppConfig.application.estacao.id;
+    item.idVendedor = idVendedor;
+    item.idUsuario = idUsuario;
+    item.quantidade = quantidade ?? componente.quantidade;
     item.idGrade = gradeEmpresa.id;
     item.grade = gradeEmpresa;
     item.precoUnitario =
@@ -178,40 +212,6 @@ class NotaItemUtils {
     return item;
   }
 
-//   static NotaItem itemCompostoToNotaItem(int idNota,
-//       ProdutoMenuComponente componente, int idEmpresa, int idTabelaPreco,
-//       {int idVendedor, int idUsuario}) {
-//     ProdutoMenuComponenteEmpresa componenteEmpresa = componente
-//         .componenteEmpresas
-//         .firstWhere((ce) => ce.idEmpresa == idEmpresa);
-//     GradeEmpresa gradeEmpresa = componenteEmpresa.gradeEmpresa;
-//     ProdutoEmpresa produtoEmpresa = gradeEmpresa.produtoEmpresa;
-//
-//     String descricao = produtoEmpresa.produto.descricao;
-//     if (produtoEmpresa.produto.grade != "NENHUMA")
-//       descricao += " (${gradeEmpresa.grade.tamanho.descricao})";
-//
-//     NotaItem item = NotaItem();
-//     item.idNota = idNota;
-//     item.descricao = descricao;
-//     item.idProdutoEmpresa = produtoEmpresa.id;
-//     item.produtoEmpresa = produtoEmpresa;
-//     item.tipo = StringUtils.getEnumValue(TipoItem.ITEM_COMPOSTO);
-// //    item.idEstacao = AppConfig.application.estacao.id;
-//     item.idVendedor = idVendedor;
-//     item.idUsuario = idUsuario;
-//     item.quantidade = componente.quantidade;
-//     item.idGrade = gradeEmpresa.id;
-//     item.grade = gradeEmpresa;
-//     item.precoUnitario =
-//         componente.getValorComponente(idEmpresa, idTabelaPreco);
-//     item.precoTotal = item.quantidade.multiplicar(item.precoUnitario);
-//     item.subitens = [];
-//     item.dataLancamento = DateTime.now();
-//     item.idTabelaPreco = idTabelaPreco;
-//     return item;
-//   }
-//
 //   static NotaItem itemRodizioToNotaItem(int idNota,
 //       ProdutoMenuComponente componente, int idEmpresa, int idTabelaPreco,
 //       {int idVendedor, int idUsuario}) {
@@ -437,20 +437,18 @@ class NotaItemUtils {
 //     }
 //   }
 //
-//   static BigDecimal quantidadeSelecionadaMenu(NotaItem itemMenu) {
-//     BigDecimal qtdeSelecionada = BigDecimal.ZERO();
-//     if (itemMenu != null) {
-//       itemMenu.subitens.forEach((ni) {
-//         if (ni.tipo != "OBSERVACAO") {
-//           if (ni.cancelado == null || !ni.cancelado)
-//             qtdeSelecionada = qtdeSelecionada.somar(ni.quantidade);
-//         } else {
-//           qtdeSelecionada = qtdeSelecionada.somar(BigDecimal.ONE());
-//         }
-//       });
-//     }
-//     return qtdeSelecionada;
-//   }
+  static BigDecimal quantidadeSelecionadaMenu(NotaItem itemMenu) {
+    BigDecimal qtdeSelecionada = BigDecimal.ZERO();
+      itemMenu.subitens.forEach((ni) {
+        if (ni.tipo != "OBSERVACAO") {
+          if (!ni.cancelado)
+            qtdeSelecionada = qtdeSelecionada.somar(ni.quantidade);
+        } else {
+          qtdeSelecionada = qtdeSelecionada.somar(BigDecimal.ONE());
+        }
+      });
+    return qtdeSelecionada;
+  }
 //
 //   static BigDecimal quantidadeSelecionadaComponente(
 //       NotaItem itemMenu, ProdutoMenuComponenteEmpresa componente) {
@@ -602,9 +600,54 @@ class NotaItemUtils {
       return null;
     }
 
+   // Caso duplique o menu dentro do itemOriginal ele pega e junta em um só menu
+    itemOriginal = tratativaMenuDuplicado(itemOriginal, produtoMenu);
+
+
     return itemOriginal.subitens.firstWhereOrNull(
             (ni) =>
         ni.consumoItem != null && ni.consumoItem!.idMenu == produtoMenu.id);
+  }
+
+ static  NotaItem tratativaMenuDuplicado(NotaItem itemOriginal,
+       ProdutoMenu produtoMenu){
+    // cria uma lista dos duplicados
+     List<NotaItem> menus = itemOriginal.subitens.where((ni) => ni.consumoItem != null && ni.consumoItem!.idMenu == produtoMenu.id).toList();
+
+     //verifica se tem mais que 1 menu
+     if (menus != null && menus.length >= 2) {
+       //Pega o primeiro dos menu
+       NotaItem? pr = itemOriginal.subitens.firstWhereOrNull((ni) =>
+       ni.consumoItem != null && ni.consumoItem!.idMenu == produtoMenu.id);
+
+       // remove esse primeiro da lista
+       menus.remove(pr);
+       // remove do item original
+       itemOriginal.subitens.remove(pr);
+
+       // acha o menu e adciona os items do menu que foi removido no menu unico do itemOriginal
+       for (NotaItem nt in itemOriginal.subitens) {
+         if (nt.consumoItem?.idMenu == pr?.consumoItem?.idMenu) {
+           nt.subitens.addAll(pr!.subitens);
+         }
+       }
+     }
+     return itemOriginal;
+  }
+  static int quantidadeLancadaDoMenu(NotaItem itemOriginal,
+      ProdutoMenu produtoMenu) {
+      int total = 0;
+
+    if (itemOriginal.subitens.isEmpty)
+      return 0;
+
+    List<NotaItem> menus = itemOriginal.subitens.where((ni) => ni.consumoItem != null && ni.consumoItem!.idMenu == produtoMenu.id).toList();
+
+    for(NotaItem menu in menus)
+      for(NotaItem item in menu.subitens)
+        total += item.quantidade!.toInt();
+
+      return total;
   }
 
   static NotaItem? localizaObservacaoJaLancada(NotaItem itemOriginal,
@@ -636,15 +679,15 @@ class NotaItemUtils {
   }
 
 
-  static List<NotaItem> getItensCombo(NotaItem notaItem) {
+  static List<NotaItem> getItensComboComposto(NotaItem notaItem) {
     List<NotaItem> list = [];
 
-    if (notaItem.tipo == "ITEM_COMBO" || notaItem.tipo == "ADICIONAL")
+    if (notaItem.tipo == "ITEM_COMBO" || notaItem.tipo == "ADICIONAL" || notaItem.tipo == "ITEM_COMPOSTO")
       list.add(notaItem);
 
     if (notaItem.subitens.isNotEmpty)
       notaItem.subitens.forEach((element) {
-        var itensCombo = getItensCombo(element);
+        var itensCombo = getItensComboComposto(element);
         list.addAll(itensCombo);
       });
 

@@ -125,7 +125,7 @@ class RedefinirSenhaPageComponent {
     if (_formKey.currentState!.validate()) {
       WayCardUtils.showProgress();
       UsuarioRequester.esqueciSenha(
-          AppConfig.application.pwsConfig, _emailController.text).then((
+          AppConfig.application.pwsConfigWaychef, _emailController.text).then((
           response) {
         if (response.status == 202) {
           WayCardUtils.closeProgress();

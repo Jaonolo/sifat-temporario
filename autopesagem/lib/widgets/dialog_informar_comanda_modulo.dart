@@ -18,8 +18,8 @@ class _DialogInformarComandaModuloState
 
   @override
   void initState() {
-    if (AppConfig.servicoAutoPesagem.lancamentoAutomatico != "AMBOS") {
-      modulo = AppConfig.servicoAutoPesagem.lancamentoAutomatico!;
+    if (AppConfig.clientAutoPesagem.lancamentoAutomatico != "AMBOS") {
+      modulo = AppConfig.clientAutoPesagem.lancamentoAutomatico!;
     }
 
     super.initState();
@@ -30,7 +30,7 @@ class _DialogInformarComandaModuloState
     focusNode.requestFocus();
     return AlertDialog(
       backgroundColor: Color.fromRGBO(43, 49, 53, 1),
-      title: Text((AppConfig.servicoAutoPesagem.lancamentoAutomatico == "AMBOS")
+      title: Text((AppConfig.clientAutoPesagem.lancamentoAutomatico == "AMBOS")
           ? "Escolha o modulo:"
           : "", style: TextStyle(color: Colors.white),),
       content: Column(
@@ -38,13 +38,13 @@ class _DialogInformarComandaModuloState
         children: [
           Row(
             children: [
-              if(AppConfig.servicoAutoPesagem.lancamentoAutomatico == "AMBOS" ||
-                  AppConfig.servicoAutoPesagem.lancamentoAutomatico == "MESA")
+              if(AppConfig.clientAutoPesagem.lancamentoAutomatico == "AMBOS" ||
+                  AppConfig.clientAutoPesagem.lancamentoAutomatico == "MESA")
                 Expanded(
                   child: btnModulo("MESA"),
                 ),
-              if(AppConfig.servicoAutoPesagem.lancamentoAutomatico == "AMBOS" ||
-                  AppConfig.servicoAutoPesagem.lancamentoAutomatico == "FICHA")
+              if(AppConfig.clientAutoPesagem.lancamentoAutomatico == "AMBOS" ||
+                  AppConfig.clientAutoPesagem.lancamentoAutomatico == "FICHA")
                 Expanded(
                   child: btnModulo("FICHA"),
                 ),

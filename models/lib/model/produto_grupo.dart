@@ -14,8 +14,10 @@ class ProdutoGrupo implements Cloneable {
 
   bool? padraoSistema;
 
+  @JsonKey(defaultValue: [])
   List<ProdutoGrupo> subgrupos = [];
 
+  @JsonKey(defaultValue: [])
   List<ProdutoEmpresa> produtos = [];
 
   int? versao;

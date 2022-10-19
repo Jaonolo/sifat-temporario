@@ -9,12 +9,15 @@ import 'package:flutter/material.dart';
 class DialogConfigApp extends StatefulWidget {
   TextEditingController host = TextEditingController();
   TextEditingController clientSecret = TextEditingController();
+  TextEditingController hostGateway = TextEditingController();
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String mensagemErro = "";
 
   DialogConfigApp({this.mensagemErro = ""}) {
-    host.text = AppConfig.urlApi;
+    host.text = AppConfig.urlApiWaychef;
     clientSecret.text = AppConfig.clientSecret;
+    hostGateway.text = AppConfig.urlApiGateway;
   }
 
   @override
@@ -29,14 +32,12 @@ class _DialogConfigAppState extends State<DialogConfigApp> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+
       backgroundColor: Color.fromRGBO(43, 49, 53, 1),
       title: Text("Configuração API", style: TextStyle(color: Colors.white)),
       content: Container(
           height: 300,
-          width: MediaQuery
-              .of(context)
-              .size
-              .width * 0.90,
+          width: MediaQuery.of(context).size.width * 0.90,
           child: Form(
             key: widget.formKey,
             child: Column(
@@ -52,6 +53,17 @@ class _DialogConfigAppState extends State<DialogConfigApp> {
                       labelStyle: TextStyle(color: Colors.white),
                       labelText: "Host:"),
                   controller: widget.host,
+                  validator: (value) {
+                    if (value != null && value.isEmpty) return "teste";
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                      labelStyle: TextStyle(color: Colors.white),
+                      labelText: "Host Gateway:"),
+                  controller: widget.hostGateway,
                   validator: (value) {
                     if (value != null && value.isEmpty) return "teste";
                     return null;
@@ -80,7 +92,7 @@ class _DialogConfigAppState extends State<DialogConfigApp> {
   }
 
   Future<void> realizarLoginApi(BuildContext context) async {
-    PutValue.setValues(widget.host.text, widget.clientSecret.text);
+    PutValue.setValues(widget.host.text,widget.hostGateway.text, widget.clientSecret.text );
 
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => SplashPage()));

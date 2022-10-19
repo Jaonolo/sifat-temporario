@@ -72,7 +72,8 @@ class Conta {
 
   Conta? contaOrigem;
 
-  List<Conta>? pagamentosParciais;
+  @JsonKey(defaultValue: [])
+  List<Conta> pagamentosParciais = [];
 
   bool? transferencia;
 
@@ -84,8 +85,10 @@ class Conta {
 
   bool? cancelado;
 
+  @JsonKey(defaultValue: [])
   List<ContaClassificacao> classificacoes = [];
 
+  @JsonKey(defaultValue: [])
   List<ContaCentroCusto> centroCustos = [];
 
   int? idNota;

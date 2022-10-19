@@ -16,6 +16,7 @@ class PedidoItemDTO {
 
   BigDecimal? total;
 
+  @JsonKey(defaultValue: [])
   List<PedidoItemDTO> subitens = [];
 
   PedidoItemDTO();

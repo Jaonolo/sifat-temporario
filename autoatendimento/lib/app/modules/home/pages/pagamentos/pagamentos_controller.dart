@@ -1,6 +1,6 @@
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/transacao_tef/transacao_tef_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/tef/transacao_tef/transacao_tef_controller.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -25,14 +25,14 @@ abstract class PagamentosBase with Store {
 
       switch (finalizadoraEmpresa.finalizadora!.finalizadoraRFB) {
         case "DINHEIRO":
-          avancar();
+          avancar(context);
           break;
         case "CARTAO_CREDITO":
           _transacaoTEF("CREDITO", context);
-          //_transacaoTEF("CREDITO");
           break;
         case "CARTAO_DEBITO":
         case "VALE_REFEICAO":
+        case "VALE_ALIMENTACAO":
           _transacaoTEF("DEBITO", context);
           break;
       }
@@ -46,7 +46,13 @@ abstract class PagamentosBase with Store {
         tipoPagamentoTEF, vendaController.nota.id!);
   }
 
-  void avancar() {
+  Future<void> avancar(BuildContext context) async {
+    //Insere os itens
+    await vendaController.insereItensAPI();
+
+    //Receber venda
+    await vendaController.receberVendaAPI(context);
+
     Modular.to.pushNamed("/finalizado");
   }
 

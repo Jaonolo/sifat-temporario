@@ -4,9 +4,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Waychef AutoAtendimento',
       theme: DefaultTheme.get(),
-    ).modular(); //added by extension
+      routeInformationParser: Modular.routeInformationParser,
+      routerDelegate: Modular.routerDelegate,
+    ); //added by extension
   }
 }

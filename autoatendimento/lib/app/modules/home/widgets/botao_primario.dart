@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 // ignore: must_be_immutable
 class BotaoPrimario extends StatelessWidget {
@@ -28,9 +28,6 @@ class BotaoPrimario extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppController appController = Modular.get();
-    Orientation orientation = MediaQuery
-        .of(context)
-        .orientation;
     heightScreen = MediaQuery
         .of(context)
         .size
@@ -52,9 +49,7 @@ class BotaoPrimario extends StatelessWidget {
             Text(descricao,
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: orientation == Orientation.landscape
-                        ? FontUtils.h2(context)
-                        : FontUtils.h3(context))),
+                    fontSize: FontUtils.h2(context))),
             if (iconData != null)
               Icon(
                 iconData,
@@ -64,7 +59,7 @@ class BotaoPrimario extends StatelessWidget {
           ],
         ),
         style: ElevatedButton.styleFrom(
-          primary: DefaultTheme.accentColor,
+          primary: function != null ? DefaultTheme.accentColor : DefaultTheme.cinza,
           elevation: 4.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),

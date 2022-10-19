@@ -5,8 +5,10 @@ class DtoNota {
 
   Nota? nota;
 
+  @JsonKey(defaultValue: [])
   List<NotaItem> notaItemList = [];
 
+  @JsonKey(defaultValue: [])
   List<NotaFinalizadora> notaFinalizadoraList = [];
 
   DtoNota();

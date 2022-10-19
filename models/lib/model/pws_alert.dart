@@ -20,7 +20,7 @@ class PwsAlert {
     if (json['code'] == null) {
       code = null;
     } else {
-      code = json['code'];
+      code = json['code'].toString();
     }
     if (json['message'] == null) {
       message = null;

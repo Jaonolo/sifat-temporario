@@ -22,7 +22,8 @@ class Regiao {
 
   Cidade? cidade;
 
-  List<RegiaoEmpresa>? regioesEmpresa;
+  @JsonKey(defaultValue: [])
+  List<RegiaoEmpresa> regioesEmpresa = [];
 
   int? versao;
 
@@ -52,7 +53,7 @@ class Regiao {
 
   BigDecimal? getValor(int idEmpresa) {
     BigDecimal? valor;
-    for (RegiaoEmpresa re in regioesEmpresa!) {
+    for (RegiaoEmpresa re in regioesEmpresa) {
       if (re.idEmpresa == idEmpresa) valor = re.valor;
     }
     return valor;
