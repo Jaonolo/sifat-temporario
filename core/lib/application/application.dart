@@ -98,10 +98,10 @@ class Application {
   Modulo? getModuloFromTipo(String? tipoModulo) {
     return estacao!.modulos.firstWhere((modulo) => modulo.tipo == tipoModulo);
   }
-  //
-  // void setImpressoraService(TipoEstacao tipoEstacao, MarcaPOS marcaPOS) {
-  //   impressoraService = ImpressoraService(tipoEstacao, marcaPOS);
-  // }
+
+  void setImpressoraService(TipoEstacao tipoEstacao, MarcaPOS marcaPOS) {
+    impressoraService = ImpressoraService(tipoEstacao, marcaPOS);
+  }
 
   void setVerificaPermissaoService(UsuarioPerfilEmpresa usuarioPerfilEmpresa) {
     verificaPermissaoService =

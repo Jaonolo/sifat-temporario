@@ -2,7 +2,11 @@ import 'dart:async';
 
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/utils/autoatendimento_utils.dart';
+import 'package:core/application/application.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:models/model/enum/marca_pos.dart';
+import 'package:models/model/enum/tipo_estacao.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/enum/clients.dart';
@@ -79,6 +83,8 @@ abstract class SplashBase with Store {
       await _carregaCardapio();
 
       await _carregaTabelaPreco(context);
+
+      await _iniciaImpressao();
 
       _concluir();
     } catch (e) {
@@ -198,6 +204,22 @@ abstract class SplashBase with Store {
     appController.listCardapioMenu = dto.listCardapioMenu;
     appController.mapProdutos = dto.mapProdutos;
     appController.mapMenus = dto.mapMenu;
+
+    return Future.value();
+  }
+  Future<void> _iniciaImpressao() async {
+    changeStatus("Carregando Impressão");
+    if (defaultTargetPlatform != TargetPlatform.windows) {
+      Application
+          .getInstance().setImpressoraService(TipoEstacao.MINI_PDV, MarcaPOS.NENHUMA);
+      Application
+          .getInstance()
+          .impressoraService
+          .imprime("Autoatendimento iniciado");
+    }else{
+      Application
+          .getInstance().setImpressoraService(TipoEstacao.AUTO_ATENDIMENTO, MarcaPOS.NENHUMA);
+    }
 
     return Future.value();
   }

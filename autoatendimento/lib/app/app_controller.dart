@@ -9,6 +9,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:requester/config/pws_config.dart';
+import 'package:pos/pos/impressora/impressora_service.dart';
+import 'package:models/model/enum/marca_pos.dart';
+import 'package:models/model/enum/tipo_estacao.dart';
 
 part 'app_controller.g.dart';
 

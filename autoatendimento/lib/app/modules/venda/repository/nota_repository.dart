@@ -94,6 +94,8 @@ class NotaRepository {
       {bool gerarImpressao = false}) {
     return NotaRequester.emitirNFCe(
         appController.pwsConfig, appController.token, nota,
+        appController.estacaoTrabalho.tipo!,
+        appController.estacaoTrabalho.marcaSmartPOS!,
         gerarImpressao: gerarImpressao);
   }
 }

@@ -3,6 +3,8 @@ import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/transacao_tef/transacao_tef_controller.dart';
 import 'package:autoatendimento/app/modules/venda/pos/sitef_pos.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
+import 'package:autoatendimento/app/utils/autoatendimento_utils.dart';
+import 'package:core/application/application.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -73,13 +75,12 @@ abstract class PagamentosBase with Store {
           xml = await vendaController.emitirFiscal();
 
           if (xml != null) {
-            var impressoraService =
-                ImpressoraService(TipoEstacao.MINI_PDV, MarcaPOS.NENHUMA);
-            impressoraService.imprimeNFCE(xml, context);
+            Application.getInstance().impressoraService.imprimeNFCE(xml, context);
           }
         } else {
           xml = null;
         }
+        Modular.to.pushNamed("/finalizado");
       }else{
         vendaController.nota.finalizadoras.removeLast();
       }
