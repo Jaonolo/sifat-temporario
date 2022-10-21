@@ -1,4 +1,5 @@
 import 'package:autoatendimento/app/app_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/transacao_tef/transacao_tef_controller.dart';
 import 'package:autoatendimento/app/modules/venda/widgets/confirmation_dialog.dart';
 import 'package:autoatendimento/app/modules/venda/widgets/select_option_dialog/select_option.dart';
 import 'package:autoatendimento/app/modules/venda/widgets/sitef_dialog.dart';
@@ -26,6 +27,7 @@ class SitefPOS {
   static FinalizadoraEmpresa? _finalizadoraEmpresa;
   static Map<String, String>? _dadosTransacao;
   static AppController appController = Modular.get();
+  static TransacaoTefController controller = Modular.get();
   static const _platform = const MethodChannel("sitef_channel");
   static const _channel = const BasicMessageChannel(
       "sitef_message_channel", StandardMessageCodec());
@@ -87,21 +89,6 @@ class SitefPOS {
 
       _channel.setMessageHandler(_handleSitefActions);
 
-      showDialog(
-          context: _context!,
-          barrierDismissible: false,
-          builder: (context) => SitefDialog(
-                onCancelar: () {
-                  _perguntaCancelamento = true;
-                  _abortar();
-                },
-              )).then((result) async {
-        if (!_sucesso!) {
-          _perguntaCancelamento = false;
-          _abortar();
-        }
-      });
-
       appController.transacaoCartao = TransacaoCartao();
       appController.transacaoCartao!.bandeira = BandeiraCartao();
 
@@ -111,10 +98,9 @@ class SitefPOS {
       if (success) {
         _sucesso = true;
         appController.transacoes.add(_dadosTransacao);
-        Navigator.pop(_context!);
+        controller.finalizaVendaAndroid(_context!);
       }
     } on PlatformException catch (_) {
-      Navigator.pop(_context!);
       //SitefDialog.instance.setError(e);
       //throw e;
     }
@@ -181,12 +167,12 @@ class SitefPOS {
           builder: (context) => SitefDialog(
                 onCancelar: () {
                   _perguntaCancelamento = true;
-                  _abortar();
+                  abortar();
                 },
               )).then((result) async {
         if (!_sucesso!) {
           _perguntaCancelamento = false;
-          _abortar();
+          abortar();
         }
       });
 
@@ -233,12 +219,12 @@ class SitefPOS {
           builder: (context) => SitefDialog(
                 onCancelar: () {
                   _perguntaCancelamento = true;
-                  _abortar();
+                  abortar();
                 },
               )).then((result) async {
         if (!_sucesso!) {
           _perguntaCancelamento = false;
-          _abortar();
+          abortar();
         }
       });
 
@@ -257,7 +243,8 @@ class SitefPOS {
     }
   }
 
-  static Future<void> _abortar() async {
+  static Future<void> abortar() async {
+    _perguntaCancelamento = false;
     await _platform.invokeMethod('abortar');
     return Future.value();
   }
@@ -327,7 +314,6 @@ class SitefPOS {
                 _perguntarCancelamentoOperacao();
               } else {
                 _send("0");
-                Navigator.pop(_context!);
               }
               break;
             default:
@@ -513,7 +499,7 @@ class SitefPOS {
 
     if (map.containsKey('status')) {
       String status = map['status'].toString();
-      SitefDialog.instance.setStatus(status);
+      controller.atualizaBuffer(status);
     }
 
     if (map.containsKey('alerta')) {
@@ -627,7 +613,6 @@ class SitefPOS {
         case '1':
           switch (map['resultCode']) {
             case '-2': // Retirada do cartão, cancelamento operador
-              Navigator.pop(_context!);
               break;
           }
 
