@@ -6341,6 +6341,8 @@ ServicoAutoAtendimento _$ServicoAutoAtendimentoFromJson(
           $enumDecode(_$TicketConsumoEnumMap, json['ticketConsumo'])
       ..impressaoVenda =
           $enumDecode(_$ImpressaoVendaEnumMap, json['impressaoVenda'])
+      ..impressaoTef =
+          $enumDecode(_$ImpressaoVendaEnumMap, json['impressaoTef'])
       ..avisoTempoOcioso = json['avisoTempoOcioso'] as int?
       ..senhaAtendimento =
           $enumDecode(_$SenhaAtendimentoEnumMap, json['senhaAtendimento'])
@@ -6375,6 +6377,7 @@ Map<String, dynamic> _$ServicoAutoAtendimentoToJson(
       'token': instance.token,
       'ticketConsumo': _$TicketConsumoEnumMap[instance.ticketConsumo],
       'impressaoVenda': _$ImpressaoVendaEnumMap[instance.impressaoVenda],
+      'impressaoTef': _$ImpressaoVendaEnumMap[instance.impressaoTef],
       'avisoTempoOcioso': instance.avisoTempoOcioso,
       'senhaAtendimento': _$SenhaAtendimentoEnumMap[instance.senhaAtendimento],
       'idFinalizadoraDebito': instance.idFinalizadoraDebito,

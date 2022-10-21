@@ -87,7 +87,7 @@ class PrinterRepository {
     });
   }
 
-  static Future<void> printerTefCancelamento(PWSConfig configLocal,
+  static Future<void> printerTefComprovante(PWSConfig configLocal,
       String viaCliente,
       String viaCaixa,
       ServicoAutoAtendimento servicoAutoAtendimento,
@@ -99,7 +99,7 @@ class PrinterRepository {
     dto.viaCaixa = viaCaixa;
     dto.viaCliente = viaCliente;
 
-    return await AutoatendimentoRequester.printTefCancelamento(configLocal, dto)
+    return await AutoatendimentoRequester.printTefComprovante(configLocal, dto)
         .then((response) {
       if (!response.isSuccess) {
         throw PwsException(response.content);
