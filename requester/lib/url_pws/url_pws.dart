@@ -513,7 +513,7 @@ class UrlPws {
   }
 
   UrlPws.postAutoatendimentoPrintComprovanteTef() {
-    _url = "/printer/comprovantetef";
+    _url = "/printer/comprovante-tef";
     _type = RequestType.POST;
   }
 
