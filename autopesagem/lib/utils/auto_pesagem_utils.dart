@@ -24,7 +24,7 @@ class AutoPesagemUtils {
 
   static void criaComunicacaoBalanca() {
     AppConfig.pwsUtils = PWSConfig(
-        urlBase: "http://localhost:3030",
+        urlBase: "http://localhost:2022",
         client: AppConfig.application.client!,
         clientSecret: AppConfig.clientSecret);
   }

@@ -6348,6 +6348,7 @@ ServicoAutoAtendimento _$ServicoAutoAtendimentoFromJson(
           $enumDecode(_$SenhaAtendimentoEnumMap, json['senhaAtendimento'])
       ..idFinalizadoraDebito = json['idFinalizadoraDebito'] as int?
       ..idFinalizadoraCredito = json['idFinalizadoraCredito'] as int?
+      ..idFinalizadoraVale = json['idFinalizadoraVale'] as int?
       ..finalizadoraDebito = json['finalizadoraDebito'] == null
           ? null
           : FinalizadoraEmpresa.fromJson(
@@ -6356,6 +6357,10 @@ ServicoAutoAtendimento _$ServicoAutoAtendimentoFromJson(
           ? null
           : FinalizadoraEmpresa.fromJson(
               json['finalizadoraCredito'] as Map<String, dynamic>)
+      ..finalizadoraVale = json['finalizadoraVale'] == null
+          ? null
+          : FinalizadoraEmpresa.fromJson(
+              json['finalizadoraVale'] as Map<String, dynamic>)
       ..mensagemFinalAtendimento = json['mensagemFinalAtendimento'] as String?
       ..arquivos = (json['arquivos'] as List<dynamic>?)
               ?.map((e) =>
@@ -6377,8 +6382,10 @@ Map<String, dynamic> _$ServicoAutoAtendimentoToJson(
       'senhaAtendimento': _$SenhaAtendimentoEnumMap[instance.senhaAtendimento],
       'idFinalizadoraDebito': instance.idFinalizadoraDebito,
       'idFinalizadoraCredito': instance.idFinalizadoraCredito,
+      'idFinalizadoraVale': instance.idFinalizadoraVale,
       'finalizadoraDebito': instance.finalizadoraDebito,
       'finalizadoraCredito': instance.finalizadoraCredito,
+      'finalizadoraVale': instance.finalizadoraVale,
       'mensagemFinalAtendimento': instance.mensagemFinalAtendimento,
       'arquivos': instance.arquivos,
     };

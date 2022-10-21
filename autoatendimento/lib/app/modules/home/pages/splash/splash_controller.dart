@@ -162,6 +162,11 @@ abstract class SplashBase with Store {
           appController.servicoAutoAtendimento.finalizadoraCredito!);
     }
 
+    if (appController.servicoAutoAtendimento.finalizadoraVale != null) {
+      appController.listFormaPagamento.add(
+          appController.servicoAutoAtendimento.finalizadoraVale!);
+    }
+
 
     //Transforma a finalizadora de credito em dinheiro para finalizar a venda sem tipo tef //todo apenas testes
     // appController.servicoAutoAtendimento.finalizadoraCredito!.finalizadora!.finalizadoraRFB = "DINHEIRO";
