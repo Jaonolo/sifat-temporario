@@ -5,8 +5,11 @@ import 'dart:convert';
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/repositories/printer_repository.dart';
+import 'package:autoatendimento/app/modules/venda/pos/sitef_pos.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/utils/dialog_auto.dart';
+import 'package:core/application/application.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -106,10 +109,16 @@ abstract class TransacaoTefBase with Store {
   }
 
   Future<void> cancelar() async {
+    if (defaultTargetPlatform == TargetPlatform.windows) {
     SitefProtocoloSocket sitefProtocoloSocket = SitefProtocoloSocket();
     sitefProtocoloSocket.funcao = "abortar";
     channel.sink.add(sitefProtocoloSocket.toJson());
     recomecar();
+    }else{
+      SitefPOS.abortar();
+      recomecar();
+    }
+
   }
 
   Future<void> recomecar() async {
@@ -213,6 +222,56 @@ abstract class TransacaoTefBase with Store {
           txt: "Continuar",
           showCancelBtn: false,
           context);
+    }
+  }
+
+  Future<void> finalizaVendaAndroid(BuildContext context) async {
+    atualizaBuffer("Finalizando pedido");
+    try {
+      await vendaController.insereItensAPI();
+
+      //Receber venda
+      await vendaController.receberVendaAPI(context);
+
+      XmlDTO? xml;
+      if (appController.estacaoTrabalho.emissorFiscal != null) {
+        //Emitir cupom fiscal
+        xml = await vendaController.emitirFiscal();
+
+        if (xml != null) {
+          Application
+              .getInstance()
+              .impressoraService
+              .imprimeNFCE(xml, context);
+        }
+      } else {
+        xml = null;
+      }
+
+      _avancar();
+    }catch (e) {
+
+      String erro = e.toString();
+
+      if (e.runtimeType == PwsException) {
+        e as PwsException;
+        if (e.message != null) erro = e.message!;
+        if (e.pws != null && e.pws!.description != null)
+          erro += "\n" + e.pws!.description!;
+      }
+
+      print('[ERRO - tratativasPosTransacao]: ${e.toString()}');
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (c) => DialogAuto(
+            title: "Desculpe! \n\n Ocorreu um problema na finalização do pedido:\n\n [$erro] \n\n"
+                " Caso queira solicitar cupom fiscal, favor dirigir-se ao caixa.",
+            message: "",
+            txtConfirmar: "Confirmar" ,
+            onConfirm: () => {_avancar()},
+          ));
+
     }
   }
 

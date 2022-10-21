@@ -47,43 +47,14 @@ abstract class PagamentosBase with Store {
 
   Future<void> _transacaoTEF(String tipoPagamentoTEF, BuildContext context,
       FinalizadoraEmpresa finalizadoraEmpresa) async {
+    Modular.to.pushNamed("/transacao");
     if (defaultTargetPlatform == TargetPlatform.windows) {
-      Modular.to.pushNamed("/transacao");
       transacaoTefController.comunicaWebSocket(context);
       transacaoTefController.transacionar(vendaController.nota.valorTotal!,
           tipoPagamentoTEF, vendaController.nota.id!);
     } else {
-      var success = await SitefPOS.transacionar(context, vendaController.nota,
+      await SitefPOS.transacionar(context, vendaController.nota,
           vendaController.nota.valorTotal!, finalizadoraEmpresa);
-
-      if (success) {
-        //Insere os itens
-        await vendaController.insereItensAPI();
-
-        print(">>>>>>>>>> " +
-            vendaController.nota.finalizadoras.length.toString());
-        if (vendaController.nota.finalizadoras.length == 0)
-          vendaController.addNotaFinalizadora(
-              finalizadoraEmpresa, vendaController.nota.valorTotal!);
-
-        //Receber venda
-        await vendaController.receberVendaAPI(context);
-
-        XmlDTO? xml;
-        if (appController.estacaoTrabalho.emissorFiscal != null) {
-          //Emitir cupom fiscal
-          xml = await vendaController.emitirFiscal();
-
-          if (xml != null) {
-            Application.getInstance().impressoraService.imprimeNFCE(xml, context);
-          }
-        } else {
-          xml = null;
-        }
-        Modular.to.pushNamed("/finalizado");
-      }else{
-        vendaController.nota.finalizadoras.removeLast();
-      }
     }
   }
 
