@@ -5,6 +5,7 @@ import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
@@ -40,7 +41,7 @@ class CardProdutoExtra extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Expanded(flex: 50, child: _txtDescricao()),
+          Expanded(flex: 28, child: _txtDescricao()),
           Expanded(flex: 15, child: _txtPreco()),
           Expanded(flex: 10, child: _btnRemover()),
           Expanded(flex: 8, child: _txtQuantidadeLancada()),
@@ -103,7 +104,7 @@ class CardProdutoExtra extends StatelessWidget {
      Orientation orientation = MediaQuery.of(context).orientation;
      return SizedBox(
        height: orientation == Orientation.landscape
-           ? FontUtils.h2(context)
+           ? defaultTargetPlatform == TargetPlatform.windows ?FontUtils.h2(context) : FontUtils.h2(context) * 2.1
            : FontUtils.h3(context) * 1.4,
        child: ElevatedButton(
          style: ElevatedButton.styleFrom(
@@ -128,7 +129,7 @@ class CardProdutoExtra extends StatelessWidget {
      Orientation orientation = MediaQuery.of(context).orientation;
      return SizedBox(
        height: orientation == Orientation.landscape
-           ? FontUtils.h2(context)
+           ? defaultTargetPlatform == TargetPlatform.windows ?FontUtils.h2(context) : FontUtils.h2(context) * 2.1
            : FontUtils.h3(context) * 1.4,
        child: ElevatedButton(
          style: ElevatedButton.styleFrom(

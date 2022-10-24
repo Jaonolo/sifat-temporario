@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:core/application/application.dart';
 import 'package:flutter/material.dart';
+import 'package:models/model/enum/clients.dart';
 import 'package:models/model/models.dart';
 import 'package:utils/utils/date_time_utils.dart';
 import 'package:utils/utils/number_utils.dart';
@@ -1392,5 +1393,318 @@ class ImpressaoPOSUtils {
         notaItem.subitens
             .forEach((s) => _percorreNotaItemIndividual(s, modulo));
     }
+  }
+
+
+  //  Impressão auto atendimento
+
+  static Future<void> imprimeTicketConsumo(
+      PrinterVendaDTO dto, List<NotaItem> itens) async {
+    impressao = "";
+
+    impressao += "----------------------------------------" + "\n";
+
+    impressao += "AUTOATENDIMENTO: " +
+        dto.dtoNota!.nota!.consumo!.comanda.toString() +
+        "\n";
+
+    if (dto.dtoNota!.nota!.consumo!.senhaAtendimento != null)
+      impressao += "SENHA: " +
+          dto.dtoNota!.nota!.consumo!.senhaAtendimento.toString() +
+          "\n";
+
+    impressao += "\n" + dto.dtoNota!.nota!.consumo!.observacao! + "\n\n";
+
+    impressao +=
+        "${DateTimeUtils.format(dto.dtoNota!.nota!.dataEmissao, DateTimeUtils.dataHoraFullFormat)} \n\n";
+    impressao += "Total de itens: " +
+        itens
+            .map((n) => n.quantidade)
+            .reduce((value, element) => value! + element)
+            .toString();
+    impressao += "\n\n";
+    for (NotaItem notaItem in itens) {
+      impressao += "Qtde: " + notaItem.quantidade!.toString() + "\n";
+      impressao += notaItem.descricao! + "\n";
+      if (notaItem.subitens.isNotEmpty) {
+        List<NotaItem> subitens = [];
+        notaItem.subitens.forEach((n) {
+          _percorreNotaItem(n, subitens);
+        });
+        for (NotaItem subitem in subitens) {
+          if (subitem.quantidade!.compareTo(BigDecimal.ZERO()) > 0) {
+            impressao += "  > " +
+                subitem.quantidade.toString() +
+                "x " +
+                subitem.descricao! +
+                "\n";
+          } else {
+            impressao += "  >   " + subitem.descricao! + "\n";
+          }
+        }
+      }
+      impressao += "\n";
+    }
+    impressao += "\n";
+    impressao +=
+        "|Autoatendimento " + Clients.AUTOATENDIMENTO.versao + "|" + "\n";
+
+    impressao += "\n";
+    impressao += "---------------------------- \n";
+    impressao += "\n";
+
+    await Application.getInstance().impressoraService.imprime(impressao);
+  }
+
+  static Future<void> imprimirTicketVenda(
+      PrinterVendaDTO dto, List<NotaItem> itens) async {
+     impressao = "";
+
+    imprimeTicketCabecalho("Pagamento", dto.dtoNota!.nota!);
+    _imprimeTicketItens(dto.dtoNota!.nota!, dto.servicoAutoAtendimento!, itens);
+    _imprimeTicketTotais(dto.dtoNota!.nota!);
+    String senha = dto.dtoNota!.nota!.consumo!.senhaAtendimento == null
+        ? dto.dtoNota!.nota!.consumo!.comanda.toString()
+        : dto.dtoNota!.nota!.consumo!.senhaAtendimento!;
+    _imprimeTicketRodape(senha);
+
+    await Application.getInstance().impressoraService.imprime(impressao);
+  }
+
+  static void imprimeTicketCabecalho(String descricao, Nota nota) {
+  impressao += "Waychef Autoatendimento" + "\n";
+  impressao += "========================================" + "\n";
+  impressao += descricao + "\n\n";
+  if (nota.numero != null)
+  impressao += "Controle: " + nota.numero.toString() + "\n";
+  impressao += nota.consumo!.modulo.toString() + ": " + nota.consumo!.comanda.toString()
+  + " 	" +  "${DateTimeUtils.format(nota.dataEmissao, DateTimeUtils.dataFormat)}"
+  + " " + "${DateTimeUtils.format(nota.dataEmissao, DateTimeUtils.dataHora)}" + "\n";
+  if (nota.motivoCancelamento != null && nota.motivoCancelamento!.isNotEmpty)
+  impressao += "Motivo: " + nota.motivoCancelamento! + "\n";
+  impressao += "========================================" + "\n";
+  }
+
+  static void _imprimeTicketItens(Nota nota, ServicoAutoAtendimento modulo, List<NotaItem> itens) {
+    qtdeTotalItens = BigDecimal.ZERO();
+
+    impressao += "DESCRICAO ITEM" +  " VR.UNIT " + " VR.TOTAL " + "\n";
+    impressao += "============================== \n";
+
+    switch (modulo.ticketConsumo.name) {
+      case "AGRUPAR":
+        List<NotaItem> itemList = [];
+        itens.forEach((i) {
+          if (i.tipo != "GORJETA") _percorreNotaItem(i, itemList);
+        });
+
+        var groupByPreco = Map<BigDecimal?, List<NotaItem>>();
+        itemList.forEach((nt) {
+          var preco = nt.precoUnitario;
+          if (groupByPreco.containsKey(preco))
+            groupByPreco[preco]!.add(nt);
+          else
+            groupByPreco[preco] = [nt];
+        });
+
+        var notaItemPorProdutoEPreco =
+        Map<int?, Map<BigDecimal?, List<NotaItem>>>();
+
+        groupByPreco.forEach((preco, itens) {
+          itens.forEach((item) {
+            var idProduto = Application.getInstance().produtos[item.idProdutoEmpresa]!.produto!.id;
+
+            if (notaItemPorProdutoEPreco.containsKey(idProduto)) {
+              if (notaItemPorProdutoEPreco[idProduto]!.containsKey(preco)) {
+                notaItemPorProdutoEPreco[idProduto]![preco]!.add(item);
+              } else {
+                notaItemPorProdutoEPreco[idProduto]![preco] = [item];
+              }
+            } else {
+              notaItemPorProdutoEPreco[idProduto] = {
+                preco: [item]
+              };
+            }
+          });
+        });
+
+        notaItemPorProdutoEPreco.forEach((idProduto, itemPorPreco) {
+          itemPorPreco.forEach((precoUnitario, notaItens) {
+            var notaItem = notaItens[0];
+            notaItem.precoTotal = notaItens
+                .map((n) => n.precoTotal)
+                .reduce((value, element) => value! + element);
+            notaItem.quantidade = notaItens
+                .map((n) => n.quantidade)
+                .reduce((value, element) => value! + element);
+            notaItem.valorDesconto = notaItens
+                .map((n) => n.valorDesconto)
+                .reduce((value, element) => value! + element);
+            notaItem.valorDescontoPromocao = notaItens
+                .map((n) => n.valorDescontoPromocao)
+                .reduce((value, element) => value! + element);
+            qtdeTotalItens += notaItem.quantidade;
+
+            String quantidade;
+            if (notaItem.quantidade!.toDouble() != notaItem.quantidade!.toInt())
+              quantidade = notaItem.quantidade!.toDouble().toString();
+            else
+              quantidade = notaItem.quantidade!.toInt().toString();
+
+
+            impressao +=
+                "${notaItem.descricao}   $quantidade X  ${Application.getInstance().produtos[notaItem
+                    .idProdutoEmpresa]!.produto!.unidade}  " +
+                    "${notaItem.precoUnitario!.toStringAsFixed(2)}  " +
+                    "${notaItem.precoTotal!.toStringAsFixed(2)} \n";
+
+
+            BigDecimal descontoTotal =
+                notaItem.valorDesconto! + notaItem.valorDescontoPromocao;
+            if (descontoTotal != BigDecimal.ZERO())
+              impressao +=
+              "Desconto item:   - ${descontoTotal.toStringAsFixed(2)} \n";
+          });
+        });
+
+        break;
+
+      case "INDIVIDUAL":
+        itens.forEach((nt) {
+          if (nt.tipo != "GORJETA") _percorreIndividualNotaItem(nt);
+        });
+        break;
+
+      case "AGRUPAR_INDIVIDUAL":
+        itens.forEach((nt) {
+          if (nt.tipo != "GORJETA") _percorreIndividualNotaItem(nt);
+        });
+        break;
+
+    }
+
+    impressao += "------------------------------ \n";
+    impressao +=
+    "${qtdeTotalItens.toDouble() == qtdeTotalItens.toInt()
+        ? "QTDE: (${qtdeTotalItens.toInt()})"
+        : ""} \n\n";
+  }
+
+  static void _imprimeTicketTotais(Nota nota) {
+    bool linha = false;
+    bool imprimiuSubtotal = false;
+
+
+    if (nota.valorDesconto != BigDecimal.ZERO()) {
+      if (!imprimiuSubtotal) {
+        impressao += "Subtotal: ${nota.valorSubTotal!.toStringAsFixed(2)} \n";
+        imprimiuSubtotal = true;
+      }
+
+      impressao += "Desconto: ${nota.valorDesconto!.toStringAsFixed(2)} \n";
+      linha = true;
+    }
+
+    if (nota.valorAcrescimo != BigDecimal.ZERO()) {
+      if (!imprimiuSubtotal) {
+        impressao += "Subtotal: ${nota.valorSubTotal!.toStringAsFixed(2)} \n";
+        imprimiuSubtotal = true;
+      }
+
+      impressao += "Acréscimo: ${nota.valorAcrescimo!.toStringAsFixed(2)} \n";
+      linha = true;
+    }
+
+    if (linha) impressao += "--------------------------- \n";
+    impressao += "Vr. Total:  ${nota.valorTotal!.toStringAsFixed(2)} \n";
+
+    if (nota.finalizadoras != null && nota.finalizadoras.isNotEmpty) {
+      BigDecimal totalPago;
+      totalPago = nota.finalizadoras
+          .map((f) => f.valor!)
+          .reduce((value, element) => value + element);
+
+      impressao += "--------------------------- \n";
+      impressao += "Pago R\$:  ${totalPago.toStringAsFixed(2)} \n";
+
+
+      BigDecimal troco = nota.finalizadoras
+          .map((f) => f.troco != null ? f.troco! : BigDecimal.ZERO())
+          .reduce((value, element) => value + element);
+
+      if (troco != BigDecimal.ZERO())
+        impressao += "Troco: R\$:  ${troco.toStringAsFixed(2)} \n";
+
+      impressao += "\nFormas de pagamento:\n";
+      nota.finalizadoras.forEach((f) {
+        impressao +=
+        "${f.finalizadoraEmpresa!.finalizadora!.descricao}   ${f.valor!.toStringAsFixed(2)} \n";
+      });
+    }
+  }
+
+   static void _imprimeTicketRodape( String senhaAtendimento) {
+     impressao += "\n";
+     impressao += "========================================" + "\n";
+     impressao += "	NAO E DOCUMENTO FISCAL" + "\n";
+
+     //Imprime senha de atendimento caso existir
+     if (senhaAtendimento != null && senhaAtendimento.isNotEmpty) {
+       impressao += "\n";
+       impressao += "****ATENDIMENTO****" + "\n";
+       impressao += senhaAtendimento.toUpperCase() + "\n\n";
+     }
+     impressao += "\n\n\n";
+   }
+
+  static void _percorreNotaItem(NotaItem notaItem, List<NotaItem> itemList) {
+    if (!notaItem.cancelado &&
+        (notaItem.tipo == "ITEM" ||
+            notaItem.tipo == "ITEM_COMBINADO" ||
+            notaItem.tipo == "ITEM_COMBO" ||
+            notaItem.tipo == "ADICIONAL" ||
+            notaItem.tipo == "ITEM_COMPOSTO" ||
+            notaItem.tipo == "ITEM_CESTA" ||
+            notaItem.tipo == "OBSERVACAO" ||
+            notaItem.tipo == "ITEM_RODIZIO")) itemList.add(notaItem);
+
+    if (notaItem.subitens.isNotEmpty)
+      notaItem.subitens.forEach((s) => _percorreNotaItemAgrupado(s, itemList));
+  }
+
+  static void _percorreIndividualNotaItem(NotaItem notaItem) {
+    if (!notaItem.cancelado &&
+        (notaItem.tipo == "ITEM" ||
+            notaItem.tipo == "ITEM_COMBINADO" ||
+            notaItem.tipo == "ITEM_COMBO" ||
+            notaItem.tipo == "ADICIONAL" ||
+            notaItem.tipo == "ITEM_COMPOSTO" ||
+            notaItem.tipo == "ITEM_CESTA" ||
+            notaItem.tipo == "OBSERVACAO" ||
+            notaItem.tipo == "ITEM_RODIZIO")) {
+      qtdeTotalItens += notaItem.quantidade;
+      String quantidade;
+
+      if (notaItem.quantidade!.toDouble() != notaItem.quantidade!.toInt()) {
+        quantidade = notaItem.quantidade!.toDouble().toString();
+      } else {
+        quantidade = notaItem.quantidade!.toInt().toString();
+      }
+
+        impressao +=
+            " $quantidade  X   ${notaItem.descricao}   " +
+                "${notaItem.precoUnitario!.toStringAsFixed(2)}   " +
+                "${notaItem.precoTotal!.toStringAsFixed(2)} \n";
+
+
+      BigDecimal descontoTotal =
+          notaItem.valorDesconto! + notaItem.valorDescontoPromocao;
+      if (descontoTotal != BigDecimal.ZERO())
+        impressao +=
+        "Desconto item:   - ${descontoTotal.toStringAsFixed(2)} \n";
+    }
+
+    if (notaItem.subitens.isNotEmpty)
+      notaItem.subitens.forEach((s) => _percorreIndividualNotaItem(s));
   }
 }

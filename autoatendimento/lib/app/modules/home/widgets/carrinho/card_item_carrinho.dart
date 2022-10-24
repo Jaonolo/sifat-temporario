@@ -8,6 +8,7 @@ import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/dialog_auto.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -47,6 +48,8 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
       }
     }
 
+    bool isWindows = defaultTargetPlatform == TargetPlatform.windows;
+
     return Card(
       elevation: 5,
       child: Padding(
@@ -55,16 +58,16 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
           children: [
             Row(
               children: [
-                Expanded(flex: 8, child: _botaoRemove()),
+                Expanded(flex:isWindows? 8 : 9, child: _botaoRemove()),
                 Expanded(flex: 4, child: _txtUnidade()),
-                Expanded(flex: 8, child: _botaoAdd()),
-                Expanded(flex: 54, child: _txtDescricao()),
+                Expanded(flex: isWindows? 8 : 9, child: _botaoAdd()),
+                Expanded(flex: isWindows? 54 : 10, child: _txtDescricao()),
                 Expanded(
-                    flex: 12,
+                    flex: isWindows? 12 : 6,
                     child: podeEditar
                         ? _botaoEditar()
                         :const SizedBox()),
-                Expanded(flex: 14, child: _txtValor()),
+                Expanded(flex:isWindows? 14 :  8, child: _txtValor()),
                 Expanded(
                   child: Container(),
                 ),
@@ -79,18 +82,20 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
   }
 
   Widget _botaoAdd() {
-    return SizedBox(
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: DefaultTheme.accentColor,
-          onPrimary: DefaultTheme.branco,
-          elevation: 4.0,
-          shape: const CircleBorder(),
-        ),
-        onPressed: () => widget.produtoCarrinho.adicionar(),
-        child: Icon(
-          Icons.add,
-          size: FontUtils.h3(context),
+    return Center(
+      child: SizedBox(
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: DefaultTheme.accentColor,
+            onPrimary: DefaultTheme.branco,
+            elevation: 4.0,
+            shape: const CircleBorder(),
+          ),
+          onPressed: () => widget.produtoCarrinho.adicionar(),
+          child: Icon(
+            Icons.add,
+            size: FontUtils.h3(context),
+          ),
         ),
       ),
     );
@@ -110,34 +115,36 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
   }
 
   Widget _botaoRemove() {
-    return SizedBox(
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: DefaultTheme.accentColor,
-          onPrimary: DefaultTheme.branco,
-          elevation: 4.0,
-          shape: const CircleBorder(),
-          //splashColor: Colors.grey, Desativado pelo uso do ElevatedButton
-        ),
-        onPressed: () {
-          //se for o ultimo pedido aparece uma dialog de confirmação
-          widget.produtoCarrinho.remover(
-              ultimoPedido: (index) =>
-                  showDialog(
-                      context: context,
-                      builder: (context) =>
-                          DialogAuto(
-                            message: "Deseja remover o item do carrinho?",
-                            txtConfirmar: "SIM",
-                            txtCancelar: "NÃO",
-                            onConfirm: () =>
-                                vendaController.removerProdutoCarrinho(index),
-                            title: '',
-                          )));
-        },
-        child: Icon(
-          Icons.remove,
-          size: FontUtils.h3(context),
+    return Center(
+      child: SizedBox(
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: DefaultTheme.accentColor,
+            onPrimary: DefaultTheme.branco,
+            elevation: 4.0,
+            shape: const CircleBorder(),
+            //splashColor: Colors.grey, Desativado pelo uso do ElevatedButton
+          ),
+          onPressed: () {
+            //se for o ultimo pedido aparece uma dialog de confirmação
+            widget.produtoCarrinho.remover(
+                ultimoPedido: (index) =>
+                    showDialog(
+                        context: context,
+                        builder: (context) =>
+                            DialogAuto(
+                              message: "Deseja remover o item do carrinho?",
+                              txtConfirmar: "SIM",
+                              txtCancelar: "NÃO",
+                              onConfirm: () =>
+                                  vendaController.removerProdutoCarrinho(index),
+                              title: '',
+                            )));
+          },
+          child: Icon(
+            Icons.remove,
+            size: FontUtils.h3(context),
+          ),
         ),
       ),
     );

@@ -3,16 +3,11 @@ import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/transacao_tef/transacao_tef_controller.dart';
 import 'package:autoatendimento/app/modules/venda/pos/sitef_pos.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
-import 'package:autoatendimento/app/utils/autoatendimento_utils.dart';
-import 'package:core/application/application.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:models/model/enum/marca_pos.dart';
-import 'package:models/model/enum/tipo_estacao.dart';
 import 'package:models/model/models.dart';
-import 'package:pos/pos/impressora/impressora_service.dart';
 
 part "pagamentos_controller.g.dart";
 

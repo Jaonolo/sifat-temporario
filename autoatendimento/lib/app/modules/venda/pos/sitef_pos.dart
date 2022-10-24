@@ -100,7 +100,8 @@ class SitefPOS {
         appController.transacoes.add(_dadosTransacao);
         controller.finalizaVendaAndroid(_context!);
       }
-    } on PlatformException catch (_) {
+    } on PlatformException catch (e) {
+      controller.tratativasRetornoFalhaAndroid(e.message.toString(), _context!);
       //SitefDialog.instance.setError(e);
       //throw e;
     }
@@ -310,11 +311,8 @@ class SitefPOS {
               break;
 
             case "5013":
-              if (_perguntaCancelamento!) {
-                _perguntarCancelamentoOperacao();
-              } else {
                 _send("0");
-              }
+                controller.recomecar(false);
               break;
             default:
           }
@@ -372,29 +370,21 @@ class SitefPOS {
           if (adquirenteCorrespondente != null) {
             _send(adquirenteCorrespondente.value);
           } else {
-            //alimenta a tela com as opções
-            SitefDialog.instance.setOptions(map['title'], itens, (v) {
-              String valor = v;
-              if (valor != null && valor.isNotEmpty) _send(valor);
-            });
+            controller.atualizaBuffer(map['title'].toString());
           }
           break;
 
         case "30":
           switch (fieldId) {
-            case "500":
+            case "500": // código do supervisor
               _send(_codigoOperador!);
               break;
 
             case "515":
             case "505":
-              SitefDialog.instance.setInput(
-                  message: map['message'],
-                  keyboardType: TextInputType.datetime,
-                  onConfirm: (v) {
-                    String valor = v;
-                    if (valor != null && valor.isNotEmpty) _send(valor);
-                  });
+              //515 - data da transação a ser cancelada
+              //505 - parcelas
+            controller.atualizaBuffer(map['message'].toString());
 
               //================ preenchimento automatico ======================
               if (_tipoOperacao == TipoOperacaoTEF.CANCELAMENTO) {
@@ -413,14 +403,7 @@ class SitefPOS {
               break;
 
             case "516":
-              SitefDialog.instance.setInput(
-                  message: map['message'],
-                  keyboardType: TextInputType.number,
-                  onConfirm: (v) {
-                    String valor = v;
-                    if (valor != null && valor.isNotEmpty) _send(valor);
-                  });
-
+              controller.atualizaBuffer(map['message'].toString());
               //================ preenchimento automatico ======================
               if (_tipoOperacao == TipoOperacaoTEF.CANCELAMENTO) {
                 if (map['message'].toString().contains(
@@ -444,17 +427,7 @@ class SitefPOS {
           switch (fieldId) {
             case "145":
             case "146":
-              SitefDialog.instance.setInput(
-                  message: map['message'],
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    CurrencyInputFormatter(),
-                  ],
-                  onConfirm: (v) {
-                    String valor = v;
-                    if (valor != null && valor.isNotEmpty) _send(valor);
-                  });
+            controller.atualizaBuffer(map['message'].toString());
 
               //================ preenchimento automatico ======================
               if (_tipoOperacao == TipoOperacaoTEF.CANCELAMENTO) {
@@ -486,20 +459,20 @@ class SitefPOS {
           break;
 
         case "50":
-          //Comando para exibir o qrCode na tela do pdv
-          SitefDialog.instance.setQrCode(titleQrCode, map['message']);
+
+          controller.atualizaBuffer(map['message'].toString());
           break;
 
         case "51":
           //Comando para retirar o QrCode da tela Sitef ja devolveu a resposta
-          SitefDialog.instance.setStatus("Aguarde ...");
+          controller.atualizaBuffer("Aguarde ...");
           break;
       }
     }
 
     if (map.containsKey('status')) {
-      String status = map['status'].toString();
-      controller.atualizaBuffer(status);
+        controller.atualizaBuffer( map['status'].toString());
+
     }
 
     if (map.containsKey('alerta')) {
@@ -621,10 +594,8 @@ class SitefPOS {
     }
 
     if (map.containsKey('information')) {
-      SitefDialog.instance.setInformation(
-        information: map['message'],
-        onConfirm: (_) => _send(""),
-      );
+      controller.atualizaBuffer(map['message'].toString());
+      _send("");
     }
   }
 
