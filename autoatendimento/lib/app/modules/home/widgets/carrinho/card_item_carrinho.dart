@@ -63,7 +63,7 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
                 Expanded(flex: isWindows? 8 : 6, child: _botaoAdd()),
                 Expanded(flex: isWindows? 54 : 10, child: _txtDescricao()),
                 Expanded(
-                    flex: isWindows? 12 : 2,
+                    flex: isWindows? 12 : 6,
                     child: podeEditar
                         ? _botaoEditar()
                         :const SizedBox()),
