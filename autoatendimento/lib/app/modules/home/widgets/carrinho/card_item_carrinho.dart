@@ -58,16 +58,16 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
           children: [
             Row(
               children: [
-                Expanded(flex:isWindows? 8 : 9, child: _botaoRemove()),
-                Expanded(flex: 4, child: _txtUnidade()),
-                Expanded(flex: isWindows? 8 : 9, child: _botaoAdd()),
+                Expanded(flex:isWindows? 8 : 6, child: _botaoRemove()),
+                Expanded(flex: 2, child: _txtUnidade()),
+                Expanded(flex: isWindows? 8 : 6, child: _botaoAdd()),
                 Expanded(flex: isWindows? 54 : 10, child: _txtDescricao()),
                 Expanded(
-                    flex: isWindows? 12 : 6,
+                    flex: isWindows? 12 : 2,
                     child: podeEditar
                         ? _botaoEditar()
                         :const SizedBox()),
-                Expanded(flex:isWindows? 14 :  8, child: _txtValor()),
+                Expanded(flex:isWindows? 14 :  7, child: _txtValor()),
                 Expanded(
                   child: Container(),
                 ),
@@ -109,7 +109,7 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
         textAlign: TextAlign.center,
         softWrap: false,
         style: TextStyle(
-            color: DefaultTheme.preto, fontSize: FontUtils.h3(context)),
+            color: DefaultTheme.preto, fontSize: defaultTargetPlatform == TargetPlatform.windows? FontUtils.h3(context) : FontUtils.h3(context) * 1.80),
       );
     });
   }
@@ -229,7 +229,7 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
               child: Text(
                 StringUtils.montaDescricaoSubItensAuto(
                     widget.produtoCarrinho.notaItem, isValorItemTotal: false),
-                style: TextStyle(fontSize: FontUtils.h4(context)),
+                style: TextStyle(fontSize:  defaultTargetPlatform == TargetPlatform.windows ? FontUtils.h4(context) : FontUtils.h3(context) ),
               ),
             )
           ]),

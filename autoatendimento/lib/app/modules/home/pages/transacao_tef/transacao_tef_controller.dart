@@ -382,7 +382,10 @@ abstract class TransacaoTefBase with Store {
                     " Caso queira solicitar cupom fiscal, favor dirigir-se ao caixa.",
                 message: "",
                 txtConfirmar: "Confirmar",
-                onConfirm: () => {_avancar()},
+                showCancelButton: false,
+                onConfirm: () => {
+                  _printerConsumoAndroid(context)
+                  },
               ));
     }
   }
@@ -399,16 +402,34 @@ abstract class TransacaoTefBase with Store {
         await ImpressaoPOSUtils.imprimirTicketVenda(
             criaObjetoVendaDTO(itens), itens);
       }
+    await _printerConsumoAndroid(context);
+    }catch (e){
+      _tentarNovamentePrinter(
+          "Desculpe, houve um problema na impressão do pedido",
+              () => _printerNfceAndroid(xml, context),
+              () => _printerConsumoAndroid(context),
+          context);
+    }
+  }
+
+  Future<void> _printerConsumoAndroid( BuildContext context) async {
+    try{
+      List<NotaItem> itens = [];
+      for (var ni in vendaController.itensLancados) {
+        itens.add(ni.notaItem);
+      }
       if (appController.servicoAutoAtendimento.impressaoVenda
           .equals(ImpressaoVenda.IMPRIME)) {
-
         await ImpressaoPOSUtils.imprimeTicketConsumo(criaObjetoVendaDTO(itens), itens);
-
       }
 
     _avancar();
     }catch (e){
-
+      _tentarNovamentePrinter(
+          "Desculpe, houve um problema na impressão do pedido",
+              () => _printerConsumoAndroid(context),
+              () => _avancar(),
+          context);
     }
   }
 

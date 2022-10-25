@@ -6,6 +6,7 @@ import 'package:autoatendimento/app/modules/home/widgets/botao_primario.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -161,7 +162,7 @@ class ProdutoCompostoComponent {
                       ? "Revisão"
                       : controller.proximoMenu!.descricao!.toUpperCase(),
                   function: () => controller.proximo(),
-                  altura: FontUtils.h2(context) * 1.01,
+                  altura: defaultTargetPlatform == TargetPlatform.windows ? FontUtils.h2(context) * 1.01 : FontUtils.h2(context) * 5.01 ,
                   largura: FontUtils.h2(context) * 20,
                   borderRadius: 10.0,
                 ),
@@ -235,7 +236,7 @@ class ProdutoCompostoComponent {
             function: () {
               controller.adicionarAoCarrinho();
             },
-            altura: FontUtils.h2(context) * 1.01,
+            altura:  defaultTargetPlatform == TargetPlatform.windows ? FontUtils.h2(context) * 1.01 : FontUtils.h2(context) * 5.01 ,
             largura: FontUtils.h2(context) * 10,
           ),
         ),
