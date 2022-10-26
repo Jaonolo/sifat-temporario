@@ -1669,7 +1669,7 @@ class ImpressaoPOSUtils {
             notaItem.tipo == "ITEM_RODIZIO")) itemList.add(notaItem);
 
     if (notaItem.subitens.isNotEmpty)
-      notaItem.subitens.forEach((s) => _percorreNotaItemAgrupado(s, itemList));
+      notaItem.subitens.forEach((s) => _percorreNotaItem(s, itemList));
   }
 
   static void _percorreIndividualNotaItem(NotaItem notaItem) {

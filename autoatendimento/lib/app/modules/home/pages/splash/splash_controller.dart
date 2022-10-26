@@ -5,6 +5,7 @@ import 'package:autoatendimento/app/utils/autoatendimento_utils.dart';
 import 'package:core/application/application.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:models/model/enum/marca_pos.dart';
 import 'package:models/model/enum/tipo_estacao.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -16,6 +17,7 @@ import 'package:requester/requester/gerenciador_requester.dart';
 import 'package:requester/requester/servico_auto_atendimento_requester.dart';
 import 'package:requester/requester/tabela_preco_requester.dart';
 
+import '../../../../utils/dialog_auto.dart';
 import 'model/cardapio_dto.dart';
 import 'repositories/cardapio_repository.dart';
 import 'repositories/config_repository.dart';
@@ -74,7 +76,7 @@ abstract class SplashBase with Store {
     try {
       await _carregaNomeEstacao();
 
-      await _loginAPI();
+      await _loginAPI(context);
 
       await _carregaModuloEFormasPagamento();
 
@@ -129,7 +131,7 @@ abstract class SplashBase with Store {
     }
   }
 
-  Future<void> _loginAPI() async {
+  Future<void> _loginAPI(BuildContext context) async {
     await ServicoAutoAtendimentoRequester.login(
         appController.pwsConfig,
         appController.pwsConfig.clientSecret,
@@ -147,7 +149,22 @@ abstract class SplashBase with Store {
         appController.servicoAutoAtendimento = dto.servicoAutoAtendimento!;
         appController.token = dto.servicoAutoAtendimento!.token!;
       } else if (response.status == 204) {
-        throw WaybeException('Estação de trabalho não encontrada');
+          showDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (c) =>
+            DialogAuto(
+              showCancelButton: false,
+              title: "Estação de trabalho não encontrada",
+              message:
+              "Realize a configuração da estação no ERP, nome da estação esperado {$nomeEstacao}.\n"
+                  "Após finalizar o cadastro, clique em OK para reiniciar o aplicativo.",
+              txtConfirmar: "OK",
+              onConfirm: () {
+                Modular.to.pushNamed("/");
+                _carregarDadosIniciaisAPI(c);
+              },
+            ));
       } else {
         throw WaybeException('Problema ao realizar login na API',
             exception: response.content);
