@@ -90,7 +90,10 @@ abstract class SplashBase with Store {
     } catch (e) {
       print(e);
       if (e is WaybeException) {
-        changeBotaoDetalhesErro(true, e.mensagem);
+        if (e.titulo.contains("Estação de trabalho não encontrada")) {
+          e.mensagem = "Nome da estação não localizado , nome estação desejada : {$nomeEstacao}";
+        };
+        changeBotaoDetalhesErro(true, e.mensagem != null? e.mensagem : e.titulo);
         return changeStatus('$erro_base \n\n ${(e.exception != null) ? e.exception.message : ""}');
       }
     }
@@ -116,7 +119,7 @@ abstract class SplashBase with Store {
     await ConfigRepository.carregaNomeEstacao(appController.pwsConfigLocal);
     if (nomeEstacao == null || nomeEstacao!.isEmpty) {
       PwsAlert pws = PwsAlert();
-      pws.message = 'Nome da estação não localizado';
+      pws.message = 'Nome da estação não localizado + $nomeEstacao';
       throw WaybeException('Nome da estação não localizado.',
           exception: PwsException(pws));
     }
