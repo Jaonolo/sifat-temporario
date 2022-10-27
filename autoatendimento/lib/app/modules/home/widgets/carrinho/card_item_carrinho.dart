@@ -39,14 +39,7 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
 
   @override
   Widget build(BuildContext context) {
-    bool podeEditar = false;
 
-    if (widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa] != null) {
-      if (!widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.pacote.equals(TipoPacote.NENHUM)
-          || widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.grades.isNotEmpty) {
-        podeEditar = true;
-      }
-    }
 
     bool isWindows = defaultTargetPlatform == TargetPlatform.windows;
 
@@ -59,21 +52,15 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
             Row(
               children: [
                 Expanded(flex:isWindows? 8 : 6, child: _botaoRemove()),
-                Expanded(flex: 2, child: _txtUnidade()),
+                Expanded(flex: 4, child: _txtUnidade()),
                 Expanded(flex: isWindows? 8 : 6, child: _botaoAdd()),
                 Expanded(flex: isWindows? 54 : 10, child: _txtDescricao()),
-                Expanded(
-                    flex: isWindows? 12 : 6,
-                    child: podeEditar
-                        ? _botaoEditar()
-                        :const SizedBox()),
                 Expanded(flex:isWindows? 14 :  7, child: _txtValor()),
-                Expanded(
+                Expanded(flex: 1,
                   child: Container(),
                 ),
               ],
             ),
-            if (widget.produtoCarrinho.notaItem.subitens.isNotEmpty)
               _txtSubItens(),
           ],
         ),
@@ -153,9 +140,8 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
   Widget _botaoEditar() {
     return Center(
         child: SizedBox(
-            height: FontUtils.h2(context) * 1,
-            width: FontUtils.h2(context) * 8,
             child: IconButton(
+              alignment: AlignmentDirectional.topEnd,
               onPressed: onEditar,
               icon: Icon(
                 Icons.edit,
@@ -208,37 +194,65 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
               .toStringAsFixed(2)}',
           textAlign: TextAlign.end,
           style: TextStyle(
-              color: DefaultTheme.preto, fontSize: FontUtils.h3(context)),
+              color: DefaultTheme.preto, fontSize: FontUtils.h3(context) * 1.2),
         ),
       );
     });
   }
 
   Widget _txtSubItens() {
-    return Row(
-      children: [
-        Expanded(
-          flex: 14,
-          child: Container(),
-        ),
-        Expanded(
-          flex: 74,
-          child: Wrap(children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: Text(
-                StringUtils.montaDescricaoSubItensAuto(
-                    widget.produtoCarrinho.notaItem, isValorItemTotal: false),
-                style: TextStyle(fontSize:  defaultTargetPlatform == TargetPlatform.windows ? FontUtils.h4(context) : FontUtils.h3(context) ),
-              ),
-            )
-          ]),
-        ),
-        Expanded(
-          flex: 12,
-          child: Container(),
-        )
-      ],
-    );
+    bool podeEditar = false;
+    bool isSubItens = false ;
+
+    if(widget.produtoCarrinho.notaItem.subitens.isNotEmpty) {
+      isSubItens = true;
+    }
+
+
+    if (widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa] != null) {
+      //Diferente de nenhum e que tenha menus  OU  diferente de nenhum a grade que é usado hoje por causa da variação que fica como tamanho e que tenha grade
+      //todos produtos tem grade, apenas pra validar certeza
+      if ((!widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.pacote.equals(TipoPacote.NENHUM)
+              && widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus.isNotEmpty)
+          ||
+             (widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.grade != "NENHUMA"
+              &&  widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.grades.isNotEmpty)) {
+        podeEditar = true;
+      }
+    }
+
+    if(podeEditar || isSubItens) {
+      return Row(
+        children: [
+          Expanded(
+            flex: 8,
+            child: Container(),
+          ),
+          Expanded(
+            flex: 74,
+            child: Wrap(children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                child:
+                isSubItens ?
+                Text(
+                  StringUtils.montaDescricaoSubItensAuto(
+                      widget.produtoCarrinho.notaItem, isValorItemTotal: false),
+                  style: TextStyle(fontSize:  defaultTargetPlatform == TargetPlatform.windows ? FontUtils.h4(context) : FontUtils.h3(context) ),
+                ):
+                Text(""),
+              )
+            ]),
+          ),
+          Expanded(
+            flex: 7,
+            child: podeEditar? _botaoEditar() : Container(),
+          ),
+          Expanded(flex: 12,child: Container())
+        ],
+      );
+    }else{
+      return Container();
+    }
   }
 }

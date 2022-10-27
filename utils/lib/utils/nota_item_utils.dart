@@ -107,7 +107,9 @@ class NotaItemUtils {
 
     String descricao = produtoEmpresa.produto!.descricao!;
     if (produtoEmpresa.produto!.grade != "NENHUMA")
-      descricao += " (${gradeEmpresa.grade!.tamanho!.descricao})";
+      descricao += gradeEmpresa.grade != null && gradeEmpresa.grade!.tamanho != null
+          ?  "(${gradeEmpresa.grade!.tamanho!.descricao})"
+          :  "";
 
     NotaItem item = NotaItem();
     item.idNota = idNota;

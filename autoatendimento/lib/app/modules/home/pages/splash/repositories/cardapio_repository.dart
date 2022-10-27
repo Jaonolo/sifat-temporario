@@ -17,8 +17,7 @@ class CardapioRepository {
         cardapioMenus = response.content;
 
         List<ProdutoEmpresa> listProduto = [];
-        ResponsePws pws =
-            await ProdutoEmpresaRequester.buscarPaginado(config, token);
+        ResponsePws pws = await ProdutoEmpresaRequester.buscarPaginado(config, token);
         if (pws.isSuccess) {
           listProduto = pws.content;
         } else {

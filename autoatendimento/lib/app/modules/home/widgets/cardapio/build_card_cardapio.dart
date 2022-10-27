@@ -154,8 +154,26 @@ class BuildCardCardapio {
             var notaItem = NotaItemUtils.instanciar(vendaController.nota.id!,
                 TipoItem.ITEM, produtoEmpresa, appController.tabelaPreco.id!,
                 gradeEmpresa: grade);
-            homeController
-                .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
+
+            if(notaItem.grade!.produtoEmpresa!.produto!.menus.isNotEmpty) {
+              homeController
+                  .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
+            } else {
+              homeController.habilitarCarrinho = false;
+              if (NotaItemUtils.verificaAlcoolica(notaItem, (idProdutoEmpresa) {
+                return appController.mapProdutos[idProdutoEmpresa];
+              })) {
+                bool permitido =
+                    await ProdutoCarrinhoUtils.podeVenderBebidaAlcoolica(
+                        notaItem);
+                if (!permitido) {
+                  throw Exception('Venda de bebida alcoolica não permitida');
+                }
+              }
+
+              vendaController
+                  .adicionarProdutoCarrinho(ProdutoCarrinho(notaItem));
+            }
             break;
           case TipoPacote.COMBO:
             homeController.habilitarCarrinho = true;
