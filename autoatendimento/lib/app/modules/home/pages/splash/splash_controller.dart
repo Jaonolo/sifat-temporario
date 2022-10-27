@@ -40,6 +40,8 @@ abstract class SplashBase with Store {
   @observable
   bool botaoDetalhesErro = false;
 
+  bool isReiniciando = false;
+
   @action
   void changeStatus(String value) {
     status = value;
@@ -91,12 +93,14 @@ abstract class SplashBase with Store {
       _concluir();
     } catch (e) {
       print(e);
-      if (e is WaybeException) {
-        if (e.titulo.contains("Estação de trabalho não encontrada")) {
-          e.mensagem = "Nome da estação não localizado , nome estação desejada : {$nomeEstacao}";
-        };
-        changeBotaoDetalhesErro(true, e.mensagem != null? e.mensagem : e.titulo);
-        return changeStatus('$erro_base \n\n ${(e.exception != null) ? e.exception.message : ""}');
+      if(!isReiniciando){
+        if (e is WaybeException) {
+          if (e.titulo.contains("Estação de trabalho não encontrada")) {
+            e.mensagem = "Nome da estação não localizado , nome estação desejada : {$nomeEstacao}";
+          };
+          changeBotaoDetalhesErro(true, e.mensagem != null? e.mensagem : e.titulo);
+          return changeStatus('$erro_base \n\n ${(e.exception != null) ? e.exception.message : ""}');
+        }
       }
     }
   }
@@ -137,7 +141,7 @@ abstract class SplashBase with Store {
         appController.pwsConfig.clientSecret,
         appController.pwsConfig.client.clientKey,
         nomeEstacao!)
-        .then((response) {
+        .then((response) async {
           print(nomeEstacao);
       if (response.status == 200) {
         LoginAutoAtendimentoDTO dto = response.content;
@@ -148,8 +152,9 @@ abstract class SplashBase with Store {
 
         appController.servicoAutoAtendimento = dto.servicoAutoAtendimento!;
         appController.token = dto.servicoAutoAtendimento!.token!;
-      } else if (response.status == 204) {
-          showDialog(
+      }
+       else if (response.status == 204) {
+       await  showDialog(
             context: context,
             barrierDismissible: true,
             builder: (c) =>
@@ -161,6 +166,7 @@ abstract class SplashBase with Store {
                   "Após finalizar o cadastro, clique em OK para reiniciar o aplicativo.",
               txtConfirmar: "OK",
               onConfirm: () {
+                isReiniciando = true;
                 Modular.to.pushNamed("/");
                 _carregarDadosIniciaisAPI(c);
               },
@@ -176,6 +182,8 @@ abstract class SplashBase with Store {
 
   Future<void> _carregaModuloEFormasPagamento() async {
     //Mapeia o módulo e as formas de pagamento
+    appController.listFormaPagamento = [];
+
     if (appController.servicoAutoAtendimento.finalizadoraDebito != null) {
       appController.listFormaPagamento
           .add(appController.servicoAutoAtendimento.finalizadoraDebito!);
