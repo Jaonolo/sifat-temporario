@@ -43,9 +43,9 @@ class SitefPOS {
       var cnpjAC = "00689700000135";
       var adicionais;
 
-      if (otp != null && otp.isNotEmpty) {
+      if (appController.estacaoTrabalho.codigoOTPSitef != null && appController.estacaoTrabalho.codigoOTPSitef!.isNotEmpty) {
         adicionais = "[[TipoComunicacaoExterna=GSURF.SSL;"
-            "GSurf.OTP=$otp;TerminalUUID=$terminal];"
+            "GSurf.OTP=${appController.estacaoTrabalho.codigoOTPSitef};TerminalUUID=$terminal];"
             "[ParmsClient=1=$cnpjEmpresa;"
             "2=$cnpjAC];"
             "[TipoPinPad=${appController.estacaoTrabalho.tipoPinPad}];]";
@@ -63,7 +63,9 @@ class SitefPOS {
 
       await _platform.invokeMethod('configure', {"configuracoes": config});
     } on PlatformException catch (e) {
-      throw e;
+      throw WaybeException("Não foi possivel iniciar o serviço",
+          exception: e.message,
+          mensagem: "Não foi possível carregar o serviço do Sitef");
     }
   }
 
