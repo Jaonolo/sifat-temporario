@@ -17,7 +17,8 @@ class CardapioRepository {
         cardapioMenus = response.content;
 
         List<ProdutoEmpresa> listProduto = [];
-        ResponsePws pws = await ProdutoEmpresaRequester.buscarPaginado(config, token);
+        ResponsePws pws =
+            await ProdutoEmpresaRequester.buscarPaginado(config, token);
         if (pws.isSuccess) {
           listProduto = pws.content;
         } else {
@@ -104,7 +105,7 @@ class CardapioRepository {
       List<ProdutoMenu> menus = [];
       var produtoEmpresa = mapProdutos[k];
       produtoEmpresa!.produto!.menus.forEach((m) {
-        menus.add(mapMenus[m.id!]!);
+        if (mapMenus[m.id!] != null) menus.add(mapMenus[m.id!]!);
       });
 
       produtoEmpresa.produto!.menus = menus;
@@ -115,10 +116,13 @@ class CardapioRepository {
         c.componenteEmpresas.forEach((ce) {
           if (ce.gradeEmpresa != null) {
             List<ProdutoMenu> menus = [];
-            ce.gradeEmpresa!.produtoEmpresa!.produto!.menus.forEach((menu) {
-              menus.add(mapMenus[menu.id!]!);
-            });
-            ce.gradeEmpresa!.produtoEmpresa!.produto!.menus = menus;
+            if (ce.gradeEmpresa!.produtoEmpresa != null &&
+                ce.gradeEmpresa!.produtoEmpresa!.produto != null) {
+              ce.gradeEmpresa!.produtoEmpresa!.produto!.menus.forEach((menu) {
+                if (mapMenus[menu.id!] != null) menus.add(mapMenus[menu.id!]!);
+              });
+              ce.gradeEmpresa!.produtoEmpresa!.produto!.menus = menus;
+            }
           }
         });
       });
@@ -130,8 +134,10 @@ class CardapioRepository {
       if (cardapioMenu.tipo == "ITENS" && cardapioMenu.itens.isNotEmpty) {
         List<ProdutoEmpresa> listProdutoEmpresa = [];
         cardapioMenu.itens.forEach((element) {
-          ProdutoEmpresa produtoEmpresa = (mapProdutos[element.id!]!);
-          listProdutoEmpresa.add(produtoEmpresa);
+          if (mapProdutos[element.id!] != null) {
+            ProdutoEmpresa produtoEmpresa = (mapProdutos[element.id!]!);
+            listProdutoEmpresa.add(produtoEmpresa);
+          }
         });
         cardapioMenu.itens = listProdutoEmpresa;
       }
