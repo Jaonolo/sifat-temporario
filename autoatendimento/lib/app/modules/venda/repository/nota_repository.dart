@@ -45,7 +45,7 @@ class NotaRepository {
     });
   }
 
-  static Future<String?> emitirFiscal(Nota nota, String modeloFiscal) async {
+  static Future<XmlDTO?> emitirFiscal(Nota nota, String modeloFiscal) async {
     return await _calcularImpostos(nota).then((response) async {
       if (response.isSuccess) {
         if (modeloFiscal == 'NFCE') {
@@ -54,8 +54,7 @@ class NotaRepository {
               .then((response) async {
             if (response.isSuccess) {
               XmlDTO dto = response.content;
-              String? xml = dto.xml;
-              return xml;
+              return dto;
             } else {
               PwsAlert pws = response.content;
               throw PwsException(pws);
@@ -95,6 +94,8 @@ class NotaRepository {
       {bool gerarImpressao = false}) {
     return NotaRequester.emitirNFCe(
         appController.pwsConfig, appController.token, nota,
+        appController.estacaoTrabalho.tipo!,
+        appController.estacaoTrabalho.marcaSmartPOS!,
         gerarImpressao: gerarImpressao);
   }
 }

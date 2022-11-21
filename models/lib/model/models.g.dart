@@ -1764,7 +1764,12 @@ FinalizadoraEmpresa _$FinalizadoraEmpresaFromJson(Map<String, dynamic> json) =>
       ..maximoParcelas = json['maximoParcelas'] as int?
       ..valorMinimoParcela = json['valorMinimoParcela'] == null
           ? null
-          : BigDecimal.fromJson(json['valorMinimoParcela']);
+          : BigDecimal.fromJson(json['valorMinimoParcela'])
+      ..identificacaoCarteiraDigital =
+          json['identificacaoCarteiraDigital'] == null
+              ? null
+              : IdentificacaoCarteiraDigital.fromJson(
+                  json['identificacaoCarteiraDigital'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$FinalizadoraEmpresaToJson(
         FinalizadoraEmpresa instance) =>
@@ -1792,6 +1797,7 @@ Map<String, dynamic> _$FinalizadoraEmpresaToJson(
       'sugestaoParcelas': instance.sugestaoParcelas,
       'maximoParcelas': instance.maximoParcelas,
       'valorMinimoParcela': instance.valorMinimoParcela,
+      'identificacaoCarteiraDigital': instance.identificacaoCarteiraDigital,
     };
 
 FoxConsumo _$FoxConsumoFromJson(Map<String, dynamic> json) => FoxConsumo()
@@ -2688,9 +2694,6 @@ NotaItem _$NotaItemFromJson(Map<String, dynamic> json) => NotaItem()
       : DateTime.parse(json['dataLancamento'] as String)
   ..idTurno = json['idTurno'] as int?
   ..idProdutoEmpresa = json['idProdutoEmpresa'] as int?
-  ..produtoEmpresa = json['produtoEmpresa'] == null
-      ? null
-      : ProdutoEmpresa.fromJson(json['produtoEmpresa'] as Map<String, dynamic>)
   ..idGrade = json['idGrade'] as int?
   ..grade = json['grade'] == null
       ? null
@@ -2786,7 +2789,6 @@ Map<String, dynamic> _$NotaItemToJson(NotaItem instance) => <String, dynamic>{
       'dataLancamento': instance.dataLancamento?.toIso8601String(),
       'idTurno': instance.idTurno,
       'idProdutoEmpresa': instance.idProdutoEmpresa,
-      'produtoEmpresa': instance.produtoEmpresa,
       'idGrade': instance.idGrade,
       'grade': instance.grade,
       'indice': instance.indice,
@@ -3355,7 +3357,7 @@ Map<String, dynamic> _$ProdutoToJson(Produto instance) => <String, dynamic>{
       'cubagem': instance.cubagem,
       'volumes': instance.volumes,
       'pesoBruto': instance.pesoBruto,
-      'pacote': _$TipoPacoteEnumMap[instance.pacote],
+      'pacote': _$TipoPacoteEnumMap[instance.pacote]!,
       'grade': instance.grade,
       'fiscal': instance.fiscal,
       'grades': instance.grades,
@@ -6368,10 +6370,10 @@ Map<String, dynamic> _$ServicoAutoAtendimentoToJson(
       'idEmpresa': instance.idEmpresa,
       'ativo': instance.ativo,
       'token': instance.token,
-      'ticketConsumo': _$TicketConsumoEnumMap[instance.ticketConsumo],
-      'impressaoVenda': _$ImpressaoVendaEnumMap[instance.impressaoVenda],
+      'ticketConsumo': _$TicketConsumoEnumMap[instance.ticketConsumo]!,
+      'impressaoVenda': _$ImpressaoVendaEnumMap[instance.impressaoVenda]!,
       'avisoTempoOcioso': instance.avisoTempoOcioso,
-      'senhaAtendimento': _$SenhaAtendimentoEnumMap[instance.senhaAtendimento],
+      'senhaAtendimento': _$SenhaAtendimentoEnumMap[instance.senhaAtendimento]!,
       'idFinalizadoraDebito': instance.idFinalizadoraDebito,
       'idFinalizadoraCredito': instance.idFinalizadoraCredito,
       'finalizadoraDebito': instance.finalizadoraDebito,
@@ -6483,7 +6485,7 @@ LoginClientDTO _$LoginClientDTOFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$LoginClientDTOToJson(LoginClientDTO instance) =>
     <String, dynamic>{
-      'client': _$ClientsEnumMap[instance.client],
+      'client': _$ClientsEnumMap[instance.client]!,
       'clientKey': instance.clientKey,
       'clientSecret': instance.clientSecret,
       'versao': instance.versao,
@@ -6504,4 +6506,19 @@ TokenDTO _$TokenDTOFromJson(Map<String, dynamic> json) => TokenDTO()
 Map<String, dynamic> _$TokenDTOToJson(TokenDTO instance) => <String, dynamic>{
       'token': instance.token,
       'type': instance.type,
+    };
+
+IdentificacaoCarteiraDigital _$IdentificacaoCarteiraDigitalFromJson(
+        Map<String, dynamic> json) =>
+    IdentificacaoCarteiraDigital()
+      ..id = json['id'] as int?
+      ..codigo = json['codigo'] as String?
+      ..descricao = json['descricao'] as String?;
+
+Map<String, dynamic> _$IdentificacaoCarteiraDigitalToJson(
+        IdentificacaoCarteiraDigital instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'codigo': instance.codigo,
+      'descricao': instance.descricao,
     };

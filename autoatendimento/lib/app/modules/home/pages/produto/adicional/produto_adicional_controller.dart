@@ -1,7 +1,7 @@
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/abstract/controller_abstract.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/modules/venda/produto_carrinho_utils.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
@@ -47,7 +47,9 @@ abstract class ProdutoAdicionalBase extends ControllerAbstract with Store {
     try {
       //Pré validações
       ProdutoCarrinhoUtils.atualizaProdutoCarrinho(
-          produtoCarrinhoOriginal, produtoCarrinho);
+          produtoCarrinhoOriginal, produtoCarrinho, (idProdutoEmpresa) {
+        return appController.mapProdutos[idProdutoEmpresa];
+      });
 
       //Ação de adicionar o produto carrinho
       //Caso o produto carrinho já possuir indice, a atualização é feita por referencia no passo anterior "atualizaProdutoCarrinho"
@@ -65,7 +67,7 @@ abstract class ProdutoAdicionalBase extends ControllerAbstract with Store {
     } finally {
       try {
         //Validações para voltar ao cardapio principal quando o item tiver grade => REMOVER OS DOIS ULTIMOS PALCOS
-        if (produtoCarrinho.notaItem.produtoEmpresa!.gradesAtivas.isNotEmpty &&
+        if (appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.gradesAtivas.isNotEmpty &&
             homeController.palco.length == 3 &&
             produtoCarrinho.notaItem.tipo == "ITEM") {
           homeController.removePalco();
@@ -93,19 +95,19 @@ abstract class ProdutoAdicionalBase extends ControllerAbstract with Store {
   Future<void> atualizaMenus(int index) async {
     //menu atual
     produtoMenu =
-    (index < produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index]
-        : null;
+        (index < appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus.length)
+            ? appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus[index]
+            : null;
 
     //o proximo menu
     proximoMenu = (index + 1 <
-        produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index + 1]
+        appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus.length)
+        ? appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus[index + 1]
         : null;
 
     //o menu anterior
     anteriorMenu = (index > 0)
-        ? produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[index - 1]
+        ? appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus[index - 1]
         : null;
   }
 

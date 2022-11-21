@@ -5,6 +5,7 @@ import 'package:models/model/models.dart';
 import 'package:utils/utils/nota_item_utils.dart';
 
 class ProdutoCarrinhoUtils {
+
   static ProdutoCarrinho clone(ProdutoCarrinho produtoCarrinho) {
     NotaItem itemClone = produtoCarrinho.notaItem.clone();
     ProdutoCarrinho produtoCarrinhoClone = ProdutoCarrinho(itemClone);
@@ -14,8 +15,10 @@ class ProdutoCarrinhoUtils {
 
   static Future<ProdutoCarrinho> atualizaProdutoCarrinho(
       ProdutoCarrinho produtoCarrinhoOriginal,
-      ProdutoCarrinho produtoCarrinho) async {
-    if (NotaItemUtils.verificaAlcoolica(produtoCarrinho.notaItem)) {
+      ProdutoCarrinho produtoCarrinho,
+      Function(int idProdutoEmpresa) buscaProduto
+      ) async {
+    if (NotaItemUtils.verificaAlcoolica(produtoCarrinho.notaItem, buscaProduto)) {
       bool permitido =
       await podeVenderBebidaAlcoolica(produtoCarrinho.notaItem);
       if (!permitido) {
@@ -25,7 +28,7 @@ class ProdutoCarrinhoUtils {
 
     NotaItemUtils.atualizaQuantidadeSubitens(produtoCarrinho.notaItem,
         BigDecimal.ONE(), produtoCarrinhoOriginal.notaItem.quantidade!);
-    NotaItemUtils.atualizaTotais(produtoCarrinho.notaItem);
+    NotaItemUtils.atualizaTotais(produtoCarrinho.notaItem, buscaProduto);
     produtoCarrinhoOriginal.notaItem = produtoCarrinho.notaItem;
     produtoCarrinho = produtoCarrinhoOriginal;
 

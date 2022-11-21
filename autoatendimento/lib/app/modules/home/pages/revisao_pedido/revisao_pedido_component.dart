@@ -63,13 +63,18 @@ class RevisaoPedidoComponent {
                   elevation: 5,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 40),
-                    child: ListView.builder(
+                    child: Scrollbar(
+                      radius: Radius.circular(10),
+                      trackVisibility: true,
+                      isAlwaysShown: true,
+                      child:ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       itemCount: vendaController.itensLancados.length,
                       itemBuilder: (c, index) {
                         return CardItemRevisaoPedido(index: index);
                       },
+                      ),
                     ),
                   ),
                 ),

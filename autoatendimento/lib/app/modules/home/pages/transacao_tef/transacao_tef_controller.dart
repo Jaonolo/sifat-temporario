@@ -5,14 +5,18 @@ import 'dart:convert';
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/repositories/printer_repository.dart';
+import 'package:autoatendimento/app/modules/venda/pos/sitef_pos.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/utils/dialog_auto.dart';
+import 'package:core/application/application.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:models/model/sitef_protocolo_socket.dart';
-import 'package:web_socket_channel/html.dart';
+import 'package:web_socket_channel/io.dart';
+import 'package:pos/pos/impressora/impressao_pos_utils.dart';
 
 part "transacao_tef_controller.g.dart";
 
@@ -24,7 +28,7 @@ abstract class TransacaoTefBase with Store {
   HomeController homeController = Modular.get();
   String viaCliente = "";
   String? xml;
-  late HtmlWebSocketChannel channel;
+  late IOWebSocketChannel channel;
   SitefProtocoloSocket sitefProtocoloSocket = SitefProtocoloSocket();
 
   @observable
@@ -50,7 +54,7 @@ abstract class TransacaoTefBase with Store {
     viaCliente = "";
     xml = "";
 
-    channel = HtmlWebSocketChannel.connect("ws://localhost:12345");
+    channel = IOWebSocketChannel.connect("ws://localhost:12345");
     channel.stream.listen((message) {
       print('--> $message');
 
@@ -105,16 +109,27 @@ abstract class TransacaoTefBase with Store {
   }
 
   Future<void> cancelar() async {
+    if (defaultTargetPlatform == TargetPlatform.windows) {
     SitefProtocoloSocket sitefProtocoloSocket = SitefProtocoloSocket();
     sitefProtocoloSocket.funcao = "abortar";
     channel.sink.add(sitefProtocoloSocket.toJson());
-    recomecar();
+    recomecar(true);
+    }else{
+      SitefPOS.abortar();
+      recomecar(true);
+    }
+
   }
 
-  Future<void> recomecar() async {
+  Future<void> recomecar(bool isTelaInicial) async {
     atualizaBuffer("Transação cancelada...");
     await Future.delayed(const Duration(seconds: 2));
-    homeController.recomecar();
+    if(isTelaInicial) {
+      homeController.recomecar();
+    }else{
+      vendaController.descartarNotaFinalizadoras();
+      Modular.to.pop();
+    }
     //limpando variaveis
     atualizaBuffer("");
   }
@@ -185,7 +200,7 @@ abstract class TransacaoTefBase with Store {
 
       if (appController.estacaoTrabalho.emissorFiscal != null) {
         //Emitir cupom fiscal
-        xml = await vendaController.emitirFiscal();
+        xml = (await vendaController.emitirFiscal())!.xml;
       } else {
         xml = null;
       }
@@ -326,4 +341,130 @@ abstract class TransacaoTefBase with Store {
     var split = message.split(']');
     return split[1];
   }
+
+
+  //Tratativas tef android
+
+  Future<void> finalizaVendaAndroid(BuildContext context) async {
+    atualizaBuffer("Finalizando pedido");
+    try {
+      await vendaController.insereItensAPI();
+
+      //Receber venda
+      await vendaController.receberVendaAPI(context);
+
+      XmlDTO? xml;
+      if (appController.estacaoTrabalho.emissorFiscal != null) {
+        //Emitir cupom fiscal
+        xml = await vendaController.emitirFiscal();
+
+        _printerNfceAndroid(xml!, context);
+      } else {
+        xml = null;
+      }
+      } catch (e) {
+      String erro = e.toString();
+
+      if (e.runtimeType == PwsException) {
+        e as PwsException;
+        if (e.message != null) erro = e.message!;
+        if (e.pws != null && e.pws!.description != null)
+          erro += "\n" + e.pws!.description!;
+      }
+
+      print('[ERRO - tratativasPosTransacao]: ${e.toString()}');
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (c) =>
+              DialogAuto(
+                title: "Desculpe! \n\n Ocorreu um problema na finalização do pedido:\n\n [$erro] \n\n"
+                    " Caso queira solicitar cupom fiscal, favor dirigir-se ao caixa.",
+                message: "",
+                txtConfirmar: "Confirmar",
+                showCancelButton: false,
+                onConfirm: () => {
+                  _printerConsumoAndroid(context)
+                  },
+              ));
+    }
+  }
+
+  Future<void> _printerNfceAndroid(XmlDTO xml, BuildContext context) async {
+    try{
+      List<NotaItem> itens = [];
+      for (var ni in vendaController.itensLancados) {
+        itens.add(ni.notaItem);
+      }
+      if (xml != null) {
+        Application.getInstance().impressoraService.imprimeNFCE(xml, context);
+      } else {
+        await ImpressaoPOSUtils.imprimirTicketVenda(
+            criaObjetoVendaDTO(itens), itens);
+      }
+    await _printerConsumoAndroid(context);
+    }catch (e){
+      _tentarNovamentePrinter(
+          "Desculpe, houve um problema na impressão do pedido",
+              () => _printerNfceAndroid(xml, context),
+              () => _printerConsumoAndroid(context),
+          context);
+    }
+  }
+
+  Future<void> _printerConsumoAndroid( BuildContext context) async {
+    try{
+      List<NotaItem> itens = [];
+      for (var ni in vendaController.itensLancados) {
+        itens.add(ni.notaItem);
+      }
+      if (appController.servicoAutoAtendimento.impressaoVenda
+          .equals(ImpressaoVenda.IMPRIME)) {
+        await ImpressaoPOSUtils.imprimeTicketConsumo(criaObjetoVendaDTO(itens), itens);
+      }
+
+    _avancar();
+    }catch (e){
+      _tentarNovamentePrinter(
+          "Desculpe, houve um problema na impressão do pedido",
+              () => _printerConsumoAndroid(context),
+              () => _avancar(),
+          context);
+    }
+  }
+
+  PrinterVendaDTO  criaObjetoVendaDTO(List<NotaItem> itens){
+    PrinterVendaDTO dto = PrinterVendaDTO();
+    dto.dtoNota = DtoNota();
+    dto.dtoNota!.nota =  vendaController.nota;
+    dto.dtoNota!.notaItemList = itens;
+    dto.dtoNota!.notaFinalizadoraList = vendaController.nota.finalizadoras;
+    dto.servicoAutoAtendimento = appController.servicoAutoAtendimento;
+    dto.senha =  vendaController.nota.consumo!.comanda.toString();
+    dto.mensagemRodape = viaCliente;
+
+    return dto;
+  }
+
+  Future<void> tratativasRetornoFalhaAndroid(
+      String motivo, BuildContext context) async {
+    String motivoTratado = (motivo.isNotEmpty ? 'Motivo: $motivo' : '');
+    atualizaPermiteCancelar(false);
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => DialogAuto(
+          title: "Pagamento não aprovado",
+          message: '$motivoTratado',
+          txtConfirmar: "Ok",
+          onConfirm: () => naoTentarNovamenteAndroid(),
+          showCancelButton: false,
+        ));
+  }
+
+  Future<void> naoTentarNovamenteAndroid() async {
+    vendaController.descartarNotaFinalizadoras();
+    Modular.to.pop();
+  }
+
 }

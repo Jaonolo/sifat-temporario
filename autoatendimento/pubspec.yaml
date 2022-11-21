@@ -38,6 +38,8 @@ dependencies:
   animated_text_kit: ^4.2.1
   mask_shifter_v2: ^0.0.1
   cpf_cnpj_validator: ^2.0.0
+  shared_preferences: ^2.0.15
+  qr_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:
