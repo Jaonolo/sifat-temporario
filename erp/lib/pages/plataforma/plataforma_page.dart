@@ -1,0 +1,2229 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:erp/pages/plataforma/plataforma_page_controller.dart';
+import '../../models/item_configurcao_waychef.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/botao_padrao.dart';
+import '../../widgets/carregamento/icone_carregando.dart';
+import '../../widgets/chebox_mobile.dart';
+import '../../widgets/drop_down_button_padrao.dart';
+import '../../widgets/responsive.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
+import '../../widgets/texto_aba_modal.dart';
+
+class PlataformaPage extends GetView<PlataformaPageController> {
+  // PlataformaPage({Key? key}) : super(key: key);
+
+// {
+//
+// class PlataformaPage extends StatelessWidget {
+//   const PlataformaPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+//------------ VARIAVEIS------------
+    Size _size = MediaQuery.of(context).size;
+//------------ EstruturaPrincipal
+    return Scaffold(
+      body: Responsive(
+        mobile: Container(
+          height: 200,
+          width: 200,
+          color: Colors.amber,
+        ),
+        desktop: ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                _btnAdicionar(),
+                Expanded(child: Container()),
+                _btnSalvar(),
+              ],
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const Divider(
+              thickness: 2,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Card(
+              child: _tabelaPlataforma(),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            ElevatedButton(
+              child: Text('Clique aqui - para abrir o modal adicione extras'),
+              onPressed: () {
+                showModalBottomSheet(
+                  isScrollControlled: true,
+                  context: context,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      )),
+                  builder: (context) => Container(
+                    // padding: EdgeInsets.all(16),
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      Container(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 34, top: 28),
+                              child: Text(
+                                'Adicione Extras',
+                                style: GoogleFonts.comfortaa(
+                                  fontSize: 23,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppTheme.modaltitulo,
+                                  letterSpacing: -0.5,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 8, left: 34, bottom: 8),
+                              child: Text(
+                                  'Selecione as funcionalidades que deseja inserir como extra no contrato',
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.blackSubtitulo,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 500,
+                        child: _modalPlataforma(context),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
+                        child: Row(
+                          // runSpacing: 16,
+                          // alignment: WrapAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  side: BorderSide(
+                                    color: Color.fromRGBO(186, 26, 26, 1),
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 4),
+                                child: Text(
+                                  textAlign: TextAlign.end,
+                                  'Cancelar',
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromRGBO(186, 26, 26, 1),
+                                    letterSpacing: 0.25,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromRGBO(22, 156, 52, 1),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 4),
+                                child: Text(
+                                  textAlign: TextAlign.end,
+                                  'Confirmar',
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppTheme.buttomModalConfirmar,
+                                    letterSpacing: 0.25,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+
+            //todo modal abaixo está pronto novo contrato
+            ElevatedButton(
+              child: Text('Clique aqui - para abrir o modal empresas'),
+              onPressed: () {
+                showModalBottomSheet(
+                  isScrollControlled: true,
+                  context: context,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      )),
+                  builder: (context) => Container(
+                    padding: EdgeInsets.all(16),
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      Container(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 34, top: 28),
+                              child: Text(
+                                'Novo Contrato',
+                                // textAlign: TextAlign.end,
+                                style: GoogleFonts.comfortaa(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 33,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Divider(
+                        thickness: 2,
+                      ),
+                      Wrap(
+                          alignment: WrapAlignment.spaceBetween,
+                          spacing: 12,
+                          runSpacing: 16,
+                          children: [
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              color: Color.fromRGBO(255, 237, 232, 1),
+                              child: Container(
+                                width: Get.width / 4,
+                                height: Get.height / 5,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(26.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          AutoSizeText(
+                                            'Contrato Customizado',
+                                            // textAlign: TextAlign.end,
+                                            style: GoogleFonts.comfortaa(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 23,
+                                              letterSpacing: -0.5,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 14,
+                                      ),
+                                      Text(
+                                        'Dados do contrato são negociados diferente com o integrador,'
+                                            ' esse tipo de contrato não fica disponível para compra pelos '
+                                            'usuários',
+                                        // minFontSize: 12,
+                                        softWrap: true,
+                                        style: GoogleFonts.sourceSansPro(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppTheme.blackSubtitulo,
+                                          letterSpacing: 0.5,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 16,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              color: Color.fromRGBO(255, 237, 232, 1),
+                              child: Container(
+                                width: Get.width / 4,
+                                height: Get.height / 5,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(26.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          AutoSizeText(
+                                            'Contrato Convencional',
+                                            // textAlign: TextAlign.end,
+                                            style: GoogleFonts.comfortaa(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 23,
+                                              letterSpacing: -0.5,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 14,
+                                      ),
+                                      Text(
+                                        'Dados do contrato são personalizados pelo usuários(Plano e Contratos Extras),'
+                                            ' esse tipo de contrato fica disponível para compra pelos '
+                                            'usuários',
+                                        // minFontSize: 12,
+                                        softWrap: true,
+                                        style: GoogleFonts.sourceSansPro(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppTheme.blackSubtitulo,
+                                          letterSpacing: 0.5,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 16,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ]),
+                    ]),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            //todo modal abaixo tem que fazer
+            ElevatedButton(
+              child: Text('Clique aqui - para abrir o NOVO CONTRATO'),
+              onPressed: () {
+                showModalBottomSheet(
+                  isScrollControlled: true,
+                  context: context,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      )),
+                  builder: (context) => Container(
+                    height: 100,
+                    padding: EdgeInsets.all(16),
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          child: Row(
+                            children: [
+                              Text(
+                                'Novo Contrato',
+                                // textAlign: TextAlign.end,
+                                style: GoogleFonts.comfortaa(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 33,
+                                ),
+                              ),
+                            ],
+                          ),
+                          // color: Colors.red,
+                        ),
+                      ),
+                      Divider(
+                        thickness: 2,
+                      ),
+                      Expanded(
+                        flex: 8,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(),
+                                  ),
+                                  Expanded(
+                                    flex: 6,
+                                    child: Container(
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Insira os dados do novo contrato customizado',
+                                                textAlign: TextAlign.left,
+                                                style:
+                                                GoogleFonts.sourceSansPro(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 19,
+                                                  letterSpacing: 0.5,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 32,
+                                          ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              DropDownButtonPadrao(
+                                                itensLista: ['plano'],
+                                                valorSelecionado: 'Plano',
+                                              ),
+                                              Expanded(child: Container()),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 32,
+                                          ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              DropDownButtonPadrao(
+                                                itensLista: ['plano'],
+                                                valorSelecionado: 'Plano',
+                                              ),
+                                              Expanded(child: Container()),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 5,
+                              child: Container(
+                                child: Wrap(
+                                  children: [
+                                    Card(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      color: Color.fromRGBO(233, 241, 255, 1),
+                                      child: Container(
+                                        width: Get.width / 4,
+                                        height: Get.height / 5,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(26.0),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceBetween,
+                                                children: [
+                                                  AutoSizeText(
+                                                    'Alteração do novo plano',
+                                                    // textAlign: TextAlign.end,
+                                                    style:
+                                                    GoogleFonts.comfortaa(
+                                                      fontWeight:
+                                                      FontWeight.w700,
+                                                      fontSize: 23,
+                                                      letterSpacing: -0.5,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 14,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'Valor debitado do plano R\$58,00',
+                                                    // minFontSize: 12,
+                                                    softWrap: true,
+                                                    style: GoogleFonts
+                                                        .sourceSansPro(
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                      FontWeight.w400,
+                                                      color: AppTheme
+                                                          .blackSubtitulo,
+                                                      letterSpacing: 0.5,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 14,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'Dias acrescentados ao vencimento: 10',
+                                                    // minFontSize: 12,
+                                                    softWrap: true,
+                                                    style: GoogleFonts
+                                                        .sourceSansPro(
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                      FontWeight.w400,
+                                                      color: AppTheme
+                                                          .blackSubtitulo,
+                                                      letterSpacing: 0.5,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 16,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'Valor do novo contrato R\$58,00',
+                                                    // minFontSize: 12,
+                                                    softWrap: true,
+                                                    style: GoogleFonts
+                                                        .sourceSansPro(
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                      FontWeight.w400,
+                                                      color: AppTheme
+                                                          .blackSubtitulo,
+                                                      letterSpacing: 0.5,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          child: Row(
+                            // runSpacing: 16,
+                            // alignment: WrapAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: BorderSide(
+                                      color: Color.fromRGBO(186, 26, 26, 1),
+                                    ),
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 4),
+                                  child: Text(
+                                    textAlign: TextAlign.end,
+                                    'Cancelar',
+                                    style: GoogleFonts.sourceSansPro(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromRGBO(186, 26, 26, 1),
+                                      letterSpacing: 0.25,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                  Color.fromRGBO(22, 156, 52, 1),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8)),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 4),
+                                  child: Text(
+                                    textAlign: TextAlign.end,
+                                    'Confirmar',
+                                    style: GoogleFonts.sourceSansPro(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppTheme.buttomModalConfirmar,
+                                      letterSpacing: 0.25,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
+                );
+              },
+            ),
+            //
+          ],
+        ),
+      ),
+    );
+  }
+
+//----------- WIDGETS
+  Widget _btnSalvar() {
+    return BotaoPadrao(
+      corIcone: AppTheme.salvar,
+      corTexto: Colors.white,
+      texto: 'Salvar',
+      icone: Icons.save,
+      acao: () {
+        //TODO: AÇÃO SALVAR
+      },
+    );
+  }
+
+  Widget _btnAdicionar() {
+    return BotaoPadrao(
+      corIcone: AppTheme.adicionar,
+      corTexto: Colors.white,
+      texto: 'Adicionar',
+      icone: Icons.add_circle,
+      acao: () {
+        //TODO: AÇÃO SALVAR
+      },
+    );
+  }
+
+  Widget _tabelaPlataforma() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Obx(
+              () => controller.carregando
+              ? const IconeCarregando()
+              :  PaginatedDataTable(
+            // DataTable(
+            source: Tabela(data: controller.listaPlataformaContratoExtra),
+            columns: [
+              DataColumn(
+                label: Expanded(
+                  child: Text(
+                    'Função / aplicação',
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.sourceSansPro(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                      color: Color.fromRGBO(0, 51, 85, 1),
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+                // onSort: controller.onSort,
+              ),
+              // DataColumn(
+              //   label: Expanded(
+              //     child: Text(
+              //       'Nome',
+              //       textAlign: TextAlign.start,
+              //       style: GoogleFonts.sourceSansPro(
+              //         fontSize: 17,
+              //         fontWeight: FontWeight.w600,
+              //         color: Color.fromRGBO(0, 51, 85, 1),
+              //         letterSpacing: 0.5,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // DataColumn(
+              //   label: Expanded(
+              //     child: Text(
+              //       'Detalhes',
+              //       textAlign: TextAlign.start,
+              //       style: GoogleFonts.sourceSansPro(
+              //         fontSize: 17,
+              //         fontWeight: FontWeight.w600,
+              //         color: Color.fromRGBO(0, 51, 85, 1),
+              //         letterSpacing: 0.5,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // DataColumn(
+              //   label: Expanded(
+              //     child: Text(
+              //       'Valor',
+              //       textAlign: TextAlign.start,
+              //       style: GoogleFonts.sourceSansPro(
+              //         fontSize: 17,
+              //         fontWeight: FontWeight.w600,
+              //         color: Color.fromRGBO(0, 51, 85, 1),
+              //         letterSpacing: 0.5,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              DataColumn(
+                  label: Expanded(
+                    child: Text(
+                      'Tipo',
+                      textAlign: TextAlign.start,
+                      style: GoogleFonts.sourceSansPro(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromRGBO(0, 51, 85, 1),
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  )),
+              // DataColumn(
+              //     label: Expanded(
+              //   child: Text(
+              //     'Disponível',
+              //     textAlign: TextAlign.start,
+              //     style: GoogleFonts.sourceSansPro(
+              //       fontSize: 17,
+              //       fontWeight: FontWeight.w600,
+              //       color: Color.fromRGBO(0, 51, 85, 1),
+              //       letterSpacing: 0.5,
+              //     ),
+              //   ),
+              // )),
+            ],
+            // rows: [
+            //   DataRow(cells: [
+            //     DataCell(
+            //       Container(
+            //         child: Text(
+            //           "Aplicativo - AUTOATENDIMENTO (TOTEM)",
+            //           textAlign: TextAlign.start,
+            //           style: GoogleFonts.sourceSansPro(
+            //             fontStyle: FontStyle.normal,
+            //             fontSize: 16,
+            //             fontWeight: FontWeight.w400,
+            //             color: Color(0xFF171C22),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     DataCell(
+            //       Container(
+            //         child: Text(
+            //           "AUTOATENDIMENTO",
+            //           textAlign: TextAlign.start,
+            //           style: GoogleFonts.sourceSansPro(
+            //             fontStyle: FontStyle.normal,
+            //             fontSize: 16,
+            //             fontWeight: FontWeight.w400,
+            //             color: Color(0xFF171C22),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     DataCell(
+            //       Padding(
+            //         // padding: const EdgeInsets.all(8.0),
+            //         padding: const EdgeInsets.only(bottom: 5),
+            //         child: TextFormField(
+            //           cursorColor: Colors.black87,
+            //           decoration: const InputDecoration(
+            //             enabledBorder: UnderlineInputBorder(
+            //               borderSide: BorderSide(width: 1, color: Colors.black87),
+            //             ),
+            //             focusedBorder: UnderlineInputBorder(
+            //               borderSide: BorderSide(width: 1, color: Colors.black87),
+            //             ),
+            //             labelStyle: TextStyle(
+            //               color: Colors.black87,
+            //             ),
+            //           ),
+            //           style: GoogleFonts.sourceSansPro(
+            //             fontSize: 16,
+            //             fontWeight: FontWeight.w400,
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     DataCell(
+            //       Padding(
+            //         // padding: const EdgeInsets.all(8.0),
+            //         padding: const EdgeInsets.only(bottom: 5),
+            //         child: SizedBox(
+            //           width: 70,
+            //           child: TextFormField(
+            //             textAlign: TextAlign.start,
+            //             cursorColor: Colors.black87,
+            //             decoration: const InputDecoration(
+            //               hintText: 'R\$ 0.00',
+            //               enabledBorder: UnderlineInputBorder(
+            //                 borderSide:
+            //                     BorderSide(width: 1, color: Colors.black87),
+            //               ),
+            //               focusedBorder: UnderlineInputBorder(
+            //                 borderSide:
+            //                     BorderSide(width: 1, color: Colors.black87),
+            //               ),
+            //               labelStyle: TextStyle(
+            //                 color: Colors.black87,
+            //               ),
+            //             ),
+            //             style: GoogleFonts.sourceSansPro(
+            //               fontSize: 16,
+            //               fontWeight: FontWeight.w400,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     DataCell(
+            //       Container(
+            //         child: ElevatedButton(
+            //           onPressed: () {},
+            //           style: ElevatedButton.styleFrom(
+            //               backgroundColor: const Color(0xFFE5FFE5),
+            //               minimumSize: Size.zero, // Set this
+            //               padding: EdgeInsets.zero,
+            //               shape: RoundedRectangleBorder(
+            //                   borderRadius: BorderRadius.circular(16)) // and this
+            //               ),
+            //           child: Padding(
+            //             padding: const EdgeInsets.all(8.0),
+            //             child: Text(
+            //               'Normal',
+            //               textAlign: TextAlign.start,
+            //               style: GoogleFonts.sourceSansPro(
+            //                 fontSize: 12,
+            //                 color: Color(0xFF169C34),
+            //                 fontWeight: FontWeight.w400,
+            //                 fontStyle: FontStyle.normal,
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+
+            //   ]),
+            // ],
+          ),
+        ),
+        // ),
+      ],
+    );
+  }
+
+  //Todo modal integradores desktop pronto
+  Widget _modalIntegradores() {
+    return AlertDialog(
+      shape: const RoundedRectangleBorder(
+        side: BorderSide(),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+      title: Container(
+        margin: EdgeInsets.zero,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Integrador',
+                textAlign: TextAlign.start,
+                style: GoogleFonts.comfortaa(
+                  fontSize: 23,
+                  fontWeight: FontWeight.w500,
+                  color: AppTheme.modaltitulo,
+                  letterSpacing: -0.5,
+                ),
+              ),
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 0),
+                child: Text(
+                    'Selecione os integradores que poderão ser liberados para comercializar',
+                    textAlign: TextAlign.start,
+                    style: GoogleFonts.sourceSansPro(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400,
+                      color: AppTheme.blackSubtitulo,
+                      letterSpacing: 0.5,
+                    )),
+              ),
+            ),
+          ],
+        ),
+      ),
+      content: ConstrainedBox(
+        constraints:
+        BoxConstraints(maxWidth: Get.width / 2, maxHeight: Get.height / 2),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Divider(indent: 1, height: 2),
+            const SizedBox(
+              height: 8,
+            ),
+            Container(
+              child: Column(
+                // alignment: WrapAlignment.start,
+                // runSpacing: 16,
+                // spacing: 42,
+                children: [
+                  Container(
+                    width: Get.width / 3,
+                    height: Get.height / 4,
+
+                    // color: Colors.red,
+                    child: GridView.count(
+                      // padding: EdgeInsets.all(60),
+                      primary: false,
+                      // padding: const EdgeInsets.all(20),
+                      crossAxisSpacing: 2,
+                      mainAxisSpacing: 2,
+                      crossAxisCount: 4,
+                      children: <Widget>[
+                        Container(
+                          height: 80,
+                          // color: Colors.red,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CheckBoxMobile(),
+                              AutoSizeText(
+                                'Selecionar',
+                                minFontSize: 12,
+                                style: GoogleFonts.sourceSansPro(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.modaltextocheckbox,
+                                  letterSpacing: 0.25,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CheckBoxMobile(),
+                              AutoSizeText(
+                                'Integrador',
+                                style: GoogleFonts.sourceSansPro(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.modaltextocheckbox,
+                                  letterSpacing: 0.25,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CheckBoxMobile(),
+                              AutoSizeText(
+                                'Integrador',
+                                style: GoogleFonts.sourceSansPro(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.modaltextocheckbox,
+                                  letterSpacing: 0.25,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CheckBoxMobile(),
+                              AutoSizeText(
+                                'Integrador',
+                                style: GoogleFonts.sourceSansPro(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.modaltextocheckbox,
+                                  letterSpacing: 0.25,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CheckBoxMobile(),
+                              AutoSizeText(
+                                'Integrador',
+                                style: GoogleFonts.sourceSansPro(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.modaltextocheckbox,
+                                  letterSpacing: 0.25,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CheckBoxMobile(),
+                              AutoSizeText(
+                                'Integrador',
+                                style: GoogleFonts.sourceSansPro(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.modaltextocheckbox,
+                                  letterSpacing: 0.25,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CheckBoxMobile(),
+                              AutoSizeText(
+                                'Integrador',
+                                style: GoogleFonts.sourceSansPro(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.modaltextocheckbox,
+                                  letterSpacing: 0.25,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CheckBoxMobile(),
+                              AutoSizeText(
+                                'Integrador',
+                                style: GoogleFonts.sourceSansPro(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.modaltextocheckbox,
+                                  letterSpacing: 0.25,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // CustomScrollView(
+                  //   slivers: [
+                  //     SliverGrid(
+                  //         delegate: SliverChildBuilderDelegate (
+                  //           childCount: 10,
+                  //             (context, index) {
+                  //             return Text('GRID');
+                  //             }
+                  //         ),
+                  //         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  //             crossAxisCount: 4,
+                  //           childAspectRatio: 1.1,
+                  //         ),
+                  //     ),
+                  //   ],
+                  // ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Row(
+              // runSpacing: 16,
+              // alignment: WrapAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(
+                        color: Color.fromRGBO(186, 26, 26, 1),
+                      ),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    child: Text(
+                      textAlign: TextAlign.end,
+                      'Cancelar',
+                      style: GoogleFonts.sourceSansPro(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromRGBO(186, 26, 26, 1),
+                        letterSpacing: 0.25,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromRGBO(22, 156, 52, 1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    child: Text(
+                      textAlign: TextAlign.end,
+                      'Confirmar',
+                      style: GoogleFonts.sourceSansPro(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.buttomModalConfirmar,
+                        letterSpacing: 0.25,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            // const SizedBox(
+            //   height: 15,
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// TODOWenderson tabela getx pagina principal
+class Tabela extends DataTableSource {
+  List<ItemConfiguracaoWaychef> data;
+
+  Tabela({required this.data});
+
+  bool get isRowCountApproximate => false;
+
+  int get rowCount => data.length;
+
+  int get selectedRowCount => 0;
+
+  DataRow getRow(int index) {
+    return DataRow(cells: [
+      DataCell(
+        Container(
+          child: Text(
+            data[index].descricao!,
+            textAlign: TextAlign.start,
+            style: GoogleFonts.sourceSansPro(
+              fontStyle: FontStyle.normal,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: Color(0xFF171C22),
+            ),
+          ),
+        ),
+      ),
+      // DataCell(
+      //   SizedBox(
+      //     // width: 500,
+      //     child: Text(
+      //       data[index].nomeFantasia!,
+      //       overflow: TextOverflow.clip,
+      //     ),
+      //   ),
+      // ),
+      DataCell(
+        Container(
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFE5FFE5),
+                minimumSize: Size.zero, // Set this
+                padding: EdgeInsets.zero,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)) // and this
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                data[index].tipoItem!,
+                textAlign: TextAlign.start,
+                style: GoogleFonts.sourceSansPro(
+                  fontSize: 12,
+                  color: Color(0xFF169C34),
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                ),
+              ),
+
+            ),
+          ),
+        ),
+      ),
+      DataCell(
+        Container(
+          child: TextButton(
+            onPressed: () {
+              //todoWenderson analisar como chamar o modal
+              // Get.dialog(_modalIntegradores());
+            },
+            child: Text(
+              'Integrador',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.sourceCodePro(
+                color: Color(0xFFFF5722),
+                fontSize: 14,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w500,
+                decoration: TextDecoration.underline,
+                decorationStyle: TextDecorationStyle.solid,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ),
+        ),
+      ),
+      // DataCell(Text(
+      //   data[index].cnpj,
+      //   overflow: TextOverflow.clip,
+      // )),
+      // DataCell(Text(
+      //   data[index].validadeAcordo!.toString(),
+      //   overflow: TextOverflow.clip,
+      // )),
+      // DataCell(
+      //   IconButton(
+      //     tooltip: "Editar",
+      //     icon: Icon(
+      //       FontAwesomeIcons.solidEdit,
+      //       color: AppTheme.primary,
+      //       size: 16,
+      //     ),
+      //     onPressed: () {
+      //       Get.toNamed(Routes.ADM_EDITAR_EMPRESA, arguments: index);
+      //     },
+      //   ),
+      // ),
+    ]);
+  }
+
+  Widget _icone(bool status) {
+    return Icon(
+      status ? Icons.check : Icons.close,
+      color: status ? AppTheme.confirm : AppTheme.cancel,
+    );
+  }
+}
+
+//TODO SEPARAR O MODAL ABAIXO DEPOIS
+
+Widget _modalPlataforma(BuildContext context) {
+  Size _size = MediaQuery.of(context).size;
+  return DefaultTabController(
+    length: 6,
+    child: Scaffold(
+      // backgroundColor: AppTheme.background,
+      appBar: _negocioAppBar(_size),
+      body: TabBarView(
+        children: [
+          _abaFinanceiro(),
+          _abaFiscal(),
+          _abaEstoque(),
+          _abaProduto(),
+          _abaModulosDeVenda(),
+          _abaServicosAplicacoes(),
+          // _dadosPrincipais(context),
+          // _horarioDeFuncionamento(context, _size),
+
+          // SingleChildScrollView(child: _qrCodeIntegracao()),
+        ],
+      ),
+      // ],),
+    ),
+  );
+}
+
+AppBar _negocioAppBar(Size size) {
+  return AppBar(
+    // mainAxisSize: MainAxisSize.min,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(16),
+    ),
+    toolbarHeight: 0,
+    // toolbarTextStyle: ,
+    elevation: 0,
+    backgroundColor: AppTheme.corDeFundoAbaModal,
+    bottom: TabBar(
+        labelColor: AppTheme.corBranco,
+        labelStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+        unselectedLabelColor: AppTheme.adicionar,
+        indicatorSize: TabBarIndicatorSize.label,
+        indicator: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Color(0xFFFF5722),
+          // bottom: BorderSide(color: Color.fromRGBO(176, 179, 251, 1), width: 5)
+        ),
+        // borderRadius: const BorderRadius.only(),
+        //   //     topLeft: Radius.circular(10),
+        //   //     topRight: Radius.circular(10),
+        //   ),
+        //   color: AppTheme.modaltitulo,
+        tabs: [
+          Tab(
+            child: size.width > 530
+                ? Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              child: Text(
+                "Financeiro",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.comfortaa(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.15,
+                ),
+              ),
+            )
+                : const Icon(Icons.fact_check_outlined),
+          ),
+          Tab(
+            child: size.width > 530
+                ? Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              child: Text(
+                "Fiscal",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.comfortaa(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.15,
+                ),
+              ),
+            )
+                : const Icon(Icons.more_time),
+          ),
+          Tab(
+            child: size.width > 530
+                ? Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              child: Text(
+                "Estoque",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.comfortaa(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.15,
+                ),
+              ),
+            )
+                : const Icon(Icons.attach_money),
+          ),
+          Tab(
+            child: size.width > 530
+                ? Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              child: Text(
+                "Produto",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.comfortaa(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.15,
+                ),
+              ),
+            )
+                : const Icon(Icons.attach_money),
+          ),
+          Tab(
+            child: size.width > 530
+                ? Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              child: AutoSizeText(
+                "Módulo de Vendas",
+                minFontSize: 18,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.comfortaa(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.15,
+                ),
+              ),
+            )
+                : const Icon(Icons.attach_money),
+          ),
+          Tab(
+            child: size.width > 530
+                ? Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              child: AutoSizeText(
+                "Serviços/Aplicações",
+                minFontSize: 18,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.comfortaa(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.15,
+                ),
+              ),
+            )
+                : const Icon(Icons.attach_money),
+          ),
+        ]),
+  );
+}
+
+Widget _abaFinanceiro() {
+  return SingleChildScrollView(
+    child: Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: Responsive(
+        larguraMaximaMobile: 905,
+        desktop: _abaFinanceiroDesk(),
+        mobile: Container(),
+      ),
+    ),
+  );
+}
+
+Widget _abaFiscal() {
+  return SingleChildScrollView(
+    child: Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: Responsive(
+        larguraMaximaMobile: 905,
+        desktop: _abaFiscalDesk(),
+        mobile: Container(),
+      ),
+    ),
+  );
+}
+
+Widget _abaEstoque() {
+  return SingleChildScrollView(
+    child: Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: Responsive(
+        larguraMaximaMobile: 905,
+        desktop: _abaEstoqueDesk(),
+        mobile: Container(),
+      ),
+    ),
+  );
+}
+
+Widget _abaProduto() {
+  return SingleChildScrollView(
+    child: Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: Responsive(
+        larguraMaximaMobile: 905,
+        desktop: _abaProdutoDesk(),
+        mobile: Container(),
+      ),
+    ),
+  );
+}
+
+Widget _abaModulosDeVenda() {
+  return SingleChildScrollView(
+    child: Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: Responsive(
+        larguraMaximaMobile: 905,
+        desktop: _abaModulosDeVendaDesk(),
+        mobile: Container(),
+      ),
+    ),
+  );
+}
+
+Widget _abaServicosAplicacoes() {
+  return SingleChildScrollView(
+    child: Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: Responsive(
+        larguraMaximaMobile: 905,
+        desktop: _abaServicosAplicacoesDesk(),
+        mobile: Container(),
+      ),
+    ),
+  );
+}
+
+Widget _abaFinanceiroDesk() {
+  return Padding(
+    // padding: const EdgeInsets.all(16.0),
+    padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 181),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: const Padding(
+                  padding: EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Módulo Financeiro',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Controle de boleto bancário',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: const Padding(
+                  padding: EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Controle de cartões',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Controle de DRE/DFC',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Controle de vendas a prazo',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _abaFiscalDesk() {
+  return Padding(
+    // padding: const EdgeInsets.all(16.0),
+    padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 181),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: TextoAbaModal(
+                  texto: 'Emissão de NF-e (saída)',
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Container(
+          color: Color(0xFFFCFCFF),
+          padding: EdgeInsets.only(top: 30, bottom: 30),
+          child: Row(
+            children: [
+              // TablePlataforma(),
+              Expanded(
+                child: Container(
+                  child: TextoAbaModal(
+                    texto: 'Emissão de NFS-e (serviço)',
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: CheckBoxMobile(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: TextoAbaModal(
+                  texto: 'Lançamento NF-e (entrada)',
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _abaEstoqueDesk() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 181),
+    // padding: const EdgeInsets.all(16.0),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(texto: 'Módulo Estoque'),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(texto: 'Controle multiplos locais'),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _abaProdutoDesk() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 181),
+    // padding: const EdgeInsets.all(16.0),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Controle de observações',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Controle de gerador de etiqueta',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Controle de promoção',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Controle de pacotes',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Controle de tabela de preços',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Controle de variações',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _abaModulosDeVendaDesk() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 181),
+    // padding: const EdgeInsets.all(16.0),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Autoatendimento',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Balcão',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(texto: 'Mesa'),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Ficha',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Delivery',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Drive Thru',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'PUB',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _abaServicosAplicacoesDesk() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 181),
+    // padding: const EdgeInsets.all(16.0),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Serviço Impressão',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Waychef Desktop',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+        Row(
+          children: [
+            // TablePlataforma(),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: TextoAbaModal(
+                    texto: 'Waychef Mobile',
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: CheckBoxMobile(),
+                ),
+              ),
+            ),
+
+            const SizedBox(width: 12),
+          ],
+        ),
+      ],
+    ),
+  );
+}
