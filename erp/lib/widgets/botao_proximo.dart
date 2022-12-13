@@ -2,43 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../theme/app_theme.dart';
 
-
-class BotaoPadrao extends StatelessWidget {
-
+class BotaoPadraoProximo extends StatelessWidget {
   final String texto;
-  final IconData? icone;
-  final Color? corIcone;
+
   final Color? corTexto;
   final Function acao;
 
-
-  const BotaoPadrao({
-    required this.texto,
-    required this.acao,
-    this.icone,
-    this.corIcone,
-    this.corTexto
-  });
+  const BotaoPadraoProximo(
+      {required this.texto, required this.acao, this.corTexto});
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
+    return
+      ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: (corIcone != null) ? corIcone : AppTheme.primary,
+        backgroundColor: Color(0xFFFF5722),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
       ),
-      icon: Icon(
-        icone,
-        color: (corTexto != null) ? corTexto : Colors.white,
-        size: AppTheme.h4,
-      ),
-      onPressed: (){
+      onPressed: () {
         acao.call();
       },
-      label: Text(
+      child: Text(
         texto,
         softWrap: false,
         style: GoogleFonts.sourceSansPro(

@@ -59,15 +59,17 @@ class PlataformaIntegradorPageController extends GetxController {
 // REQUESTER PUT -> ANALISA MINHA FUNÇÃO CONTROLLER
     void atualizarItemConfiguracaoIntegrador() async {
     carregando = true;
-    await PlataformaRequester.atualizarItemConfiguracaoIntegrador("token", _listaPlataformaContratoIntegradorExtra).then((value) {
-      if (value.isSuccess) {
-        _listaPlataformaContratoIntegradorExtra.addAll(value.content);
-      } else {
-        WidgetsUtils.snackBarError('Erro', 'Falha ao salvar lista');
-        //TODO: verificar e trata possiveis erros
-        print('>>>>>> Erro ao carregar empresas no sistema');
-      }
-    });
+    for(ItemConfiguracaoIntegradorWaychef itemWaychef in _listaPlataformaContratoIntegradorExtra) {
+      await PlataformaRequester.atualizarItemConfiguracaoIntegrador("token", itemWaychef).then((value) {
+        if (value.isSuccess) {
+          _listaPlataformaContratoIntegradorExtra.addAll(value.content);
+        } else {
+          WidgetsUtils.snackBarError('Erro', 'Falha ao salvar lista');
+          //TODO: verificar e trata possiveis erros
+          print('>>>>>> Erro ao carregar empresas no sistema');
+        }
+      });
+    }
     carregando = false;
   }
 //   void atualizarItemConfiguracaoIntegrador() async {

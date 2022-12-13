@@ -14,7 +14,7 @@ void main() {
       primarySwatch: AppTheme.swatchPadrao,
       backgroundColor: AppTheme.background,
     ),
-    initialRoute: Routes.PLATAFORMAINTEGRADOR,
+    initialRoute: Routes.CONTRATO_INTREGRADOR_CUSTOMIZADO,
     getPages: AppPages.routes,
   ));
 }

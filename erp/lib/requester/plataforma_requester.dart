@@ -31,11 +31,11 @@ class PlataformaRequester {
   }
 
   //método PUT ABAIXO
-  static Future<ResponsePws> atualizarItemConfiguracaoIntegrador(String token,  List<ItemConfiguracaoIntegradorWaychef> listasItensDTO) async {
+  static Future<ResponsePws> atualizarItemConfiguracaoIntegrador(String token,  ItemConfiguracaoIntegradorWaychef itemDto) async {
     Response? response = await RequesterPws().consome(
       urlPws: UrlPws.putAtualizarItemConfiguracaoIntegrador(),
         // headerParams: {"Authorization": "Bearer " + token,},
-        body:listasItensDTO,
+        body:itemDto.itemConfiguracaoWaychefDTO,
     );
     return ResponsePws(
         response: response, converter: (json) => ItemConfiguracaoIntegradorWaychef.listFromJson(json));
