@@ -90,6 +90,8 @@ abstract class SplashBase with Store {
 
       await _iniciaImpressao();
 
+      await _validaCardapio();
+
       _concluir();
     } catch (e) {
       print(e);
@@ -234,6 +236,21 @@ abstract class SplashBase with Store {
     appController.mapMenus = dto.mapMenu;
 
     return Future.value();
+  }
+
+  Future<void> _validaCardapio() async {
+    appController.timer = Timer.periodic(const Duration(minutes: 3), (timer) async {
+      List<CardapioMenu> listCardapioMenu =  await CardapioRepository.atualizaCardapio(
+          appController.pwsConfig,
+          appController.token,
+          appController.listCardapioMenu,
+          appController.mapProdutos);
+     if(listCardapioMenu.isNotEmpty){
+          appController.listCardapioMenu = [];
+          appController.listCardapioMenu = listCardapioMenu;
+      }
+
+    });
   }
   Future<void> _iniciaImpressao() async {
     changeStatus("Carregando Impressão");
