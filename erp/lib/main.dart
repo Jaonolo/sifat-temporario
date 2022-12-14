@@ -6,7 +6,6 @@ import 'package:erp/pages/routes/app_pages.dart';
 
 void main() {
   runApp(GetMaterialApp(
-
     debugShowCheckedModeBanner: false,
     // TODO: Configurar Thema do aplicativo
     theme: ThemeData(
@@ -14,7 +13,7 @@ void main() {
       primarySwatch: AppTheme.swatchPadrao,
       backgroundColor: AppTheme.background,
     ),
-    initialRoute: Routes.CONTRATO_INTREGRADOR_CUSTOMIZADO,
+    initialRoute: Routes.PLATAFORMA_CONTRATOS_EXTRAS,
     getPages: AppPages.routes,
   ));
 }

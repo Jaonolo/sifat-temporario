@@ -53,6 +53,7 @@ class SelecaoDeImagem extends StatelessWidget {
                       acao.call();
                     },
                     child: Text( nome!,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.comfortaa(
                           fontWeight: FontWeight.w400,
                           fontSize: 33,
