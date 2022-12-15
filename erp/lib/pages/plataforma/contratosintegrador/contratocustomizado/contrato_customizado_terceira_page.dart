@@ -153,15 +153,10 @@ class ContratoCustomizadoTerceiraPage extends StatelessWidget {
             const SizedBox(
               height: 36,
             ),
-
-
             const SizedBox(
               height: 36,
             ),
-
-
             Wrap(
-
               alignment: WrapAlignment.center,
               // direction: Axis.horizontal,
               spacing: 51,
@@ -587,8 +582,6 @@ class ContratoCustomizadoTerceiraPage extends StatelessWidget {
 
               ],
             ),
-
-
             const SizedBox(
               height: 36,
             ),

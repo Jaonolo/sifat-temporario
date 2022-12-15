@@ -6,18 +6,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:status_change/status_change.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+// import 'stepper.dart';
+import '../../../../theme/app_theme.dart';
+import '../../../../widgets/botao_padrao.dart';
 import '../../../../widgets/botao_proximo.dart';
 import '../../../../widgets/responsive.dart';
+import 'contrato_customizado_controller.dart';
 
-
-
-class ContratoCustomizadoPage extends StatelessWidget {
+class ContratoCustomizadoPage extends GetView<ContratoCustomizadoController> {
+// class ContratoCustomizadoPage extends StatelessWidget {
   const ContratoCustomizadoPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 //------------ VARIAVEIS------------
-    Size _size = MediaQuery.of(context).size;
+//     Size _size = MediaQuery
+//         .of(context)
+//         .size;
 //------------ EstruturaPrincipal
     return Scaffold(
       body: Responsive(
@@ -47,62 +52,1299 @@ class ContratoCustomizadoPage extends StatelessWidget {
               thickness: 2,
             ),
 
-            // Container(
-            //   height: Get.width / 2,
-            //   width: Get.height / 2,
-            //   child: Stepper(
-            //     type: StepperType.horizontal,
-            //     steps: getSteps(),
-            //   ),
-            // ),
-            //
+            Container(
+              height: Get.width / 2,
+              width: Get.height / 2,
+              child:
 
-            const SizedBox(
-              height: 36,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  'Digite o nome do plano',
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.comfortaa(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 46,
-                  ),
+              Obx(
+                () => Stepper(
+                  elevation: 0,
+                  type: StepperType.horizontal,
+                  steps: getSteps(),
+                  currentStep: controller.contadorStep.value,
+                  onStepContinue: () {
+                    if (controller.contadorStep.value ==
+                        getSteps().length - 1) {
+                      print('traduzir send data to server');
+                    } else {
+                      controller.contadorStep.value++;
+                    }
+                  },
+                  onStepCancel: () {
+                    controller.contadorStep.value == 0
+                        ? null
+                        : controller.contadorStep.value--;
+                  },
+                  onStepTapped: (index) {
+                    controller.contadorStep.value = index;
+                  },
+                  controlsBuilder:
+                      (BuildContext context, ControlsDetails controls) {
+                    return Container(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                              ),
+                              child: Text(
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                  ),
+                                  controller.contadorStep.value ==
+                                          getSteps().length - 1
+                                      ? "Submit"
+                                      : 'Próximo'),
+                              onPressed: controls.onStepContinue,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 16,
+                          ),
+                          if (controller.contadorStep.value != 0)
+                            Expanded(
+                              child: ElevatedButton(
+                                child: Text('Cancel'),
+                                onPressed: controls.onStepCancel,
+                              ),
+                            ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
-                Expanded(child: Container()),
-              ],
+              ),
             ),
-            const Divider(
-              thickness: 2,
-            ),
-            const SizedBox(
-              height: 36,
-            ),
-            expandedListaLimitesCustomizado(),
-            expandedListaFinanceiroCustomizado(),
-            expandedListaFiscalCustomizado(),
-            expandedListaEstoqueCustomizado(),
-            expandedListaProdutoCustomizado(),
-            expandedListaValoresCustomizado(),
-            const SizedBox(
-              height: 36,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _btnProximo(),
-              ],
-            ),
-
+            //
           ],
         ),
-
-
       ),
     );
   }
+
+  List<Step> getSteps() => [
+        Step(
+            title: Text(''),
+            content: Container(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 36,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Digite o nome do plano',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.comfortaa(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 46,
+                        ),
+                      ),
+                      Expanded(child: Container()),
+                    ],
+                  ),
+                  const Divider(
+                    thickness: 2,
+                  ),
+                  const SizedBox(
+                    height: 36,
+                  ),
+                  expandedListaLimitesCustomizado(),
+                  expandedListaFinanceiroCustomizado(),
+                  expandedListaFiscalCustomizado(),
+                  expandedListaEstoqueCustomizado(),
+                  expandedListaProdutoCustomizado(),
+                  expandedListaValoresCustomizado(),
+                  const SizedBox(
+                    height: 36,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _btnProximo(),
+                    ],
+                  ),
+                ],
+              ),
+
+              // height: 100,
+              // width: 200,
+              // color: Colors.red,
+            ),
+            isActive: controller.contadorStep.value >= 0,
+            state: controller.contadorStep.value > 0
+                ? StepState.complete
+                : StepState.indexed),
+        Step(
+
+            title: Text(''),
+            content: Container(
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(8, 32, 8, 32),
+                    color: Color(0xFFE9F1FF),
+                    child: Text(
+                      'Extras',
+                      style: GoogleFonts.comfortaa(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 23,
+                        letterSpacing: -0.5,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Aplicativo - AUTOATENDIMENTO (TOTEM)',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Aplicativo - AUTOPESAGEM',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Aplicativo - WAYWALLET',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Aplicativo XML Venda',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Concentrador',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Dashboard WEB',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Emissores Fiscais',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Integração - Catraca',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Integração - Everest',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Integração - TrackApp',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Integração - WayMenu',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Sessão Extra',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'Suporte Premium - Telefone',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'TEF - Cielo',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'TEF - Elgin Pay',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'TEF - PayGo',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'TEF - REDE',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(14.0),
+                            child: Text(
+                              'TEF - SiTef',
+                              textAlign: TextAlign.left,
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                letterSpacing: 0.15,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: CheckBoxMobile()),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 36,
+                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     _btnProximo(),
+                  //   ],
+                  // ),
+                ],
+              ),
+            ),
+            isActive: controller.contadorStep.value >= 1,
+            state: controller.contadorStep.value > 1
+                ? StepState.complete
+                : StepState.indexed),
+        Step(
+          title: Text(''),
+          content: Container(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Plano Diamante',
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.comfortaa(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 46,
+                      ),
+                    ),
+                    Expanded(child: Container()),
+                  ],
+                ),
+                const Divider(
+                  thickness: 2,
+                ),
+                const SizedBox(
+                  height: 36,
+                ),
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(8, 32, 8, 32),
+                        color: Color(0xFFE9F1FF),
+                        child: Text(
+                          'Valores',
+                          style: GoogleFonts.comfortaa(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 23,
+                            letterSpacing: -0.5,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 28,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        child: Padding(
+                          padding: EdgeInsets.all(14.0),
+                          child: Text(
+                            'Valor mensal',
+                            textAlign: TextAlign.left,
+                            style: GoogleFonts.comfortaa(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 19,
+                              letterSpacing: 0.15,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'R\$ 45.90',
+                                style: GoogleFonts.sourceSansPro(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20,
+                                  color: Color(0xFF0D0D0D),
+                                ),
+                              )),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                  ],
+                ),
+                const SizedBox(
+                  height: 36,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Empresas',
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.comfortaa(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 28,
+                        letterSpacing: 0.15,
+                      ),
+                    ),
+                    Expanded(child: Container()),
+                    // _btnProrrogarContrato(),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 36,
+                ),
+                const SizedBox(
+                  height: 36,
+                ),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  // direction: Axis.horizontal,
+                  spacing: 51,
+                  runSpacing: 25,
+                  children: <Widget>[
+                    Card(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: Color(0xFFFF5722),
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              textAlign: TextAlign.end,
+                              'Lorem Ipsum é simplesmente',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFFF5722),
+                                letterSpacing: 0.25,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.close,
+                                color: Color(0xFFFF5722),
+                                size: 16,
+                              ),
+                              // icon: Icon(Icons.close)
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // child: ElevatedButton(
+                      //    onPressed: (){
+                      //     print("You pressed Icon Elevated Button");
+                      //   },
+                      //   child: Row(
+                      //     mainAxisSize: MainAxisSize.min,
+                      //     children: [
+                      //       Text('Lorem Ipsum is simply dummy text of '),
+                      //       IconButton(onPressed: (){}, icon: Icon(Icons.close))
+                      //     ],
+                      //   )
+                      //
+                      //   ),
+                    ),
+                    Card(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: Color(0xFFFF5722),
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              textAlign: TextAlign.end,
+                              'Lorem Ipsum é simplesmente',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFFF5722),
+                                letterSpacing: 0.25,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.close,
+                                color: Color(0xFFFF5722),
+                                size: 16,
+                              ),
+                              // icon: Icon(Icons.close)
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // child: ElevatedButton(
+                      //    onPressed: (){
+                      //     print("You pressed Icon Elevated Button");
+                      //   },
+                      //   child: Row(
+                      //     mainAxisSize: MainAxisSize.min,
+                      //     children: [
+                      //       Text('Lorem Ipsum is simply dummy text of '),
+                      //       IconButton(onPressed: (){}, icon: Icon(Icons.close))
+                      //     ],
+                      //   )
+                      //
+                      //   ),
+                    ),
+                    Card(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: Color(0xFFFF5722),
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              textAlign: TextAlign.end,
+                              'Lorem Ipsum é simplesmente',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFFF5722),
+                                letterSpacing: 0.25,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.close,
+                                color: Color(0xFFFF5722),
+                                size: 16,
+                              ),
+                              // icon: Icon(Icons.close)
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // child: ElevatedButton(
+                      //    onPressed: (){
+                      //     print("You pressed Icon Elevated Button");
+                      //   },
+                      //   child: Row(
+                      //     mainAxisSize: MainAxisSize.min,
+                      //     children: [
+                      //       Text('Lorem Ipsum is simply dummy text of '),
+                      //       IconButton(onPressed: (){}, icon: Icon(Icons.close))
+                      //     ],
+                      //   )
+                      //
+                      //   ),
+                    ),
+                    Card(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: Color(0xFFFF5722),
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              textAlign: TextAlign.end,
+                              'Lorem Ipsum é simplesmente',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFFF5722),
+                                letterSpacing: 0.25,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.close,
+                                color: Color(0xFFFF5722),
+                                size: 16,
+                              ),
+                              // icon: Icon(Icons.close)
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // child: ElevatedButton(
+                      //    onPressed: (){
+                      //     print("You pressed Icon Elevated Button");
+                      //   },
+                      //   child: Row(
+                      //     mainAxisSize: MainAxisSize.min,
+                      //     children: [
+                      //       Text('Lorem Ipsum is simply dummy text of '),
+                      //       IconButton(onPressed: (){}, icon: Icon(Icons.close))
+                      //     ],
+                      //   )
+                      //
+                      //   ),
+                    ),
+                    Card(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: Color(0xFFFF5722),
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              textAlign: TextAlign.end,
+                              'Lorem Ipsum é simplesmente',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFFF5722),
+                                letterSpacing: 0.25,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.close,
+                                color: Color(0xFFFF5722),
+                                size: 16,
+                              ),
+                              // icon: Icon(Icons.close)
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // child: ElevatedButton(
+                      //    onPressed: (){
+                      //     print("You pressed Icon Elevated Button");
+                      //   },
+                      //   child: Row(
+                      //     mainAxisSize: MainAxisSize.min,
+                      //     children: [
+                      //       Text('Lorem Ipsum is simply dummy text of '),
+                      //       IconButton(onPressed: (){}, icon: Icon(Icons.close))
+                      //     ],
+                      //   )
+                      //
+                      //   ),
+                    ),
+                    Card(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: Color(0xFFFF5722),
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              textAlign: TextAlign.end,
+                              'Lorem Ipsum é simplesmente',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFFF5722),
+                                letterSpacing: 0.25,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.close,
+                                color: Color(0xFFFF5722),
+                                size: 16,
+                              ),
+                              // icon: Icon(Icons.close)
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // child: ElevatedButton(
+                      //    onPressed: (){
+                      //     print("You pressed Icon Elevated Button");
+                      //   },
+                      //   child: Row(
+                      //     mainAxisSize: MainAxisSize.min,
+                      //     children: [
+                      //       Text('Lorem Ipsum is simply dummy text of '),
+                      //       IconButton(onPressed: (){}, icon: Icon(Icons.close))
+                      //     ],
+                      //   )
+                      //
+                      //   ),
+                    ),
+                    Card(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: Color(0xFFFF5722),
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              textAlign: TextAlign.end,
+                              'Lorem Ipsum é simplesmente',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFFF5722),
+                                letterSpacing: 0.25,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.close,
+                                color: Color(0xFFFF5722),
+                                size: 16,
+                              ),
+                              // icon: Icon(Icons.close)
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // child: ElevatedButton(
+                      //    onPressed: (){
+                      //     print("You pressed Icon Elevated Button");
+                      //   },
+                      //   child: Row(
+                      //     mainAxisSize: MainAxisSize.min,
+                      //     children: [
+                      //       Text('Lorem Ipsum is simply dummy text of '),
+                      //       IconButton(onPressed: (){}, icon: Icon(Icons.close))
+                      //     ],
+                      //   )
+                      //
+                      //   ),
+                    ),
+                    Card(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            side: BorderSide(
+                              color: Color(0xFFFF5722),
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              textAlign: TextAlign.end,
+                              'Lorem Ipsum é simplesmente',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFFF5722),
+                                letterSpacing: 0.25,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.close,
+                                color: Color(0xFFFF5722),
+                                size: 16,
+                              ),
+                              // icon: Icon(Icons.close)
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // child: ElevatedButton(
+                      //    onPressed: (){
+                      //     print("You pressed Icon Elevated Button");
+                      //   },
+                      //   child: Row(
+                      //     mainAxisSize: MainAxisSize.min,
+                      //     children: [
+                      //       Text('Lorem Ipsum is simply dummy text of '),
+                      //       IconButton(onPressed: (){}, icon: Icon(Icons.close))
+                      //     ],
+                      //   )
+                      //
+                      //   ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 36,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    _btnFinalizar(),
+                  ],
+                ),
+                const SizedBox(
+                  height: 36,
+                ),
+              ],
+            ),
+          ),
+          isActive: controller.contadorStep.value >= 2,
+        ),
+
+      ];
 }
 
 Widget expandedListaLimitesCustomizado() {
@@ -361,8 +1603,7 @@ Widget expandedListaFinanceiroCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                    alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -396,8 +1637,7 @@ Widget expandedListaFinanceiroCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -431,8 +1671,7 @@ Widget expandedListaFinanceiroCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -465,9 +1704,8 @@ Widget expandedListaFinanceiroCustomizado() {
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child:Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                  child: Align(
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -501,8 +1739,7 @@ Widget expandedListaFinanceiroCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -553,8 +1790,7 @@ Widget expandedListaFiscalCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -588,8 +1824,7 @@ Widget expandedListaFiscalCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -623,8 +1858,7 @@ Widget expandedListaFiscalCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -632,7 +1866,6 @@ Widget expandedListaFiscalCustomizado() {
           ],
         ),
       ),
-
     ],
   );
 }
@@ -676,8 +1909,7 @@ Widget expandedListaEstoqueCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -711,8 +1943,7 @@ Widget expandedListaEstoqueCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -720,7 +1951,6 @@ Widget expandedListaEstoqueCustomizado() {
           ],
         ),
       ),
-
     ],
   );
 }
@@ -764,8 +1994,7 @@ Widget expandedListaProdutoCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -799,8 +2028,7 @@ Widget expandedListaProdutoCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -834,8 +2062,7 @@ Widget expandedListaProdutoCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -869,8 +2096,7 @@ Widget expandedListaProdutoCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -904,8 +2130,7 @@ Widget expandedListaProdutoCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -939,8 +2164,7 @@ Widget expandedListaProdutoCustomizado() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -948,7 +2172,6 @@ Widget expandedListaProdutoCustomizado() {
           ],
         ),
       ),
-
     ],
   );
 }
@@ -1126,28 +2349,9 @@ Widget expandedListaValoresCustomizado() {
           ],
         ),
       ),
-
     ],
   );
 }
-//
-// List<Step> getSteps() => [
-//   Step(
-//     title: Text('Account'),
-//     content: Container(),
-//   ),
-//   Step(
-//     title: Text('texto2'),
-//     content: Container(),
-//   ),
-//   Step(
-//     title: Text('texto2'),
-//     content: Container(),
-//   ),
-// ];
-
-
-
 
 Widget _btnProximo() {
   return BotaoPadraoProximo(
@@ -1159,3 +2363,37 @@ Widget _btnProximo() {
     },
   );
 }
+
+Widget _btnFinalizar() {
+  return ElevatedButton(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Color(0xFF169C34),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+    ),
+    onPressed: () {},
+    child: Text(
+      'Finalizar',
+      softWrap: false,
+      style: GoogleFonts.sourceSansPro(
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+      ),
+    ),
+  );
+}
+
+// Widget _btnProrrogarContrato() {
+//   return BotaoPadrao(
+//     corIcone: AppTheme.adicionar,
+//     corTexto: Colors.white,
+//     texto: 'Adicionar',
+//     icone: Icons.add,
+//     acao: () {
+//       //TODO: AÇÃO SALVAR
+//     },
+//   );
+// }

@@ -60,8 +60,8 @@ class ItemConfiguracaoWaychef {
   static List<ItemConfiguracaoWaychef> listFromJson(List<dynamic> json) {
     print(json);
     for (var value in json) {
-      var rafa = ItemConfiguracaoWaychef.fromMap(value);
-      print(rafa.toJson());
+      var lista = ItemConfiguracaoWaychef.fromMap(value);
+      print(lista.toJson());
     }
 
     return json.map((value) => ItemConfiguracaoWaychef.fromMap(value)).toList();

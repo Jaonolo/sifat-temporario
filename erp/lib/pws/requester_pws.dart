@@ -60,7 +60,16 @@ class RequesterPws {
     }
 
     if (body != null) {
-      data = jsonEncode(body);
+      if (body is List) {
+        List lista = [];
+        body.forEach((element) {
+          lista.add(element.toMap());
+        });
+
+        data = jsonEncode(lista);
+      } else {
+        data = jsonEncode(body);
+      }
       headerParams ??= {};
       headerParams['Content-Type'] = 'application/json';
     }

@@ -5,6 +5,8 @@ import '../plataforma/contratosintegrador/contrato/planos/contratos_integrador_b
 import '../plataforma/contratosintegrador/contrato/planos/contratos_integrador_page.dart';
 import '../plataforma/contratosintegrador/contratocustomizado/cadastrarplanos/cadastrar_contrato_integrador_bindigs.dart';
 import '../plataforma/contratosintegrador/contratocustomizado/cadastrarplanos/cadastrar_contrato_integrador_page.dart';
+import '../plataforma/contratosintegrador/contratocustomizado/contrato_customizado_bindigs.dart';
+import '../plataforma/contratosintegrador/contratocustomizado/contrato_customizado_page.dart';
 import '../plataforma/contratosintegrador/contratocustomizado/contrato_customizado_terceira_page.dart';
 import '../plataforma/contratosintegrador/extras/plataforma_integrador_page.dart';
 import '../plataforma/contratosintegrador/extras/plataforma_integrador_page_bindings.dart';
@@ -84,11 +86,11 @@ class AppPages {
 
 
     // ************ TESTELIVRE *************************
-    // GetPage(
-    //   name: Routes.TESTE,
-      // page: () => ContratoCustomizadoTerceiraPage(),
-    // //   binding: PlataformaPageBindings(),
-    // ),
+    GetPage(
+      name: Routes.TESTE,
+      page: () => ContratoCustomizadoPage(),
+      binding: ContratoCustomizadoBindings(),
+    ),
 
   ];
 }

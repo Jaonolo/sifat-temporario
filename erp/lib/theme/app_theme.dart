@@ -4,7 +4,8 @@ class AppTheme {
   static Color confirm = const Color(0xFF1CC88A);
 
   static Color cancel = const Color(0xFFE74A3B);
-  static Color primary = const Color(0xFFF09400);
+  static Color primary = const Color(0xFFB10AD7);
+  // static Color primary = const Color(0xFFF09400);
   static Color background = Colors.white;
   // static Color background = const Color(0xFFF7F7F7);
   static Color textColor = const Color(0xFF858796);
@@ -21,17 +22,17 @@ class AppTheme {
   static Color corBranco = Colors.white;
 
 
-  static MaterialColor swatchPadrao = const MaterialColor(0xFFF09400, <int, Color>{
-    50: Color(0x19F09400),
-    100: Color(0x32F09400),
-    200: Color(0x4BF09400),
-    300: Color(0x64F09400),
-    400: Color(0x7DF09400),
-    500: Color(0x96F09400),
-    600: Color(0xAFF09400),
-    700: Color(0xC8F09400),
-    800: Color(0xE1F09400),
-    900: Color(0xFFF09400),
+  static MaterialColor swatchPadrao = const MaterialColor(0xFFD75100, <int, Color>{
+    50: Color(0x19D75100),
+    100: Color(0x32D75100),
+    200: Color(0x4BD75100),
+    300: Color(0x64D75100),
+    400: Color(0x7DD75100),
+    500: Color(0x96D75100),
+    600: Color(0xAFD75100),
+    700: Color(0xC8D75100),
+    800: Color(0xE1D75100),
+    900: Color(0xFFD75100),
   });
 
 // static Color icons = Colors.grey;

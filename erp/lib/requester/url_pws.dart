@@ -21,7 +21,8 @@ class UrlPws{
     _type = RequestType.GET;
   }
 
-  // ===========================PLATAFORMA CONTRATO INTEGRADOR ABAIXO=======================
+
+  // ===========================PLATAFORMA CONTRATO  =======================
 
   UrlPws.getBuscarTodosItensPorIdEmpresa() {
     _url = "/contrato/waychef/item-integrador/buscar-todos/{idEmpresa}";
@@ -38,7 +39,6 @@ class UrlPws{
     _type = RequestType.POST;
   }
 
-  // ===========================PLATAFORMA CONTRATO INTEGRADOR ACIMA =======================
 
   // UrlPws.usuarioLogin() {
   //   _url = "/usuarios/login";

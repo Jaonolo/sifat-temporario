@@ -13,7 +13,7 @@ void main() {
       primarySwatch: AppTheme.swatchPadrao,
       backgroundColor: AppTheme.background,
     ),
-    initialRoute: Routes.PLATAFORMA_CONTRATOS_EXTRAS,
+    initialRoute: Routes.CONTRATO_INTREGRADOR_EXTRAS,
     getPages: AppPages.routes,
   ));
 }

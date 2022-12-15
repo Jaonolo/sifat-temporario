@@ -658,13 +658,6 @@ class ContratoCustomizadoSegundoPage extends StatelessWidget {
                 const SizedBox(width: 12),
               ],
             ),
-
-
-
-
-
-
-
             const SizedBox(
               height: 36,
             ),

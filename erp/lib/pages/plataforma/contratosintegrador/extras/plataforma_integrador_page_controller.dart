@@ -3,6 +3,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:erp/pages/routes/app_pages.dart';
 import '../../../../models/plataformaintegrador/item_configuracao_integrador_waychef.dart';
+import '../../../../models/plataformaintegrador/item_configuracao_wayche_dto.dart';
 import '../../../../requester/plataforma_requester.dart';
 import '../../../../widgets/utils/widgets_utils.dart';
 
@@ -30,12 +31,13 @@ class PlataformaIntegradorPageController extends GetxController {
 
   set listaPlataformaContratoIntegradorExtra(value) => _listaPlataformaContratoIntegradorExtra.value = value;
 
-//-------------------------------------------------- FUNÇÕES --------------------------------------------------------------
+//-------------------------------------------------- FUNÇÕES ---------------------------------------------Future<void>----------async ---
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     _buscarPlataformaContratoIntegradorExtra();
+    await Future.delayed(const Duration(seconds: 5));
     atualizarItemConfiguracaoIntegrador();
   }
 
@@ -57,8 +59,14 @@ class PlataformaIntegradorPageController extends GetxController {
 // REQUESTER PUT -> ANALISA MINHA FUNÇÃO CONTROLLER
     void atualizarItemConfiguracaoIntegrador() async {
     carregando = true;
-    for(ItemConfiguracaoIntegradorWaychef itemWaychef in _listaPlataformaContratoIntegradorExtra) {
-      await PlataformaRequester.atualizarItemConfiguracaoIntegrador("token", itemWaychef).then((value) {
+
+    List<ItemConfiguracaoIntegradorWaychef> listaPlataformaContratoDTO = [];
+    for(ItemConfiguracaoIntegradorWaychef itemContratoIntegrador in _listaPlataformaContratoIntegradorExtra) {
+      listaPlataformaContratoDTO.add(itemContratoIntegrador);
+    }
+    print(listaPlataformaContratoDTO);
+
+    await PlataformaRequester.atualizarItemConfiguracaoIntegrador("token", listaPlataformaContratoDTO).then((value) {
         if (value.isSuccess) {
           _listaPlataformaContratoIntegradorExtra.addAll(value.content);
         } else {
@@ -67,7 +75,7 @@ class PlataformaIntegradorPageController extends GetxController {
           print('>>>>>> Erro ao carregar empresas no sistema');
         }
       });
-    }
+
     carregando = false;
   }
 //   void atualizarItemConfiguracaoIntegrador() async {

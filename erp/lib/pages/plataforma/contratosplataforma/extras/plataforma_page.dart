@@ -40,7 +40,7 @@ class PlataformaPage extends GetView<PlataformaPageController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                _btnAdicionar(),
+                _btnAdicionar(context),
                 Expanded(child: Container()),
                 _btnSalvar(),
               ],
@@ -60,130 +60,7 @@ class PlataformaPage extends GetView<PlataformaPageController> {
             const SizedBox(
               height: 16,
             ),
-            ElevatedButton(
-              child: Text('Clique aqui - para abrir o modal adicione extras'),
-              onPressed: () {
-                showModalBottomSheet(
-                  isScrollControlled: true,
-                  context: context,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      )),
-                  builder: (context) => Container(
-                    // padding: EdgeInsets.all(16),
-                    child: Column(mainAxisSize: MainAxisSize.min, children: [
-                      Container(
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 34, top: 28),
-                              child: Text(
-                                'Adicione Extras',
-                                style: GoogleFonts.comfortaa(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppTheme.modaltitulo,
-                                  letterSpacing: -0.5,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 8, left: 34, bottom: 8),
-                              child: Text(
-                                  'Selecione as funcionalidades que deseja inserir como extra no contrato',
-                                  style: GoogleFonts.sourceSansPro(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppTheme.blackSubtitulo,
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 500,
-                        child: _modalPlataforma(context),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
-                        child: Row(
-                          // runSpacing: 16,
-                          // alignment: WrapAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  side: BorderSide(
-                                    color: Color.fromRGBO(186, 26, 26, 1),
-                                  ),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 4),
-                                child: Text(
-                                  textAlign: TextAlign.end,
-                                  'Cancelar',
-                                  style: GoogleFonts.sourceSansPro(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromRGBO(186, 26, 26, 1),
-                                    letterSpacing: 0.25,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 4,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Color.fromRGBO(22, 156, 52, 1),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 4),
-                                child: Text(
-                                  textAlign: TextAlign.end,
-                                  'Confirmar',
-                                  style: GoogleFonts.sourceSansPro(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppTheme.buttomModalConfirmar,
-                                    letterSpacing: 0.25,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-
             //todo modal abaixo está pronto novo contrato
-
             const SizedBox(
               height: 16,
             ),
@@ -208,14 +85,130 @@ class PlataformaPage extends GetView<PlataformaPageController> {
     );
   }
 
-  Widget _btnAdicionar() {
+  Widget _btnAdicionar(context) {
     return BotaoPadrao(
       corIcone: AppTheme.adicionar,
       corTexto: Colors.white,
       texto: 'Adicionar',
       icone: Icons.add_circle,
       acao: () {
-        //TODO: AÇÃO SALVAR
+        showModalBottomSheet(
+          isScrollControlled: true,
+          context: context,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(20),
+              )),
+          builder: (context) => Container(
+            // padding: EdgeInsets.all(16),
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              Container(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 34, top: 28),
+                      child: Text(
+
+                        'Adicione Extras',
+                        style: GoogleFonts.comfortaa(
+                          fontSize: 23,
+                          fontWeight: FontWeight.w500,
+                          color: AppTheme.modaltitulo,
+                          letterSpacing: -0.5,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 8, left: 34, bottom: 8),
+                      child: Text(
+                          'Selecione as funcionalidades que deseja inserir como extra no contrato',
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: AppTheme.blackSubtitulo,
+                          )),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 500,
+                child: _modalPlataforma(context),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
+                child: Row(
+                  // runSpacing: 16,
+                  // alignment: WrapAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(
+                            color: Color.fromRGBO(186, 26, 26, 1),
+                          ),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 4),
+                        child: Text(
+                          textAlign: TextAlign.end,
+                          'Cancelar',
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromRGBO(186, 26, 26, 1),
+                            letterSpacing: 0.25,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromRGBO(22, 156, 52, 1),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 4),
+                        child: Text(
+                          textAlign: TextAlign.end,
+                          'Confirmar',
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: AppTheme.buttomModalConfirmar,
+                            letterSpacing: 0.25,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ]),
+          ),
+        );
+
+
+
       },
     );
   }
