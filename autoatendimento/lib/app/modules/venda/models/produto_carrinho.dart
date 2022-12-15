@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
@@ -11,6 +12,7 @@ class ProdutoCarrinho = _ProdutoCarrinhoBase with _$ProdutoCarrinho;
 
 abstract class _ProdutoCarrinhoBase with Store {
   VendaController vendaController = Modular.get();
+  AppController appController = Modular.get();
 
   @observable
   NotaItem notaItem;
@@ -25,7 +27,9 @@ abstract class _ProdutoCarrinhoBase with Store {
       NotaItemUtils.atualizaQuantidadeSubitens(element,
           item.quantidade!.subtrair(BigDecimal.ONE()), item.quantidade!);
     });
-    NotaItemUtils.atualizaTotais(item);
+    NotaItemUtils.atualizaTotais(item, (idProdutoEmpresa){
+      return appController.mapProdutos[idProdutoEmpresa];
+    });
 
     notaItem = item;
     vendaController.atualizaTotais();
@@ -40,7 +44,9 @@ abstract class _ProdutoCarrinhoBase with Store {
           element, item.quantidade!.somar(BigDecimal.ONE()), item.quantidade!);
     });
 
-    NotaItemUtils.atualizaTotais(item);
+    NotaItemUtils.atualizaTotais(item, (idProdutoEmpresa){
+      return appController.mapProdutos[idProdutoEmpresa];
+    });
 
     if (item.quantidade!.compareTo(BigDecimal.ONE()) < 0) {
       //se for o ultimo chama a funcao para aparecer a dialog

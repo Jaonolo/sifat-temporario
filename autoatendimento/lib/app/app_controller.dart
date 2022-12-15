@@ -9,6 +9,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:requester/config/pws_config.dart';
+import 'package:pos/pos/impressora/impressora_service.dart';
+import 'package:models/model/enum/marca_pos.dart';
+import 'package:models/model/enum/tipo_estacao.dart';
 
 part 'app_controller.g.dart';
 
@@ -22,6 +25,7 @@ abstract class _AppControllerBase with Store {
   late ServicoAutoAtendimento servicoAutoAtendimento;
   late TabelaPreco tabelaPreco;
   late Map<num, ProdutoEmpresa> mapProdutos;
+  late Map<num, ProdutoMenu> mapMenus;
   List<CardapioMenu> listCardapioMenu = [];
   List<FinalizadoraEmpresa> listFormaPagamento = [];
   Timer? timer;
@@ -29,6 +33,8 @@ abstract class _AppControllerBase with Store {
   bool maiorIdade = false;
   CountDownController _controller = CountDownController();
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  TransacaoCartao? transacaoCartao;
+  List<Map<String, String?>?> transacoes = [];
 
   EstacaoImpressora getImpressoraVenda() {
     return estacaoTrabalho.impressoras.firstWhere((element) =>

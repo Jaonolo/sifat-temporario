@@ -360,27 +360,35 @@ class HomeComponent {
                     ),
                     Expanded(
                       flex: 85,
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.95,
-                        // altura da gridView
-                        crossAxisSpacing: 40,
-                        mainAxisSpacing: 30,
-                        children: (produtoEmpresa != null)
-                            ? List.generate(gradeAtivas.length, (index) {
-                                return BuildCardCardapio.create(
-                                    produtoEmpresa: produtoEmpresa,
-                                    gradeEmpresa: gradeAtivas[index],
-                                    context: c);
-                              })
-                            : List.generate(
-                                controller.menuSelecionado.itens.length,
-                                (index) {
-                                return BuildCardCardapio.create(
-                                    produtoEmpresa:
-                                        controller.menuSelecionado.itens[index],
-                                    context: context);
-                              }),
+                      child: Padding(
+                        padding: const EdgeInsets.all(1.5),
+                        child: Scrollbar(
+                          radius: Radius.circular(10),
+                          trackVisibility: true,
+                          isAlwaysShown: true,
+                          child: GridView.count(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.95,
+                            // altura da gridView
+                            crossAxisSpacing: 40,
+                            mainAxisSpacing: 30,
+                            children: (produtoEmpresa != null)
+                                ? List.generate(gradeAtivas.length, (index) {
+                                    return BuildCardCardapio.create(
+                                        produtoEmpresa: produtoEmpresa,
+                                        gradeEmpresa: gradeAtivas[index],
+                                        context: c);
+                                  })
+                                : List.generate(
+                                    controller.menuSelecionado.itens.length,
+                                    (index) {
+                                    return BuildCardCardapio.create(
+                                        produtoEmpresa:
+                                            controller.menuSelecionado.itens[index],
+                                        context: context);
+                                  }),
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -413,15 +421,24 @@ class HomeComponent {
                     ),
                     Expanded(
                       flex: 98,
-                      child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        controller: scrollCarrinho,
-                        itemCount: vendaController.itensLancados.length,
-                        itemBuilder: (c, index) {
-                          var produtoCarrinho =
-                              vendaController.itensLancados[index];
-                          return CardItemCarrinho(produtoCarrinho, index);
-                        },
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Scrollbar(
+                          radius: Radius.circular(10),
+                          trackVisibility: true,
+                          isAlwaysShown: true,
+                          child: ListView.builder(
+                            padding: EdgeInsetsDirectional.only(end: 5),
+                            scrollDirection: Axis.vertical,
+                            controller: scrollCarrinho,
+                            itemCount: vendaController.itensLancados.length,
+                            itemBuilder: (c, index) {
+                              var produtoCarrinho =
+                                  vendaController.itensLancados[index];
+                              return CardItemCarrinho(produtoCarrinho, index);
+                            },
+                          ),
+                        ),
                       ),
                     ),
                   ],
