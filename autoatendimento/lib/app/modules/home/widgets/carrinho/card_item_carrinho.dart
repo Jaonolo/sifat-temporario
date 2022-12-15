@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_page.dart';
@@ -7,6 +8,7 @@ import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/dialog_auto.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -17,6 +19,7 @@ import 'package:utils/utils/string_utils.dart';
 class CardItemCarrinho extends StatefulWidget {
   final int index;
   final ProdutoCarrinho produtoCarrinho;
+  final AppController appController = Modular.get();
 
   CardItemCarrinho(this.produtoCarrinho, this.index);
 
@@ -36,13 +39,9 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
 
   @override
   Widget build(BuildContext context) {
-    bool podeEditar = false;
 
-    if (widget.produtoCarrinho.notaItem.produtoEmpresa != null) {
-      if (!widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote.equals(TipoPacote.NENHUM) || widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.grades.isNotEmpty) {
-        podeEditar = true;
-      }
-    }
+
+    bool isWindows = defaultTargetPlatform == TargetPlatform.windows;
 
     return Card(
       elevation: 5,
@@ -52,22 +51,16 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
           children: [
             Row(
               children: [
-                Expanded(flex: 8, child: _botaoRemove()),
+                Expanded(flex:isWindows? 8 : 6, child: _botaoRemove()),
                 Expanded(flex: 4, child: _txtUnidade()),
-                Expanded(flex: 8, child: _botaoAdd()),
-                Expanded(flex: 54, child: _txtDescricao()),
-                Expanded(
-                    flex: 12,
-                    child: podeEditar
-                        ? _botaoEditar()
-                        :const SizedBox()),
-                Expanded(flex: 14, child: _txtValor()),
-                Expanded(
+                Expanded(flex: isWindows? 8 : 6, child: _botaoAdd()),
+                Expanded(flex: isWindows? 54 : 10, child: _txtDescricao()),
+                Expanded(flex:isWindows? 14 :  7, child: _txtValor()),
+                Expanded(flex: 1,
                   child: Container(),
                 ),
               ],
             ),
-            if (widget.produtoCarrinho.notaItem.subitens.isNotEmpty)
               _txtSubItens(),
           ],
         ),
@@ -76,18 +69,20 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
   }
 
   Widget _botaoAdd() {
-    return SizedBox(
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: DefaultTheme.accentColor,
-          onPrimary: DefaultTheme.branco,
-          elevation: 4.0,
-          shape: const CircleBorder(),
-        ),
-        onPressed: () => widget.produtoCarrinho.adicionar(),
-        child: Icon(
-          Icons.add,
-          size: FontUtils.h3(context),
+    return Center(
+      child: SizedBox(
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: DefaultTheme.accentColor,
+            onPrimary: DefaultTheme.branco,
+            elevation: 4.0,
+            shape: const CircleBorder(),
+          ),
+          onPressed: () => widget.produtoCarrinho.adicionar(),
+          child: Icon(
+            Icons.add,
+            size: FontUtils.h3(context),
+          ),
         ),
       ),
     );
@@ -101,40 +96,42 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
         textAlign: TextAlign.center,
         softWrap: false,
         style: TextStyle(
-            color: DefaultTheme.preto, fontSize: FontUtils.h3(context)),
+            color: DefaultTheme.preto, fontSize: defaultTargetPlatform == TargetPlatform.windows? FontUtils.h3(context) : FontUtils.h3(context) * 1.80),
       );
     });
   }
 
   Widget _botaoRemove() {
-    return SizedBox(
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: DefaultTheme.accentColor,
-          onPrimary: DefaultTheme.branco,
-          elevation: 4.0,
-          shape: const CircleBorder(),
-          //splashColor: Colors.grey, Desativado pelo uso do ElevatedButton
-        ),
-        onPressed: () {
-          //se for o ultimo pedido aparece uma dialog de confirmação
-          widget.produtoCarrinho.remover(
-              ultimoPedido: (index) =>
-                  showDialog(
-                      context: context,
-                      builder: (context) =>
-                          DialogAuto(
-                            message: "Deseja remover o item do carrinho?",
-                            txtConfirmar: "SIM",
-                            txtCancelar: "NÃO",
-                            onConfirm: () =>
-                                vendaController.removerProdutoCarrinho(index),
-                            title: '',
-                          )));
-        },
-        child: Icon(
-          Icons.remove,
-          size: FontUtils.h3(context),
+    return Center(
+      child: SizedBox(
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: DefaultTheme.accentColor,
+            onPrimary: DefaultTheme.branco,
+            elevation: 4.0,
+            shape: const CircleBorder(),
+            //splashColor: Colors.grey, Desativado pelo uso do ElevatedButton
+          ),
+          onPressed: () {
+            //se for o ultimo pedido aparece uma dialog de confirmação
+            widget.produtoCarrinho.remover(
+                ultimoPedido: (index) =>
+                    showDialog(
+                        context: context,
+                        builder: (context) =>
+                            DialogAuto(
+                              message: "Deseja remover o item do carrinho?",
+                              txtConfirmar: "SIM",
+                              txtCancelar: "NÃO",
+                              onConfirm: () =>
+                                  vendaController.removerProdutoCarrinho(index),
+                              title: '',
+                            )));
+          },
+          child: Icon(
+            Icons.remove,
+            size: FontUtils.h3(context),
+          ),
         ),
       ),
     );
@@ -143,9 +140,8 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
   Widget _botaoEditar() {
     return Center(
         child: SizedBox(
-            height: FontUtils.h2(context) * 1,
-            width: FontUtils.h2(context) * 8,
             child: IconButton(
+              alignment: AlignmentDirectional.topEnd,
               onPressed: onEditar,
               icon: Icon(
                 Icons.edit,
@@ -156,13 +152,13 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
 
   void onEditar() {
     //caso o item tiver grade botao editar adiciona o palco do cardapio com a grade do produto
-    if (widget.produtoCarrinho.notaItem.produtoEmpresa!.gradesAtivas.length >
+    if (widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.gradesAtivas.length >
         1) {
       homeController.habilitarCarrinho = true;
       homeController.addPalco(ProdutoAdicionalPage(vendaController.itensLancados[widget.index]));
       return;
     }
-    switch (widget.produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote) {
+    switch (widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.pacote) {
       case TipoPacote.ADICIONAIS:
         homeController.habilitarCarrinho = true;
         homeController.addPalco(ProdutoAdicionalPage(vendaController.itensLancados[widget.index]));
@@ -198,37 +194,65 @@ class _CardItemCarrinhoState extends State<CardItemCarrinho> {
               .toStringAsFixed(2)}',
           textAlign: TextAlign.end,
           style: TextStyle(
-              color: DefaultTheme.preto, fontSize: FontUtils.h3(context)),
+              color: DefaultTheme.preto, fontSize: FontUtils.h3(context) * 1.2),
         ),
       );
     });
   }
 
   Widget _txtSubItens() {
-    return Row(
-      children: [
-        Expanded(
-          flex: 14,
-          child: Container(),
-        ),
-        Expanded(
-          flex: 74,
-          child: Wrap(children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: Text(
-                StringUtils.montaDescricaoSubItensAuto(
-                    widget.produtoCarrinho.notaItem, isValorItemTotal: false),
-                style: TextStyle(fontSize: FontUtils.h4(context)),
-              ),
-            )
-          ]),
-        ),
-        Expanded(
-          flex: 12,
-          child: Container(),
-        )
-      ],
-    );
+    bool podeEditar = false;
+    bool isSubItens = false ;
+
+    if(widget.produtoCarrinho.notaItem.subitens.isNotEmpty) {
+      isSubItens = true;
+    }
+
+
+    if (widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa] != null) {
+      //Diferente de nenhum e que tenha menus  OU  diferente de nenhum a grade que é usado hoje por causa da variação que fica como tamanho e que tenha grade
+      //todos produtos tem grade, apenas pra validar certeza
+      if ((!widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.pacote.equals(TipoPacote.NENHUM)
+              && widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus.isNotEmpty)
+          ||
+             (widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.grade != "NENHUMA"
+              &&  widget.appController.mapProdutos[widget.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.grades.isNotEmpty)) {
+        podeEditar = true;
+      }
+    }
+
+    if(podeEditar || isSubItens) {
+      return Row(
+        children: [
+          Expanded(
+            flex: 8,
+            child: Container(),
+          ),
+          Expanded(
+            flex: 74,
+            child: Wrap(children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                child:
+                isSubItens ?
+                Text(
+                  StringUtils.montaDescricaoSubItensAuto(
+                      widget.produtoCarrinho.notaItem, isValorItemTotal: false),
+                  style: TextStyle(fontSize:  defaultTargetPlatform == TargetPlatform.windows ? FontUtils.h4(context) : FontUtils.h3(context) ),
+                ):
+                Text(""),
+              )
+            ]),
+          ),
+          Expanded(
+            flex: 7,
+            child: podeEditar? _botaoEditar() : Container(),
+          ),
+          Expanded(flex: 12,child: Container())
+        ],
+      );
+    }else{
+      return Container();
+    }
   }
 }

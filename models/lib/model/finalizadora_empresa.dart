@@ -48,6 +48,8 @@ class FinalizadoraEmpresa {
 
   BigDecimal? valorMinimoParcela = BigDecimal.ZERO();
 
+  IdentificacaoCarteiraDigital? identificacaoCarteiraDigital;
+
   FinalizadoraEmpresa();
 
   @override

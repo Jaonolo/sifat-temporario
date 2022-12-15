@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/generic/widgets/mostra_quantidade.dart';
@@ -6,6 +7,7 @@ import 'package:autoatendimento/app/modules/home/widgets/botao_primario.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -16,9 +18,14 @@ class ProdutoAdicionalComponent {
   final HomeController homeController = Modular.get();
   final VendaController vendaController = Modular.get();
   final ProdutoAdicionalController controller = Modular.get();
+  final AppController appController = Modular.get();
+  bool? isWindows = true;
 
   initialize(BuildContext context) {
     this.context = context;
+    if (defaultTargetPlatform != TargetPlatform.windows){
+      isWindows = false;
+    }
   }
 
   body() {
@@ -61,10 +68,10 @@ class ProdutoAdicionalComponent {
                   child: Container(),
                 ),
                 Expanded(
-                  flex: 76,
+                  flex: isWindows! ? 76 : 68,
                   child: _adicionalConteudo(),
                 ),
-                Expanded(flex: 9, child: _rodapeCard()),
+                Expanded(flex: isWindows!? 9 : 15, child: _rodapeCard()),
                 Expanded(flex: 2, child: SizedBox()),
               ],
             ),
@@ -134,7 +141,7 @@ class ProdutoAdicionalComponent {
               Expanded(flex: 35, child: _imagem()),
               Expanded(
                   flex: 5,
-                  child: (controller.produtoCarrinho.notaItem.produtoEmpresa!
+                  child: (appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!
                               .produto!.detalhes !=
                           null)
                       ? _detalhes()
@@ -152,11 +159,11 @@ class ProdutoAdicionalComponent {
   Widget _imagem() {
     return SizedBox(
       height: FontUtils.h1(context),
-      child: (controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!
+      child: (appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!
           .arquivoPrincipal() !=
           null)
           ? Image.network(
-        controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!
+        appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!
             .arquivoPrincipal()!
             .link!,
         fit: BoxFit.fill,
@@ -172,7 +179,7 @@ class ProdutoAdicionalComponent {
   Widget _detalhes() {
     return Wrap(children: [
       Text(
-          controller.produtoCarrinho.notaItem.produtoEmpresa!.produto!.detalhes!
+          appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.detalhes!
               .toUpperCase(),
           style: TextStyle(fontSize: FontUtils.h4(context)))
     ]);
@@ -183,7 +190,7 @@ class ProdutoAdicionalComponent {
         physics: NeverScrollableScrollPhysics(),
         controller: controller.pageController,
         itemCount: controller
-            .produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus.length,
+            .appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus.length,
         itemBuilder: (BuildContext context, int index) {
           controller.atualizaMenus(index);
 
@@ -252,7 +259,7 @@ class ProdutoAdicionalComponent {
               ? "ADICIONAR"
               : 'ADICIONAR AO CARRINHO',
           function: () => controller.adicionarAoCarrinho(),
-          altura: FontUtils.h2(context) * 1.01,
+          altura: isWindows!? FontUtils.h2(context) * 1.01 : FontUtils.h2(context) * 5.01,
           largura: FontUtils.h2(context) * 10,
         );
       }
@@ -268,7 +275,7 @@ class ProdutoAdicionalComponent {
             child: Text(
               'SUBTOTAL R\$ ${controller.produtoCarrinho.notaItem.precoTotal!.somar(NotaItemUtils.calcularAdicionais(controller.produtoCarrinho.notaItem)).toStringAsFixed(2)}',
               style: TextStyle(
-                fontSize: FontUtils.h3(context),
+                 fontSize: isWindows!? FontUtils.h3(context) :FontUtils.h2(context),
               ),
             ),
           ),

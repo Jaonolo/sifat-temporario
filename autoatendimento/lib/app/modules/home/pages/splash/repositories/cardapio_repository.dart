@@ -7,8 +7,8 @@ import 'package:requester/requester/produto_menu_requester.dart';
 import 'package:requester/response/response_pws.dart';
 
 class CardapioRepository {
-  static Future<CardapioDTO> obterCardapioTipoItens(PWSConfig config,
-      String token, String idCardapio) async {
+  static Future<CardapioDTO> obterCardapioTipoItens(
+      PWSConfig config, String token, String idCardapio) async {
     return await CardapioRequester.buscar(config, token, idCardapio)
         .then((response) async {
       if (response.isSuccess) {
@@ -18,7 +18,7 @@ class CardapioRepository {
 
         List<ProdutoEmpresa> listProduto = [];
         ResponsePws pws =
-        await ProdutoEmpresaRequester.buscarPaginado(config, token);
+            await ProdutoEmpresaRequester.buscarPaginado(config, token);
         if (pws.isSuccess) {
           listProduto = pws.content;
         } else {
@@ -53,10 +53,10 @@ class CardapioRepository {
     //-------------------- Cria os Maps --------------------
 
     Map<num, ProdutoMenu> mapMenus =
-    Map.fromIterable(listMenu, key: (pm) => pm.id, value: (pm) => pm);
+        Map.fromIterable(listMenu, key: (pm) => pm.id, value: (pm) => pm);
 
     Map<num, ProdutoEmpresa> mapProdutos =
-    Map.fromIterable(listProduto, key: (p) => p.id, value: (p) => p);
+        Map.fromIterable(listProduto, key: (p) => p.id, value: (p) => p);
 
     //-------------------- Alimenta os objetos ProdutoMenu --------------------
 
@@ -105,7 +105,7 @@ class CardapioRepository {
       List<ProdutoMenu> menus = [];
       var produtoEmpresa = mapProdutos[k];
       produtoEmpresa!.produto!.menus.forEach((m) {
-        menus.add(mapMenus[m.id!]!);
+        if (mapMenus[m.id!] != null) menus.add(mapMenus[m.id!]!);
       });
 
       produtoEmpresa.produto!.menus = menus;
@@ -116,10 +116,13 @@ class CardapioRepository {
         c.componenteEmpresas.forEach((ce) {
           if (ce.gradeEmpresa != null) {
             List<ProdutoMenu> menus = [];
-            ce.gradeEmpresa!.produtoEmpresa!.produto!.menus.forEach((menu) {
-              menus.add(mapMenus[menu.id!]!);
-            });
-            ce.gradeEmpresa!.produtoEmpresa!.produto!.menus = menus;
+            if (ce.gradeEmpresa!.produtoEmpresa != null &&
+                ce.gradeEmpresa!.produtoEmpresa!.produto != null) {
+              ce.gradeEmpresa!.produtoEmpresa!.produto!.menus.forEach((menu) {
+                if (mapMenus[menu.id!] != null) menus.add(mapMenus[menu.id!]!);
+              });
+              ce.gradeEmpresa!.produtoEmpresa!.produto!.menus = menus;
+            }
           }
         });
       });
@@ -128,12 +131,13 @@ class CardapioRepository {
     //-------------------- Alimenta os dados dentro do menu do cardápio --------------------
 
     listCardapio.forEach((cardapioMenu) {
-      if (cardapioMenu.tipo == "ITENS" &&
-          cardapioMenu.itens.isNotEmpty) {
+      if (cardapioMenu.tipo == "ITENS" && cardapioMenu.itens.isNotEmpty) {
         List<ProdutoEmpresa> listProdutoEmpresa = [];
         cardapioMenu.itens.forEach((element) {
-          ProdutoEmpresa produtoEmpresa = (mapProdutos[element.id!]!);
-          listProdutoEmpresa.add(produtoEmpresa);
+          if (mapProdutos[element.id!] != null) {
+            ProdutoEmpresa produtoEmpresa = (mapProdutos[element.id!]!);
+            listProdutoEmpresa.add(produtoEmpresa);
+          }
         });
         cardapioMenu.itens = listProdutoEmpresa;
       }
@@ -142,6 +146,7 @@ class CardapioRepository {
     CardapioDTO dto = CardapioDTO();
     dto.listCardapioMenu = listCardapio;
     dto.mapProdutos = mapProdutos;
+    dto.mapMenu = mapMenus;
     return dto;
   }
 

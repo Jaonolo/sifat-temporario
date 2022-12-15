@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/composto/produto_composto_component.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/composto/produto_composto_controller.dart';
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
@@ -11,6 +12,7 @@ import 'package:utils/utils/nota_item_utils.dart';
 class ProdutoCompostoPage extends StatefulWidget {
   ProdutoCarrinho produtoCarrinho;
   ProdutoCompostoController controller = Modular.get();
+  AppController appController = Modular.get();
 
   ProdutoCompostoPage(this.produtoCarrinho) {
     atualizaController();
@@ -28,12 +30,14 @@ class ProdutoCompostoPage extends StatefulWidget {
           produtoCarrinhoClone.notaItem,
           controller.produtoCarrinhoOriginal.notaItem.quantidade!,
           BigDecimal.ONE());
-      NotaItemUtils.atualizaTotais(produtoCarrinhoClone.notaItem);
+      NotaItemUtils.atualizaTotais(produtoCarrinhoClone.notaItem, (idProdutoEmpresa) {
+        return appController.mapProdutos[idProdutoEmpresa];
+      });
     }
 
     controller.produtoCarrinho = produtoCarrinhoClone;
     controller.proximoMenu =
-        produtoCarrinho.notaItem.produtoEmpresa!.produto!.menus[0];
+    appController.mapProdutos[produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.menus[0];
     controller.index = 0;
   }
 

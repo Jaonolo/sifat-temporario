@@ -54,7 +54,8 @@ class CardProdutoSelecaoUnica extends StatelessWidget {
   }
 
   Widget _imagem() {
-    String url_imagem = notaItem.produtoEmpresa!.produto!.imagemPrincipal;
+    String url_imagem = appController
+        .mapProdutos[notaItem.idProdutoEmpresa]!.produto!.imagemPrincipal;
     if (url_imagem.isNotEmpty) {
       return Center(
         child: Image.network(
@@ -92,8 +93,10 @@ class CardProdutoSelecaoUnica extends StatelessWidget {
           produtoMenuComponente.componenteEmpresas.firstWhere(
               (ce) =>
                   ce.idEmpresa ==
-                  controllerAbstract
-                      .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa,
+                  appController
+                      .mapProdutos[controllerAbstract
+                          .produtoCarrinho.notaItem.idProdutoEmpresa]!
+                      .idEmpresa,
               orElse: () =>
                   throw Exception("CompomeenteEmpresa não encontrado"));
 
@@ -114,7 +117,7 @@ class CardProdutoSelecaoUnica extends StatelessWidget {
       }
     }
 
-    if(valorAdicional.compareTo(BigDecimal.ZERO()) == 0)
+    if (valorAdicional.compareTo(BigDecimal.ZERO()) == 0)
       return const SizedBox();
 
     return Text(
@@ -140,11 +143,14 @@ class CardProdutoSelecaoUnica extends StatelessWidget {
         menu.subitens.add(notaItem);
 
         //Se tiver alguns observação ou adicionais abre a tela nova
-        bool temMenuObservacao = notaItem.produtoEmpresa!.produto!.menus
+        bool temMenuObservacao = appController
+            .mapProdutos[notaItem.idProdutoEmpresa]!.produto!.menus
             .any((element) => element.tipo == "OBSERVACAO");
 
         if (controllerAbstract.produtoCarrinho.notaItem.tipo == "COMBO" &&
-            (notaItem.produtoEmpresa!.produto!.pacote == "ADICIONAIS" ||
+            (appController.mapProdutos[notaItem.idProdutoEmpresa]!.produto!
+                        .pacote ==
+                    "ADICIONAIS" ||
                 temMenuObservacao)) {
           homeController
               .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(notaItem)));
@@ -157,7 +163,9 @@ class CardProdutoSelecaoUnica extends StatelessWidget {
         NotaItem? itemJaLancado = NotaItemUtils.localizaSubitemJaLancado(
             controllerAbstract.produtoCarrinho.notaItem,
             controllerAbstract.produtoMenu!,
-            produtoMenuComponente);
+            produtoMenuComponente, (idProdutoEmpresa) {
+          return appController.mapProdutos[idProdutoEmpresa];
+        });
 
         if (itemJaLancado != null) menu.subitens.remove(itemJaLancado);
 
@@ -170,11 +178,14 @@ class CardProdutoSelecaoUnica extends StatelessWidget {
         removendo = true;
       }
 
-      NotaItemUtils.atualizaTotais(controllerAbstract.produtoCarrinho.notaItem);
+      NotaItemUtils.atualizaTotais(controllerAbstract.produtoCarrinho.notaItem,
+          (idProdutoEmpresa) {
+        return appController.mapProdutos[idProdutoEmpresa];
+      });
       controllerAbstract
           .changeProdutoCarrinho(controllerAbstract.produtoCarrinho);
 
-      if(!removendo) {
+      if (!removendo) {
         controllerAbstract.proximo();
       }
     } catch (e, s) {

@@ -1,3 +1,4 @@
+import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/composto/produto_composto_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/generic/widgets/mostra_quantidade.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/generic/widgets/produto_compomente/list_view_compomentes.dart';
@@ -5,6 +6,7 @@ import 'package:autoatendimento/app/modules/home/widgets/botao_primario.dart';
 import 'package:autoatendimento/app/modules/home/widgets/botao_seta_voltar.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -15,6 +17,7 @@ import 'package:utils/utils/string_utils.dart';
 class ProdutoCompostoComponent {
   late BuildContext context;
   final ProdutoCompostoController controller = Modular.get();
+  AppController appController= Modular.get();
 
   initialize(BuildContext context) {
     this.context = context;
@@ -125,7 +128,7 @@ class ProdutoCompostoComponent {
       child: PageView.builder(
           physics: NeverScrollableScrollPhysics(),
           controller: controller.pageController,
-          itemCount: (controller.produtoCarrinho.notaItem.produtoEmpresa!
+          itemCount: (appController.mapProdutos[controller.produtoCarrinho.notaItem.idProdutoEmpresa]!
                   .produto!.menus.length +
               1),
           itemBuilder: (BuildContext context, int index) {
@@ -159,7 +162,7 @@ class ProdutoCompostoComponent {
                       ? "Revisão"
                       : controller.proximoMenu!.descricao!.toUpperCase(),
                   function: () => controller.proximo(),
-                  altura: FontUtils.h2(context) * 1.01,
+                  altura: defaultTargetPlatform == TargetPlatform.windows ? FontUtils.h2(context) * 1.01 : FontUtils.h2(context) * 5.01 ,
                   largura: FontUtils.h2(context) * 20,
                   borderRadius: 10.0,
                 ),
@@ -233,7 +236,7 @@ class ProdutoCompostoComponent {
             function: () {
               controller.adicionarAoCarrinho();
             },
-            altura: FontUtils.h2(context) * 1.01,
+            altura:  defaultTargetPlatform == TargetPlatform.windows ? FontUtils.h2(context) * 1.01 : FontUtils.h2(context) * 5.01 ,
             largura: FontUtils.h2(context) * 10,
           ),
         ),

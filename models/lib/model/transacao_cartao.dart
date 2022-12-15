@@ -34,6 +34,8 @@ class TransacaoCartao {
 
   String? orderId;
 
+  String? documentoCarteiraDigital;
+
   TransacaoCartao();
 
   @override
