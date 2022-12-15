@@ -20,8 +20,7 @@ class ListViewCompomentes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      if(controllerAbstract.produtoMenu == null)
-        return SizedBox();
+      if (controllerAbstract.produtoMenu == null) return SizedBox();
 
       return ListView.builder(
           shrinkWrap: true,
@@ -82,25 +81,33 @@ class ListViewCompomentes extends StatelessWidget {
         notaItem = NotaItemUtils.localizaSubitemJaLancado(
             controllerAbstract.produtoCarrinho.notaItem,
             controllerAbstract.produtoMenu!,
-            controllerAbstract.produtoMenu!.componentes[index]);
+            controllerAbstract.produtoMenu!.componentes[index],
+            (idProdutoEmpresa) {
+          return appController.mapProdutos[idProdutoEmpresa];
+        });
 
         if (notaItem == null)
-          switch (controllerAbstract
-              .produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote) {
+          switch (appController
+              .mapProdutos[
+                  controllerAbstract.produtoCarrinho.notaItem.idProdutoEmpresa]!
+              .produto!
+              .pacote) {
             case TipoPacote.ADICIONAIS:
             case TipoPacote.COMBO:
             case TipoPacote.COMPOSTO:
               notaItem = NotaItemUtils.adicionalToNotaItem(
                   controllerAbstract.produtoCarrinho.notaItem.idNota!,
                   controllerAbstract.produtoMenu!.componentes[index],
-                  controllerAbstract
-                      .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+                  appController
+                      .mapProdutos[controllerAbstract
+                          .produtoCarrinho.notaItem.idProdutoEmpresa]!
+                      .idEmpresa!,
                   appController.tabelaPreco.id!,
                   quantidade: BigDecimal.ZERO());
               break;
             default:
               throw Exception(
-                  "TipoPacote: ${controllerAbstract.produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote} não implementado");
+                  "TipoPacote: ${appController.mapProdutos[controllerAbstract.produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.pacote} não implementado");
           }
         break;
 
@@ -109,17 +116,20 @@ class ListViewCompomentes extends StatelessWidget {
         notaItem = NotaItemUtils.localizaSubitemJaLancado(
             controllerAbstract.produtoCarrinho.notaItem,
             controllerAbstract.produtoMenu!,
-            controllerAbstract.produtoMenu!.componentes[index]);
+            controllerAbstract.produtoMenu!.componentes[index],
+            (idProdutoEmpresa) {
+          return appController.mapProdutos[idProdutoEmpresa];
+        });
 
         if (notaItem == null) {
-          switch (controllerAbstract
-              .produtoCarrinho.notaItem.produtoEmpresa!.produto!.pacote) {
+          switch (appController.mapProdutos[controllerAbstract
+              .produtoCarrinho.notaItem.idProdutoEmpresa]!.produto!.pacote) {
             case TipoPacote.COMBO:
               notaItem = NotaItemUtils.itemComboToNotaItem(
                   controllerAbstract.produtoCarrinho.notaItem.idNota!,
                   controllerAbstract.produtoMenu!.componentes[index],
-                  controllerAbstract
-                      .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+                  appController.mapProdutos[controllerAbstract
+                      .produtoCarrinho.notaItem.idProdutoEmpresa]!.idEmpresa!,
                   appController.tabelaPreco.id!,
                   quantidade: BigDecimal.ZERO());
               break;
@@ -127,8 +137,8 @@ class ListViewCompomentes extends StatelessWidget {
               notaItem = NotaItemUtils.itemCompostoToNotaItem(
                   controllerAbstract.produtoCarrinho.notaItem.idNota!,
                   controllerAbstract.produtoMenu!.componentes[index],
-                  controllerAbstract
-                      .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+                  appController.mapProdutos[controllerAbstract
+                      .produtoCarrinho.notaItem.idProdutoEmpresa]!.idEmpresa!,
                   appController.tabelaPreco.id!,
                   quantidade: BigDecimal.ZERO());
               break;

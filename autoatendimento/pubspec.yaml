@@ -39,7 +39,8 @@ dependencies:
   mask_shifter_v2: ^0.0.1
   cpf_cnpj_validator: ^2.0.0
   flutter_svg: ^1.1.4
-
+  shared_preferences: ^2.0.15
+  qr_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:

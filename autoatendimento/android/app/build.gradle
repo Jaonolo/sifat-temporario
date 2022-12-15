@@ -27,36 +27,171 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     compileSdkVersion flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-    }
-
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.autoatendimento"
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        applicationId "br.com.sifat.autoatendimento"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
+        minSdkVersion 22
+        targetSdkVersion 32
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
-    buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+    signingConfigs {
+        sifat {
+            keyPassword 'developer@2000'
+            storeFile file('../key/SifatSistemas.keystore')
+            storePassword 'developer@2000'
+            keyAlias 'sifatsistemas'
+        }
+
+        gertecEnhanced {
+            keyPassword 'Development@GertecDeveloper2018'
+            storeFile file('../key/Development_GertecDeveloper_EnhancedAPP.jks')
+            storePassword 'Development@GertecDeveloper2018'
+            keyAlias 'developmentgertecdeveloper_enhancedapp'
+        }
+
+        gertecCustomer {
+            keyPassword 'Development@GertecDeveloper2018'
+            storeFile file('../key/Development_GertecDeveloper_CustomerAPP.jks')
+            storePassword 'Development@GertecDeveloper2018'
+            keyAlias 'developmentgertecdeveloper_customerapp'
         }
     }
+
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig null
+        }
+
+        debug {
+            signingConfig null
+        }
+    }
+
+    flavorDimensions "equipamento", "firmware"
+    productFlavors {
+
+        /************* Dimension equipamento *************/
+        standardSimulado {
+            dimension "equipamento"
+            signingConfig signingConfigs.sifat
+        }
+        standardProducao {
+            dimension "equipamento"
+            signingConfig signingConfigs.sifat
+        }
+
+        newlandSimulado {
+            dimension "equipamento"
+            signingConfig signingConfigs.sifat
+        }
+        newlandProducao {
+            dimension "equipamento"
+            signingConfig signingConfigs.sifat
+        }
+
+        elginPaySimulado {
+            dimension "equipamento"
+            signingConfig signingConfigs.sifat
+        }
+        elginPayProducao {
+            dimension "equipamento"
+            signingConfig signingConfigs.sifat
+        }
+
+        gertecGposSimulado {
+            dimension "equipamento"
+            signingConfig signingConfigs.gertecEnhanced
+        }
+        gertecGposProducao {
+            dimension "equipamento"
+            signingConfig signingConfigs.gertecEnhanced
+        }
+
+        ingenicoA8Simulado {
+            dimension "equipamento"
+            signingConfig signingConfigs.sifat
+        }
+        ingenicoA8Producao {
+            dimension "equipamento"
+            signingConfig signingConfigs.sifat
+        }
+        /***********************************************/
+
+        /************* Dimension firmware *************/
+        /** Sufixos conforme firmware gertec
+         * 102.1 - Sufixo: A
+         * 147.1 - Sufixo: B
+         * 181.12 - Sufixo: C
+         * 181.13 - Sufixo: D
+         * 181B.12 - Sufixo: E
+         * 181B.34 - Sufixo: F
+         * 197.2 - Sufixo: G
+         */
+        _all {
+            //opção utilizada para as dimensions standardSimulado, standardProducao, ingenicoA8Simulado, ingenicoA8Producao, newlandSimulado, newlandProducao
+            dimension "firmware"
+        }
+        _147_1 {
+            //opção utilizada para as dimensions gertecGposSimulado e gertecGposProducao para o firmware 147.1
+            dimension "firmware"
+            applicationIdSuffix ".B"
+        }
+        _181_12 {
+            //opção utilizada para as dimensions gertecGposSimulado e gertecGposProducao para o firmware 181.12
+            dimension "firmware"
+//            applicationIdSuffix ".C"
+        }
+        _181B_2 {
+            //opção utilizada para as dimensions gertecGposSimulado e gertecGposProducao para o firmware 181B.12
+            dimension "firmware"
+            //applicationIdSuffix ".E"
+        }
+        /**********************************************/
+
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            if (variant.buildType.name == "release") {
+                output.outputFileName = "app-${variant.baseName}.apk"
+            }
+        }
+    }
+
+    // A opção abaixo é importante para manter o binário da clisitef íntegro,
+    // já que ele é assinado. A ausência dessa opção pode causar erro de
+    // assinatura ao iniciar a transação na CliSiTef.
+    packagingOptions { doNotStrip "**/libclisitef.so" }
+
+
+    /**
+     * Necessário para funcionamento da impressão no N910, por conta da pasta com os .so que
+     * fica em libs/armeabi-v7a, uso EXCLUSIVO para o newland N910
+     */
+    sourceSets {
+        newlandSimulado {
+            jniLibs.srcDirs = ['../poslibs/libs/newland/se-simulado']
+        }
+        newlandProducao {
+            jniLibs.srcDirs = ['../poslibs/libs/newland/se-producao']
+        }
+    }
+
 }
 
 flutter {
@@ -64,5 +199,102 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation project(":poslibs")
+
+    //todo verificar se o newLand ira funcionar com o versao 3.4, caso funcionar apagar essa versao
+    //Dependência da interface automação newland:
+    //implementation "org.apache.commons:commons-lang3:3.9"
+
+    //ElginPay/NewLand Dependency
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+
+    //erro ao executar com a nova bliblioteca do mini pdv https://stackoverflow.com/questions/65321223/unable-to-get-provider-androidx-startup-initializationprovider
+    implementation "androidx.startup:startup-runtime:1.0.0"
+
+    //Nescessaria por conta da impressao do qrCode do miniPDV
+    implementation 'com.google.zxing:core:3.4.0'
+
+    // https://mvnrepository.com/artifact/org.java-websocket/Java-WebSocket
+    implementation 'org.java-websocket:Java-WebSocket:1.5.1'
+
+    /** Libs específicas dos flavors relacionados à gertec **/
+    gertecGposSimuladoImplementation fileTree(dir: '../poslibs/libs/gertec/gpos/se-simulado', include: 'clisitef-android.jar')
+    gertecGposProducaoImplementation fileTree(dir: '../poslibs/libs/gertec/gpos/se-producao', include: 'clisitef-android.jar')
+
+    _147_1Implementation fileTree(dir: '../poslibs/libs/gertec/gpos/147.1', include: 'ppcomp-1.15.0.181029.aar')
+
+    _181_12Implementation fileTree(dir: '../poslibs/libs/gertec/gpos/181.12', include: 'ppcomp_release-1.29.8.200623.aar')
+    _181_12Implementation fileTree(dir: '../poslibs/libs/gertec/gpos', include: 'gedi-release-1.14.13.190715.aar')
+
+    _181B_2Implementation fileTree(dir: '../poslibs/libs/gertec/gpos/181B.12', include: 'ppcomp-release-1.29.6.200422.aar')
+    _181B_2Implementation fileTree(dir: '../poslibs/libs/gertec/gpos', include: 'gedi-release-1.14.13.190715.aar')
+    /***************************************************************************************************************************/
+
+    /** Bibliotecas especificas dos flavors ingenicoA8Simulado e ingenicoA8Producao ************************************************************/
+    ingenicoA8SimuladoImplementation fileTree(dir: '../poslibs/libs/ingenico-a8/se-simulado', include: 'clisitef-android.jar')
+    ingenicoA8ProducaoImplementation fileTree(dir: '../poslibs/libs/ingenico-a8/se-producao', include: 'clisitef-android.jar')
+
+    /** Compatibilidade com classes Gertec (Não pode estar no implementation por duplicidade) **/
+    ingenicoA8SimuladoImplementation fileTree(dir: '../poslibs/libs/gertec/gpos', include: 'gedi-release-1.14.13.190715.aar')
+    ingenicoA8ProducaoImplementation fileTree(dir: '../poslibs/libs/gertec/gpos', include: 'gedi-release-1.14.13.190715.aar')
+    /*******************************************************************************************************************************************/
+
+
+    /** Bibliotecas especificas dos flavors new-landSimulado e new-landProducao ************************************************************/
+    newlandSimuladoImplementation fileTree(dir: '../poslibs/libs/standard/se-simulado', include: 'clisitef-android.jar')
+    newlandSimuladoImplementation fileTree(dir: '../poslibs/libs/newland/se-simulado', include: 'meSdk-3.7.95-RELEASE.jar')
+    newlandSimuladoImplementation fileTree(dir: '../poslibs/libs/newland/se-simulado', include: ['*.aar'])
+
+
+    newlandProducaoImplementation fileTree(dir: '../poslibs/libs/standard/se-producao', include: 'clisitef-android.jar')
+    newlandProducaoImplementation fileTree(dir: '../poslibs/libs/newland/se-producao', include: 'meSdk-3.7.95-RELEASE.jar')
+    newlandProducaoImplementation fileTree(dir: '../poslibs/libs/newland/se-producao', include: ['*.aar'])
+
+    /** Compatibilidade com classes Gertec (Não pode estar no implementation por duplicidade) **/
+    newlandSimuladoImplementation fileTree(dir: '../poslibs/libs/gertec/gpos', include: 'gedi-release-1.14.13.190715.aar')
+    newlandProducaoImplementation fileTree(dir: '../poslibs/libs/gertec/gpos', include: 'gedi-release-1.14.13.190715.aar')
+    /*******************************************************************************************************************************************/
+
+
+    /** Bibliotecas especificas dos flavors elginPaySimulado  e elginPayProducao ***************************************************************/
+    elginPaySimuladoImplementation fileTree(dir: '../poslibs/libs/standard/se-simulado', include: 'clisitef-android.jar')
+    elginPayProducaoImplementation fileTree(dir: '../poslibs/libs/standard/se-producao', include: 'clisitef-android.jar')
+
+    /** Compatibilidade com classes Gertec (Não pode estar no implementation por duplicidade) **/
+    elginPaySimuladoImplementation fileTree(dir: '../poslibs/libs/gertec/gpos', include: 'gedi-release-1.14.13.190715.aar')
+    elginPayProducaoImplementation fileTree(dir: '../poslibs/libs/gertec/gpos', include: 'gedi-release-1.14.13.190715.aar')
+    /*******************************************************************************************************************************************/
+
+
+    /** Bibliotecas especificas dos flavors standardSimulado, standardProducao ***************************************************************/
+    standardSimuladoImplementation fileTree(dir: '../poslibs/libs/standard/se-simulado', include: 'clisitef-android.jar')
+    standardProducaoImplementation fileTree(dir: '../poslibs/libs/standard/se-producao', include: 'clisitef-android.jar')
+
+    /** Compatibilidade com classes Gertec (Não pode estar no implementation por duplicidade) **/
+    standardSimuladoImplementation fileTree(dir: '../poslibs/libs/gertec/gpos', include: 'gedi-release-1.14.13.190715.aar')
+    standardProducaoImplementation fileTree(dir: '../poslibs/libs/gertec/gpos', include: 'gedi-release-1.14.13.190715.aar')
+    /*******************************************************************************************************************************************/
+
+    /** Bibliotecas que deverão sempre serem compiladas independente do flavor *****************************************************************/
+    /** Default **/
+    implementation fileTree(dir: '../poslibs/libs/default', include: '*.jar')
+
+    /** Utilizado na impressão do newLand **/
+    implementation fileTree(dir: '../poslibs/libs/default', include: 'printer-v1.2.1.aar')
+    /** Gertec **/
+    implementation fileTree(dir: '../poslibs/libs/gertec', include: 'libescpos-release.aar')
+    /** Rede **/
+    implementation fileTree(dir: '../poslibs/libs/redeflex', include: 'sdk-3.0-release.aar')
+    /** Ingenico **/
+    implementation fileTree(dir: '../poslibs/libs/ingenico-a8', include: 'bcapos-3.10.aar')
+    /** Elgin **/
+    implementation fileTree(dir: '../poslibs/libs/elgin', include: 'e1-v2.0.4-release.aar')
+    implementation fileTree(dir: '../poslibs/libs/elgin/mini-pdv', include: 'minipdvm8.aar')
+    implementation fileTree(dir: '../poslibs/libs/elgin/gpos', include: 'cloudpossdk-s-1.0.2.aar')
+    /*******************************************************************************************************************************************/
+
 }
