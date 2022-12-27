@@ -110,7 +110,7 @@ class SitefPOS {
     return _sucesso!;
   }
 
-  static Future<bool> finalizar(Map<String, String> dados,
+  static Future<bool> finalizar(Map<String, String?>? dados,
       {bool confirmar = true}) async {
     return await _platform
         .invokeMethod('finalizar', {"dados": dados, "confirmar": confirmar});
