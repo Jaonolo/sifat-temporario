@@ -98,6 +98,7 @@ class SitefPOS {
           .invokeMethod('transacionar', {"dados": _dadosTransacao});
 
       if (success) {
+        appController.transacoes = [];
         _sucesso = true;
         appController.transacoes.add(_dadosTransacao);
         controller.finalizaVendaAndroid(_context!);
