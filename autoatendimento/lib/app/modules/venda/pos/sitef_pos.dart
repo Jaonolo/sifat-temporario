@@ -98,6 +98,7 @@ class SitefPOS {
           .invokeMethod('transacionar', {"dados": _dadosTransacao});
 
       if (success) {
+        appController.transacoes = [];
         _sucesso = true;
         appController.transacoes.add(_dadosTransacao);
         controller.finalizaVendaAndroid(_context!);
@@ -110,7 +111,7 @@ class SitefPOS {
     return _sucesso!;
   }
 
-  static Future<bool> finalizar(Map<String, String> dados,
+  static Future<bool> finalizar(Map<String, String?>? dados,
       {bool confirmar = true}) async {
     return await _platform
         .invokeMethod('finalizar', {"dados": dados, "confirmar": confirmar});
