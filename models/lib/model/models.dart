@@ -40,7 +40,21 @@ part 'enum/tipo_pacote.dart';
 
 part 'enum/servico.dart';
 
+part 'model_erp/enum/modulo_contrato_indicador_enum.dart';
+
+part 'model_erp/enum/tipo_item_contrato_waychef_enum.dart';
+
 //#################### OBJECT  ########################
+
+part 'model_erp/item_configurcao_waychef.dart';
+
+part 'model_erp/item_configuracao_wayche_dto.dart';
+
+part 'model_erp/item_configuracao_integrador_waychef.dart';
+
+part 'model_erp/integrador_pode_comercializar_item_dto.dart';
+
+
 part 'big_decimal.dart';
 
 part 'alfa_sync.dart';

@@ -1,3 +1,4 @@
+import 'package:erp/config/application.dart';
 import 'package:erp/pages/plataforma/empresas/plataforma_empresa_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,11 +17,11 @@ import '../../routes/app_pages.dart';
 
 class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
 //   PlataformaPage({Key? key}) : super(key: key);
-
+// String token;
 // {
 //
 // class PlataformaEmpresaPage extends StatelessWidget {
-  const PlataformaEmpresaPage({Key? key}) : super(key: key);
+   PlataformaEmpresaPage( {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,24 +60,33 @@ class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
               spacing: 51,
               runSpacing: 25,
               children: <Widget>[
-                SelecaoDeImagem(nome: 'Plano',
-                  acao: () {
-                    Get.offAndToNamed(Routes.PLATAFORMA_EMPRESA_PLANO);
-                  },
+                Expanded(
+                  flex: 4,
+                  child: SelecaoDeImagem(nome: 'Plano',
+                    acao: () {
+                      // Get.offAndToNamed(Routes.PLATAFORMA_EMPRESA_PLANO);
+                    },
+                  ),
                 ),
-                SelecaoDeImagem(
-                  nome: 'Extras',
-                  acao: () {
-                    Get.offAndToNamed(Routes.PLATAFORMA_EMPRESA_EXTRA);
-                  },
-                  imagem: Image.asset('assets/images/extras.png'),
+                Expanded(
+                  flex: 4,
+                  child: SelecaoDeImagem(
+                    nome: 'Extras',
+                    acao: () {
+                      // Get.offAndToNamed(Routes.PLATAFORMA_EMPRESA_EXTRA);
+                    },
+                    imagem: Image.asset('assets/images/extras.png'),
+                  ),
                 ),
-                SelecaoDeImagem(
-                  nome: 'Comissão',
-                  acao: () {
-                    Get.offAndToNamed(Routes.PLATAFORMA_EMPRESA_COMISSAO);
-                  },
-                  imagem: Image.asset('assets/images/comissao.png'),
+                Expanded(
+                  flex: 4,
+                  child: SelecaoDeImagem(
+                    nome: 'Comissão',
+                    acao: () {
+                      // Get.offAndToNamed(Routes.PLATAFORMA_EMPRESA_COMISSAO);
+                    },
+                    imagem: Image.asset('assets/images/comissao.png'),
+                  ),
                 ),
               ],
             ),
@@ -110,4 +120,6 @@ class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
       },
     );
   }
+
+
 }

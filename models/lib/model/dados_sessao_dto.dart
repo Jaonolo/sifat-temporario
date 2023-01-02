@@ -9,7 +9,7 @@ class DadosSessaoDTO {
 
   Servico? servico;
 
-  Clients? client;
+  Clients? tipoClient;
 
   DateTime? dataAbertura;
 
@@ -23,7 +23,7 @@ class DadosSessaoDTO {
 
   @override
   String toString() {
-    return 'DadosSessaoDTO{nomeUsuario: $nomeUsuario, nomeEstacao: $nomeEstacao, client: $client, dataAbertura: $dataAbertura, dataUltimaAtualizacao: $dataUltimaAtualizacao, token: $token}';
+    return 'DadosSessaoDTO{nomeUsuario: $nomeUsuario, nomeEstacao: $nomeEstacao, client: $tipoClient, dataAbertura: $dataAbertura, dataUltimaAtualizacao: $dataUltimaAtualizacao, token: $token}';
   }
 
   factory DadosSessaoDTO.fromJson(Map<String, dynamic> json) =>

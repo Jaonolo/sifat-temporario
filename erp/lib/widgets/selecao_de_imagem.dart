@@ -29,18 +29,7 @@ class SelecaoDeImagem extends StatelessWidget {
 
             children: [
               Image.asset("assets/images/plano.png",),
-          //     ConstrainedBox(
-          //       constraints: const BoxConstraints(
-          //         maxWidth: 386,
-          //         maxHeight: 365,
-          //       // color: Color(0xFF),
-          // ),
-          //       child:
-          //       (imagem != null)
-          //           ? imagem
-          //           : Image.asset("assets/images/plano.png"),
-          //
-          //     ),
+
               SizedBox(height: 30,),
               Row(
                 mainAxisSize: MainAxisSize.min,

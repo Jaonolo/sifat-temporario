@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
 class CheckBoxMobile extends StatefulWidget {
-  const CheckBoxMobile({super.key});
+  bool? isChecked = false;
+   CheckBoxMobile(
+      {super.key, this.isChecked = false   }
+      );
 
   @override
   State<CheckBoxMobile> createState() => _CheckBoxMobileState();
 }
 
 class _CheckBoxMobileState extends State<CheckBoxMobile> {
-  bool isChecked = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +40,10 @@ class _CheckBoxMobileState extends State<CheckBoxMobile> {
           borderRadius: BorderRadius.circular(6,),
 
         ),
-        value: isChecked,
+        value: widget.isChecked,
         onChanged: (bool? value) {
           setState(() {
-            isChecked = value!;
+            widget.isChecked = value!;
           });
         },
       ),

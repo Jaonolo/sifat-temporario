@@ -6,10 +6,10 @@ import 'package:requester/response/response_pws.dart';
 import 'package:requester/url_pws/url_pws.dart';
 
 class AutoatendimentoRequester {
-  static Future<ResponsePws> startSitef(PWSConfig config,
-      ServicoSitef servicoSitef,
+  static Future<ResponsePws> startSitef(PWSConfig config, ServicoSitef servicoSitef,
       String caixa,
       String cnpjEstabelecimento) async {
+
     Response response = await RequesterPws(config: config).consome(
       urlPws: UrlPws.postAutoatendimentoStartSitef(),
       headerParams: {},

@@ -6,6 +6,159 @@ part of openapi.api;
 // JsonSerializableGenerator
 // **************************************************************************
 
+ItemConfiguracaoWaychef _$ItemConfiguracaoWaychefFromJson(
+        Map<String, dynamic> json) =>
+    ItemConfiguracaoWaychef()
+      ..id = json['id'] as String?
+      ..nome = json['nome'] as String?
+      ..tipoItem = json['tipoItem'] as String?
+      ..tipoItemContratoWaychef = $enumDecodeNullable(
+          _$TipoitemContratoWaychefEnumEnumMap, json['tipoItemContratoWaychef'])
+      ..integradorPodeComercializarItemDTOLista =
+          (json['integradorPodeComercializarItemDTOLista'] as List<dynamic>?)
+              ?.map((e) => IntegradorPodeComercializarItemDTO.fromJson(
+                  e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$ItemConfiguracaoWaychefToJson(
+        ItemConfiguracaoWaychef instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'nome': instance.nome,
+      'tipoItem': instance.tipoItem,
+      'tipoItemContratoWaychef': _$TipoitemContratoWaychefEnumEnumMap[
+          instance.tipoItemContratoWaychef],
+      'integradorPodeComercializarItemDTOLista':
+          instance.integradorPodeComercializarItemDTOLista,
+    };
+
+const _$TipoitemContratoWaychefEnumEnumMap = {
+  TipoitemContratoWaychefEnum.MODULO_FINANCEIRO: 'MODULO_FINANCEIRO',
+  TipoitemContratoWaychefEnum.CONTROLE_BOLETO_BANCARIO:
+      'CONTROLE_BOLETO_BANCARIO',
+  TipoitemContratoWaychefEnum.CONTROLE_CARTOES: 'CONTROLE_CARTOES',
+  TipoitemContratoWaychefEnum.CONTROLE_DRE_DFC: 'CONTROLE_DRE_DFC',
+  TipoitemContratoWaychefEnum.CONTROLE_VENDAS_PRAZO: 'CONTROLE_VENDAS_PRAZO',
+  TipoitemContratoWaychefEnum.EMISSAO_NFE: 'EMISSAO_NFE',
+  TipoitemContratoWaychefEnum.EMISSAO_NFSE: 'EMISSAO_NFSE',
+  TipoitemContratoWaychefEnum.LANCAMENTO_NFE: 'LANCAMENTO_NFE',
+  TipoitemContratoWaychefEnum.MODULO_ESTOQUE: 'MODULO_ESTOQUE',
+  TipoitemContratoWaychefEnum.CONTROLE_MULTIPLOS_LOCAIS:
+      'CONTROLE_MULTIPLOS_LOCAIS',
+  TipoitemContratoWaychefEnum.CONTROLE_OBSERVACOES: 'CONTROLE_OBSERVACOES',
+  TipoitemContratoWaychefEnum.CONTROLE_PROMOCAO: 'CONTROLE_PROMOCAO',
+  TipoitemContratoWaychefEnum.CONTROLE_PACOTES: 'CONTROLE_PACOTES',
+  TipoitemContratoWaychefEnum.CONTROLE_TABELA_PRECO: 'CONTROLE_TABELA_PRECO',
+  TipoitemContratoWaychefEnum.CONTROLE_GERADOR_ETIQUETA:
+      'CONTROLE_GERADOR_ETIQUETA',
+  TipoitemContratoWaychefEnum.CONTROLE_VARIACOES: 'CONTROLE_VARIACOES',
+  TipoitemContratoWaychefEnum.MODULO_VENDA_AUTOATENDIMENTO:
+      'MODULO_VENDA_AUTOATENDIMENTO',
+  TipoitemContratoWaychefEnum.MODULO_VENDA_BALCAO: 'MODULO_VENDA_BALCAO',
+  TipoitemContratoWaychefEnum.MODULO_VENDA_MESA: 'MODULO_VENDA_MESA',
+  TipoitemContratoWaychefEnum.MODULO_VENDA_FICHA: 'MODULO_VENDA_FICHA',
+  TipoitemContratoWaychefEnum.MODULO_VENDA_DELIVERY: 'MODULO_VENDA_DELIVERY',
+  TipoitemContratoWaychefEnum.MODULO_VENDA_DRIVE_THRU:
+      'MODULO_VENDA_DRIVE_THRU',
+  TipoitemContratoWaychefEnum.MODULO_VENDA_PUB: 'MODULO_VENDA_PUB',
+  TipoitemContratoWaychefEnum.SERVICO_IMPRESSAO: 'SERVICO_IMPRESSAO',
+  TipoitemContratoWaychefEnum.SERVICO_WAYCHEF_DESKTOP:
+      'SERVICO_WAYCHEF_DESKTOP',
+  TipoitemContratoWaychefEnum.SERVICO_WAYCHEF_MOBILE: 'SERVICO_WAYCHEF_MOBILE',
+  TipoitemContratoWaychefEnum.SERVICO_ALFA_SYNC: 'SERVICO_ALFA_SYNC',
+  TipoitemContratoWaychefEnum.MODO_HIBRIDO: 'MODO_HIBRIDO',
+  TipoitemContratoWaychefEnum.AUTO_PESAGEM: 'AUTO_PESAGEM',
+  TipoitemContratoWaychefEnum.AUTO_ATENDIMENTO: 'AUTO_ATENDIMENTO',
+  TipoitemContratoWaychefEnum.WAYWALLET: 'WAYWALLET',
+  TipoitemContratoWaychefEnum.ARQUIVAR_XML_VENDA: 'ARQUIVAR_XML_VENDA',
+  TipoitemContratoWaychefEnum.CONCENTRADOR: 'CONCENTRADOR',
+  TipoitemContratoWaychefEnum.DASHBOARD_WEB: 'DASHBOARD_WEB',
+  TipoitemContratoWaychefEnum.EMISSAO_FISCAL: 'EMISSAO_FISCAL',
+  TipoitemContratoWaychefEnum.SESSAO_EXTRA: 'SESSAO_EXTRA',
+  TipoitemContratoWaychefEnum.IFOOD: 'IFOOD',
+  TipoitemContratoWaychefEnum.QUEST: 'QUEST',
+  TipoitemContratoWaychefEnum.TRACKAPP: 'TRACKAPP',
+  TipoitemContratoWaychefEnum.WAYMENU: 'WAYMENU',
+  TipoitemContratoWaychefEnum.WABIZ: 'WABIZ',
+  TipoitemContratoWaychefEnum.CATRACA: 'CATRACA',
+  TipoitemContratoWaychefEnum.EVEREST: 'EVEREST',
+  TipoitemContratoWaychefEnum.UNICID: 'UNICID',
+  TipoitemContratoWaychefEnum.NAPP: 'NAPP',
+  TipoitemContratoWaychefEnum.GIG: 'GIG',
+  TipoitemContratoWaychefEnum.SUPORTE_PREMIUM_PLANTAO:
+      'SUPORTE_PREMIUM_PLANTAO',
+  TipoitemContratoWaychefEnum.SUPORTE_PREMIUM: 'SUPORTE_PREMIUM',
+  TipoitemContratoWaychefEnum.CIELO_LIO: 'CIELO_LIO',
+  TipoitemContratoWaychefEnum.PAYGO: 'PAYGO',
+  TipoitemContratoWaychefEnum.REDE: 'REDE',
+  TipoitemContratoWaychefEnum.SITEF: 'SITEF',
+  TipoitemContratoWaychefEnum.ELGIN_PAY: 'ELGIN_PAY',
+};
+
+ItemConfiguracaoWaychefDTO _$ItemConfiguracaoWaychefDTOFromJson(
+        Map<String, dynamic> json) =>
+    ItemConfiguracaoWaychefDTO()
+      ..id = json['id'] as String?
+      ..nome = json['nome'] as String?
+      ..tipoItem = json['tipoItem'] as String?
+      ..tipoItemContratoWaychef = json['tipoItemContratoWaychef'] as String?
+      ..integradorPodeComercializarItemDTOLista =
+          (json['integradorPodeComercializarItemDTOLista'] as List<dynamic>?)
+              ?.map((e) => IntegradorPodeComercializarItemDTO.fromJson(
+                  e as Map<String, dynamic>))
+              .toList();
+
+Map<String, dynamic> _$ItemConfiguracaoWaychefDTOToJson(
+        ItemConfiguracaoWaychefDTO instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'nome': instance.nome,
+      'tipoItem': instance.tipoItem,
+      'tipoItemContratoWaychef': instance.tipoItemContratoWaychef,
+      'integradorPodeComercializarItemDTOLista':
+          instance.integradorPodeComercializarItemDTOLista,
+    };
+
+ItemConfiguracaoIntegradorWaychef _$ItemConfiguracaoIntegradorWaychefFromJson(
+        Map<String, dynamic> json) =>
+    ItemConfiguracaoIntegradorWaychef()
+      ..id = json['id'] as String?
+      ..valor = (json['valor'] as num?)?.toDouble()
+      ..podeComercializar = json['podeComercializar'] as bool?
+      ..idEmpresa = json['idEmpresa'] as int?
+      ..detalhes = json['detalhes'] as String?
+      ..idItemConfiguracaoWaychef = json['idItemConfiguracaoWaychef'] as String?
+      ..itemConfiguracaoWaychefDTO = ItemConfiguracaoWaychefDTO.fromJson(
+          json['itemConfiguracaoWaychefDTO'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$ItemConfiguracaoIntegradorWaychefToJson(
+        ItemConfiguracaoIntegradorWaychef instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'valor': instance.valor,
+      'podeComercializar': instance.podeComercializar,
+      'idEmpresa': instance.idEmpresa,
+      'detalhes': instance.detalhes,
+      'idItemConfiguracaoWaychef': instance.idItemConfiguracaoWaychef,
+      'itemConfiguracaoWaychefDTO': instance.itemConfiguracaoWaychefDTO,
+    };
+
+IntegradorPodeComercializarItemDTO _$IntegradorPodeComercializarItemDTOFromJson(
+        Map<String, dynamic> json) =>
+    IntegradorPodeComercializarItemDTO()
+      ..id = json['id'] as String?
+      ..idEmpresa = json['idEmpresa'] as int?
+      ..idItemConfiguracaoWaychef =
+          json['idItemConfiguracaoWaychef'] as String?;
+
+Map<String, dynamic> _$IntegradorPodeComercializarItemDTOToJson(
+        IntegradorPodeComercializarItemDTO instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'idEmpresa': instance.idEmpresa,
+      'idItemConfiguracaoWaychef': instance.idItemConfiguracaoWaychef,
+    };
+
 BigDecimal _$BigDecimalFromJson(Map<String, dynamic> json) => BigDecimal(
       json['valor'] as String,
     );
@@ -3355,7 +3508,7 @@ Map<String, dynamic> _$ProdutoToJson(Produto instance) => <String, dynamic>{
       'cubagem': instance.cubagem,
       'volumes': instance.volumes,
       'pesoBruto': instance.pesoBruto,
-      'pacote': _$TipoPacoteEnumMap[instance.pacote],
+      'pacote': _$TipoPacoteEnumMap[instance.pacote]!,
       'grade': instance.grade,
       'fiscal': instance.fiscal,
       'grades': instance.grades,
@@ -6370,10 +6523,10 @@ Map<String, dynamic> _$ClientAutoAtendimentoToJson(
       'idEmpresa': instance.idEmpresa,
       'ativo': instance.ativo,
       'token': instance.token,
-      'ticketConsumo': _$TicketConsumoEnumMap[instance.ticketConsumo],
-      'impressaoVenda': _$ImpressaoVendaEnumMap[instance.impressaoVenda],
+      'ticketConsumo': _$TicketConsumoEnumMap[instance.ticketConsumo]!,
+      'impressaoVenda': _$ImpressaoVendaEnumMap[instance.impressaoVenda]!,
       'avisoTempoOcioso': instance.avisoTempoOcioso,
-      'senhaAtendimento': _$SenhaAtendimentoEnumMap[instance.senhaAtendimento],
+      'senhaAtendimento': _$SenhaAtendimentoEnumMap[instance.senhaAtendimento]!,
       'idFinalizadoraDebito': instance.idFinalizadoraDebito,
       'idFinalizadoraCredito': instance.idFinalizadoraCredito,
       'finalizadoraDebito': instance.finalizadoraDebito,
@@ -6485,7 +6638,7 @@ LoginClientDTO _$LoginClientDTOFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$LoginClientDTOToJson(LoginClientDTO instance) =>
     <String, dynamic>{
-      'client': _$ClientsEnumMap[instance.client],
+      'client': _$ClientsEnumMap[instance.client]!,
       'clientKey': instance.clientKey,
       'clientSecret': instance.clientSecret,
       'versao': instance.versao,
@@ -6520,7 +6673,7 @@ LoginUsuarioDTO _$LoginUsuarioDTOFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$LoginUsuarioDTOToJson(LoginUsuarioDTO instance) =>
     <String, dynamic>{
-      'client': _$ClientsEnumMap[instance.client],
+      'client': _$ClientsEnumMap[instance.client]!,
       'clientKey': instance.clientKey,
       'clientSecret': instance.clientSecret,
       'versao': instance.versao,
@@ -6565,7 +6718,7 @@ DadosSessaoDTO _$DadosSessaoDTOFromJson(Map<String, dynamic> json) =>
       ..nomeUsuario = json['nomeUsuario'] as String?
       ..nomeEstacao = json['nomeEstacao'] as String?
       ..servico = $enumDecodeNullable(_$ServicoEnumMap, json['servico'])
-      ..client = $enumDecodeNullable(_$ClientsEnumMap, json['client'])
+      ..tipoClient = $enumDecodeNullable(_$ClientsEnumMap, json['tipoClient'])
       ..dataAbertura = json['dataAbertura'] == null
           ? null
           : DateTime.parse(json['dataAbertura'] as String)
@@ -6579,7 +6732,7 @@ Map<String, dynamic> _$DadosSessaoDTOToJson(DadosSessaoDTO instance) =>
       'nomeUsuario': instance.nomeUsuario,
       'nomeEstacao': instance.nomeEstacao,
       'servico': _$ServicoEnumMap[instance.servico],
-      'client': _$ClientsEnumMap[instance.client],
+      'tipoClient': _$ClientsEnumMap[instance.tipoClient],
       'dataAbertura': instance.dataAbertura?.toIso8601String(),
       'dataUltimaAtualizacao':
           instance.dataUltimaAtualizacao?.toIso8601String(),

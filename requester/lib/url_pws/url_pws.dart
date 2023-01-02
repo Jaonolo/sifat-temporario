@@ -836,6 +836,26 @@ class UrlPws {
     _type = RequestType.GET;
   }
 
+  //******************************** PROJETO ERP *******************************
+  // ===PROJETO ERP PLATAFORMA CONTRATO PLATAFORMA ====
+  UrlPws.getbuscarTodosItensPorIdEmpresaETipoItem() {
+    _url = "/contrato/waychef/item-integrador/buscar-todos/{idEmpresa}/por-tipo/{tipoItem}";
+    _type = RequestType.GET;
+  }
+
+  //busca os items adicionais do modal
+  UrlPws.getbuscarTodosItemConfiguracaoWaychefExtra() {
+    _url = "/contrato/waychef/item-configuracao/buscar-todos/{tipoItem}";
+    _type = RequestType.GET;
+  }
+
+  UrlPws.putAtualizarItemConfiguracaoIntegrador() {
+    _url = "/contrato/waychef/item-integrador";
+    _type = RequestType.PUT;
+  }
+
+
+
 
   RequestType? get type => _type;
 

@@ -47,11 +47,7 @@ class EditarContratoIntegradorErpPage extends GetView<EditarContratoIntegradorEr
 
               ],
             ),
-            // Row(
-            //  children: [
-            //    _tabBarPersonalizada(),
-            //  ],
-            // ),
+
             const Divider(
               thickness: 2,
             ),
