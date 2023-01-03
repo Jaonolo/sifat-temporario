@@ -125,7 +125,8 @@ class MyApp extends StatelessWidget {
       scaffoldMessengerKey: locator<NavigationService>().snackbarGlobalKey,
       onGenerateRoute: generateRoute,
       initialRoute: ContratoRoute,
-      // initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiQVBJIiwiaWRTZXNzYW8iOiJlNDI2NWRjZC0yNGEyLTQ2MTktYTQ2MC0zZjRjODU0NDA4OGMiLCJleHAiOjE2NzI0MjM4NzAsImlhdCI6MTY3MjQwOTQ3MH0.Rer4zVMraVe_YO6_MPVwTOAAB2Qg9_abgQfTwrJP2WN_vQjbAxePADLRBUzxPQfj4afhZ7AoioLTmn4HOJlkgw",
+      // initialRoute: Sessa,
+      // initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiRVJQIiwiaWRTZXNzYW8iOiJlZDY2NmRkMS05YWMyLTQxMjMtODU4OC0zODM5OWRhMDE3OTciLCJleHAiOjE2NzI3MTM3MTksImlhdCI6MTY3MjY5OTMxOX0.e-f-cvnU8a4s7mRZ3lBvAQWJCzTTp8lALR3NZRmZOqIx6w_B7nxk-6Z8I-4ORlpOBcGgO7-QaBdA8YcTOJWvwg",
     );
   }
 
