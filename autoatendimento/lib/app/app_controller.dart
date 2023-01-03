@@ -30,6 +30,7 @@ abstract class _AppControllerBase with Store {
   List<FinalizadoraEmpresa> listFormaPagamento = [];
   Timer? timer;
   Timer? timerAtualizaSessao;
+  Timer? timerVerificaProdutos;
   bool maiorIdade = false;
   CountDownController _controller = CountDownController();
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
