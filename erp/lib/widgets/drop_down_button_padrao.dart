@@ -63,8 +63,8 @@ class DropDownButtonPadrao extends StatelessWidget {
                         },
                         items: itensLista.map((String value) {
                           return DropdownMenuItem<String>(
-                            value: 'Plano',
-                            child: Text('Plano'),
+                            value: titulo,
+                            child: Text('$tituloa'),
                           );
                         }).toList(),
                       ),
