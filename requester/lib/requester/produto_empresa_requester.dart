@@ -21,6 +21,20 @@ class ProdutoEmpresaRequester {
     return ResponsePws(response: response,
         converter: (json) => ProdutoEmpresa.listFromJson(json));
   }
+  static Future<ResponsePws> validarProdutosCardapio(PWSConfig config, String token,
+      List<int> listIdProdutos) async {
+
+    http.Response response = await RequesterPws(config: config).consome(
+      urlPws: UrlPws.getValidaProdutosCardapio(),
+      headerParams: {
+        'token': token,
+      },
+      queryParams: {
+        "listIdProduto": listIdProdutos,
+      },
+    );
+    return ResponsePws(response: response);
+  }
 
   static Future<ResponsePws> buscarPaginado(PWSConfig config,
       String token) async {

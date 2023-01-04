@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/toque_comecar/toque_comecar_controller.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
@@ -7,12 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:collection/collection.dart';
 
+import '../splash/repositories/cardapio_repository.dart';
+
 class ToqueComecarComponent {
   final ToqueComecarController controller = ToqueComecarController();
   late BuildContext context;
   AppController appController = Modular.get();
 
   initialize(BuildContext context) {
+    _validaCardapio();
     this.context = context;
   }
 
@@ -39,7 +44,9 @@ class ToqueComecarComponent {
     }
 
     return InkWell(
-      onTap: () => controller.comecar(),
+      onTap: () => {
+        appController.timerVerificaProdutos!.cancel(),
+        controller.comecar()},
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -86,5 +93,20 @@ class ToqueComecarComponent {
         ),
       ),
     );
+  }
+
+  Future<void> _validaCardapio() async {
+    appController.timerVerificaProdutos = Timer.periodic(const Duration(minutes: 3), (timer) async {
+      List<CardapioMenu> listCardapioMenu =  await CardapioRepository.atualizaCardapio(
+          appController.pwsConfig,
+          appController.token,
+          appController.listCardapioMenu,
+          appController.mapProdutos);
+      if(listCardapioMenu.isNotEmpty){
+        appController.listCardapioMenu = [];
+        appController.listCardapioMenu = listCardapioMenu;
+      }
+
+    });
   }
 }
