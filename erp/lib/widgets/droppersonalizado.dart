@@ -53,10 +53,21 @@ class DropDownPersonalizado extends StatelessWidget {
               builder: (FormFieldState<String> state) {
                 return InputDecorator(
                   decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(12.0),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
+                    contentPadding: EdgeInsets.all(12.0),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2.0),
+                      ),
+
+                      // InputBorder(
+                      //   borderSide: BorderSide(color: Colors.black, width: 2.0),
+                      //   // bottom: BorderSide(color: Colors.black, width: 2.0)
+                      // ),
+
+                      // Border(bottom: BorderSide(color: Colors.black, width: 2.0),
+                    // border:
+                    // OutlineInputBorder(
+                    //   borderRadius: BorderRadius.only(bottomRight: Radius.zero),
+                    // ),
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(

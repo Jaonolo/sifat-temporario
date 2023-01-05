@@ -10,8 +10,9 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 
+import '../../pages/plataforma/contratosintegrador/contrato/editar_contrato_integrador_page.dart';
 import '../../pages/plataforma/contratosintegrador/extras/plataforma_integrador_page.dart';
-import '../../pages/plataforma/contratosplataforma/comissao/comissao_page.dart';
+import '../../pages/plataforma/contratosplataforma/padrao/plataforma_contrato_page.dart';
 
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -27,7 +28,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       case SessaoRoute:
         return _getPageRoute(PlataformaIntegradorPage(routingData["token"]), settings);
       case ContratoRoute:
-        return _getPageRoute(ComissaoPlataformaPage(), settings);
+        return _getPageRoute(PlataformaContratoPage(), settings);
       // case ContratoIntegradorRoute:
       //   return _getPageRoute(PlataformaIntegradorPage(), settings);
 

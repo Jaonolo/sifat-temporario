@@ -7,6 +7,7 @@
 // import 'package:erp/pages/routes/app_routes.dart';
 // import 'package:erp/services/navigation_service.dart';
 // import 'package:flutter/material.dart';
+import 'package:erp/pages/plataforma/contratosintegrador/contrato/editar_contato_integrador_controller.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/contratocustomizado/contrato_customizado_terceira_page.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/extras/plataforma_integrador_page_controller.dart';
 import 'package:erp/pages/plataforma/contratosplataforma/comissao/comissao_controller.dart';
@@ -105,6 +106,7 @@ import 'package:requester/config/pws_config.dart';
 void main() {
   Get.lazyPut(()=> PlataformaIntegradorPageController());
   Get.lazyPut(()=> ComissaoPlataformaPageController());
+  Get.lazyPut(()=> EditarContratoIntegradorErpController());
   setupLocator();
   runApp(MyApp());
 }
@@ -124,9 +126,9 @@ class MyApp extends StatelessWidget {
       key: locator<NavigationService>().navigatorKey,
       scaffoldMessengerKey: locator<NavigationService>().snackbarGlobalKey,
       onGenerateRoute: generateRoute,
-      initialRoute: ContratoRoute,
+      // initialRoute: ContratoRoute,
       // initialRoute: Sessa,
-      // initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiRVJQIiwiaWRTZXNzYW8iOiJlZDY2NmRkMS05YWMyLTQxMjMtODU4OC0zODM5OWRhMDE3OTciLCJleHAiOjE2NzI3MTM3MTksImlhdCI6MTY3MjY5OTMxOX0.e-f-cvnU8a4s7mRZ3lBvAQWJCzTTp8lALR3NZRmZOqIx6w_B7nxk-6Z8I-4ORlpOBcGgO7-QaBdA8YcTOJWvwg",
+      initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiQVBJIiwiaWRTZXNzYW8iOiI5YzJiYjZjMC0xMmY0LTQ5NDgtYTdhMS0yNmY4ODg5ZWE2MjQiLCJleHAiOjE2NzI5NjIwNzMsImlhdCI6MTY3Mjk0NzY3M30._X0XF2JGPEKe-7OMUq8kPmgGMf9TCC9SAn_JnF-OBDhm51JzSarUOz4Nx-oKi8dRTan6LSTd09vMXgW_0pCGoA",
     );
   }
 

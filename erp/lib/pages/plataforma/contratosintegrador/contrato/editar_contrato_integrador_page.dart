@@ -7,11 +7,14 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../theme/app_theme.dart';
 import '../../../../widgets/botao_padrao.dart';
 import '../../../../widgets/botao_proximo.dart';
+import '../../../../widgets/card_preco.dart';
 import '../../../../widgets/expanded_lista.dart';
 import '../../../../widgets/responsive.dart';
+import '../../../../widgets/texto_plataforma_extras.dart';
 import 'editar_contato_integrador_controller.dart';
 
-class EditarContratoIntegradorErpPage extends GetView<EditarContratoIntegradorErpController> {
+class EditarContratoIntegradorErpPage
+    extends GetView<EditarContratoIntegradorErpController> {
 // class EditarContratoErpPage extends StatelessWidget {
   const EditarContratoIntegradorErpPage({Key? key}) : super(key: key);
 
@@ -27,8 +30,7 @@ class EditarContratoIntegradorErpPage extends GetView<EditarContratoIntegradorEr
           width: 200,
           color: Colors.amber,
         ),
-        desktop:
-        ListView(
+        desktop: ListView(
           padding: const EdgeInsets.all(16),
           children: [
             Row(
@@ -44,37 +46,722 @@ class EditarContratoIntegradorErpPage extends GetView<EditarContratoIntegradorEr
                     ),
                   ),
                 ),
-
               ],
             ),
-
             const Divider(
               thickness: 2,
             ),
             const SizedBox(
               height: 36,
             ),
-            expandedListaLimites(),
-            expandedListaFinanceiro(),
-            expandedListaFiscal(),
-            expandedListaEstoque(),
-            expandedListaProduto(),
-            expandedListaValores(),
-            const SizedBox(
-              height: 36,
-            ),
-            Container(
-              child: Center(
-                child: _btnProximo(),
-              ),
-            )
+            Card(
+              margin: EdgeInsets.zero,
+              elevation: 0,
+              color: AppTheme.corDeFundoAbaModal,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Obx(() {
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: controller.indexController.value == 0
+                              ? AppTheme.adicionar
+                              : AppTheme.corDeFundoAbaModal,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                        ),
+                        onPressed: () => controller.updateIndex(0),
+                        // mudaindex(0);
 
+                        child: Text(
+                          'ERP',
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                            color: controller.indexController.value == 0
+                                ? AppTheme.corBranco
+                                : AppTheme.adicionar,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      );
+                    }),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Obx(() {
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: controller.indexController.value == 1
+                              ? AppTheme.adicionar
+                              : AppTheme.corDeFundoAbaModal,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                        ),
+                        onPressed: () => controller.updateIndex(1),
+                        child: Text(
+                          'Waychef',
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                            // (corTexto != null) ? corTexto : Colors.white,
+                            color: controller.indexController.value == 1
+                                ? AppTheme.corBranco
+                                : AppTheme.adicionar,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      );
+                    }),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Obx(() {
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: controller.indexController.value == 2
+                              ? AppTheme.adicionar
+                              : AppTheme.corDeFundoAbaModal,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                        ),
+                        onPressed: () => controller.updateIndex(2),
+                        child: Text(
+                          'Valores',
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                            // (corTexto != null) ? corTexto : Colors.white,
+                            color: controller.indexController.value == 2
+                                ? AppTheme.corBranco
+                                : AppTheme.adicionar,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      );
+                    }),
+                  ],
+                ),
+              ),
+            ),
+            Obx(() {
+              return IndexedStack(
+                index: controller.indexController.value,
+                children: [
+                  Container(
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 52,
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Text(
+                                'Safira',
+                                style: GoogleFonts.comfortaa(
+                                  fontSize: 33,
+                                  letterSpacing: -0.5,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color.fromRGBO(13, 13, 13, 1),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 52,
+                        ),
+                        CardPreco(
+                          elevated: false,
+                          menorCallback: () {},
+                          maiorCallback: () {},
+                          preco: 6.00,
+                          quantidade: 1,
+                          labelAdicional: 'Sessão Adicional',
+                          label: 'Sessão',
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        expandedListaLimites(),
+                        expandedListaFinanceiro(),
+                        expandedListaFiscal(),
+                        expandedListaEstoque(),
+                        expandedListaProduto(),
+                        expandedListaValores(),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        Container(
+                          child: Row(children: [
+                            Expanded(child: Container()),
+                            _btnProximo(),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Container(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const SizedBox(
+                          height: 52,
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  'Safira',
+                                  style: GoogleFonts.comfortaa(
+                                    fontSize: 33,
+                                    letterSpacing: -0.5,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color.fromRGBO(13, 13, 13, 1),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          thickness: 2,
+                        ),
+                        const SizedBox(
+                          height: 52,
+                        ),
+                        ExpansionTile(
+                          collapsedIconColor: Color.fromRGBO(13, 13, 13, 1),
+                          collapsedBackgroundColor: Color(0xFFE9F1FF),
+                          title: Text('Módulos de vendas',
+                              style: GoogleFonts.comfortaa(
+                                fontSize: 23,
+                                fontWeight: FontWeight.w700,
+                                color: Color.fromRGBO(0, 29, 52, 1),
+                                letterSpacing: -0.5,
+                              )),
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(14.0),
+                                            child: TextoPlataformaExtras(
+                                              texto: 'AUTOATENDIMENTO',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child:
+                                                Center(child: CheckBoxMobile()),
+                                          ),
+                                        ),
+                                      ),
+
+                                      const SizedBox(width: 12),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(14.0),
+                                            child: TextoPlataformaExtras(
+                                              texto: 'Balcão',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child:
+                                                Center(child: CheckBoxMobile()),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(14.0),
+                                            child: TextoPlataformaExtras(
+                                              texto: 'Mesa',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child:
+                                                Center(child: CheckBoxMobile()),
+                                          ),
+                                        ),
+                                      ),
+
+                                      const SizedBox(width: 12),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        ExpansionTile(
+                          collapsedIconColor: Color.fromRGBO(13, 13, 13, 1),
+                          collapsedBackgroundColor: Color(0xFFE9F1FF),
+                          title: Text('Serviços/ aplicações',
+                              style: GoogleFonts.comfortaa(
+                                fontSize: 23,
+                                fontWeight: FontWeight.w700,
+                                color: Color.fromRGBO(0, 29, 52, 1),
+                                letterSpacing: -0.5,
+                              )),
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(14.0),
+                                            child: TextoPlataformaExtras(
+                                              texto: 'Serviço impressão',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child:
+                                                Center(child: CheckBoxMobile()),
+                                          ),
+                                        ),
+                                      ),
+
+                                      const SizedBox(width: 12),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(14.0),
+                                            child: TextoPlataformaExtras(
+                                              texto: 'Waychef Desktop',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child:
+                                                Center(child: CheckBoxMobile()),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(14.0),
+                                            child: TextoPlataformaExtras(
+                                              texto: 'Waychef Mobile',
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child:
+                                                Center(child: CheckBoxMobile()),
+                                          ),
+                                        ),
+                                      ),
+
+                                      const SizedBox(width: 12),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        Container(
+                          child: Row(children: [
+                            Expanded(child: Container()),
+                            _btnProximo(),
+                          ]),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Container(
+                    child: Column(
+                      // mainAxisSize: MainAxisSize.max,
+                      // padding: const EdgeInsets.all(16),
+                      children: [
+                        const SizedBox(
+                          height: 52,
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Text(
+                                'Safira',
+                                style: GoogleFonts.comfortaa(
+                                  fontSize: 33,
+                                  letterSpacing: -0.5,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color.fromRGBO(13, 13, 13, 1),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 16,),
+
+                          ],
+                        ),
+                        // Row(
+                        //   children: [
+                        //     Container(
+                        //       child: RadioListTile(
+                        //         value: "Nao possui",
+                        //         groupValue: Get
+                        //             .find<
+                        //             EditarContratoIntegradorErpController>()
+                        //             .selectedValue,
+                        //         title: Text(
+                        //           "Nao possui",
+                        //           overflow: TextOverflow
+                        //               .ellipsis,
+                        //           style: GoogleFonts
+                        //               .sourceSansPro(
+                        //             fontSize: 15,
+                        //             fontWeight:
+                        //             FontWeight.w400,
+                        //             letterSpacing: 0.25,
+                        //           ),
+                        //         ),
+                        //         onChanged: (newValue) {
+                        //           Get.find<
+                        //               EditarContratoIntegradorErpController>()
+                        //               .updateSelectedValue(
+                        //               newValue
+                        //                   .toString());
+                        //         },
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+                        const SizedBox(
+                          height: 52,
+                        ),
+                        // collapsedIconColor: Color.fromRGBO(13, 13, 13, 1),
+                        // collapsedBackgroundColor: Color(0xFFE9F1FF),
+                        // title:
+                        Container(
+                          color: Color(0xFFE9F1FF),
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text('Valores',
+                                style: GoogleFonts.comfortaa(
+                                  fontSize: 23,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color.fromRGBO(0, 29, 52, 1),
+                                  letterSpacing: -0.5,
+                                )),
+                          ),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 5),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(14.0),
+                                            child: Text(
+                                              'Valor mensal',
+                                              textAlign: TextAlign.left,
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: Text(
+                                              'R\$ 45,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                decorationThickness: 1,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 5),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(14.0),
+                                            child: Text(
+                                              'Valor trimestral',
+                                              textAlign: TextAlign.left,
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: Text(
+                                              'R\$ 45,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                decorationThickness: 1,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 5),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(14.0),
+                                            child: Text(
+                                              'Valor semestral',
+                                              textAlign: TextAlign.left,
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: Text(
+                                              'R\$ 45,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                decorationThickness: 1,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 5),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: EdgeInsets.all(14.0),
+                                            child: Text(
+                                              'Valor anual',
+                                              textAlign: TextAlign.left,
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: Text(
+                                              'R\$ 45,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                decorationThickness: 1,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                    ],
+                                  ),
+                                ),
+                              ]),
+                        ),
+
+                        const SizedBox(
+                          height: 36,
+                        ),
+                        Container(
+                          child: Row(
+                            children: [
+                              Expanded(child: Container()),
+                            _btnSalvar(),
+                          ]
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                ],
+              );
+            }),
           ],
         ),
       ),
     );
   }
 }
+
+Widget _btnProximo() {
+  return BotaoPadraoProximo(
+    corTexto: Colors.white,
+    texto: 'Próximo',
+    // icone: Icons.calendar_today_outlined,
+    acao: () {
+      //TODO: AÇÃO SALVAR
+    },
+  );
+}
+
 Widget expandedListaLimites() {
   return ExpansionTile(
     collapsedIconColor: Color.fromRGBO(13, 13, 13, 1),
@@ -85,8 +772,7 @@ Widget expandedListaLimites() {
           fontWeight: FontWeight.w700,
           color: Color.fromRGBO(0, 29, 52, 1),
           letterSpacing: -0.5,
-        )
-    ),
+        )),
     children: [
       Divider(),
       Container(
@@ -332,8 +1018,7 @@ Widget expandedListaFinanceiro() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -367,8 +1052,7 @@ Widget expandedListaFinanceiro() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -402,8 +1086,7 @@ Widget expandedListaFinanceiro() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -436,9 +1119,8 @@ Widget expandedListaFinanceiro() {
               child: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child:Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                  child: Align(
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -472,8 +1154,7 @@ Widget expandedListaFinanceiro() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -524,8 +1205,7 @@ Widget expandedListaFiscal() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -559,8 +1239,7 @@ Widget expandedListaFiscal() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -594,8 +1273,7 @@ Widget expandedListaFiscal() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -603,7 +1281,6 @@ Widget expandedListaFiscal() {
           ],
         ),
       ),
-
     ],
   );
 }
@@ -647,8 +1324,7 @@ Widget expandedListaEstoque() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -682,8 +1358,7 @@ Widget expandedListaEstoque() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -691,7 +1366,6 @@ Widget expandedListaEstoque() {
           ],
         ),
       ),
-
     ],
   );
 }
@@ -735,8 +1409,7 @@ Widget expandedListaProduto() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -770,8 +1443,7 @@ Widget expandedListaProduto() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -805,8 +1477,7 @@ Widget expandedListaProduto() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -840,8 +1511,7 @@ Widget expandedListaProduto() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -875,8 +1545,7 @@ Widget expandedListaProduto() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -910,8 +1579,7 @@ Widget expandedListaProduto() {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: CheckBoxMobile()),
+                      alignment: Alignment.centerLeft, child: CheckBoxMobile()),
                 ),
               ),
             ),
@@ -919,7 +1587,6 @@ Widget expandedListaProduto() {
           ],
         ),
       ),
-
     ],
   );
 }
@@ -1097,69 +1764,19 @@ Widget expandedListaValores() {
           ],
         ),
       ),
-
     ],
   );
 }
-
-
-
-Widget _btnProximo() {
-  return BotaoPadraoProximo(
-    corTexto: Colors.white,
-    texto: 'Próximo',
-    // icone: Icons.calendar_today_outlined,
-    acao: () {
-      //TODO: AÇÃO SALVAR
-    },
-  );
-}
-
-Widget _btnAdicionar() {
-  return ElevatedButton(
-    onPressed: () {},
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-        side: BorderSide(
-          color: Color(0xFFFF5722),
-        ),
-      ),
-    ),
-    child: Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: 16, vertical: 4),
-      child: Text(
-        textAlign: TextAlign.end,
-        'Adicionar',
-        style: GoogleFonts.sourceSansPro(
-          fontSize: 26,
-          fontWeight: FontWeight.w600,
-          color: Color(0xFFFF5722),
-          letterSpacing: 0.25,
-        ),
-      ),
-    ),
-  );
-}
-
-
-
 
 Widget _btnSalvar() {
   return BotaoPadrao(
     corIcone: AppTheme.salvar,
     corTexto: Colors.white,
-    texto: 'Salvar',
+    texto: 'Finalizar',
     icone: Icons.save,
     acao: () {
       //TODO: AÇÃO SALVAR
     },
   );
 }
-
-
-//TODO SEPARAR O MODAL ABAIXO DEPOIS
-
 
