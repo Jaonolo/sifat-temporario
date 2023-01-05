@@ -5,6 +5,7 @@ import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
 import 'package:autoatendimento/app/utils/dialog_auto.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
 import 'package:autoatendimento/app/utils/style_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -40,7 +41,10 @@ class TransacaoTefComponent {
                         child: Text(
                           controller.bufferSitef!,
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: FontUtils.h2(context)),
+                          style: TextStyle(fontSize:  defaultTargetPlatform == TargetPlatform.windows
+                            ? FontUtils.h2(context)
+                            : 20,
+                            color: Colors.black,),
                         ),
                       ),
                     ),

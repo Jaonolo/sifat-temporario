@@ -50,7 +50,7 @@ class _CountDownTimerState extends State<CountDownTimer>
     );
 
     started = false;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       if (widget.autoStart) {
         start();
         started = true;

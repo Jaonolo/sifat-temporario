@@ -47,13 +47,15 @@ class NotaRequester {
   }
 
   static Future<ResponsePws> emitirNFCe(PWSConfig config, String token,
-      Nota nota,
+      Nota nota,String tipoEstacao, String marcaPOS,
       {bool gerarImpressao = false}) async {
     Response response = await RequesterPws(config: config).consome(
       urlPws: UrlPws.putEmitirNFCeNota(),
       headerParams: {"token": token},
       pathParams: {"{idNota}": nota.id.toString()},
-      queryParams: {"gerarImpressao": gerarImpressao},
+      queryParams: {"gerarImpressao": gerarImpressao,
+        "tipoEstacao": tipoEstacao,
+        "marcaSmartPOS": marcaPOS},
     );
     return ResponsePws(
         response: response, converter: (json) => XmlDTO.fromJson(json));

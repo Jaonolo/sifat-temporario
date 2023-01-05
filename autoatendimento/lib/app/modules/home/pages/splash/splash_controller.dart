@@ -2,7 +2,12 @@ import 'dart:async';
 
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/utils/autoatendimento_utils.dart';
+import 'package:core/application/application.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:models/model/enum/marca_pos.dart';
+import 'package:models/model/enum/tipo_estacao.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/enum/clients.dart';
@@ -12,6 +17,7 @@ import 'package:requester/requester/gerenciador_requester.dart';
 import 'package:requester/requester/servico_auto_atendimento_requester.dart';
 import 'package:requester/requester/tabela_preco_requester.dart';
 
+import '../../../../utils/dialog_auto.dart';
 import 'model/cardapio_dto.dart';
 import 'repositories/cardapio_repository.dart';
 import 'repositories/config_repository.dart';
@@ -33,6 +39,8 @@ abstract class SplashBase with Store {
 
   @observable
   bool botaoDetalhesErro = false;
+
+  bool isReiniciando = false;
 
   @action
   void changeStatus(String value) {
@@ -70,7 +78,7 @@ abstract class SplashBase with Store {
     try {
       await _carregaNomeEstacao();
 
-      await _loginAPI();
+      await _loginAPI(context);
 
       await _carregaModuloEFormasPagamento();
 
@@ -80,12 +88,19 @@ abstract class SplashBase with Store {
 
       await _carregaTabelaPreco(context);
 
+      await _iniciaImpressao();
+
       _concluir();
     } catch (e) {
       print(e);
-      if (e is WaybeException) {
-        changeBotaoDetalhesErro(true, e.mensagem);
-        return changeStatus('$erro_base \n\n ${(e.exception != null) ? e.exception.message : ""}');
+      if(!isReiniciando){
+        if (e is WaybeException) {
+          if (e.titulo.contains("Estação de trabalho não encontrada")) {
+            e.mensagem = "Nome da estação não localizado , nome estação desejada : {$nomeEstacao}";
+          };
+          changeBotaoDetalhesErro(true, e.mensagem != null? e.mensagem : e.titulo);
+          return changeStatus('$erro_base \n\n ${(e.exception != null) ? e.exception.message : ""}');
+        }
       }
     }
   }
@@ -110,7 +125,7 @@ abstract class SplashBase with Store {
     await ConfigRepository.carregaNomeEstacao(appController.pwsConfigLocal);
     if (nomeEstacao == null || nomeEstacao!.isEmpty) {
       PwsAlert pws = PwsAlert();
-      pws.message = 'Nome da estação não localizado';
+      pws.message = 'Nome da estação não localizado + $nomeEstacao';
       throw WaybeException('Nome da estação não localizado.',
           exception: PwsException(pws));
     }
@@ -123,13 +138,14 @@ abstract class SplashBase with Store {
     }
   }
 
-  Future<void> _loginAPI() async {
+  Future<void> _loginAPI(BuildContext context) async {
     await ServicoAutoAtendimentoRequester.login(
         appController.pwsConfig,
         appController.pwsConfig.clientSecret,
         appController.pwsConfig.client.clientKey,
         nomeEstacao!)
-        .then((response) {
+        .then((response) async {
+          print(nomeEstacao);
       if (response.status == 200) {
         LoginAutoAtendimentoDTO dto = response.content;
         appController.estacaoTrabalho = dto.estacaoTrabalho!;
@@ -139,8 +155,25 @@ abstract class SplashBase with Store {
 
         appController.servicoAutoAtendimento = dto.servicoAutoAtendimento!;
         appController.token = dto.servicoAutoAtendimento!.token!;
-      } else if (response.status == 204) {
-        throw WaybeException('Estação de trabalho não encontrada');
+      }
+       else if (response.status == 204) {
+       await  showDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (c) =>
+            DialogAuto(
+              showCancelButton: false,
+              title: "Estação de trabalho não encontrada",
+              message:
+              "Realize a configuração da estação no ERP, nome da estação esperado {$nomeEstacao}.\n"
+                  "Após finalizar o cadastro, clique em OK para reiniciar o aplicativo.",
+              txtConfirmar: "OK",
+              onConfirm: () {
+                isReiniciando = true;
+                Modular.to.pushNamed("/");
+                _carregarDadosIniciaisAPI(c);
+              },
+            ));
       } else {
         throw WaybeException('Problema ao realizar login na API',
             exception: response.content);
@@ -152,6 +185,8 @@ abstract class SplashBase with Store {
 
   Future<void> _carregaModuloEFormasPagamento() async {
     //Mapeia o módulo e as formas de pagamento
+    appController.listFormaPagamento = [];
+
     if (appController.servicoAutoAtendimento.finalizadoraDebito != null) {
       appController.listFormaPagamento
           .add(appController.servicoAutoAtendimento.finalizadoraDebito!);
@@ -160,6 +195,11 @@ abstract class SplashBase with Store {
     if (appController.servicoAutoAtendimento.finalizadoraCredito != null) {
       appController.listFormaPagamento.add(
           appController.servicoAutoAtendimento.finalizadoraCredito!);
+    }
+
+    if (appController.servicoAutoAtendimento.finalizadoraVale != null) {
+      appController.listFormaPagamento.add(
+          appController.servicoAutoAtendimento.finalizadoraVale!);
     }
 
 
@@ -199,6 +239,23 @@ abstract class SplashBase with Store {
 
     appController.listCardapioMenu = dto.listCardapioMenu;
     appController.mapProdutos = dto.mapProdutos;
+    appController.mapMenus = dto.mapMenu;
+
+    return Future.value();
+  }
+  Future<void> _iniciaImpressao() async {
+    changeStatus("Carregando Impressão");
+    if (defaultTargetPlatform != TargetPlatform.windows) {
+      Application
+          .getInstance().setImpressoraService(TipoEstacao.MINI_PDV, MarcaPOS.NENHUMA);
+      Application
+          .getInstance()
+          .impressoraService
+          .imprime("Autoatendimento iniciado");
+    }else{
+      Application
+          .getInstance().setImpressoraService(TipoEstacao.AUTO_ATENDIMENTO, MarcaPOS.NENHUMA);
+    }
 
     return Future.value();
   }

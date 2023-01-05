@@ -5,6 +5,7 @@ import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto
 import 'package:autoatendimento/app/modules/venda/models/produto_carrinho.dart';
 import 'package:autoatendimento/app/theme/default_theme.dart';
 import 'package:autoatendimento/app/utils/font_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:models/model/models.dart';
@@ -40,7 +41,7 @@ class CardProdutoExtra extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Expanded(flex: 50, child: _txtDescricao()),
+          Expanded(flex: 28, child: _txtDescricao()),
           Expanded(flex: 15, child: _txtPreco()),
           Expanded(flex: 10, child: _btnRemover()),
           Expanded(flex: 8, child: _txtQuantidadeLancada()),
@@ -103,7 +104,7 @@ class CardProdutoExtra extends StatelessWidget {
      Orientation orientation = MediaQuery.of(context).orientation;
      return SizedBox(
        height: orientation == Orientation.landscape
-           ? FontUtils.h2(context)
+           ? defaultTargetPlatform == TargetPlatform.windows ?FontUtils.h2(context) : FontUtils.h2(context) * 2.1
            : FontUtils.h3(context) * 1.4,
        child: ElevatedButton(
          style: ElevatedButton.styleFrom(
@@ -128,7 +129,7 @@ class CardProdutoExtra extends StatelessWidget {
      Orientation orientation = MediaQuery.of(context).orientation;
      return SizedBox(
        height: orientation == Orientation.landscape
-           ? FontUtils.h2(context)
+           ? defaultTargetPlatform == TargetPlatform.windows ?FontUtils.h2(context) : FontUtils.h2(context) * 2.1
            : FontUtils.h3(context) * 1.4,
        child: ElevatedButton(
          style: ElevatedButton.styleFrom(
@@ -199,7 +200,9 @@ class CardProdutoExtra extends StatelessWidget {
         NotaItem? itemJaLancado = NotaItemUtils.localizaSubitemJaLancado(
             controllerAbstract.produtoCarrinho.notaItem,
             controllerAbstract.produtoMenu!,
-            produtoMenuComponente);
+            produtoMenuComponente, (idProdutoEmpresa) {
+          return appController.mapProdutos[idProdutoEmpresa];
+        });
 
         if (menu == null || itemJaLancado == null)
           throw Exception(
@@ -252,7 +255,9 @@ class CardProdutoExtra extends StatelessWidget {
       }
 
       NotaItemUtils.atualizaTotais(
-          controllerAbstract.produtoCarrinho.notaItem);
+          controllerAbstract.produtoCarrinho.notaItem,  (idProdutoEmpresa) {
+        return appController.mapProdutos[idProdutoEmpresa];
+      });
       controllerAbstract
           .changeProdutoCarrinho(controllerAbstract.produtoCarrinho);
     } catch (e, s) {
@@ -262,11 +267,11 @@ class CardProdutoExtra extends StatelessWidget {
 
   bool isAbrirTelaAdcional(){
     //Se tiver alguns observação ou adicionais abre a tela nova
-    bool temMenuObservacao = notaItem.produtoEmpresa!.produto!.menus
+    bool temMenuObservacao = appController.mapProdutos[notaItem.idProdutoEmpresa]!.produto!.menus
         .any((element) => element.tipo == "OBSERVACAO");
 
     if (controllerAbstract.produtoCarrinho.notaItem.tipo == "COMBO" &&
-        (notaItem.produtoEmpresa!.produto!.pacote.equals(TipoPacote.ADICIONAIS) ||
+        (appController.mapProdutos[notaItem.idProdutoEmpresa]!.produto!.pacote.equals(TipoPacote.ADICIONAIS) ||
             temMenuObservacao)) {
       return true;
     }
@@ -279,11 +284,11 @@ class CardProdutoExtra extends StatelessWidget {
      NotaItem ni = NotaItemUtils.itemComboToNotaItem(
          controllerAbstract.produtoCarrinho.notaItem.idNota!,
          produtoMenuComponente,
-         controllerAbstract
-             .produtoCarrinho.notaItem.produtoEmpresa!.idEmpresa!,
+         appController.mapProdutos[controllerAbstract
+             .produtoCarrinho.notaItem.idProdutoEmpresa]!.idEmpresa!,
          appController.tabelaPreco.id!,
          //VALIDA SE FOR COMPONENTE FIXO NÃO TEM VALOR PARA PEGAR SE FOR DIFERENTE TEM
-         adcionalDoItemDoCombo: menu!.consumoItem!.menu!.tipo == "COMPONENTE_FIXO" ? false : true);
+         adcionalDoItemDoCombo: appController.mapMenus[menu!.consumoItem!.idMenu]!.tipo == "COMPONENTE_FIXO" ? false : true);
 
      homeController
          .addPalco(ProdutoAdicionalPage(ProdutoCarrinho(ni)));

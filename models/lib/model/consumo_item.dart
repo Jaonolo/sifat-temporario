@@ -5,8 +5,8 @@ class ConsumoItem {
   int? id;
 
   int? idMenu;
-
-  ProdutoMenu? menu;
+  //
+  // ProdutoMenu? menu;
 
   LocalProducao? localProducao1;
 
@@ -34,7 +34,7 @@ class ConsumoItem {
 
   @override
   String toString() {
-    return 'ConsumoItem[id=$id, menu=$menu, localProducao1=$localProducao1, localProducao2=$localProducao2, assento=$assento, statusProducao=$statusProducao, reimpressao=$reimpressao, confirmado=$confirmado, dataConfirmacao=$dataConfirmacao, dataStatus=$dataStatus, guardaVolume=$guardaVolume, tentativasImpressao=$tentativasImpressao, ]';
+    return 'ConsumoItem[id=$id, localProducao1=$localProducao1, localProducao2=$localProducao2, assento=$assento, statusProducao=$statusProducao, reimpressao=$reimpressao, confirmado=$confirmado, dataConfirmacao=$dataConfirmacao, dataStatus=$dataStatus, guardaVolume=$guardaVolume, tentativasImpressao=$tentativasImpressao, ]';
   }
 
   ConsumoItem.fromJson(Map<String, dynamic>? json) {
@@ -49,11 +49,11 @@ class ConsumoItem {
     } else {
       idMenu = json['idMenu'];
     }
-    if (json['menu'] == null) {
-      menu = null;
-    } else {
-      menu = ProdutoMenu.fromJson(json['menu']);
-    }
+    // if (json['menu'] == null) {
+    //   menu = null;
+    // } else {
+    //   menu = ProdutoMenu.fromJson(json['menu']);
+    // }
     if (json['localProducao1'] == null) {
       localProducao1 = null;
     } else {
@@ -112,8 +112,8 @@ class ConsumoItem {
       json['id'] = id;
     if (idMenu != null)
       json['idMenu'] = idMenu;
-    else if (menu != null)
-      json['idMenu'] = menu!.id;
+    // else if (menu != null)
+    //   json['idMenu'] = menu!.id;
     if (localProducao1 != null)
       json['localProducao1'] = localProducao1;
     if (localProducao2 != null)

@@ -1,0 +1,48 @@
+<resources>
+    <string name="flutter_downloader_notification_started">Download iniciado</string>
+    <string name="flutter_downloader_notification_in_progress">Download em progresso</string>
+    <string name="flutter_downloader_notification_canceled">Download cancelado</string>
+    <string name="flutter_downloader_notification_failed">Download falhou</string>
+    <string name="flutter_downloader_notification_complete">Download completo</string>
+    <string name="flutter_downloader_notification_paused">Download pausado</string>
+
+
+    <string name="msgModuloNaoConfigurado">Module not initialized</string>
+    <string name="msgCanceladoOperador">Cancelled by operator</string>
+    <string name="msgFuncaoInvalida">Invalid function code</string>
+    <string name="msgFaltaMemoria">Out of memory</string>
+    <string name="msgFalhaComunicacao">SiTef communication error</string>
+    <string name="msgCanceladoPortador">Cancelled by cardholder</string>
+    <string name="msgNegadaSiTef">Transaction denied by SiTef</string>
+    <string name="msgErroPinPad">Pinpad communication error</string>
+    <string name="msgOutrosErros">Other errors</string>
+    <string name="msgReturned"> returned</string>
+    <string name="msgPPSearching">Searching pinpad&#8230;</string>
+    <string name="msgPPConfiguring">Pinpad connected, please wait&#8230;</string>
+    <string name="msgPPConfigured">Pinpad OK, proceeding with transaction&#8230;</string>
+    <string name="msgPPDisconnected">Pinpad disconnected</string>
+
+    <!-- ingenico -->
+    <string name="succeed">Succeed</string>
+    <string name="service_crash">Service Crash</string>
+    <string name="request_exception">Request Exception</string>
+    <string name="printer_paper_ended">Out of paper</string>
+    <string name="printer_hardware_error">Hardware error</string>
+    <string name="printer_overheat">Overheat</string>
+    <string name="printer_buffer_overflow">Buffer overflow</string>
+    <string name="printer_low_vol">Low VOL protection</string>
+    <string name="printer_paper_ending">Out of paper soon</string>
+    <string name="printer_engine_error">Printer engine error</string>
+    <string name="printer_pe_not_found">Failed to locate automatically, paper returned to the original position</string>
+    <string name="printer_paper_jam">Paper jam</string>
+    <string name="printer_no_bm">Black mark not found</string>
+    <string name="printer_busy">Printer is busy</string>
+    <string name="printer_bm_black">Black signal</string>
+    <string name="printer_lift_head">Printer head is lifted</string>
+    <string name="printer_power_on">Printer is powered on</string>
+    <string name="printer_cutter_position_error">Cutter not in position</string>
+    <string name="printer_low_temperature">Low temperature</string>
+
+    <string name="waiting_for_printing">Waiting For Printing</string>
+    <string name="other_error">Other Error</string>
+</resources>

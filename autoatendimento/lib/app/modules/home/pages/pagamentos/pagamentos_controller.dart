@@ -1,7 +1,9 @@
 import 'package:autoatendimento/app/app_controller.dart';
 import 'package:autoatendimento/app/modules/home/home_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/tef/transacao_tef/transacao_tef_controller.dart';
+import 'package:autoatendimento/app/modules/venda/pos/sitef_pos.dart';
 import 'package:autoatendimento/app/modules/venda/venda_controller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -17,8 +19,8 @@ abstract class PagamentosBase with Store {
   TransacaoTefController transacaoTefController = Modular.get();
   AppController appController = Modular.get();
 
-  Function acaoFormaPagamento(FinalizadoraEmpresa finalizadoraEmpresa,
-      BuildContext context) {
+  Function acaoFormaPagamento(
+      FinalizadoraEmpresa finalizadoraEmpresa, BuildContext context) {
     return () {
       vendaController.addNotaFinalizadora(
           finalizadoraEmpresa, vendaController.nota.valorTotal!);
@@ -28,21 +30,28 @@ abstract class PagamentosBase with Store {
           avancar(context);
           break;
         case "CARTAO_CREDITO":
-          _transacaoTEF("CREDITO", context);
+          _transacaoTEF("CREDITO", context, finalizadoraEmpresa);
           break;
         case "CARTAO_DEBITO":
         case "VALE_REFEICAO":
-          _transacaoTEF("DEBITO", context);
+        case "VALE_ALIMENTACAO":
+          _transacaoTEF("DEBITO", context, finalizadoraEmpresa);
           break;
       }
     };
   }
 
-  void _transacaoTEF(String tipoPagamentoTEF, BuildContext context) {
+  Future<void> _transacaoTEF(String tipoPagamentoTEF, BuildContext context,
+      FinalizadoraEmpresa finalizadoraEmpresa) async {
     Modular.to.pushNamed("/transacao");
-    transacaoTefController.comunicaWebSocket(context);
-    transacaoTefController.transacionar(vendaController.nota.valorTotal!,
-        tipoPagamentoTEF, vendaController.nota.id!);
+    if (defaultTargetPlatform == TargetPlatform.windows) {
+      transacaoTefController.comunicaWebSocket(context);
+      transacaoTefController.transacionar(vendaController.nota.valorTotal!,
+          tipoPagamentoTEF, vendaController.nota.id!);
+    } else {
+      await SitefPOS.transacionar(context, vendaController.nota,
+          vendaController.nota.valorTotal!, finalizadoraEmpresa);
+    }
   }
 
   Future<void> avancar(BuildContext context) async {

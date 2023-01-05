@@ -107,7 +107,7 @@ abstract class VendaBase with Store {
     await NotaRepository.receber(nota, context).catchError((e) => throw e);
   }
 
-  Future<String?> emitirFiscal() async {
+  Future<XmlDTO?> emitirFiscal() async {
     return await NotaRepository.emitirFiscal(nota, "NFCE")
         .catchError((e) => throw e);
   }
