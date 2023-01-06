@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 
 
 import '../../pages/plataforma/contratosintegrador/contrato/editar_contrato_integrador_page.dart';
+import '../../pages/plataforma/contratosintegrador/contratocustomizado/contrato_customizado_page.dart';
 import '../../pages/plataforma/contratosintegrador/extras/plataforma_integrador_page.dart';
 import '../../pages/plataforma/contratosplataforma/padrao/plataforma_contrato_page.dart';
 
@@ -28,7 +29,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       case SessaoRoute:
         return _getPageRoute(PlataformaIntegradorPage(routingData["token"]), settings);
       case ContratoRoute:
-        return _getPageRoute(PlataformaContratoPage(), settings);
+        return _getPageRoute(ContratoCustomizadoPage(), settings);
       // case ContratoIntegradorRoute:
       //   return _getPageRoute(PlataformaIntegradorPage(), settings);
 

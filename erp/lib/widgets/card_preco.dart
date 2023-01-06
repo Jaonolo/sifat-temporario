@@ -32,6 +32,7 @@ class CardPreco extends StatelessWidget {
     return Container(
 
       child: Card(
+        color: Color.fromRGBO(250, 250, 250, 255),
         elevation: elevated ? 5 : 0,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
