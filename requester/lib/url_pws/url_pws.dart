@@ -208,6 +208,10 @@ class UrlPws {
     _url = "/v1/produtos";
     _type = RequestType.GET;
   }
+  UrlPws.getValidaProdutosCardapio() {
+    _url = "/v1/produtos/validaProdutosCardapio";
+    _type = RequestType.GET;
+  }
 
   UrlPws.getProdutoMenus() {
     _url = "/v1/produto-menus";
