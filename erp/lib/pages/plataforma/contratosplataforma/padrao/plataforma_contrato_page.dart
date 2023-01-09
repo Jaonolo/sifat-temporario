@@ -20,6 +20,7 @@ class PlataformaContratoPage extends GetView<PlataformaContratoController> {
 
   @override
   Widget build(BuildContext context) {
+
 //------------ VARIAVEIS------------
     Size _size = MediaQuery.of(context).size;
 //------------ EstruturaPrincipal
@@ -101,6 +102,77 @@ class PlataformaContratoPage extends GetView<PlataformaContratoController> {
                                   )
                               ),
                               Expanded(child: Container(),),
+                              PopupMenuButton<String>(
+                                offset: Offset(-140,0),
+                                position: PopupMenuPosition.under,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                onSelected: (value) {
+                                  // Adicione o código aqui para executar quando uma opção for selecionada
+                                },
+                                itemBuilder: (BuildContext context) => [
+                                  PopupMenuItem(
+                                    value: "editarvalores",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.attach_money,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Editar valores',
+                                        style: GoogleFonts.sourceSansPro(
+                                          fontSize: 14,
+                                          letterSpacing: 0.1,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                        )),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    value: "editar",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.edit_calendar_rounded,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Editar',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(14, 32, 49, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    value: "desativar",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.block,
+                                          color: Color.fromRGBO(231, 74, 59, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Desativar',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(231, 74, 59, 1),
+                                            )),
+                                      ],
+                                    ),
+                                    ),
+                                ],
+                              ),
                             ],
                           ),
                           SizedBox(height: 30,),
@@ -236,6 +308,77 @@ class PlataformaContratoPage extends GetView<PlataformaContratoController> {
                                   )
                               ),
                               Expanded(child: Container(),),
+                              PopupMenuButton<String>(
+                                offset: Offset(-140,0),
+                                position: PopupMenuPosition.under,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                onSelected: (value) {
+                                  // Adicione o código aqui para executar quando uma opção for selecionada
+                                },
+                                itemBuilder: (BuildContext context) => [
+                                  PopupMenuItem(
+                                    value: "editarvalores",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.attach_money,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Editar valores',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(14, 32, 49, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    value: "editar",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.edit_calendar_rounded,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Editar',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(14, 32, 49, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    value: "desativar",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.block,
+                                          color: Color.fromRGBO(231, 74, 59, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Desativar',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(231, 74, 59, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                           SizedBox(height: 30,),
@@ -371,6 +514,77 @@ class PlataformaContratoPage extends GetView<PlataformaContratoController> {
                                   )
                               ),
                               Expanded(child: Container(),),
+                              PopupMenuButton<String>(
+                                offset: Offset(-140,0),
+                                position: PopupMenuPosition.under,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                onSelected: (value) {
+                                  // Adicione o código aqui para executar quando uma opção for selecionada
+                                },
+                                itemBuilder: (BuildContext context) => [
+                                  PopupMenuItem(
+                                    value: "editarvalores",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.attach_money,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Editar valores',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(14, 32, 49, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    value: "editar",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.edit_calendar_rounded,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Editar',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(14, 32, 49, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    value: "desativar",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.block,
+                                          color: Color.fromRGBO(231, 74, 59, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Desativar',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(231, 74, 59, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                           SizedBox(height: 30,),
@@ -506,6 +720,77 @@ class PlataformaContratoPage extends GetView<PlataformaContratoController> {
                                   )
                               ),
                               Expanded(child: Container(),),
+                              PopupMenuButton<String>(
+                                offset: Offset(-140,0),
+                                position: PopupMenuPosition.under,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                onSelected: (value) {
+                                  // Adicione o código aqui para executar quando uma opção for selecionada
+                                },
+                                itemBuilder: (BuildContext context) => [
+                                  PopupMenuItem(
+                                    value: "editarvalores",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.attach_money,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Editar valores',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(14, 32, 49, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    value: "editar",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.edit_calendar_rounded,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Editar',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(14, 32, 49, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    value: "desativar",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.block,
+                                          color: Color.fromRGBO(231, 74, 59, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Desativar',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(231, 74, 59, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                           SizedBox(height: 30,),
@@ -641,6 +926,77 @@ class PlataformaContratoPage extends GetView<PlataformaContratoController> {
                                   )
                               ),
                               Expanded(child: Container(),),
+                              PopupMenuButton<String>(
+                                offset: Offset(-140,0),
+                                position: PopupMenuPosition.under,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                onSelected: (value) {
+                                  // Adicione o código aqui para executar quando uma opção for selecionada
+                                },
+                                itemBuilder: (BuildContext context) => [
+                                  PopupMenuItem(
+                                    value: "editarvalores",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.attach_money,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Editar valores',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(14, 32, 49, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    value: "editar",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.edit_calendar_rounded,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Editar',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(14, 32, 49, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    value: "desativar",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.block,
+                                          color: Color.fromRGBO(231, 74, 59, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Desativar',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(231, 74, 59, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                           SizedBox(height: 30,),
@@ -776,6 +1132,77 @@ class PlataformaContratoPage extends GetView<PlataformaContratoController> {
                                   )
                               ),
                               Expanded(child: Container(),),
+                              PopupMenuButton<String>(
+                                offset: Offset(-140,0),
+                                position: PopupMenuPosition.under,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                onSelected: (value) {
+                                  // Adicione o código aqui para executar quando uma opção for selecionada
+                                },
+                                itemBuilder: (BuildContext context) => [
+                                  PopupMenuItem(
+                                    value: "editarvalores",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.attach_money,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Editar valores',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(14, 32, 49, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    value: "editar",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.edit_calendar_rounded,
+                                          color: Color.fromRGBO(14, 32, 49, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Editar',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(14, 32, 49, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  PopupMenuDivider(),
+                                  PopupMenuItem(
+                                    value: "desativar",
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.block,
+                                          color: Color.fromRGBO(231, 74, 59, 1),
+                                          size: 14,
+                                        ),
+                                        SizedBox(width: 16,),
+                                        Text('Desativar',
+                                            style: GoogleFonts.sourceSansPro(
+                                              fontSize: 14,
+                                              letterSpacing: 0.1,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color.fromRGBO(231, 74, 59, 1),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                           SizedBox(height: 30,),
@@ -883,8 +1310,6 @@ class PlataformaContratoPage extends GetView<PlataformaContratoController> {
                     ),
                   ),
                 ),
-
-
               ],
             ),
 

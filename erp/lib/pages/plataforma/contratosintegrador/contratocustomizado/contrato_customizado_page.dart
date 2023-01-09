@@ -13,6 +13,7 @@ import '../../../../widgets/botao_proximo.dart';
 import '../../../../widgets/card_preco.dart';
 import '../../../../widgets/responsive.dart';
 import 'contrato_customizado_controller.dart';
+import 'contrato_customizado_segundo_page.dart';
 
 class ContratoCustomizadoPage extends GetView<ContratoCustomizadoController> {
 // class ContratoCustomizadoPage extends StatelessWidget {
@@ -96,8 +97,20 @@ class ContratoCustomizadoPage extends GetView<ContratoCustomizadoController> {
             const SizedBox(
               height: 36,
             ),
-            Container(
-              child: _btnProximo(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(child: Container()),
+                Container(
+                  child: BotaoPadraoProximo(
+                    corTexto: Colors.white,
+                    texto: 'Próximo',
+                    acao: () {
+                      Get.to(ContratoCustomizadoSegundoPage());
+                    },
+                  ),
+                ),
+              ],
             ),
 
 
@@ -1340,6 +1353,8 @@ class ContratoCustomizadoPage extends GetView<ContratoCustomizadoController> {
       texto: 'Próximo',
       // icone: Icons.calendar_today_outlined,
       acao: () {
+
+
         //TODO: AÇÃO SALVAR
       },
     );

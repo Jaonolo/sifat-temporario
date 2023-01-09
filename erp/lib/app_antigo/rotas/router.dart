@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import '../../pages/plataforma/contratosintegrador/contrato/editar_contrato_integrador_page.dart';
 import '../../pages/plataforma/contratosintegrador/contratocustomizado/contrato_customizado_page.dart';
 import '../../pages/plataforma/contratosintegrador/extras/plataforma_integrador_page.dart';
+import '../../pages/plataforma/contratosplataforma/padrao/editarcontrato/editar_contrato_plataforma_page.dart';
 import '../../pages/plataforma/contratosplataforma/padrao/plataforma_contrato_page.dart';
 
 

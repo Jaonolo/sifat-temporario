@@ -12,6 +12,8 @@ import 'package:erp/pages/plataforma/contratosintegrador/contratocustomizado/con
 import 'package:erp/pages/plataforma/contratosintegrador/contratocustomizado/contrato_customizado_terceira_page.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/extras/plataforma_integrador_page_controller.dart';
 import 'package:erp/pages/plataforma/contratosplataforma/comissao/comissao_controller.dart';
+import 'package:erp/pages/plataforma/contratosplataforma/padrao/editarcontrato/editar_contrato_plataforma_controller.dart';
+import 'package:erp/pages/plataforma/contratosplataforma/padrao/editarcontrato/editar_contrato_plataforma_page.dart';
 import 'package:get/get.dart';
 // import 'package:erp/theme/app_theme.dart';
 // import 'package:erp/pages/routes/app_pages.dart';
@@ -109,6 +111,7 @@ void main() {
   Get.lazyPut(()=> ComissaoPlataformaPageController());
   Get.lazyPut(()=> EditarContratoIntegradorErpController());
   Get.lazyPut(()=> ContratoCustomizadoController());
+  Get.lazyPut(()=> EditarContratoPlataformaErpController());
   setupLocator();
   runApp(MyApp());
 }
