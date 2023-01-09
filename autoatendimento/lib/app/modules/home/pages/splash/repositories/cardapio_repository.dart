@@ -150,6 +150,45 @@ class CardapioRepository {
     return dto;
   }
 
+  static Future<List<CardapioMenu>> atualizaCardapio(PWSConfig config, String token, List<CardapioMenu> listCardapioMenu,
+      Map<num, ProdutoEmpresa> mapProdutos) async {
+    List<int> listIdProdutosCardapio = [];
+    for (CardapioMenu cardapioMenu in listCardapioMenu){
+      if(cardapioMenu.itens.isNotEmpty){
+        for(ProdutoEmpresa produtoEmpresa in cardapioMenu.itens){
+          listIdProdutosCardapio.add(produtoEmpresa.id!);
+        }
+
+      }
+    }
+      ResponsePws pws = await ProdutoEmpresaRequester.validarProdutosCardapio(config, token, listIdProdutosCardapio);
+      if (pws.isSuccess) {
+        List<ProdutoEmpresa> listProdutoEmpresa = [];
+        List<String>? strings =  pws.body?.replaceAll("{", "").replaceAll("]", "").replaceAll("[", "").split(",");
+        listCardapioMenu.forEach((cardapioMenu) {
+          if (cardapioMenu.tipo == "ITENS" && cardapioMenu.itens.isNotEmpty) {
+            cardapioMenu.itens.forEach((element) {
+              if (strings!.contains(element.id.toString())) {
+                ProdutoEmpresa produtoEmpresa = (mapProdutos[element.id!]!);
+               listProdutoEmpresa.add(produtoEmpresa);
+              }
+            });
+          }
+        });
+
+      if(listProdutoEmpresa.isNotEmpty){
+          for(ProdutoEmpresa produtoEmpresa in listProdutoEmpresa){
+            listCardapioMenu.forEach((cardapioMenu) {
+              cardapioMenu.itens.remove(produtoEmpresa);
+            });
+          }
+        }
+        return listCardapioMenu;
+      } else {
+        throw PwsException(pws.content);
+      }
+  }
+
 //  static Future<Map<num, ProdutoEmpresa>> obterCardapio(
 //      PWSConfig config, String token, String idCardapio) async {
 //    return await CardapioRequester.buscar(config, token, idCardapio)
