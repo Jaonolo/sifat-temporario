@@ -16,6 +16,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:models/model/sitef_protocolo_socket.dart';
+import 'package:web_socket_channel/html.dart';
 import 'package:utils/utils/date_time_utils.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:pos/pos/impressora/impressao_pos_utils.dart';
@@ -31,7 +32,7 @@ abstract class TransacaoTefBase with Store {
   CancelamentoTefController cancelamentoTefController = Modular.get();
   String viaCliente = "";
   String? xml;
-  late IOWebSocketChannel channel;
+  late HtmlWebSocketChannel channel;
   SitefProtocoloSocket sitefProtocoloSocket = SitefProtocoloSocket();
 
   @observable
@@ -65,7 +66,7 @@ abstract class TransacaoTefBase with Store {
     viaCliente = "";
     xml = "";
 
-    channel = IOWebSocketChannel.connect("ws://localhost:12345");
+    channel = HtmlWebSocketChannel.connect("ws://localhost:12345");
     channel.stream.listen((message) {
       print('--> $message');
 
@@ -528,6 +529,8 @@ abstract class TransacaoTefBase with Store {
       //Receber venda
       await vendaController.receberVendaAPI(context);
 
+      await _finalizaPendenciasSitef(true,context);
+
       XmlDTO? xml;
       if (appController.estacaoTrabalho.emissorFiscal != null) {
         //Emitir cupom fiscal
@@ -640,6 +643,41 @@ abstract class TransacaoTefBase with Store {
   Future<void> naoTentarNovamenteAndroid() async {
     vendaController.descartarNotaFinalizadoras();
     Modular.to.pop();
+  }
+
+  Future _finalizaPendenciasSitef(bool confirmar, BuildContext context) async {
+    if (appController.transacoes != null &&
+        appController.transacoes.isNotEmpty) {
+      var dados = appController.transacoes.first;
+      try {
+        await SitefPOS.finalizar(dados, confirmar: confirmar);
+      } catch (e, stackTrace) {
+        String erro = e.toString();
+
+        if (e.runtimeType == PwsException) {
+          e as PwsException;
+          if (e.message != null) erro = e.message!;
+          if (e.pws != null && e.pws!.description != null)
+            erro += "\n" + e.pws!.description!;
+        }
+
+        print('[ERRO - tratativasFinalizarPosTransacao]: ${e.toString()}');
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (c) =>
+                DialogAuto(
+                  title: "Desculpe! \n\n Ocorreu um problema na finalização da transação:\n\n [$erro] \n\n"
+                      " Deseja tentar novamente?",
+                  message: "",
+                  txtConfirmar: "Confirmar",
+                  showCancelButton: false,
+                  onConfirm: () => {
+                   _finalizaPendenciasSitef(true,context)
+                  },
+                ));
+      }
+    }
   }
 
 }
