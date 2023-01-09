@@ -72,6 +72,7 @@ class NotaRepository {
               return dto;
             } else {
               PwsAlert pws = response.content;
+              await atualizarErroPendencia(nota, pws.description!);
               throw PwsException(pws);
             }
           });
@@ -121,4 +122,9 @@ class NotaRepository {
         appController.estacaoTrabalho.marcaSmartPOS!,
         gerarImpressao: gerarImpressao);
   }
+
+  static Future<ResponsePws> atualizarErroPendencia(Nota nota, String erro) {
+    return NotaRequester.atualizarErroPendencia(appController.pwsConfig, appController.token, nota.id!, erro);
+  }
+
 }

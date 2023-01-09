@@ -38,6 +38,8 @@ part 'enum/formato_arquivo.dart';
 
 part 'enum/tipo_pacote.dart';
 
+part 'enum/tipo_pendencia.dart';
+
 part 'enum/operacao_cartao.dart';
 
 part 'enum/tipo_transacao.dart';

@@ -800,6 +800,10 @@ class UrlPws {
     _type = RequestType.POST;
   }
 
+  UrlPws.putNotaFiscalAtualizarErro(){
+    _url = "/v1/notas/{idNota}/atualizar-erro-emissao";
+    _type = RequestType.PUT;
+  }
 
   RequestType? get type => _type;
 
