@@ -10,13 +10,21 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../theme/app_theme.dart';
 import '../../../../../widgets/botao_padrao.dart';
 import '../../../../../widgets/responsive.dart';
+import '../../../../app_antigo/config/application.dart';
+import '../../../../config/application.dart';
 
 
 
 
 class PlataformaContratoPage extends GetView<PlataformaContratoController> {
+  String? token;
+
+  PlataformaContratoPage(this.token) {
+    print(this.token);
+    Application.tokenUsuario = token!;
+  }
 // class ContratosIntegradorPage extends StatelessWidget {
-  const PlataformaContratoPage({Key? key}) : super(key: key);
+//   PlataformaContratoPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

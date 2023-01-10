@@ -1,19 +1,13 @@
 import 'package:erp/app_antigo/extensions/string_extension.dart';
 import 'package:erp/app_antigo/modules/home/home_page.dart';
-import 'package:erp/app_antigo//modules/intregador/pages/contrato_page.dart';
 import 'package:erp/app_antigo/modules/not_found/not_found_page.dart';
-import 'package:erp/app_antigo/modules/sessao/sessao_page.dart';
 import 'package:erp/app_antigo/rotas/route_names.dart';
-import 'package:erp/pages/plataforma/empresas/comissao/comissao_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-
-
 import '../../pages/plataforma/contratosintegrador/contrato/editar_contrato_integrador_page.dart';
-import '../../pages/plataforma/contratosintegrador/contratocustomizado/contrato_customizado_page.dart';
-import '../../pages/plataforma/contratosintegrador/extras/plataforma_integrador_page.dart';
-import '../../pages/plataforma/contratosplataforma/padrao/editarcontrato/editar_contrato_plataforma_page.dart';
+import '../../pages/plataforma/contratosintegrador/extras/plataforma_page.dart';
+import '../../pages/plataforma/contratosplataforma/extras/plataforma_integrador_page.dart';
 import '../../pages/plataforma/contratosplataforma/padrao/plataforma_contrato_page.dart';
 
 
@@ -30,7 +24,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       case SessaoRoute:
         return _getPageRoute(PlataformaIntegradorPage(routingData["token"]), settings);
       case ContratoRoute:
-        return _getPageRoute(ContratoCustomizadoPage(), settings);
+        return _getPageRoute(PlataformaPage(routingData["token"]), settings);
+      case ContratoExtraIntegradorRoute:
+        return _getPageRoute(EditarContratoIntegradorErpPage(), settings);
       // case ContratoIntegradorRoute:
       //   return _getPageRoute(PlataformaIntegradorPage(), settings);
 

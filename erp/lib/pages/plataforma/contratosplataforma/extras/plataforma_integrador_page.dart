@@ -1,11 +1,11 @@
 import 'package:erp/config/application.dart';
-import 'package:erp/pages/plataforma/contratosintegrador/extras/plataforma_integrador_page_controller.dart';
+import 'package:erp/pages/plataforma/contratosplataforma/extras/plataforma_integrador_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:models/model/models.dart';
-import '../../../../models/plataformaintegrador/item_configuracao_integrador_waychef.dart';
+import '../../../../app_antigo/config/application.dart';
 import '../../../../theme/app_theme.dart';
 import '../../../../widgets/botao_padrao.dart';
 import '../../../../widgets/carregamento/icone_carregando.dart';
@@ -117,6 +117,7 @@ class PlataformaIntegradorPage
           () => controller.carregando
               ? const IconeCarregando()
               : PaginatedDataTable(
+                rowsPerPage:  controller.listaPlataformaContratoIntegradorExtra.length,
                   horizontalMargin: 0,
                   // DataTable(
                   source: Tabela(
