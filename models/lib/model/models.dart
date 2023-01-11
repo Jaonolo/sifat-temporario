@@ -38,6 +38,8 @@ part 'enum/formato_arquivo.dart';
 
 part 'enum/tipo_pacote.dart';
 
+part 'enum/tipo_pendencia.dart';
+
 part 'enum/operacao_cartao.dart';
 
 part 'enum/tipo_transacao.dart';
@@ -528,5 +530,7 @@ part 'login_auto_atendimento_dto.dart';
 part 'login_client_dto.dart';
 
 part 'token_dto.dart';
+
+part 'printer_tef_dto.dart';
 
 part 'identificador_carteira_digital.dart';

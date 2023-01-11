@@ -86,4 +86,28 @@ class PrinterRepository {
       throw e;
     });
   }
+
+  static Future<void> printerTefComprovante(PWSConfig configLocal,
+      String viaCliente,
+      String viaCaixa,
+      ServicoAutoAtendimento servicoAutoAtendimento,
+      EquipamentoImpressao equipamentoImpressao,) async {
+    PrinterTefDTO dto = PrinterTefDTO();
+
+    dto.equipamentoImpressao = equipamentoImpressao;
+    dto.servicoAutoAtendimento= servicoAutoAtendimento;
+    dto.viaCaixa = viaCaixa;
+    dto.viaCliente = viaCliente;
+
+    return await AutoatendimentoRequester.printTefComprovante(configLocal, dto)
+        .then((response) {
+      if (!response.isSuccess) {
+        throw PwsException(response.content);
+      }
+    }).catchError((e, s) {
+      print(e);
+      print(s);
+      throw e;
+    });
+  }
 }

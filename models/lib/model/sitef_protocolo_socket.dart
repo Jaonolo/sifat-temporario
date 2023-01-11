@@ -15,6 +15,9 @@ class SitefProtocoloSocketParam {
   int? cupomFiscal;
   bool confirmaTransacao = false;
   String? tipoPagamentoTEF;
+  String? nsu;
+  String? data;
+  String? horaFiscal;
   BigDecimal valor = BigDecimal.ZERO();
 
   String toJson() {
@@ -22,6 +25,9 @@ class SitefProtocoloSocketParam {
         'cupomFiscal": "${this.cupomFiscal}"'
         ',"confirmaTransacao": "${this.confirmaTransacao}"'
         ',"valor": ${this.valor}'
+        ',"nsu": "${this.nsu}"'
+        ',"data": "${this.data}"'
+        ',"horaFiscal": "${this.horaFiscal}"'
         '${this.tipoPagamentoTEF != null ? ',"tipoPagamentoTEF": "${this.tipoPagamentoTEF}"' : ''}'
         '}';
   }

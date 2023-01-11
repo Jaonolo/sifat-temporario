@@ -516,6 +516,11 @@ class UrlPws {
     _type = RequestType.POST;
   }
 
+  UrlPws.postAutoatendimentoPrintComprovanteTef() {
+    _url = "/printer/comprovante-tef";
+    _type = RequestType.POST;
+  }
+
   UrlPws.postAutoatendimentoPrintConsumo() {
     _url = "/printer/consumo";
     _type = RequestType.POST;
@@ -723,6 +728,11 @@ class UrlPws {
     _type = RequestType.PUT;
   }
 
+  UrlPws.putNotaPerdenciaArquivar() {
+    _url = "/notas/{idNota}/arquivar-pendencia";
+    _type = RequestType.PUT;
+  }
+
   UrlPws.getBuscarIntegrador() {
     _url = "/v2/empresa/integrador/{idIntegrador}";
     _type = RequestType.GET;
@@ -794,6 +804,10 @@ class UrlPws {
     _type = RequestType.POST;
   }
 
+  UrlPws.putNotaFiscalAtualizarErro(){
+    _url = "/v1/notas/{idNota}/atualizar-erro-emissao";
+    _type = RequestType.PUT;
+  }
 
   RequestType? get type => _type;
 

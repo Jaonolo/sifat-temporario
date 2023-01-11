@@ -132,8 +132,11 @@ abstract class SplashBase with Store {
           exception: PwsException(pws));
     }
     //todo retirar isso JOSE
+    if(nomeEstacao == "DESKTOP-C2U01ML"){
+         nomeEstacao =  nomeEstacao! + "_autoAtendimento";
+    }
     if(nomeEstacao == "DSV11"){
-         nomeEstacao =  nomeEstacao! + "_autoatendimento";
+      nomeEstacao =  nomeEstacao! + "_autoAtendimento";
     }
   }
 
@@ -194,6 +197,11 @@ abstract class SplashBase with Store {
     if (appController.servicoAutoAtendimento.finalizadoraCredito != null) {
       appController.listFormaPagamento.add(
           appController.servicoAutoAtendimento.finalizadoraCredito!);
+    }
+
+    if (appController.servicoAutoAtendimento.finalizadoraVale != null) {
+      appController.listFormaPagamento.add(
+          appController.servicoAutoAtendimento.finalizadoraVale!);
     }
 
 

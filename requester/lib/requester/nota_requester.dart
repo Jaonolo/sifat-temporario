@@ -324,4 +324,37 @@ class NotaRequester {
     );
     return ResponsePws(response: response);
   }
+  static Future<ResponsePws> atualizarErroPendencia(PWSConfig config,String token,
+      int idNota, String erro) async {
+    Response response = await RequesterPws(config: config).consome(
+      urlPws: UrlPws.putNotaFiscalAtualizarErro(),
+      headerParams: {
+        "token": token,
+      },
+      pathParams: {
+        "{idNota}": idNota.toString(),
+      },
+      queryParams: {
+        "erroPendencia": erro },
+    );
+    return ResponsePws(response: response);
+  }
+
+  static Future<ResponsePws> arquivarPendencia(PWSConfig config,
+      String token,
+      int idNota,String tipoPendencia) async {
+    Response response = await RequesterPws(config: config).consome(
+      urlPws: UrlPws.putNotaPerdenciaArquivar(),
+      headerParams: {
+        "token": token,
+      },
+      pathParams: {
+        "{idNota}": idNota.toString(),
+      },
+      queryParams: {
+        "tipoPendencia": tipoPendencia,
+      }
+    );
+    return ResponsePws(response: response);
+  }
 }

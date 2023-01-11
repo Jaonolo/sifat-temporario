@@ -46,6 +46,21 @@ class NotaRepository {
   }
 
   static Future<XmlDTO?> emitirFiscal(Nota nota, String modeloFiscal) async {
+
+    if(!isNotaNaoMontada(nota)){
+      print('XML envio =' + nota.notaFiscal!.notaXml!.xmlEnvio!.toString());
+      return await _emitirNFCe(nota, gerarImpressao: true)
+          .then((response) async {
+        if (response.isSuccess) {
+          XmlDTO dto = response.content;
+          String? xml = dto.xml;
+          return xml;
+        } else {
+          PwsAlert pws = response.content;
+          throw PwsException(pws);
+        }
+      });
+    }
     return await _calcularImpostos(nota).then((response) async {
       if (response.isSuccess) {
         if (modeloFiscal == 'NFCE') {
@@ -57,6 +72,7 @@ class NotaRepository {
               return dto;
             } else {
               PwsAlert pws = response.content;
+              await atualizarErroPendencia(nota, pws.description!);
               throw PwsException(pws);
             }
           });
@@ -70,6 +86,14 @@ class NotaRepository {
       print(s);
       throw e;
     });
+  }
+
+  static bool isNotaNaoMontada(Nota nota) {
+
+    return nota.notaFiscal == null
+        || nota.notaFiscal!.notaXml == null
+        || ((nota.notaFiscal!.notaXml!.xmlEnvio == null || nota.notaFiscal!.notaXml!.xmlEnvio!.isEmpty)
+            && (nota.notaFiscal!.notaXml!.xmlEmissao == null || nota.notaFiscal!.notaXml!.xmlEmissao!.isEmpty));
   }
 
   //Métodos privados da classe
@@ -98,4 +122,9 @@ class NotaRepository {
         appController.estacaoTrabalho.marcaSmartPOS!,
         gerarImpressao: gerarImpressao);
   }
+
+  static Future<ResponsePws> atualizarErroPendencia(Nota nota, String erro) {
+    return NotaRequester.atualizarErroPendencia(appController.pwsConfig, appController.token, nota.id!, erro);
+  }
+
 }
