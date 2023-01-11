@@ -282,13 +282,15 @@ abstract class TransacaoTefBase with Store {
       await finalizar(vendaController.nota.id!, true);
     } catch (e) {
       String erro = e.toString();
-
+      String description = "";
       if (e.runtimeType == PwsException) {
         e as PwsException;
         if (e.message != null) erro = e.message!;
         if (e.pws != null && e.pws!.description != null)
           erro += "\n" + e.pws!.description!;
+        description = e.pws!.description!;
       }
+      await vendaController.atualizarErroPendencia(description);
 
       print('[ERRO - tratativasPosTransacao]: ${e.toString()}');
 
