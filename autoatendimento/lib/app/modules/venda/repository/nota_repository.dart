@@ -53,8 +53,7 @@ class NotaRepository {
           .then((response) async {
         if (response.isSuccess) {
           XmlDTO dto = response.content;
-          String? xml = dto.xml;
-          return xml;
+          return dto;
         } else {
           PwsAlert pws = response.content;
           throw PwsException(pws);

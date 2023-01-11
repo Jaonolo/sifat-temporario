@@ -8,7 +8,8 @@ class GetValue {
     final hostValueWaychef = await prefs.getString("hostWaychef");
     final hostValueGateway = await prefs.getString("hostGateway");
     final clientSecretValue = await prefs.getString("clientSecret");
-    AppConfig.urlApi = hostValue ?? '';
+    AppConfig.urlApiWaychef = hostValueWaychef ?? '';
+    AppConfig.urlApiGateway = hostValueGateway ?? '';
     AppConfig.clientSecret = clientSecretValue ?? '';
   }
 }

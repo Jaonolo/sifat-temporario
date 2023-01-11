@@ -1,5 +1,5 @@
 import 'package:autoatendimento/app/app_controller.dart';
-import 'package:autoatendimento/app/modules/home/pages/transacao_tef/transacao_tef_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/tef/transacao_tef/transacao_tef_controller.dart';
 import 'package:autoatendimento/app/modules/venda/widgets/confirmation_dialog.dart';
 import 'package:autoatendimento/app/modules/venda/widgets/select_option_dialog/select_option.dart';
 import 'package:autoatendimento/app/modules/venda/widgets/sitef_dialog.dart';
@@ -256,6 +256,8 @@ class SitefPOS {
   static String _getFuncaoTransacao(FinalizadoraEmpresa finalizadoraEmpresa) {
     switch (finalizadoraEmpresa.finalizadora!.finalizadoraRFB) {
       case "CARTAO_DEBITO":
+      case "VALE_REFEICAO":
+      case "VALE_ALIMENTACAO":
         _tipoTransacao = 2;
         return '2';
 
