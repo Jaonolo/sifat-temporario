@@ -1,3 +1,4 @@
+import 'package:erp/pages/pagamentos/pagamentos_page_controller.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/contrato/editar_contato_integrador_controller.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/contratocustomizado/contrato_customizado_controller.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/extras/plataforma_page_controller.dart';
@@ -22,6 +23,7 @@ void main() {
   Get.lazyPut(()=> ContratoCustomizadoController());
   Get.lazyPut(()=> EditarContratoPlataformaErpController());
   Get.lazyPut(()=> PlataformaPageController());
+  Get.lazyPut(()=> PagamentosPageController());
   setupLocator();
   runApp(MyApp());
 }
@@ -41,22 +43,23 @@ class MyApp extends StatelessWidget {
       key: locator<NavigationService>().navigatorKey,
       scaffoldMessengerKey: locator<NavigationService>().snackbarGlobalKey,
       onGenerateRoute: generateRoute,
-      // initialRoute: SessaoRoute,
+      initialRoute: PagamentoRoute,
       // initialRoute: Sessa,
-      initialRoute: ContratoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJpZFVzdWFyaW9FbXByZXNhIjoiMjQ0IiwidGlwb0NsaWVudCI6IkVSUCIsImlkU2Vzc2FvIjoiZjljNDYwOWMtZDJkYS00YjNmLWJjODktN2VhOGViMzMwZDk5IiwiaWRFbXByZXNhIjoiMSIsImV4cCI6MTY3MzM5NTY4NCwiaWF0IjoxNjczMzgxMjg0fQ.s7k_H5ggydVrtFHzlv3K2XWPC4GdEOfqGHhJM6YDM5hrYZMtQpkKb2tF15R175DpRpG8eRFMFbaNNAvTTo1bnQ",
+      // initialRoute: ContratoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJpZFVzdWFyaW9FbXByZXNhIjoiMjQ0IiwidGlwb0NsaWVudCI6IkVSUCIsImlkU2Vzc2FvIjoiZjljNDYwOWMtZDJkYS00YjNmLWJjODktN2VhOGViMzMwZDk5IiwiaWRFbXByZXNhIjoiMSIsImV4cCI6MTY3MzM5NTY4NCwiaWF0IjoxNjczMzgxMjg0fQ.s7k_H5ggydVrtFHzlv3K2XWPC4GdEOfqGHhJM6YDM5hrYZMtQpkKb2tF15R175DpRpG8eRFMFbaNNAvTTo1bnQ",
     );
   }
 
   void inicializePws(){
     Application.pwsConfigWaychef = PWSConfig(
         urlBase: "http://api.wenderson/api",
-        // urlBase: "http://api.192.168.5.37/api",
+        // urlBase: "http://dev.api.waybe.com.br/api",
         client: Clients.ERP,
         clientSecret: "");
     Application.pwsConfigGateway = PWSConfig(
         urlBase: "http://api.wenderson:8081",
-        // urlBase: "http://api.192.168.5.37:8761",
+        // urlBase: "http://dev.api.waybe.com.br:8081",
         client: Clients.ERP,
         clientSecret: "");
   }
+
 }

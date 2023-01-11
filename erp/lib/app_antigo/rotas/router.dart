@@ -5,6 +5,7 @@ import 'package:erp/app_antigo/rotas/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import '../../pages/pagamentos/pagamentos_page.dart';
 import '../../pages/plataforma/contratosintegrador/contrato/editar_contrato_integrador_page.dart';
 import '../../pages/plataforma/contratosintegrador/extras/plataforma_page.dart';
 import '../../pages/plataforma/contratosplataforma/extras/plataforma_integrador_page.dart';
@@ -25,8 +26,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         return _getPageRoute(PlataformaIntegradorPage(routingData["token"]), settings);
       case ContratoRoute:
         return _getPageRoute(PlataformaPage(routingData["token"]), settings);
-      case ContratoExtraIntegradorRoute:
-        return _getPageRoute(EditarContratoIntegradorErpPage(), settings);
+      case PagamentoRoute:
+        return _getPageRoute(PagamentosPage(), settings);
       // case ContratoIntegradorRoute:
       //   return _getPageRoute(PlataformaIntegradorPage(), settings);
 
