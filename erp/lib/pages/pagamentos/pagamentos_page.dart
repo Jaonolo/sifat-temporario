@@ -12,6 +12,7 @@ import '../../../../widgets/card_preco.dart';
 import '../../../../widgets/expanded_lista.dart';
 import '../../../../widgets/responsive.dart';
 import '../../../../widgets/texto_plataforma_extras.dart';
+import 'componentes/cartao.dart';
 
 
 class PagamentosPage
@@ -1235,76 +1236,81 @@ class PagamentosPage
                           ),
                         ),
 
-
-
-
-
-
                         const SizedBox(
                           height: 32,
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              /*1*/
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  /*2*/
-                                  Container(
-                                    padding: EdgeInsets.only(bottom: 8),
-                                    child: Text(
-                                      'Valor total do plano R\$100,00',
-                                      style: GoogleFonts.comfortaa(
-                                        fontSize: 26,
-                                        letterSpacing: 0.15,
-                                        fontWeight: FontWeight.w500,
-                                        color: Color.fromRGBO(13, 13, 13, 1),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: 8,),
-                                  Text(
-                                    'Você adicionou pacotes extras ao seu plano, será cobrado o valor de R\$ 3.288,72 referente'
-                                        ' aos dias restantes de contrato',
-                                    softWrap: true,
-                                    style: GoogleFonts.sourceSansPro(
-                                      fontSize: 15,
-                                      letterSpacing: 0.25,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xFF0D0D0D),
-                                    ),
-                                  ),
-                                  SizedBox(height: 32,),
-
-                                ],
-                              ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFFFAED),
+                            borderRadius: BorderRadius.circular(16),
                             ),
-                            /*3*/
-                            _btnFazerPagamento(),
-                            // ElevatedButton(
-                            //   style: ElevatedButton.styleFrom(
-                            //     backgroundColor: Color.fromRGBO(250, 250, 250, 1),
-                            //     shape: RoundedRectangleBorder(
-                            //         borderRadius: BorderRadius.circular(100.0),
-                            //         side: BorderSide(width: 3, color: AppTheme.adicionar)),
-                            //     //splashColor: DefaultTheme.accentColor, Desativado pelo uso do ElevatedButton
-                            //   ),
-                            //   onPressed: () {},
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.all(16.0),
-                            //     child: Text(
-                            //       'Alterar plano',
-                            //       style: GoogleFonts.sourceSansPro(
-                            //         fontWeight: FontWeight.w600,
-                            //         fontSize: 20,
-                            //         letterSpacing: 0.25,
-                            //         color: AppTheme.adicionar,
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
+                          child: Padding(
+                            padding: const EdgeInsets.all(24.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+
+                                  /*1*/
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      /*2*/
+                                      Container(
+                                        padding: EdgeInsets.only(bottom: 8),
+                                        child: Text(
+                                          'Valor total do plano R\$100,00',
+                                          style: GoogleFonts.comfortaa(
+                                            fontSize: 26,
+                                            letterSpacing: 0.15,
+                                            fontWeight: FontWeight.w500,
+                                            color: Color.fromRGBO(13, 13, 13, 1),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 8,),
+                                      Text(
+                                        'Você adicionou pacotes extras ao seu plano, será cobrado o valor de R\$ 3.288,72\n'
+                                            'referente aos dias restantes de contrato',
+                                        softWrap: true,
+                                        style: GoogleFonts.sourceSansPro(
+                                          fontSize: 15,
+                                          letterSpacing: 0.25,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xFF0D0D0D),
+                                        ),
+                                      ),
+                                      SizedBox(height: 32,),
+
+                                    ],
+                                  ),
+                                ),
+                                /*3*/
+                                _btnFazerPagamento(),
+                                // ElevatedButton(
+                                //   style: ElevatedButton.styleFrom(
+                                //     backgroundColor: Color.fromRGBO(250, 250, 250, 1),
+                                //     shape: RoundedRectangleBorder(
+                                //         borderRadius: BorderRadius.circular(100.0),
+                                //         side: BorderSide(width: 3, color: AppTheme.adicionar)),
+                                //     //splashColor: DefaultTheme.accentColor, Desativado pelo uso do ElevatedButton
+                                //   ),
+                                //   onPressed: () {},
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.all(16.0),
+                                //     child: Text(
+                                //       'Alterar plano',
+                                //       style: GoogleFonts.sourceSansPro(
+                                //         fontWeight: FontWeight.w600,
+                                //         fontSize: 20,
+                                //         letterSpacing: 0.25,
+                                //         color: AppTheme.adicionar,
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
+                              ],
+                            ),
+                          ),
                         ),
                         // Container(
                         //   child: Row(children: [
@@ -1331,11 +1337,11 @@ class PagamentosPage
                                 padding:
                                 const EdgeInsets.symmetric(horizontal: 16),
                                 child: Text(
-                                  'Safira',
+                                  'Meus cartões',
                                   style: GoogleFonts.comfortaa(
-                                    fontSize: 33,
+                                    fontSize: 23,
                                     letterSpacing: -0.5,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                     color: Color.fromRGBO(13, 13, 13, 1),
                                   ),
                                 ),
@@ -1343,206 +1349,29 @@ class PagamentosPage
                             ],
                           ),
                         ),
-                        Divider(
-                          thickness: 2,
-                        ),
+
                         const SizedBox(
                           height: 52,
                         ),
-                        ExpansionTile(
-                          collapsedIconColor: Color.fromRGBO(13, 13, 13, 1),
-                          collapsedBackgroundColor: Color(0xFFE9F1FF),
-                          title: Text('Módulos de vendas',
-                              style: GoogleFonts.comfortaa(
-                                fontSize: 23,
-                                fontWeight: FontWeight.w700,
-                                color: Color.fromRGBO(0, 29, 52, 1),
-                                letterSpacing: -0.5,
-                              )),
+
+                        Row(
+
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(14.0),
-                                            child: TextoPlataformaExtras(
-                                              texto: 'AUTOATENDIMENTO',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child:
-                                            Center(child: CheckBoxMobile()),
-                                          ),
-                                        ),
-                                      ),
+                            Expanded(
 
-                                      const SizedBox(width: 12),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(14.0),
-                                            child: TextoPlataformaExtras(
-                                              texto: 'Balcão',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child:
-                                            Center(child: CheckBoxMobile()),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 12),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(14.0),
-                                            child: TextoPlataformaExtras(
-                                              texto: 'Mesa',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child:
-                                            Center(child: CheckBoxMobile()),
-                                          ),
-                                        ),
-                                      ),
-
-                                      const SizedBox(width: 12),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                child: Cartao()
                             ),
+
+                            Expanded(
+                                child: Container(
+
+                                ),
+                            ),
+
+
                           ],
                         ),
-                        ExpansionTile(
-                          collapsedIconColor: Color.fromRGBO(13, 13, 13, 1),
-                          collapsedBackgroundColor: Color(0xFFE9F1FF),
-                          title: Text('Serviços/ aplicações',
-                              style: GoogleFonts.comfortaa(
-                                fontSize: 23,
-                                fontWeight: FontWeight.w700,
-                                color: Color.fromRGBO(0, 29, 52, 1),
-                                letterSpacing: -0.5,
-                              )),
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(14.0),
-                                            child: TextoPlataformaExtras(
-                                              texto: 'Serviço impressão',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child:
-                                            Center(child: CheckBoxMobile()),
-                                          ),
-                                        ),
-                                      ),
 
-                                      const SizedBox(width: 12),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(14.0),
-                                            child: TextoPlataformaExtras(
-                                              texto: 'Waychef Desktop',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child:
-                                            Center(child: CheckBoxMobile()),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 12),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(14.0),
-                                            child: TextoPlataformaExtras(
-                                              texto: 'Waychef Mobile',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child:
-                                            Center(child: CheckBoxMobile()),
-                                          ),
-                                        ),
-                                      ),
-
-                                      const SizedBox(width: 12),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
                         const SizedBox(
                           height: 32,
                         ),
