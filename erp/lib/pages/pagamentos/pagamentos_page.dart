@@ -4,6 +4,7 @@ import 'package:erp/widgets/chebox_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../../../theme/app_theme.dart';
 import '../../../../widgets/botao_padrao.dart';
@@ -13,20 +14,22 @@ import '../../../../widgets/expanded_lista.dart';
 import '../../../../widgets/responsive.dart';
 import '../../../../widgets/texto_plataforma_extras.dart';
 import 'componentes/cartao.dart';
+import 'componentes/cartao_vazio.dart';
+import 'modal/texto_customizado.dart';
 
+class PagamentosPage extends GetView<PagamentosPageController> {
 
-class PagamentosPage
-    extends GetView<PagamentosPageController> {
 // class EditarContratoErpPage extends StatelessWidget {
   const PagamentosPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 //------------ VARIAVEIS------------
+
+
     Size _size = MediaQuery.of(context).size;
 //------------ EstruturaPrincipal
     return Scaffold(
-
       body: Responsive(
         mobile: Container(
           height: 200,
@@ -188,7 +191,9 @@ class PagamentosPage
                                       ),
                                     ),
                                   ),
-                                  SizedBox(height: 8,),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
                                   Text(
                                     'Vencimento: 01/01/0001',
                                     style: GoogleFonts.comfortaa(
@@ -197,8 +202,10 @@ class PagamentosPage
                                       fontWeight: FontWeight.w600,
                                       color: Color.fromRGBO(94, 94, 94, 1),
                                     ),
-                                    ),
-                                  SizedBox(height: 8,),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
                                   Text(
                                     'Valor Total: R\$ 0,00',
                                     style: GoogleFonts.comfortaa(
@@ -214,25 +221,27 @@ class PagamentosPage
                             /*3*/
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Color.fromRGBO(250, 250, 250, 1),
+                                backgroundColor:
+                                    Color.fromRGBO(250, 250, 250, 1),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(100.0),
-                                    side: BorderSide(width: 3, color: AppTheme.adicionar)),
+                                    side: BorderSide(
+                                        width: 3, color: AppTheme.adicionar)),
                                 //splashColor: DefaultTheme.accentColor, Desativado pelo uso do ElevatedButton
                               ),
-                                onPressed: () {},
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Text(
-                                    'Alterar plano',
-                                    style: GoogleFonts.sourceSansPro(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20,
-                                      letterSpacing: 0.25,
-                                        color: AppTheme.adicionar,
-                                    ),
+                              onPressed: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  'Alterar plano',
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 20,
+                                    letterSpacing: 0.25,
+                                    color: AppTheme.adicionar,
                                   ),
                                 ),
+                              ),
                             ),
                           ],
                         ),
@@ -264,10 +273,10 @@ class PagamentosPage
                                                 style: GoogleFonts.comfortaa(
                                                   fontSize: 23,
                                                   fontWeight: FontWeight.w700,
-                                                  color: Color.fromRGBO(13, 13, 13, 1),
+                                                  color: Color.fromRGBO(
+                                                      13, 13, 13, 1),
                                                   letterSpacing: -0.5,
-                                                )
-                                            ),
+                                                )),
                                           ),
                                         ],
                                       ),
@@ -275,9 +284,11 @@ class PagamentosPage
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 24),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               flex: 8,
@@ -293,16 +304,17 @@ class PagamentosPage
                                               ),
                                             ),
                                             Expanded(
-                                              flex:4,
-                                              child: Icon(Icons.check,
-                                                color: Color.fromRGBO(22, 156, 52, 1),
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
                                     ),
-
                                   ],
                                 ),
                               ),
@@ -325,10 +337,10 @@ class PagamentosPage
                                                 style: GoogleFonts.comfortaa(
                                                   fontSize: 23,
                                                   fontWeight: FontWeight.w700,
-                                                  color: Color.fromRGBO(13, 13, 13, 1),
+                                                  color: Color.fromRGBO(
+                                                      13, 13, 13, 1),
                                                   letterSpacing: -0.5,
-                                                )
-                                            ),
+                                                )),
                                           ),
                                         ],
                                       ),
@@ -336,9 +348,11 @@ class PagamentosPage
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 24),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               flex: 8,
@@ -354,16 +368,17 @@ class PagamentosPage
                                               ),
                                             ),
                                             Expanded(
-                                              flex:4,
-                                              child: Icon(Icons.check,
-                                                color: Color.fromRGBO(22, 156, 52, 1),
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
                                     ),
-
                                   ],
                                 ),
                               ),
@@ -386,10 +401,10 @@ class PagamentosPage
                                                 style: GoogleFonts.comfortaa(
                                                   fontSize: 23,
                                                   fontWeight: FontWeight.w700,
-                                                  color: Color.fromRGBO(13, 13, 13, 1),
+                                                  color: Color.fromRGBO(
+                                                      13, 13, 13, 1),
                                                   letterSpacing: -0.5,
-                                                )
-                                            ),
+                                                )),
                                           ),
                                         ],
                                       ),
@@ -397,9 +412,11 @@ class PagamentosPage
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 24),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               flex: 8,
@@ -415,9 +432,11 @@ class PagamentosPage
                                               ),
                                             ),
                                             Expanded(
-                                              flex:4,
-                                              child: Icon(Icons.check,
-                                                color: Color.fromRGBO(22, 156, 52, 1),
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
                                               ),
                                             ),
                                           ],
@@ -427,9 +446,11 @@ class PagamentosPage
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 24),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               flex: 8,
@@ -445,9 +466,11 @@ class PagamentosPage
                                               ),
                                             ),
                                             Expanded(
-                                              flex:4,
-                                              child: Icon(Icons.check,
-                                                color: Color.fromRGBO(22, 156, 52, 1),
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
                                               ),
                                             ),
                                           ],
@@ -457,9 +480,11 @@ class PagamentosPage
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 24),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               flex: 8,
@@ -475,18 +500,17 @@ class PagamentosPage
                                               ),
                                             ),
                                             Expanded(
-                                              flex:4,
-                                              child: Icon(Icons.check,
-                                                color: Color.fromRGBO(22, 156, 52, 1),
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
                                     ),
-
-
-
                                   ],
                                 ),
                               ),
@@ -509,10 +533,10 @@ class PagamentosPage
                                                 style: GoogleFonts.comfortaa(
                                                   fontSize: 23,
                                                   fontWeight: FontWeight.w700,
-                                                  color: Color.fromRGBO(13, 13, 13, 1),
+                                                  color: Color.fromRGBO(
+                                                      13, 13, 13, 1),
                                                   letterSpacing: -0.5,
-                                                )
-                                            ),
+                                                )),
                                           ),
                                         ],
                                       ),
@@ -520,9 +544,11 @@ class PagamentosPage
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 24),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               flex: 8,
@@ -538,9 +564,11 @@ class PagamentosPage
                                               ),
                                             ),
                                             Expanded(
-                                              flex:4,
-                                              child: Icon(Icons.check,
-                                                color: Color.fromRGBO(22, 156, 52, 1),
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
                                               ),
                                             ),
                                           ],
@@ -550,9 +578,11 @@ class PagamentosPage
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 24),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               flex: 8,
@@ -568,9 +598,11 @@ class PagamentosPage
                                               ),
                                             ),
                                             Expanded(
-                                              flex:4,
-                                              child: Icon(Icons.check,
-                                                color: Color.fromRGBO(22, 156, 52, 1),
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
                                               ),
                                             ),
                                           ],
@@ -580,9 +612,11 @@ class PagamentosPage
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 24),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               flex: 8,
@@ -598,9 +632,11 @@ class PagamentosPage
                                               ),
                                             ),
                                             Expanded(
-                                              flex:4,
-                                              child: Icon(Icons.check,
-                                                color: Color.fromRGBO(22, 156, 52, 1),
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
                                               ),
                                             ),
                                           ],
@@ -610,9 +646,11 @@ class PagamentosPage
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 24),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               flex: 8,
@@ -628,18 +666,17 @@ class PagamentosPage
                                               ),
                                             ),
                                             Expanded(
-                                              flex:4,
-                                              child: Icon(Icons.check,
-                                                color: Color.fromRGBO(22, 156, 52, 1),
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
                                     ),
-
-
-
                                   ],
                                 ),
                               ),
@@ -662,10 +699,10 @@ class PagamentosPage
                                                 style: GoogleFonts.comfortaa(
                                                   fontSize: 23,
                                                   fontWeight: FontWeight.w700,
-                                                  color: Color.fromRGBO(13, 13, 13, 1),
+                                                  color: Color.fromRGBO(
+                                                      13, 13, 13, 1),
                                                   letterSpacing: -0.5,
-                                                )
-                                            ),
+                                                )),
                                           ),
                                         ],
                                       ),
@@ -673,9 +710,11 @@ class PagamentosPage
                                     Padding(
                                       padding: const EdgeInsets.all(16.0),
                                       child: Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 24),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               flex: 8,
@@ -691,25 +730,22 @@ class PagamentosPage
                                               ),
                                             ),
                                             Expanded(
-                                              flex:4,
-                                              child: Icon(Icons.check,
-                                                color: Color.fromRGBO(22, 156, 52, 1),
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
                                     ),
-
-
-
                                   ],
                                 ),
                               ),
                             ),
-
                           ],
-
                         ),
                         const SizedBox(
                           height: 32,
@@ -727,8 +763,7 @@ class PagamentosPage
                                       fontWeight: FontWeight.w700,
                                       color: Color.fromRGBO(13, 13, 13, 1),
                                       letterSpacing: -0.5,
-                                    )
-                                ),
+                                    )),
                               ),
                             ],
                           ),
@@ -742,9 +777,11 @@ class PagamentosPage
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 24),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           flex: 6,
@@ -760,29 +797,28 @@ class PagamentosPage
                                           ),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('R\$ 30,00',
-                                          style : GoogleFonts.comfortaa(
-                                            fontWeight: FontWeight.w500,
-                                            color: Color.fromRGBO(13, 13, 13, 1),
-                                            fontSize: 19,
-                                            letterSpacing: 0.15,
-                                          )
-                                          ),
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('Adicionar',
-                                            textAlign: TextAlign.right,
-                                              style : GoogleFonts.comfortaa(
-                                                decoration: TextDecoration.underline,
+                                              textAlign: TextAlign.right,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
                                                 fontWeight: FontWeight.w500,
                                                 color: Color(0xFFFF5722),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-
-                                          ),
+                                              )),
                                         ),
                                       ],
                                     ),
@@ -791,9 +827,11 @@ class PagamentosPage
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 24),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           flex: 6,
@@ -809,29 +847,28 @@ class PagamentosPage
                                           ),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('R\$ 30,00',
-                                              style : GoogleFonts.comfortaa(
+                                              style: GoogleFonts.comfortaa(
                                                 fontWeight: FontWeight.w500,
-                                                color: Color.fromRGBO(13, 13, 13, 1),
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-                                          ),
+                                              )),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('Adicionar',
                                               textAlign: TextAlign.right,
-                                              style : GoogleFonts.comfortaa(
-                                                decoration: TextDecoration.underline,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
                                                 fontWeight: FontWeight.w500,
                                                 color: Color(0xFFFF5722),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-
-                                          ),
+                                              )),
                                         ),
                                       ],
                                     ),
@@ -840,9 +877,11 @@ class PagamentosPage
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 24),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           flex: 6,
@@ -858,29 +897,28 @@ class PagamentosPage
                                           ),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('R\$ 30,00',
-                                              style : GoogleFonts.comfortaa(
+                                              style: GoogleFonts.comfortaa(
                                                 fontWeight: FontWeight.w500,
-                                                color: Color.fromRGBO(13, 13, 13, 1),
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-                                          ),
+                                              )),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('Adicionar',
                                               textAlign: TextAlign.right,
-                                              style : GoogleFonts.comfortaa(
-                                                decoration: TextDecoration.underline,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
                                                 fontWeight: FontWeight.w500,
                                                 color: Color(0xFFFF5722),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-
-                                          ),
+                                              )),
                                         ),
                                       ],
                                     ),
@@ -889,9 +927,11 @@ class PagamentosPage
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 24),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           flex: 6,
@@ -907,29 +947,28 @@ class PagamentosPage
                                           ),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('R\$ 30,00',
-                                              style : GoogleFonts.comfortaa(
+                                              style: GoogleFonts.comfortaa(
                                                 fontWeight: FontWeight.w500,
-                                                color: Color.fromRGBO(13, 13, 13, 1),
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-                                          ),
+                                              )),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('Adicionar',
                                               textAlign: TextAlign.right,
-                                              style : GoogleFonts.comfortaa(
-                                                decoration: TextDecoration.underline,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
                                                 fontWeight: FontWeight.w500,
                                                 color: Color(0xFFFF5722),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-
-                                          ),
+                                              )),
                                         ),
                                       ],
                                     ),
@@ -938,9 +977,11 @@ class PagamentosPage
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 24),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           flex: 6,
@@ -956,29 +997,28 @@ class PagamentosPage
                                           ),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('R\$ 30,00',
-                                              style : GoogleFonts.comfortaa(
+                                              style: GoogleFonts.comfortaa(
                                                 fontWeight: FontWeight.w500,
-                                                color: Color.fromRGBO(13, 13, 13, 1),
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-                                          ),
+                                              )),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('Adicionar',
                                               textAlign: TextAlign.right,
-                                              style : GoogleFonts.comfortaa(
-                                                decoration: TextDecoration.underline,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
                                                 fontWeight: FontWeight.w500,
                                                 color: Color(0xFFFF5722),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-
-                                          ),
+                                              )),
                                         ),
                                       ],
                                     ),
@@ -987,9 +1027,11 @@ class PagamentosPage
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 24),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           flex: 6,
@@ -1005,29 +1047,28 @@ class PagamentosPage
                                           ),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('R\$ 30,00',
-                                              style : GoogleFonts.comfortaa(
+                                              style: GoogleFonts.comfortaa(
                                                 fontWeight: FontWeight.w500,
-                                                color: Color.fromRGBO(13, 13, 13, 1),
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-                                          ),
+                                              )),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('Adicionar',
                                               textAlign: TextAlign.right,
-                                              style : GoogleFonts.comfortaa(
-                                                decoration: TextDecoration.underline,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
                                                 fontWeight: FontWeight.w500,
                                                 color: Color(0xFFFF5722),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-
-                                          ),
+                                              )),
                                         ),
                                       ],
                                     ),
@@ -1036,9 +1077,11 @@ class PagamentosPage
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 24),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           flex: 6,
@@ -1054,29 +1097,28 @@ class PagamentosPage
                                           ),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('R\$ 30,00',
-                                              style : GoogleFonts.comfortaa(
+                                              style: GoogleFonts.comfortaa(
                                                 fontWeight: FontWeight.w500,
-                                                color: Color.fromRGBO(13, 13, 13, 1),
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-                                          ),
+                                              )),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('Adicionar',
                                               textAlign: TextAlign.right,
-                                              style : GoogleFonts.comfortaa(
-                                                decoration: TextDecoration.underline,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
                                                 fontWeight: FontWeight.w500,
                                                 color: Color(0xFFFF5722),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-
-                                          ),
+                                              )),
                                         ),
                                       ],
                                     ),
@@ -1085,9 +1127,11 @@ class PagamentosPage
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 24),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           flex: 6,
@@ -1103,29 +1147,28 @@ class PagamentosPage
                                           ),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('R\$ 30,00',
-                                              style : GoogleFonts.comfortaa(
+                                              style: GoogleFonts.comfortaa(
                                                 fontWeight: FontWeight.w500,
-                                                color: Color.fromRGBO(13, 13, 13, 1),
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-                                          ),
+                                              )),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('Adicionar',
                                               textAlign: TextAlign.right,
-                                              style : GoogleFonts.comfortaa(
-                                                decoration: TextDecoration.underline,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
                                                 fontWeight: FontWeight.w500,
                                                 color: Color(0xFFFF5722),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-
-                                          ),
+                                              )),
                                         ),
                                       ],
                                     ),
@@ -1134,9 +1177,11 @@ class PagamentosPage
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 24),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           flex: 6,
@@ -1152,29 +1197,28 @@ class PagamentosPage
                                           ),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('R\$ 30,00',
-                                              style : GoogleFonts.comfortaa(
+                                              style: GoogleFonts.comfortaa(
                                                 fontWeight: FontWeight.w500,
-                                                color: Color.fromRGBO(13, 13, 13, 1),
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-                                          ),
+                                              )),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('Adicionar',
                                               textAlign: TextAlign.right,
-                                              style : GoogleFonts.comfortaa(
-                                                decoration: TextDecoration.underline,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
                                                 fontWeight: FontWeight.w500,
                                                 color: Color(0xFFFF5722),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-
-                                          ),
+                                              )),
                                         ),
                                       ],
                                     ),
@@ -1183,9 +1227,11 @@ class PagamentosPage
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: 24),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           flex: 6,
@@ -1201,36 +1247,33 @@ class PagamentosPage
                                           ),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('R\$ 30,00',
-                                              style : GoogleFonts.comfortaa(
+                                              style: GoogleFonts.comfortaa(
                                                 fontWeight: FontWeight.w500,
-                                                color: Color.fromRGBO(13, 13, 13, 1),
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-                                          ),
+                                              )),
                                         ),
                                         Expanded(
-                                          flex:3,
+                                          flex: 3,
                                           child: Text('Adicionar',
                                               textAlign: TextAlign.right,
-                                              style : GoogleFonts.comfortaa(
-                                                decoration: TextDecoration.underline,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
                                                 fontWeight: FontWeight.w500,
                                                 color: Color(0xFFFF5722),
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
-                                              )
-
-                                          ),
+                                              )),
                                         ),
                                       ],
                                     ),
                                   ),
                                 ),
-
-
                               ],
                             ),
                           ),
@@ -1243,16 +1286,16 @@ class PagamentosPage
                           decoration: BoxDecoration(
                             color: Color(0xFFFFFAED),
                             borderRadius: BorderRadius.circular(16),
-                            ),
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.all(24.0),
                             child: Row(
                               children: [
                                 Expanded(
-
                                   /*1*/
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       /*2*/
                                       Container(
@@ -1263,14 +1306,17 @@ class PagamentosPage
                                             fontSize: 26,
                                             letterSpacing: 0.15,
                                             fontWeight: FontWeight.w500,
-                                            color: Color.fromRGBO(13, 13, 13, 1),
+                                            color:
+                                                Color.fromRGBO(13, 13, 13, 1),
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 8,),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
                                       Text(
                                         'Você adicionou pacotes extras ao seu plano, será cobrado o valor de R\$ 3.288,72\n'
-                                            'referente aos dias restantes de contrato',
+                                        'referente aos dias restantes de contrato',
                                         softWrap: true,
                                         style: GoogleFonts.sourceSansPro(
                                           fontSize: 15,
@@ -1279,35 +1325,15 @@ class PagamentosPage
                                           color: Color(0xFF0D0D0D),
                                         ),
                                       ),
-                                      SizedBox(height: 32,),
-
+                                      SizedBox(
+                                        height: 32,
+                                      ),
                                     ],
                                   ),
                                 ),
                                 /*3*/
                                 _btnFazerPagamento(),
-                                // ElevatedButton(
-                                //   style: ElevatedButton.styleFrom(
-                                //     backgroundColor: Color.fromRGBO(250, 250, 250, 1),
-                                //     shape: RoundedRectangleBorder(
-                                //         borderRadius: BorderRadius.circular(100.0),
-                                //         side: BorderSide(width: 3, color: AppTheme.adicionar)),
-                                //     //splashColor: DefaultTheme.accentColor, Desativado pelo uso do ElevatedButton
-                                //   ),
-                                //   onPressed: () {},
-                                //   child: Padding(
-                                //     padding: const EdgeInsets.all(16.0),
-                                //     child: Text(
-                                //       'Alterar plano',
-                                //       style: GoogleFonts.sourceSansPro(
-                                //         fontWeight: FontWeight.w600,
-                                //         fontSize: 20,
-                                //         letterSpacing: 0.25,
-                                //         color: AppTheme.adicionar,
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
+
                               ],
                             ),
                           ),
@@ -1321,7 +1347,6 @@ class PagamentosPage
                       ],
                     ),
                   ),
-
                   Container(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -1335,7 +1360,7 @@ class PagamentosPage
                             children: [
                               Padding(
                                 padding:
-                                const EdgeInsets.symmetric(horizontal: 16),
+                                    const EdgeInsets.symmetric(horizontal: 16),
                                 child: Text(
                                   'Meus cartões',
                                   style: GoogleFonts.comfortaa(
@@ -1349,29 +1374,31 @@ class PagamentosPage
                             ],
                           ),
                         ),
-
                         const SizedBox(
                           height: 52,
                         ),
-
                         Row(
-
                           children: [
                             Expanded(
-
-                                child: Cartao()
-                            ),
-
-                            Expanded(
-                                child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                child: Cartao(
 
                                 ),
+                              ),
                             ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                child: CartaoVazio(
+                                  onPressed: () { Get.dialog(_modalCadastroCartao()); }
+                                ),
 
-
+                              ),
+                            ),
+                            Expanded(child: Container()),
                           ],
                         ),
-
                         const SizedBox(
                           height: 32,
                         ),
@@ -1384,7 +1411,6 @@ class PagamentosPage
                       ],
                     ),
                   ),
-
                   Container(
                     child: Column(
                       // mainAxisSize: MainAxisSize.max,
@@ -1397,7 +1423,7 @@ class PagamentosPage
                           children: [
                             Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 16),
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               child: Text(
                                 'Safira',
                                 style: GoogleFonts.comfortaa(
@@ -1408,7 +1434,9 @@ class PagamentosPage
                                 ),
                               ),
                             ),
-                            SizedBox(height: 16,),
+                            SizedBox(
+                              height: 16,
+                            ),
                           ],
                         ),
                         const SizedBox(
@@ -1443,7 +1471,7 @@ class PagamentosPage
                                       vertical: 5, horizontal: 5),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                         child: Container(
@@ -1472,7 +1500,7 @@ class PagamentosPage
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
                                                 decoration:
-                                                TextDecoration.underline,
+                                                    TextDecoration.underline,
                                                 decorationThickness: 1,
                                               ),
                                             ),
@@ -1488,7 +1516,7 @@ class PagamentosPage
                                       vertical: 5, horizontal: 5),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                         child: Container(
@@ -1517,7 +1545,7 @@ class PagamentosPage
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
                                                 decoration:
-                                                TextDecoration.underline,
+                                                    TextDecoration.underline,
                                                 decorationThickness: 1,
                                               ),
                                             ),
@@ -1533,7 +1561,7 @@ class PagamentosPage
                                       vertical: 5, horizontal: 5),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                         child: Container(
@@ -1562,7 +1590,7 @@ class PagamentosPage
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
                                                 decoration:
-                                                TextDecoration.underline,
+                                                    TextDecoration.underline,
                                                 decorationThickness: 1,
                                               ),
                                             ),
@@ -1578,7 +1606,7 @@ class PagamentosPage
                                       vertical: 5, horizontal: 5),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                         child: Container(
@@ -1607,7 +1635,7 @@ class PagamentosPage
                                                 fontSize: 19,
                                                 letterSpacing: 0.15,
                                                 decoration:
-                                                TextDecoration.underline,
+                                                    TextDecoration.underline,
                                                 decorationThickness: 1,
                                               ),
                                             ),
@@ -1625,17 +1653,14 @@ class PagamentosPage
                           height: 36,
                         ),
                         Container(
-                          child: Row(
-                              children: [
-                                Expanded(child: Container()),
-                                _btnSalvar(),
-                              ]
-                          ),
+                          child: Row(children: [
+                            Expanded(child: Container()),
+                            _btnSalvar(),
+                          ]),
                         ),
                       ],
                     ),
                   ),
-
                 ],
               );
             }),
@@ -1644,7 +1669,163 @@ class PagamentosPage
       ),
     );
   }
+  Widget _modalCadastroCartao() {
+    final numeroCartaoFormatter = MaskTextInputFormatter(
+      mask: '####-####-####-####',
+      filter: {'#': RegExp(r'[0-9]')},
+    );
+    final celularFormatter = MaskTextInputFormatter(
+      mask: '## # ####-####',
+      filter: {'#': RegExp(r'[0-9]')},
+    );
+    return AlertDialog(
+      shape: const RoundedRectangleBorder(
+        side: BorderSide(),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+      title: Text('Novo cartão',
+        style: GoogleFonts.comfortaa(
+          fontWeight: FontWeight.w400,
+          letterSpacing: -0.5,
+          fontSize: 33,
+        ),
+      ),
+      content: ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: 400),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      TextoCustomizadoFormField(
+                        label: 'Número do cartão',
+                        inputFormatters: [numeroCartaoFormatter],
+
+                      ),
+                      TextoCustomizadoFormField(
+                        label: 'Nome do cartão',
+                        inputFormatters: [numeroCartaoFormatter],
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Expanded(
+                            flex: 6,
+                            child: TextoCustomizadoFormField(
+                              label: 'Vencimento',
+                              inputFormatters: [numeroCartaoFormatter],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 6,
+                            child: TextoCustomizadoFormField(
+                              label: 'CVV',
+                              inputFormatters: [numeroCartaoFormatter],
+                            ),
+                          ),
+                        ],
+                      ),
+
+
+                    ],
+                  ),
+                ),
+                Expanded(
+                    flex: 7,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Cartao(),
+                      ],
+                    ))
+              ],
+            ),
+
+            Row(
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(
+                            color: Color.fromRGBO(186, 26, 26, 1),
+                          ),
+                        ),
+                      ),
+                      child: Padding(
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                        child: Text(
+                          textAlign: TextAlign.end,
+                          'Cancelar',
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromRGBO(186, 26, 26, 1),
+                            letterSpacing: 0.25,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromRGBO(22, 156, 52, 1),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                      ),
+                      child: Padding(
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                        child: Text(
+                          textAlign: TextAlign.end,
+                          'Cadastrar cartão',
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: AppTheme.buttomModalConfirmar,
+                            letterSpacing: 0.25,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
+
+
+
 
 Widget _btnFazerPagamento() {
   return BotaoPadraoProximo(
@@ -1657,7 +1838,6 @@ Widget _btnFazerPagamento() {
   );
 }
 
-
 Widget _btnProximo() {
   return BotaoPadraoProximo(
     corTexto: Colors.white,
@@ -1668,9 +1848,6 @@ Widget _btnProximo() {
     },
   );
 }
-
-
-
 
 Widget _btnSalvar() {
   return BotaoPadrao(
@@ -1683,4 +1860,3 @@ Widget _btnSalvar() {
     },
   );
 }
-
