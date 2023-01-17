@@ -15,7 +15,7 @@ import '../../../../widgets/responsive.dart';
 import '../../../../widgets/texto_plataforma_extras.dart';
 import 'componentes/cartao.dart';
 import 'componentes/cartao_vazio.dart';
-import 'modal/texto_customizado.dart';
+import 'componentes/texto_customizado.dart';
 
 class PagamentosPage extends GetView<PagamentosPageController> {
 
@@ -1377,26 +1377,25 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                         const SizedBox(
                           height: 52,
                         ),
-                        Row(
+                        Wrap(
+                          alignment: WrapAlignment.start,
+                          clipBehavior: Clip.antiAlias,
+                          runSpacing: 8,
+                          spacing: 8,
                           children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                child: Cartao(
-
-                                ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.48,
+                              child: Cartao(
                               ),
                             ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                child: CartaoVazio(
-                                  onPressed: () { Get.dialog(_modalCadastroCartao()); }
-                                ),
-
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.48,
+                              child: CartaoVazio(
+                                // onPressed: () { Get.dialog(_modalCadastroCartao()); }
+                                onPressed: () { Get.dialog(_modalNovoContratoCartao(context)); }
                               ),
                             ),
-                            Expanded(child: Container()),
+                            // Expanded(child: Container()),
                           ],
                         ),
                         const SizedBox(
@@ -1822,6 +1821,197 @@ class PagamentosPage extends GetView<PagamentosPageController> {
       ),
     );
   }
+
+  Widget _modalNovoContratoCartao(context) {
+    final numeroCartaoFormatter = MaskTextInputFormatter(
+      mask: '####-####-####-####',
+      filter: {'#': RegExp(r'[0-9]')},
+    );
+    final celularFormatter = MaskTextInputFormatter(
+      mask: '## # ####-####',
+      filter: {'#': RegExp(r'[0-9]')},
+    );
+    return AlertDialog(
+      shape: const RoundedRectangleBorder(
+        side: BorderSide(),
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
+      title: Row(
+        children: [
+        Text('Finalizar compra',
+          style: GoogleFonts.comfortaa(
+            fontWeight: FontWeight.w400,
+            letterSpacing: -0.5,
+            fontSize: 33,
+            decorationThickness: 2,
+          ),
+        ),
+          Divider(thickness: 2,),
+              ]
+        ),
+      content: ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: 400),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Divider(thickness: 2,),
+            SizedBox(height: 16,),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+                color: Color.fromRGBO(255, 237, 231, 1),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text('Alteração do novo plano',
+                      textAlign: TextAlign.start,
+                      style: GoogleFonts.comfortaa(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 23,
+                        letterSpacing: -0.5,
+                      ),
+                    ),
+                  SizedBox(height: 32,),
+                  Text('Valor debitado do plano: R\$ 58,00',
+                    style: GoogleFonts.sourceSansPro(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 17,
+                      letterSpacing: 0.5,
+                      color: Color.fromRGBO(13, 13, 13, 1),
+                    ),
+                  ),
+                  SizedBox(height: 16,),
+                  Text('Dias acrescentados ao vencimento: 8 dias',
+                    style: GoogleFonts.sourceSansPro(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 17,
+                      letterSpacing: 0.5,
+                      color: Color.fromRGBO(13, 13, 13, 1),
+                    ),),
+                    SizedBox(height: 16,),
+                  Text('Valor do novo contrato: R\$ 58,00',
+                    style: GoogleFonts.sourceSansPro(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 17,
+                      letterSpacing: 0.5,
+                      color: Color.fromRGBO(13, 13, 13, 1),
+                    ),),
+
+                ]
+            ),
+              ),
+            ),
+            SizedBox(height: 24,),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text('Cartão Cadastrado',
+              style: GoogleFonts.comfortaa(
+                fontWeight: FontWeight.w500,
+                fontSize: 19,
+                letterSpacing: 0.15,
+                color: Color.fromRGBO(13, 13, 13, 1),
+
+              ),
+              ),
+            ),
+            SizedBox(height: 16,),
+            Row(
+              children: [
+                Expanded(
+                  // width: MediaQuery.of(context).size.width * 0.48,
+                  child: Cartao(
+                  ),
+                ),
+                Expanded(
+                  // width: MediaQuery.of(context).size.width * 0.48,
+                  child: CartaoVazio(
+                    // onPressed: () { Get.dialog(_modalCadastroCartao()); }
+                      onPressed: () {  }
+                  ),
+                ),
+                // Expanded(child: Container()),
+              ],
+            ),
+            SizedBox(height: 32,),
+            Row(
+              children: [
+                Expanded(
+                  flex: 8,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          side: BorderSide(
+                            color: Color.fromRGBO(186, 26, 26, 1),
+                          ),
+                        ),
+                      ),
+                      child: Padding(
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                        child: Text(
+                          textAlign: TextAlign.end,
+                          'Cancelar',
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromRGBO(186, 26, 26, 1),
+                            letterSpacing: 0.25,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromRGBO(22, 156, 52, 1),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                      ),
+                      child: Padding(
+                        padding:
+                        EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                        child: Text(
+                          textAlign: TextAlign.end,
+                          'Finalizar compra',
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: AppTheme.buttomModalConfirmar,
+                            letterSpacing: 0.25,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 32,),
+          ],
+        ),
+      ),
+    );
+  }
+
+
 }
 
 

@@ -9,7 +9,8 @@ class CartaoCreditoFront extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width *.9,
+      // width: MediaQuery.of(context).size.width *.3,
+      width: 380,
       height: 220,
       decoration: BoxDecoration(
         color: Color.fromRGBO(13, 13, 13, 1),

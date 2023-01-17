@@ -20,7 +20,8 @@ class CartaoVazio extends StatelessWidget {
           Stack(
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * .9,
+                // width: MediaQuery.of(context).size.width * .3,
+                width: 380,
                 height: 220,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
