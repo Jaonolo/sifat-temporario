@@ -29,7 +29,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       case ContratoRoute:
         return _getPageRoute(PlataformaPage(routingData["token"]), settings);
       case PagamentoRoute:
-        return _getPageRoute(ContratosPagamentosPage(), settings);
+        return _getPageRoute(PagamentosPage(), settings);
         // return _getPageRoute(Cartao(), settings);
       // case ContratoIntegradorRoute:
       //   return _getPageRoute(PlataformaIntegradorPage(), settings);

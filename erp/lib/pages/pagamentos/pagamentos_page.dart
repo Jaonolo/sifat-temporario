@@ -18,14 +18,12 @@ import 'componentes/cartao_vazio.dart';
 import 'componentes/texto_customizado.dart';
 
 class PagamentosPage extends GetView<PagamentosPageController> {
-
 // class EditarContratoErpPage extends StatelessWidget {
   const PagamentosPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 //------------ VARIAVEIS------------
-
 
     Size _size = MediaQuery.of(context).size;
 //------------ EstruturaPrincipal
@@ -165,6 +163,7 @@ class PagamentosPage extends GetView<PagamentosPageController> {
               return IndexedStack(
                 index: controller.indexController.value,
                 children: [
+                  // Tela aba plano
                   Container(
                     child: Column(
                       children: [
@@ -1333,7 +1332,6 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                                 ),
                                 /*3*/
                                 _btnFazerPagamento(),
-
                               ],
                             ),
                           ),
@@ -1347,6 +1345,8 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                       ],
                     ),
                   ),
+
+                  // Tela aba forma de pagamento
                   Container(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -1385,15 +1385,15 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                           children: [
                             Container(
                               width: MediaQuery.of(context).size.width * 0.48,
-                              child: Cartao(
-                              ),
+                              child: Cartao(),
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width * 0.48,
                               child: CartaoVazio(
-                                // onPressed: () { Get.dialog(_modalCadastroCartao()); }
-                                onPressed: () { Get.dialog(_modalNovoContratoCartao(context)); }
-                              ),
+                                  // onPressed: () { Get.dialog(_modalCadastroCartao()); }
+                                  onPressed: () {
+                                Get.dialog(_modalNovoContratoCartao(context));
+                              }),
                             ),
                             // Expanded(child: Container()),
                           ],
@@ -1410,6 +1410,8 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                       ],
                     ),
                   ),
+
+                  // Tela aba fatura
                   Container(
                     child: Column(
                       // mainAxisSize: MainAxisSize.max,
@@ -1441,9 +1443,6 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                         const SizedBox(
                           height: 52,
                         ),
-                        // collapsedIconColor: Color.fromRGBO(13, 13, 13, 1),
-                        // collapsedBackgroundColor: Color(0xFFE9F1FF),
-                        // title:
                         Container(
                           color: Color(0xFFE9F1FF),
                           alignment: Alignment.centerLeft,
@@ -1473,27 +1472,388 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
+                                        flex: 6,
                                         child: Container(
-                                          child: Padding(
-                                            padding: EdgeInsets.all(14.0),
-                                            child: Text(
-                                              'Valor mensal',
-                                              textAlign: TextAlign.left,
-                                              style: GoogleFonts.comfortaa(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 19,
-                                                letterSpacing: 0.15,
+                                          decoration: BoxDecoration(
+                                            color: Color.fromRGBO(233, 241, 255, 1),
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.all(14.0),
+                                                child: Card(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(16),
+                                                  ),
+                                                  color: Color.fromRGBO(252, 252, 255, 1),
+                                                    child: Padding(
+                                                    padding: const EdgeInsets.all(24.0),
+                                                    child: Column(
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              'Licença de uso Prata Mensal + 10 sessões',
+                                                              textAlign: TextAlign.left,
+                                                              style: GoogleFonts.sourceSansPro(
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize: 19,
+                                                                letterSpacing: 0.5,
+                                                                color: Color.fromRGBO(94, 94, 94, 1),
+                                                              ),
+                                                            ),
+
+                                                            Icon(
+                                                              Icons.visibility,
+                                                              color: AppTheme.adicionar,
+                                                            ),
+
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                          children: [
+                                                            Text(
+                                                              '10/09/2011',
+                                                              textAlign: TextAlign.left,
+                                                              style: GoogleFonts.sourceSansPro(
+                                                                fontWeight: FontWeight.w400,
+                                                                fontSize: 17,
+                                                                letterSpacing: 0.5,
+                                                                color: Color.fromRGBO(94, 94, 94, 1),
+                                                              ),
+                                                            ),
+                                                            Expanded(child: Container()),
+                                                            Text(
+                                                              'Valor: R\$ 0,00',
+                                                              textAlign: TextAlign.left,
+                                                              style: GoogleFonts.sourceSansPro(
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize: 19,
+                                                                letterSpacing: 0.5,
+                                                                color: Color.fromRGBO(94, 94, 94, 1),
+                                                              ),
+                                                            ),
+                                                            Expanded(child: Container()),
+                                                            ElevatedButton(
+                                                              onPressed: () {},
+                                                              style: ElevatedButton.styleFrom(
+                                                                padding: EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+                                                                backgroundColor: Color.fromRGBO(255, 237, 232, 1),
+                                                                shape: RoundedRectangleBorder(
+                                                                  borderRadius: BorderRadius.circular(99),
+                                                                  side: BorderSide(
+                                                                    color: Color.fromRGBO(255, 237, 232, 1),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                                                child: Text(
+                                                                  'Atrasado',
+                                                                  style: GoogleFonts.sourceSansPro(
+                                                                    fontSize: 12,
+                                                                    fontWeight: FontWeight.w400,
+                                                                    color: Color.fromRGBO(95, 21, 0, 1),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Expanded(child: Container()),
+
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
+                                              Padding(
+                                                padding: EdgeInsets.all(14.0),
+                                                child: Card(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(16),
+                                                  ),
+                                                  color: Color.fromRGBO(252, 252, 255, 1),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(24.0),
+                                                    child: Column(
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              'Licença de uso Prata Mensal + 10 sessões',
+                                                              textAlign: TextAlign.left,
+                                                              style: GoogleFonts.sourceSansPro(
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize: 19,
+                                                                letterSpacing: 0.5,
+                                                                color: Color.fromRGBO(94, 94, 94, 1),
+                                                              ),
+                                                            ),
+
+                                                            Icon(
+                                                              Icons.visibility,
+                                                              color: AppTheme.adicionar,
+                                                            ),
+
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                          children: [
+                                                            Text(
+                                                              '10/09/2011',
+                                                              textAlign: TextAlign.left,
+                                                              style: GoogleFonts.sourceSansPro(
+                                                                fontWeight: FontWeight.w400,
+                                                                fontSize: 17,
+                                                                letterSpacing: 0.5,
+                                                                color: Color.fromRGBO(94, 94, 94, 1),
+                                                              ),
+                                                            ),
+                                                            Expanded(child: Container()),
+                                                            Text(
+                                                              'Valor: R\$ 0,00',
+                                                              textAlign: TextAlign.left,
+                                                              style: GoogleFonts.sourceSansPro(
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize: 19,
+                                                                letterSpacing: 0.5,
+                                                                color: Color.fromRGBO(94, 94, 94, 1),
+                                                              ),
+                                                            ),
+                                                            Expanded(child: Container()),
+                                                            ElevatedButton(
+                                                              onPressed: () {},
+                                                              style: ElevatedButton.styleFrom(
+                                                                padding: EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+                                                                backgroundColor: Color.fromRGBO(255, 237, 232, 1),
+                                                                shape: RoundedRectangleBorder(
+                                                                  borderRadius: BorderRadius.circular(99),
+                                                                  side: BorderSide(
+                                                                    color: Color.fromRGBO(255, 237, 232, 1),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                                                child: Text(
+                                                                  'Atrasado',
+                                                                  style: GoogleFonts.sourceSansPro(
+                                                                    fontSize: 12,
+                                                                    fontWeight: FontWeight.w400,
+                                                                    color: Color.fromRGBO(95, 21, 0, 1),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Expanded(child: Container()),
+
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.all(14.0),
+                                                child: Card(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(16),
+                                                  ),
+                                                  color: Color.fromRGBO(252, 252, 255, 1),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(24.0),
+                                                    child: Column(
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              'Licença de uso Prata Mensal + 10 sessões',
+                                                              textAlign: TextAlign.left,
+                                                              style: GoogleFonts.sourceSansPro(
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize: 19,
+                                                                letterSpacing: 0.5,
+                                                                color: Color.fromRGBO(94, 94, 94, 1),
+                                                              ),
+                                                            ),
+
+                                                            Icon(
+                                                              Icons.visibility,
+                                                              color: AppTheme.adicionar,
+                                                            ),
+
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                          children: [
+                                                            Text(
+                                                              '10/09/2011',
+                                                              textAlign: TextAlign.left,
+                                                              style: GoogleFonts.sourceSansPro(
+                                                                fontWeight: FontWeight.w400,
+                                                                fontSize: 17,
+                                                                letterSpacing: 0.5,
+                                                                color: Color.fromRGBO(94, 94, 94, 1),
+                                                              ),
+                                                            ),
+                                                            Expanded(child: Container()),
+                                                            Text(
+                                                              'Valor: R\$ 0,00',
+                                                              textAlign: TextAlign.left,
+                                                              style: GoogleFonts.sourceSansPro(
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize: 19,
+                                                                letterSpacing: 0.5,
+                                                                color: Color.fromRGBO(94, 94, 94, 1),
+                                                              ),
+                                                            ),
+                                                            Expanded(child: Container()),
+                                                            ElevatedButton(
+                                                              onPressed: () {},
+                                                              style: ElevatedButton.styleFrom(
+                                                                padding: EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+                                                                backgroundColor: Color.fromRGBO(255, 237, 232, 1),
+                                                                shape: RoundedRectangleBorder(
+                                                                  borderRadius: BorderRadius.circular(99),
+                                                                  side: BorderSide(
+                                                                    color: Color.fromRGBO(255, 237, 232, 1),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                                                child: Text(
+                                                                  'Atrasado',
+                                                                  style: GoogleFonts.sourceSansPro(
+                                                                    fontSize: 12,
+                                                                    fontWeight: FontWeight.w400,
+                                                                    color: Color.fromRGBO(95, 21, 0, 1),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Expanded(child: Container()),
+
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.all(14.0),
+                                                child: Card(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(16),
+                                                  ),
+                                                  color: Color.fromRGBO(252, 252, 255, 1),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(24.0),
+                                                    child: Column(
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              'Licença de uso Prata Mensal + 10 sessões',
+                                                              textAlign: TextAlign.left,
+                                                              style: GoogleFonts.sourceSansPro(
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize: 19,
+                                                                letterSpacing: 0.5,
+                                                                color: Color.fromRGBO(94, 94, 94, 1),
+                                                              ),
+                                                            ),
+
+                                                            Icon(
+                                                              Icons.visibility,
+                                                              color: AppTheme.adicionar,
+                                                            ),
+
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                          children: [
+                                                            Text(
+                                                              '10/09/2011',
+                                                              textAlign: TextAlign.left,
+                                                              style: GoogleFonts.sourceSansPro(
+                                                                fontWeight: FontWeight.w400,
+                                                                fontSize: 17,
+                                                                letterSpacing: 0.5,
+                                                                color: Color.fromRGBO(94, 94, 94, 1),
+                                                              ),
+                                                            ),
+                                                            Expanded(child: Container()),
+                                                            Text(
+                                                              'Valor: R\$ 0,00',
+                                                              textAlign: TextAlign.left,
+                                                              style: GoogleFonts.sourceSansPro(
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize: 19,
+                                                                letterSpacing: 0.5,
+                                                                color: Color.fromRGBO(94, 94, 94, 1),
+                                                              ),
+                                                            ),
+                                                            Expanded(child: Container()),
+                                                            ElevatedButton(
+                                                              onPressed: () {},
+                                                              style: ElevatedButton.styleFrom(
+                                                                padding: EdgeInsets.only(left: 0, top: 8, right: 0, bottom: 8),
+                                                                backgroundColor: Color.fromRGBO(255, 237, 232, 1),
+                                                                shape: RoundedRectangleBorder(
+                                                                  borderRadius: BorderRadius.circular(99),
+                                                                  side: BorderSide(
+                                                                    color: Color.fromRGBO(255, 237, 232, 1),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                                                child: Text(
+                                                                  'Atrasado',
+                                                                  style: GoogleFonts.sourceSansPro(
+                                                                    fontSize: 12,
+                                                                    fontWeight: FontWeight.w400,
+                                                                    color: Color.fromRGBO(95, 21, 0, 1),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Expanded(child: Container()),
+
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
                                       Expanded(
+                                        flex: 6,
                                         child: Container(
                                           child: Padding(
                                             padding: const EdgeInsets.all(16.0),
                                             child: Text(
-                                              'R\$ 45,00',
+                                              'R\$ 45,00 CARD 2',
                                               style: GoogleFonts.comfortaa(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 19,
@@ -1647,7 +2007,6 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                                 ),
                               ]),
                         ),
-
                         const SizedBox(
                           height: 36,
                         ),
@@ -1668,6 +2027,7 @@ class PagamentosPage extends GetView<PagamentosPageController> {
       ),
     );
   }
+
   Widget _modalCadastroCartao() {
     final numeroCartaoFormatter = MaskTextInputFormatter(
       mask: '####-####-####-####',
@@ -1682,7 +2042,8 @@ class PagamentosPage extends GetView<PagamentosPageController> {
         side: BorderSide(),
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
-      title: Text('Novo cartão',
+      title: Text(
+        'Novo cartão',
         style: GoogleFonts.comfortaa(
           fontWeight: FontWeight.w400,
           letterSpacing: -0.5,
@@ -1705,7 +2066,6 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                       TextoCustomizadoFormField(
                         label: 'Número do cartão',
                         inputFormatters: [numeroCartaoFormatter],
-
                       ),
                       TextoCustomizadoFormField(
                         label: 'Nome do cartão',
@@ -1730,8 +2090,6 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                           ),
                         ],
                       ),
-
-
                     ],
                   ),
                 ),
@@ -1745,7 +2103,6 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                     ))
               ],
             ),
-
             Row(
               children: [
                 Expanded(
@@ -1769,7 +2126,7 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                       ),
                       child: Padding(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                         child: Text(
                           textAlign: TextAlign.end,
                           'Cancelar',
@@ -1797,7 +2154,7 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                       ),
                       child: Padding(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                         child: Text(
                           textAlign: TextAlign.end,
                           'Cadastrar cartão',
@@ -1812,8 +2169,6 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                     ),
                   ),
                 ),
-
-
               ],
             ),
           ],
@@ -1836,9 +2191,9 @@ class PagamentosPage extends GetView<PagamentosPageController> {
         side: BorderSide(),
         borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
-      title: Row(
-        children: [
-        Text('Finalizar compra',
+      title: Row(children: [
+        Text(
+          'Finalizar compra',
           style: GoogleFonts.comfortaa(
             fontWeight: FontWeight.w400,
             letterSpacing: -0.5,
@@ -1846,16 +2201,21 @@ class PagamentosPage extends GetView<PagamentosPageController> {
             decorationThickness: 2,
           ),
         ),
-          Divider(thickness: 2,),
-              ]
+        Divider(
+          thickness: 2,
         ),
+      ]),
       content: ConstrainedBox(
         constraints: const BoxConstraints(minWidth: 400),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Divider(thickness: 2,),
-            SizedBox(height: 16,),
+            Divider(
+              thickness: 2,
+            ),
+            SizedBox(
+              height: 16,
+            ),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -1864,78 +2224,92 @@ class PagamentosPage extends GetView<PagamentosPageController> {
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text('Alteração do novo plano',
-                      textAlign: TextAlign.start,
-                      style: GoogleFonts.comfortaa(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 23,
-                        letterSpacing: -0.5,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        'Alteração do novo plano',
+                        textAlign: TextAlign.start,
+                        style: GoogleFonts.comfortaa(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 23,
+                          letterSpacing: -0.5,
+                        ),
                       ),
-                    ),
-                  SizedBox(height: 32,),
-                  Text('Valor debitado do plano: R\$ 58,00',
-                    style: GoogleFonts.sourceSansPro(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17,
-                      letterSpacing: 0.5,
-                      color: Color.fromRGBO(13, 13, 13, 1),
-                    ),
-                  ),
-                  SizedBox(height: 16,),
-                  Text('Dias acrescentados ao vencimento: 8 dias',
-                    style: GoogleFonts.sourceSansPro(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17,
-                      letterSpacing: 0.5,
-                      color: Color.fromRGBO(13, 13, 13, 1),
-                    ),),
-                    SizedBox(height: 16,),
-                  Text('Valor do novo contrato: R\$ 58,00',
-                    style: GoogleFonts.sourceSansPro(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 17,
-                      letterSpacing: 0.5,
-                      color: Color.fromRGBO(13, 13, 13, 1),
-                    ),),
-
-                ]
-            ),
+                      SizedBox(
+                        height: 32,
+                      ),
+                      Text(
+                        'Valor debitado do plano: R\$ 58,00',
+                        style: GoogleFonts.sourceSansPro(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                          letterSpacing: 0.5,
+                          color: Color.fromRGBO(13, 13, 13, 1),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text(
+                        'Dias acrescentados ao vencimento: 8 dias',
+                        style: GoogleFonts.sourceSansPro(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                          letterSpacing: 0.5,
+                          color: Color.fromRGBO(13, 13, 13, 1),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text(
+                        'Valor do novo contrato: R\$ 58,00',
+                        style: GoogleFonts.sourceSansPro(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                          letterSpacing: 0.5,
+                          color: Color.fromRGBO(13, 13, 13, 1),
+                        ),
+                      ),
+                    ]),
               ),
             ),
-            SizedBox(height: 24,),
+            SizedBox(
+              height: 24,
+            ),
             Container(
               alignment: Alignment.centerLeft,
-              child: Text('Cartão Cadastrado',
-              style: GoogleFonts.comfortaa(
-                fontWeight: FontWeight.w500,
-                fontSize: 19,
-                letterSpacing: 0.15,
-                color: Color.fromRGBO(13, 13, 13, 1),
-
-              ),
+              child: Text(
+                'Cartão Cadastrado',
+                style: GoogleFonts.comfortaa(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 19,
+                  letterSpacing: 0.15,
+                  color: Color.fromRGBO(13, 13, 13, 1),
+                ),
               ),
             ),
-            SizedBox(height: 16,),
+            SizedBox(
+              height: 16,
+            ),
             Row(
               children: [
                 Expanded(
                   // width: MediaQuery.of(context).size.width * 0.48,
-                  child: Cartao(
-                  ),
+                  child: Cartao(),
                 ),
                 Expanded(
                   // width: MediaQuery.of(context).size.width * 0.48,
                   child: CartaoVazio(
-                    // onPressed: () { Get.dialog(_modalCadastroCartao()); }
-                      onPressed: () {  }
-                  ),
+                      // onPressed: () { Get.dialog(_modalCadastroCartao()); }
+                      onPressed: () {}),
                 ),
                 // Expanded(child: Container()),
               ],
             ),
-            SizedBox(height: 32,),
+            SizedBox(
+              height: 32,
+            ),
             Row(
               children: [
                 Expanded(
@@ -1959,7 +2333,7 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                       ),
                       child: Padding(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                         child: Text(
                           textAlign: TextAlign.end,
                           'Cancelar',
@@ -1987,7 +2361,7 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                       ),
                       child: Padding(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                         child: Text(
                           textAlign: TextAlign.end,
                           'Finalizar compra',
@@ -2004,18 +2378,15 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                 ),
               ],
             ),
-            SizedBox(height: 32,),
+            SizedBox(
+              height: 32,
+            ),
           ],
         ),
       ),
     );
   }
-
-
 }
-
-
-
 
 Widget _btnFazerPagamento() {
   return BotaoPadraoProximo(
