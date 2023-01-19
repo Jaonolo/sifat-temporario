@@ -4,7 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:requester/requester/transacao_cartao_requester.dart';
-import 'package:web_socket_channel/html.dart';
+import 'package:web_socket_channel/io.dart';
 
 part 'cancelamento_tef_controller.g.dart';
 
@@ -13,7 +13,7 @@ class CancelamentoTefController = CancelamentoTefBase
 
 abstract class CancelamentoTefBase with Store {
   static AppController appController = Modular.get();
-  late HtmlWebSocketChannel channel;
+  late IOWebSocketChannel channel;
 
   TextEditingController controllerTipoCancelamento = TextEditingController();
 

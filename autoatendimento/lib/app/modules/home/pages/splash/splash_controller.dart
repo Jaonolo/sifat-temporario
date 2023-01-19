@@ -90,8 +90,6 @@ abstract class SplashBase with Store {
 
       await _iniciaImpressao();
 
-      await _validaCardapio();
-
       _concluir();
     } catch (e) {
       print(e);

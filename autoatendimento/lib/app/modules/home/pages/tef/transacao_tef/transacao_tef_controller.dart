@@ -16,7 +16,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:models/model/models.dart';
 import 'package:models/model/sitef_protocolo_socket.dart';
-import 'package:web_socket_channel/html.dart';
 import 'package:utils/utils/date_time_utils.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:pos/pos/impressora/impressao_pos_utils.dart';
@@ -32,7 +31,7 @@ abstract class TransacaoTefBase with Store {
   CancelamentoTefController cancelamentoTefController = Modular.get();
   String viaCliente = "";
   String? xml;
-  late HtmlWebSocketChannel channel;
+  late IOWebSocketChannel channel;
   SitefProtocoloSocket sitefProtocoloSocket = SitefProtocoloSocket();
 
   @observable
@@ -66,7 +65,7 @@ abstract class TransacaoTefBase with Store {
     viaCliente = "";
     xml = "";
 
-    channel = HtmlWebSocketChannel.connect("ws://localhost:12345");
+    channel = IOWebSocketChannel.connect("ws://localhost:12345");
     channel.stream.listen((message) {
       print('--> $message');
 
