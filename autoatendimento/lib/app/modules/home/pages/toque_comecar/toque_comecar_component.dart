@@ -9,6 +9,7 @@ import 'package:models/model/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:collection/collection.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../splash/repositories/cardapio_repository.dart';
 
@@ -18,7 +19,6 @@ class ToqueComecarComponent {
   AppController appController = Modular.get();
 
   initialize(BuildContext context) {
-    _validaCardapio();
     this.context = context;
   }
 
@@ -41,9 +41,7 @@ class ToqueComecarComponent {
     }
 
     return InkWell(
-      onTap: () => {
-        appController.timerVerificaProdutos!.cancel(),
-        controller.comecar()},
+      onTap: () => {controller.comecar()},
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -54,46 +52,67 @@ class ToqueComecarComponent {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              alignment: Alignment.topLeft,
-              child: InkWell(
-                child: IconButton(
-                  icon: Icon(Icons.settings, color: Colors.white, size: 20),
-                  color: Colors.white,
-                  onPressed: () => controller.configurar())),
+            SafeArea(
+              child: Container(),
+              // child:
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: [
+              //     Expanded(
+              //       child: Container(),
+              //     ),
+              //     InkWell(
+              //       onTap: () {
+              //         controller.configurar();
+              //       },
+              //       child: Image.asset(
+              //         'assets/setting.png',
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ),
-            const Expanded(
-              flex: 64,
-              child: SizedBox(),
-            ),
-            Expanded(
-                flex: 19,
-                child: Center(
-                    child: Text(
-                  'TOQUE PARA COMEÇAR',
-                  style: TextStyle(
-                      color: DefaultTheme.branco,
-                      shadows: const [
-                        Shadow(
-                          blurRadius: 10.0,
-                          color: Colors.grey,
-                          offset: Offset(5.0, 5.0),
+            // ),
+            Column(
+              children: [
+                Container(
+                  child: Transform.scale(
+                    scale: 1.1,
+                    child: Image.asset('assets/way_chef_inicio.png'),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 58),
+                  child: Stack(
+                    children: [
+                      Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Color.fromRGBO(249, 77, 24, 1),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          'Toque na tela para começar',
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 41,
+                            color: Colors.white,
+                          ),
                         ),
-                      ],
-                      fontSize: FontUtils.h1(context) * 1.2),
-                ))),
-            Expanded(
-                flex: 7,
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.white,
-                  child: Center(
-                      child: Image.asset(
-                    "assets/waychef_autoatendimento3.png",
-                    width: FontUtils.h1(context) * 4,
-                  )),
-                ))
+                      ),
+                    ),
+                      FractionalTranslation(
+                        translation: Offset(4.1, 0.65),
+                        child: Image.asset('assets/hand.png'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -101,17 +120,18 @@ class ToqueComecarComponent {
   }
 
   Future<void> _validaCardapio() async {
-    appController.timerVerificaProdutos = Timer.periodic(const Duration(minutes: 3), (timer) async {
-      List<CardapioMenu> listCardapioMenu =  await CardapioRepository.atualizaCardapio(
-          appController.pwsConfig,
-          appController.token,
-          appController.listCardapioMenu,
-          appController.mapProdutos);
-      if(listCardapioMenu.isNotEmpty){
+    appController.timerVerificaProdutos =
+        Timer.periodic(const Duration(minutes: 3), (timer) async {
+      List<CardapioMenu> listCardapioMenu =
+          await CardapioRepository.atualizaCardapio(
+              appController.pwsConfig,
+              appController.token,
+              appController.listCardapioMenu,
+              appController.mapProdutos);
+      if (listCardapioMenu.isNotEmpty) {
         appController.listCardapioMenu = [];
         appController.listCardapioMenu = listCardapioMenu;
       }
-
     });
   }
 }
