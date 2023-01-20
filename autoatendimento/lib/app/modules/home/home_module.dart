@@ -61,23 +61,21 @@ class HomeModule extends Module {
   List<ModularRoute> get routes =>
       [
         ChildRoute('/', child: (context, args) => SplashPage()),
+        ChildRoute("/wizard", child: (_, args) => WizardPage()),
         ChildRoute("/comecar", child: (_, args) => ToqueComecarPage()),
+        ChildRoute("/viagem", child: (_, args) => PedidoViagemPage()),
         ChildRoute("/home", child: (_, args) => HomePage()),
         ChildRoute("/revisao", child: (_, args) => RevisaoPedidoPage()),
-        ChildRoute("/viagem", child: (_, args) => PedidoViagemPage()),
         ChildRoute("/cpf", child: (_, args) => CPFPage()),
         ChildRoute("/pagamento", child: (_, args) => PagamentoPage()),
+        ChildRoute("/transacao", child: (_, args) => TransacaoTefPage()),
         ChildRoute("/finalizado", child: (_, args) => PedidoFinalizadoPage()),
         ChildRoute("/aviso", child: (_, args) => AvisoIdadePage()),
-        ChildRoute("/transacao", child: (_, args) => TransacaoTefPage()),
-        ChildRoute("/wizard", child: (_, args) => WizardPage()),
         ChildRoute("/bloqueio", child: (_, args) => BloqueioAdministrativoPage()),
         ChildRoute("/configuracao", child: (_, args) => ConfiguracaoPage()),
         ChildRoute("/administrativo_tef", child: (_, args) => AdministrativoTefPage()),
         ChildRoute("/cancelamento_tef", child: (_, args) => CancelamentoTefPage()),
         ChildRoute("/pendencia_fiscal", child: (_, args) => PendenciaFiscalPage()),
-
-
 
       ];
 }

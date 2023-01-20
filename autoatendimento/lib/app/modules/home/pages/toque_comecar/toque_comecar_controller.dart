@@ -8,7 +8,7 @@ class ToqueComecarController = ToqueComecarBase with _$ToqueComecarController;
 abstract class ToqueComecarBase with Store {
 
   void comecar() {
-    Modular.to.pushNamed("/home");
+    Modular.to.pushNamed("/viagem");
   }
   void configurar() {
     Modular.to.pushNamed("/bloqueio");

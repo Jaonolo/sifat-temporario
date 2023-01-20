@@ -22,6 +22,9 @@ abstract class VendaBase with Store {
   Nota nota = Nota();
 
   @observable
+  String obsOndePrefereComer = "";
+
+  @observable
   ObservableList<ProdutoCarrinho> itensLancados = ObservableList();
 
   @action
@@ -54,6 +57,11 @@ abstract class VendaBase with Store {
       itensLancados[i].index = i;
     }
     atualizaTotais();
+  }
+
+  @action
+  void adcionarObservacao(String texto){
+    obsOndePrefereComer = texto;
   }
 
   void addNotaFinalizadora(FinalizadoraEmpresa finalizadoraEmpresa,

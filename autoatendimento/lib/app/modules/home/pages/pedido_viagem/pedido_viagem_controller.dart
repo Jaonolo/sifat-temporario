@@ -23,7 +23,7 @@ abstract class PedidoViagemBase with Store {
   }
 
   void selecionaOpcao(String value) {
-    vendaController.nota.consumo!.observacao = "Onde prefere comer: " + value;
-    Modular.to.pushNamed("/cpf");
+    vendaController.obsOndePrefereComer = "Onde prefere comer: " + value;
+    Modular.to.pushNamed("/home");
   }
 }
