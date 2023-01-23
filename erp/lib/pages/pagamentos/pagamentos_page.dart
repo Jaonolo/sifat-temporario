@@ -1428,7 +1428,7 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 16),
                               child: Text(
-                                'Safira',
+                                'Filtros',
                                 style: GoogleFonts.comfortaa(
                                   fontSize: 33,
                                   letterSpacing: -0.5,
@@ -1443,21 +1443,119 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                           ],
                         ),
                         const SizedBox(
-                          height: 52,
+                          height: 32,
                         ),
-                        Container(
-                          color: Color(0xFFE9F1FF),
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text('Valores',
-                                style: GoogleFonts.comfortaa(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.w700,
-                                  color: Color.fromRGBO(0, 29, 52, 1),
-                                  letterSpacing: -0.5,
-                                )),
-                          ),
+                        Row(
+                          children: [
+                            Expanded(child: Container()),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  side: BorderSide(
+                                    color: Color.fromRGBO(186, 26, 26, 1),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 16,
+                                ),
+                                child: Text(
+                                  'Limpar filtros',
+                                  style: GoogleFonts.sourceSansPro(
+                                    color: Color.fromRGBO(186, 26, 26, 1),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    letterSpacing: 0.25,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppTheme.adicionar,
+                              ),
+                              onPressed: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 16,
+                                ),
+                                child: Text(
+                                  'Pesquisar',
+                                  style: GoogleFonts.sourceSansPro(
+                                    color: AppTheme.corBranco,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    letterSpacing: 0.25,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(child: Container()),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  side: BorderSide(
+                                    color: Color.fromRGBO(186, 26, 26, 1),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 16,
+                                ),
+                                child: Text(
+                                  'Limpar filtros',
+                                  style: GoogleFonts.sourceSansPro(
+                                    color: Color.fromRGBO(186, 26, 26, 1),
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    letterSpacing: 0.25,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppTheme.adicionar,
+                              ),
+                              onPressed: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 16,
+                                ),
+                                child: Text(
+                                  'Pesquisar',
+                                  style: GoogleFonts.sourceSansPro(
+                                    color: AppTheme.corBranco,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    letterSpacing: 0.25,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         Column(
                             // mainAxisSize: MainAxisSize.min,
@@ -3762,61 +3860,81 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                                       child: Container(
                                         child: Column(
                                           children: [
+                                            SizedBox(
+                                              height: 48,
+                                            ),
                                             Container(
                                               child: Row(
                                                 // mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                 children: [
                                                   Expanded(
-                                                    flex: 4,
+                                                    flex: 3,
                                                     child: Container(
-                                                      child: Column(
-                                                        children: [
-                                                          Text(
-                                                            'Número',
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                            style: GoogleFonts
-                                                                .comfortaa(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize: 24,
-                                                              letterSpacing:
-                                                                  0.15,
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      94,
-                                                                      94,
-                                                                      94,
-                                                                      1),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    16.0),
+                                                        child: Column(
+                                                          children: [
+                                                            Align(
+                                                              alignment: Alignment
+                                                                  .centerLeft,
+                                                              child: Text(
+                                                                'Número',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .comfortaa(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 24,
+                                                                  letterSpacing:
+                                                                      0.15,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          51,
+                                                                          85,
+                                                                          1),
+                                                                ),
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            '16518432354224',
-                                                            textAlign:
-                                                                TextAlign.left,
-                                                            style: GoogleFonts
-                                                                .sourceSansPro(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              fontSize: 17,
-                                                              letterSpacing:
-                                                                  0.5,
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      94,
-                                                                      94,
-                                                                      94,
-                                                                      1),
+                                                            Align(
+                                                              alignment: Alignment
+                                                                  .centerLeft,
+                                                              child: Text(
+                                                                '16518432354224',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .sourceSansPro(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  fontSize: 17,
+                                                                  letterSpacing:
+                                                                      0.5,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          94,
+                                                                          94,
+                                                                          94,
+                                                                          1),
+                                                                ),
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
                                                   Expanded(
-                                                    flex: 8,
+                                                    flex: 9,
                                                     child: Container(
                                                       decoration: BoxDecoration(
                                                         color: Color.fromRGBO(
@@ -3829,23 +3947,11 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                                                           children: [
                                                             Row(
                                                               children: [
-                                                                Text(
-                                                                  'Não autorizado, cartão de crédito inexistente',
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
+                                                                Expanded(
+                                                                  flex: 1,
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .warning_amber,
                                                                     color: Color
                                                                         .fromRGBO(
                                                                             156,
@@ -3854,38 +3960,62 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                                                                             1),
                                                                   ),
                                                                 ),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    elevation:
-                                                                        0,
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            248,
-                                                                            214,
-                                                                            1),
-                                                                  ),
+                                                                // SizedBox(
+                                                                //   width: 16,
+                                                                // ),
+                                                                Expanded(
+                                                                  flex: 8,
                                                                   child: Text(
-                                                                    'Alterar Cartão',
+                                                                    'Não autorizado, cartão de crédito inexistente',
                                                                     style: GoogleFonts
                                                                         .sourceSansPro(
-                                                                      decoration:
-                                                                          TextDecoration
-                                                                              .underline,
-                                                                      fontSize:
-                                                                          16,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w400,
-                                                                      color: Color
-                                                                          .fromRGBO(
-                                                                              44,
-                                                                              49,
-                                                                              55,
-                                                                              1),
+                                                                      fontSize:
+                                                                          19,
+                                                                      letterSpacing:
+                                                                          0.5,
+                                                                      color: Color.fromRGBO(
+                                                                          156,
+                                                                          143,
+                                                                          22,
+                                                                          1),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Expanded(
+                                                                  flex: 3,
+                                                                  child:
+                                                                      ElevatedButton(
+                                                                    onPressed:
+                                                                        () {},
+                                                                    style: ElevatedButton
+                                                                        .styleFrom(
+                                                                      elevation:
+                                                                          0,
+                                                                      backgroundColor: Color.fromRGBO(
+                                                                          255,
+                                                                          248,
+                                                                          214,
+                                                                          1),
+                                                                    ),
+                                                                    child: Text(
+                                                                      'Alterar Cartão',
+                                                                      style: GoogleFonts
+                                                                          .sourceSansPro(
+                                                                        decoration:
+                                                                            TextDecoration.underline,
+                                                                        fontSize:
+                                                                            16,
+                                                                        fontWeight:
+                                                                            FontWeight.w600,
+                                                                        color: Color.fromRGBO(
+                                                                            44,
+                                                                            49,
+                                                                            55,
+                                                                            1),
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -3899,587 +4029,369 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                                                 ],
                                               ),
                                             ),
+                                            SizedBox(
+                                              height: 24,
+                                            ),
                                             Container(
                                               height: 400,
-                                              child: SingleChildScrollView(
-                                                child: Column(children: [
-                                                  Padding(
+                                              child: Column(children: [
+                                                // aqui
+                                                Card(
+                                                  elevation: 0,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                  ),
+                                                  color: Color.fromRGBO(
+                                                      252, 252, 255, 1),
+                                                  child: Padding(
                                                     padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
+                                                        const EdgeInsets.all(
+                                                            16.0),
+                                                    child: Column(
+                                                      children: [
+                                                        Row(
+                                                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                           children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child: Text(
+                                                                'NFSE',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .comfortaa(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 16,
+                                                                  letterSpacing:
+                                                                      0.15,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          51,
+                                                                          85,
+                                                                          1),
                                                                 ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                  color: AppTheme
-                                                                      .adicionar,
-                                                                ),
-                                                              ],
+                                                              ),
                                                             ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        17,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
+                                                            Expanded(
+                                                              flex: 3,
+                                                              child: Text(
+                                                                'Cód. Autorização',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .comfortaa(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 16,
+                                                                  letterSpacing:
+                                                                      0.15,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          51,
+                                                                          85,
+                                                                          1),
                                                                 ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 3,
+                                                              child: Text(
+                                                                'NSU',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .comfortaa(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 16,
+                                                                  letterSpacing:
+                                                                      0.15,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          51,
+                                                                          85,
+                                                                          1),
                                                                 ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
-                                                                            0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child: Text(
+                                                                'TID',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .comfortaa(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 16,
+                                                                  letterSpacing:
+                                                                      0.15,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          51,
+                                                                          85,
+                                                                          1),
                                                                 ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child: Text(
+                                                                'Data',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .comfortaa(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 16,
+                                                                  letterSpacing:
+                                                                      0.15,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          51,
+                                                                          85,
+                                                                          1),
+                                                                ),
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
+                                                        Row(
+                                                          // mainAxisAlignment:
+                                                          //     MainAxisAlignment
+                                                          //         .start,
                                                           children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Icon(
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child: Align(
+                                                                alignment: Alignment
+                                                                    .centerLeft,
+                                                                child: Icon(
                                                                   Icons
-                                                                      .visibility,
+                                                                      .download,
                                                                   color: AppTheme
                                                                       .adicionar,
                                                                 ),
-                                                              ],
+                                                              ),
                                                             ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        17,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
+                                                            Expanded(
+                                                              flex: 3,
+                                                              child: Text(
+                                                                '4545454545',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .sourceSansPro(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 16,
+                                                                  letterSpacing:
+                                                                      0.15,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          51,
+                                                                          85,
+                                                                          1),
                                                                 ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 3,
+                                                              child: Text(
+                                                                '16518432354224',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .sourceSansPro(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 16,
+                                                                  letterSpacing:
+                                                                      0.15,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          51,
+                                                                          85,
+                                                                          1),
                                                                 ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
-                                                                            0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child: Text(
+                                                                '16511545',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .sourceSansPro(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 16,
+                                                                  letterSpacing:
+                                                                      0.15,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          51,
+                                                                          85,
+                                                                          1),
                                                                 ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child: Text(
+                                                                '10/08/2022',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .sourceSansPro(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 16,
+                                                                  letterSpacing:
+                                                                      0.15,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          51,
+                                                                          85,
+                                                                          1),
+                                                                ),
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
+                                                        SizedBox(
+                                                          height: 64,
+                                                        ),
+                                                        Row(
+                                                          // mainAxisAlignment:
+                                                          //     MainAxisAlignment
+                                                          //         .spaceBetween,
                                                           children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
+                                                            Expanded(
+                                                              flex: 10,
+                                                              child: Text(
+                                                                'Descrição',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .sourceSansPro(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 16,
+                                                                  letterSpacing:
+                                                                      0.15,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          51,
+                                                                          85,
+                                                                          1),
                                                                 ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                  color: AppTheme
-                                                                      .adicionar,
-                                                                ),
-                                                              ],
+                                                              ),
                                                             ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child: Align(
+                                                                alignment: Alignment
+                                                                    .centerLeft,
+                                                                child: Text(
+                                                                  'Valor',
                                                                   textAlign:
                                                                       TextAlign
                                                                           .left,
                                                                   style: GoogleFonts
-                                                                      .sourceSansPro(
+                                                                      .comfortaa(
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .w400,
+                                                                            .w500,
                                                                     fontSize:
-                                                                        17,
+                                                                        16,
                                                                     letterSpacing:
                                                                         0.5,
                                                                     color: Color
                                                                         .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
                                                                             0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
+                                                                            51,
+                                                                            85,
                                                                             1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
                                                                   ),
                                                                 ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
+                                                        SizedBox(height: 16),
+                                                        Row(
+                                                          // mainAxisAlignment:
+                                                          //     MainAxisAlignment
+                                                          //         .spaceBetween,
                                                           children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
+                                                            Expanded(
+                                                              flex: 10,
+                                                              child: Text(
+                                                                'Licença de uso Prata Mensal + 10 sessões',
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                style: GoogleFonts
+                                                                    .sourceSansPro(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontSize: 17,
+                                                                  letterSpacing:
+                                                                      0.5,
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          0,
+                                                                          51,
+                                                                          85,
+                                                                          1),
                                                                 ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                  color: AppTheme
-                                                                      .adicionar,
-                                                                ),
-                                                              ],
+                                                              ),
                                                             ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child: Align(
+                                                                alignment: Alignment
+                                                                    .centerLeft,
+                                                                child: Text(
+                                                                  'R\$ 0,00',
                                                                   textAlign:
                                                                       TextAlign
                                                                           .left,
@@ -4487,1673 +4399,30 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                                                                       .sourceSansPro(
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .w400,
+                                                                            .w700,
                                                                     fontSize:
-                                                                        17,
+                                                                        20,
                                                                     letterSpacing:
                                                                         0.5,
                                                                     color: Color
                                                                         .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
                                                                             0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
+                                                                            51,
+                                                                            85,
                                                                             1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
                                                                   ),
                                                                 ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
+                                                      ],
                                                     ),
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                  color: AppTheme
-                                                                      .adicionar,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        17,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
-                                                                            0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                  color: AppTheme
-                                                                      .adicionar,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        17,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
-                                                                            0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                  color: AppTheme
-                                                                      .adicionar,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        17,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
-                                                                            0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                  color: AppTheme
-                                                                      .adicionar,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        17,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
-                                                                            0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                  color: AppTheme
-                                                                      .adicionar,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        17,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
-                                                                            0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                  color: AppTheme
-                                                                      .adicionar,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        17,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
-                                                                            0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                  color: AppTheme
-                                                                      .adicionar,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        17,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
-                                                                            0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                  color: AppTheme
-                                                                      .adicionar,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        17,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
-                                                                            0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.all(14.0),
-                                                    child: Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(16),
-                                                      ),
-                                                      color: Color.fromRGBO(
-                                                          252, 252, 255, 1),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(24.0),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Text(
-                                                                  'Licença de uso Prata Mensal + 10 sessões',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                  color: AppTheme
-                                                                      .adicionar,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                              children: [
-                                                                Text(
-                                                                  '10/09/2011',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    fontSize:
-                                                                        17,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                Text(
-                                                                  'Valor: R\$ 0,00',
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .left,
-                                                                  style: GoogleFonts
-                                                                      .sourceSansPro(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                    fontSize:
-                                                                        19,
-                                                                    letterSpacing:
-                                                                        0.5,
-                                                                    color: Color
-                                                                        .fromRGBO(
-                                                                            94,
-                                                                            94,
-                                                                            94,
-                                                                            1),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                                ElevatedButton(
-                                                                  onPressed:
-                                                                      () {},
-                                                                  style: ElevatedButton
-                                                                      .styleFrom(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 0,
-                                                                        top: 8,
-                                                                        right:
-                                                                            0,
-                                                                        bottom:
-                                                                            8),
-                                                                    backgroundColor:
-                                                                        Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              99),
-                                                                      side:
-                                                                          BorderSide(
-                                                                        color: Color.fromRGBO(
-                                                                            255,
-                                                                            237,
-                                                                            232,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            8,
-                                                                        vertical:
-                                                                            8),
-                                                                    child: Text(
-                                                                      'Atrasado',
-                                                                      style: GoogleFonts
-                                                                          .sourceSansPro(
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Color.fromRGBO(
-                                                                            95,
-                                                                            21,
-                                                                            0,
-                                                                            1),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                    child:
-                                                                        Container()),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ]),
-                                              ),
+                                                ),
+
+                                                //aqqui2
+                                              ]),
                                             ),
                                           ],
                                         ),
