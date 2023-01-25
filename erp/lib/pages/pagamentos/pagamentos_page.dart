@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erp/pages/pagamentos/pagamentos_page_controller.dart';
 import 'package:erp/widgets/chebox_mobile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -4797,6 +4798,296 @@ class PagamentosPage extends GetView<PagamentosPageController> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _modalCancelar() {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      title: Column(
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text('Cancelamento',
+              style: GoogleFonts.comfortaa(
+                fontSize: 33,
+                letterSpacing: -0.5,
+                fontWeight: FontWeight.w400,
+                color: Color.fromRGBO(13, 13, 13, 1),
+              ),
+            ),
+          ),
+          const Divider(thickness: 2,),
+        ],
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text('Para cancelar esse contrato é necessário \n'
+                    'descrever o motivo do cancelamento',
+                  style: GoogleFonts.sourceSansPro(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 17,
+                    letterSpacing: 0.5,
+                  ),),
+              ),
+            ],
+          ),
+          SizedBox(height: 40,),
+          Padding(
+            padding: EdgeInsets.only(bottom: 16),
+            child: TextFormField(
+              inputFormatters: [LengthLimitingTextInputFormatter(80)],
+              cursorColor: Color.fromRGBO(66, 71, 78, 1),
+              decoration: InputDecoration(
+                labelText: 'Motivo Do Cancelamento',
+                labelStyle: GoogleFonts.sourceSansPro(
+                  fontSize: 15,
+                  letterSpacing: 0.25,
+                  fontWeight: FontWeight.w400,
+                  color: Color.fromRGBO(66, 71, 78, 1),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color.fromRGBO(66, 71, 78, 1),),
+                ),
+                isDense: true,
+              ),
+
+            ),
+          ),
+          SizedBox(height: 40,),
+          Row(
+            children: [
+              Expanded(child: Container()),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(
+                        color: Color.fromRGBO(186, 26, 26, 1),
+                      ),
+                    ),
+                  ),
+                  child: Padding(
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: Text(
+                      textAlign: TextAlign.end,
+                      'Desistir',
+                      style: GoogleFonts.sourceSansPro(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromRGBO(186, 26, 26, 1),
+                        letterSpacing: 0.25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromRGBO(22, 156, 52, 1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                  ),
+                  child: Padding(
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: Text(
+                      textAlign: TextAlign.end,
+                      'Cancelar assinatura',
+                      style: GoogleFonts.sourceSansPro(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.buttomModalConfirmar,
+                        letterSpacing: 0.25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _modalCancelarRecorrencia() {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      title: Column(
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text('Cancelar Recorrência',
+            style: GoogleFonts.comfortaa(
+              fontSize: 33,
+              letterSpacing: -0.5,
+              fontWeight: FontWeight.w400,
+              color: Color.fromRGBO(13, 13, 13, 1),
+            ),
+            ),
+          ),
+          const Divider(thickness: 2,),
+        ],
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text('Selecione a quantidade de sessões extras que \n'
+                    'deseja cancelar, no momento você possui',
+                style: GoogleFonts.sourceSansPro(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 17,
+                  letterSpacing: 0.5,
+                ),),
+              ),
+            ],
+          ),
+          SizedBox(height: 40,),
+          Row(
+            children: [
+              Expanded(
+                flex: 6,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(194, 199, 207, 1),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('Sessões Extras Atuais',
+                        style: GoogleFonts.roboto(
+                          color: Color.fromRGBO(66, 71, 78, 1),
+                          fontSize: 12,
+                          letterSpacing: 0.4,
+                          fontWeight: FontWeight.w400,
+                        ),),
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('10',
+                        style: GoogleFonts.sourceSansPro(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          letterSpacing: 0.25,
+                          color: Color.fromRGBO(66, 71, 78, 1),
+                        ),),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 6,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                     Row(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children: [
+                         Text('-'),
+                         Text('1'),
+                         Text('+'),
+                       ],
+                     ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+
+
+
+          SizedBox(height: 40,),
+          Row(
+            children: [
+              Expanded(child: Container()),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(
+                        color: AppTheme.adicionar,
+                      ),
+                    ),
+                  ),
+                  child: Padding(
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: Text(
+                      textAlign: TextAlign.end,
+                      'Desistir',
+                      style: GoogleFonts.sourceSansPro(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.adicionar,
+                        letterSpacing: 0.25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromRGBO(186, 26, 26, 1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                  ),
+                  child: Padding(
+                    padding:
+                    EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: Text(
+                      textAlign: TextAlign.end,
+                      'Cancelar recorrência',
+                      style: GoogleFonts.sourceSansPro(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.buttomModalConfirmar,
+                        letterSpacing: 0.25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
