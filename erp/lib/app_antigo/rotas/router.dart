@@ -2,6 +2,7 @@ import 'package:erp/app_antigo/extensions/string_extension.dart';
 import 'package:erp/app_antigo/modules/home/home_page.dart';
 import 'package:erp/app_antigo/modules/not_found/not_found_page.dart';
 import 'package:erp/app_antigo/rotas/route_names.dart';
+import 'package:erp/pages/pagamentos/pagamentos_relatorio_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       case ContratoRoute:
         return _getPageRoute(PlataformaPage(routingData["token"]), settings);
       case PagamentoRoute:
-        return _getPageRoute(PagamentosPage(), settings);
+        return _getPageRoute(PagamentosRelatorioPage(), settings);
         // return _getPageRoute(Cartao(), settings);
       // case ContratoIntegradorRoute:
       //   return _getPageRoute(PlataformaIntegradorPage(), settings);

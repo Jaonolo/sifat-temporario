@@ -1,4 +1,5 @@
 import 'package:erp/pages/pagamentos/pagamentos_page_controller.dart';
+import 'package:erp/pages/pagamentos/pagamentos_relatorios_controller.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/contrato/editar_contato_integrador_controller.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/contratocustomizado/contrato_customizado_controller.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/extras/plataforma_page_controller.dart';
@@ -24,6 +25,7 @@ void main() {
   Get.lazyPut(()=> EditarContratoPlataformaErpController());
   Get.lazyPut(()=> PlataformaPageController());
   Get.lazyPut(()=> PagamentosPageController());
+  Get.lazyPut(()=> PagamentosRelatoriosController());
   setupLocator();
   runApp(MyApp());
 }

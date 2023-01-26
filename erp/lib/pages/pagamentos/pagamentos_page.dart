@@ -39,25 +39,41 @@ class PagamentosPage extends GetView<PagamentosPageController> {
           padding: const EdgeInsets.all(16),
           children: [
             Row(
-              // mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Expanded(
+                Text(
+                  'Dados da Empresa',
+                  style: GoogleFonts.sourceSansPro(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    letterSpacing: 0.25,
+                    color: Color(0xFF001D34),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
-                    'Assinaturas',
-                    textAlign: TextAlign.left,
+                    '>',
                     style: GoogleFonts.comfortaa(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 46,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 16,
+                      letterSpacing: -0.5,
+                      color: Color(0xFF001D34),
                     ),
+                  ),
+                ),
+                Text(
+                  'Minha Empresa',
+                  style: GoogleFonts.sourceSansPro(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    letterSpacing: 0.25,
+                    color: Color(0xFF171C22),
                   ),
                 ),
               ],
             ),
-            const Divider(
-              thickness: 2,
-            ),
             const SizedBox(
-              height: 36,
+              height: 64,
             ),
             Card(
               margin: EdgeInsets.zero,
@@ -165,1254 +181,1248 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                 index: controller.indexController.value,
                 children: [
                   // Tela aba plano
-                  Container(),
-                  // Container(
-                  //   child: Column(
-                  //     children: [
-                  //       const SizedBox(
-                  //         height: 52,
-                  //       ),
-                  //       Row(
-                  //         children: [
-                  //           Expanded(
-                  //             /*1*/
-                  //             child: Column(
-                  //               crossAxisAlignment: CrossAxisAlignment.start,
-                  //               children: [
-                  //                 /*2*/
-                  //                 Container(
-                  //                   padding: EdgeInsets.only(bottom: 8),
-                  //                   child: Text(
-                  //                     'Prata Mensal',
-                  //                     style: GoogleFonts.comfortaa(
-                  //                       fontSize: 26,
-                  //                       letterSpacing: 0.15,
-                  //                       fontWeight: FontWeight.w500,
-                  //                       color: Color.fromRGBO(13, 13, 13, 1),
-                  //                     ),
-                  //                   ),
-                  //                 ),
-                  //                 SizedBox(
-                  //                   height: 8,
-                  //                 ),
-                  //                 Text(
-                  //                   'Vencimento: 01/01/0001',
-                  //                   style: GoogleFonts.comfortaa(
-                  //                     fontSize: 19,
-                  //                     letterSpacing: 0.5,
-                  //                     fontWeight: FontWeight.w600,
-                  //                     color: Color.fromRGBO(94, 94, 94, 1),
-                  //                   ),
-                  //                 ),
-                  //                 SizedBox(
-                  //                   height: 8,
-                  //                 ),
-                  //                 Text(
-                  //                   'Valor Total: R\$ 0,00',
-                  //                   style: GoogleFonts.comfortaa(
-                  //                     fontSize: 19,
-                  //                     letterSpacing: 0.5,
-                  //                     fontWeight: FontWeight.w600,
-                  //                     color: Color.fromRGBO(94, 94, 94, 1),
-                  //                   ),
-                  //                 ),
-                  //               ],
-                  //             ),
-                  //           ),
-                  //           /*3*/
-                  //           ElevatedButton(
-                  //             style: ElevatedButton.styleFrom(
-                  //               backgroundColor:
-                  //                   Color.fromRGBO(250, 250, 250, 1),
-                  //               shape: RoundedRectangleBorder(
-                  //                   borderRadius: BorderRadius.circular(100.0),
-                  //                   side: BorderSide(
-                  //                       width: 3, color: AppTheme.adicionar)),
-                  //               //splashColor: DefaultTheme.accentColor, Desativado pelo uso do ElevatedButton
-                  //             ),
-                  //             onPressed: () {},
-                  //             child: Padding(
-                  //               padding: const EdgeInsets.all(16.0),
-                  //               child: Text(
-                  //                 'Alterar plano',
-                  //                 style: GoogleFonts.sourceSansPro(
-                  //                   fontWeight: FontWeight.w600,
-                  //                   fontSize: 20,
-                  //                   letterSpacing: 0.25,
-                  //                   color: AppTheme.adicionar,
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //       const SizedBox(
-                  //         height: 52,
-                  //       ),
-                  //
-                  //       Wrap(
-                  //         runAlignment: WrapAlignment.spaceBetween,
-                  //         clipBehavior: Clip.antiAlias,
-                  //         runSpacing: 16,
-                  //         spacing: 32,
-                  //         children: [
-                  //           Container(
-                  //             // height: 300,
-                  //             width: MediaQuery.of(context).size.width * 0.48,
-                  //             child: Card(
-                  //               color: Color.fromRGBO(250, 250, 250, 1),
-                  //               elevation: 0,
-                  //               child: Column(
-                  //                 children: [
-                  //                   Container(
-                  //                     padding: EdgeInsets.all(16),
-                  //                     color: Color(0xFFE9F1FF),
-                  //                     child: Row(
-                  //                       children: [
-                  //                         Expanded(
-                  //                           child: Text('Produto',
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontSize: 23,
-                  //                                 fontWeight: FontWeight.w700,
-                  //                                 color: Color.fromRGBO(
-                  //                                     13, 13, 13, 1),
-                  //                                 letterSpacing: -0.5,
-                  //                               )),
-                  //                         ),
-                  //                       ],
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.all(16.0),
-                  //                     child: Container(
-                  //                       padding: EdgeInsets.symmetric(
-                  //                           horizontal: 24),
-                  //                       child: Row(
-                  //                         mainAxisAlignment:
-                  //                             MainAxisAlignment.spaceBetween,
-                  //                         children: [
-                  //                           Expanded(
-                  //                             flex: 8,
-                  //                             child: Text(
-                  //                               'Controle de tabela de preços',
-                  //                               softWrap: true,
-                  //                               textAlign: TextAlign.left,
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontWeight: FontWeight.w500,
-                  //                                 fontSize: 19,
-                  //                                 letterSpacing: 0.15,
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                           Expanded(
-                  //                             flex: 4,
-                  //                             child: Icon(
-                  //                               Icons.check,
-                  //                               color: Color.fromRGBO(
-                  //                                   22, 156, 52, 1),
-                  //                             ),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           Container(
-                  //             // height: 300,
-                  //             width: MediaQuery.of(context).size.width * 0.48,
-                  //             child: Card(
-                  //               color: Color.fromRGBO(250, 250, 250, 1),
-                  //               elevation: 0,
-                  //               child: Column(
-                  //                 children: [
-                  //                   Container(
-                  //                     padding: EdgeInsets.all(16),
-                  //                     color: Color(0xFFE9F1FF),
-                  //                     child: Row(
-                  //                       children: [
-                  //                         Expanded(
-                  //                           child: Text('Limites',
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontSize: 23,
-                  //                                 fontWeight: FontWeight.w700,
-                  //                                 color: Color.fromRGBO(
-                  //                                     13, 13, 13, 1),
-                  //                                 letterSpacing: -0.5,
-                  //                               )),
-                  //                         ),
-                  //                       ],
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.all(16.0),
-                  //                     child: Container(
-                  //                       padding: EdgeInsets.symmetric(
-                  //                           horizontal: 24),
-                  //                       child: Row(
-                  //                         mainAxisAlignment:
-                  //                             MainAxisAlignment.spaceBetween,
-                  //                         children: [
-                  //                           Expanded(
-                  //                             flex: 8,
-                  //                             child: Text(
-                  //                               'Controle de tabela de preços',
-                  //                               softWrap: true,
-                  //                               textAlign: TextAlign.left,
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontWeight: FontWeight.w500,
-                  //                                 fontSize: 19,
-                  //                                 letterSpacing: 0.15,
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                           Expanded(
-                  //                             flex: 4,
-                  //                             child: Icon(
-                  //                               Icons.check,
-                  //                               color: Color.fromRGBO(
-                  //                                   22, 156, 52, 1),
-                  //                             ),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           Container(
-                  //             // height: 300,
-                  //             width: MediaQuery.of(context).size.width * 0.48,
-                  //             child: Card(
-                  //               color: Color.fromRGBO(250, 250, 250, 1),
-                  //               elevation: 0,
-                  //               child: Column(
-                  //                 children: [
-                  //                   Container(
-                  //                     padding: EdgeInsets.all(16),
-                  //                     color: Color(0xFFE9F1FF),
-                  //                     child: Row(
-                  //                       children: [
-                  //                         Expanded(
-                  //                           child: Text('Estoque',
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontSize: 23,
-                  //                                 fontWeight: FontWeight.w700,
-                  //                                 color: Color.fromRGBO(
-                  //                                     13, 13, 13, 1),
-                  //                                 letterSpacing: -0.5,
-                  //                               )),
-                  //                         ),
-                  //                       ],
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.all(16.0),
-                  //                     child: Container(
-                  //                       padding: EdgeInsets.symmetric(
-                  //                           horizontal: 24),
-                  //                       child: Row(
-                  //                         mainAxisAlignment:
-                  //                             MainAxisAlignment.spaceBetween,
-                  //                         children: [
-                  //                           Expanded(
-                  //                             flex: 8,
-                  //                             child: Text(
-                  //                               'Controle de tabela de preços',
-                  //                               softWrap: true,
-                  //                               textAlign: TextAlign.left,
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontWeight: FontWeight.w500,
-                  //                                 fontSize: 19,
-                  //                                 letterSpacing: 0.15,
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                           Expanded(
-                  //                             flex: 4,
-                  //                             child: Icon(
-                  //                               Icons.check,
-                  //                               color: Color.fromRGBO(
-                  //                                   22, 156, 52, 1),
-                  //                             ),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.all(16.0),
-                  //                     child: Container(
-                  //                       padding: EdgeInsets.symmetric(
-                  //                           horizontal: 24),
-                  //                       child: Row(
-                  //                         mainAxisAlignment:
-                  //                             MainAxisAlignment.spaceBetween,
-                  //                         children: [
-                  //                           Expanded(
-                  //                             flex: 8,
-                  //                             child: Text(
-                  //                               'Controle de tabela de preços',
-                  //                               softWrap: true,
-                  //                               textAlign: TextAlign.left,
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontWeight: FontWeight.w500,
-                  //                                 fontSize: 19,
-                  //                                 letterSpacing: 0.15,
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                           Expanded(
-                  //                             flex: 4,
-                  //                             child: Icon(
-                  //                               Icons.check,
-                  //                               color: Color.fromRGBO(
-                  //                                   22, 156, 52, 1),
-                  //                             ),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.all(16.0),
-                  //                     child: Container(
-                  //                       padding: EdgeInsets.symmetric(
-                  //                           horizontal: 24),
-                  //                       child: Row(
-                  //                         mainAxisAlignment:
-                  //                             MainAxisAlignment.spaceBetween,
-                  //                         children: [
-                  //                           Expanded(
-                  //                             flex: 8,
-                  //                             child: Text(
-                  //                               'Controle de tabela de preços',
-                  //                               softWrap: true,
-                  //                               textAlign: TextAlign.left,
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontWeight: FontWeight.w500,
-                  //                                 fontSize: 19,
-                  //                                 letterSpacing: 0.15,
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                           Expanded(
-                  //                             flex: 4,
-                  //                             child: Icon(
-                  //                               Icons.check,
-                  //                               color: Color.fromRGBO(
-                  //                                   22, 156, 52, 1),
-                  //                             ),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           Container(
-                  //             // height: 300,
-                  //             width: MediaQuery.of(context).size.width * 0.48,
-                  //             child: Card(
-                  //               color: Color.fromRGBO(250, 250, 250, 1),
-                  //               elevation: 0,
-                  //               child: Column(
-                  //                 children: [
-                  //                   Container(
-                  //                     padding: EdgeInsets.all(16),
-                  //                     color: Color(0xFFE9F1FF),
-                  //                     child: Row(
-                  //                       children: [
-                  //                         Expanded(
-                  //                           child: Text('Financeiro',
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontSize: 23,
-                  //                                 fontWeight: FontWeight.w700,
-                  //                                 color: Color.fromRGBO(
-                  //                                     13, 13, 13, 1),
-                  //                                 letterSpacing: -0.5,
-                  //                               )),
-                  //                         ),
-                  //                       ],
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.all(16.0),
-                  //                     child: Container(
-                  //                       padding: EdgeInsets.symmetric(
-                  //                           horizontal: 24),
-                  //                       child: Row(
-                  //                         mainAxisAlignment:
-                  //                             MainAxisAlignment.spaceBetween,
-                  //                         children: [
-                  //                           Expanded(
-                  //                             flex: 8,
-                  //                             child: Text(
-                  //                               'Controle de tabela de preços',
-                  //                               softWrap: true,
-                  //                               textAlign: TextAlign.left,
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontWeight: FontWeight.w500,
-                  //                                 fontSize: 19,
-                  //                                 letterSpacing: 0.15,
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                           Expanded(
-                  //                             flex: 4,
-                  //                             child: Icon(
-                  //                               Icons.check,
-                  //                               color: Color.fromRGBO(
-                  //                                   22, 156, 52, 1),
-                  //                             ),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.all(16.0),
-                  //                     child: Container(
-                  //                       padding: EdgeInsets.symmetric(
-                  //                           horizontal: 24),
-                  //                       child: Row(
-                  //                         mainAxisAlignment:
-                  //                             MainAxisAlignment.spaceBetween,
-                  //                         children: [
-                  //                           Expanded(
-                  //                             flex: 8,
-                  //                             child: Text(
-                  //                               'Controle de tabela de preços',
-                  //                               softWrap: true,
-                  //                               textAlign: TextAlign.left,
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontWeight: FontWeight.w500,
-                  //                                 fontSize: 19,
-                  //                                 letterSpacing: 0.15,
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                           Expanded(
-                  //                             flex: 4,
-                  //                             child: Icon(
-                  //                               Icons.check,
-                  //                               color: Color.fromRGBO(
-                  //                                   22, 156, 52, 1),
-                  //                             ),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.all(16.0),
-                  //                     child: Container(
-                  //                       padding: EdgeInsets.symmetric(
-                  //                           horizontal: 24),
-                  //                       child: Row(
-                  //                         mainAxisAlignment:
-                  //                             MainAxisAlignment.spaceBetween,
-                  //                         children: [
-                  //                           Expanded(
-                  //                             flex: 8,
-                  //                             child: Text(
-                  //                               'Controle de tabela de preços',
-                  //                               softWrap: true,
-                  //                               textAlign: TextAlign.left,
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontWeight: FontWeight.w500,
-                  //                                 fontSize: 19,
-                  //                                 letterSpacing: 0.15,
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                           Expanded(
-                  //                             flex: 4,
-                  //                             child: Icon(
-                  //                               Icons.check,
-                  //                               color: Color.fromRGBO(
-                  //                                   22, 156, 52, 1),
-                  //                             ),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.all(16.0),
-                  //                     child: Container(
-                  //                       padding: EdgeInsets.symmetric(
-                  //                           horizontal: 24),
-                  //                       child: Row(
-                  //                         mainAxisAlignment:
-                  //                             MainAxisAlignment.spaceBetween,
-                  //                         children: [
-                  //                           Expanded(
-                  //                             flex: 8,
-                  //                             child: Text(
-                  //                               'Controle de tabela de preços',
-                  //                               softWrap: true,
-                  //                               textAlign: TextAlign.left,
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontWeight: FontWeight.w500,
-                  //                                 fontSize: 19,
-                  //                                 letterSpacing: 0.15,
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                           Expanded(
-                  //                             flex: 4,
-                  //                             child: Icon(
-                  //                               Icons.check,
-                  //                               color: Color.fromRGBO(
-                  //                                   22, 156, 52, 1),
-                  //                             ),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           Container(
-                  //             // height: 300,
-                  //             width: MediaQuery.of(context).size.width * 0.48,
-                  //             child: Card(
-                  //               color: Color.fromRGBO(250, 250, 250, 1),
-                  //               elevation: 0,
-                  //               child: Column(
-                  //                 children: [
-                  //                   Container(
-                  //                     padding: EdgeInsets.all(16),
-                  //                     color: Color(0xFFE9F1FF),
-                  //                     child: Row(
-                  //                       children: [
-                  //                         Expanded(
-                  //                           child: Text('Fiscal',
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontSize: 23,
-                  //                                 fontWeight: FontWeight.w700,
-                  //                                 color: Color.fromRGBO(
-                  //                                     13, 13, 13, 1),
-                  //                                 letterSpacing: -0.5,
-                  //                               )),
-                  //                         ),
-                  //                       ],
-                  //                     ),
-                  //                   ),
-                  //                   Padding(
-                  //                     padding: const EdgeInsets.all(16.0),
-                  //                     child: Container(
-                  //                       padding: EdgeInsets.symmetric(
-                  //                           horizontal: 24),
-                  //                       child: Row(
-                  //                         mainAxisAlignment:
-                  //                             MainAxisAlignment.spaceBetween,
-                  //                         children: [
-                  //                           Expanded(
-                  //                             flex: 8,
-                  //                             child: Text(
-                  //                               'Controle de tabela de preços',
-                  //                               softWrap: true,
-                  //                               textAlign: TextAlign.left,
-                  //                               style: GoogleFonts.comfortaa(
-                  //                                 fontWeight: FontWeight.w500,
-                  //                                 fontSize: 19,
-                  //                                 letterSpacing: 0.15,
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                           Expanded(
-                  //                             flex: 4,
-                  //                             child: Icon(
-                  //                               Icons.check,
-                  //                               color: Color.fromRGBO(
-                  //                                   22, 156, 52, 1),
-                  //                             ),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                 ],
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //       const SizedBox(
-                  //         height: 32,
-                  //       ),
-                  //
-                  //       Container(
-                  //         padding: EdgeInsets.all(16),
-                  //         color: Color(0xFFE9F1FF),
-                  //         child: Row(
-                  //           children: [
-                  //             Expanded(
-                  //               child: Text('Extras',
-                  //                   style: GoogleFonts.comfortaa(
-                  //                     fontSize: 23,
-                  //                     fontWeight: FontWeight.w700,
-                  //                     color: Color.fromRGBO(13, 13, 13, 1),
-                  //                     letterSpacing: -0.5,
-                  //                   )),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //       Container(
-                  //         child: Card(
-                  //           color: Color.fromRGBO(250, 250, 250, 1),
-                  //           elevation: 0,
-                  //           child: Column(
-                  //             children: [
-                  //               Padding(
-                  //                 padding: const EdgeInsets.all(16.0),
-                  //                 child: Container(
-                  //                   padding:
-                  //                       EdgeInsets.symmetric(horizontal: 24),
-                  //                   child: Row(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.spaceBetween,
-                  //                     children: [
-                  //                       Expanded(
-                  //                         flex: 6,
-                  //                         child: Text(
-                  //                           'Aplicativo - WayWallert',
-                  //                           softWrap: true,
-                  //                           textAlign: TextAlign.left,
-                  //                           style: GoogleFonts.comfortaa(
-                  //                             fontWeight: FontWeight.w500,
-                  //                             fontSize: 19,
-                  //                             letterSpacing: 0.15,
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('R\$ 30,00',
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color.fromRGBO(
-                  //                                   13, 13, 13, 1),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('Adicionar',
-                  //                             textAlign: TextAlign.right,
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               decoration:
-                  //                                   TextDecoration.underline,
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color(0xFFFF5722),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //               Padding(
-                  //                 padding: const EdgeInsets.all(16.0),
-                  //                 child: Container(
-                  //                   padding:
-                  //                       EdgeInsets.symmetric(horizontal: 24),
-                  //                   child: Row(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.spaceBetween,
-                  //                     children: [
-                  //                       Expanded(
-                  //                         flex: 6,
-                  //                         child: Text(
-                  //                           'Aplicativo - WayWallert',
-                  //                           softWrap: true,
-                  //                           textAlign: TextAlign.left,
-                  //                           style: GoogleFonts.comfortaa(
-                  //                             fontWeight: FontWeight.w500,
-                  //                             fontSize: 19,
-                  //                             letterSpacing: 0.15,
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('R\$ 30,00',
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color.fromRGBO(
-                  //                                   13, 13, 13, 1),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('Adicionar',
-                  //                             textAlign: TextAlign.right,
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               decoration:
-                  //                                   TextDecoration.underline,
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color(0xFFFF5722),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //               Padding(
-                  //                 padding: const EdgeInsets.all(16.0),
-                  //                 child: Container(
-                  //                   padding:
-                  //                       EdgeInsets.symmetric(horizontal: 24),
-                  //                   child: Row(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.spaceBetween,
-                  //                     children: [
-                  //                       Expanded(
-                  //                         flex: 6,
-                  //                         child: Text(
-                  //                           'Aplicativo - WayWallert',
-                  //                           softWrap: true,
-                  //                           textAlign: TextAlign.left,
-                  //                           style: GoogleFonts.comfortaa(
-                  //                             fontWeight: FontWeight.w500,
-                  //                             fontSize: 19,
-                  //                             letterSpacing: 0.15,
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('R\$ 30,00',
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color.fromRGBO(
-                  //                                   13, 13, 13, 1),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('Adicionar',
-                  //                             textAlign: TextAlign.right,
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               decoration:
-                  //                                   TextDecoration.underline,
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color(0xFFFF5722),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //               Padding(
-                  //                 padding: const EdgeInsets.all(16.0),
-                  //                 child: Container(
-                  //                   padding:
-                  //                       EdgeInsets.symmetric(horizontal: 24),
-                  //                   child: Row(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.spaceBetween,
-                  //                     children: [
-                  //                       Expanded(
-                  //                         flex: 6,
-                  //                         child: Text(
-                  //                           'Aplicativo - WayWallert',
-                  //                           softWrap: true,
-                  //                           textAlign: TextAlign.left,
-                  //                           style: GoogleFonts.comfortaa(
-                  //                             fontWeight: FontWeight.w500,
-                  //                             fontSize: 19,
-                  //                             letterSpacing: 0.15,
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('R\$ 30,00',
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color.fromRGBO(
-                  //                                   13, 13, 13, 1),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('Adicionar',
-                  //                             textAlign: TextAlign.right,
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               decoration:
-                  //                                   TextDecoration.underline,
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color(0xFFFF5722),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //               Padding(
-                  //                 padding: const EdgeInsets.all(16.0),
-                  //                 child: Container(
-                  //                   padding:
-                  //                       EdgeInsets.symmetric(horizontal: 24),
-                  //                   child: Row(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.spaceBetween,
-                  //                     children: [
-                  //                       Expanded(
-                  //                         flex: 6,
-                  //                         child: Text(
-                  //                           'Aplicativo - WayWallert',
-                  //                           softWrap: true,
-                  //                           textAlign: TextAlign.left,
-                  //                           style: GoogleFonts.comfortaa(
-                  //                             fontWeight: FontWeight.w500,
-                  //                             fontSize: 19,
-                  //                             letterSpacing: 0.15,
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('R\$ 30,00',
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color.fromRGBO(
-                  //                                   13, 13, 13, 1),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('Adicionar',
-                  //                             textAlign: TextAlign.right,
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               decoration:
-                  //                                   TextDecoration.underline,
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color(0xFFFF5722),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //               Padding(
-                  //                 padding: const EdgeInsets.all(16.0),
-                  //                 child: Container(
-                  //                   padding:
-                  //                       EdgeInsets.symmetric(horizontal: 24),
-                  //                   child: Row(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.spaceBetween,
-                  //                     children: [
-                  //                       Expanded(
-                  //                         flex: 6,
-                  //                         child: Text(
-                  //                           'Aplicativo - WayWallert',
-                  //                           softWrap: true,
-                  //                           textAlign: TextAlign.left,
-                  //                           style: GoogleFonts.comfortaa(
-                  //                             fontWeight: FontWeight.w500,
-                  //                             fontSize: 19,
-                  //                             letterSpacing: 0.15,
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('R\$ 30,00',
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color.fromRGBO(
-                  //                                   13, 13, 13, 1),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('Adicionar',
-                  //                             textAlign: TextAlign.right,
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               decoration:
-                  //                                   TextDecoration.underline,
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color(0xFFFF5722),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //               Padding(
-                  //                 padding: const EdgeInsets.all(16.0),
-                  //                 child: Container(
-                  //                   padding:
-                  //                       EdgeInsets.symmetric(horizontal: 24),
-                  //                   child: Row(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.spaceBetween,
-                  //                     children: [
-                  //                       Expanded(
-                  //                         flex: 6,
-                  //                         child: Text(
-                  //                           'Aplicativo - WayWallert',
-                  //                           softWrap: true,
-                  //                           textAlign: TextAlign.left,
-                  //                           style: GoogleFonts.comfortaa(
-                  //                             fontWeight: FontWeight.w500,
-                  //                             fontSize: 19,
-                  //                             letterSpacing: 0.15,
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('R\$ 30,00',
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color.fromRGBO(
-                  //                                   13, 13, 13, 1),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('Adicionar',
-                  //                             textAlign: TextAlign.right,
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               decoration:
-                  //                                   TextDecoration.underline,
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color(0xFFFF5722),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //               Padding(
-                  //                 padding: const EdgeInsets.all(16.0),
-                  //                 child: Container(
-                  //                   padding:
-                  //                       EdgeInsets.symmetric(horizontal: 24),
-                  //                   child: Row(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.spaceBetween,
-                  //                     children: [
-                  //                       Expanded(
-                  //                         flex: 6,
-                  //                         child: Text(
-                  //                           'Aplicativo - WayWallert',
-                  //                           softWrap: true,
-                  //                           textAlign: TextAlign.left,
-                  //                           style: GoogleFonts.comfortaa(
-                  //                             fontWeight: FontWeight.w500,
-                  //                             fontSize: 19,
-                  //                             letterSpacing: 0.15,
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('R\$ 30,00',
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color.fromRGBO(
-                  //                                   13, 13, 13, 1),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('Adicionar',
-                  //                             textAlign: TextAlign.right,
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               decoration:
-                  //                                   TextDecoration.underline,
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color(0xFFFF5722),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //               Padding(
-                  //                 padding: const EdgeInsets.all(16.0),
-                  //                 child: Container(
-                  //                   padding:
-                  //                       EdgeInsets.symmetric(horizontal: 24),
-                  //                   child: Row(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.spaceBetween,
-                  //                     children: [
-                  //                       Expanded(
-                  //                         flex: 6,
-                  //                         child: Text(
-                  //                           'Aplicativo - WayWallert',
-                  //                           softWrap: true,
-                  //                           textAlign: TextAlign.left,
-                  //                           style: GoogleFonts.comfortaa(
-                  //                             fontWeight: FontWeight.w500,
-                  //                             fontSize: 19,
-                  //                             letterSpacing: 0.15,
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('R\$ 30,00',
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color.fromRGBO(
-                  //                                   13, 13, 13, 1),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('Adicionar',
-                  //                             textAlign: TextAlign.right,
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               decoration:
-                  //                                   TextDecoration.underline,
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color(0xFFFF5722),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //               Padding(
-                  //                 padding: const EdgeInsets.all(16.0),
-                  //                 child: Container(
-                  //                   padding:
-                  //                       EdgeInsets.symmetric(horizontal: 24),
-                  //                   child: Row(
-                  //                     mainAxisAlignment:
-                  //                         MainAxisAlignment.spaceBetween,
-                  //                     children: [
-                  //                       Expanded(
-                  //                         flex: 6,
-                  //                         child: Text(
-                  //                           'Aplicativo - WayWallert',
-                  //                           softWrap: true,
-                  //                           textAlign: TextAlign.left,
-                  //                           style: GoogleFonts.comfortaa(
-                  //                             fontWeight: FontWeight.w500,
-                  //                             fontSize: 19,
-                  //                             letterSpacing: 0.15,
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('R\$ 30,00',
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color.fromRGBO(
-                  //                                   13, 13, 13, 1),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                       Expanded(
-                  //                         flex: 3,
-                  //                         child: Text('Adicionar',
-                  //                             textAlign: TextAlign.right,
-                  //                             style: GoogleFonts.comfortaa(
-                  //                               decoration:
-                  //                                   TextDecoration.underline,
-                  //                               fontWeight: FontWeight.w500,
-                  //                               color: Color(0xFFFF5722),
-                  //                               fontSize: 19,
-                  //                               letterSpacing: 0.15,
-                  //                             )),
-                  //                       ),
-                  //                     ],
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //             ],
-                  //           ),
-                  //         ),
-                  //       ),
-                  //
-                  //       const SizedBox(
-                  //         height: 32,
-                  //       ),
-                  //       Container(
-                  //         decoration: BoxDecoration(
-                  //           color: Color(0xFFFFFAED),
-                  //           borderRadius: BorderRadius.circular(16),
-                  //         ),
-                  //         child: Padding(
-                  //           padding: const EdgeInsets.all(24.0),
-                  //           child: Row(
-                  //             children: [
-                  //               Expanded(
-                  //                 /*1*/
-                  //                 child: Column(
-                  //                   crossAxisAlignment:
-                  //                       CrossAxisAlignment.start,
-                  //                   children: [
-                  //                     /*2*/
-                  //                     Container(
-                  //                       padding: EdgeInsets.only(bottom: 8),
-                  //                       child: Text(
-                  //                         'Valor total do plano R\$100,00',
-                  //                         style: GoogleFonts.comfortaa(
-                  //                           fontSize: 26,
-                  //                           letterSpacing: 0.15,
-                  //                           fontWeight: FontWeight.w500,
-                  //                           color:
-                  //                               Color.fromRGBO(13, 13, 13, 1),
-                  //                         ),
-                  //                       ),
-                  //                     ),
-                  //                     SizedBox(
-                  //                       height: 8,
-                  //                     ),
-                  //                     Text(
-                  //                       'Você adicionou pacotes extras ao seu plano, será cobrado o valor de R\$ 3.288,72\n'
-                  //                       'referente aos dias restantes de contrato',
-                  //                       softWrap: true,
-                  //                       style: GoogleFonts.sourceSansPro(
-                  //                         fontSize: 15,
-                  //                         letterSpacing: 0.25,
-                  //                         fontWeight: FontWeight.w400,
-                  //                         color: Color(0xFF0D0D0D),
-                  //                       ),
-                  //                     ),
-                  //                     SizedBox(
-                  //                       height: 32,
-                  //                     ),
-                  //                   ],
-                  //                 ),
-                  //               ),
-                  //               /*3*/
-                  //               _btnFazerPagamento(),
-                  //             ],
-                  //           ),
-                  //         ),
-                  //       ),
-                  //       // Container(
-                  //       //   child: Row(children: [
-                  //       //     Expanded(child: Container()),
-                  //       //     _btnFazerPagamento(),
-                  //       //   ]),
-                  //       // ),
-                  //     ],
-                  //   ),
-                  // ),
+                  Container(
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 52,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              /*1*/
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  /*2*/
+                                  Container(
+                                    padding: EdgeInsets.only(bottom: 8),
+                                    child: Text(
+                                      'Prata Mensal',
+                                      style: GoogleFonts.comfortaa(
+                                        fontSize: 26,
+                                        letterSpacing: 0.15,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color.fromRGBO(13, 13, 13, 1),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    'Vencimento: 01/01/0001',
+                                    style: GoogleFonts.comfortaa(
+                                      fontSize: 19,
+                                      letterSpacing: 0.5,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromRGBO(94, 94, 94, 1),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Text(
+                                    'Valor Total: R\$ 0,00',
+                                    style: GoogleFonts.comfortaa(
+                                      fontSize: 19,
+                                      letterSpacing: 0.5,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromRGBO(94, 94, 94, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            /*3*/
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Color.fromRGBO(250, 250, 250, 1),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    side: BorderSide(
+                                        width: 3, color: AppTheme.adicionar)),
+                                //splashColor: DefaultTheme.accentColor, Desativado pelo uso do ElevatedButton
+                              ),
+                              onPressed: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  'Alterar plano',
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 20,
+                                    letterSpacing: 0.25,
+                                    color: AppTheme.adicionar,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 52,
+                        ),
 
+                        Wrap(
+                          runAlignment: WrapAlignment.spaceBetween,
+                          clipBehavior: Clip.antiAlias,
+                          runSpacing: 16,
+                          spacing: 28,
+                          children: [
+                            Container(
+                              // height: 300,
+                              width: MediaQuery.of(context).size.width * 0.42,
+                              child: Card(
+                                color: Color.fromRGBO(250, 250, 250, 1),
+                                elevation: 0,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(16),
+                                      color: Color(0xFFE9F1FF),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text('Produto',
+                                                style: GoogleFonts.comfortaa(
+                                                  fontSize: 23,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Color.fromRGBO(
+                                                      13, 13, 13, 1),
+                                                  letterSpacing: -0.5,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                'Controle de tabela de preços',
+                                                softWrap: true,
+                                                textAlign: TextAlign.left,
+                                                style: GoogleFonts.comfortaa(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 19,
+                                                  letterSpacing: 0.15,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              // height: 300,
+                              width: MediaQuery.of(context).size.width * 0.42,
+                              child: Card(
+                                color: Color.fromRGBO(250, 250, 250, 1),
+                                elevation: 0,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(16),
+                                      color: Color(0xFFE9F1FF),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text('Limites',
+                                                style: GoogleFonts.comfortaa(
+                                                  fontSize: 23,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Color.fromRGBO(
+                                                      13, 13, 13, 1),
+                                                  letterSpacing: -0.5,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                'Controle de tabela de preços',
+                                                softWrap: true,
+                                                textAlign: TextAlign.left,
+                                                style: GoogleFonts.comfortaa(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 19,
+                                                  letterSpacing: 0.15,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              // height: 300,
+                              width: MediaQuery.of(context).size.width * 0.42,
+                              child: Card(
+                                color: Color.fromRGBO(250, 250, 250, 1),
+                                elevation: 0,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(16),
+                                      color: Color(0xFFE9F1FF),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text('Estoque',
+                                                style: GoogleFonts.comfortaa(
+                                                  fontSize: 23,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Color.fromRGBO(
+                                                      13, 13, 13, 1),
+                                                  letterSpacing: -0.5,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                'Controle de tabela de preços',
+                                                softWrap: true,
+                                                textAlign: TextAlign.left,
+                                                style: GoogleFonts.comfortaa(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 19,
+                                                  letterSpacing: 0.15,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                'Controle de tabela de preços',
+                                                softWrap: true,
+                                                textAlign: TextAlign.left,
+                                                style: GoogleFonts.comfortaa(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 19,
+                                                  letterSpacing: 0.15,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                'Controle de tabela de preços',
+                                                softWrap: true,
+                                                textAlign: TextAlign.left,
+                                                style: GoogleFonts.comfortaa(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 19,
+                                                  letterSpacing: 0.15,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              // height: 300,
+                              width: MediaQuery.of(context).size.width * 0.42,
+                              child: Card(
+                                color: Color.fromRGBO(250, 250, 250, 1),
+                                elevation: 0,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(16),
+                                      color: Color(0xFFE9F1FF),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text('Financeiro',
+                                                style: GoogleFonts.comfortaa(
+                                                  fontSize: 23,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Color.fromRGBO(
+                                                      13, 13, 13, 1),
+                                                  letterSpacing: -0.5,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                'Controle de tabela de preços',
+                                                softWrap: true,
+                                                textAlign: TextAlign.left,
+                                                style: GoogleFonts.comfortaa(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 19,
+                                                  letterSpacing: 0.15,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                'Controle de tabela de preços',
+                                                softWrap: true,
+                                                textAlign: TextAlign.left,
+                                                style: GoogleFonts.comfortaa(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 19,
+                                                  letterSpacing: 0.15,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                'Controle de tabela de preços',
+                                                softWrap: true,
+                                                textAlign: TextAlign.left,
+                                                style: GoogleFonts.comfortaa(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 19,
+                                                  letterSpacing: 0.15,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                'Controle de tabela de preços',
+                                                softWrap: true,
+                                                textAlign: TextAlign.left,
+                                                style: GoogleFonts.comfortaa(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 19,
+                                                  letterSpacing: 0.15,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              // height: 300,
+                              width: MediaQuery.of(context).size.width * 0.42,
+                              child: Card(
+                                color: Color.fromRGBO(250, 250, 250, 1),
+                                elevation: 0,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(16),
+                                      color: Color(0xFFE9F1FF),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text('Fiscal',
+                                                style: GoogleFonts.comfortaa(
+                                                  fontSize: 23,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Color.fromRGBO(
+                                                      13, 13, 13, 1),
+                                                  letterSpacing: -0.5,
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 24),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                'Controle de tabela de preços',
+                                                softWrap: true,
+                                                textAlign: TextAlign.left,
+                                                style: GoogleFonts.comfortaa(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 19,
+                                                  letterSpacing: 0.15,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 4,
+                                              child: Icon(
+                                                Icons.check,
+                                                color: Color.fromRGBO(
+                                                    22, 156, 52, 1),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+
+                        Container(
+                          padding: EdgeInsets.all(16),
+                          color: Color(0xFFE9F1FF),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text('Extras',
+                                    style: GoogleFonts.comfortaa(
+                                      fontSize: 23,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color.fromRGBO(13, 13, 13, 1),
+                                      letterSpacing: -0.5,
+                                    )),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Card(
+                            color: Color.fromRGBO(250, 250, 250, 1),
+                            elevation: 0,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 6,
+                                          child: Text(
+                                            'Aplicativo - WayWallert',
+                                            softWrap: true,
+                                            textAlign: TextAlign.left,
+                                            style: GoogleFonts.comfortaa(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 19,
+                                              letterSpacing: 0.15,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('R\$ 30,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('Adicionar',
+                                              textAlign: TextAlign.right,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color(0xFFFF5722),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 6,
+                                          child: Text(
+                                            'Aplicativo - WayWallert',
+                                            softWrap: true,
+                                            textAlign: TextAlign.left,
+                                            style: GoogleFonts.comfortaa(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 19,
+                                              letterSpacing: 0.15,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('R\$ 30,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('Adicionar',
+                                              textAlign: TextAlign.right,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color(0xFFFF5722),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 6,
+                                          child: Text(
+                                            'Aplicativo - WayWallert',
+                                            softWrap: true,
+                                            textAlign: TextAlign.left,
+                                            style: GoogleFonts.comfortaa(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 19,
+                                              letterSpacing: 0.15,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('R\$ 30,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('Adicionar',
+                                              textAlign: TextAlign.right,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color(0xFFFF5722),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 6,
+                                          child: Text(
+                                            'Aplicativo - WayWallert',
+                                            softWrap: true,
+                                            textAlign: TextAlign.left,
+                                            style: GoogleFonts.comfortaa(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 19,
+                                              letterSpacing: 0.15,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('R\$ 30,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('Adicionar',
+                                              textAlign: TextAlign.right,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color(0xFFFF5722),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 6,
+                                          child: Text(
+                                            'Aplicativo - WayWallert',
+                                            softWrap: true,
+                                            textAlign: TextAlign.left,
+                                            style: GoogleFonts.comfortaa(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 19,
+                                              letterSpacing: 0.15,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('R\$ 30,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('Adicionar',
+                                              textAlign: TextAlign.right,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color(0xFFFF5722),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 6,
+                                          child: Text(
+                                            'Aplicativo - WayWallert',
+                                            softWrap: true,
+                                            textAlign: TextAlign.left,
+                                            style: GoogleFonts.comfortaa(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 19,
+                                              letterSpacing: 0.15,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('R\$ 30,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('Adicionar',
+                                              textAlign: TextAlign.right,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color(0xFFFF5722),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 6,
+                                          child: Text(
+                                            'Aplicativo - WayWallert',
+                                            softWrap: true,
+                                            textAlign: TextAlign.left,
+                                            style: GoogleFonts.comfortaa(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 19,
+                                              letterSpacing: 0.15,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('R\$ 30,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('Adicionar',
+                                              textAlign: TextAlign.right,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color(0xFFFF5722),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 6,
+                                          child: Text(
+                                            'Aplicativo - WayWallert',
+                                            softWrap: true,
+                                            textAlign: TextAlign.left,
+                                            style: GoogleFonts.comfortaa(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 19,
+                                              letterSpacing: 0.15,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('R\$ 30,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('Adicionar',
+                                              textAlign: TextAlign.right,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color(0xFFFF5722),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 6,
+                                          child: Text(
+                                            'Aplicativo - WayWallert',
+                                            softWrap: true,
+                                            textAlign: TextAlign.left,
+                                            style: GoogleFonts.comfortaa(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 19,
+                                              letterSpacing: 0.15,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('R\$ 30,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('Adicionar',
+                                              textAlign: TextAlign.right,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color(0xFFFF5722),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Container(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 24),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 6,
+                                          child: Text(
+                                            'Aplicativo - WayWallert',
+                                            softWrap: true,
+                                            textAlign: TextAlign.left,
+                                            style: GoogleFonts.comfortaa(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 19,
+                                              letterSpacing: 0.15,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('R\$ 30,00',
+                                              style: GoogleFonts.comfortaa(
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromRGBO(
+                                                    13, 13, 13, 1),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text('Adicionar',
+                                              textAlign: TextAlign.right,
+                                              style: GoogleFonts.comfortaa(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color(0xFFFF5722),
+                                                fontSize: 19,
+                                                letterSpacing: 0.15,
+                                              )),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFFFAED),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(24.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  /*1*/
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      /*2*/
+                                      Container(
+                                        padding: EdgeInsets.only(bottom: 8),
+                                        child: Text(
+                                          'Valor total do plano R\$100,00',
+                                          style: GoogleFonts.comfortaa(
+                                            fontSize: 26,
+                                            letterSpacing: 0.15,
+                                            fontWeight: FontWeight.w500,
+                                            color:
+                                                Color.fromRGBO(13, 13, 13, 1),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Text(
+                                        'Você adicionou pacotes extras ao seu plano, será cobrado o valor de R\$ 3.288,72\n'
+                                        'referente aos dias restantes de contrato',
+                                        softWrap: true,
+                                        style: GoogleFonts.sourceSansPro(
+                                          fontSize: 15,
+                                          letterSpacing: 0.25,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xFF0D0D0D),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 32,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                /*3*/
+                                _btnFazerPagamento(),
+                              ],
+                            ),
+                          ),
+                        ),
+                        // Container(
+                        //   child: Row(children: [
+                        //     Expanded(child: Container()),
+                        //     _btnFazerPagamento(),
+                        //   ]),
+                        // ),
+                      ],
+                    ),
+                  ),
+                  
                   // Tela aba forma de pagamento
-                  Container(),
-                  // Container(
-                  //   child: Column(
-                  //     mainAxisSize: MainAxisSize.max,
-                  //     children: [
-                  //       const SizedBox(
-                  //         height: 52,
-                  //       ),
-                  //       Container(
-                  //         child: Row(
-                  //           mainAxisSize: MainAxisSize.max,
-                  //           children: [
-                  //             Padding(
-                  //               padding:
-                  //                   const EdgeInsets.symmetric(horizontal: 16),
-                  //               child: Text(
-                  //                 'Meus cartões',
-                  //                 style: GoogleFonts.comfortaa(
-                  //                   fontSize: 23,
-                  //                   letterSpacing: -0.5,
-                  //                   fontWeight: FontWeight.w500,
-                  //                   color: Color.fromRGBO(13, 13, 13, 1),
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ),
-                  //       const SizedBox(
-                  //         height: 52,
-                  //       ),
-                  //       Wrap(
-                  //         alignment: WrapAlignment.start,
-                  //         clipBehavior: Clip.antiAlias,
-                  //         runSpacing: 8,
-                  //         spacing: 8,
-                  //         children: [
-                  //           Container(
-                  //             width: MediaQuery.of(context).size.width * 0.48,
-                  //             child: Cartao(),
-                  //           ),
-                  //           Container(
-                  //             width: MediaQuery.of(context).size.width * 0.48,
-                  //             child: CartaoVazio(
-                  //                 // onPressed: () { Get.dialog(_modalCadastroCartao()); }
-                  //                 onPressed: () {
-                  //               Get.dialog(_modalNovoContratoCartao(context));
-                  //             }),
-                  //           ),
-                  //           // Expanded(child: Container()),
-                  //         ],
-                  //       ),
-                  //       const SizedBox(
-                  //         height: 32,
-                  //       ),
-                  //       Container(
-                  //         child: Row(children: [
-                  //           Expanded(child: Container()),
-                  //           _btnProximo(),
-                  //         ]),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+                  Container(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const SizedBox(
+                          height: 52,
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  'Meus cartões',
+                                  style: GoogleFonts.comfortaa(
+                                    fontSize: 23,
+                                    letterSpacing: -0.5,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromRGBO(13, 13, 13, 1),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 52,
+                        ),
+                        Wrap(
+                          alignment: WrapAlignment.start,
+                          clipBehavior: Clip.antiAlias,
+                          runSpacing: 8,
+                          spacing: 8,
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.48,
+                              child: Cartao(),
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.48,
+                              child: CartaoVazio(
+                                  // onPressed: () { Get.dialog(_modalCadastroCartao()); }
+                                  onPressed: () {
+                                Get.dialog(_modalNovoContratoCartao(context));
+                              }),
+                            ),
+                            // Expanded(child: Container()),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+
+                      ],
+                    ),
+                  ),
+
 
                   // Tela aba fatura
                   Container(
@@ -1425,83 +1435,200 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                         ),
                         Row(
                           children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                'Filtros',
-                                style: GoogleFonts.comfortaa(
-                                  fontSize: 33,
-                                  letterSpacing: -0.5,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color.fromRGBO(13, 13, 13, 1),
-                                ),
+                            Text(
+                              'Filtros',
+                              style: GoogleFonts.comfortaa(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 23,
+                                letterSpacing: -0.5,
+                                color: Color(0xFF171C22),
                               ),
-                            ),
-                            SizedBox(
-                              height: 16,
                             ),
                           ],
                         ),
                         const SizedBox(
-                          height: 32,
+                          height: 16,
                         ),
                         Row(
                           children: [
-                            Expanded(child: Container()),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  side: BorderSide(
-                                    color: Color.fromRGBO(186, 26, 26, 1),
-                                  ),
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 16,
-                                ),
-                                child: Text(
-                                  'Limpar filtros',
-                                  style: GoogleFonts.sourceSansPro(
-                                    color: Color.fromRGBO(186, 26, 26, 1),
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                    letterSpacing: 0.25,
+                            Expanded(
+                              flex: 3,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 22),
+                                child: TextFormField(
+                                  cursorColor: Color.fromRGBO(66, 71, 78, 1),
+                                  decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        Icons.calendar_today,
+                                        color: Color.fromRGBO(50, 50, 50, 1),
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                    hintText: '26/01/2023',
+                                    hintStyle: GoogleFonts.sourceSansPro(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 15,
+                                      letterSpacing: 0.4,
+                                      color: Color.fromRGBO(66, 71, 78, 1),
+                                    ),
+                                    labelText: 'Selecione um período (a partir de) *',
+                                    labelStyle: GoogleFonts.sourceSansPro(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                      letterSpacing: 0.4,
+                                      color: Color.fromRGBO(66, 71, 78, 1),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color.fromRGBO(66, 71, 78, 1),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppTheme.adicionar,
-                              ),
-                              onPressed: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 16,
-                                ),
-                                child: Text(
-                                  'Pesquisar',
-                                  style: GoogleFonts.sourceSansPro(
-                                    color: AppTheme.corBranco,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                    letterSpacing: 0.25,
+                            Expanded(
+                              flex: 3,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 22),
+                                child: TextFormField(
+                                  cursorColor: Color.fromRGBO(66, 71, 78, 1),
+                                  decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        Icons.calendar_today,
+                                        color: Color.fromRGBO(50, 50, 50, 1),
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                    hintText: '26/01/2023',
+                                    hintStyle: GoogleFonts.sourceSansPro(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 15,
+                                      letterSpacing: 0.4,
+                                      color: Color.fromRGBO(66, 71, 78, 1),
+                                    ),
+                                    labelText: 'Selecione um período (até)',
+                                    labelStyle: GoogleFonts.sourceSansPro(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                      letterSpacing: 0.4,
+                                      color: Color.fromRGBO(66, 71, 78, 1),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color.fromRGBO(66, 71, 78, 1),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 22),
+                                child: TextFormField(
+                                  cursorColor: Color.fromRGBO(66, 71, 78, 1),
+                                  decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        Icons.calendar_today,
+                                        color: Color.fromRGBO(50, 50, 50, 1),
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                    hintText: '26/01/2023',
+                                    hintStyle: GoogleFonts.sourceSansPro(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 15,
+                                      letterSpacing: 0.4,
+                                      color: Color.fromRGBO(66, 71, 78, 1),
+                                    ),
+                                    labelText: 'Selecione um período (a partir de) *',
+                                    labelStyle: GoogleFonts.sourceSansPro(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12,
+                                      letterSpacing: 0.4,
+                                      color: Color.fromRGBO(66, 71, 78, 1),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color.fromRGBO(66, 71, 78, 1),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                                flex: 3,
+                              child: Container(),
                             ),
                           ],
                         ),
+                        SizedBox(
+                          height: 16,
+                        ),
+
+                        // Row(
+                        //   children: [
+                        //     Expanded(child: Container()),
+                        //     ElevatedButton(
+                        //       style: ElevatedButton.styleFrom(
+                        //         backgroundColor: Colors.white,
+                        //         shape: RoundedRectangleBorder(
+                        //           borderRadius: BorderRadius.circular(8),
+                        //           side: BorderSide(
+                        //             color: Color.fromRGBO(186, 26, 26, 1),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       onPressed: () {},
+                        //       child: Padding(
+                        //         padding: const EdgeInsets.symmetric(
+                        //           horizontal: 8,
+                        //           vertical: 16,
+                        //         ),
+                        //         child: Text(
+                        //           'Limpar filtros',
+                        //           style: GoogleFonts.sourceSansPro(
+                        //             color: Color.fromRGBO(186, 26, 26, 1),
+                        //             fontWeight: FontWeight.w600,
+                        //             fontSize: 16,
+                        //             letterSpacing: 0.25,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     SizedBox(
+                        //       width: 16,
+                        //     ),
+                        //     ElevatedButton(
+                        //       style: ElevatedButton.styleFrom(
+                        //         backgroundColor: AppTheme.adicionar,
+                        //       ),
+                        //       onPressed: () {},
+                        //       child: Padding(
+                        //         padding: const EdgeInsets.symmetric(
+                        //           horizontal: 8,
+                        //           vertical: 16,
+                        //         ),
+                        //         child: Text(
+                        //           'Pesquisar',
+                        //           style: GoogleFonts.sourceSansPro(
+                        //             color: AppTheme.corBranco,
+                        //             fontWeight: FontWeight.w600,
+                        //             fontSize: 16,
+                        //             letterSpacing: 0.25,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+
                         Row(
                           children: [
                             Expanded(child: Container()),
@@ -4178,9 +4305,6 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                                                           ],
                                                         ),
                                                         Row(
-                                                          // mainAxisAlignment:
-                                                          //     MainAxisAlignment
-                                                          //         .start,
                                                           children: [
                                                             Expanded(
                                                               flex: 2,
@@ -4496,151 +4620,13 @@ class PagamentosPage extends GetView<PagamentosPageController> {
                                   ],
                                 ),
                               ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 5),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        child: Padding(
-                                          padding: EdgeInsets.all(14.0),
-                                          child: Text(
-                                            'Valor trimestral',
-                                            textAlign: TextAlign.left,
-                                            style: GoogleFonts.comfortaa(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 19,
-                                              letterSpacing: 0.15,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: Text(
-                                            'R\$ 45,00',
-                                            style: GoogleFonts.comfortaa(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 19,
-                                              letterSpacing: 0.15,
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              decorationThickness: 1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 12),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 5),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        child: Padding(
-                                          padding: EdgeInsets.all(14.0),
-                                          child: Text(
-                                            'Valor semestral',
-                                            textAlign: TextAlign.left,
-                                            style: GoogleFonts.comfortaa(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 19,
-                                              letterSpacing: 0.15,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: Text(
-                                            'R\$ 45,00',
-                                            style: GoogleFonts.comfortaa(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 19,
-                                              letterSpacing: 0.15,
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              decorationThickness: 1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 12),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 5),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        child: Padding(
-                                          padding: EdgeInsets.all(14.0),
-                                          child: Text(
-                                            'Valor anual',
-                                            textAlign: TextAlign.left,
-                                            style: GoogleFonts.comfortaa(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 19,
-                                              letterSpacing: 0.15,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: Text(
-                                            'R\$ 45,00',
-                                            style: GoogleFonts.comfortaa(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 19,
-                                              letterSpacing: 0.15,
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              decorationThickness: 1,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 12),
-                                  ],
-                                ),
-                              ),
+
                             ]),
                         const SizedBox(
                           height: 36,
                         ),
-                        Container(
-                          child: Row(children: [
-                            Expanded(child: Container()),
-                            _btnSalvar(),
-                          ]),
-                        ),
+
+
                       ],
                     ),
                   ),
