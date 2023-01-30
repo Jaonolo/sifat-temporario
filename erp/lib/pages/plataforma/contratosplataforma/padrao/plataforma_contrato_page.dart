@@ -16,15 +16,18 @@ import '../../../../config/application.dart';
 
 
 
-class PlataformaContratoPage extends GetView<PlataformaContratoController> {
-  String? token;
 
-  PlataformaContratoPage(this.token) {
-    print(this.token);
-    Application.tokenUsuario = token!;
-  }
-// class ContratosIntegradorPage extends StatelessWidget {
-//   PlataformaContratoPage({Key? key}) : super(key: key);
+
+//
+// class PlataformaContratoPage extends GetView<PlataformaContratoController> {
+//   String? token;
+//
+//   PlataformaContratoPage(this.token) {
+//     print(this.token);
+//     Application.tokenUsuario = token!;
+//   }
+class PlataformaContratoPage extends StatelessWidget {
+  const PlataformaContratoPage ({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +48,6 @@ class PlataformaContratoPage extends GetView<PlataformaContratoController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  'Contratos',
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.comfortaa(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 46,
-                  ),
-                ),
                 Expanded(child: Container()),
                 _btnAdicionar(),
                 const SizedBox(

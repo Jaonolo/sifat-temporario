@@ -28,27 +28,6 @@ class ComissaoPlataformaPage extends GetView<ComissaoPlataformaPageController> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      child: Text(
-                        'Comissão',
-                        style: GoogleFonts.comfortaa(
-                          fontSize: 46,
-                          fontWeight: FontWeight.w400,
-                          color: Color.fromRGBO(23, 28, 34, 1),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Divider(
-                  thickness: 2,
-                ),
-              ],
-            ),
             SizedBox(height:32),
             Container(
               // width: Get.width * 0.5,

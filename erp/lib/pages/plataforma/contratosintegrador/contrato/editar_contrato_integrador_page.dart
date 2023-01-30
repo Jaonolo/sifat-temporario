@@ -33,24 +33,6 @@ class EditarContratoIntegradorErpPage
         desktop: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: Text(
-                    'Edição de contrato padrão',
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.comfortaa(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 46,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const Divider(
-              thickness: 2,
-            ),
             const SizedBox(
               height: 36,
             ),

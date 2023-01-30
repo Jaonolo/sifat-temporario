@@ -10,7 +10,13 @@ import '../../pages/pagamentos/componentes/cartao.dart';
 import '../../pages/pagamentos/contratos/contratos_pagamentos_page.dart';
 import '../../pages/pagamentos/pagamentos_page.dart';
 import '../../pages/plataforma/contratosintegrador/contrato/editar_contrato_integrador_page.dart';
+import '../../pages/plataforma/contratosintegrador/contrato/planos/contratos_integrador_page.dart';
+import '../../pages/plataforma/contratosintegrador/contratocustomizado/cadastrarplanos/cadastrar_contrato_integrador_page.dart';
+import '../../pages/plataforma/contratosintegrador/contratocustomizado/contrato_customizado_page.dart';
+import '../../pages/plataforma/contratosintegrador/contratocustomizado/contrato_customizado_segundo_page.dart';
+import '../../pages/plataforma/contratosintegrador/contratocustomizado/contrato_customizado_terceira_page.dart';
 import '../../pages/plataforma/contratosintegrador/extras/plataforma_page.dart';
+import '../../pages/plataforma/contratosplataforma/comissao/comissao_page.dart';
 import '../../pages/plataforma/contratosplataforma/extras/plataforma_integrador_page.dart';
 import '../../pages/plataforma/contratosplataforma/padrao/plataforma_contrato_page.dart';
 
@@ -26,15 +32,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       case HomeRoute:
         return _getPageRoute(HomePage(), settings);
       case SessaoRoute:
-        return _getPageRoute(PlataformaIntegradorPage(routingData["token"]), settings);
-      case ContratoRoute:
-        return _getPageRoute(PlataformaPage(routingData["token"]), settings);
+        // return _getPageRoute(ContratosPagamentosPage(routingData["token"]), settings);
+        return _getPageRoute(ContratosIntegradorPage(), settings);
+      // case ContratoRoute:
+      //   return _getPageRoute(PlataformaPage(routingData["token"]), settings);
       case PagamentoRoute:
         return _getPageRoute(PagamentosRelatorioPage(), settings);
         // return _getPageRoute(Cartao(), settings);
-      // case ContratoIntegradorRoute:
-      //   return _getPageRoute(PlataformaIntegradorPage(), settings);
-
+      // case ContratoRoute:
+      //   return _getPageRoute(ContratosPagamentosPage(), settings);
 
       default:
         return _getPageRoute(NotFoundPage(), settings);

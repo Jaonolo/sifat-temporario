@@ -38,43 +38,6 @@ class PagamentosPage extends GetView<PagamentosPageController> {
         desktop: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            Row(
-              children: [
-                Text(
-                  'Dados da Empresa',
-                  style: GoogleFonts.sourceSansPro(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
-                    letterSpacing: 0.25,
-                    color: Color(0xFF001D34),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
-                    '>',
-                    style: GoogleFonts.comfortaa(
-                      fontWeight: FontWeight.w900,
-                      fontSize: 16,
-                      letterSpacing: -0.5,
-                      color: Color(0xFF001D34),
-                    ),
-                  ),
-                ),
-                Text(
-                  'Minha Empresa',
-                  style: GoogleFonts.sourceSansPro(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
-                    letterSpacing: 0.25,
-                    color: Color(0xFF171C22),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 64,
-            ),
             Card(
               margin: EdgeInsets.zero,
               elevation: 0,

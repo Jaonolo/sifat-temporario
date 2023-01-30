@@ -29,23 +29,7 @@ class ContratoCustomizadoSegundoPage extends StatelessWidget {
         desktop: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  'Cadastrar contrato customizado',
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.comfortaa(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 46,
-                  ),
-                ),
-                Expanded(child: Container()),
-              ],
-            ),
-            const Divider(
-              thickness: 2,
-            ),
+
             const SizedBox(
               height: 36,
             ),
@@ -53,17 +37,15 @@ class ContratoCustomizadoSegundoPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  'Plano Diamante',
+                  'Digite o nome do plano',
                   textAlign: TextAlign.left,
                   style: GoogleFonts.comfortaa(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 46,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 23,
+                    decorationThickness: 2,
                   ),
                 ),
                 Expanded(child: Container()),
-
-
-
               ],
             ),
             const Divider(

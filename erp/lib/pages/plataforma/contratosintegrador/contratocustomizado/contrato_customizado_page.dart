@@ -36,43 +36,22 @@ class ContratoCustomizadoPage extends GetView<ContratoCustomizadoController> {
         desktop: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  'Cadastrar contrato customizado',
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.comfortaa(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 46,
-                  ),
-                ),
-                Expanded(child: Container()),
-              ],
-            ),
-            const Divider(
-              thickness: 2,
-            ),
             const SizedBox(
               height: 36,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  'Digite o nome do plano',
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.comfortaa(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 46,
-                  ),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Digite o nome do plano',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.comfortaa(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 23,
+                  decorationThickness: 2,
                 ),
-                Expanded(child: Container()),
-              ],
+              ),
             ),
-            const Divider(
-              thickness: 2,
-            ),
+
             const SizedBox(
               height: 36,
             ),

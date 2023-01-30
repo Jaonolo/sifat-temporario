@@ -37,14 +37,7 @@ class ContratosIntegradorPage extends GetView<ContratosIntegradorController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  'Contratos',
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.comfortaa(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 46,
-                  ),
-                ),
+
                 Expanded(child: Container()),
                 _btnAdicionar(),
                 const SizedBox(

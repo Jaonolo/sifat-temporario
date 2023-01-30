@@ -45,9 +45,9 @@ class MyApp extends StatelessWidget {
       key: locator<NavigationService>().navigatorKey,
       scaffoldMessengerKey: locator<NavigationService>().snackbarGlobalKey,
       onGenerateRoute: generateRoute,
-      initialRoute: PagamentoRoute,
-      // initialRoute: Sessa,
-      // initialRoute: ContratoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJpZFVzdWFyaW9FbXByZXNhIjoiMjQ0IiwidGlwb0NsaWVudCI6IkVSUCIsImlkU2Vzc2FvIjoiZjljNDYwOWMtZDJkYS00YjNmLWJjODktN2VhOGViMzMwZDk5IiwiaWRFbXByZXNhIjoiMSIsImV4cCI6MTY3MzM5NTY4NCwiaWF0IjoxNjczMzgxMjg0fQ.s7k_H5ggydVrtFHzlv3K2XWPC4GdEOfqGHhJM6YDM5hrYZMtQpkKb2tF15R175DpRpG8eRFMFbaNNAvTTo1bnQ",
+      // initialRoute: PagamentoRoute,
+      // initialRoute: SessaoRoute,
+      initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiRVJQIiwiaWRTZXNzYW8iOiIwNjczNjJiNS03M2ZjLTRiNDgtOWY4Yi02NmZhOWEwMmQ3M2QiLCJleHAiOjE2NzUxMTU1MDMsImlhdCI6MTY3NTEwMTEwM30.Of1ku6Z1-uaPb1m7ptdDaIrdlwKqi6SFu5meoQeE9_rm5C94QefIOlc9WA-PhYW9W9hflZ7KeemKKilBZvtVJg",
     );
   }
 
