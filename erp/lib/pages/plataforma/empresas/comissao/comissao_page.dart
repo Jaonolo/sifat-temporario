@@ -21,301 +21,287 @@ class ComissaoPage extends GetView<ComissaoController> {
         mobile: Container(
           color: Colors.amber,
         ),
-        desktop: ListView(padding: const EdgeInsets.all(16), children: [
-          Row(
-            // mainAxisAlignment: MainAxisAlignment.end,
+        desktop: ListView(
+            padding: const EdgeInsets.all(
+              16,
+            ),
             children: [
-              Text(
-                'Assinaturas',
-                textAlign: TextAlign.left,
-                style: GoogleFonts.comfortaa(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 46,
-                ),
-              ),
-              Expanded(child: Container()),
-            ],
-          ),
-          const Divider(
-            thickness: 2,
-          ),
-          const SizedBox(
-            height: 36,
-          ),
-          Row(
-            children: [
-              Text(
-                'Comissão',
-                textAlign: TextAlign.left,
-                style: GoogleFonts.comfortaa(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 28,
-                  letterSpacing: 0.15,
-                ),
-              ),
-              Expanded(child: Container()),
-              _btnProrrogarContrato(context),
               const SizedBox(
-                width: 8,
+                height: 36,
               ),
-              _btnNovoContrato(context),
-
-            ],
-          ),
-          const SizedBox(height: 72),
-          Wrap(
-            alignment: WrapAlignment.spaceAround,
-            children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                color: Color.fromRGBO(252, 252, 255, 1),
-                child: SizedBox(
-                  width: Get.width / 4,
-                  height: 100,
-                  child: Padding(
-                    padding: const EdgeInsets.all(26.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            AutoSizeText(
-                              'Valor do contrato',
-                              minFontSize: 12,
-                              style: GoogleFonts.sourceSansPro(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.textoComissao,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            AutoSizeText(
-                              'R\$ 100,00',
-                              minFontSize: 12,
-                              style: GoogleFonts.sourceSansPro(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.textoComissao,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            AutoSizeText(
-                              'Comissão do contrato',
-                              minFontSize: 12,
-                              style: GoogleFonts.sourceSansPro(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.salvar,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            AutoSizeText(
-                              'R\$ 500,00',
-                              minFontSize: 12,
-                              style: GoogleFonts.sourceSansPro(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.salvar,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+              Row(
+                children: [
+                  Text(
+                    'Comissão',
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.comfortaa(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 28,
+                      letterSpacing: 0.15,
                     ),
                   ),
-                ),
+                  Expanded(child: Container()),
+                  _btnProrrogarContrato(context),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  _btnNovoContrato(context),
+                ],
               ),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                color: Color.fromRGBO(252, 252, 255, 1),
-                child: SizedBox(
-                  width: Get.width / 4,
-                  height: 100,
-                  child: Padding(
-                    padding: const EdgeInsets.all(26.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              const SizedBox(height: 72),
+              Wrap(
+                alignment: WrapAlignment.spaceAround,
+                children: [
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    color: Color.fromRGBO(252, 252, 255, 1),
+                    child: SizedBox(
+                      width: 328,
+                      height: 100,
+                      child: Padding(
+                        padding: const EdgeInsets.all(26.0),
+                        child: Column(
                           children: [
-                            AutoSizeText(
-                              'Valor do contrato',
-                              minFontSize: 12,
-                              style: GoogleFonts.sourceSansPro(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.textoComissao,
-                                letterSpacing: 0.5,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                AutoSizeText(
+                                  'Valor do contrato',
+                                  minFontSize: 12,
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.textoComissao,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                AutoSizeText(
+                                  'R\$ 100,00',
+                                  minFontSize: 12,
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.textoComissao,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            AutoSizeText(
-                              'R\$ 100,00',
-                              minFontSize: 12,
-                              style: GoogleFonts.sourceSansPro(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.textoComissao,
-                                letterSpacing: 0.5,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                AutoSizeText(
+                                  'Comissão do contrato',
+                                  minFontSize: 12,
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.salvar,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                AutoSizeText(
+                                  'R\$ 500,00',
+                                  minFontSize: 12,
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.salvar,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            AutoSizeText(
-                              'Comissão do contrato',
-                              minFontSize: 12,
-                              style: GoogleFonts.sourceSansPro(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.salvar,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            AutoSizeText(
-                              'R\$ 500,00',
-                              minFontSize: 12,
-                              style: GoogleFonts.sourceSansPro(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.salvar,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ),
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                color: Color.fromRGBO(252, 252, 255, 1),
-                child: SizedBox(
-                  width: Get.width / 4,
-                  height: 100,
-                  child: Padding(
-                    padding: const EdgeInsets.all(26.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    color: Color.fromRGBO(252, 252, 255, 1),
+                    child: SizedBox(
+                      width: 328,
+                      height: 100,
+                      child: Padding(
+                        padding: const EdgeInsets.all(26.0),
+                        child: Column(
                           children: [
-                            AutoSizeText(
-                              'Valor do contrato',
-                              minFontSize: 12,
-                              style: GoogleFonts.sourceSansPro(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.textoComissao,
-                                letterSpacing: 0.5,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                AutoSizeText(
+                                  'Valor do contrato',
+                                  minFontSize: 12,
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.textoComissao,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                AutoSizeText(
+                                  'R\$ 100,00',
+                                  minFontSize: 12,
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.textoComissao,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            AutoSizeText(
-                              'R\$ 100,00',
-                              minFontSize: 12,
-                              style: GoogleFonts.sourceSansPro(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.textoComissao,
-                                letterSpacing: 0.5,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                AutoSizeText(
+                                  'Comissão do contrato',
+                                  minFontSize: 12,
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.salvar,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                AutoSizeText(
+                                  'R\$ 500,00',
+                                  minFontSize: 12,
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.salvar,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            AutoSizeText(
-                              'Comissão do contrato',
-                              minFontSize: 12,
-                              style: GoogleFonts.sourceSansPro(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.salvar,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            AutoSizeText(
-                              'R\$ 500,00',
-                              minFontSize: 12,
-                              style: GoogleFonts.sourceSansPro(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.salvar,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    color: Color.fromRGBO(252, 252, 255, 1),
+                    child: SizedBox(
+                      width: 328,
+                      height: 100,
+                      child: Padding(
+                        padding: const EdgeInsets.all(26.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                AutoSizeText(
+                                  'Valor do contrato',
+                                  minFontSize: 12,
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.textoComissao,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                AutoSizeText(
+                                  'R\$ 100,00',
+                                  minFontSize: 12,
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.textoComissao,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                AutoSizeText(
+                                  'Comissão do contrato',
+                                  minFontSize: 12,
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.salvar,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                AutoSizeText(
+                                  'R\$ 500,00',
+                                  minFontSize: 12,
+                                  style: GoogleFonts.sourceSansPro(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.salvar,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          const SizedBox(height: 36),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(child: Container()),
-              Text(
-                'Saldo Total:',
-                textAlign: TextAlign.end,
-                style: GoogleFonts.comfortaa(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 23,
-                  color: AppTheme.confirm,
-                ),
+              const SizedBox(height: 36),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Expanded(child: Container()),
+                  Text(
+                    'Saldo Total:',
+                    textAlign: TextAlign.end,
+                    style: GoogleFonts.comfortaa(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 23,
+                      color: AppTheme.confirm,
+                    ),
+                  ),
+                  Text(
+                    ' R\$ 100,00',
+                    textAlign: TextAlign.end,
+                    style: GoogleFonts.comfortaa(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 23,
+                      color: AppTheme.confirm,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                ' R\$ 100,00',
-                textAlign: TextAlign.end,
-                style: GoogleFonts.comfortaa(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 23,
-                  color: AppTheme.confirm,
-                ),
+              const Divider(
+                thickness: 2,
               ),
-            ],
-          ),
-          const Divider(
-            thickness: 2,
-          ),
-        ]),
+            ]),
       ),
     );
   }
@@ -600,7 +586,6 @@ Widget _btnProrrogarContrato(context) {
   );
 }
 
-
 Widget _btnNovoContrato(context) {
   return ElevatedButton.icon(
     style: ElevatedButton.styleFrom(
@@ -624,8 +609,8 @@ Widget _btnNovoContrato(context) {
         context: context,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              top: Radius.circular(20),
-            )),
+          top: Radius.circular(20),
+        )),
         builder: (context) => Container(
           height: Get.height / 2,
           padding: EdgeInsets.all(16),
@@ -634,8 +619,7 @@ Widget _btnNovoContrato(context) {
               child: Row(
                 children: [
                   Padding(
-                    padding:
-                    const EdgeInsets.only(left: 34, top: 28),
+                    padding: const EdgeInsets.only(left: 34, top: 28),
                     child: Text(
                       'Novo Contrato',
                       // textAlign: TextAlign.end,
@@ -669,8 +653,7 @@ Widget _btnNovoContrato(context) {
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 AutoSizeText(
                                   'Contrato Customizado',
@@ -688,8 +671,8 @@ Widget _btnNovoContrato(context) {
                             ),
                             Text(
                               'Dados do contrato são negociados diferente com o integrador,'
-                                  ' esse tipo de contrato não fica disponível para compra pelos '
-                                  'usuários',
+                              ' esse tipo de contrato não fica disponível para compra pelos '
+                              'usuários',
                               // minFontSize: 12,
                               softWrap: true,
                               style: GoogleFonts.sourceSansPro(
@@ -720,8 +703,7 @@ Widget _btnNovoContrato(context) {
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 AutoSizeText(
                                   'Contrato Convencional',
@@ -739,8 +721,8 @@ Widget _btnNovoContrato(context) {
                             ),
                             Text(
                               'Dados do contrato são personalizados pelo usuários(Plano e Contratos Extras),'
-                                  ' esse tipo de contrato fica disponível para compra pelos '
-                                  'usuários',
+                              ' esse tipo de contrato fica disponível para compra pelos '
+                              'usuários',
                               // minFontSize: 12,
                               softWrap: true,
                               style: GoogleFonts.sourceSansPro(
@@ -766,8 +748,7 @@ Widget _btnNovoContrato(context) {
     label: Text(
       'Novo Contrato',
       style: GoogleFonts.sourceSansPro(
-          fontSize: AppTheme.h4,
-          color: Color.fromRGBO(255, 87, 34, 1)),
+          fontSize: AppTheme.h4, color: Color.fromRGBO(255, 87, 34, 1)),
     ),
   );
 }

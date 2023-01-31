@@ -6,6 +6,7 @@ import 'package:erp/pages/plataforma/contratosintegrador/extras/plataforma_page_
 import 'package:erp/pages/plataforma/contratosplataforma/extras/plataforma_integrador_page_controller.dart';
 import 'package:erp/pages/plataforma/contratosplataforma/comissao/comissao_controller.dart';
 import 'package:erp/pages/plataforma/contratosplataforma/padrao/editarcontrato/editar_contrato_plataforma_controller.dart';
+import 'package:erp/pages/plataforma/empresas/plataforma_empresa_controller.dart';
 import 'package:get/get.dart';
 import 'app_antigo/config/application.dart';
 import 'package:erp/app_antigo/rotas/route_names.dart';
@@ -23,6 +24,7 @@ void main() {
   Get.lazyPut(()=> EditarContratoIntegradorErpController());
   Get.lazyPut(()=> ContratoCustomizadoController());
   Get.lazyPut(()=> EditarContratoPlataformaErpController());
+  Get.lazyPut(()=> PlataformaEmpresaController());
   Get.lazyPut(()=> PlataformaPageController());
   Get.lazyPut(()=> PagamentosPageController());
   Get.lazyPut(()=> PagamentosRelatoriosController());

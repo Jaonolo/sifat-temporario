@@ -18,7 +18,12 @@ import '../../pages/plataforma/contratosintegrador/contratocustomizado/contrato_
 import '../../pages/plataforma/contratosintegrador/extras/plataforma_page.dart';
 import '../../pages/plataforma/contratosplataforma/comissao/comissao_page.dart';
 import '../../pages/plataforma/contratosplataforma/extras/plataforma_integrador_page.dart';
+import '../../pages/plataforma/contratosplataforma/padrao/editarcontrato/editar_contrato_plataforma_page.dart';
 import '../../pages/plataforma/contratosplataforma/padrao/plataforma_contrato_page.dart';
+import '../../pages/plataforma/empresas/comissao/comissao_page.dart';
+import '../../pages/plataforma/empresas/extras/extras_page.dart';
+import '../../pages/plataforma/empresas/plano/plano_page.dart';
+import '../../pages/plataforma/empresas/plataforma_empresa_page.dart';
 
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -33,11 +38,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         return _getPageRoute(HomePage(), settings);
       case SessaoRoute:
         // return _getPageRoute(ContratosPagamentosPage(routingData["token"]), settings);
-        return _getPageRoute(ContratosIntegradorPage(), settings);
+        return _getPageRoute(PlataformaEmpresaPage(), settings);
       // case ContratoRoute:
       //   return _getPageRoute(PlataformaPage(routingData["token"]), settings);
       case PagamentoRoute:
-        return _getPageRoute(PagamentosRelatorioPage(), settings);
+        return _getPageRoute(ComissaoPage(), settings);
         // return _getPageRoute(Cartao(), settings);
       // case ContratoRoute:
       //   return _getPageRoute(ContratosPagamentosPage(), settings);
