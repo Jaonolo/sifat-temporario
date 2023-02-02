@@ -47,11 +47,10 @@ class PlataformaPage extends GetView<PlataformaPageController> {
               flex: 10,
               child: Padding(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-
                     Expanded(child: Container()),
                     _btnSalvar(),
                   ],
@@ -62,7 +61,7 @@ class PlataformaPage extends GetView<PlataformaPageController> {
               flex: 90,
               child: ListView(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 children: [
                   const Divider(
                     thickness: 2,
@@ -76,8 +75,6 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                   const SizedBox(
                     height: 16,
                   ),
-
-                  //
                 ],
               ),
             ),
@@ -86,13 +83,6 @@ class PlataformaPage extends GetView<PlataformaPageController> {
       ),
     );
   }
-
-  // Get.snackbar('Sucesso', 'Bandeira adicionada',
-  // backgroundColor: AppTheme.confirm,
-  // colorText: Colors.white,
-  // snackPosition: SnackPosition.BOTTOM,
-  // icon: const Icon(Icons.check, color: Colors.white),
-  // maxWidth: 300);
 
 //----------- WIDGETS
   Widget _btnSalvar() {
@@ -103,9 +93,6 @@ class PlataformaPage extends GetView<PlataformaPageController> {
         icone: Icons.save,
         acao: () {
           controller.atualizarItemConfiguracaoIntegrador();
-
-          // onPressed: ()=> _atualizarItemConfiguracaoIntegrador(PlataformaIntegradorPageController.),
-          // _atualizarItemConfiguracaoIntegrador();
         });
   }
 
@@ -114,108 +101,94 @@ class PlataformaPage extends GetView<PlataformaPageController> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Obx(
-              () =>
-          controller.carregando
+          () => controller.carregando
               ? const IconeCarregando()
               : PaginatedDataTable(
-            rowsPerPage: controller.listaPlataformaContratoIntegradorExtra
-                .length,
-            horizontalMargin: 0,
-            // DataTable(
-            source: Tabela(
-                data: controller.listaPlataformaContratoIntegradorExtra,
-                controller: controller),
-            columns: [
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Função / Aplicação',
-                    textAlign: TextAlign.start,
-                    style: GoogleFonts.sourceSansPro(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      color: Color.fromRGBO(0, 51, 85, 1),
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                ),
-                onSort: controller.onSort,
-                // onSort: controller.onSort,
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Nome',
-                    textAlign: TextAlign.start,
-                    style: GoogleFonts.sourceSansPro(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      color: Color.fromRGBO(0, 51, 85, 1),
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                ),
-                onSort: controller.onSort,
-                // onSort: controller.onSort,
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Detalhes',
-                    textAlign: TextAlign.start,
-                    style: GoogleFonts.sourceSansPro(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      color: Color.fromRGBO(0, 51, 85, 1),
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                ),
-                // onSort: controller.onSort,
-              ),
-              DataColumn(
-                label: Expanded(
-                  child: Text(
-                    'Valor',
-                    textAlign: TextAlign.start,
-                    style: GoogleFonts.sourceSansPro(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      color: Color.fromRGBO(0, 51, 85, 1),
-                      letterSpacing: 0.5,
-                    ),
-                  ),
-                ),
-                // onSort: controller.onSort,
-              ),
-              // DataColumn(
-              //     label: Expanded(
-              //   child: Text(
-              //     'Tipo',
-              //     textAlign: TextAlign.start,
-              //     style: GoogleFonts.sourceSansPro(
-              //       fontSize: 17,
-              //       fontWeight: FontWeight.w600,
-              //       color: Color.fromRGBO(0, 51, 85, 1),
-              //       letterSpacing: 0.5,
-              //     ),
-              //   ),
-              // )),
-              DataColumn(
-                  label: Expanded(
-                    child: Text(
-                      'Disponível',
-                      textAlign: TextAlign.start,
-                      style: GoogleFonts.sourceSansPro(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600,
-                        color: Color.fromRGBO(0, 51, 85, 1),
-                        letterSpacing: 0.5,
+                  rowsPerPage:
+                      controller.listaPlataformaContratoIntegradorExtra.length,
+                  horizontalMargin: 0,
+                  // DataTable(
+                  source: Tabela(
+                      data: controller.listaPlataformaContratoIntegradorExtra,
+                      controller: controller),
+                  columns: [
+                    DataColumn(
+                      label: Expanded(
+                        child: Text(
+                          'Função / Aplicação',
+                          textAlign: TextAlign.start,
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromRGBO(0, 51, 85, 1),
+                            letterSpacing: 0.5,
+                          ),
+                        ),
                       ),
+                      onSort: controller.onSort,
+                      // onSort: controller.onSort,
                     ),
-                  )),
-            ],
-          ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Text(
+                          'Nome',
+                          textAlign: TextAlign.start,
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromRGBO(0, 51, 85, 1),
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                      onSort: controller.onSort,
+                      // onSort: controller.onSort,
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Text(
+                          'Detalhes',
+                          textAlign: TextAlign.start,
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromRGBO(0, 51, 85, 1),
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                      // onSort: controller.onSort,
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Text(
+                          'Valor',
+                          textAlign: TextAlign.start,
+                          style: GoogleFonts.sourceSansPro(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromRGBO(0, 51, 85, 1),
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                      // onSort: controller.onSort,
+                    ),
+                    DataColumn(
+                        label: Expanded(
+                      child: Text(
+                        'Disponível',
+                        textAlign: TextAlign.start,
+                        style: GoogleFonts.sourceSansPro(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                          color: Color.fromRGBO(0, 51, 85, 1),
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                    )),
+                  ],
+                ),
         ),
         // ),
       ],
@@ -229,17 +202,17 @@ class PlataformaPage extends GetView<PlataformaPageController> {
         Tab(
           child: size.width > 530
               ? Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-            child: Text(
-              key.descricao,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.comfortaa(
-                fontSize: 22,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 0.15,
-              ),
-            ),
-          )
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  child: Text(
+                    key.descricao,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.comfortaa(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0.15,
+                    ),
+                  ),
+                )
               : const Icon(Icons.fact_check_outlined),
         ),
       );
@@ -271,11 +244,8 @@ class PlataformaPage extends GetView<PlataformaPageController> {
     );
   }
 
-
   Widget _modalPlataforma(BuildContext context) {
-    Size _size = MediaQuery
-        .of(context)
-        .size;
+    Size _size = MediaQuery.of(context).size;
 
     //lista tabBar- appBar
     List<Tab> tabsLista = [];
@@ -284,17 +254,17 @@ class PlataformaPage extends GetView<PlataformaPageController> {
         Tab(
           child: _size.width > 530
               ? Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-            child: Text(
-              key.descricao,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.comfortaa(
-                fontSize: 22,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 0.15,
-              ),
-            ),
-          )
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  child: Text(
+                    key.descricao,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.comfortaa(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0.15,
+                    ),
+                  ),
+                )
               : const Icon(Icons.fact_check_outlined),
         ),
       );
@@ -324,13 +294,12 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Obx(
-                          () =>
-                          CheckBoxPadrao(
-                            status: controller.boxEmpresateste,
-                            alteraStatus: () {
-                              // controller.alternaBoxEmpresateste();
-                            },
-                          ),
+                      () => CheckBoxPadrao(
+                        status: controller.boxEmpresateste,
+                        alteraStatus: () {
+                          // controller.alternaBoxEmpresateste();
+                        },
+                      ),
                     ),
 
                     // CheckBoxMobile(),
@@ -350,7 +319,7 @@ class PlataformaPage extends GetView<PlataformaPageController> {
               desktop: Padding(
                 // padding: const EdgeInsets.all(16.0),
                 padding:
-                const EdgeInsets.symmetric(vertical: 48, horizontal: 181),
+                    const EdgeInsets.symmetric(vertical: 48, horizontal: 181),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -377,7 +346,6 @@ class PlataformaPage extends GetView<PlataformaPageController> {
       ),
     );
   }
-
 }
 
 // TODOWenderson tabela getx pagina principal
@@ -431,9 +399,10 @@ class Tabela extends DataTableSource {
                   ? data[index].itemConfiguracaoWaychefDTO.nome
                   : " ",
               onChanged: (text) {
-                controller.mapDetalhes[
-                data[index].itemConfiguracaoWaychefDTO.id!]!
-                    .itemConfiguracaoWaychefDTO.nome = text;
+                controller
+                    .mapDetalhes[data[index].itemConfiguracaoWaychefDTO.id!]!
+                    .itemConfiguracaoWaychefDTO
+                    .nome = text;
               },
               textAlign: TextAlign.start,
               decoration: InputDecoration(
@@ -463,12 +432,13 @@ class Tabela extends DataTableSource {
           padding: const EdgeInsets.only(bottom: 5),
           child: TextFormField(
             initialValue:
-            data[index].detalhes != null ? data[index].detalhes : " ",
+                data[index].detalhes != null ? data[index].detalhes : " ",
             maxLines: 5,
             inputFormatters: [LengthLimitingTextInputFormatter(250)],
             onChanged: (text) {
-              controller.mapDetalhes[data[index].itemConfiguracaoWaychefDTO
-                  .id!]!.detalhes = text;
+              controller
+                  .mapDetalhes[data[index].itemConfiguracaoWaychefDTO.id!]!
+                  .detalhes = text;
             },
             cursorColor: Colors.black87,
             decoration: InputDecoration(
@@ -497,8 +467,9 @@ class Tabela extends DataTableSource {
             child: TextFormField(
               initialValue: data[index].valor!.toStringAsFixed(2),
               onChanged: (valor) {
-                controller.mapDetalhes[data[index].itemConfiguracaoWaychefDTO
-                    .id!]!.valor = double.tryParse(valor);
+                controller
+                    .mapDetalhes[data[index].itemConfiguracaoWaychefDTO.id!]!
+                    .valor = double.tryParse(valor);
               },
               cursorColor: Colors.black87,
               decoration: InputDecoration(
@@ -526,33 +497,30 @@ class Tabela extends DataTableSource {
         ),
       ),
       DataCell(
-
-       Transform.scale(
-            scale: 1,
-            child: Checkbox(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  width: 1,
-                  style: BorderStyle.solid,
-                ),
-                borderRadius: BorderRadius.circular(6,),
+        Transform.scale(
+          scale: 1,
+          child: Checkbox(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                width: 1,
+                style: BorderStyle.solid,
               ),
-              fillColor: MaterialStateProperty.resolveWith(getColor),
-              value:  data[index].podeComercializar,
-              onChanged:((value) {
-                  controller.alternaBoxEmpresateste(data[index].itemConfiguracaoWaychefDTO.id!, value!);
-                  data[index].podeComercializar = value;
-              }),
-
-
+              borderRadius: BorderRadius.circular(
+                6,
+              ),
             ),
+            fillColor: MaterialStateProperty.resolveWith(getColor),
+            value: data[index].podeComercializar,
+            onChanged: ((value) {
+              controller.alternaBoxEmpresateste(
+                  data[index].itemConfiguracaoWaychefDTO.id!, value!);
+              data[index].podeComercializar = value;
+            }),
           ),
-
+        ),
       ),
-
     ]);
   }
-
 
   ////////////////////////////////// BOTÃO///////////////////////
 
@@ -568,7 +536,6 @@ class Tabela extends DataTableSource {
     return Color.fromRGBO(90, 95, 102, 1);
   }
 }
-
 
 //   @override
 //   Widget build(BuildContext context) {

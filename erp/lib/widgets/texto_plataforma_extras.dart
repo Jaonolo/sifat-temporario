@@ -16,10 +16,10 @@ class TextoPlataformaExtras extends StatelessWidget {
     return Text(
         texto,
         style: GoogleFonts.comfortaa(
-          fontSize: 19,
-          color: Color(0xFF0D0D0D),
-          fontWeight: FontWeight.w500,
-          letterSpacing: 0.15,
+          fontSize: 23,
+          color: Color.fromRGBO(13, 13, 13, 1),
+          fontWeight: FontWeight.w700,
+          letterSpacing: -0.5,
         )
     );
   }

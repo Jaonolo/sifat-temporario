@@ -20,6 +20,7 @@ class AppTheme {
   static Color salvar = const Color(0xFF169C34);
   static Color corDeFundoAbaModal = const Color(0xFFFFEDE8);
   static Color corBranco = Colors.white;
+  static Color corMenuNavegacao = const Color.fromRGBO(23, 28, 34, 1);
 
 
   static MaterialColor swatchPadrao = const MaterialColor(0xFFD75100, <int, Color>{
