@@ -37,10 +37,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       case HomeRoute:
         return _getPageRoute(HomePage(), settings);
       case SessaoRoute:
-        // return _getPageRoute(ContratosPagamentosPage(routingData["token"]), settings);
-        return _getPageRoute(PlataformaEmpresaPage(), settings);
-      case ContratoRoute:
         return _getPageRoute(PlataformaPage(routingData["token"]), settings);
+        // return _getPageRoute((), settings);
+      case ContratoRoute:
+        return _getPageRoute(PlataformaEmpresaPage(), settings);
       case PagamentoRoute:
         return _getPageRoute(ComissaoPage(), settings);
         // return _getPageRoute(Cartao(), settings);

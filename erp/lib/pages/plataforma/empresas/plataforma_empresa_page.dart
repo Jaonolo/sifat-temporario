@@ -2828,21 +2828,6 @@ class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   Widget _btnNovoContrato(context) {
     return ElevatedButton.icon(
       style: ElevatedButton.styleFrom(

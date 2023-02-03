@@ -14,13 +14,14 @@ import '../../../../widgets/utils/widgets_utils.dart';
 class PlataformaPageController extends GetxController {
 
 
-//-------------------------------------------------- FUNÇÕES
+//--------FUNÇÕES
 
   final _boxEmpresateste = false.obs;
 
+
   get boxEmpresateste => _boxEmpresateste.value;
-  void alternaBoxEmpresateste(String id, bool v) {
-    mapDetalhes[id]!.podeComercializar = v;
+  void alternaBoxEmpresateste(int id, bool v) {
+    listaPlataformaContratoIntegradorExtra[id].permiteComercializar = v;
     _boxEmpresateste.toggle();
   }
 
@@ -29,20 +30,18 @@ class PlataformaPageController extends GetxController {
   set carregando(value) => _carregando.value = value;
 
 //-------- FUNÇÕES plataforma page
-  final _listaPlataformaContratoIntegradorExtra = <ItemConfiguracaoIntegradorWaychef>[].obs;
-  List<ItemConfiguracaoIntegradorWaychef> get listaPlataformaContratoIntegradorExtra => _listaPlataformaContratoIntegradorExtra.toList();
-  set listaPlataformaContratoIntegradorExtra(value) => _listaPlataformaContratoIntegradorExtra.value = value;
+  var listaPlataformaContratoIntegradorExtra = <ItemConfiguracaoIntegradorWaychef>[].obs;
 
   final _listaPlataformaContratoExtra = <ItemConfiguracaoWaychef>[].obs;
   List<ItemConfiguracaoWaychef> get listaPlataformaContratoExtra => _listaPlataformaContratoExtra.toList();
   set listaPlataformaContratoExtra(value) => _listaPlataformaContratoExtra.value = value;
 
-  Map<String, ItemConfiguracaoIntegradorWaychef> mapDetalhes = new Map();
+  RxMap<String, ItemConfiguracaoIntegradorWaychef> mapDetalhes = new Map<String, ItemConfiguracaoIntegradorWaychef>().obs;
   Map<ModuloContratoIndicadorEnum, List<ItemConfiguracaoWaychef>> mapContratoIndicador = new Map();
   Map<dynamic, dynamic> mapControleCheckBox = {}.obs;
 
 
-//-------------------------------------------------- FUNÇÕES --------------------------------------------------------------
+//------------FUNÇÕES -----------
 
   @override
   void onInit() {
@@ -50,28 +49,14 @@ class PlataformaPageController extends GetxController {
     _buscarPlataformaContratoExtraIntegradores();
   }
 
-
-  //   void _buscarPlataformaContratoExtraIntegradores() async {
-  //   carregando = true;
-  //   await PlataformaContratosExtrasIntegradorRequester.buscarTodosItensPorIdEmpresaETipoItem(Application.pwsConfigGateway, Application.tokenUsuario, "1" , "EXTRA").then((value) {
-  //     if (value.isSuccess) {
-  //       _listaPlataformaContratoExtra.addAll(value.content);
-  //     } else {
-  //       //TODO: verificar e trata possiveis erros
-  //       print('>>>>>> Erro ao carregar empresas');
-  //     }
-  //   });
-  //   carregando = false;
-  // }
-
   void _buscarPlataformaContratoExtraIntegradores() async {
-    print('cheguei no carregando');
+    print('cheguei no_buscarPlataformaContratoExtraIntegradores');
     carregando = true;
     await PlataformaContratosExtrasIntegradorRequester.buscarTodosItensPorIdEmpresaETipoItem(Application.pwsConfigGateway, Application.tokenUsuario, "1" , "EXTRA").then((value) {
       print('entrei no if de buscar buscarTodosItensPorIdEmpresaETipoItem');
       if (value.isSuccess) {
-        _listaPlataformaContratoIntegradorExtra.addAll(value.content);
-        for (ItemConfiguracaoIntegradorWaychef value1 in _listaPlataformaContratoIntegradorExtra) {
+        listaPlataformaContratoIntegradorExtra.addAll(value.content);
+        for (ItemConfiguracaoIntegradorWaychef value1 in listaPlataformaContratoIntegradorExtra) {
           mapDetalhes[value1.itemConfiguracaoWaychefDTO.id!] = value1;
         }
       } else {

@@ -33,6 +33,14 @@ mixin _$SessaoController on SessaoBase, Store {
     return _$buscarSessoesAsyncAction.run(() => super.buscarSessoes());
   }
 
+  late final _$encerrarSessaoAsyncAction =
+      AsyncAction('SessaoBase.encerrarSessao', context: context);
+
+  @override
+  Future<void> encerrarSessao(DadosSessaoDTO dto) {
+    return _$encerrarSessaoAsyncAction.run(() => super.encerrarSessao(dto));
+  }
+
   @override
   String toString() {
     return '''

@@ -124,7 +124,7 @@ ItemConfiguracaoIntegradorWaychef _$ItemConfiguracaoIntegradorWaychefFromJson(
     ItemConfiguracaoIntegradorWaychef()
       ..id = json['id'] as String?
       ..valor = (json['valor'] as num?)?.toDouble()
-      ..podeComercializar = json['podeComercializar'] as bool?
+      ..permiteComercializar = json['permiteComercializar'] as bool?
       ..idEmpresa = json['idEmpresa'] as int?
       ..detalhes = json['detalhes'] as String?
       ..idItemConfiguracaoWaychef = json['idItemConfiguracaoWaychef'] as String?
@@ -136,7 +136,7 @@ Map<String, dynamic> _$ItemConfiguracaoIntegradorWaychefToJson(
     <String, dynamic>{
       'id': instance.id,
       'valor': instance.valor,
-      'podeComercializar': instance.podeComercializar,
+      'permiteComercializar': instance.permiteComercializar,
       'idEmpresa': instance.idEmpresa,
       'detalhes': instance.detalhes,
       'idItemConfiguracaoWaychef': instance.idItemConfiguracaoWaychef,

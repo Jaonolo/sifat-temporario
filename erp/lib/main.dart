@@ -19,7 +19,7 @@ import 'package:models/model/enum/clients.dart';
 import 'package:requester/config/pws_config.dart';
 
 void main() {
-  Get.lazyPut(()=> PlataformaIntegradorPageController());
+  // Get.lazyPut(()=> PlataformaIntegradorPageController());
   Get.lazyPut(()=> ComissaoPlataformaPageController());
   Get.lazyPut(()=> EditarContratoIntegradorErpController());
   Get.lazyPut(()=> ContratoCustomizadoController());
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: generateRoute,
       // initialRoute: PagamentoRoute,
       // initialRoute: SessaoRoute,
-      initialRoute: ContratoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiRVJQIiwiaWRTZXNzYW8iOiI3NGE3N2M1MC0yMGQwLTQ2NzgtOTYyMC02Mjc2OWIyZDAyZjIiLCJleHAiOjE2NzUzODAxMzYsImlhdCI6MTY3NTM2NTczNn0.nNEF51PIzGcbAHWt-BiCzR6nASn2-LUquMfNCor6-ALjRQMfkWukj0zN0md3TW5V9Jy3aoxlT-Ndmm395IVntg",
+      initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJpZFVzdWFyaW9FbXByZXNhIjoiMjQ0IiwidGlwb0NsaWVudCI6IkVSUCIsImlkU2Vzc2FvIjoiODc4ZmQyMDMtYmJlYy00MWE0LWFkYjQtYmZkMGFjMWMxZDNkIiwiaWRFbXByZXNhIjoiMSIsImV4cCI6MTY3NTQ0OTc5NiwiaWF0IjoxNjc1NDM1Mzk2fQ.uDrnN8fOxFVGJuVlkLkMLYlOpdbuq5twD4Nhc51y0RtESXDLSqpswcJ0hPvNMSkpmKNjC10PEXZiuHG2oHK1VA",
     );
   }
 
