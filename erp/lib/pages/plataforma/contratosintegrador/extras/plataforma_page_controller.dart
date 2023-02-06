@@ -4,45 +4,40 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:requester/requester/micro-service/contrato/plataforma/contrato-integrador/plataforma_contratos_extras_integrador_requester.dart';
 import 'package:models/model/models.dart';
-
 import '../../../../app_antigo/config/application.dart';
 import '../../../../widgets/utils/widgets_utils.dart';
 
 
-
-
 class PlataformaPageController extends GetxController {
 
+//-------- FUNÇÕES PLATAFORMA PAGE --------
 
-//--------FUNÇÕES
-
+  //controlador do chebox -abaixo
   final _boxEmpresateste = false.obs;
-
-
   get boxEmpresateste => _boxEmpresateste.value;
-  void alternaBoxEmpresateste(int id, bool v) {
-    listaPlataformaContratoIntegradorExtra[id].permiteComercializar = v;
+  set boxEmpresateste(value) => _boxEmpresateste.value = value;
+  void alternaBoxEmpresateste(int id, bool value) {
+    listaPlataformaContratoIntegradorExtra[id].permiteComercializar = value;
+    boxEmpresateste = listaPlataformaContratoIntegradorExtra[id].permiteComercializar;
     _boxEmpresateste.toggle();
   }
+  //controlador da do chebox -acima
 
+  //controlador do icone carregando na pagina -abaixo
   final _carregando = false.obs;
   bool get carregando => _carregando.value;
   set carregando(value) => _carregando.value = value;
+  //controlador do icone carregando na pagina -acima
 
-//-------- FUNÇÕES plataforma page
   var listaPlataformaContratoIntegradorExtra = <ItemConfiguracaoIntegradorWaychef>[].obs;
-
-  final _listaPlataformaContratoExtra = <ItemConfiguracaoWaychef>[].obs;
-  List<ItemConfiguracaoWaychef> get listaPlataformaContratoExtra => _listaPlataformaContratoExtra.toList();
-  set listaPlataformaContratoExtra(value) => _listaPlataformaContratoExtra.value = value;
-
   RxMap<String, ItemConfiguracaoIntegradorWaychef> mapDetalhes = new Map<String, ItemConfiguracaoIntegradorWaychef>().obs;
-  Map<ModuloContratoIndicadorEnum, List<ItemConfiguracaoWaychef>> mapContratoIndicador = new Map();
-  Map<dynamic, dynamic> mapControleCheckBox = {}.obs;
+
+
+  final listaAtualizada = Get.put(<ItemConfiguracaoIntegradorWaychef>[]);
+  List<ItemConfiguracaoIntegradorWaychef> get obs => listaAtualizada.obs;
 
 
 //------------FUNÇÕES -----------
-
   @override
   void onInit() {
     super.onInit();
@@ -50,10 +45,10 @@ class PlataformaPageController extends GetxController {
   }
 
   void _buscarPlataformaContratoExtraIntegradores() async {
-    print('cheguei no_buscarPlataformaContratoExtraIntegradores');
+    print('Estou na funcao _buscarPlataformaContratoExtraIntegradores');
     carregando = true;
     await PlataformaContratosExtrasIntegradorRequester.buscarTodosItensPorIdEmpresaETipoItem(Application.pwsConfigGateway, Application.tokenUsuario, "1" , "EXTRA").then((value) {
-      print('entrei no if de buscar buscarTodosItensPorIdEmpresaETipoItem');
+      print('Executando if de buscar buscarTodosItensPorIdEmpresaETipoItem');
       if (value.isSuccess) {
         listaPlataformaContratoIntegradorExtra.addAll(value.content);
         for (ItemConfiguracaoIntegradorWaychef value1 in listaPlataformaContratoIntegradorExtra) {
@@ -63,16 +58,17 @@ class PlataformaPageController extends GetxController {
         //TODO: verificar e trata possiveis erros
         print('>>>>>> Erro ao carregar _buscarTodosItensPorIdEmpresaETipoItem');
       }
-      print('>>>>>> mapDetalhes');
+      print('>>>>>> mapDetalhes - FORA DO IF ');
       print(mapDetalhes);
-      print('>>>>>> mapDetalhes');
+      print('>>>>>> mapDetalhes -  FORA DO IF');
     });
-    print('>>>>>> mapDetalhes 22222 ');
+    print('>>>>>> mapDetalhes APOS FINALIZAR A FUNCAO ');
     print(mapDetalhes);
-    print('>>>>>> mapDetalhes 22222 ');
+    print('>>>>>> mapDetalhes APOS FINALIZAR A FUNCAO ');
     carregando = false;
   }
 
+  // pronto ou funcional
   void onSort(int columnIndex, bool ascending) {
     var _listaOrdenada = listaPlataformaContratoIntegradorExtra;
     switch (columnIndex) {
@@ -110,13 +106,14 @@ class PlataformaPageController extends GetxController {
         break;
     }
   }
-
+  // pronto ou funcional
   int _compareString(bool ascending, String value1, String value2) {
     if (value1 != null && value2 != null) {
       return ascending ? value1.compareTo(value2) : value2.compareTo(value1);
     }
     return 0;
   }
+  // pronto ou funcional
   int compareDate(bool ascending, DateTime value1, DateTime value2) {
     if (value1 != null && value2 != null) {
       return ascending ? value1.compareTo(value2) : value2.compareTo(value1);

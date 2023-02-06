@@ -57,7 +57,7 @@ class RequesterPws {
       if (headerParams == null) {
         headerParams = {};
       }
-      headerParams['Content-Type'] = 'application/x-www-form-urlencoded';
+      headerParams['Content-Type'] = 'application/json';
     }
 
     if (body != null) {

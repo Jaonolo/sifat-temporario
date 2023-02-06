@@ -4,21 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:models/model/models.dart';
-
-// import 'package:erp/pages/organizar/plataforma_page_controller.dart';
+// import 'package:models/model/models.dart';
 import '../../../../app_antigo/config/application.dart';
-import '../../../../config/application.dart';
-import '../../../../models/item_configurcao_waychef.dart';
 import '../../../../theme/app_theme.dart';
 import '../../../../widgets/botao_padrao.dart';
 import '../../../../widgets/carregamento/icone_carregando.dart';
-import '../../../../widgets/chebox_mobile.dart';
-import '../../../../widgets/check_box_padrao.dart';
-import '../../../../widgets/drop_down_button_padrao.dart';
 import '../../../../widgets/responsive.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
-import '../../../../widgets/texto_aba_modal.dart';
 
 class PlataformaPage extends GetView<PlataformaPageController> {
   String? token;
@@ -27,10 +19,6 @@ class PlataformaPage extends GetView<PlataformaPageController> {
     print(this.token);
     Application.tokenUsuario = token!;
   }
-
-//
-// class PlataformaPage extends StatelessWidget {
-//   const PlataformaPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,11 +92,11 @@ class PlataformaPage extends GetView<PlataformaPageController> {
           () => controller.carregando
               ? const IconeCarregando()
               : PaginatedDataTable(
-                  rowsPerPage:
-                      controller.listaPlataformaContratoIntegradorExtra.length,
+                  rowsPerPage: controller.listaPlataformaContratoIntegradorExtra.length,
                   horizontalMargin: 0,
                   // DataTable(
-                  source: Tabela(
+                  source:
+                  Tabela(
                       data: controller.listaPlataformaContratoIntegradorExtra,
                       controller: controller),
                   columns: [
@@ -194,161 +182,9 @@ class PlataformaPage extends GetView<PlataformaPageController> {
       ],
     );
   }
-
-  AppBar _negocioAppBar(Size size) {
-    List<Tab> tabsLista = [];
-    controller.mapContratoIndicador.forEach((key, value) {
-      tabsLista.add(
-        Tab(
-          child: size.width > 530
-              ? Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  child: Text(
-                    key.descricao,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.comfortaa(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 0.15,
-                    ),
-                  ),
-                )
-              : const Icon(Icons.fact_check_outlined),
-        ),
-      );
-    });
-    print('Estou montando _negocioAppBar de adicional extra');
-    return AppBar(
-      // mainAxisSize: MainAxisSize.min,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      toolbarHeight: 0,
-      // toolbarTextStyle: ,
-      elevation: 0,
-      backgroundColor: AppTheme.corDeFundoAbaModal,
-      bottom: TabBar(
-        labelColor: AppTheme.corBranco,
-        labelStyle: const TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
-        unselectedLabelColor: AppTheme.adicionar,
-        indicatorSize: TabBarIndicatorSize.label,
-        indicator: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Color(0xFFFF5722),
-          // bottom: BorderSide(color: Color.fromRGBO(176, 179, 251, 1), width: 5)
-        ),
-        tabs: tabsLista,
-      ),
-    );
-  }
-
-  Widget _modalPlataforma(BuildContext context) {
-    Size _size = MediaQuery.of(context).size;
-
-    //lista tabBar- appBar
-    List<Tab> tabsLista = [];
-    controller.mapContratoIndicador.forEach((key, value) {
-      tabsLista.add(
-        Tab(
-          child: _size.width > 530
-              ? Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  child: Text(
-                    key.descricao,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.comfortaa(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 0.15,
-                    ),
-                  ),
-                )
-              : const Icon(Icons.fact_check_outlined),
-        ),
-      );
-    });
-
-    List<SingleChildScrollView> tabbarviewLista = [];
-    controller.mapContratoIndicador.forEach((key, value) {
-      List<Widget> listaNova = [];
-      value.forEach((element) {
-        print(element);
-        listaNova.add(
-          Row(
-            children: [
-              // TablePlataforma(),
-              Expanded(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(14.0),
-                    child: TextoAbaModal(
-                      texto: element.nome!,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Obx(
-                      () => CheckBoxPadrao(
-                        status: controller.boxEmpresateste,
-                        alteraStatus: () {
-                          // controller.alternaBoxEmpresateste();
-                        },
-                      ),
-                    ),
-
-                    // CheckBoxMobile(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      });
-      tabbarviewLista.add(
-        SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Responsive(
-              larguraMaximaMobile: 905,
-              desktop: Padding(
-                // padding: const EdgeInsets.all(16.0),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 48, horizontal: 181),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: listaNova,
-                ),
-              ),
-              mobile: Container(),
-            ),
-          ),
-        ),
-      );
-    });
-    print('Estou montando _modalPlataforma de adicional extra');
-    return DefaultTabController(
-      length: controller.mapContratoIndicador.length,
-      child: Scaffold(
-        // backgroundColor: AppTheme.background,
-        appBar: _negocioAppBar(_size),
-        body: TabBarView(
-          children: tabbarviewLista,
-        ),
-        // ],),
-      ),
-    );
-  }
 }
 
-// TODOWenderson tabela getx pagina principal
+// TODO tabela getx pagina principal
 class Tabela extends DataTableSource {
   PlataformaPageController controller;
 
@@ -474,7 +310,6 @@ class Tabela extends DataTableSource {
               cursorColor: Colors.black87,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(horizontal: 20),
-
                 // labelText: data[index].itemConfiguracaoWaychefDTO.detalhes!,
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(width: 1, color: Colors.black87),
@@ -505,26 +340,27 @@ class Tabela extends DataTableSource {
                 width: 1,
                 style: BorderStyle.solid,
               ),
-              borderRadius: BorderRadius.circular(
-                6,
+              borderRadius: BorderRadius.circular(6,
               ),
             ),
             fillColor: MaterialStateProperty.resolveWith(getColor),
             value: data[index].permiteComercializar,
-            onChanged: ((value) {
-              print('BoloTERCA');
-              controller.alternaBoxEmpresateste(
-                  index, value!);
-              data[index].permiteComercializar = value;
+            onChanged: ((bool? value) {
+                controller.alternaBoxEmpresateste(index, value!);
+                data[index].permiteComercializar = value;
             }),
+            // onChanged: ((value) {
+            //   print('BoloTERCA');
+            //   controller.alterarBoxEmpresateste(index, value!);
+            //   data[index].permiteComercializar = value;
+            // }),
           ),
         ),
       ),
     ]);
   }
 
-  ////////////////////////////////// BOTÃO///////////////////////
-
+  // cor do botão checkbox
   Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.pressed,
