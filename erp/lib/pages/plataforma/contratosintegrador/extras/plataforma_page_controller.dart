@@ -20,6 +20,8 @@ class PlataformaPageController extends GetxController {
     listaPlataformaContratoIntegradorExtra[id].permiteComercializar = value;
     boxEmpresateste = listaPlataformaContratoIntegradorExtra[id].permiteComercializar;
     _boxEmpresateste.toggle();
+    update();
+
   }
   //controlador da do chebox -acima
 
@@ -33,8 +35,8 @@ class PlataformaPageController extends GetxController {
   RxMap<String, ItemConfiguracaoIntegradorWaychef> mapDetalhes = new Map<String, ItemConfiguracaoIntegradorWaychef>().obs;
 
 
-  final listaAtualizada = Get.put(<ItemConfiguracaoIntegradorWaychef>[]);
-  List<ItemConfiguracaoIntegradorWaychef> get obs => listaAtualizada.obs;
+  // final listaAtualizada = Get.put(<ItemConfiguracaoIntegradorWaychef>[]);
+  // List<ItemConfiguracaoIntegradorWaychef> get obs => listaAtualizada.obs;
 
 
 //------------FUNÇÕES -----------

@@ -94,7 +94,6 @@ class RequesterPws {
           pws.message = "Erro ao montar o requester";
           throw PwsException(pws);
       }
-
       if (debug) {
         print('Retorno status: ${response.statusCode}');
         print('Retorno Headers: ${response.headers}');
