@@ -8,7 +8,7 @@ import 'package:http/http.dart';
 
 class LogradouroRequester {
   static Future<ResponsePws> buscar(PWSConfig config, String cep) async {
-    Response response = await RequesterPws(config: config).consome(
+    return await RequesterPws(config: config).consome(
       urlPws: UrlPws.getLogradouro(),
       headerParams: {
         "clientKey": config.client.clientKey,
@@ -16,8 +16,7 @@ class LogradouroRequester {
       queryParams: {
         "cep": cep,
       },
+        converter: (json) => Logradouro.fromJson(json)
     );
-    return ResponsePws(
-        response: response, converter: (json) => Logradouro.fromJson(json));
   }
 }

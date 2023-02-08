@@ -3,28 +3,26 @@ import 'package:requester/config/pws_config.dart';
 import 'package:requester/requester/requester_pws.dart';
 import 'package:requester/response/response_pws.dart';
 import 'package:requester/url_pws/url_pws.dart';
-import 'package:http/http.dart';
 
 class ProdutoMenuRequester {
-  static Future<ResponsePws> buscar(PWSConfig config,
-      String token,
-      int offset) async {
+  static Future<ResponsePws> buscar(
+      PWSConfig config, String token, int offset) async {
     Map<String, dynamic> query = {};
     if (offset != "") query["offset"] = offset;
 
-    Response response = await RequesterPws(config: config).consome(
-      urlPws: UrlPws.getProdutoMenus(),
-      headerParams: {
-        'token': token,
-      },
-      queryParams: query,
-    );
-    return ResponsePws(response: response,
+    return await RequesterPws(config: config).consome(
+        urlPws: UrlPws.getProdutoMenus(),
+        headerParams: {
+          'token': token,
+        },
+        queryParams: query,
         converter: (json) => ProdutoMenu.listFromJson(json));
   }
 
-  static Future<ResponsePws> buscarPaginado(PWSConfig config,
-      String token,) async {
+  static Future<ResponsePws> buscarPaginado(
+    PWSConfig config,
+    String token,
+  ) async {
     int totalMenus = 0;
     ResponsePws responsePws;
     List<ProdutoMenu> menus = [];

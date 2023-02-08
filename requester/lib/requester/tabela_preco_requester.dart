@@ -8,19 +8,18 @@ import 'package:http/http.dart' as http;
 class TabelaPrecoRequester {
 
   static Future<ResponsePws> buscarTodos(PWSConfig config, String token) async {
-    http.Response response = await RequesterPws(config: config).consome(
+    return await RequesterPws(config: config).consome(
       urlPws: UrlPws.getBuscarTodosTabelaPreco(),
       headerParams: {
         "token": token,
       },
+        converter: (json) => TabelaPreco.listFromJson(json)
     );
-    return ResponsePws(response: response,
-        converter: (json) => TabelaPreco.listFromJson(json));
   }
 
   static Future<ResponsePws> buscarPorId(PWSConfig config, String token,
       String id) async {
-    http.Response response = await RequesterPws(config: config).consome(
+    return await RequesterPws(config: config).consome(
       urlPws: UrlPws.getBuscarPorIdTabelaPreco(),
       headerParams: {
         "token": token,
@@ -28,9 +27,8 @@ class TabelaPrecoRequester {
       pathParams: {
         "{idTabela}": id,
       },
+        converter: (json) => TabelaPreco.fromJson(json)
     );
-    return ResponsePws(
-        response: response, converter: (json) => TabelaPreco.fromJson(json));
   }
 
 }

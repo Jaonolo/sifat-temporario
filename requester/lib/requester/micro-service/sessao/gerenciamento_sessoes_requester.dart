@@ -5,17 +5,14 @@ import 'package:requester/requester/requester_pws.dart';
 import 'package:requester/response/response_pws.dart';
 import 'package:requester/url_pws/url_pws.dart';
 
-class GerenciamentoSessoesRequester{
-
-
-  static Future<ResponsePws> buscarSessoes(PWSConfig pwsConfigGateway, String token) async {
-    Response response = await RequesterPws(config: pwsConfigGateway).consome(
-      urlPws: UrlPws.getBuscarSessoes(),
-      headerParams: {
-        'Authorization': "Bearer $token",
-      },
-    );
-    return ResponsePws(response: response,
+class GerenciamentoSessoesRequester {
+  static Future<ResponsePws> buscarSessoes(
+      PWSConfig pwsConfigGateway, String token) async {
+    return await RequesterPws(config: pwsConfigGateway).consome(
+        urlPws: UrlPws.getBuscarSessoes(),
+        headerParams: {
+          'Authorization': "Bearer $token",
+        },
         converter: (json) => DadosSessaoDTO.listFromJson(json));
   }
 }

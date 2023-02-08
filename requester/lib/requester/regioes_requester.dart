@@ -8,11 +8,10 @@ import 'package:http/http.dart';
 class RegiaoRequester {
 
   static Future<ResponsePws> carregar(PWSConfig config, String token) async {
-    Response response = await RequesterPws(config: config).consome(
+    return await RequesterPws(config: config).consome(
       urlPws: UrlPws.getRegioes(),
       headerParams: {"token": token},
+        converter: (json) => Regiao.listFromJson(json)
     );
-    return ResponsePws(
-        response: response, converter: (json) => Regiao.listFromJson(json));
   }
 }

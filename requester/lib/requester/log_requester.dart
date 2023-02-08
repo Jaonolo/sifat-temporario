@@ -3,11 +3,10 @@ import 'package:requester/config/pws_config.dart';
 import 'package:requester/requester/requester_pws.dart';
 import 'package:requester/response/response_pws.dart';
 import 'package:requester/url_pws/url_pws.dart';
-import 'package:http/http.dart';
 
 class LogRequester {
-  static Future<ResponsePws> gravarLog(PWSConfig config, String token,
-      String msg) async {
+  static Future<ResponsePws> gravarLog(
+      PWSConfig config, String token, String msg) async {
     Log log = Log();
     log.data = DateTime.now();
     log.descricao = "Debug Waychef Mobile";
@@ -17,16 +16,12 @@ class LogRequester {
     log.idExterno = DateTime.now().toString();
     log.stackTrace = msg;
 
-    Response response = await RequesterPws(config: config).consome(
+    return await RequesterPws(config: config).consome(
         urlPws: UrlPws.postLog(),
         headerParams: {
           'token': token,
         },
-        body: [
-          log.toJson()
-        ]
-    );
-    return ResponsePws(
-        response: response, converter: (json) => ServicoSitef.fromJson(json));
+        body: [log.toJson()],
+        converter: (json) => ServicoSitef.fromJson(json));
   }
 }

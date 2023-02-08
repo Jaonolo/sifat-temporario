@@ -11,29 +11,26 @@ import '../../requester_pws.dart';
 class SessaoUsuarioRequester {
 
   static Future<ResponsePws> realizaLoginCriaSessao(PWSConfig clientSessao, String token, LoginUsuarioDTO loginUsuarioDTO) async {
-    Response response = await RequesterPws(config: clientSessao).consome(
+    return await RequesterPws(config: clientSessao).consome(
         urlPws: UrlPws.postNovaSessaoUsuario(),
         headerParams: {"Authorization": "Bearer "+token,},
-        body: loginUsuarioDTO
+        body: loginUsuarioDTO,
+        converter: (json) => TokenDTO.fromJson(json)
     );
-    return ResponsePws(
-        response: response, converter: (json) => TokenDTO.fromJson(json));
   }
 
   static Future<ResponsePws> encerrarSessao(PWSConfig clientSessao, String token) async {
-    Response response = await RequesterPws(config: clientSessao).consome(
+    return await RequesterPws(config: clientSessao).consome(
         urlPws: UrlPws.postEncerrarSessaoUsuario(),
         headerParams: {"Authorization": "Bearer " + token,}
     );
-    return ResponsePws(response: response);
   }
 
   static Future<ResponsePws> atualizarSessao(PWSConfig clientSessao, String token) async {
-    Response response = await RequesterPws(config: clientSessao).consome(
+    return await RequesterPws(config: clientSessao).consome(
         urlPws: UrlPws.postAtualizarSessaoUsuario(),
-        headerParams: {"Authorization": "Bearer " + token,}
+        headerParams: {"Authorization": "Bearer " + token,},
+        converter: (json) => TokenDTO.fromJson(json)
     );
-    return ResponsePws(
-        response: response, converter: (json) => TokenDTO.fromJson(json));
   }
 }

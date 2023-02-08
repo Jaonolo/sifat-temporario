@@ -6,9 +6,8 @@ import 'package:http/http.dart';
 
 class VersionInfoRequester {
   static Future<ResponsePws> buscar(PWSConfig config) async {
-    Response response = await RequesterPws(config: config).consome(
+    return await RequesterPws(config: config).consome(
       urlPws: UrlPws.getVersao(),
     );
-    return ResponsePws(response: response);
   }
 }

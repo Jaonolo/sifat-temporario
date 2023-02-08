@@ -6,10 +6,9 @@ import 'package:requester/url_pws/url_pws.dart';
 
 class SessaoServicoRequest {
   static Future<ResponsePws> encerrarSessao(PWSConfig pwsConfig, String token) async {
-    Response response = await RequesterPws(config: pwsConfig).consome(
+    return await RequesterPws(config: pwsConfig).consome(
         urlPws: UrlPws.postEncerrarSessaoServico(),
         headerParams: {"Authorization": "Bearer " + token,}
     );
-    return ResponsePws(response: response);
   }
 }

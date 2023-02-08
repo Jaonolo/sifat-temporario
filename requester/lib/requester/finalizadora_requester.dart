@@ -7,14 +7,12 @@ import 'package:http/http.dart' as http;
 
 class FinalizadoraRequester {
   static Future<ResponsePws> buscar(PWSConfig config, String token) async {
-    http.Response response = await RequesterPws(config: config).consome(
+    return await RequesterPws(config: config).consome(
       urlPws: UrlPws.getFinalizadoras(),
       headerParams: {
         'token': token,
       },
+        converter: (json) => FinalizadoraEmpresa.listFromJson(json)
     );
-    return ResponsePws(
-        response: response,
-        converter: (json) => FinalizadoraEmpresa.listFromJson(json));
   }
 }
