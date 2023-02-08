@@ -31,10 +31,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
 
+    print("Passou pelo build");
     return Scaffold(
       body: SafeArea(
         child: Align(
@@ -44,12 +44,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             width: selected ? _height / 7 : _width / 2.3,
             height: selected ? _height : _height,
             color: Color.fromRGBO(249, 77, 24, 1),
-            alignment:
-            selected ? Alignment.centerRight : AlignmentDirectional.centerEnd,
+            alignment: selected
+                ? Alignment.centerRight
+                : AlignmentDirectional.centerEnd,
             duration: const Duration(milliseconds: 400),
             curve: Curves.decelerate,
-            child:
-            Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Visibility(
@@ -59,12 +59,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   maintainState: false,
                   maintainSize: false,
                   // ****** A FUNÇÃO ABAIXO ELA TROCA O ICONE PELO CONTAINER COM A LISTA DE ITENS E AS DEMAIS FUNCIONALIDADES SEGUINTES  ******
-                  replacement:
-                  Column(
+                  replacement: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 26, right: 11, bottom: 50),
+                        padding:
+                            EdgeInsets.only(left: 26, right: 11, bottom: 50),
                         child: Row(
                           children: [
                             Expanded(
@@ -86,15 +86,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   backgroundColor: Colors.white,
                                   elevation: 0,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(45),
+                                    borderRadius: BorderRadius.circular(45),
                                   ),
                                 ),
                                 onPressed: () {
                                   setState(() {
-
-                                    Future.delayed(Duration(seconds: 1)).then((value) {
-
+                                    Future.delayed(Duration(seconds: 1))
+                                        .then((value) {
                                       _visible = !_visible;
                                     });
                                     selected = !selected;
@@ -152,9 +150,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                         height: 46,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadius.circular(8),
-                                          color: Color.fromRGBO(
-                                              245, 245, 245, 1),
+                                              BorderRadius.circular(8),
+                                          color:
+                                              Color.fromRGBO(245, 245, 245, 1),
                                         ),
                                         child: Row(
                                           children: [
@@ -170,8 +168,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                             ),
                                             Text(
                                               '1',
-                                              style:
-                                              GoogleFonts.sourceSansPro(
+                                              style: GoogleFonts.sourceSansPro(
                                                 fontSize: 24,
                                                 color: Color.fromRGBO(
                                                     94, 94, 94, 1),
@@ -189,28 +186,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                             Expanded(
                                               child: Text(
                                                 'X Burguer',
-                                                style: GoogleFonts
-                                                    .sourceSansPro(
+                                                style:
+                                                    GoogleFonts.sourceSansPro(
                                                   fontSize: 16,
                                                   color: Color.fromRGBO(
                                                       94, 94, 94, 1),
-                                                  fontWeight:
-                                                  FontWeight.w400,
+                                                  fontWeight: FontWeight.w400,
                                                 ),
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.only(
-                                                  right: 11),
+                                              padding:
+                                                  EdgeInsets.only(right: 11),
                                               child: Text(
                                                 'R\$25,00',
-                                                style: GoogleFonts
-                                                    .sourceSansPro(
+                                                style:
+                                                    GoogleFonts.sourceSansPro(
                                                   fontSize: 18,
                                                   color: Color.fromRGBO(
                                                       0, 150, 93, 1),
-                                                  fontWeight:
-                                                  FontWeight.w600,
+                                                  fontWeight: FontWeight.w600,
                                                 ),
                                               ),
                                             ),
@@ -232,11 +227,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       'Limpar Carrinho',
                                       style: GoogleFonts.sourceSansPro(
                                         fontSize: 16,
-                                        color:
-                                        Color.fromRGBO(231, 74, 59, 1),
+                                        color: Color.fromRGBO(231, 74, 59, 1),
                                         fontWeight: FontWeight.w400,
-                                        decoration:
-                                        TextDecoration.underline,
+                                        decoration: TextDecoration.underline,
                                       ),
                                     ),
                                   ),
@@ -320,8 +313,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             ),
                             onPressed: () {
                               setState(() {
-                                Future.delayed(Duration(seconds: 1)).then((value) {
-
+                                Future.delayed(Duration(seconds: 1))
+                                    .then((value) {
                                   _visible = !_visible;
                                 });
                                 selected = !selected;
