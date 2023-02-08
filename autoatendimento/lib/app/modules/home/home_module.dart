@@ -10,6 +10,8 @@ import 'package:autoatendimento/app/modules/home/pages/pendencia_fiscal/pendenci
 import 'package:autoatendimento/app/modules/home/pages/produto/adicional/produto_adicional_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/combo/produto_combo_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/produto/composto/produto_composto_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/menu_produto/menu_controller.dart';
+import 'package:autoatendimento/app/modules/home/pages/produto/menu_produto/menu_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/revisao_pedido/revisao_pedido_page.dart';
 import 'package:autoatendimento/app/modules/home/pages/tef/administrativo_tef/administrativo_tef_controller.dart';
 import 'package:autoatendimento/app/modules/home/pages/tef/administrativo_tef/administrativo_tef_page.dart';
@@ -50,6 +52,7 @@ class HomeModule extends Module {
         Bind.lazySingleton((i) => AdministrativoTefController()),
         Bind.lazySingleton((i) => CancelamentoTefController()),
         Bind.lazySingleton((i) => PendenciaFiscalController()),
+        Bind.lazySingleton((i) => MenuController()),
 
 
 
@@ -64,6 +67,7 @@ class HomeModule extends Module {
         ChildRoute("/wizard", child: (_, args) => WizardPage()),
         ChildRoute("/comecar", child: (_, args) => ToqueComecarPage()),
         ChildRoute("/viagem", child: (_, args) => PedidoViagemPage()),
+        ChildRoute("/menu_page", child: (_, args) => MenuPage()),
         ChildRoute("/home", child: (_, args) => HomePage()),
         ChildRoute("/revisao", child: (_, args) => RevisaoPedidoPage()),
         ChildRoute("/cpf", child: (_, args) => CPFPage()),

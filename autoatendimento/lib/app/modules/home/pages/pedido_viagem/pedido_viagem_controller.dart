@@ -15,7 +15,7 @@ abstract class PedidoViagemBase with Store {
   AppController appController = Modular.get();
 
   void voltarCardapio() {
-    Modular.to.popUntil(ModalRoute.withName('/home'));
+    Modular.to.popUntil(ModalRoute.withName('/menu_page'));
   }
 
   void cancelar() {
@@ -24,6 +24,6 @@ abstract class PedidoViagemBase with Store {
 
   void selecionaOpcao(String value) {
     vendaController.obsOndePrefereComer = "Onde prefere comer: " + value;
-    Modular.to.pushNamed("/home");
+    Modular.to.pushNamed("/menu_page");
   }
 }

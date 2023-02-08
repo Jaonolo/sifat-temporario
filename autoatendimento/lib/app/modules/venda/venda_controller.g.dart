@@ -24,6 +24,22 @@ mixin _$VendaController on VendaBase, Store {
     });
   }
 
+  late final _$obsOndePrefereComerAtom =
+      Atom(name: 'VendaBase.obsOndePrefereComer', context: context);
+
+  @override
+  String get obsOndePrefereComer {
+    _$obsOndePrefereComerAtom.reportRead();
+    return super.obsOndePrefereComer;
+  }
+
+  @override
+  set obsOndePrefereComer(String value) {
+    _$obsOndePrefereComerAtom.reportWrite(value, super.obsOndePrefereComer, () {
+      super.obsOndePrefereComer = value;
+    });
+  }
+
   late final _$itensLancadosAtom =
       Atom(name: 'VendaBase.itensLancados', context: context);
 
@@ -86,9 +102,21 @@ mixin _$VendaController on VendaBase, Store {
   }
 
   @override
+  void adcionarObservacao(String texto) {
+    final _$actionInfo = _$VendaBaseActionController.startAction(
+        name: 'VendaBase.adcionarObservacao');
+    try {
+      return super.adcionarObservacao(texto);
+    } finally {
+      _$VendaBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 nota: ${nota},
+obsOndePrefereComer: ${obsOndePrefereComer},
 itensLancados: ${itensLancados}
     ''';
   }
