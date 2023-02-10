@@ -153,7 +153,6 @@ class RequesterPws {
     return ResponsePws(
         response: response,
         body: await response.stream.bytesToString(),
-        converter: (json) =>
-            ItemConfiguracaoIntegradorWaychef.listFromJson(json));
+        converter: converter);
   }
 }
