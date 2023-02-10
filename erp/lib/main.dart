@@ -49,19 +49,19 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: generateRoute,
       // initialRoute: PagamentoRoute,
       // initialRoute: SessaoRoute,
-      initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiRVJQIiwiaWRTZXNzYW8iOiIwYWIzMDhlYy0wYjM2LTQ0NGItYWI4NS03MjQwYjIzZDU5NWEiLCJleHAiOjE2NzYwNDgyMjcsImlhdCI6MTY3NjAzMzgyN30.HRJmxnp-MWXSIphEGRd86ezX0onxPJkQYuLRZZo3dqGWllfRWTKecDi2CFIDacPhldDGpuki61zw8YO1DWNJRw",
+      initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiRVJQIiwiaWRTZXNzYW8iOiIwMGEzNzhkNy03ZGM4LTQxYWEtOTNiNS1hNDVlNDExYmVmMGMiLCJleHAiOjE2NzYwNDUzNTYsImlhdCI6MTY3NjAzMDk1Nn0._v_3HWJQw_TaOgylKcCN4FP6XRLUytJZG54GcwwN9N1jOWpe7AlL45sV-ENNRKBoUXPDpL61I5UsbbVu0XtGsQ",
     );
   }
 
   void inicializePws(){
     Application.pwsConfigWaychef = PWSConfig(
-        // urlBase: "http://api.wenderson/api",
-        urlBase: "http://dev.api.waybe.com.br/api",
+        urlBase: "http://api.wenderson/api",
+        // urlBase: "http://dev.api.waybe.com.br/api",
         client: Clients.ERP,
         clientSecret: "");
     Application.pwsConfigGateway = PWSConfig(
-        // urlBase: "http://api.wenderson:8081",
-        urlBase: "http://dev.api.waybe.com.br:8081",
+        urlBase: "http://api.wenderson:8081",
+        // urlBase: "http://dev.api.waybe.com.br:8081",
         client: Clients.ERP,
         clientSecret: "");
   }

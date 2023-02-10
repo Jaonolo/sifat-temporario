@@ -144,7 +144,7 @@ class PlataformaPageController extends GetxController {
             //TODO: verificar e trata possiveis erros
           }
         });
-          carregando = false;
+    carregando = false;
     }
 
 

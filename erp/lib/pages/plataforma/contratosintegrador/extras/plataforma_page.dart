@@ -41,7 +41,6 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                 _btnSalvar(),
               ],
             ),
-
             Column(
               // padding:
               // const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -68,8 +67,6 @@ class PlataformaPage extends GetView<PlataformaPageController> {
             ),
           ],
         ),
-
-
       ),
     );
   }
@@ -195,147 +192,257 @@ class PlataformaPage extends GetView<PlataformaPageController> {
       () => controller.carregando
           ? const IconeCarregando()
           : Container(
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: controller.listaPlataformaContratoIntegradorExtra.length,
-              itemBuilder: (context, index) {
-                ItemConfiguracaoIntegradorWaychef itemConfiguracaoIntegradorWaychef = controller.listaPlataformaContratoIntegradorExtra[index];
-                return
-                  Card(
-                    margin: EdgeInsets.zero,
-                    // color: Color.fromRGBO(233, 241, 255, 1),
-                    child: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            flex: 3,
-                            child: Container(
-                              child: Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: Text(
-                                  // controller.listaPlataformaContratoIntegradorExtra[index].itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!,
-                                  itemConfiguracaoIntegradorWaychef.itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!,
-                                  textAlign: TextAlign.start,
-                                  style: GoogleFonts.sourceSansPro(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color.fromRGBO(0, 51, 85, 1),
-                                    letterSpacing: 0.5,
-                                  ),
-                                ),
-                              ),
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount:
+                      controller.listaPlataformaContratoIntegradorExtra.length,
+                  itemBuilder: (context, index) {
+                    ItemConfiguracaoIntegradorWaychef
+                        itemConfiguracaoIntegradorWaychef = controller
+                            .listaPlataformaContratoIntegradorExtra[index];
+                    return Card(
+                      margin: EdgeInsets.zero,
+                      // color: Color.fromRGBO(233, 241, 255, 1),
+                      child: Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            expandedFuncaoAplicacao(
+                              context,
+                              index,
+                              itemConfiguracaoIntegradorWaychef,
                             ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child:
-                            Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 5),
-                                  child: TextFormField(
-                                    keyboardType: TextInputType.multiline,
-                                    inputFormatters: [
-                                      LengthLimitingTextInputFormatter(49)
-                                    ],
-                                    initialValue: itemConfiguracaoIntegradorWaychef.itemConfiguracaoWaychefDTO
-                                                .nome != null
-                                        ? itemConfiguracaoIntegradorWaychef.itemConfiguracaoWaychefDTO.nome
-                                        : " ",
-                                    onChanged: (text) {
-                                      controller
-                                          .mapDetalhes[itemConfiguracaoIntegradorWaychef.itemConfiguracaoWaychefDTO
-                                              .id!]!.itemConfiguracaoWaychefDTO.nome = text;
-                                    },
-                                    textAlign: TextAlign.start,
-                                    decoration: InputDecoration(
-                                      // labelText: controller.listaPlataformaContratoIntegradorExtra[index].itemConfiguracaoWaychefDTO.detalhes!,
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1, color: Colors.black87),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1, color: Colors.black87),
-                                      ),
-                                      labelStyle: TextStyle(
-                                        color: Colors.black87,
-                                      ),
-                                    ),
-                                    style: GoogleFonts.sourceSansPro(
-                                      fontStyle: FontStyle.normal,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xFF171C22),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Container(
-                              child: Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: Text(
-                                  'Detalhes',
-                                  textAlign: TextAlign.start,
-                                  style: GoogleFonts.comfortaa(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color.fromRGBO(0, 51, 85, 1),
-                                    letterSpacing: 0.15,
-                                  ),
-                                ),
-                              ),
+                            expandedNome(
+                              context,
+                              index,
+                              itemConfiguracaoIntegradorWaychef,
                             ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              child: Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: Text(
-                                  'Valor',
-                                  textAlign: TextAlign.start,
-                                  style: GoogleFonts.comfortaa(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color.fromRGBO(0, 51, 85, 1),
-                                    letterSpacing: 0.15,
-                                  ),
-                                ),
-                              ),
+                            expandedDetalhes(
+                              context,
+                              index,
+                              itemConfiguracaoIntegradorWaychef,
                             ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              child: Padding(
-                                padding: EdgeInsets.all(12.0),
-                                child: Text(
-                                  'Disponível',
-                                  textAlign: TextAlign.start,
-                                  style: GoogleFonts.comfortaa(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color.fromRGBO(0, 51, 85, 1),
-                                    letterSpacing: 0.15,
-                                  ),
-                                ),
-                              ),
+                            expandedValor(
+                              context,
+                              index,
+                              itemConfiguracaoIntegradorWaychef,
                             ),
-                          ),
-                        ],
+                            expandedDisponivel(
+                              context,
+                              index,
+                              itemConfiguracaoIntegradorWaychef,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-              }
+                    );
+                  }),
+            ),
+    );
+  }
 
-
+  expandedFuncaoAplicacao(context, index, itemConfiguracaoIntegradorWaychef) {
+    return Expanded(
+      flex: 3,
+      child: Container(
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Text(
+            // controller.listaPlataformaContratoIntegradorExtra[index].itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!,
+            itemConfiguracaoIntegradorWaychef
+                .itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!,
+            textAlign: TextAlign.start,
+            style: GoogleFonts.sourceSansPro(
+              fontSize: 17,
+              fontWeight: FontWeight.w400,
+              color: Color.fromRGBO(0, 51, 85, 1),
+              letterSpacing: 0.5,
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  expandedNome(context, index, itemConfiguracaoIntegradorWaychef) {
+    return Expanded(
+      flex: 2,
+      child: Container(
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: TextFormField(
+            keyboardType: TextInputType.multiline,
+            inputFormatters: [LengthLimitingTextInputFormatter(49)],
+            initialValue: itemConfiguracaoIntegradorWaychef
+                        .itemConfiguracaoWaychefDTO.nome !=
+                    null
+                ? itemConfiguracaoIntegradorWaychef
+                    .itemConfiguracaoWaychefDTO.nome
+                : " ",
+            onChanged: (text) {
+              controller
+                  .mapDetalhes[itemConfiguracaoIntegradorWaychef
+                      .itemConfiguracaoWaychefDTO.id!]!
+                  .itemConfiguracaoWaychefDTO
+                  .nome = text;
+            },
+            textAlign: TextAlign.start,
+            decoration: InputDecoration(
+              // labelText: controller.listaPlataformaContratoIntegradorExtra[index].itemConfiguracaoWaychefDTO.detalhes!,
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(width: 1, color: Colors.black87),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(width: 1, color: Colors.black87),
+              ),
+              labelStyle: TextStyle(
+                color: Colors.black87,
+              ),
+            ),
+            style: GoogleFonts.sourceSansPro(
+              fontStyle: FontStyle.normal,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: Color(0xFF171C22),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  expandedDetalhes(context, index, itemConfiguracaoIntegradorWaychef) {
+    return Expanded(
+      flex: 3,
+      child: Container(
+        padding: EdgeInsets.only(bottom: 0.0),
+        child: TextFormField(
+          initialValue: controller
+                      .listaPlataformaContratoIntegradorExtra[index].detalhes !=
+                  null
+              ? controller
+                  .listaPlataformaContratoIntegradorExtra[index].detalhes
+              : " ",
+          maxLines: 2,
+          // maxLines: null,
+          inputFormatters: [LengthLimitingTextInputFormatter(250)],
+          onChanged: (text) {
+            controller
+                .mapDetalhes[controller
+                    .listaPlataformaContratoIntegradorExtra[index]
+                    .itemConfiguracaoWaychefDTO
+                    .id!]!
+                .detalhes = text;
+          },
+          cursorColor: Colors.black87,
+          decoration: InputDecoration(
+            isDense: true,
+            // labelText: controller.listaPlataformaContratoIntegradorExtra[index].itemConfiguracaoWaychefDTO.detalhes!,
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(width: 1, color: Colors.black87),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(width: 1, color: Colors.black87),
+            ),
+            labelStyle: TextStyle(
+              color: Colors.black87,
+            ),
+          ),
+          style: GoogleFonts.sourceSansPro(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ),
+    );
+  }
+
+  expandedValor(context, index, itemConfiguracaoIntegradorWaychef) {
+    return Expanded(
+      flex: 2,
+      child: Container(
+        child: Padding(
+          padding: EdgeInsets.all(12.0),
+          child: TextFormField(
+            initialValue: controller
+                .listaPlataformaContratoIntegradorExtra[index].valor!
+                .toStringAsFixed(2),
+            onChanged: (valor) {
+              controller
+                  .mapDetalhes[controller
+                      .listaPlataformaContratoIntegradorExtra[index]
+                      .itemConfiguracaoWaychefDTO
+                      .id!]!
+                  .valor = double.tryParse(valor);
+            },
+            cursorColor: Colors.black87,
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.money),
+              // contentPadding: EdgeInsets.symmetric(horizontal: 20),
+              // labelText: controller.listaPlataformaContratoIntegradorExtra[index].itemConfiguracaoWaychefDTO.detalhes!,
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(width: 1, color: Colors.black87),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(width: 1, color: Colors.black87),
+              ),
+              labelStyle: TextStyle(
+                color: Colors.black87,
+              ),
+            ),
+            style: GoogleFonts.sourceSansPro(
+              fontStyle: FontStyle.normal,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: Color(0xFF171C22),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  expandedDisponivel(context, index, itemConfiguracaoIntegradorWaychef) {
+    return Expanded(
+      flex: 2,
+      child: Container(
+        child: Transform.scale(
+          scale: 1,
+          child: Checkbox(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                width: 1,
+                style: BorderStyle.solid,
+              ),
+              borderRadius: BorderRadius.circular(
+                6,
+              ),
+            ),
+            fillColor: MaterialStateProperty.resolveWith(getColor),
+            value: itemConfiguracaoIntegradorWaychef.permiteComercializar,
+            onChanged: ((bool? value) {
+              controller.alternaBoxEmpresateste(index, value!);
+              controller.carregando = true;
+              controller.listaPlataformaContratoIntegradorExtra
+                  .forEach((element) {
+                if (element.idItemConfiguracaoWaychef ==
+                    itemConfiguracaoIntegradorWaychef
+                        .idItemConfiguracaoWaychef) {
+                  element.permiteComercializar = value;
+                }
+                controller.carregando = false;
+              });
+              // controller.listaPlataformaContratoIntegradorExtra[index].permiteComercializar = value;
+            }),
+            // onChanged: ((value) {
+            //   print('BoloTERCA');
+            //   controller.alterarBoxEmpresateste(index, value!);
+            //   controller.listaPlataformaContratoIntegradorExtra[index].permiteComercializar = value;
+            // }),
+          ),
+        ),
+      ),
     );
   }
 
@@ -645,19 +752,20 @@ class PlataformaPage extends GetView<PlataformaPageController> {
 //         ),
 //       ),
 //
-//     ]);
+//     ]
+// );
 //   }
 //
 //   // cor do botão checkbox
-//   Color getColor(Set<MaterialState> states) {
-//     const Set<MaterialState> interactiveStates = <MaterialState>{
-//       MaterialState.pressed,
-//       MaterialState.hovered,
-//       MaterialState.focused,
-//     };
-//     if (states.any(interactiveStates.contains)) {
-//       return Color.fromRGBO(90, 95, 102, 1);
-//     }
-//     return Color.fromRGBO(90, 95, 102, 1);
-//   }
+Color getColor(Set<MaterialState> states) {
+  const Set<MaterialState> interactiveStates = <MaterialState>{
+    MaterialState.pressed,
+    MaterialState.hovered,
+    MaterialState.focused,
+  };
+  if (states.any(interactiveStates.contains)) {
+    return Color.fromRGBO(90, 95, 102, 1);
+  }
+  return Color.fromRGBO(90, 95, 102, 1);
+}
 // }

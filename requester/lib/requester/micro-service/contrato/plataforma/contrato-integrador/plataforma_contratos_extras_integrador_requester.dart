@@ -14,18 +14,16 @@ class PlataformaContratosExtrasIntegradorRequester {
     return await RequesterPws(config: config).consome(
         urlPws: UrlPws.putAtualizarItemConfiguracaoIntegrador(),
         headerParams: {
-          "Authorization": "Bearer " + token,
+          'Authorization': "Bearer $token",
         },
         //body: "[{\"id\":\"e0488da5-6116-11ed-a5cb-20898409f05a\", \"valor\":10.10, \"podeComercializar\":true, \"idEmpresa\":1, \"idItemConfiguracaoWaychef\":\"e03f6204-6116-11ed-a5cb-20898409f05a\", \"itemConfiguracaoWaychefDTO\":{\"id\":\"e03f6204-6116-11ed-a5cb-20898409f05a\", \"nome\":\"AUTOATENDIMENTO\", \"detalhes\":null, \"tipoItem\":\"NORMAL\", \"tipoItemContratoWaychef\":\"SERVICO_ALFA_SYNC\", \"integradorPodeComercializarItemDTOList\":[]}}, {\"id\":\"e048aa63-6116-11ed-a5cb-20898409f05a\", \"valor\":0.00, \"podeComercializar\":true, \"idEmpresa\":1, \"idItemConfiguracaoWaychef\":\"e03f5c35-6116-11ed-a5cb-20898409f05a\", \"itemConfiguracaoWaychefDTO\":{\"id\":\"e03f5c35-6116-11ed-a5cb-20898409f05a\", \"nome\":\"AUTOATENDIMENTO\", \"detalhes\":null, \"tipoItem\":\"NORMAL\", \"tipoItemContratoWaychef\":\"SERVICO_WAYCHEF_MOBILE\", \"integradorPodeComercializarItemDTOList\":[]}}]",
-        body: itemDto);
+        body: itemDto
+    );
   }
 
   //MÉTODO GET - getbuscarTodosItensPorIdEmpresaETipoItem - buscarPlataformaContratoIntegradorExtra
   static Future<ResponsePws> buscarTodosItensPorIdEmpresaETipoItem(
       PWSConfig config, String token, String idEmpresa, String tipoItem) async {
-    token =
-        "eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiRVJQIiwiaWRTZXNzYW8iOiIwYWIzMDhlYy0wYjM2LTQ0NGItYWI4NS03MjQwYjIzZDU5NWEiLCJleHAiOjE2NzYwNDgyMjcsImlhdCI6MTY3NjAzMzgyN30.HRJmxnp-MWXSIphEGRd86ezX0onxPJkQYuLRZZo3dqGWllfRWTKecDi2CFIDacPhldDGpuki61zw8YO1DWNJRw";
-
     return await RequesterPws(config: config).consome(
         urlPws: UrlPws.getbuscarTodosItensPorIdEmpresaETipoItem(),
         headerParams: {
