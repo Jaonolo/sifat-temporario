@@ -89,7 +89,7 @@ class RequesterPws {
           break;
         case RequestType.PUT:
           var request = http.Request('PUT', Uri.parse(url));
-          request.body = json.encode(data);
+          request.body = data;
           print('Entrei no resquest do put');
           print('Entrei no resquest do put print do body ${request.body}');
           request.headers.addAll(headerParams!);
@@ -100,7 +100,7 @@ class RequesterPws {
           break;
         case RequestType.POST:
           var request = http.Request('POST', Uri.parse(url));
-          request.body = json.encode(data);
+          request.body = data;
           request.headers.addAll(headerParams!);
           response = await request.send();
 

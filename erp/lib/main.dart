@@ -3,7 +3,6 @@ import 'package:erp/pages/pagamentos/pagamentos_relatorios_controller.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/contrato/editar_contato_integrador_controller.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/contratocustomizado/contrato_customizado_controller.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/extras/plataforma_page_controller.dart';
-import 'package:erp/pages/plataforma/contratosplataforma/extras/plataforma_integrador_page_controller.dart';
 import 'package:erp/pages/plataforma/contratosplataforma/comissao/comissao_controller.dart';
 import 'package:erp/pages/plataforma/contratosplataforma/padrao/editarcontrato/editar_contrato_plataforma_controller.dart';
 import 'package:erp/pages/plataforma/empresas/plataforma_empresa_controller.dart';
@@ -49,7 +48,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: generateRoute,
       // initialRoute: PagamentoRoute,
       // initialRoute: SessaoRoute,
-      initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiRVJQIiwiaWRTZXNzYW8iOiIwMGEzNzhkNy03ZGM4LTQxYWEtOTNiNS1hNDVlNDExYmVmMGMiLCJleHAiOjE2NzYwNDUzNTYsImlhdCI6MTY3NjAzMDk1Nn0._v_3HWJQw_TaOgylKcCN4FP6XRLUytJZG54GcwwN9N1jOWpe7AlL45sV-ENNRKBoUXPDpL61I5UsbbVu0XtGsQ",
+      initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiRVJQIiwiaWRTZXNzYW8iOiI0MmMwODU0Yi02Zjc1LTQyMzYtODY5Ni04Zjg2YmFkZjk0NmEiLCJleHAiOjE2NzYzMjUyNzMsImlhdCI6MTY3NjMxMDg3M30.fkzFX4QLE7kC9HOnM07aWVBtokXnQZ9cwL3v8zHy0ydxZHM2oQNT3cbjWEgBIBuU342qNI2tOVRswIImxsoUqA",
     );
   }
 
