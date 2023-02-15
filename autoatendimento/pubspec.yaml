@@ -78,6 +78,14 @@ flutter:
       fonts:
         - asset: fonts/IconsOpção.ttf
 
+    - family: IconsArrowCarrinho
+      fonts:
+        - asset: fonts/IconsArrowCarrinho.ttf
+
+    - family: IconsPlusCard
+      fonts:
+        - asset: fonts/IconsPlusCard.ttf
+
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
