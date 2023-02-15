@@ -61,6 +61,22 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  fonts:
+    - family: IconsAutoCarrinho
+      fonts:
+        - asset: fonts/IconsAutoCarrinho.ttf
+
+    - family: IconsAutoCarrinhoperson
+      fonts:
+        - asset: fonts/IconsAutoCarrinhoperson.ttf
+
+    - family: IconsCarrinhoPerson
+      fonts:
+        - asset: fonts/IconsCarrinhoPerson.ttf
+
+    - family: IconsOpcaoPerson
+      fonts:
+        - asset: fonts/IconsOpção.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:
@@ -77,10 +93,7 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
