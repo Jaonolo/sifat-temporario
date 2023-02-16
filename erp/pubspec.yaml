@@ -65,6 +65,9 @@ flutter:
     - family: IconsErpersonalizados
       fonts:
         - asset: fonts/IconsErpersonalizados.ttf
+    - family: Comfortaa
+      fonts:
+        - asset: fonts/Comfortaa-Medium.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
+
+  // PADRÃO CORRETO
+  static Color salvar = Color.fromRGBO(22, 156, 52, 1);
+
+
+  // PADRÃO ANALISAR
   static Color confirm = const Color(0xFF1CC88A);
 
   static Color cancel = const Color(0xFFE74A3B);
@@ -17,7 +23,7 @@ class AppTheme {
   static Color modaltextocheckbox = const Color(0xFF5A5F66);
   static Color buttomModalConfirmar = Colors.white;
   static Color adicionar = const Color(0xFFFF5722);
-  static Color salvar = const Color(0xFF169C34);
+
   static Color corDeFundoAbaModal = const Color(0xFFFFEDE8);
   static Color corBranco = Colors.white;
   static Color corMenuNavegacao = const Color.fromRGBO(23, 28, 34, 1);
