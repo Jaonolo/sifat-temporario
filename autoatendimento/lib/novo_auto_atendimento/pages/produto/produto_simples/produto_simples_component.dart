@@ -44,7 +44,9 @@ class ProdutoSimplesComponent {
                   size: 55,
                   color: Color.fromRGBO(249, 77, 24, 1),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Get.back();
+                },
               ),
             ),
             Padding(
@@ -66,102 +68,12 @@ class ProdutoSimplesComponent {
     );
   }
 
-  // ItensSimples() {
-  //   return Wrap(
-  //     runSpacing: 10,
-  //     spacing: 10,
-  //     direction: Axis.horizontal,
-  //     children: [
-  //       Container(
-  //         width: 345,
-  //         height: 365,
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(16),
-  //           border: Border.all(color: Color.fromRGBO(249, 77, 24, 1),
-  //             width: 4,
-  //           ),
-  //         ),
-  //       ),
-  //       Container(
-  //         width: 345,
-  //         height: 365,
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(16),
-  //           border: Border.all(color: Color.fromRGBO(249, 77, 24, 1),
-  //             width: 4,
-  //           ),
-  //         ),
-  //       ),
-  //       Container(
-  //         width: 345,
-  //         height: 365,
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(16),
-  //           border: Border.all(color: Color.fromRGBO(249, 77, 24, 1),
-  //             width: 4,
-  //           ),
-  //         ),
-  //       ),
-  //       Container(
-  //         width: 345,
-  //         height: 365,
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(16),
-  //           border: Border.all(color: Color.fromRGBO(249, 77, 24, 1),
-  //             width: 4,
-  //           ),
-  //         ),
-  //       ),
-  //       Container(
-  //         width: 345,
-  //         height: 365,
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(16),
-  //           border: Border.all(color: Color.fromRGBO(249, 77, 24, 1),
-  //             width: 4,
-  //           ),
-  //         ),
-  //       ),
-  //       Container(
-  //         width: 345,
-  //         height: 365,
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(16),
-  //           border: Border.all(color: Color.fromRGBO(249, 77, 24, 1),
-  //             width: 4,
-  //           ),
-  //         ),
-  //       ),
-  //       Container(
-  //         width: 345,
-  //         height: 365,
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(16),
-  //           border: Border.all(color: Color.fromRGBO(249, 77, 24, 1),
-  //             width: 4,
-  //           ),
-  //         ),
-  //       ),
-  //       Container(
-  //         width: 345,
-  //         height: 365,
-  //         decoration: BoxDecoration(
-  //           borderRadius: BorderRadius.circular(16),
-  //           border: Border.all(color: Color.fromRGBO(249, 77, 24, 1),
-  //             width: 4,
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
-
   ItensSimples() {
     // TAMANHO E DISTRIBUIÇÃO DOS CARDS
     return Padding(
       padding: EdgeInsets.only(right: _width / 10),
       child: Container(
-        height: _height / 1.30,
+        height: _height / 1.25,
         width: _width / 1.16,
         child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -194,7 +106,9 @@ class ProdutoSimplesComponent {
                               size: 55,
                               color: Color.fromRGBO(235, 76, 27, 1),
                             ),
-                            onPressed: () {Get.back();},
+                            onPressed: () {Get.back();
+
+                              },
                           ),
                         ),
                       ],
