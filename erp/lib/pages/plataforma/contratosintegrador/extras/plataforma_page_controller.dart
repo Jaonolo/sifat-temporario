@@ -7,9 +7,7 @@ import 'package:models/model/models.dart';
 import '../../../../app_antigo/config/application.dart';
 import '../../../../widgets/utils/widgets_utils.dart';
 
-
 class PlataformaPageController extends GetxController {
-
 //-------- FUNÇÕES PLATAFORMA PAGE --------
 
   //controlador do chebox -abaixo
@@ -17,28 +15,24 @@ class PlataformaPageController extends GetxController {
   get boxEmpresateste => _boxEmpresateste.value;
   set boxEmpresateste(value) => _boxEmpresateste.value = value;
 
-
   void alternaBoxEmpresateste(int id, bool value) {
     listaPlataformaContratoIntegradorExtra[id].permiteComercializar = value;
     boxEmpresateste = listaPlataformaContratoIntegradorExtra[id].permiteComercializar;
     _boxEmpresateste.toggle();
     update();
-
   }
-  //controlador da do chebox -acima
+
 
   //controlador do icone carregando na pagina -abaixo
   final _carregando = false.obs;
   bool get carregando => _carregando.value;
   set carregando(value) => _carregando.value = value;
+
   //controlador do icone carregando na pagina -acima
-
-  var listaPlataformaContratoIntegradorExtra = <ItemConfiguracaoIntegradorWaychef>[].obs;
-  RxMap<String, ItemConfiguracaoIntegradorWaychef> mapDetalhes = new Map<String, ItemConfiguracaoIntegradorWaychef>().obs;
-
-
-  // final listaAtualizada = Get.put(<ItemConfiguracaoIntegradorWaychef>[]);
-  // List<ItemConfiguracaoIntegradorWaychef> get obs => listaAtualizada.obs;
+  var listaPlataformaContratoIntegradorExtra =
+      <ItemConfiguracaoIntegradorWaychef>[].obs;
+  RxMap<String, ItemConfiguracaoIntegradorWaychef> mapDetalhes =
+      new Map<String, ItemConfiguracaoIntegradorWaychef>().obs;
 
 
 //------------FUNÇÕES -----------
@@ -49,13 +43,15 @@ class PlataformaPageController extends GetxController {
   }
 
   void _buscarPlataformaContratoExtraIntegradores() async {
-    print('Estou na funcao _buscarPlataformaContratoExtraIntegradores');
     carregando = true;
-    await PlataformaContratosExtrasIntegradorRequester.buscarTodosItensPorIdEmpresaETipoItem(Application.pwsConfigGateway, Application.tokenUsuario, "1" , "EXTRA").then((value) {
-      print('Executando if de buscar buscarTodosItensPorIdEmpresaETipoItem');
+    await PlataformaContratosExtrasIntegradorRequester
+            .buscarTodosItensPorIdEmpresaETipoItem(Application.pwsConfigGateway,
+                Application.tokenUsuario, "1", "EXTRA")
+        .then((value) {
       if (value.isSuccess) {
         listaPlataformaContratoIntegradorExtra.addAll(value.content);
-        for (ItemConfiguracaoIntegradorWaychef value1 in listaPlataformaContratoIntegradorExtra) {
+        for (ItemConfiguracaoIntegradorWaychef value1
+            in listaPlataformaContratoIntegradorExtra) {
           mapDetalhes[value1.itemConfiguracaoWaychefDTO.id!] = value1;
         }
       } else {
@@ -64,14 +60,12 @@ class PlataformaPageController extends GetxController {
       }
       print('>>>>>> mapDetalhes - FORA DO IF ');
       print(mapDetalhes);
-      print('>>>>>> mapDetalhes -  FORA DO IF');
     });
     print('>>>>>> mapDetalhes APOS FINALIZAR A FUNCAO ');
     print(mapDetalhes);
-    print('>>>>>> mapDetalhes APOS FINALIZAR A FUNCAO ');
+
     carregando = false;
   }
-
 
   RxInt sortIndex = 99.obs;
   RxBool ascending = true.obs;
@@ -79,6 +73,7 @@ class PlataformaPageController extends GetxController {
   // pronto ou funcional
   void onSort(int columnIndex) {
     var _listaOrdenada = listaPlataformaContratoIntegradorExtra;
+
 
     if (sortIndex.value == columnIndex)
       ascending.value = !ascending.value;
@@ -89,62 +84,66 @@ class PlataformaPageController extends GetxController {
 
     switch (columnIndex) {
       case 0:
-        _listaOrdenada.sort((funcaoaplicacao, funcaoaplicacaob) => ascending.value
-        ? funcaoaplicacao.itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!.compareTo(funcaoaplicacaob.itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!)
-        : funcaoaplicacaob.itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!.compareTo(funcaoaplicacao.itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!));
+        _listaOrdenada.sort((funcaoaplicacao, funcaoaplicacaob) =>
+            ascending.value
+                ? funcaoaplicacao
+                    .itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!
+                    .compareTo(funcaoaplicacaob
+                        .itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!)
+                : funcaoaplicacaob
+                    .itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!
+                    .compareTo(funcaoaplicacao
+                        .itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!));
         listaPlataformaContratoIntegradorExtra = _listaOrdenada;
-        // {
-        //   return _compareString(ascending, ? funcaoaplicacao.itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!
-        //                                   : funcaoaplicacaob.itemConfiguracaoWaychefDTO.tipoItemContratoWaychef!
-        //
-        // });
-
         break;
       case 1:
-        _listaOrdenada.sort((nome1, nome2) {
+        _listaOrdenada.sort((nomePrimeiro, nomeSegundo) => ascending.value
+            ? nomePrimeiro.itemConfiguracaoWaychefDTO.nome!
+                .compareTo(nomeSegundo.itemConfiguracaoWaychefDTO.nome!)
+            : nomeSegundo.itemConfiguracaoWaychefDTO.nome!
+                .compareTo(nomePrimeiro.itemConfiguracaoWaychefDTO.nome!));
+        listaPlataformaContratoIntegradorExtra = _listaOrdenada;
+        break;
+      case 2:
+        _listaOrdenada.sort((nomePrimeiro, nomeSegundo) => ascending.value
+            ? nomePrimeiro.detalhes!.compareTo(nomeSegundo.detalhes!)
+            : nomeSegundo.detalhes!.compareTo(nomePrimeiro.detalhes!));
+        listaPlataformaContratoIntegradorExtra = _listaOrdenada;
+        break;
+      case 3:
+        _listaOrdenada.sort((valorPrimeiro, valorSegundo) => ascending.value
+            ? valorPrimeiro.valor!.compareTo(valorSegundo.valor!)
+            : valorSegundo.valor!.compareTo(valorPrimeiro.valor!));
+        listaPlataformaContratoIntegradorExtra = _listaOrdenada;
+        break;
+
+      case 4:
+        _listaOrdenada.sort((valorPrimeiro, valorSegundo) {
           return _compareString(
-              ascending.value, nome1.itemConfiguracaoWaychefDTO.nome!, nome2.itemConfiguracaoWaychefDTO.nome!);
+              ascending.value,
+              valorPrimeiro.permiteComercializar!.toString(),
+              valorSegundo.permiteComercializar!.toString());
         });
         listaPlataformaContratoIntegradorExtra = _listaOrdenada;
         break;
-      // case 2:
-      //   _listaOrdenada.sort((empresa1, empresa2) {
-      //     return _compareString(
-      //         ascending, empresa1.detalhes!, empresa2.detalhes!);
-      //   });
-      //   listaPlataformaContratoIntegradorExtra = _listaOrdenada;
-      //   break;
-      // case 3:
-      //   _listaOrdenada.sort((empresa1, empresa2) {
-      //     return _compareString(
-      //         ascending, empresa1.valor.toString(), empresa2.valor.toString());
-      //   });
-      //   listaPlataformaContratoIntegradorExtra = _listaOrdenada;
-      //   break;
-    // case 4:
-    //   break;
       default:
         break;
     }
   }
 
-
   final _alterarValor = false.obs;
-  bool get alterarValor=> _alterarValor.value;
+  bool get alterarValor => _alterarValor.value;
   set alterarValor(value) => _alterarValor.value = value;
 
-  // final ascending = false.obs;
-  // void alterarValor(ascending) {
-  //   ascending.value = !ascending.value;
-  // }
-  // pronto ou funcional
+  // pronto
   int _compareString(bool ascending, String value1, String value2) {
     if (value1 != null && value2 != null) {
       return ascending ? value1.compareTo(value2) : value2.compareTo(value1);
     }
     return 0;
   }
-  // pronto ou funcional
+
+  // pronto
   int compareDate(bool ascending, DateTime value1, DateTime value2) {
     if (value1 != null && value2 != null) {
       return ascending ? value1.compareTo(value2) : value2.compareTo(value1);
@@ -152,29 +151,23 @@ class PlataformaPageController extends GetxController {
     return 0;
   }
 
-
-
   // REQUESTER PUT -> ANALISA MINHA FUNÇÃO CONTROLLER
   void atualizarItemConfiguracaoIntegrador() async {
     carregando = true;
     List<ItemConfiguracaoIntegradorWaychef> listaPlataformaContratoDTO = [];
     mapDetalhes.forEach((key, value) {
-      print('--itemContratoIntegrador.detalhes-----');
-      print(value);
       listaPlataformaContratoDTO.add(value);
     });
-    await PlataformaContratosExtrasIntegradorRequester.atualizarItemConfiguracaoIntegrador(
-        Application.pwsConfigGateway, Application.tokenUsuario, listaPlataformaContratoDTO).then((value) {
-          if (value.status == 200) {
-            WidgetsUtils.snackBarSucesso('Sucesso', 'Lista atualizada');
-          } else {
-            WidgetsUtils.snackBarError('Erro', 'Falha ao salvar lista');
-            //TODO: verificar e trata possiveis erros
-          }
-        });
+    await PlataformaContratosExtrasIntegradorRequester
+            .atualizarItemConfiguracaoIntegrador(Application.pwsConfigGateway,
+                Application.tokenUsuario, listaPlataformaContratoDTO)
+        .then((value) {
+      if (value.status == 200) {
+        WidgetsUtils.snackBarSucesso('Sucesso', 'Lista atualizada');
+      } else {
+        WidgetsUtils.snackBarError('Erro', 'Falha ao salvar lista');
+      }
+    });
     carregando = false;
-    }
-
-
-
+  }
 }

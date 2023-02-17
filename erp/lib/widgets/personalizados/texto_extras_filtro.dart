@@ -49,19 +49,16 @@ class TextoExtrasFiltro extends StatelessWidget {
               ),
             ),
 
-            Expanded(
-              // flex: 1,
-              child: GestureDetector(
-                onTap: onPressed,
-                child: Icon(
-                    icone,
-                    size: 16,
-                    color: (corIcone != null)
-                        ? corIcone
-                        : Color.fromRGBO(0, 51, 85, 1),
-                  ),
-              ),
-              ),
+            GestureDetector(
+              onTap: onPressed,
+              child: Icon(
+                  icone,
+                  size: 16,
+                  color: (corIcone != null)
+                      ? corIcone
+                      : Color.fromRGBO(0, 51, 85, 1),
+                ),
+            ),
             Expanded(
 
                 child: SizedBox()),

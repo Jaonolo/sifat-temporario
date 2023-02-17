@@ -22,6 +22,7 @@ class PlataformaPage extends GetView<PlataformaPageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(248, 248, 255, 1),
       body: Responsive(
         mobile: Container(
           child: ListView(
@@ -31,7 +32,7 @@ class PlataformaPage extends GetView<PlataformaPageController> {
           ),
         ),
         desktop: ListView(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(4),
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -60,7 +61,7 @@ class PlataformaPage extends GetView<PlataformaPageController> {
               ],
             ),
             const SizedBox(
-              height: 64,
+              height: 32,
             ),
           ],
         ),
@@ -136,7 +137,6 @@ class PlataformaPage extends GetView<PlataformaPageController> {
   }
 
 //----------- WIDGETS DESKTOP
-
   Widget _tabelaPlataformaVersaoList(context) {
     return Card(
       // margin: EdgeInsets.zero,
@@ -159,11 +159,7 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                             : Icons.arrow_upward
                         : IconsErpersonalizados.arrow_up_arrow_down,
                     onPressed: () {
-                      print(
-                          'entrada funcao aplicacao: ${controller.onSort} ${controller.alterarValor}');
                       controller.onSort(0);
-                      print(
-                          'saida funcao aplicacao: ${controller.onSort} ${controller.alterarValor}');
                     }),
               ),
               Expanded(
@@ -177,11 +173,7 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                             : Icons.arrow_upward
                         : IconsErpersonalizados.arrow_up_arrow_down,
                     onPressed: () {
-                      print(
-                          'Entrada nome: ${controller.onSort} ${controller.alterarValor}');
                       controller.onSort(1);
-                      print(
-                          'saida nome : ${controller.onSort} ${controller.alterarValor}');
                     }),
               ),
               Expanded(
@@ -197,7 +189,6 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                               : Icons.arrow_upward
                           : IconsErpersonalizados.arrow_up_arrow_down,
                       onPressed: () {
-                        // controller.onSort(2, controller.alterarValor);
                         controller.onSort(2);
                       }),
                 ),
@@ -207,8 +198,14 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                 child: TextoExtrasFiltro(
                     inteiroExpanded: 1,
                     texto: 'Valor',
-                    icone: IconsErpersonalizados.arrow_up_arrow_down,
-                    onPressed: () {}),
+                    icone: controller.sortIndex.value == 3
+                        ? controller.ascending.value
+                            ? Icons.arrow_downward
+                            : Icons.arrow_upward
+                        : IconsErpersonalizados.arrow_up_arrow_down,
+                    onPressed: () {
+                      controller.onSort(3);
+                    }),
               ),
               Expanded(
                 flex: 2,
@@ -217,8 +214,14 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                   child: TextoExtrasFiltro(
                       inteiroExpanded: 2,
                       texto: 'Disponível',
-                      icone: IconsErpersonalizados.arrow_up_arrow_down,
-                      onPressed: () {}),
+                      icone: controller.sortIndex.value == 4
+                          ? controller.ascending.value
+                              ? Icons.arrow_downward
+                              : Icons.arrow_upward
+                          : IconsErpersonalizados.arrow_up_arrow_down,
+                      onPressed: () {
+                        controller.onSort(4);
+                      }),
                 ),
               ),
             ],
@@ -239,12 +242,14 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                   itemCount:
                       controller.listaPlataformaContratoIntegradorExtra.length,
                   itemBuilder: (context, index) {
-                    
                     ItemConfiguracaoIntegradorWaychef
                         itemConfiguracaoIntegradorWaychef = controller
                             .listaPlataformaContratoIntegradorExtra[index];
                     return Card(
-                      color: index%2 == 0? Colors.transparent : Colors.black.withOpacity(0.02),
+                      // color: index%2 == 0? Colors.transparent : Colors.black.withOpacity(0.02),
+                      color: index % 2 == 0
+                          ? Color.fromRGBO(248, 248, 255, 1)
+                          : Colors.white,
                       elevation: 0,
                       margin: EdgeInsets.zero,
                       // color: Color.fromRGBO(233, 241, 255, 1),
@@ -273,11 +278,8 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                               index,
                               itemConfiguracaoIntegradorWaychef,
                             ),
-                            expandedDisponivel(
-                              context,
-                              index,
-                              itemConfiguracaoIntegradorWaychef
-                            ),
+                            expandedDisponivel(context, index,
+                                itemConfiguracaoIntegradorWaychef),
                           ],
                         ),
                       ),
@@ -312,6 +314,13 @@ class PlataformaPage extends GetView<PlataformaPageController> {
 
   expandedNome(context, index, itemConfiguracaoIntegradorWaychef) {
     var width = MediaQuery.of(context).size.width;
+    var textController = TextEditingController(
+        text: itemConfiguracaoIntegradorWaychef
+            .itemConfiguracaoWaychefDTO.nome !=
+            null
+            ? itemConfiguracaoIntegradorWaychef
+            .itemConfiguracaoWaychefDTO.nome
+            : " ");
     return Expanded(
       flex: 2,
       child: Container(
@@ -320,12 +329,13 @@ class PlataformaPage extends GetView<PlataformaPageController> {
           child: TextFormField(
             keyboardType: TextInputType.multiline,
             inputFormatters: [LengthLimitingTextInputFormatter(49)],
-            initialValue: itemConfiguracaoIntegradorWaychef
-                        .itemConfiguracaoWaychefDTO.nome !=
-                    null
-                ? itemConfiguracaoIntegradorWaychef
-                    .itemConfiguracaoWaychefDTO.nome
-                : " ",
+            controller: textController,
+            // initialValue: itemConfiguracaoIntegradorWaychef
+            //             .itemConfiguracaoWaychefDTO.nome !=
+            //         null
+            //     ? itemConfiguracaoIntegradorWaychef
+            //         .itemConfiguracaoWaychefDTO.nome
+            //     : " ",
             onChanged: (text) {
               controller
                   .mapDetalhes[itemConfiguracaoIntegradorWaychef
@@ -361,17 +371,16 @@ class PlataformaPage extends GetView<PlataformaPageController> {
 
   expandedDetalhes(context, index, itemConfiguracaoIntegradorWaychef) {
     var width = MediaQuery.of(context).size.width;
+    var textController = TextEditingController(
+        text: controller.listaPlataformaContratoIntegradorExtra[index].detalhes !=  null
+            ? controller.listaPlataformaContratoIntegradorExtra[index].detalhes
+            : " ");
     return Expanded(
       flex: 3,
       child: Container(
         padding: EdgeInsets.only(left: 8.0, top: 8.0, right: 0.0, bottom: 8.0),
         child: TextFormField(
-          initialValue: controller
-                      .listaPlataformaContratoIntegradorExtra[index].detalhes !=
-                  null
-              ? controller
-                  .listaPlataformaContratoIntegradorExtra[index].detalhes
-              : " ",
+          controller: textController,
           maxLines: 2,
           // maxLines: null,
           inputFormatters: [LengthLimitingTextInputFormatter(250)],
@@ -407,6 +416,8 @@ class PlataformaPage extends GetView<PlataformaPageController> {
   }
 
   expandedValor(context, index, itemConfiguracaoIntegradorWaychef) {
+    var textController = TextEditingController(
+        text: controller.listaPlataformaContratoIntegradorExtra[index].valor!.toStringAsFixed(2));
     var width = MediaQuery.of(context).size.width;
     return Expanded(
       flex: 2,
@@ -424,9 +435,8 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                     FilteringTextInputFormatter.allow(
                         RegExp(r'^\d+\.?\d{0,2}')),
                   ],
-                  initialValue: controller
-                      .listaPlataformaContratoIntegradorExtra[index].valor!
-                      .toStringAsFixed(2),
+                  controller: textController,
+                  // initialValue: controller.listaPlataformaContratoIntegradorExtra[index].valor!.toStringAsFixed(2),
                   onChanged: (valor) {
                     controller
                         .mapDetalhes[controller
@@ -482,9 +492,10 @@ class PlataformaPage extends GetView<PlataformaPageController> {
 
   expandedDisponivel(context, index, itemConfiguracaoIntegradorWaychef) {
     var width = MediaQuery.of(context).size.width;
-    
     return Expanded(
-      child: Column(
+      flex: 1,
+      child: Row(
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             padding: EdgeInsets.all(16),
@@ -515,6 +526,9 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                 }),
               ),
             ),
+          ),
+          Expanded(
+            child: Container(),
           ),
         ],
       ),
