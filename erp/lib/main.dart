@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: generateRoute,
       // initialRoute: PagamentoRoute,
       // initialRoute: SessaoRoute,
-      initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiRVJQIiwiaWRTZXNzYW8iOiI0NzJmMDZmNC0yZDVhLTQ4NzQtOGU4OS05ZDNiOTU2MzFlY2MiLCJleHAiOjE2NzY2NjU3NDEsImlhdCI6MTY3NjY1MTM0MX0.x5wBUUnaCw3QQe2RmCEw8uiGqxeR3cT8d26Kszmr1v2eHPzl0AYBjXlLQQNa0Ou3lVwWXsnoNbl1wU9zyIqw8Q",
+      initialRoute: SessaoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiQVBJIiwiaWRTZXNzYW8iOiI0MThjYzBmNi02OWNiLTQ1YjMtOTVjYi03NDM4YTY2ZGVhNTIiLCJleHAiOjE2NzY5MTc3MzEsImlhdCI6MTY3NjkwMzMzMX0.iwG9gGxMwWHEL5oIC5FszzHO1FYMj7iZISO4dmE2j-v837BxW8QiLnQXs8kBfaFK6qblu3XIT7ULJP-pMMX9-g",
     );
   }
 
