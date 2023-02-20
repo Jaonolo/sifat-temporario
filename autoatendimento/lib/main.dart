@@ -1,9 +1,14 @@
-import 'package:autoatendimento/app/app_module.dart';
-import 'package:autoatendimento/app/app_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get/get.dart';
 
+import 'app/pages/toque_comecar/toque_comecar_page.dart';
+import 'app/rotas_pages/rotas_pages.dart';
 
 void main() {
-  return runApp(ModularApp(module: AppModule(), child: AppWidget()));
+  return runApp(GetMaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: ToqueComecarPage(),
+    initialRoute: Routes.TOQUEPARACOMECAR,
+    getPages: AppPages.routes,
+  ));
 }
