@@ -45,8 +45,7 @@ class ExtraIntegradorPageController extends GetxController {
     carregando = true;
     await PlataformaContratosExtrasIntegradorRequester
         .buscarTodosItensPorIdEmpresaETipoItem(Application.pwsConfigGateway,
-        Application.tokenUsuario, "1", "EXTRA")
-        .then((value) {
+        Application.tokenUsuario, "1", "EXTRA").then((value) {
       if (value.isSuccess) {
         listaPlataformaContratoIntegradorExtra.addAll(value.content);
         for (ItemConfiguracaoIntegradorWaychef value1
@@ -169,5 +168,36 @@ class ExtraIntegradorPageController extends GetxController {
     });
     carregando = false;
   }
+
+
+
+// BUSCAR ADICIONAL DE EXTRAS
+  void _buscarTodosItemConfiguracaoWaychefExtra() async {
+    print('Busca os Adicionais');
+    await PlataformaRequester.buscarTodosItemConfiguracaoWaychefExtra(Application.pwsConfigGateway, Application.tokenUsuario).then((value) {
+      print('entrei no if de buscar buscarTodosItensPorIdEmpresaETipoItem');
+      if (value.isSuccess) {
+        _listaPlataformaContratoAdicionais.addAll(value.content);
+        for (ItemConfiguracaoWaychef itemConfiguracaoWaychef in _listaPlataformaContratoAdicionais) {
+
+          if(mapContratoIndicador[itemConfiguracaoWaychef.tipoItemContratoWaychef!.modulo] == null) {
+            List<ItemConfiguracaoWaychef> listaa = [];
+            listaa.add(itemConfiguracaoWaychef);
+            mapContratoIndicador[itemConfiguracaoWaychef.tipoItemContratoWaychef!.modulo] = listaa;
+          } else {
+            mapContratoIndicador[
+                    itemConfiguracaoWaychef.tipoItemContratoWaychef!.modulo]!
+                .add(itemConfiguracaoWaychef);
+          }
+        }
+        print(mapContratoIndicador);
+      } else {
+        //TODO: verificar e trata possiveis erros
+        print('>>>>>> Erro ao carregar o modal adicionais');
+      }
+    });
+  }
+
+
 
 }

@@ -14,7 +14,6 @@ import '../../../../widgets/responsive.dart';
 
 class PlataformaPage extends GetView<PlataformaPageController> {
   String? token;
-
   PlataformaPage(this.token) {
     Application.tokenUsuario = token!;
   }
