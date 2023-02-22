@@ -1,30 +1,20 @@
-// import 'package:erp/widgets/personalizados/texto_extras_filtro.dart';
-// import 'package:erp/widgets/utils/icons_erp/icons_erpersonalizados.dart';
-// import 'package:erp/pages/plataforma/contratosintegrador/extras/plataforma_page_controller.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:erp/widgets/utils/botoes/btn_cancelar.dart';
+import 'package:erp/widgets/utils/botoes/btn_confirmar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter/services.dart';
-// import 'package:get/get.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:models/model/models.dart';
-// import '../../../../app_antigo/config/application.dart';
-// import '../../../../theme/app_theme.dart';
-// import '../../../../widgets/botao_padrao.dart';
-// import '../../../../widgets/carregamento/icone_carregando.dart';
-// import '../../../../widgets/responsive.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:models/model/models.dart';
-
 import '../../../../app_antigo/config/application.dart';
 import '../../../../theme/app_theme.dart';
-import '../../../../widgets/botao_padrao.dart';
+import '../../../../widgets/utils/botoes/botao_padrao.dart';
 import '../../../../widgets/carregamento/icone_carregando.dart';
 import '../../../../widgets/chebox_mobile.dart';
+import '../../../../widgets/check_box_padrao.dart';
 import '../../../../widgets/personalizados/texto_extras_filtro.dart';
 import '../../../../widgets/responsive.dart';
+import '../../../../widgets/texto_aba_modal.dart';
 import '../../../../widgets/utils/icons_erp/icons_erpersonalizados.dart';
 import 'extra_integrador_controller.dart';
 
@@ -49,14 +39,8 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
         desktop: ListView(
           padding: const EdgeInsets.all(4),
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                _btnAdicionar(context),
-                _espacoExpandedContainer(),
-                _btnSalvar(),
-              ],
-            ),
+            //TODO opcao cancelar e confirmar
+            _rowAdicionarSalvar(context),
             Column(
               children: [
                 const Divider(
@@ -87,21 +71,33 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
 
   //Desktop
   _espacoExpandedContainer() {
-    return Expanded(child: Container());
+    return Expanded(
+      child: Container(),
+    );
   }
 
-  //Mobile
+  _rowAdicionarSalvar(context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        _btnAdicionar(context),
+        _espacoExpandedContainer(),
+        _btnSalvar(),
+      ],
+    );
+  }
 
   //Desktop e Mobile
   _btnSalvar() {
-    return BotaoPadrao(
-        corIcone: AppTheme.salvar,
-        corTexto: Color.fromRGBO(255, 255, 255, 1),
-        texto: 'Salvar',
-        icone: Icons.save,
-        acao: () {
-          controller.atualizarItemConfiguracaoIntegrador();
-        });
+    return BtnPadrao(
+      corIcone: AppTheme.sucesso,
+      corTexto: Color.fromRGBO(255, 255, 255, 1),
+      texto: 'Salvar',
+      icone: Icons.save,
+      acao: () {
+        controller.atualizarItemConfiguracaoIntegrador();
+      },
+    );
   }
 
 //----------- WIDGETS MOBILE
@@ -160,7 +156,7 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         child: Obx(
-              () => Row(
+          () => Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
@@ -171,8 +167,8 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                     inteiroExpanded: 3,
                     icone: controller.sortIndex.value == 0
                         ? controller.ascending.value
-                        ? Icons.arrow_downward
-                        : Icons.arrow_upward
+                            ? Icons.arrow_downward
+                            : Icons.arrow_upward
                         : IconsErpersonalizados.arrow_up_arrow_down,
                     onPressed: () {
                       controller.onSort(0);
@@ -185,8 +181,8 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                     inteiroExpanded: 1,
                     icone: controller.sortIndex.value == 1
                         ? controller.ascending.value
-                        ? Icons.arrow_downward
-                        : Icons.arrow_upward
+                            ? Icons.arrow_downward
+                            : Icons.arrow_upward
                         : IconsErpersonalizados.arrow_up_arrow_down,
                     onPressed: () {
                       controller.onSort(1);
@@ -201,8 +197,8 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                       inteiroExpanded: 1,
                       icone: controller.sortIndex.value == 2
                           ? controller.ascending.value
-                          ? Icons.arrow_downward
-                          : Icons.arrow_upward
+                              ? Icons.arrow_downward
+                              : Icons.arrow_upward
                           : IconsErpersonalizados.arrow_up_arrow_down,
                       onPressed: () {
                         controller.onSort(2);
@@ -216,8 +212,8 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                     texto: 'Valor',
                     icone: controller.sortIndex.value == 3
                         ? controller.ascending.value
-                        ? Icons.arrow_downward
-                        : Icons.arrow_upward
+                            ? Icons.arrow_downward
+                            : Icons.arrow_upward
                         : IconsErpersonalizados.arrow_up_arrow_down,
                     onPressed: () {
                       controller.onSort(3);
@@ -232,8 +228,8 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                       texto: 'Disponível',
                       icone: controller.sortIndex.value == 4
                           ? controller.ascending.value
-                          ? Icons.arrow_downward
-                          : Icons.arrow_upward
+                              ? Icons.arrow_downward
+                              : Icons.arrow_upward
                           : IconsErpersonalizados.arrow_up_arrow_down,
                       onPressed: () {
                         controller.onSort(4);
@@ -249,59 +245,59 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
 
   Widget _tabelaPlataformaVersaoListFilhos() {
     return Obx(
-          () => controller.carregando
+      () => controller.carregando
           ? const IconeCarregando()
           : Container(
-        child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount:
-            controller.listaPlataformaContratoIntegradorExtra.length,
-            itemBuilder: (context, index) {
-              ItemConfiguracaoIntegradorWaychef
-              itemConfiguracaoIntegradorWaychef = controller
-                  .listaPlataformaContratoIntegradorExtra[index];
-              return Card(
-                // color: index%2 == 0? Colors.transparent : Colors.black.withOpacity(0.02),
-                color: index % 2 == 0
-                    ? Color.fromRGBO(248, 248, 255, 1)
-                    : Colors.white,
-                elevation: 0,
-                margin: EdgeInsets.zero,
-                // color: Color.fromRGBO(233, 241, 255, 1),
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      expandedFuncaoAplicacao(
-                        context,
-                        index,
-                        itemConfiguracaoIntegradorWaychef,
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount:
+                      controller.listaPlataformaContratoIntegradorExtra.length,
+                  itemBuilder: (context, index) {
+                    ItemConfiguracaoIntegradorWaychef
+                        itemConfiguracaoIntegradorWaychef = controller
+                            .listaPlataformaContratoIntegradorExtra[index];
+                    return Card(
+                      // color: index%2 == 0? Colors.transparent : Colors.black.withOpacity(0.02),
+                      color: index % 2 == 0
+                          ? Color.fromRGBO(248, 248, 255, 1)
+                          : Colors.white,
+                      elevation: 0,
+                      margin: EdgeInsets.zero,
+                      // color: Color.fromRGBO(233, 241, 255, 1),
+                      child: Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            expandedFuncaoAplicacao(
+                              context,
+                              index,
+                              itemConfiguracaoIntegradorWaychef,
+                            ),
+                            expandedNome(
+                              context,
+                              index,
+                              itemConfiguracaoIntegradorWaychef,
+                            ),
+                            expandedDetalhes(
+                              context,
+                              index,
+                              itemConfiguracaoIntegradorWaychef,
+                            ),
+                            expandedValor(
+                              context,
+                              index,
+                              itemConfiguracaoIntegradorWaychef,
+                            ),
+                            expandedDisponivel(context, index,
+                                itemConfiguracaoIntegradorWaychef),
+                          ],
+                        ),
                       ),
-                      expandedNome(
-                        context,
-                        index,
-                        itemConfiguracaoIntegradorWaychef,
-                      ),
-                      expandedDetalhes(
-                        context,
-                        index,
-                        itemConfiguracaoIntegradorWaychef,
-                      ),
-                      expandedValor(
-                        context,
-                        index,
-                        itemConfiguracaoIntegradorWaychef,
-                      ),
-                      expandedDisponivel(context, index,
-                          itemConfiguracaoIntegradorWaychef),
-                    ],
-                  ),
-                ),
-              );
-            }),
-      ),
+                    );
+                  }),
+            ),
     );
   }
 
@@ -332,10 +328,9 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
     var width = MediaQuery.of(context).size.width;
     var textController = TextEditingController(
         text: itemConfiguracaoIntegradorWaychef
-            .itemConfiguracaoWaychefDTO.nome !=
-            null
-            ? itemConfiguracaoIntegradorWaychef
-            .itemConfiguracaoWaychefDTO.nome
+                    .itemConfiguracaoWaychefDTO.nome !=
+                null
+            ? itemConfiguracaoIntegradorWaychef.itemConfiguracaoWaychefDTO.nome
             : " ");
     return Expanded(
       flex: 2,
@@ -355,7 +350,7 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
             onChanged: (text) {
               controller
                   .mapDetalhes[itemConfiguracaoIntegradorWaychef
-                  .itemConfiguracaoWaychefDTO.id!]!
+                      .itemConfiguracaoWaychefDTO.id!]!
                   .itemConfiguracaoWaychefDTO
                   .nome = text;
             },
@@ -388,7 +383,9 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
   expandedDetalhes(context, index, itemConfiguracaoIntegradorWaychef) {
     var width = MediaQuery.of(context).size.width;
     var textController = TextEditingController(
-        text: controller.listaPlataformaContratoIntegradorExtra[index].detalhes !=  null
+        text: controller
+                    .listaPlataformaContratoIntegradorExtra[index].detalhes !=
+                null
             ? controller.listaPlataformaContratoIntegradorExtra[index].detalhes
             : " ");
     return Expanded(
@@ -403,9 +400,9 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
           onChanged: (text) {
             controller
                 .mapDetalhes[controller
-                .listaPlataformaContratoIntegradorExtra[index]
-                .itemConfiguracaoWaychefDTO
-                .id!]!
+                    .listaPlataformaContratoIntegradorExtra[index]
+                    .itemConfiguracaoWaychefDTO
+                    .id!]!
                 .detalhes = text;
           },
           cursorColor: Colors.black87,
@@ -433,18 +430,21 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
 
   expandedValor(context, index, itemConfiguracaoIntegradorWaychef) {
     var textController = TextEditingController(
-        text: controller.listaPlataformaContratoIntegradorExtra[index].valor!.toStringAsFixed(2));
+        text: controller.listaPlataformaContratoIntegradorExtra[index].valor!
+            .toStringAsFixed(2));
     var width = MediaQuery.of(context).size.width;
     return Expanded(
       flex: 2,
       child: Container(
         child: Padding(
           padding:
-          EdgeInsets.only(left: 8.0, top: 8.0, right: 0.0, bottom: 8.0),
+              EdgeInsets.only(left: 8.0, top: 8.0, right: 0.0, bottom: 8.0),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(width: 16,),
+              Container(
+                width: 16,
+              ),
               Expanded(
                 child: TextFormField(
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -457,9 +457,9 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                   onChanged: (valor) {
                     controller
                         .mapDetalhes[controller
-                        .listaPlataformaContratoIntegradorExtra[index]
-                        .itemConfiguracaoWaychefDTO
-                        .id!]!
+                            .listaPlataformaContratoIntegradorExtra[index]
+                            .itemConfiguracaoWaychefDTO
+                            .id!]!
                         .valor = double.tryParse(valor);
                   },
                   cursorColor: Colors.black87,
@@ -497,8 +497,9 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                   ),
                 ),
               ),
-              Container(width: 16,),
-
+              Container(
+                width: 16,
+              ),
             ],
           ),
         ),
@@ -518,7 +519,8 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                padding: EdgeInsets.only(left: 0.0, top: 8.0, right: 8.0, bottom: 8.0),
+                padding: EdgeInsets.only(
+                    left: 0.0, top: 8.0, right: 8.0, bottom: 8.0),
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: BorderSide(width: 1, color: AppTheme.adicionar),
@@ -573,7 +575,6 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
           //     ),
           //   ),
           // ),
-
         ],
       ),
     );
@@ -605,18 +606,13 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
     return Color.fromRGBO(90, 95, 102, 1);
   }
 
-
-
-
   Widget _modalIntegradores() {
     return AlertDialog(
       shape: const RoundedRectangleBorder(
         side: BorderSide(),
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
-      title:
-
-      Container(
+      title: Container(
         margin: EdgeInsets.zero,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -654,7 +650,7 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
       ),
       content: ConstrainedBox(
         constraints:
-        BoxConstraints(maxWidth: Get.width / 2, maxHeight: Get.height / 2),
+            BoxConstraints(maxWidth: Get.width / 2, maxHeight: Get.height / 2),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -847,60 +843,16 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
               height: 40,
             ),
             Row(
-              // runSpacing: 16,
-              // alignment: WrapAlignment.end,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(
-                        color: Color.fromRGBO(186, 26, 26, 1),
-                      ),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                    child: Text(
-                      textAlign: TextAlign.end,
-                      'Cancelar',
-                      style: GoogleFonts.sourceSansPro(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Color.fromRGBO(186, 26, 26, 1),
-                        letterSpacing: 0.25,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                ElevatedButton(
+                BtnCancelar(
                   onPressed: () {
-                    // controller.salvarAlteracoes();
+                    Get.back();
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromRGBO(22, 156, 52, 1),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                    child: Text(
-                      textAlign: TextAlign.end,
-                      'Confirmar',
-                      style: GoogleFonts.sourceSansPro(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: AppTheme.buttomModalConfirmar,
-                        letterSpacing: 0.25,
-                      ),
-                    ),
-                  ),
+                ),
+                const SizedBox(width: 4),
+                BtnConfirmar(
+                  onPressed: () {},
                 ),
               ],
             ),
@@ -914,7 +866,7 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
   }
 
   Widget _btnAdicionar(context) {
-    return BotaoPadrao(
+    return BtnPadrao(
       corIcone: AppTheme.adicionar,
       corTexto: Colors.white,
       texto: 'Adicionar',
@@ -977,59 +929,16 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                   // alignment: WrapAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ElevatedButton(
+                    BtnCancelar(
                       onPressed: () {
                         Get.back();
-                        print('clicou em sair');
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: BorderSide(
-                            color: Color.fromRGBO(186, 26, 26, 1),
-                          ),
-                        ),
-                      ),
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                        child: Text(
-                          textAlign: TextAlign.end,
-                          'Cancelar',
-                          style: GoogleFonts.sourceSansPro(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Color.fromRGBO(186, 26, 26, 1),
-                            letterSpacing: 0.25,
-                          ),
-                        ),
-                      ),
                     ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromRGBO(22, 156, 52, 1),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                      ),
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                        child: Text(
-                          textAlign: TextAlign.end,
-                          'Confirmar',
-                          style: GoogleFonts.sourceSansPro(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: AppTheme.buttomModalConfirmar,
-                            letterSpacing: 0.25,
-                          ),
-                        ),
-                      ),
+                    const SizedBox(width: 4),
+                    BtnConfirmar(
+                      onPressed: () {
+                        //TODO btnconfirmar
+                      },
                     ),
                   ],
                 ),
@@ -1091,9 +1000,9 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                     padding: const EdgeInsets.all(16.0),
                     child: Obx(
                       () => CheckBoxPadrao(
-                        status:  controller.boxEmpresateste,
+                        status: controller.boxEmpresateste,
                         alteraStatus: () {
-                          controller.alternaBoxEmpresateste();
+                          // controller.alternaBoxEmpresateste();
                         },
                       ),
                     ),
@@ -1143,38 +1052,52 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
     );
   }
 
+  AppBar _negocioAppBar(Size size) {
+    List<Tab> tabsLista = [];
+    controller.mapContratoIndicador.forEach((key, value) {
+      tabsLista.add(
+        Tab(
+          child: size.width > 530
+              ? Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                  child: Text(
+                    key.descricao,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.comfortaa(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0.15,
+                    ),
+                  ),
+                )
+              : const Icon(Icons.fact_check_outlined),
+        ),
+      );
+    });
+    print('Estou montando _negocioAppBar de adicional extra');
+    return AppBar(
+      // mainAxisSize: MainAxisSize.min,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      toolbarHeight: 0,
+      // toolbarTextStyle: ,
+      elevation: 0,
+      backgroundColor: AppTheme.corDeFundoAbaModal,
+      bottom: TabBar(
+        labelColor: AppTheme.corBranco,
+        labelStyle: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+        unselectedLabelColor: AppTheme.adicionar,
+        indicatorSize: TabBarIndicatorSize.label,
+        indicator: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Color(0xFFFF5722),
+          // bottom: BorderSide(color: Color.fromRGBO(176, 179, 251, 1), width: 5)
+        ),
+        tabs: tabsLista,
+      ),
+    );
+  }
 }
-
-
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import '../../../../app_antigo/config/application.dart';
-// import 'extra_integrador_component.dart';
-//
-// import 'extra_integrador_controller.dart';
-//
-// class ExtraIntegradorPage extends StatelessWidget with ExtraIntegradorPageComponent {
-//   String? token;
-//   ExtraIntegradorPage(this.token) {
-//     Application.tokenUsuario = token!;
-//
-//   }
-//
-//   // ExtraIntegradorPage({Key? key,
-//   // this.token}) : super(key: key);
-//
-//
-//   final controller = Get.put(ExtraIntegradorPageController());
-//
-//
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     initialize(context);
-//
-//     return Scaffold(body: body());
-//   }
-// }

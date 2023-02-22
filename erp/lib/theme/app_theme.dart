@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
 
-  // PADRÃO CORRETO
-  static Color salvar = Color.fromRGBO(22, 156, 52, 1);
+  //TODO PADRÃO CORRETO
+  static Color sucesso = Color.fromRGBO(22, 156, 52, 1);
+  static Color error = Color.fromRGBO(186, 26, 26, 1);
+
+
+
 
 
   // PADRÃO ANALISAR

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../theme/app_theme.dart';
-import '../../../../widgets/botao_padrao.dart';
+import '../../../../widgets/utils/botoes/botao_padrao.dart';
 import '../../../../widgets/drop_down_button_padrao.dart';
 import '../../../../widgets/responsive.dart';
 import 'comissao_controller.dart';
@@ -101,7 +101,7 @@ class ComissaoPage extends GetView<ComissaoController> {
                                   style: GoogleFonts.sourceSansPro(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w400,
-                                    color: AppTheme.salvar,
+                                    color: AppTheme.sucesso,
                                     letterSpacing: 0.5,
                                   ),
                                 ),
@@ -114,7 +114,7 @@ class ComissaoPage extends GetView<ComissaoController> {
                                   style: GoogleFonts.sourceSansPro(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w400,
-                                    color: AppTheme.salvar,
+                                    color: AppTheme.sucesso,
                                     letterSpacing: 0.5,
                                   ),
                                 ),
@@ -174,7 +174,7 @@ class ComissaoPage extends GetView<ComissaoController> {
                                   style: GoogleFonts.sourceSansPro(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w400,
-                                    color: AppTheme.salvar,
+                                    color: AppTheme.sucesso,
                                     letterSpacing: 0.5,
                                   ),
                                 ),
@@ -187,7 +187,7 @@ class ComissaoPage extends GetView<ComissaoController> {
                                   style: GoogleFonts.sourceSansPro(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w400,
-                                    color: AppTheme.salvar,
+                                    color: AppTheme.sucesso,
                                     letterSpacing: 0.5,
                                   ),
                                 ),
@@ -247,7 +247,7 @@ class ComissaoPage extends GetView<ComissaoController> {
                                   style: GoogleFonts.sourceSansPro(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w400,
-                                    color: AppTheme.salvar,
+                                    color: AppTheme.sucesso,
                                     letterSpacing: 0.5,
                                   ),
                                 ),
@@ -260,7 +260,7 @@ class ComissaoPage extends GetView<ComissaoController> {
                                   style: GoogleFonts.sourceSansPro(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w400,
-                                    color: AppTheme.salvar,
+                                    color: AppTheme.sucesso,
                                     letterSpacing: 0.5,
                                   ),
                                 ),
@@ -308,7 +308,7 @@ class ComissaoPage extends GetView<ComissaoController> {
 }
 
 Widget _btnProrrogarContrato(context) {
-  return BotaoPadrao(
+  return BtnPadrao(
     corIcone: AppTheme.adicionar,
     corTexto: Colors.white,
     texto: 'Prorrogar contrato',

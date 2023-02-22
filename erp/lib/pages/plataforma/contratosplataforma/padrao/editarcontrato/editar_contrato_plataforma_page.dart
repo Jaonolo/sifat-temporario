@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../theme/app_theme.dart';
-import '../../../../../widgets/botao_padrao.dart';
+import '../../../../../widgets/utils/botoes/botao_padrao.dart';
 import '../../../../../widgets/botao_proximo.dart';
 import '../../../../../widgets/card_preco.dart';
 import '../../../../../widgets/responsive.dart';
@@ -1111,22 +1111,7 @@ class EditarContratoPlataformaErpPage extends GetView<EditarContratoPlataformaEr
                                   ],
                                 ),
                               ),
-
-                              // child: ElevatedButton(
-                              //    onPressed: (){
-                              //     print("You pressed Icon Elevated Button");
-                              //   },
-                              //   child: Row(
-                              //     mainAxisSize: MainAxisSize.min,
-                              //     children: [
-                              //       Text('Lorem Ipsum is simply dummy text of '),
-                              //       IconButton(onPressed: (){}, icon: Icon(Icons.close))
-                              //     ],
-                              //   )
-                              //
-                              //   ),
                             ),
-
                           ],
                         ),
                         const SizedBox(
@@ -1136,8 +1121,8 @@ class EditarContratoPlataformaErpPage extends GetView<EditarContratoPlataformaEr
                           child: Row(
                               children: [
                                 Expanded(child: Container()),
-                                BotaoPadrao(
-                                  corIcone: AppTheme.salvar,
+                                BtnPadrao(
+                                  corIcone: AppTheme.sucesso,
                                   corTexto: Colors.white,
                                   texto: 'Finalizar',
                                   // icone: Icons.save,
@@ -2232,7 +2217,7 @@ Widget _btnAdicionar() {
 }
 
 Widget _btnProrrogarContrato() {
-  return BotaoPadrao(
+  return BtnPadrao(
     corIcone: AppTheme.adicionar,
     corTexto: Colors.white,
     texto: 'Adicionar',
@@ -2245,8 +2230,8 @@ Widget _btnProrrogarContrato() {
 
 
 Widget _btnSalvar() {
-  return BotaoPadrao(
-    corIcone: AppTheme.salvar,
+  return BtnPadrao(
+    corIcone: AppTheme.sucesso,
     corTexto: Colors.white,
     texto: 'Salvar',
     icone: Icons.save,

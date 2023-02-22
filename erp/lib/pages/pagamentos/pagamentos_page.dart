@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../../../theme/app_theme.dart';
-import '../../../../widgets/botao_padrao.dart';
+import '../../widgets/utils/botoes/botao_padrao.dart';
 import '../../../../widgets/botao_proximo.dart';
 import '../../../../widgets/card_preco.dart';
 import '../../../../widgets/expanded_lista.dart';
@@ -5275,8 +5275,8 @@ Widget _btnProximo() {
 }
 
 Widget _btnSalvar() {
-  return BotaoPadrao(
-    corIcone: AppTheme.salvar,
+  return BtnPadrao(
+    corIcone: AppTheme.sucesso,
     corTexto: Colors.white,
     texto: 'Finalizar',
     icone: Icons.save,

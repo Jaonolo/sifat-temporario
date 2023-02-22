@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:erp/pages/plataforma/plataforma_page_controller.dart';
 import '../../../theme/app_theme.dart';
-import '../../../widgets/botao_padrao.dart';
+import '../../../widgets/utils/botoes/botao_padrao.dart';
 import '../../../widgets/card_preco.dart';
 import '../../../widgets/card_preco_button.dart';
 import '../../../widgets/chebox_mobile.dart';
@@ -924,7 +924,7 @@ class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
                                             style: GoogleFonts.sourceSansPro(
                                               fontSize: 17,
                                               fontWeight: FontWeight.w400,
-                                              color: AppTheme.salvar,
+                                              color: AppTheme.sucesso,
                                               letterSpacing: 0.5,
                                             ),
                                           ),
@@ -937,7 +937,7 @@ class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
                                             style: GoogleFonts.sourceSansPro(
                                               fontSize: 17,
                                               fontWeight: FontWeight.w400,
-                                              color: AppTheme.salvar,
+                                              color: AppTheme.sucesso,
                                               letterSpacing: 0.5,
                                             ),
                                           ),
@@ -997,7 +997,7 @@ class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
                                             style: GoogleFonts.sourceSansPro(
                                               fontSize: 17,
                                               fontWeight: FontWeight.w400,
-                                              color: AppTheme.salvar,
+                                              color: AppTheme.sucesso,
                                               letterSpacing: 0.5,
                                             ),
                                           ),
@@ -1010,7 +1010,7 @@ class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
                                             style: GoogleFonts.sourceSansPro(
                                               fontSize: 17,
                                               fontWeight: FontWeight.w400,
-                                              color: AppTheme.salvar,
+                                              color: AppTheme.sucesso,
                                               letterSpacing: 0.5,
                                             ),
                                           ),
@@ -1070,7 +1070,7 @@ class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
                                             style: GoogleFonts.sourceSansPro(
                                               fontSize: 17,
                                               fontWeight: FontWeight.w400,
-                                              color: AppTheme.salvar,
+                                              color: AppTheme.sucesso,
                                               letterSpacing: 0.5,
                                             ),
                                           ),
@@ -1083,7 +1083,7 @@ class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
                                             style: GoogleFonts.sourceSansPro(
                                               fontSize: 17,
                                               fontWeight: FontWeight.w400,
-                                              color: AppTheme.salvar,
+                                              color: AppTheme.sucesso,
                                               letterSpacing: 0.5,
                                             ),
                                           ),
@@ -1210,8 +1210,8 @@ class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
 
 //----------- WIDGETS
   Widget _btnSalvar() {
-    return BotaoPadrao(
-      corIcone: AppTheme.salvar,
+    return BtnPadrao(
+      corIcone: AppTheme.sucesso,
       corTexto: Colors.white,
       texto: 'Salvar',
       icone: Icons.save,
@@ -1222,7 +1222,7 @@ class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
   }
 
   Widget _btnAdicionar() {
-    return BotaoPadrao(
+    return BtnPadrao(
       corIcone: AppTheme.adicionar,
       corTexto: Colors.white,
       texto: 'Adicionar',
@@ -2544,7 +2544,7 @@ class PlataformaEmpresaPage extends GetView<PlataformaEmpresaController> {
 
 
   Widget _btnProrrogarContrato(context) {
-    return BotaoPadrao(
+    return BtnPadrao(
       corIcone: AppTheme.adicionar,
       corTexto: Colors.white,
       texto: 'Prorrogar contrato',

@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:models/model/models.dart';
 
 import '../../../../theme/app_theme.dart';
-import '../../../../widgets/botao_padrao.dart';
+import '../../../../widgets/utils/botoes/botao_padrao.dart';
 import '../../../../widgets/carregamento/icone_carregando.dart';
 import '../../../../widgets/personalizados/texto_extras_filtro.dart';
 import '../../../../widgets/responsive.dart';
@@ -118,7 +118,7 @@ class ExtraIntegradorPageComponent {
 
 
   _btnAdicionar(context) {
-    return BotaoPadrao(
+    return BtnPadrao(
       corIcone: AppTheme.adicionar,
       corTexto: Colors.white,
       texto: 'Adicionar',
@@ -248,8 +248,8 @@ class ExtraIntegradorPageComponent {
 
 
   Widget _btnSalvar() {
-    return BotaoPadrao(
-        corIcone: AppTheme.salvar,
+    return BtnPadrao(
+        corIcone: AppTheme.sucesso,
         corTexto: Colors.white,
         texto: 'Salvar',
         icone: Icons.save,

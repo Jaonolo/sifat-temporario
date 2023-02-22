@@ -1,12 +1,11 @@
 import 'package:get/get.dart';
 import 'package:models/model/models.dart';
 import 'package:requester/requester/micro-service/contrato/plataforma/contrato-integrador/plataforma_contratos_extras_integrador_requester.dart';
-
+import 'package:requester/requester/micro-service/contrato/plataforma/contrato-plataforma/plataforma_contratos_requester.dart';
 import '../../../../app_antigo/config/application.dart';
 import '../../../../widgets/utils/widgets_utils.dart';
 
 class ExtraIntegradorPageController extends GetxController {
-
 
 
   //controlador do chebox -abaixo
@@ -22,17 +21,20 @@ class ExtraIntegradorPageController extends GetxController {
   }
 
 
-  //controlador do icone carregando na pagina -abaixo
   final _carregando = false.obs;
   bool get carregando => _carregando.value;
   set carregando(value) => _carregando.value = value;
 
-  //controlador do icone carregando na pagina -acima
+
   var listaPlataformaContratoIntegradorExtra =
       <ItemConfiguracaoIntegradorWaychef>[].obs;
   RxMap<String, ItemConfiguracaoIntegradorWaychef> mapDetalhes =
       new Map<String, ItemConfiguracaoIntegradorWaychef>().obs;
 
+  final _listaPlataformaContratoAdicionais = <ItemConfiguracaoWaychef>[].obs;
+  List<ItemConfiguracaoWaychef> get listaPlataformaContratoAdicionais => _listaPlataformaContratoAdicionais.toList();
+  set listaPlataformaContratoAdicionais(value) => _listaPlataformaContratoAdicionais.value = value;
+  Map<ModuloContratoIndicadorEnum, List<ItemConfiguracaoWaychef>> mapContratoIndicador = new Map();
 
 //------------FUNÇÕES -----------
   @override
@@ -133,7 +135,6 @@ class ExtraIntegradorPageController extends GetxController {
   bool get alterarValor => _alterarValor.value;
   set alterarValor(value) => _alterarValor.value = value;
 
-  // pronto
   int _compareString(bool ascending, String value1, String value2) {
     if (value1 != null && value2 != null) {
       return ascending ? value1.compareTo(value2) : value2.compareTo(value1);
@@ -141,13 +142,6 @@ class ExtraIntegradorPageController extends GetxController {
     return 0;
   }
 
-  // pronto
-  int compareDate(bool ascending, DateTime value1, DateTime value2) {
-    if (value1 != null && value2 != null) {
-      return ascending ? value1.compareTo(value2) : value2.compareTo(value1);
-    }
-    return 0;
-  }
 
   // REQUESTER PUT -> ANALISA MINHA FUNÇÃO CONTROLLER
   void atualizarItemConfiguracaoIntegrador() async {
@@ -171,9 +165,8 @@ class ExtraIntegradorPageController extends GetxController {
 
 
 
-// BUSCAR ADICIONAL DE EXTRAS
+// CONTROLLER DO BOTAO ADICIONAL
   void _buscarTodosItemConfiguracaoWaychefExtra() async {
-    print('Busca os Adicionais');
     await PlataformaRequester.buscarTodosItemConfiguracaoWaychefExtra(Application.pwsConfigGateway, Application.tokenUsuario).then((value) {
       print('entrei no if de buscar buscarTodosItensPorIdEmpresaETipoItem');
       if (value.isSuccess) {

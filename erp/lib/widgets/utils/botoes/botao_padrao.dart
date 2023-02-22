@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../theme/app_theme.dart';
+import '../../../theme/app_theme.dart';
 
 
-class BotaoPadrao extends StatelessWidget {
+class BtnPadrao extends StatelessWidget {
 
   final String texto;
   final IconData? icone;
   final Color? corIcone;
   final Color? corTexto;
-  final Function acao;
+  final VoidCallback acao;
 
 
-  const BotaoPadrao({
+  const BtnPadrao({
     required this.texto,
     required this.acao,
     this.icone,

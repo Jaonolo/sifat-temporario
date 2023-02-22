@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 // import 'stepper.dart';
 import '../../../../theme/app_theme.dart';
-import '../../../../widgets/botao_padrao.dart';
+import '../../../../widgets/utils/botoes/botao_padrao.dart';
 import '../../../../widgets/botao_proximo.dart';
 import '../../../../widgets/card_preco.dart';
 import '../../../../widgets/responsive.dart';

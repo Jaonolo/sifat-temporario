@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:status_change/status_change.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../theme/app_theme.dart';
-import '../../../../../widgets/botao_padrao.dart';
+import '../../../../widgets/utils/botoes/botao_padrao.dart';
 import '../../../../../widgets/responsive.dart';
 import '../../../../app_antigo/config/application.dart';
 import '../../../../config/application.dart';
@@ -1328,7 +1328,7 @@ class PlataformaContratoPage extends StatelessWidget {
 }
 
 Widget _btnProrrogarContrato() {
-  return BotaoPadrao(
+  return BtnPadrao(
     corIcone: AppTheme.adicionar,
     corTexto: Colors.white,
     texto: 'Adicionar',
@@ -1394,7 +1394,7 @@ Widget _btnAdicionar()  {
 
 
 Widget _btnDesativar() {
-  return BotaoPadrao(
+  return BtnPadrao(
     corIcone: Color(0xFFBA1A1A),
     corTexto: Colors.white,
     texto: 'Desativar',

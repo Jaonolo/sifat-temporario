@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:models/model/models.dart';
 import '../../../../app_antigo/config/application.dart';
 import '../../../../theme/app_theme.dart';
-import '../../../../widgets/botao_padrao.dart';
+import '../../../../widgets/utils/botoes/botao_padrao.dart';
 import '../../../../widgets/carregamento/icone_carregando.dart';
 import '../../../../widgets/responsive.dart';
 
@@ -77,8 +77,8 @@ class PlataformaPage extends GetView<PlataformaPageController> {
 
   //Desktop e Mobile
   _btnSalvar() {
-    return BotaoPadrao(
-        corIcone: AppTheme.salvar,
+    return BtnPadrao(
+        corIcone: AppTheme.sucesso,
         corTexto: Color.fromRGBO(255, 255, 255, 1),
         texto: 'Salvar',
         icone: Icons.save,

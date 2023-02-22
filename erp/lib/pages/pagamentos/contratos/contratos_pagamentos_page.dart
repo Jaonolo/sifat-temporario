@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../theme/app_theme.dart';
-import '../../../widgets/botao_padrao.dart';
+import '../../../widgets/utils/botoes/botao_padrao.dart';
 import '../../../widgets/responsive.dart';
 import 'contratos_pagamentos_page_controller.dart';
 
@@ -1693,7 +1693,7 @@ class ContratosPagamentosPage
 }
 
 Widget _btnProrrogarContrato() {
-  return BotaoPadrao(
+  return BtnPadrao(
     corIcone: AppTheme.adicionar,
     corTexto: Colors.white,
     texto: 'Adicionar',
@@ -1754,7 +1754,7 @@ Widget _btnAdicionar() {
 }
 
 Widget _btnDesativar() {
-  return BotaoPadrao(
+  return BtnPadrao(
     corIcone: Color(0xFFBA1A1A),
     corTexto: Colors.white,
     texto: 'Desativar',

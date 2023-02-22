@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:erp/pages/plataforma/plataforma_page_controller.dart';
 import '../theme/app_theme.dart';
-import 'botao_padrao.dart';
+import 'utils/botoes/botao_padrao.dart';
 import 'responsive.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -61,8 +61,8 @@ class ContratoPadraoPage extends StatelessWidget {
 
 //----------- WIDGETS
   Widget _btnSalvar() {
-    return BotaoPadrao(
-      corIcone: AppTheme.salvar,
+    return BtnPadrao(
+      corIcone: AppTheme.sucesso,
       corTexto: Colors.white,
       texto: 'Salvar',
       icone: Icons.save,
@@ -73,7 +73,7 @@ class ContratoPadraoPage extends StatelessWidget {
   }
 
   Widget _btnAdicionar() {
-    return BotaoPadrao(
+    return BtnPadrao(
       corIcone: AppTheme.adicionar,
       corTexto: Colors.white,
       texto: 'Adicionar',
