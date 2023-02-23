@@ -5,3 +5,4 @@ const String ContratoRoute = '/contrato';
 const String PagamentoRoute = '/pagamento';
 const String ContratoIntegradorRoute = '/contrato-integrador';
 const String ContratoCustomizadoRoute = '/contrato-customizado';
+const String TelaErrorRoute = '/pagina-nao-encontrada';

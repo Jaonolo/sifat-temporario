@@ -7,6 +7,7 @@ import 'package:erp/pages/plataforma/contratosplataforma/extras/extra_integrador
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import '../../pages/modules/error/tela_de_erro.dart';
 import '../../pages/pagamentos/componentes/cartao.dart';
 import '../../pages/pagamentos/contratos/contratos_pagamentos_page.dart';
 import '../../pages/pagamentos/pagamentos_page.dart';
@@ -42,8 +43,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       case ContratoRoute:
         return _getPageRoute(ExtraIntegradorPage(routingData["token"]), settings);
         // return _getPageRoute(PlataformaEmpresaPage(), settings);
-      case PagamentoRoute:
-        return _getPageRoute(ComissaoPage(), settings);
+      // case PagamentoRoute:
+      //   return _getPageRoute(TELADEERRO(), settings);
+      case TelaErrorRoute:
+        return _getPageRoute(TELADEERRO(), settings);
         // return _getPageRoute(Cartao(), settings);
       // case ContratoRoute:
       //   return _getPageRoute(ContratosPagamentosPage(), settings);
