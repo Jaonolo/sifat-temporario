@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -18,14 +19,8 @@ class MenuComponent {
   bool itens = false;
 
   Widget body() {
-    var largura = MediaQuery
-        .of(context)
-        .size
-        .width;
-    var altura = MediaQuery
-        .of(context)
-        .size
-        .height;
+    var largura = MediaQuery.of(context).size.width;
+    var altura = MediaQuery.of(context).size.height;
     print(largura);
     print(altura);
 
@@ -33,14 +28,8 @@ class MenuComponent {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
-          height: MediaQuery
-              .of(context)
-              .size
-              .height,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
           child: Stack(
             children: [
               Row(
@@ -89,8 +78,7 @@ class MenuComponent {
                                     borderRadius: BorderRadius.circular(16),
                                     image: DecorationImage(
                                         fit: BoxFit.fill,
-                                        image: AssetImage(
-                                            'assets/no-image.png')),
+                                        image: AssetImage('assets/no-image.png')),
                                     border: Border.all(
                                       width: 4,
                                       color: Color.fromRGBO(249, 77, 24, 1),
@@ -112,19 +100,7 @@ class MenuComponent {
                                         backgroundColor: Colors.transparent,
                                         elevation: 0,
                                       ),
-                                      onPressed: () =>
-                                          Navigator.push(
-                                            context,
-                                            PageTransition(
-                                              child: ProdutoSimplesPage(),
-                                              type: PageTransitionType.rotate,
-                                              alignment: Alignment.bottomCenter,
-                                              duration: const Duration(
-                                                  milliseconds: 600),
-                                              reverseDuration: const Duration(
-                                                  milliseconds: 600),
-                                            ),
-                                          ),
+                                      onPressed: () {Get.toNamed(Routes.SIMPLES);},
                                       child: Stack(
                                         fit: StackFit.expand,
                                         children: <Widget>[
@@ -152,8 +128,7 @@ class MenuComponent {
                                       borderRadius: BorderRadius.circular(16),
                                       image: DecorationImage(
                                           fit: BoxFit.fill,
-                                          image: AssetImage(
-                                              'assets/no-image.png')),
+                                          image: AssetImage('assets/no-image.png')),
                                       border: Border.all(
                                         width: 4,
                                         color: Color.fromRGBO(249, 77, 24, 1),
@@ -194,8 +169,7 @@ class MenuComponent {
                                       borderRadius: BorderRadius.circular(16),
                                       image: DecorationImage(
                                           fit: BoxFit.fill,
-                                          image: AssetImage(
-                                              'assets/no-image.png')),
+                                          image: AssetImage('assets/no-image.png')),
                                       border: Border.all(
                                         width: 4,
                                         color: Color.fromRGBO(249, 77, 24, 1),
@@ -236,8 +210,7 @@ class MenuComponent {
                                       borderRadius: BorderRadius.circular(16),
                                       image: DecorationImage(
                                           fit: BoxFit.fill,
-                                          image: AssetImage(
-                                              'assets/no-image.png')),
+                                          image: AssetImage('assets/no-image.png')),
                                       border: Border.all(
                                         width: 4,
                                         color: Color.fromRGBO(249, 77, 24, 1),
@@ -263,22 +236,22 @@ class MenuComponent {
                   itens
                       ? CarrinhoWidget()
                       : Container(
-                    height: double.infinity,
-                    width: largura / 3.5,
-                    color: Color.fromRGBO(249, 77, 24, 1),
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 64),
-                      child: Text(
-                        'Seu carrinho está vazio escolha um produto',
-                        style: GoogleFonts.sourceSansPro(
-                          fontSize: 30,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
+                        height: double.infinity,
+                        width: largura / 3.5,
+                        color: Color.fromRGBO(249, 77, 24, 1),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 64),
+                          child: Text(
+                            'Seu carrinho está vazio escolha um produto',
+                            style: GoogleFonts.sourceSansPro(
+                              fontSize: 30,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                        textAlign: TextAlign.center,
                       ),
-                    ),
-                  ),
                 ],
               ),
             ],

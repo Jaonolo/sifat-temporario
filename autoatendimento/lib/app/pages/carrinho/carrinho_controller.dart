@@ -26,8 +26,14 @@ class CarrinhoController extends GetxController{
     print("selecao >>> ${selected.value}");
   }
 
-  void itensCarrinho () {
+  void badgeCarrinho() {
+    count++;
+    update();
+    print(count);
 
+    count--;
+    update();
+    print(count);
   }
 
 }

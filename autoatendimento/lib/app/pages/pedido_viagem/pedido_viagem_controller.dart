@@ -3,5 +3,4 @@ import 'package:get/get.dart';
 
 
 class PedidoViagemController extends GetxController{
-
 }

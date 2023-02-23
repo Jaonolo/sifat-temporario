@@ -44,6 +44,7 @@ dependencies:
   google_fonts: ^3.0.1
   get: ^4.6.5
   page_transition: ^2.0.9
+  badges: ^3.0.2
 
 dev_dependencies:
   flutter_test:
