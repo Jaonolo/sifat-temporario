@@ -19,8 +19,8 @@ class TELADEERRO extends StatelessWidget {
         mobile: Container(),
         desktop: Stack(
           children: [
-            textoPaginaNaoEncontrada(largura, altura),
-            itensCaminhoNaoExiste(largura, altura),
+            _textoPaginaNaoEncontrada(largura, altura),
+            _itensCaminhoNaoExiste(largura, altura),
           ],
         ),
       ),
@@ -28,7 +28,7 @@ class TELADEERRO extends StatelessWidget {
   }
 
 
-  textoPaginaNaoEncontrada(largura, altura) {
+  _textoPaginaNaoEncontrada(largura, altura) {
     return Align(
       alignment: altura >= 391 ? Alignment(0, -0.45) : Alignment(0, -0.70),
       child: Container(
@@ -56,7 +56,7 @@ class TELADEERRO extends StatelessWidget {
     );
   }
 
-  itensCaminhoNaoExiste(largura, altura) {
+  _itensCaminhoNaoExiste(largura, altura) {
     return Align(
       alignment: Alignment(0, 0.45),
       child: Container(
@@ -71,11 +71,11 @@ class TELADEERRO extends StatelessWidget {
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              textoCaminhoErrado(altura, largura),
-              espacoExpandedContainer(),
-              btnPaginaInicial(altura,largura),
-              espacoExpandedContainer(),
-              rowCodigoeRelatorio(largura, altura),
+              _textoCaminhoErrado(altura, largura),
+              _espacoExpandedContainer(),
+              _btnPaginaInicial(altura,largura),
+              _espacoExpandedContainer(),
+              _rowCodigoeRelatorio(largura, altura),
             ],
           ),
         ),
@@ -83,7 +83,7 @@ class TELADEERRO extends StatelessWidget {
     );
   }
 
-  btnPaginaInicial(altura, largura){
+  _btnPaginaInicial(altura, largura){
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
@@ -107,7 +107,7 @@ class TELADEERRO extends StatelessWidget {
     );
   }
 
-  textoCaminhoErrado(altura, largura){
+  _textoCaminhoErrado(altura, largura){
     return Text(
       ' O caminho que você procura está errado ou não existe, para mais detalhes entre em contato com o nosso suporte',
       textAlign: TextAlign.center,
@@ -120,13 +120,13 @@ class TELADEERRO extends StatelessWidget {
     );
   }
 
-  espacoExpandedContainer() {
+  _espacoExpandedContainer() {
     return Expanded(
       child: Container(),
     );
   }
 
-  rowCodigoeRelatorio(largura, altura) {
+  _rowCodigoeRelatorio(largura, altura) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
