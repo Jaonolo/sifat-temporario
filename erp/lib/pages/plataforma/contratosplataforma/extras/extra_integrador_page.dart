@@ -545,37 +545,6 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
               ),
             ),
           ),
-
-          // Container(
-          //   padding: EdgeInsets.all(16),
-          //   child: Transform.scale(
-          //     scale: width / 1327,
-          //     child: Checkbox(
-          //       shape: RoundedRectangleBorder(
-          //         side: BorderSide(
-          //           width: 1,
-          //           style: BorderStyle.solid,
-          //         ),
-          //         borderRadius: BorderRadius.circular(6),
-          //       ),
-          //       fillColor: MaterialStateProperty.resolveWith(getColor),
-          //       value: itemConfiguracaoIntegradorWaychef.permiteComercializar,
-          //       onChanged: ((bool? value) {
-          //         controller.alternaBoxEmpresateste(index, value!);
-          //         controller.carregando = true;
-          //         controller.listaPlataformaContratoIntegradorExtra
-          //             .forEach((element) {
-          //           if (element.idItemConfiguracaoWaychef ==
-          //               itemConfiguracaoIntegradorWaychef
-          //                   .idItemConfiguracaoWaychef) {
-          //             element.permiteComercializar = value;
-          //           }
-          //           controller.carregando = false;
-          //         });
-          //       }),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
@@ -594,7 +563,6 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
     );
   }
 
-//  cor do botão checkbox
   Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
       MaterialState.pressed,
