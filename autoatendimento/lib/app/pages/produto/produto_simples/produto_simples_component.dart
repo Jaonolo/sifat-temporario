@@ -2,17 +2,20 @@ import 'package:autoatendimento/app/icons_auto_atendimento/icons/icons_auto_aten
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:models/model/models.dart';
 import '../../../rotas_pages/rotas_pages.dart';
+import '../../carrinho/carrinho_controller.dart';
 import '../../carrinho/carrinho_widget.dart';
 import 'produto_simples_controller.dart';
 
 class ProdutoSimplesComponent {
   final ProdutoSimplesController controller = Get.find();
+  final CarrinhoController carrinhoController = Get.find();
   late BuildContext context;
   late double _height;
   late double _width;
   late var _orientation;
-  var count = 0.obs;
+  var count = 1.obs;
 
   initialize(BuildContext context) {
     this.context = context;
@@ -82,148 +85,11 @@ class ProdutoSimplesComponent {
               mainAxisSpacing: 15,
               childAspectRatio: 0.85,
             ),
-            itemCount: 1,
+            itemCount: 12,
             itemBuilder: (BuildContext context, int index) {
               //CARD E SUAS FUNÇÕES
               return GestureDetector(
-                onTap: () => {
-                  showDialog(
-                    barrierDismissible: false,
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      backgroundColor: Color.fromRGBO(249, 77, 24, 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      title: Container(
-                        width: _width / 1.4,
-                        height: _height / 1.35,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 20),
-                          child: Column(
-                            children: [
-                              Container(
-                                width: _width / 4,
-                                height: _height / 2.7,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(155),
-                                  image: DecorationImage(
-                                      fit: BoxFit.contain,
-                                      image: AssetImage('assets/lanche.png')),
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 40),
-                                child: Container(
-                                  width: _width / 7,
-                                  height: _height / 14,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(99),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.only(left: 30),
-                                    child: Row(
-                                      children: [
-                                        IconButton(
-                                          icon: Icon(
-                                            IconsAutoCarrinho.minus,
-                                            color:
-                                                Color.fromRGBO(235, 76, 27, 1),
-                                          ),
-                                          onPressed: () {
-                                            count--;
-                                          },
-                                        ),
-                                        Obx(
-                                          () => Text(
-                                            "$count",
-                                            style: GoogleFonts.sourceSansPro(
-                                              fontSize: 30,
-                                              fontWeight: FontWeight.w400,
-                                              color:
-                                                  Color.fromRGBO(13, 13, 13, 1),
-                                            ),
-                                          ),
-                                        ),
-                                        IconButton(
-                                          icon: Icon(
-                                            IconsAutoCarrinho.plus,
-                                            color:
-                                                Color.fromRGBO(235, 76, 27, 1),
-                                          ),
-                                          onPressed: () {
-                                            count++;
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 40),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    GestureDetector(
-                                      child: Container(
-                                        width: _width / 4,
-                                        height: _height / 9,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              width: 1, color: Colors.white),
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            'Cancelar',
-                                            style: GoogleFonts.sourceSansPro(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      onTap: () => Get.back(),
-                                    ),
-                                    SizedBox(width: 30),
-                                    GestureDetector(
-                                      child: Container(
-                                        width: _width / 4,
-                                        height: _height / 9,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            'Adicionar ao carrinho',
-                                            style: GoogleFonts.sourceSansPro(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.w700,
-                                              color: Color.fromRGBO(
-                                                  249, 77, 24, 1),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      elevation: 0,
-                    ),
-                  ),
-                },
+                onTap: () => confirmarItem(),
                 child: Card(
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -315,4 +181,150 @@ class ProdutoSimplesComponent {
       ),
     );
   }
+
+  confirmarItem() {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Color.fromRGBO(249, 77, 24, 1),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+        ),
+        title: Container(
+          width: _width / 1.4,
+          height: _height / 1.35,
+          child: Padding(
+            padding: EdgeInsets.only(top: 20),
+            child: Column(
+              children: [
+                Container(
+                  width: _width / 4,
+                  height: _height / 2.7,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(155),
+                    image: DecorationImage(
+                        fit: BoxFit.contain,
+                        image: AssetImage('assets/lanche.png')),
+                    color: Colors.white,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 40),
+                  child: Container(
+                    width: _width / 7,
+                    height: _height / 14,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(99),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 30),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              IconsAutoCarrinho.minus,
+                              color:
+                              Color.fromRGBO(235, 76, 27, 1),
+                            ),
+                            onPressed: () {
+                              count--;
+                            },
+                          ),
+                          Obx(
+                                () => Text(
+                              "$count",
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w400,
+                                color:
+                                Color.fromRGBO(13, 13, 13, 1),
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              IconsAutoCarrinho.plus,
+                              color:
+                              Color.fromRGBO(235, 76, 27, 1),
+                            ),
+                            onPressed: () {
+                              count++;
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        child: Container(
+                          width: _width / 4,
+                          height: _height / 9,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 1, color: Colors.white),
+                            borderRadius:
+                            BorderRadius.circular(16),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Cancelar',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        onTap: () => Get.back(),
+                      ),
+                      SizedBox(width: 30),
+                      GestureDetector(
+                        child: Container(
+                          width: _width / 4,
+                          height: _height / 9,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                            BorderRadius.circular(16),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Adicionar ao carrinho',
+                              style: GoogleFonts.sourceSansPro(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                                color: Color.fromRGBO(
+                                    249, 77, 24, 1),
+                              ),
+                            ),
+                          ),
+                        ),
+                        onTap: () {
+                          Produto p = Produto();
+                          p.descricao = 'X-Egg';
+                          carrinhoController.adicionarProduto(p);
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        elevation: 0,
+      ),
+    );
+  }
+
 }

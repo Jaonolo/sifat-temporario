@@ -1,13 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
+
 
 import '../../rotas_pages/rotas_pages.dart';
+import '../carrinho/carrinho_controller.dart';
 import '../carrinho/carrinho_widget.dart';
-import '../produto/produto_simples/produto_simples_page.dart';
+
 
 class MenuComponent {
   late BuildContext context;
@@ -16,6 +16,7 @@ class MenuComponent {
     this.context = context;
   }
 
+  final controller = Get.put(CarrinhoController());
   bool itens = false;
 
   Widget body() {
@@ -260,69 +261,4 @@ class MenuComponent {
       ),
     );
   }
-
-// List<Widget> listaWrap() {
-//   List<Widget> listWrap = [];
-//   var appController;
-//   if (appController.listCardapioMenu.isNotEmpty) {
-//     var appController;
-//     for (CardapioMenu cardapioMenu in appController.listCardapioMenu) {
-//       print(cardapioMenu.descricao);
-//       listWrap.add(_cardMenu(cardapioMenu));
-//     }
-//   } else {
-//     listWrap = [];
-//   }
-//   return listWrap;
-// }
-
-// Widget _cardMenu(CardapioMenu cardapioMenu) {
-//
-//   var largura = MediaQuery.of(context).size.width;
-//   var altura = MediaQuery.of(context).size.height;
-//   print(largura);
-//   print(altura);
-//
-//   return Container(
-//     child: ElevatedButton(
-//       style: ElevatedButton.styleFrom(
-//         backgroundColor: Colors.transparent,
-//         elevation: 0,
-//       ),
-//       onPressed: () {},
-//       child: Stack(
-//         fit: StackFit.expand,
-//         children: <Widget>[
-//           Padding(
-//             padding: EdgeInsets.only(
-//                 left: 20,
-//                 right: 50,
-//                 top: 160,
-//                 bottom: 5),
-//             child: Text( 'Ola',
-//               style: GoogleFonts.sourceSansPro(
-//                 fontSize: 40,
-//                 color: Colors.white,
-//                 fontWeight: FontWeight.w600,
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     ),
-//     width: largura / 3.64,
-//     height: altura / 3.4,
-//     decoration: BoxDecoration(
-//       borderRadius: BorderRadius.circular(16),
-//       image: DecorationImage(
-//           fit: BoxFit.fill,
-//           image:
-//           AssetImage('assets/no-image.png')),
-//       border: Border.all(
-//         width: 4,
-//         color: Color.fromRGBO(249, 77, 24, 1),
-//       ),
-//     ),
-//   );
-// }
 }

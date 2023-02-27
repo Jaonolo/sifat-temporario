@@ -6,8 +6,6 @@ import 'carrinho_controller.dart';
 class CarrinhoWidget extends StatelessWidget with CarrinhoComponent {
   CarrinhoWidget({Key? key}) : super(key: key);
 
-  final controller = Get.put(CarrinhoController());
-
   @override
   Widget build(BuildContext context) {
     initialize(context);

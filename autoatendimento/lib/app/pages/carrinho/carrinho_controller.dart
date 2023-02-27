@@ -1,9 +1,12 @@
 import 'package:get/get.dart';
+import 'package:models/model/models.dart';
 
 class CarrinhoController extends GetxController{
   var selected = false.obs;
   var visible = false.obs;
   var count = 1.obs;
+  RxList<Produto> list = <Produto>[].obs;
+
 
   void quantidadeDeItens() {
     count++;
@@ -34,6 +37,18 @@ class CarrinhoController extends GetxController{
     count--;
     update();
     print(count);
+  }
+
+  void adicionarProduto(Produto produto) {
+    list.add(produto);
+  }
+
+  void deletarProduto(int index) {
+    list.remove(index);
+  }
+
+  void deletarListaProduto () {
+    list.clear();
   }
 
 }

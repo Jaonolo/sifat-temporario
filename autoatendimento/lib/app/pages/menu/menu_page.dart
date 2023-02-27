@@ -9,7 +9,6 @@ import 'menu_controller.dart';
 class MenuPage extends StatelessWidget with MenuComponent {
   MenuPage({Key? key}) : super(key: key);
 
-  final controller = Get.put(MenuController());
 
   @override
   Widget build(BuildContext context) {
