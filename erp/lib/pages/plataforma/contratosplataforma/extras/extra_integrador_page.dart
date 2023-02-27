@@ -24,6 +24,7 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
     Application.tokenUsuario = token!;
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
