@@ -32,7 +32,7 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
         mobile: Container(
           child: ListView(
             children: [
-              _tabelaPlataformaVersaoListMobile(context),
+              // _tabelaPlataformaVersaoListMobile(context),
             ],
           ),
         ),
@@ -100,53 +100,53 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
     );
   }
 
-//----------- WIDGETS MOBILE
-  Widget _tabelaPlataformaVersaoListMobile(context) {
-    return Card(
-      margin: EdgeInsets.zero,
-      color: Color.fromRGBO(233, 241, 255, 1),
-      child: Container(
-        // width: MediaQuery.of(context).size.width * 1,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              flex: 3,
-              child: Container(
-                child: Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'Função / aplicação',
-                          textAlign: TextAlign.start,
-                          style: GoogleFonts.comfortaa(
-                            fontSize: 19,
-                            fontWeight: FontWeight.w500,
-                            color: Color.fromRGBO(0, 51, 85, 1),
-                            letterSpacing: 0.15,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          IconsErpersonalizados.arrow_up_arrow_down,
-                          size: 16,
-                          color: Color.fromRGBO(0, 51, 85, 1),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+// //----------- WIDGETS MOBILE
+//   Widget _tabelaPlataformaVersaoListMobile(context) {
+//     return Card(
+//       margin: EdgeInsets.zero,
+//       color: Color.fromRGBO(233, 241, 255, 1),
+//       child: Container(
+//         // width: MediaQuery.of(context).size.width * 1,
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//           children: [
+//             Expanded(
+//               flex: 3,
+//               child: Container(
+//                 child: Padding(
+//                   padding: EdgeInsets.all(12.0),
+//                   child: Row(
+//                     children: [
+//                       Expanded(
+//                         child: Text(
+//                           'Função / aplicação',
+//                           textAlign: TextAlign.start,
+//                           style: GoogleFonts.comfortaa(
+//                             fontSize: 19,
+//                             fontWeight: FontWeight.w500,
+//                             color: Color.fromRGBO(0, 51, 85, 1),
+//                             letterSpacing: 0.15,
+//                           ),
+//                         ),
+//                       ),
+//                       IconButton(
+//                         onPressed: () {},
+//                         icon: Icon(
+//                           IconsErpersonalizados.arrow_up_arrow_down,
+//                           size: 16,
+//                           color: Color.fromRGBO(0, 51, 85, 1),
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
 
 //----------- WIDGETS DESKTOP
   Widget _tabelaPlataformaVersaoList(context) {
@@ -528,7 +528,7 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    Get.dialog(_modalIntegradores());
+                    Get.dialog(_modalIntegradores(context));
                   },
                   child: Text(
                     'Integradores',
@@ -606,7 +606,11 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
     return Color.fromRGBO(90, 95, 102, 1);
   }
 
-  Widget _modalIntegradores() {
+  _modalIntegradores(context) {
+    showDialog(
+        context: context,
+        barrierDismissible: false, // impede o fechamento ao clicar fora do alert
+        builder: (BuildContext context) {
     return AlertDialog(
       shape: const RoundedRectangleBorder(
         side: BorderSide(),
@@ -668,9 +672,9 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                   Container(
                     width: Get.width / 3,
                     height: Get.height / 4,
-
                     // color: Colors.red,
                     child: GridView.count(
+                      childAspectRatio: 2.0,
                       // padding: EdgeInsets.all(60),
                       primary: false,
                       // padding: const EdgeInsets.all(20),
@@ -684,7 +688,36 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              CheckBoxMobile(),
+                              // Container(
+                              //   padding: EdgeInsets.all(16),
+                              //   child: Transform.scale(
+                              //     scale: 1,
+                              //     child: Checkbox(
+                              //       shape: RoundedRectangleBorder(
+                              //         side: BorderSide(
+                              //           width: 1,
+                              //           style: BorderStyle.solid,
+                              //         ),
+                              //         borderRadius: BorderRadius.circular(6),
+                              //       ),
+                              //       fillColor: MaterialStateProperty.resolveWith(getColor),
+                              //       value: itemConfiguracaoIntegradorWaychef.permiteComercializar,
+                              //       onChanged: ((bool? value) {
+                              //         controller.alternaBoxEmpresateste(index, value!);
+                              //         controller.carregando = true;
+                              //         controller.listaPlataformaContratoIntegradorExtra
+                              //             .forEach((element) {
+                              //           if (element.idItemConfiguracaoWaychef ==
+                              //               itemConfiguracaoIntegradorWaychef
+                              //                   .idItemConfiguracaoWaychef) {
+                              //             element.permiteComercializar = value;
+                              //           }
+                              //           controller.carregando = false;
+                              //         });
+                              //       }),
+                              //     ),
+                              //   ),
+                              // ),
                               Text(
                                 'Selecionar',
                                 // minFontSize: 12,
@@ -736,7 +769,9 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              CheckBoxMobile(),
+                              CheckBoxMobile(
+
+                              ),
                               AutoSizeText(
                                 'Integrador',
                                 style: GoogleFonts.sourceSansPro(
@@ -864,6 +899,8 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
       ),
     );
   }
+    );
+  }
 
   Widget _btnAdicionar(context) {
     return BtnPadrao(
@@ -873,6 +910,8 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
       icone: Icons.add_circle,
       acao: () {
         showModalBottomSheet(
+          isDismissible: false,
+          // enableDrag: false,
           isScrollControlled: true,
           context: context,
           shape: RoundedRectangleBorder(
@@ -881,7 +920,9 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
           )),
           builder: (context) => Container(
             // padding: EdgeInsets.all(16),
-            child: Column(mainAxisSize: MainAxisSize.min, children: [
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
               Container(
                 child: Row(
                   children: [
@@ -918,7 +959,7 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                 ),
               ),
               Container(
-                height: 500,
+                height: MediaQuery.of(context).size.height / 2,
                 child: _modalPlataforma(context),
               ),
               //BOTOES DO MODAL
@@ -952,17 +993,16 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
 
   Widget _modalPlataforma(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
-
-    //lista tabBar- appBar
-    List<Tab> tabsLista = [];
+    List<Tab> listaComCadaItemDoEnum = [];
     controller.mapContratoIndicador.forEach((key, value) {
-      tabsLista.add(
+      listaComCadaItemDoEnum.add(
         Tab(
           child: _size.width > 530
               ? Padding(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                   child: Text(
-                    key.descricao,
+                    'enum aquiaaaaaaaaaaaaaaa',
+                    // key.descricao,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.comfortaa(
                       fontSize: 22,
@@ -975,7 +1015,8 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
         ),
       );
     });
-    List<SingleChildScrollView> tabbarviewLista = [];
+
+    List<SingleChildScrollView> listaDeItensExtrasFilhosdoEnum = [];
     controller.mapContratoIndicador.forEach((key, value) {
       List<Widget> listaNova = [];
       value.forEach((element) {
@@ -1001,13 +1042,24 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
                     child: Obx(
                       () => CheckBoxPadrao(
                         status: controller.boxEmpresateste,
-                        alteraStatus: () {
-                          // controller.alternaBoxEmpresateste();
-                        },
+                          //TODO CHECKBOX
+                        alteraStatus: () {},
+                          // alteraStatus: ((bool? value) {
+                          //   controller.boxEmpresateste(value);
+                          //   // controller.alternaBoxEmpresaStr
+                          //   // ing(index, value!);
+                          //   // controller.carregando = true;
+                          //   controller.listaPlataformaContratoAdicionais.forEach((element) {
+                          //     if (element.id == controller.listaPlataformaContratoAdicionais[index].tipoItem ) {
+                          //       // element.tipoItem = value;
+                          //     }
+                          //     // controller.carregando = false;
+                          //   });
+                          // }
+                          // ),
+                        // },
                       ),
                     ),
-
-                    // CheckBoxMobile(),
                   ),
                 ),
               ),
@@ -1015,12 +1067,11 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
           ),
         );
       });
-      tabbarviewLista.add(
+      listaDeItensExtrasFilhosdoEnum.add(
         SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(18.0),
             child: Responsive(
-              larguraMaximaMobile: 905,
               desktop: Padding(
                 // padding: const EdgeInsets.all(16.0),
                 padding:
@@ -1038,21 +1089,20 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
         ),
       );
     });
-    print('Estou montando _modalPlataforma de adicional extra');
+
     return DefaultTabController(
       length: controller.mapContratoIndicador.length,
       child: Scaffold(
-        // backgroundColor: AppTheme.background,
-        appBar: _negocioAppBar(_size),
+        appBar: _showModalBottomAppBar(_size),
         body: TabBarView(
-          children: tabbarviewLista,
+          children: listaDeItensExtrasFilhosdoEnum,
         ),
         // ],),
       ),
     );
   }
 
-  AppBar _negocioAppBar(Size size) {
+  AppBar _showModalBottomAppBar(Size size) {
     List<Tab> tabsLista = [];
     controller.mapContratoIndicador.forEach((key, value) {
       tabsLista.add(
@@ -1074,7 +1124,6 @@ class ExtraIntegradorPage extends GetView<ExtraIntegradorPageController> {
         ),
       );
     });
-    print('Estou montando _negocioAppBar de adicional extra');
     return AppBar(
       // mainAxisSize: MainAxisSize.min,
       shape: RoundedRectangleBorder(

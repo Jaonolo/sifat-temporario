@@ -73,7 +73,7 @@ class TELADEERRO extends StatelessWidget {
             children: [
               _textoCaminhoErrado(altura, largura),
               _espacoExpandedContainer(),
-              _btnPaginaInicial(altura,largura),
+              _btnPaginaInicial(altura, largura),
               _espacoExpandedContainer(),
               _rowCodigoeRelatorio(largura, altura),
             ],
@@ -83,7 +83,7 @@ class TELADEERRO extends StatelessWidget {
     );
   }
 
-  _btnPaginaInicial(altura, largura){
+  _btnPaginaInicial(altura, largura) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
@@ -107,7 +107,7 @@ class TELADEERRO extends StatelessWidget {
     );
   }
 
-  _textoCaminhoErrado(altura, largura){
+  _textoCaminhoErrado(altura, largura) {
     return Text(
       ' O caminho que você procura está errado ou não existe, para mais detalhes entre em contato com o nosso suporte',
       textAlign: TextAlign.center,
@@ -175,5 +175,4 @@ class TELADEERRO extends StatelessWidget {
       ],
     );
   }
-
 }

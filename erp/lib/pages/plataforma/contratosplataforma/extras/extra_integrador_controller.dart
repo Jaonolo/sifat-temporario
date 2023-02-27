@@ -34,13 +34,14 @@ class ExtraIntegradorPageController extends GetxController {
   final _listaPlataformaContratoAdicionais = <ItemConfiguracaoWaychef>[].obs;
   List<ItemConfiguracaoWaychef> get listaPlataformaContratoAdicionais => _listaPlataformaContratoAdicionais.toList();
   set listaPlataformaContratoAdicionais(value) => _listaPlataformaContratoAdicionais.value = value;
-  Map<ModuloContratoIndicadorEnum, List<ItemConfiguracaoWaychef>> mapContratoIndicador = new Map();
+  RxMap<ModuloContratoIndicadorEnum, List<ItemConfiguracaoWaychef>> mapContratoIndicador =  new Map<ModuloContratoIndicadorEnum, List<ItemConfiguracaoWaychef>>().obs;
 
 //------------FUNÇÕES -----------
   @override
   void onInit() {
     super.onInit();
     _buscarPlataformaContratoExtraIntegradores();
+    _buscarTodosItemConfiguracaoWaychefExtra();
   }
 
   void _buscarPlataformaContratoExtraIntegradores() async {

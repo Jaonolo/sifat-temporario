@@ -238,12 +238,8 @@ class PlataformaPage extends GetView<PlataformaPageController> {
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount:
-                      controller.listaPlataformaContratoIntegradorExtra.length,
-                  itemBuilder: (context, index) {
-                    ItemConfiguracaoIntegradorWaychef
-                        itemConfiguracaoIntegradorWaychef = controller
-                            .listaPlataformaContratoIntegradorExtra[index];
+                  itemCount: controller.listaPlataformaContratoIntegradorExtra.length,
+                  itemBuilder: (context, index) { ItemConfiguracaoIntegradorWaychef   itemConfiguracaoIntegradorWaychef = controller.listaPlataformaContratoIntegradorExtra[index];
                     return Card(
                       // color: index%2 == 0? Colors.transparent : Colors.black.withOpacity(0.02),
                       color: index % 2 == 0
@@ -515,9 +511,7 @@ class PlataformaPage extends GetView<PlataformaPageController> {
                   controller.carregando = true;
                   controller.listaPlataformaContratoIntegradorExtra
                       .forEach((element) {
-                    if (element.idItemConfiguracaoWaychef ==
-                        itemConfiguracaoIntegradorWaychef
-                            .idItemConfiguracaoWaychef) {
+                    if (element.idItemConfiguracaoWaychef == itemConfiguracaoIntegradorWaychef.idItemConfiguracaoWaychef) {
                       element.permiteComercializar = value;
                     }
                     controller.carregando = false;

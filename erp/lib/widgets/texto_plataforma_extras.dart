@@ -5,7 +5,6 @@ class TextoPlataformaExtras extends StatelessWidget {
   // const TextoAbaModal({Key? key}) : super(key: key);
 
   final String texto;
-
   const TextoPlataformaExtras({
     super.key,
     required this.texto,

@@ -5,6 +5,7 @@ import 'package:erp/pages/plataforma/contratosintegrador/contratocustomizado/con
 import 'package:erp/pages/plataforma/contratosintegrador/extras/plataforma_page_controller.dart';
 import 'package:erp/pages/plataforma/contratosplataforma/comissao/comissao_controller.dart';
 import 'package:erp/pages/plataforma/contratosplataforma/extras/extra_integrador_controller.dart';
+import 'package:erp/pages/plataforma/contratosplataforma/extras/extra_integrador_page.dart';
 import 'package:erp/pages/plataforma/contratosplataforma/padrao/editarcontrato/editar_contrato_plataforma_controller.dart';
 import 'package:erp/pages/plataforma/empresas/plataforma_empresa_controller.dart';
 import 'package:get/get.dart';
@@ -49,8 +50,8 @@ class MyApp extends StatelessWidget {
       scaffoldMessengerKey: locator<NavigationService>().snackbarGlobalKey,
       onGenerateRoute: generateRoute,
       // initialRoute: PagamentoRoute,
-      initialRoute: TelaErrorRoute,
-      // initialRoute: ContratoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiQVBJIiwiaWRTZXNzYW8iOiIwNDZjNmY4ZC1mMGNlLTQxNTAtOTEzNy0zYTU0NWZiMzBiYTIiLCJleHAiOjE2NzcwOTg0MDgsImlhdCI6MTY3NzA4NDAwOH0.FCc6imkQCNduOpIu9AYkiX2coJQOQDQfl5EPTtm3HKIeIjcQbZOkDtJY6EoY5cj-2b0zhfcfz3_KLE6hImX0Uw",
+      // initialRoute: TelaErrorRoute,
+      initialRoute: ContratoRoute + "?token=eyJhbGciOiJIUzUxMiJ9.eyJ0aXBvQ2xpZW50IjoiRVJQIiwiaWRTZXNzYW8iOiIzZDM4OTViYi01NDMwLTRiZTgtYTVmZC1iOGMxZmZlYTA0MGYiLCJleHAiOjE2Nzc1Mjg4MDUsImlhdCI6MTY3NzUxNDQwNX0.WciEoU-g-p4cu5WJ6anKIYHPhILhTmcb3ZrukC_r2YlWhOmGRdgiiF91kqSr4gT63UjGfLm8uQDdtfp_8M3sSA",
     );
   }
 
