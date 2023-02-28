@@ -5,7 +5,7 @@ class CarrinhoController extends GetxController{
   var selected = false.obs;
   var visible = false.obs;
   var count = 1.obs;
-  RxList<Produto> list = <Produto>[].obs;
+  RxList<NotaItem> list = <NotaItem>[].obs;
 
 
   void quantidadeDeItens() {
@@ -39,16 +39,25 @@ class CarrinhoController extends GetxController{
     print(count);
   }
 
-  void adicionarProduto(Produto produto) {
+  void adicionarProduto(NotaItem produto) {
     list.add(produto);
   }
 
-  void deletarProduto(int index) {
-    list.remove(index);
+  void deletarProduto(NotaItem notaItem) {
+    list.remove(notaItem);
+  }
+  void addProduto(NotaItem notaItem) {
+    int a = 0;
+    list.forEach((element) {
+
+      if(a == 0) {
+        a++;
+        element.quantidade!.somar(BigDecimal.ONE());
+      }
+    });
   }
 
   void deletarListaProduto () {
     list.clear();
   }
-
 }

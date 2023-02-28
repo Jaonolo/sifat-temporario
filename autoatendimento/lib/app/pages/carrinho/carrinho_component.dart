@@ -23,6 +23,7 @@ class CarrinhoComponent {
     _width = MediaQuery.of(context).size.width;
   }
 
+  // ***** TAMANHO E ANIMAÇÃO DO CONTAINER *****
   body() {
     return Obx(() {
       return GestureDetector(
@@ -38,6 +39,7 @@ class CarrinhoComponent {
     });
   }
 
+  // ***** TROCA A VISIBILIDADE DO CONTEÚDO DO CARRINHO FECHADO PELO CONTEÚDO DO CARRINHO ABERTO ****
   conteudo() {
     return Visibility(
       visible: controller.visible.value,
@@ -46,6 +48,7 @@ class CarrinhoComponent {
     );
   }
 
+  // **** WIDGETS QUE COMPÕEM O CARRINHO ABERTO ****
   listaCarrinho() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -116,10 +119,11 @@ class CarrinhoComponent {
                 padding: EdgeInsets.only(left: 35, right: 37, bottom: 15),
                 child: Divider(thickness: 1),
               ),
+              // **** LISTA DOS PRODUTOS ADICIONADOS ****
               Expanded(
                   child: ListView.separated(
                       padding: EdgeInsets.only(left: 34, right: 50),
-                      itemBuilder: (context, teste){  return Row(children:[ produtoCarrinho(teste)] );},
+                      itemBuilder: (context, index) => produtoCarrinho(index),
                       separatorBuilder: (context, index) =>
                           Padding(padding: EdgeInsets.only(top: 8)),
                       itemCount: controller.list.value.length),
@@ -209,6 +213,7 @@ class CarrinhoComponent {
     );
   }
 
+  // **** ICONE DO CARRINHO QUANDO ELE ESTIVER FECHADO ****
   iconeCarrinho() {
     return Container(
       child: Row(
@@ -219,7 +224,7 @@ class CarrinhoComponent {
               ? badges.Badge(
                   badgeAnimation: badges.BadgeAnimation.slide(),
                   badgeContent: Text(
-                    count.toString(),
+                    controller.list.length.toString(),
                     style: TextStyle(
                       color: Color.fromRGBO(46, 46, 46, 1),
                       fontSize: 15,
@@ -278,83 +283,84 @@ class CarrinhoComponent {
   }
 
   produtoCarrinho(int index) {
-    return Container(
-      width: _width / 3,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Color.fromRGBO(245, 245, 245, 1),
-      ),
-      child: Row(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 8),
-            child: GestureDetector(
+    return Obx(()=>
+      Container(
+        width: _width / 3,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Color.fromRGBO(245, 245, 245, 1),
+        ),
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 8),
+              child: GestureDetector(
+                child: Icon(
+                    controller.list.value[index].quantidade! <= BigDecimal.ONE()
+                        ? IconsAutoCarrinhoperson.trash
+                        : IconsAutoCarrinho.minus,
+                    size: 20,
+                    color: Color.fromRGBO(231, 74, 59, 1),
+                  ),
+                onTap: () => confirmarExclusaoProduto( controller.list.value[index]),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 8),
               child: Obx(
-                () => Icon(
-                  count <= 1
-                      ? IconsAutoCarrinhoperson.trash
-                      : IconsAutoCarrinho.minus,
-                  size: 20,
-                  color: Color.fromRGBO(231, 74, 59, 1),
-                ),
-              ),
-              onTap: () { controller.deletarProduto(index);},
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 8),
-            child: Obx(
-              () => Text(
-                "$count",
-                style: GoogleFonts.sourceSansPro(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w400,
-                  color: Color.fromRGBO(94, 94, 94, 1),
+                () => Text(
+                  controller.list.value[index].quantidade.toString(),
+                  style: GoogleFonts.sourceSansPro(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w400,
+                    color: Color.fromRGBO(94, 94, 94, 1),
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 7, right: 12),
-            child: GestureDetector(
-              child: Icon(
-                IconsAutoCarrinho.plus,
-                size: 19,
-                color: Color.fromRGBO(235, 76, 27, 1),
+            Padding(
+              padding: EdgeInsets.only(left: 7, right: 12),
+              child: GestureDetector(
+                child: Icon(
+                  IconsAutoCarrinho.plus,
+                  size: 19,
+                  color: Color.fromRGBO(235, 76, 27, 1),
+                ),
+                onTap: () => controller.addProduto(controller.list.value[index]),
               ),
-              onTap: () => count++,
             ),
-          ),
-          Container(
-            child: Expanded(
+            Container(
+              child: Expanded(
+                child: Text(
+                  controller.list.value[index].descricao!,
+                  style: GoogleFonts.sourceSansPro(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Color.fromRGBO(94, 94, 94, 1),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 8),
               child: Text(
-                controller.list.value[index].descricao!,
+                'R\$25,00',
                 style: GoogleFonts.sourceSansPro(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Color.fromRGBO(94, 94, 94, 1),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Color.fromRGBO(0, 150, 93, 1),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 8),
-            child: Text(
-              'R\$25,00',
-              style: GoogleFonts.sourceSansPro(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Color.fromRGBO(0, 150, 93, 1),
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  confirmarExclusaoProduto(int index,Function()? function) {
-    if (count-- <= 1) {
+  // **** ALERT DIALOG SOBRE A EXCLUSÃO DOS ITENS UNITÁRIOS ****
+  confirmarExclusaoProduto(NotaItem notaItem){
+    if (notaItem.quantidade! == BigDecimal.ONE()) {
       Get.dialog(
         AlertDialog(
           shape: RoundedRectangleBorder(
@@ -417,6 +423,7 @@ class CarrinhoComponent {
                       ),
                       SizedBox(width: 27),
                       GestureDetector(
+                        onTap: () => controller.deletarProduto(notaItem),
                         child: Container(
                           width: _width / 4.5,
                           height: _height / 8,
@@ -435,9 +442,6 @@ class CarrinhoComponent {
                             ),
                           ),
                         ),
-                        onTap: function
-
-
                       ),
                     ],
                   ),
@@ -447,12 +451,15 @@ class CarrinhoComponent {
           ),
         ),
       );
-    } else if (count-- >= 0) {
+    } else if ( notaItem.quantidade! == BigDecimal.ZERO()) {
       null;
+    }else {
+      notaItem.quantidade!.subtrair(BigDecimal.ONE());
     }
-    count;
+
   }
 
+  // **** ALERT DIALOG SOBRE A EXCLUSÃO DA LISTA DE ITENS  ****
   confirmarLimparCarrinho() {
     return showDialog(
       barrierDismissible: false,

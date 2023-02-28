@@ -309,9 +309,10 @@ class ProdutoSimplesComponent {
                           ),
                         ),
                         onTap: () {
-                          Produto p = Produto();
-                          p.descricao = 'X-Egg';
-                          carrinhoController.adicionarProduto(p);
+                          NotaItem nt = NotaItem();
+                          nt.descricao = "COCA COLA";
+                          nt.quantidade = BigDecimal("$count");
+                          carrinhoController.adicionarProduto(nt);
                           Navigator.of(context).pop();
                         },
                       ),
