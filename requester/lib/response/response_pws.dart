@@ -13,10 +13,12 @@ class ResponsePws {
   dynamic content;
   late Map<String, dynamic> headers;
 
+
   ResponsePws({
-    required http.Response? response,
+    required http.StreamedResponse? response,
     Function(dynamic json)? converter,
     MediaType mediaType = MediaType.JSON,
+    String? body
   }) {
     if (response == null) {
       PwsAlert pwsAlert = PwsAlert();
@@ -26,7 +28,7 @@ class ResponsePws {
     }
     this.status = response.statusCode;
     this.headers = response.headers;
-    this.body = response.body;
+    this.body = body;
 
     isSuccess = status! < 400;
 

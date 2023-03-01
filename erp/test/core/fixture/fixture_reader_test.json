@@ -1,0 +1,32 @@
+[
+  {
+
+    "id": "e048dbb3-6116-11ed-a5cb-20898409f05a",
+    "valor": 0.00,
+    "podeComercializar": true,
+    "idEmpresa": 1,
+    "detalhes": null,
+    "idItemConfiguracaoWaychef": "e03f9a39-6116-11ed-a5cb-20898409f05a",
+    "itemConfiguracaoWaychefDTO": {
+      "id": "e03f9a39-6116-11ed-a5cb-20898409f05a",
+      "nome": "AUTOATENDIMENTO",
+      "tipoItem": "EXTRA",
+      "tipoItemContratoWaychef": "GIG"
+    }
+  },
+  {
+
+    "id": "e048dd0a-6116-11ed-a5cb-20898409f05a",
+    "valor": 0.00,
+    "podeComercializar": true,
+    "idEmpresa": 1,
+    "detalhes": null,
+    "idItemConfiguracaoWaychef": "e03f9801-6116-11ed-a5cb-20898409f05a",
+    "itemConfiguracaoWaychefDTO": {
+      "id": "e03f9801-6116-11ed-a5cb-20898409f05a",
+      "nome": "GERENCIA",
+      "tipoItem": "EXTRA",
+      "tipoItemContratoWaychef": "NAPP"
+    }
+  }
+]

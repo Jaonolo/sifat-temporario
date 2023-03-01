@@ -5,6 +5,7 @@ class ConfigPropertiesDTO {
   String? cnpj;
   String? clientSecret;
   String? host;
+  String? hostGateway;
 
   ConfigPropertiesDTO();
 

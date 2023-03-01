@@ -29,7 +29,7 @@ class PrinterRepository {
 
   static Future<void> printerVenda(PWSConfig configLocal,
       Nota nota,
-      ServicoAutoAtendimento servicoAutoAtendimento,
+      ClientAutoAtendimento clientAutoAtendimento,
       List<NotaItem> itens,
       EquipamentoImpressao equipamentoImpressao,
       {required String senha,
@@ -40,7 +40,7 @@ class PrinterRepository {
     dto.dtoNota!.nota = nota;
     dto.dtoNota!.notaItemList = itens;
     dto.dtoNota!.notaFinalizadoraList = nota.finalizadoras;
-    dto.servicoAutoAtendimento = servicoAutoAtendimento;
+    dto.clientAutoAtendimento = clientAutoAtendimento;
     dto.senha = senha;
     dto.mensagemRodape = mensagemRodape;
     dto.equipamentoImpressao = equipamentoImpressao;
@@ -60,7 +60,7 @@ class PrinterRepository {
 
   static Future<void> printerConsumo(PWSConfig configLocal,
       Nota nota,
-      ServicoAutoAtendimento servicoAutoAtendimento,
+      ClientAutoAtendimento clientAutoAtendimento,
       List<NotaItem> itens,
       EquipamentoImpressao equipamentoImpressao,
       {required String senha,
@@ -70,7 +70,7 @@ class PrinterRepository {
     dto.dtoNota!.nota = nota;
     dto.dtoNota!.notaItemList = itens;
     dto.dtoNota!.notaFinalizadoraList = nota.finalizadoras;
-    dto.servicoAutoAtendimento = servicoAutoAtendimento;
+    dto.clientAutoAtendimento = clientAutoAtendimento;
     dto.senha = senha;
     dto.mensagemRodape = mensagemRodape;
     dto.equipamentoImpressao = equipamentoImpressao;

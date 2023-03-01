@@ -7,13 +7,12 @@ import 'package:http/http.dart';
 
 class SitefRequester {
   static Future<ResponsePws> buscar(PWSConfig config, String token) async {
-    Response response = await RequesterPws(config: config).consome(
+    return await RequesterPws(config: config).consome(
       urlPws: UrlPws.getServicoSitef(),
       headerParams: {
         'token': token,
       },
+        converter: (json) => ServicoSitef.fromJson(json)
     );
-    return ResponsePws(
-        response: response, converter: (json) => ServicoSitef.fromJson(json));
   }
 }

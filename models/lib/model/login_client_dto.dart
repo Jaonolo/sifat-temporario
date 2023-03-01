@@ -2,6 +2,7 @@ part of openapi.api;
 
 @JsonSerializable()
 class LoginClientDTO {
+
   @JsonKey(defaultValue: Clients.WAITER_MOBILE)
   Clients client = Clients.WAITER_MOBILE;
 
@@ -17,7 +18,7 @@ class LoginClientDTO {
 
   @override
   String toString() {
-    return 'LoginClientDTO{}';
+    return 'LoginClientDTO{client: $client, clientKey: $clientKey, clientSecret: $clientSecret, versao: $versao, nomeEstacao: $nomeEstacao}';
   }
 
   factory LoginClientDTO.fromJson(Map<String, dynamic> json) =>

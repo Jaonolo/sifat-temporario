@@ -10,7 +10,7 @@ class ClienteContaRequester {
   static Future<ResponsePws> extrato(PWSConfig config, String token,
       String idCliente, String dataInicialFormatada,
       String dataFinalFormatada) async {
-    Response response = await RequesterPws(config: config).consome(
+    return await RequesterPws(config: config).consome(
         urlPws: UrlPws.getBuscarExtrato(),
         headerParams: {
           "token": token
@@ -21,17 +21,15 @@ class ClienteContaRequester {
         queryParams: {
           "dataInicial": dataInicialFormatada,
           "dataFinal": dataFinalFormatada
-        }
+        },
+        converter: (json) => ClienteExtratoDTO.fromJson(json)
     );
-
-    return ResponsePws(response: response,
-        converter: (json) => ClienteExtratoDTO.fromJson(json));
   }
 
 
   static Future<ResponsePws> debitar(PWSConfig config, String token,
       ClienteConta conta, bool permissaoLimiteUltrapassado) async {
-    Response response = await RequesterPws(config: config).consome(
+    return await RequesterPws(config: config).consome(
       urlPws: UrlPws.postInserirDebito(),
       headerParams: {
         "token": token,
@@ -41,10 +39,8 @@ class ClienteContaRequester {
         "{idCliente}": conta.idCliente.toString(),
       },
       body: conta.toJson(),
+        converter: (json) => ClienteConta.fromJson(json)
     );
-
-    return ResponsePws(
-        response: response, converter: (json) => ClienteConta.fromJson(json));
   }
 
 }

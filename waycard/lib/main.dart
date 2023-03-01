@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       ],
       dependencies: [],
       child: MaterialApp(
-        title: AppConfig.application.client!.descricao,
+        title: AppConfig.application.client.descricao,
         theme: AppConfig.theme,
         debugShowCheckedModeBanner: false,
         home: LoginPage(),

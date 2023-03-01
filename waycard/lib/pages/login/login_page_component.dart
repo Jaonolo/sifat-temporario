@@ -1,7 +1,9 @@
+import 'dart:async';
+
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:models/model/models.dart';
-import 'package:requester/requester/waycard_requester.dart';
+import 'package:requester/requester/micro-service/sessao/sessao_client_requester.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:utils/utils/hex_color.dart';
 import 'package:utils/utils/responsive_utils.dart';
@@ -11,12 +13,15 @@ import 'package:waycard/config/app_config.dart';
 import 'package:waycard/pages/criar_conta/criar_conta_page.dart';
 import 'package:waycard/pages/home/home_page.dart';
 import 'package:waycard/pages/login/login_page_bloc.dart';
+import 'package:waycard/pages/login_app/metodo_login/metodo_login.dart';
 import 'package:waycard/pages/login_app/sign_in_google.dart';
 import 'package:waycard/pages/login_app/sing_in_facebook.dart';
 import 'package:waycard/pages/redefinir_senha/redefinir_senha_page.dart';
+import 'package:waycard/sessao/sessao_service.dart';
 import 'package:waycard/utils/waycard_utils.dart';
 import 'package:waycard/widgets/animations/wave_decoration/wave_decoration.dart';
 import 'package:waycard/widgets/waycard_text_field.dart';
+import 'package:models/model/enum/clients.dart' as enumClient;
 
 class LoginPageComponent {
 //-------------------------------------------------- VARIAVEIS ------------------------------------------------------------
@@ -354,12 +359,44 @@ class LoginPageComponent {
 
   Future initialize({required BuildContext context}) async {
     _context = context;
+
+    if(AppConfig.application.tokenClient == "") {
+      try {
+        await criarSessaoClient();
+      } catch (error, s) {
+        WayCardUtils.catchError(error, s, closeable: true);
+        return;
+      }
+      SessaoService.startAtualizaSessaoClient();
+    }
+
     _carregarPreferences();
   }
 
   void setSize(Size size) {
     _appSize = size;
   }
+
+  Future<void> criarSessaoClient() async {
+    LoginClientDTO loginClientDTO = new LoginClientDTO();
+    loginClientDTO.client = enumClient.Clients.WAYCARD;
+    loginClientDTO.clientKey = enumClient.Clients.WAYCARD.clientKey;
+    loginClientDTO.versao = enumClient.Clients.WAYCARD.versao;
+    loginClientDTO.clientSecret = "";
+    loginClientDTO.nomeEstacao = null;
+
+    await SessaoClientRequest.criarSessao(
+        AppConfig.application.pwsConfigGateway, loginClientDTO)
+        .then((response) {
+      if (response.status == 200) {
+        AppConfig.application.tokenClient = response.content!.token!;
+        print("TOKEN: Bearer ${AppConfig.application.tokenClient}");
+      } else {
+        throw PwsException(response.content);
+      }
+    });
+  }
+
 
   Future<void> _carregarPreferences() async {
     _prefs = await SharedPreferences.getInstance();
@@ -411,27 +448,10 @@ class LoginPageComponent {
       user.email = _emailController.text.trim();
       user.password = StringUtils.stringToMd5(_senhaController.text.trim());
 
-      WaycardRequester.login(AppConfig.application.pwsConfigWaychef, user)
-          .then((response) {
-        if (response.isSuccess) {
-          _bloc.changeLoginState(false);
-          user = response.content;
-          AppConfig.application.user = user;
-          AppConfig.application.token = response.headers['token'];
+      await MetodoLogin.login(
+          user, _manterLogado, _senhaController.text.trim(), _context);
 
-          if (_manterLogado) {
-            _prefs.setBool("manter_logado", true);
-            _prefs.setString("email", _emailController.text);
-            _prefs.setString("password", _senhaController.text);
-          }
-          _goToHome();
-        } else {
-          throw PwsException(response.content);
-        }
-      }).catchError((error, s) {
-        _bloc.changeLoginState(false);
-        WayCardUtils.catchError(error, s);
-      });
+      _bloc.changeLoginState(false);
     }
   }
 }

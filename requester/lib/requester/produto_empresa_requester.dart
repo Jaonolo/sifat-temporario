@@ -11,15 +11,14 @@ class ProdutoEmpresaRequester {
     Map<String, dynamic> query = {};
     query["offset"] = offset;
 
-    http.Response response = await RequesterPws(config: config).consome(
+    return await RequesterPws(config: config).consome(
       urlPws: UrlPws.getProdutos(),
       headerParams: {
         'token': token,
       },
       queryParams: query,
+        converter: (json) => ProdutoEmpresa.listFromJson(json)
     );
-    return ResponsePws(response: response,
-        converter: (json) => ProdutoEmpresa.listFromJson(json));
   }
   static Future<ResponsePws> validarProdutosCardapio(PWSConfig config, String token,
       List<int> listIdProdutos) async {

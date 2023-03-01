@@ -381,7 +381,7 @@ class CriarContaPageComponent {
           if (user.uid != null) {
             //para logar direto quando esta pelo google ou face
             //faz o login e manda pra tela inicial
-            MetodoLogin().login(user, _context);
+            MetodoLogin.login(user, false, _userLoginFaceGoogle != null ? user.password : _senhaController.text.trim(), _context);
 
             //para carregar as preferencias email e senha
             MetodoLogin().carregarPreferences(user);

@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:models/model/enum/request_type.dart';
 import 'package:models/model/models.dart';
 import 'package:requester/config/pws_config.dart';
+import 'package:requester/response/response_pws.dart';
 import 'package:requester/url_pws/url_pws.dart';
 
 class RequesterPws {
@@ -11,13 +12,16 @@ class RequesterPws {
 
   RequesterPws({required this.config});
 
-  Future<http.Response> consome({required UrlPws urlPws,
+  Future<ResponsePws> consome({
+    required UrlPws urlPws,
     Map<String, String>? headerParams,
     Map<String, String>? pathParams,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? formParams,
     dynamic body,
-    bool debug = true}) async {
+    bool debug = true,
+    Function(dynamic json)? converter,
+  }) async {
     String url = "${config.getUrlBase()}${urlPws.url}";
 
     if (pathParams != null && pathParams.isNotEmpty) {
@@ -57,7 +61,7 @@ class RequesterPws {
       if (headerParams == null) {
         headerParams = {};
       }
-      headerParams['Content-Type'] = 'application/x-www-form-urlencoded';
+      headerParams['Content-Type'] = 'application/json';
     }
 
     if (body != null) {
@@ -69,36 +73,60 @@ class RequesterPws {
     }
 
     if (debug) {
-      print('URL: $url');
+      print('URL ENDERECO DO LINK : $url');
     }
 
-    http.Response? response;
+    http.StreamedResponse? response;
     try {
       switch (urlPws.type) {
         case RequestType.GET:
-          response = await http.get(Uri.parse(url), headers: headerParams);
+          var request = http.Request('GET', Uri.parse(url));
+          request.body = json.encode({});
+          request.headers.addAll(headerParams!);
+          response = await request.send();
+
+          // response = await http.get(Uri.parse(url), headers: headerParams);
           break;
         case RequestType.PUT:
-          response =
-          await http.put(Uri.parse(url), headers: headerParams, body: data);
+          var request = http.Request('PUT', Uri.parse(url));
+          request.body = data;
+          print('Entrei no resquest do put');
+          print('Entrei no resquest do put print do body ${request.body}');
+          request.headers.addAll(headerParams!);
+          response = await request.send();
+
+          // response =
+          // await http.put(Uri.parse(url), headers: headerParams, body: data);
           break;
         case RequestType.POST:
-          response =
-          await http.post(Uri.parse(url), headers: headerParams, body: data);
+          var request = http.Request('POST', Uri.parse(url));
+          request.body = data;
+          request.headers.addAll(headerParams!);
+          response = await request.send();
+
+          // response =
+          // await http.post(Uri.parse(url), headers: headerParams, body: data);
           break;
         case RequestType.DELETE:
-          response = await http.delete(Uri.parse(url), headers: headerParams);
+          var request = http.Request('DELETE', Uri.parse(url));
+          request.body = json.encode({});
+          request.headers.addAll(headerParams!);
+          response = await request.send();
+
+          // response = await http.delete(Uri.parse(url), headers: headerParams);
           break;
         default:
           PwsAlert pws = PwsAlert();
           pws.message = "Erro ao montar o requester";
           throw PwsException(pws);
       }
-
       if (debug) {
         print('Retorno status: ${response.statusCode}');
+        print('Retorno status convertido para String: ${response.statusCode.toString()}');
+        print('Retorno status convertido para String: ${response}');
         print('Retorno Headers: ${response.headers}');
-        if (response.statusCode > 300) print('Retorno body: ${response.body}');
+        // if (response.statusCode > 300)
+        //   print('Retorno body: ${await response.stream.bytesToString()}');
       }
     } catch (e) {
       print('##############################');
@@ -121,6 +149,14 @@ class RequesterPws {
         break;
     }
 
-    return response;
+    return await toResponserPWS(response, converter);
+  }
+
+  Future<ResponsePws> toResponserPWS(
+      http.StreamedResponse response, Function(dynamic json)? converter) async {
+    return ResponsePws(
+        response: response,
+        body: await response.stream.bytesToString(),
+        converter: converter);
   }
 }
