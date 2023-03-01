@@ -7,11 +7,25 @@ class AppTheme {
   static Color error = Color.fromRGBO(186, 26, 26, 1);
 
 
+  static ThemeData get() {
+    return ThemeData(
+      primaryColor: AppTheme.primary,
+      primarySwatch: AppTheme.swatchPadrao,
+      backgroundColor: AppTheme.background,
+      // cardColor: AppTheme.backgroundItens,
+      canvasColor: AppTheme.background,
+      unselectedWidgetColor: AppTheme.textColor,
+      fontFamily: 'Nunito',
+    );
+  }
+
+
 
 
 
   // PADRÃO ANALISAR
   static Color confirm = const Color(0xFF1CC88A);
+  static Color textoLogin = const Color.fromRGBO(66, 71, 78, 1);
 
   static Color cancel = const Color(0xFFE74A3B);
   static Color primary = const Color(0xFFB10AD7);
