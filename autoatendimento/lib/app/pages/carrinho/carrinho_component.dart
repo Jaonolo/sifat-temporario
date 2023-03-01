@@ -15,7 +15,6 @@ class CarrinhoComponent {
   var count = 1.obs;
   List<Produto> produtos = [];
 
-
   initialize(BuildContext context) {
     this.context = context;
 
@@ -121,12 +120,12 @@ class CarrinhoComponent {
               ),
               // **** LISTA DOS PRODUTOS ADICIONADOS ****
               Expanded(
-                  child: ListView.separated(
-                      padding: EdgeInsets.only(left: 34, right: 50),
-                      itemBuilder: (context, index) => produtoCarrinho(index),
-                      separatorBuilder: (context, index) =>
-                          Padding(padding: EdgeInsets.only(top: 8)),
-                      itemCount: controller.list.value.length),
+                child: ListView.separated(
+                    padding: EdgeInsets.only(left: 34, right: 50),
+                    itemBuilder: (context, index) => produtoCarrinho(index),
+                    separatorBuilder: (context, index) =>
+                        Padding(padding: EdgeInsets.only(top: 8)),
+                    itemCount: controller.list.value.length),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 35, right: 59),
@@ -283,8 +282,8 @@ class CarrinhoComponent {
   }
 
   produtoCarrinho(int index) {
-    return Obx(()=>
-      Container(
+    return Obx(
+      () => Container(
         width: _width / 3,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
@@ -296,13 +295,14 @@ class CarrinhoComponent {
               padding: EdgeInsets.only(left: 8),
               child: GestureDetector(
                 child: Icon(
-                    controller.list.value[index].quantidade! <= BigDecimal.ONE()
-                        ? IconsAutoCarrinhoperson.trash
-                        : IconsAutoCarrinho.minus,
-                    size: 20,
-                    color: Color.fromRGBO(231, 74, 59, 1),
-                  ),
-                onTap: () => confirmarExclusaoProduto( controller.list.value[index]),
+                  controller.list.value[index].quantidade! <= BigDecimal.ONE()
+                      ? IconsAutoCarrinhoperson.trash
+                      : IconsAutoCarrinho.minus,
+                  size: 20,
+                  color: Color.fromRGBO(231, 74, 59, 1),
+                ),
+                onTap: () =>
+                    confirmarExclusaoProduto(controller.list.value[index]),
               ),
             ),
             Padding(
@@ -326,7 +326,8 @@ class CarrinhoComponent {
                   size: 19,
                   color: Color.fromRGBO(235, 76, 27, 1),
                 ),
-                onTap: () => controller.addProduto(controller.list.value[index]),
+                onTap: () =>
+                    controller.addProduto(controller.list.value[index]),
               ),
             ),
             Container(
@@ -359,7 +360,7 @@ class CarrinhoComponent {
   }
 
   // **** ALERT DIALOG SOBRE A EXCLUSÃO DOS ITENS UNITÁRIOS ****
-  confirmarExclusaoProduto(NotaItem notaItem){
+  confirmarExclusaoProduto(NotaItem notaItem) {
     if (notaItem.quantidade! == BigDecimal.ONE()) {
       Get.dialog(
         AlertDialog(
@@ -423,7 +424,10 @@ class CarrinhoComponent {
                       ),
                       SizedBox(width: 27),
                       GestureDetector(
-                        onTap: () => controller.deletarProduto(notaItem),
+                        onTap: () {
+                          controller.deletarProduto(notaItem);
+                          Navigator.of(context).pop();
+                        },
                         child: Container(
                           width: _width / 4.5,
                           height: _height / 8,
@@ -451,12 +455,11 @@ class CarrinhoComponent {
           ),
         ),
       );
-    } else if ( notaItem.quantidade! == BigDecimal.ZERO()) {
+    } else if (notaItem.quantidade! == BigDecimal.ZERO()) {
       null;
-    }else {
+    } else {
       notaItem.quantidade!.subtrair(BigDecimal.ONE());
     }
-
   }
 
   // **** ALERT DIALOG SOBRE A EXCLUSÃO DA LISTA DE ITENS  ****
@@ -528,29 +531,28 @@ class CarrinhoComponent {
                   ),
                   SizedBox(width: 25),
                   GestureDetector(
-                    child: Container(
-                      width: _width / 4.5,
-                      height: _height / 8,
-                      decoration: BoxDecoration(
-                        color: Color.fromRGBO(235, 76, 27, 1),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Sim',
-                          style: GoogleFonts.sourceSansPro(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
+                      child: Container(
+                        width: _width / 4.5,
+                        height: _height / 8,
+                        decoration: BoxDecoration(
+                          color: Color.fromRGBO(235, 76, 27, 1),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Sim',
+                            style: GoogleFonts.sourceSansPro(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    onTap: () {
-                      controller.deletarListaProduto();
-                      Navigator.of(context).pop();
-                    }
-                  ),
+                      onTap: () {
+                        controller.deletarListaProduto();
+                        Navigator.of(context).pop();
+                      }),
                 ],
               )
             ],
