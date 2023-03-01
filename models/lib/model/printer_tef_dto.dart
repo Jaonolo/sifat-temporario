@@ -6,7 +6,7 @@ class PrinterTefDTO {
    String viaCliente = "";
    String viaCaixa = "";
    EquipamentoImpressao? equipamentoImpressao;
-   ServicoAutoAtendimento? servicoAutoAtendimento;
+   ClientAutoAtendimento? clientAutoAtendimento;
 
    PrinterTefDTO();
 

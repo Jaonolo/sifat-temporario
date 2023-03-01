@@ -90,12 +90,12 @@ class PrinterRepository {
   static Future<void> printerTefComprovante(PWSConfig configLocal,
       String viaCliente,
       String viaCaixa,
-      ServicoAutoAtendimento servicoAutoAtendimento,
+      ClientAutoAtendimento clientAutoAtendimento,
       EquipamentoImpressao equipamentoImpressao,) async {
     PrinterTefDTO dto = PrinterTefDTO();
 
     dto.equipamentoImpressao = equipamentoImpressao;
-    dto.servicoAutoAtendimento= servicoAutoAtendimento;
+    dto.clientAutoAtendimento = clientAutoAtendimento;
     dto.viaCaixa = viaCaixa;
     dto.viaCliente = viaCliente;
 

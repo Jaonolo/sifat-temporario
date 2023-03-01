@@ -1461,7 +1461,7 @@ class ImpressaoPOSUtils {
      impressao = "";
 
     imprimeTicketCabecalho("Pagamento", dto.dtoNota!.nota!);
-    _imprimeTicketItens(dto.dtoNota!.nota!, dto.servicoAutoAtendimento!, itens);
+    _imprimeTicketItens(dto.dtoNota!.nota!, dto.clientAutoAtendimento!, itens);
     _imprimeTicketTotais(dto.dtoNota!.nota!);
     String senha = dto.dtoNota!.nota!.consumo!.senhaAtendimento == null
         ? dto.dtoNota!.nota!.consumo!.comanda.toString()
@@ -1485,7 +1485,7 @@ class ImpressaoPOSUtils {
   impressao += "========================================" + "\n";
   }
 
-  static void _imprimeTicketItens(Nota nota, ServicoAutoAtendimento modulo, List<NotaItem> itens) {
+  static void _imprimeTicketItens(Nota nota, ClientAutoAtendimento modulo, List<NotaItem> itens) {
     qtdeTotalItens = BigDecimal.ZERO();
 
     impressao += "DESCRICAO ITEM" +  " VR.UNIT " + " VR.TOTAL " + "\n";

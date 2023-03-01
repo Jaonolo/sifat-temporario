@@ -44,7 +44,22 @@ part 'enum/operacao_cartao.dart';
 
 part 'enum/tipo_transacao.dart';
 
+part 'enum/servico.dart';
+
+part 'model_erp/enum/modulo_contrato_indicador_enum.dart';
+
+part 'model_erp/enum/tipo_item_contrato_waychef_enum.dart';
+
 //#################### OBJECT  ########################
+
+part 'model_erp/item_configurcao_waychef.dart';
+
+part 'model_erp/item_configuracao_wayche_dto.dart';
+
+part 'model_erp/item_configuracao_integrador_waychef.dart';
+
+part 'model_erp/integrador_pode_comercializar_item_dto.dart';
+
 part 'big_decimal.dart';
 
 part 'alfa_sync.dart';
@@ -521,16 +536,22 @@ part 'ticket_impressao_dto.dart';
 
 part 'item_dto.dart';
 
-part 'servico_auto_atendimento.dart';
+part 'client_auto_atendimento.dart';
 
 part 'arquivo_auto_atendimento.dart';
 
-part 'login_auto_atendimento_dto.dart';
+part 'configuracoes_auto_atendimento_dto.dart';
 
 part 'login_client_dto.dart';
+
+part 'login_usuario_dto.dart';
+
+part 'jwt_token_decode_dto.dart';
 
 part 'token_dto.dart';
 
 part 'printer_tef_dto.dart';
+
+part 'dados_sessao_dto.dart';
 
 part 'identificador_carteira_digital.dart';

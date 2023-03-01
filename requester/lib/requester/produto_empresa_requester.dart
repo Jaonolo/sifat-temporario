@@ -23,7 +23,7 @@ class ProdutoEmpresaRequester {
   static Future<ResponsePws> validarProdutosCardapio(PWSConfig config, String token,
       List<int> listIdProdutos) async {
 
-    http.Response response = await RequesterPws(config: config).consome(
+   return await RequesterPws(config: config).consome(
       urlPws: UrlPws.getValidaProdutosCardapio(),
       headerParams: {
         'token': token,
@@ -32,7 +32,6 @@ class ProdutoEmpresaRequester {
         "listIdProduto": listIdProdutos,
       },
     );
-    return ResponsePws(response: response);
   }
 
   static Future<ResponsePws> buscarPaginado(PWSConfig config,

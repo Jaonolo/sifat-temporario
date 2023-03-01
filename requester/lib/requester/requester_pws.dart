@@ -73,7 +73,7 @@ class RequesterPws {
     }
 
     if (debug) {
-      print('URL ENDERECO DO LINK : $url');
+      print('URL: $url');
     }
 
     http.StreamedResponse? response;
@@ -89,9 +89,7 @@ class RequesterPws {
           break;
         case RequestType.PUT:
           var request = http.Request('PUT', Uri.parse(url));
-          request.body = data;
-          print('Entrei no resquest do put');
-          print('Entrei no resquest do put print do body ${request.body}');
+          request.body = json.encode(data);
           request.headers.addAll(headerParams!);
           response = await request.send();
 
@@ -100,7 +98,7 @@ class RequesterPws {
           break;
         case RequestType.POST:
           var request = http.Request('POST', Uri.parse(url));
-          request.body = data;
+          request.body = json.encode(data);
           request.headers.addAll(headerParams!);
           response = await request.send();
 
@@ -122,11 +120,9 @@ class RequesterPws {
       }
       if (debug) {
         print('Retorno status: ${response.statusCode}');
-        print('Retorno status convertido para String: ${response.statusCode.toString()}');
-        print('Retorno status convertido para String: ${response}');
         print('Retorno Headers: ${response.headers}');
-        // if (response.statusCode > 300)
-        //   print('Retorno body: ${await response.stream.bytesToString()}');
+        if (response.statusCode > 300)
+          print('Retorno body: ${await response.stream.bytesToString()}');
       }
     } catch (e) {
       print('##############################');
@@ -157,6 +153,7 @@ class RequesterPws {
     return ResponsePws(
         response: response,
         body: await response.stream.bytesToString(),
-        converter: converter);
+        converter: (json) =>
+            ItemConfiguracaoIntegradorWaychef.listFromJson(json));
   }
 }

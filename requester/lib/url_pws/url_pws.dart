@@ -809,6 +809,78 @@ class UrlPws {
     _type = RequestType.PUT;
   }
 
+  UrlPws.putBuscarConfiguracoes(){
+    _url = "/v2/client-autoatendimento/buscar-configuracoes";
+    _type = RequestType.PUT;
+  }
+
+  // #####################  API SESSOES  #####################
+  //        CLient
+  UrlPws.criarSessaoClient(){
+    _url = "/sessao/sessao-client/nova-sessao";
+    _type = RequestType.POST;
+  }
+
+  UrlPws.atualizarSessaoClient(){
+    _url = "/sessao/sessao-client/atualizar-sessao";
+    _type = RequestType.POST;
+  }
+
+  //        Usuario
+  UrlPws.postNovaSessaoUsuario(){
+    _url = "/sessao/sessao-usuario/nova-sessao";
+    _type = RequestType.POST;
+  }
+
+  UrlPws.postEncerrarSessaoUsuario(){
+    _url = "/sessao/sessao-usuario/encerrar-sessao";
+    _type = RequestType.POST;
+  }
+
+  UrlPws.postAtualizarSessaoUsuario(){
+    _url = "/sessao/sessao-usuario/atualizar-sessao";
+    _type = RequestType.POST;
+  }
+
+  //        Servico
+  UrlPws.postEncerrarSessaoServico(){
+    _url = "/sessao/sessao-servico/encerrar-sessao";
+    _type = RequestType.POST;
+  }
+
+  UrlPws.getBuscarUsuarioEmpresaPorId(){
+    _url = "/v2/usuario/usuario-empresa/{idUsuarioEmpresa}";
+    _type = RequestType.GET;
+  }
+
+  UrlPws.getBuscarUsuarioById(){
+    _url = "/v2/usuario/usuario/{idUsuario}";
+    _type = RequestType.GET;
+  }
+
+  UrlPws.getBuscarSessoes(){
+    _url = "/sessao/gerenciamento-sessao";
+    _type = RequestType.GET;
+  }
+
+  //******************************** PROJETO ERP *******************************
+  // ===PROJETO ERP PLATAFORMA CONTRATO PLATAFORMA ====
+  UrlPws.getbuscarTodosItensPorIdEmpresaETipoItem() {
+    _url = "/contrato/waychef/item-integrador/buscar-todos/{idEmpresa}/por-tipo/{tipoItem}";
+    _type = RequestType.GET;
+  }
+
+  //busca os items adicionais do modal
+  UrlPws.getbuscarTodosItemConfiguracaoWaychefExtra() {
+    _url = "/contrato/waychef/item-configuracao/buscar-todos/{tipoItem}";
+    _type = RequestType.GET;
+  }
+
+  UrlPws.putAtualizarItemConfiguracaoIntegrador() {
+    _url = "/contrato/waychef/item-integrador";
+    _type = RequestType.PUT;
+  }
+
   RequestType? get type => _type;
 
   String? get url => _url;

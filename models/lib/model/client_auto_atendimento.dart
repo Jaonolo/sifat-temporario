@@ -11,12 +11,15 @@ class ClientAutoAtendimento {
   String? token;
   TicketConsumo ticketConsumo = TicketConsumo.INDIVIDUAL;
   ImpressaoVenda impressaoVenda = ImpressaoVenda.IMPRIME;
+  ImpressaoVenda impressaoTef = ImpressaoVenda.IMPRIME;
   int? avisoTempoOcioso;
   SenhaAtendimento senhaAtendimento = SenhaAtendimento.NAO_UTILIZA;
   int? idFinalizadoraDebito;
   int? idFinalizadoraCredito;
+  int? idFinalizadoraVale;
   FinalizadoraEmpresa? finalizadoraDebito;
   FinalizadoraEmpresa? finalizadoraCredito;
+  FinalizadoraEmpresa? finalizadoraVale;
   String? mensagemFinalAtendimento;
   @JsonKey(defaultValue: [])
   List<ArquivoAutoAtendimento> arquivos = [];
@@ -26,7 +29,7 @@ class ClientAutoAtendimento {
 
   @override
   String toString() {
-    return 'ClientAutoAtendimento{id: $id, idEmpresa: $idEmpresa, ativo: $ativo, token: $token, ticketConsumo: $ticketConsumo, impressaoVenda: $impressaoVenda, avisoTempoOcioso: $avisoTempoOcioso, senhaAtendimento: $senhaAtendimento, idFinalizadoraDebito: $idFinalizadoraDebito, idFinalizadoraCredito: $idFinalizadoraCredito, finalizadoraDebito: $finalizadoraDebito, finalizadoraCredito: $finalizadoraCredito, mensagemFinalAtendimento: $mensagemFinalAtendimento, arquivos: $arquivos}';
+    return 'ServicoAutoAtendimento{id: $id, idEmpresa: $idEmpresa, ativo: $ativo, token: $token, ticketConsumo: $ticketConsumo, impressaoVenda: $impressaoVenda, impressaoTef: $impressaoTef, avisoTempoOcioso: $avisoTempoOcioso, senhaAtendimento: $senhaAtendimento, idFinalizadoraDebito: $idFinalizadoraDebito, idFinalizadoraCredito: $idFinalizadoraCredito, idFinalizadoraVale: $idFinalizadoraVale, finalizadoraDebito: $finalizadoraDebito, finalizadoraCredito: $finalizadoraCredito, finalizadoraVale: $finalizadoraVale, mensagemFinalAtendimento: $mensagemFinalAtendimento, arquivos: $arquivos}';
   }
 
   factory ClientAutoAtendimento.fromJson(Map<String, dynamic> json) =>
