@@ -38,6 +38,13 @@ dependencies:
   animated_text_kit: ^4.2.1
   mask_shifter_v2: ^0.0.1
   cpf_cnpj_validator: ^2.0.0
+  flutter_svg: ^1.1.4
+  shared_preferences: ^2.0.15
+  qr_flutter: ^4.0.0
+  google_fonts: ^3.0.1
+  get: ^4.6.5
+  page_transition: ^2.0.9
+  badges: ^3.0.2
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +63,30 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  fonts:
+    - family: IconsAutoCarrinho
+      fonts:
+        - asset: fonts/IconsAutoCarrinho.ttf
+
+    - family: IconsAutoCarrinhoperson
+      fonts:
+        - asset: fonts/IconsAutoCarrinhoperson.ttf
+
+    - family: IconsCarrinhoPerson
+      fonts:
+        - asset: fonts/IconsCarrinhoPerson.ttf
+
+    - family: IconsOpcaoPerson
+      fonts:
+        - asset: fonts/IconsOpção.ttf
+
+    - family: IconsArrowCarrinho
+      fonts:
+        - asset: fonts/IconsArrowCarrinho.ttf
+
+    - family: IconsPlusCard
+      fonts:
+        - asset: fonts/IconsPlusCard.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:
@@ -72,10 +103,7 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

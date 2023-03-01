@@ -40,7 +40,7 @@ class NotaItemUtils {
       "${produtoEmpresa.produto!.descricao!} ${(produtoEmpresa.produto!.grade !=
           "NENHUMA") ? "(${gradeEmpresa!.grade!.tamanho!.descricao})" : ""}";
       item.idProdutoEmpresa = produtoEmpresa.id;
-      item.produtoEmpresa = produtoEmpresa;
+      // item.produtoEmpresa = produtoEmpresa;
       item.idGrade = gradeEmpresa == null
           ? produtoEmpresa.gradePadrao!.id
           : gradeEmpresa.id;
@@ -90,7 +90,7 @@ class NotaItemUtils {
     item.subitens = [];
     item.dataLancamento = DateTime.now();
     item.consumoItem = ConsumoItem();
-    item.consumoItem!.menu = menu;
+    // item.consumoItem!.menu = menu;
     item.consumoItem!.idMenu = menu.id;
     return item;
   }
@@ -107,13 +107,15 @@ class NotaItemUtils {
 
     String descricao = produtoEmpresa.produto!.descricao!;
     if (produtoEmpresa.produto!.grade != "NENHUMA")
-      descricao += " (${gradeEmpresa.grade!.tamanho!.descricao})";
+      descricao += gradeEmpresa.grade != null && gradeEmpresa.grade!.tamanho != null
+          ?  "(${gradeEmpresa.grade!.tamanho!.descricao})"
+          :  "";
 
     NotaItem item = NotaItem();
     item.idNota = idNota;
     item.descricao = descricao;
     item.idProdutoEmpresa = produtoEmpresa.id;
-    item.produtoEmpresa = produtoEmpresa;
+    // item.produtoEmpresa = produtoEmpresa;
     item.tipo = StringUtils.getEnumValue(TipoItem.ADICIONAL);
 //    item.idEstacao = AppConfig.application.estacao.id;
     item.idVendedor = idVendedor;
@@ -146,7 +148,7 @@ class NotaItemUtils {
 
   static NotaItem itemComboToNotaItem(int idNota,
       ProdutoMenuComponente componente, int idEmpresa, int idTabelaPreco,
-      {BigDecimal? quantidade,int? idVendedor, int? idUsuario}) {
+      {BigDecimal? quantidade,int? idVendedor, int? idUsuario, bool adcionalDoItemDoCombo = false}) {
     ProdutoMenuComponenteEmpresa componenteEmpresa = componente
         .componenteEmpresas
         .firstWhere((ce) => ce.idEmpresa == idEmpresa);
@@ -161,7 +163,7 @@ class NotaItemUtils {
     item.idNota = idNota;
     item.descricao = descricao;
     item.idProdutoEmpresa = produtoEmpresa.id;
-    item.produtoEmpresa = produtoEmpresa;
+    // item.produtoEmpresa = produtoEmpresa;
     item.tipo = StringUtils.getEnumValue(TipoItem.ITEM_COMBO);
 //    item.idEstacao = AppConfig.application.estacao.id;
     item.idVendedor = idVendedor;
@@ -169,7 +171,7 @@ class NotaItemUtils {
     item.quantidade = quantidade ?? componente.quantidade;
     item.idGrade = gradeEmpresa.id;
     item.grade = gradeEmpresa;
-    item.precoUnitario =
+    item.precoUnitario = adcionalDoItemDoCombo? gradeEmpresa.precoVenda(idTabelaPreco):
         componente.getValorComponente(idEmpresa, idTabelaPreco);
     item.precoTotal = item.quantidade!.multiplicar(item.precoUnitario);
     item.subitens = [];
@@ -195,7 +197,6 @@ class NotaItemUtils {
     item.idNota = idNota;
     item.descricao = descricao;
     item.idProdutoEmpresa = produtoEmpresa.id;
-    item.produtoEmpresa = produtoEmpresa;
     item.tipo = StringUtils.getEnumValue(TipoItem.ITEM_COMPOSTO);
 //    item.idEstacao = AppConfig.application.estacao.id;
     item.idVendedor = idVendedor;
@@ -273,13 +274,13 @@ class NotaItemUtils {
 //
 //   //Utils (Cálculos)
 //
-  static NotaItem atualizaTotais(NotaItem notaItem) {
+  static NotaItem atualizaTotais(NotaItem notaItem, Function(int idProdutoEmpresa) buscaProduto) {
     if (notaItem.tipo != "COMBO" && notaItem.tipo != "COMBINADO") {
       notaItem.precoTotal =
           notaItem.precoUnitario!.multiplicar(notaItem.quantidade);
 
-      if (notaItem.produtoEmpresa != null &&
-          notaItem.produtoEmpresa!.cobraTaxaServico! &&
+      if (notaItem.idProdutoEmpresa != null &&
+          buscaProduto.call(notaItem.idProdutoEmpresa!)!.cobraTaxaServico! &&
           notaItem.taxaServico!.compareTo(BigDecimal.ZERO()) > 0 &&
           notaItem.tipo != "INGRESSO") {
         notaItem.valorServico = notaItem.precoTotal!
@@ -297,7 +298,7 @@ class NotaItemUtils {
 
     if (notaItem.subitens.isNotEmpty)
       notaItem.subitens.forEach((element) {
-        element = atualizaTotais(element);
+        element = atualizaTotais(element, buscaProduto);
       });
 
     return notaItem;
@@ -600,11 +601,40 @@ class NotaItemUtils {
       return null;
     }
 
+   // Caso duplique o menu dentro do itemOriginal ele pega e junta em um só menu
+    itemOriginal = tratativaMenuDuplicado(itemOriginal, produtoMenu);
+
+
     return itemOriginal.subitens.firstWhereOrNull(
             (ni) =>
         ni.consumoItem != null && ni.consumoItem!.idMenu == produtoMenu.id);
   }
 
+ static  NotaItem tratativaMenuDuplicado(NotaItem itemOriginal,
+       ProdutoMenu produtoMenu){
+    // cria uma lista dos duplicados
+     List<NotaItem> menus = itemOriginal.subitens.where((ni) => ni.consumoItem != null && ni.consumoItem!.idMenu == produtoMenu.id).toList();
+
+     //verifica se tem mais que 1 menu
+     if (menus != null && menus.length >= 2) {
+       //Pega o primeiro dos menu
+       NotaItem? pr = itemOriginal.subitens.firstWhereOrNull((ni) =>
+       ni.consumoItem != null && ni.consumoItem!.idMenu == produtoMenu.id);
+
+       // remove esse primeiro da lista
+       menus.remove(pr);
+       // remove do item original
+       itemOriginal.subitens.remove(pr);
+
+       // acha o menu e adciona os items do menu que foi removido no menu unico do itemOriginal
+       for (NotaItem nt in itemOriginal.subitens) {
+         if (nt.consumoItem?.idMenu == pr?.consumoItem?.idMenu) {
+           nt.subitens.addAll(pr!.subitens);
+         }
+       }
+     }
+     return itemOriginal;
+  }
   static int quantidadeLancadaDoMenu(NotaItem itemOriginal,
       ProdutoMenu produtoMenu) {
       int total = 0;
@@ -634,7 +664,7 @@ class NotaItemUtils {
   }
 
   static NotaItem? localizaSubitemJaLancado(NotaItem itemOriginal,
-      ProdutoMenu produtoMenu, ProdutoMenuComponente produtoMenuComponente) {
+      ProdutoMenu produtoMenu, ProdutoMenuComponente produtoMenuComponente, Function(int idProdutoEmpresa) buscaProduto) {
     NotaItem? menuLocalizado = localizaMenuJaLancado(itemOriginal, produtoMenu);
     //Se não localizou menu, já interrompe o fluxo
     if (menuLocalizado == null) return null;
@@ -642,7 +672,7 @@ class NotaItemUtils {
     //Captura o produtoMenuComponenteEmpresa para utilizar do id gradeEmpresa
     ProdutoMenuComponenteEmpresa componenteEmpresa =
     produtoMenuComponente.componenteEmpresas.firstWhere(
-            (ce) => ce.idEmpresa == itemOriginal.produtoEmpresa!.idEmpresa!);
+            (ce) => ce.idEmpresa == buscaProduto.call(itemOriginal.idProdutoEmpresa!)!.idEmpresa!);
 
     //Localiza no menu se existe algum subitem lançado
     return menuLocalizado.subitens.firstWhereOrNull(
@@ -709,20 +739,20 @@ class NotaItemUtils {
   }
 
 //
-  static bool verificaAlcoolica(NotaItem item) {
-    if (item.produtoEmpresa != null &&
-        item.produtoEmpresa!.produto!.fiscal!.especie == "BEBIDA_ALCOOLICA")
+  static bool verificaAlcoolica(NotaItem item, Function(int idProdutoEmpresa) buscaProduto) {
+    if (item.idProdutoEmpresa != null &&
+        buscaProduto.call(item.idProdutoEmpresa!)!.produto!.fiscal!.especie == "BEBIDA_ALCOOLICA")
       return true;
 
     for (NotaItem subs in item.subitens) {
-      if (verificaAlcoolica(subs)) return true;
+      if (verificaAlcoolica(subs, buscaProduto)) return true;
     }
 
     return false;
   }
 
   static NotaItem preparaSerializacao(NotaItem item) {
-    item.produtoEmpresa = null;
+
     item.nota = null;
     item.grade = null;
     item.vendedor = null;

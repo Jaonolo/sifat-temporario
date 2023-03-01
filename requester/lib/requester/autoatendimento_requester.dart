@@ -67,4 +67,14 @@ class AutoatendimentoRequester {
       body: dto.toJson(),
     );
   }
+
+  static Future<ResponsePws> printTefComprovante(PWSConfig config,
+      PrinterTefDTO dto) async {
+    Response response = await RequesterPws(config: config).consome(
+      urlPws: UrlPws.postAutoatendimentoPrintComprovanteTef(),
+      headerParams: {},
+      body: dto.toJson(),
+    );
+    return ResponsePws(response: response);
+  }
 }

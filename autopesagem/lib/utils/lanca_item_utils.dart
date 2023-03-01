@@ -92,8 +92,6 @@ class LancaItemUtils {
 
     notaItem.idEstacao = AppConfig.estacaoTrabalho.id;
 
-    notaItem.produtoEmpresa =
-        AppConfig.clientAutoPesagem.gradeEmpresa!.produtoEmpresa;
     notaItem.idProdutoEmpresa =
         AppConfig.clientAutoPesagem.gradeEmpresa!.produtoEmpresa!.id;
 

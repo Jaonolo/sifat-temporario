@@ -208,6 +208,10 @@ class UrlPws {
     _url = "/v1/produtos";
     _type = RequestType.GET;
   }
+  UrlPws.getValidaProdutosCardapio() {
+    _url = "/v1/produtos/validaProdutosCardapio";
+    _type = RequestType.GET;
+  }
 
   UrlPws.getProdutoMenus() {
     _url = "/v1/produto-menus";
@@ -512,6 +516,11 @@ class UrlPws {
     _type = RequestType.POST;
   }
 
+  UrlPws.postAutoatendimentoPrintComprovanteTef() {
+    _url = "/printer/comprovante-tef";
+    _type = RequestType.POST;
+  }
+
   UrlPws.postAutoatendimentoPrintConsumo() {
     _url = "/printer/consumo";
     _type = RequestType.POST;
@@ -719,6 +728,11 @@ class UrlPws {
     _type = RequestType.PUT;
   }
 
+  UrlPws.putNotaPerdenciaArquivar() {
+    _url = "/notas/{idNota}/arquivar-pendencia";
+    _type = RequestType.PUT;
+  }
+
   UrlPws.getBuscarIntegrador() {
     _url = "/v2/empresa/integrador/{idIntegrador}";
     _type = RequestType.GET;
@@ -780,82 +794,20 @@ class UrlPws {
     _type = RequestType.PUT;
   }
 
-
-  // #####################  API SESSOES  #####################
-  //        CLient
-  UrlPws.criarSessaoClient(){
+  UrlPws.criarSessao(){
     _url = "/sessao/sessao-client/nova-sessao";
     _type = RequestType.POST;
   }
 
-  UrlPws.atualizarSessaoClient(){
+  UrlPws.atualizarSessao(){
     _url = "/sessao/sessao-client/atualizar-sessao";
     _type = RequestType.POST;
   }
 
-  //        Usuario
-  UrlPws.postNovaSessaoUsuario(){
-    _url = "/sessao/sessao-usuario/nova-sessao";
-    _type = RequestType.POST;
-  }
-
-  UrlPws.postEncerrarSessaoUsuario(){
-    _url = "/sessao/sessao-usuario/encerrar-sessao";
-    _type = RequestType.POST;
-  }
-
-  UrlPws.postAtualizarSessaoUsuario(){
-    _url = "/sessao/sessao-usuario/atualizar-sessao";
-    _type = RequestType.POST;
-  }
-
-  //        Servico
-  UrlPws.postEncerrarSessaoServico(){
-    _url = "/sessao/sessao-servico/encerrar-sessao";
-    _type = RequestType.POST;
-  }
-
-  UrlPws.getBuscarUsuarioEmpresaPorId(){
-    _url = "/v2/usuario/usuario-empresa/{idUsuarioEmpresa}";
-    _type = RequestType.GET;
-  }
-
- UrlPws.getBuscarUsuarioById(){
-    _url = "/v2/usuario/usuario/{idUsuario}";
-    _type = RequestType.GET;
-  }
-
-  UrlPws.putBuscarConfiguracoes(){
-    _url = "/v2/client-autoatendimento/buscar-configuracoes";
+  UrlPws.putNotaFiscalAtualizarErro(){
+    _url = "/v1/notas/{idNota}/atualizar-erro-emissao";
     _type = RequestType.PUT;
   }
-
-
-  UrlPws.getBuscarSessoes(){
-    _url = "/sessao/gerenciamento-sessao";
-    _type = RequestType.GET;
-  }
-
-  //******************************** PROJETO ERP *******************************
-  // ===PROJETO ERP PLATAFORMA CONTRATO PLATAFORMA ====
-  UrlPws.getbuscarTodosItensPorIdEmpresaETipoItem() {
-    _url = "/contrato/waychef/item-integrador/buscar-todos/{idEmpresa}/por-tipo/{tipoItem}";
-    _type = RequestType.GET;
-  }
-
-  //busca os items adicionais do modal
-  UrlPws.getbuscarTodosItemConfiguracaoWaychefExtra() {
-    _url = "/contrato/waychef/item-configuracao/buscar-todos/{tipoItem}";
-    _type = RequestType.GET;
-  }
-
-  UrlPws.putAtualizarItemConfiguracaoIntegrador() {
-    _url = "/contrato/waychef/item-integrador";
-    _type = RequestType.PUT;
-  }
-
-
-
 
   RequestType? get type => _type;
 
