@@ -1,7 +1,7 @@
 part of 'app_pages.dart';
-//
-abstract class Routes{
 
+//
+abstract class Routes {
   // ******** ROTAS PLATAFORMA EMPRESAS********
   // static const PLATAFORMA_EMPRESA = '/empresa';
   static const LOGIN = '/login';
@@ -9,6 +9,7 @@ abstract class Routes{
   static const PLATAFORMA_EMPRESA_PLANO = '/empresa/plano';
   static const PLATAFORMA_EMPRESA_EXTRA = '/empresa/extra';
   static const PLATAFORMA_EMPRESA_COMISSAO = '/empresa/comissao';
+  static const MENU = '/menu-dev';
 
 //   // // ******** ROTAS PLATAFORMA CONTRATO INTEGRADOR ********
 //   static const CONTRATO_INTREGRADOR = '/contrato/integrador';
@@ -24,7 +25,6 @@ abstract class Routes{
 //
 //
 //   static const TESTE = '/contratos/teste';
-
 }
 //
 // // ******** ROTAS PLATAFORMA EMPRESAS********

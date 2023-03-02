@@ -1,4 +1,6 @@
 import 'package:erp/app_antigo/config/application.dart';
+import 'package:erp/pages/menu/login_page.dart';
+import 'package:erp/pages/menu/login_page_bindings.dart';
 import 'package:erp/pages/plataforma/contratosintegrador/extras/plataforma_page.dart';
 import 'package:get/get.dart';
 
@@ -8,10 +10,13 @@ import '../login/login_page_bindings.dart';
 import '../plataforma/contratosintegrador/extras/plataforma_page_bindings.dart';
 part 'app_routes.dart';
 
-
 class AppPages {
   static final routes = [
-
+    GetPage(
+      name: Routes.MENU,
+      page: () => MenuPage(),
+      binding: MenuPageBindings(),
+    ),
     GetPage(
       name: Routes.LOGIN,
       page: () => LoginPage(),
@@ -39,6 +44,5 @@ class AppPages {
     //   binding: ComissaoBindings(),
     // ),
     //
-
   ];
 }
