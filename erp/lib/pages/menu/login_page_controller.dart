@@ -9,6 +9,7 @@ class LoginPageController extends GetxController {
   //------------------------------------------------ Variaveis Observáveis --------------------------------------------------
 
   final _menuExibido = double.infinity.obs;
+  final _darkMode = false.obs;
 
   //------------------------------------------------ VARIAVEIS --------------------------------------------------------------
 
@@ -20,6 +21,8 @@ class LoginPageController extends GetxController {
 
   //-------------------------------------------------- Getters/Setters ------------------------------------------------------
 
+  get darkMode => _darkMode.value;
+
   get menuExibido => _menuExibido.value;
 
   set menuExibido(value) {
@@ -28,24 +31,12 @@ class LoginPageController extends GetxController {
 
   //-------------------------------------------------- FUNCOES --------------------------------------------------------------
 
+  void changeDarkMode() {
+    _darkMode.value = !darkMode;
+  }
+
   void exibirMenu(double value) {
     menuExibido = (value != _menuExibido.value) ? value : double.infinity;
-  }
-
-  String? validaEmail(String value) {
-    if (GetUtils.isEmail(value)) {
-      return null;
-    } else {
-      return "Insira um e-mail válido";
-    }
-  }
-
-  String? validaSenha(String value) {
-    if (value.isNotEmpty) {
-      return null;
-    } else {
-      return "Insira uma senha válida";
-    }
   }
 
   //TODO: Finalizar validação de usuario na API
