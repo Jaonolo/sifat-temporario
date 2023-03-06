@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Botoes implements _botoes {
   Botoes({this.icon, required this.text, this.items = const <MenuEntries>[]});

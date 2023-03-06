@@ -9,7 +9,7 @@ abstract class Routes {
   static const PLATAFORMA_EMPRESA_PLANO = '/empresa/plano';
   static const PLATAFORMA_EMPRESA_EXTRA = '/empresa/extra';
   static const PLATAFORMA_EMPRESA_COMISSAO = '/empresa/comissao';
-  static const MENU = '/menu-dev';
+  static const ANALISE_E_RELATORIOS = '/menu-dev';
 
 //   // // ******** ROTAS PLATAFORMA CONTRATO INTEGRADOR ********
 //   static const CONTRATO_INTREGRADOR = '/contrato/integrador';
