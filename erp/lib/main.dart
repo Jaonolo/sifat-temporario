@@ -20,7 +20,6 @@ import 'package:requester/config/pws_config.dart';
 
 import 'pages/modules/error/tela_de_erro.dart';
 
-
 void main() {
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
@@ -28,7 +27,8 @@ void main() {
     theme: AppTheme.get(),
     initialRoute: Routes.LOGIN,
     getPages: AppPages.routes,
-    unknownRoute: GetPage(name: '/paginanaoencontrada', page: () => TELADEERRO()),
+    unknownRoute:
+        GetPage(name: '/paginanaoencontrada', page: () => TELADEERRO()),
   ));
 }
 
