@@ -18,7 +18,7 @@ class PaginaComAppBarController extends GetxController {
     _modoNoturno.value = !modoNoturno;
   }
 
-  void exibirMenu(double value) {
+  void exibirMenu(int value) {
     menuExibido = (value != _menuExibido.value) ? value : double.infinity;
   }
 

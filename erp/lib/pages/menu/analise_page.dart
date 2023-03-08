@@ -1,13 +1,11 @@
 import 'package:erp/pages/menu/botoes_class.dart';
-import 'package:erp/templates/page_with_appbar/pagina_com_appbar_template.dart';
+import 'package:erp/templates/pagina_com_appbar/pagina_com_appbar_template.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'analise_page_controller.dart';
 
 class AnalisePage extends GetView<AnalisePageController> {
-  final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return PaginaComAppBar(
@@ -20,7 +18,9 @@ class AnalisePage extends GetView<AnalisePageController> {
     Botoes(
       icon: FontAwesomeIcons.chartPie,
       text: 'Dashboard',
-      items: [MenuEntries(onClick: () {}, text: 'oi')],
+      items: [
+        MenuEntries(onClick: () {}, text: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+      ],
     ),
     Botoes(
       icon: FontAwesomeIcons.boxesStacked,

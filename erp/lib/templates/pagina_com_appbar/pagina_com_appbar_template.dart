@@ -1,5 +1,5 @@
 import 'package:erp/pages/menu/botoes_class.dart';
-import 'package:erp/templates/page_with_appbar/pagina_com_appbar_controller.dart';
+import 'package:erp/templates/pagina_com_appbar/pagina_com_appbar_controller.dart';
 import 'package:erp/widgets/personalizados/popup_menu_personalizado.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -29,7 +29,7 @@ class PaginaComAppBar extends StatelessWidget {
       key: _scaffoldState,
       appBar: _appBarHolder(context),
       body: _child,
-      drawer: Responsive(
+      endDrawer: Responsive(
         desktop: SizedBox.shrink(),
         mobile: _mobileDrawer(),
         larguraMaximaMobile: 1020,
@@ -66,9 +66,18 @@ class PaginaComAppBar extends StatelessWidget {
 
   Widget _appBarDesktop(context) => Obx(
         () => Container(
-          color: controller.modoNoturno
-              ? Color.fromRGBO(33, 36, 38, 1)
-              : Color.fromRGBO(243, 243, 243, 1),
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(0, 2),
+                blurRadius: 10,
+                color: Color.fromRGBO(0, 0, 0, 0.18),
+              ),
+            ],
+            color: controller.modoNoturno
+                ? Color.fromRGBO(33, 36, 38, 1)
+                : Color.fromRGBO(243, 243, 243, 1),
+          ),
           padding: EdgeInsets.fromLTRB(40, 15, 40, 15),
           child: Column(
             children: [
@@ -269,56 +278,6 @@ class PaginaComAppBar extends StatelessWidget {
         ),
       );
 
-  /*List<Widget> _gerarBotoesNavegacao() => _botoesNavegacao!
-      .asMap()
-      .entries
-      .map(
-        (e) => SizedBox(
-          height: 24,
-          child: Obx(
-            () => PopupMenuButton(
-              /*constraints: BoxConstraints(
-                minWidth: MediaQuery.of(_keysBotoes[e.key].currentContext!)
-                    .size
-                    .width,
-              ),*/
-              shape: RoundedRectangleBorder(),
-              offset: Offset(0, 20),
-              padding: EdgeInsets.all(0),
-              color: controller.modoNoturno
-                  ? Color.fromRGBO(44, 49, 55, 1)
-                  : Neutral10,
-              position: PopupMenuPosition.under,
-              itemBuilder: (context) => e.value.items
-                  .map<PopupMenuEntry<Function>>(_gerarItens)
-                  .toList(),
-              child: Obx(
-                () => Wrap(
-                  key: _keysBotoes[e.key],
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  spacing: 9,
-                  children: [
-                    FaIcon(
-                      e.value.icon,
-                      color: controller.modoNoturno ? Neutral10 : Neutral90,
-                      size: 20,
-                    ),
-                    Text(e.value.text,
-                        style: GoogleFonts.roboto(
-                            color: controller.modoNoturno
-                                ? Neutral10
-                                : Neutral90)),
-                    Icon(Icons.expand_more,
-                        color: controller.modoNoturno ? Neutral10 : Neutral90),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      )
-      .toList();*/
-
   List<Widget> _gerarBotoesNavegacao() => _botoesNavegacao!
       .asMap()
       .entries
@@ -327,6 +286,10 @@ class PaginaComAppBar extends StatelessWidget {
           height: 24,
           child: Obx(
             () => PopupMenuPersonalizado(
+              //isOpenParent: e.key == controller.menuExibido,
+              /*onPress: () {
+                controller.exibirMenu(e.key);
+              },*/
               onChange: (a) {},
               color: controller.modoNoturno
                   ? Color.fromRGBO(44, 49, 55, 1)
@@ -372,7 +335,7 @@ class PaginaComAppBar extends StatelessWidget {
         value: e.onClick,
         child: SizedBox(
           width: double.infinity,
-          child: Text('Item 1'),
+          child: Text(e.text),
         ),
       );
 }
