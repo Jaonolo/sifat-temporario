@@ -5,6 +5,7 @@ abstract class Routes {
   // ******** ROTAS PLATAFORMA EMPRESAS********
   // static const PLATAFORMA_EMPRESA = '/empresa';
   static const LOGIN = '/login';
+  static const SELECIONAR_EMPRESA = '/selecionarempresa';
   static const PLATAFORMA_CONTRATOS_INTEGRADOR_EXTRA = '/plataforma/extra';
   static const PLATAFORMA_EMPRESA_PLANO = '/empresa/plano';
   static const PLATAFORMA_EMPRESA_EXTRA = '/empresa/extra';
