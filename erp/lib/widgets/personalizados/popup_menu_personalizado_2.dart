@@ -29,7 +29,6 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
   late bool isMenuOpen;
   late Offset buttonPosition;
   late Size buttonSize;
-  late OverlayEntry _overlayEntry;
 
   // lembrar de comentar depois
   late OverlayEntry _overlayEntry1;
@@ -44,7 +43,6 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
       duration: Duration(milliseconds: 250),
     );
     _key = LabeledGlobalKey('popup-button');
-    _overlayEntry = _overlayEntryBuilder();
 
     // lembrar de comentar depois
     _overlayEntry1 = _overlayEntryBuilder1();
@@ -52,11 +50,12 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
     super.initState();
   }
 
+  // ANALISAR DPS URGENTE
   @override
   void didUpdateWidget(old) {
-    /*if (isMenuOpen && !widget.isOpenParent) {
+    if (isMenuOpen) {
       closeMenu();
-    }*/
+    }
     super.didUpdateWidget(old);
   }
 
@@ -66,7 +65,6 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
       // if (widget.onPress != null) {
       //   widget.onPress!();
       // }
-      _overlayEntry.remove();
 
       // lembrar de comentar depois
       _overlayEntry1.remove();
@@ -88,13 +86,15 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
   }
 
   closeMenu() {
-    _overlayEntry.remove();
-
     // lembrar de comentar depois
     _overlayEntry1.remove();
 
     _animationController.reverse();
-    isMenuOpen = !isMenuOpen;
+
+    // ANALISAR DPS
+    setState(() {
+      isMenuOpen = !isMenuOpen;
+    });
   }
 
   openMenu() {
@@ -103,87 +103,90 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
 
     //lembrar de comentar depois
     Overlay.of(context).insert(_overlayEntry1);
-    Overlay.of(context).insert(_overlayEntry);
 
-    isMenuOpen = !isMenuOpen;
+    // ANALISAR DPS
+    setState(() {
+      isMenuOpen = !isMenuOpen;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (isMenuOpen) {
-      // if (widget.onPress != null) {
-      //   widget.onPress!();
-      // }
-      closeMenu();
-    }
+    // if (isMenuOpen) {
+    //   // if (widget.onPress != null) {
+    //   //   widget.onPress!();
+    //   // }
+    //   closeMenu();
+    // }
 
-    return Container(
-      key: _key,
-      child: GestureDetector(
-        onTap: () => {
-          if (widget.onPress != null) {widget.onPress!()},
-          if (isMenuOpen) {closeMenu()} else {openMenu()}
-        },
-        child: widget.child,
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        isMenuOpen ? Popup() : SizedBox.shrink(),
+        Stack(
+          children: [
+            isMenuOpen
+                ? ColoredBox(
+                    color: widget.color,
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: buttonSize.height,
+                    ),
+                  )
+                : SizedBox.shrink(),
+            Container(
+              key: _key,
+              child: GestureDetector(
+                onTap: () => {
+                  // ANALISAR DPS (TROCADO ORDEM)
+                  if (isMenuOpen) {closeMenu()} else {openMenu()},
+                  if (widget.onPress != null) {widget.onPress!()}
+                },
+                child: widget.child,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
-  OverlayEntry _overlayEntryBuilder() {
-    return OverlayEntry(
-      builder: (context) {
-        return Positioned(
-          top: buttonPosition.dy + buttonSize.height + 20,
-          left: buttonPosition.dx,
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            width: buttonSize.width,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(6)),
-                color: widget.color,
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 2),
-                    blurRadius: 10,
-                    color: Color.fromRGBO(0, 0, 0, 0.18),
-                  )
-                ]),
-            child: Material(
-              color: Colors.transparent,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(
-                  widget.items.length,
-                  (index) {
-                    return GestureDetector(
-                      onTap: () {
-                        widget.onChange(index);
-                        closeMenu();
-                      },
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 8, horizontal: 4),
-                        child: /*Row(
+  Widget Popup() => Container(
+        width: buttonSize.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
+          color: widget.color,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: List.generate(
+              widget.items.length,
+              (index) {
+                return GestureDetector(
+                  onTap: () {
+                    widget.onChange(index);
+                    closeMenu();
+                  },
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: /*Row(
                           children: [*/
-                            widget.items[index].child,
-                        /*ExpandIcon(
+                        widget.items[index].child,
+                    /*ExpandIcon(
                               isExpanded: isMenuOpen,
                               onPressed: (o) {},
                             )
                           ],
                         ),*/
-                      ),
-                    );
-                  },
-                ),
-              ),
+                  ),
+                );
+              },
             ),
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
 
   OverlayEntry _overlayEntryBuilder1() {
     return OverlayEntry(

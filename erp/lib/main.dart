@@ -8,6 +8,7 @@ import 'package:erp/pages/plataforma/contratosplataforma/extras/extra_integrador
 import 'package:erp/pages/plataforma/contratosplataforma/padrao/editarcontrato/editar_contrato_plataforma_controller.dart';
 import 'package:erp/pages/plataforma/empresas/plataforma_empresa_controller.dart';
 import 'package:erp/pages/routes/app_pages.dart';
+import 'package:erp/templates/pagina_com_appbar/pagina_com_appbar_controller.dart';
 import 'package:erp/theme/app_theme.dart';
 import 'package:get/get.dart';
 import 'app_antigo/config/application.dart';
@@ -21,6 +22,8 @@ import 'package:requester/config/pws_config.dart';
 import 'pages/modules/error/tela_de_erro.dart';
 
 void main() {
+  Get.lazyPut(() => PaginaComAppBarController());
+
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     // theme: AppTheme.get(),

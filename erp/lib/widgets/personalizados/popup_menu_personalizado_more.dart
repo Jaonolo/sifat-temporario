@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PopupMenuPersonalizado extends StatefulWidget {
+class PopupMenuMore extends StatefulWidget {
   final List<PopupMenuItem<Function>> items;
   final ValueChanged<int> onChange;
   final Widget child;
@@ -8,8 +8,10 @@ class PopupMenuPersonalizado extends StatefulWidget {
   final Color color;
   final bool isOpenParent;
   final VoidCallback? onPress;
+  final double offsetx;
+  final double offsety;
 
-  const PopupMenuPersonalizado({
+  const PopupMenuMore({
     required this.items,
     required this.onChange,
     required this.child,
@@ -17,13 +19,15 @@ class PopupMenuPersonalizado extends StatefulWidget {
     this.onPress,
     this.selectedIndex = 0,
     this.isOpenParent = false,
+    this.offsetx = 0,
+    this.offsety = 0,
   });
 
   @override
-  _PopupMenuPersonalizadoState createState() => _PopupMenuPersonalizadoState();
+  _PopupMenuMoreState createState() => _PopupMenuMoreState();
 }
 
-class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
+class _PopupMenuMoreState extends State<PopupMenuMore>
     with SingleTickerProviderStateMixin {
   late GlobalKey _key;
   late bool isMenuOpen;
@@ -133,11 +137,10 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
     return OverlayEntry(
       builder: (context) {
         return Positioned(
-          top: buttonPosition.dy + buttonSize.height + 20,
-          left: buttonPosition.dx,
+          top: buttonPosition.dy + widget.offsety + 18,
+          left: buttonPosition.dx + widget.offsetx - 123,
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            width: buttonSize.width,
+            width: 123,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(6)),
                 color: widget.color,
@@ -162,8 +165,6 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
                       },
                       child: Container(
                         alignment: Alignment.centerLeft,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 8, horizontal: 4),
                         child: /*Row(
                           children: [*/
                             widget.items[index].child,
