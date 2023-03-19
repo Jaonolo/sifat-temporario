@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-
   //TODO PADRÃO CORRETO
   static Color sucesso = Color.fromRGBO(22, 156, 52, 1);
   static Color error = Color.fromRGBO(186, 26, 26, 1);
 
-
   static ThemeData get() {
     return ThemeData(
+      useMaterial3: true,
       primaryColor: AppTheme.primary,
       primarySwatch: AppTheme.swatchPadrao,
       backgroundColor: AppTheme.background,
@@ -18,10 +17,6 @@ class AppTheme {
       fontFamily: 'Nunito',
     );
   }
-
-
-
-
 
   // PADRÃO ANALISAR
   static Color confirm = const Color(0xFF1CC88A);
@@ -46,8 +41,8 @@ class AppTheme {
   static Color corBranco = Colors.white;
   static Color corMenuNavegacao = const Color.fromRGBO(23, 28, 34, 1);
 
-
-  static MaterialColor swatchPadrao = const MaterialColor(0xFFD75100, <int, Color>{
+  static MaterialColor swatchPadrao =
+      const MaterialColor(0xFFD75100, <int, Color>{
     50: Color(0x19D75100),
     100: Color(0x32D75100),
     200: Color(0x4BD75100),
@@ -92,6 +87,4 @@ class AppTheme {
   static double h4 = 24.0;
   static double h5 = 28.0;
   static double h6 = 32.0;
-
-
 }
