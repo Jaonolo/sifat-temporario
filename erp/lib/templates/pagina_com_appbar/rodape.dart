@@ -4,10 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Rodape extends StatelessWidget {
+class Rodape extends StatefulWidget {
   final bool modoNoturno;
   final List<Botoes> botoesNavegacao;
 
+  const Rodape({required this.modoNoturno, required this.botoesNavegacao});
+
+  @override
+  State<Rodape> createState() => _EstadoRodape();
+}
+
+class _EstadoRodape extends State<Rodape> {
+  late final OverlayEntry overlay;
   final Neutral10 = Color.fromRGBO(255, 255, 255, 1);
   final Neutral30 = Color.fromRGBO(234, 247, 253, 1);
   final Neutral50 = Color.fromRGBO(194, 199, 207, 1);
@@ -17,7 +25,23 @@ class Rodape extends StatelessWidget {
   final PrimaryBrand = Color.fromRGBO(19, 124, 185, 1);
   final Brand400 = Color.fromRGBO(35, 160, 232, 1);
 
-  Rodape({required this.modoNoturno, required this.botoesNavegacao});
+  @override
+    void initState() {
+    overlay = _iconeBusiness();
+    WidgetsBinding.instance
+        .scheduleFrameCallback((_) {
+          print(context);
+          Overlay.of(context).insert(overlay);
+        });
+    super.initState();
+  }
+
+  /*@override
+  void deactivate(context) {
+    _iconeBusiness().remove();
+
+    super.deactivate();
+  }*/
 
   @override
   Widget build(context) {
@@ -46,11 +70,11 @@ class Rodape extends StatelessWidget {
 
   Widget _estruturaFooter() {
     return PopupMenuPersonalizado(
-      color: modoNoturno ? Color.fromRGBO(44, 49, 55, 1) : Neutral10,
+      color: widget.modoNoturno ? Color.fromRGBO(44, 49, 55, 1) : Neutral10,
       items: _gerarListaAlternada(
           _gerarBotoesNavegacao(),
           Divider(
-            color: modoNoturno
+            color: widget.modoNoturno
                 ? Color.fromRGBO(255, 255, 255, 0.2)
                 : Color.fromRGBO(0, 0, 0, 0.2),
             thickness: 1,
@@ -63,7 +87,7 @@ class Rodape extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: modoNoturno
+          color: widget.modoNoturno
               ? Color.fromRGBO(33, 36, 38, 1)
               : Color.fromRGBO(243, 243, 243, 1),
           boxShadow: [
@@ -89,7 +113,7 @@ class Rodape extends StatelessWidget {
                 style: GoogleFonts.sourceSansPro(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
-                    color: modoNoturno
+                    color: widget.modoNoturno
                         ? Color.fromRGBO(255, 255, 255, 1)
                         : Color.fromRGBO(23, 28, 34, 1)),
                 textAlign: TextAlign.left,
@@ -98,7 +122,7 @@ class Rodape extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 2),
                 child: Icon(Icons.arrow_forward_ios,
                     size: 13,
-                    color: modoNoturno
+                    color: widget.modoNoturno
                         ? Color.fromRGBO(243, 243, 243, 1)
                         : Color.fromRGBO(23, 28, 34, 1)),
               ),
@@ -107,7 +131,7 @@ class Rodape extends StatelessWidget {
                 style: GoogleFonts.sourceSansPro(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
-                    color: modoNoturno
+                    color: widget.modoNoturno
                         ? Color.fromRGBO(255, 255, 255, 1)
                         : Color.fromRGBO(23, 28, 34, 1)),
                 textAlign: TextAlign.left,
@@ -119,18 +143,19 @@ class Rodape extends StatelessWidget {
     );
   }
 
-  Widget _iconeBusiness() {
-    return Positioned(
-        bottom: 52,
+  OverlayEntry _iconeBusiness() {
+    return OverlayEntry(
+      builder: (context) {
+        return Positioned( left: (MediaQuery.of(context).size.width/2) - 28, bottom: 80 - 28,
         child: Container(
           width: 56,
           height: 56,
           decoration: BoxDecoration(
-            color: modoNoturno
+            color: widget.modoNoturno
                 ? Color.fromRGBO(33, 36, 38, 1)
                 : Color.fromRGBO(243, 243, 243, 1),
             borderRadius: BorderRadius.circular(50),
-            boxShadow: modoNoturno
+            boxShadow: widget.modoNoturno
                 ? null
                 : [
                     BoxShadow(
@@ -146,7 +171,7 @@ class Rodape extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color:
-                    modoNoturno ? Color.fromRGBO(52, 55, 58, 1) : Colors.white,
+                    widget.modoNoturno ? Color.fromRGBO(52, 55, 58, 1) : Colors.white,
                 borderRadius: BorderRadius.circular(50),
                 boxShadow: [
                   BoxShadow(
@@ -164,7 +189,7 @@ class Rodape extends StatelessWidget {
               ),
             ),
           ),
-        ));
+        ),); } ); 
   }
 
   Widget _botaoScrollarAcima() {
@@ -194,7 +219,7 @@ class Rodape extends StatelessWidget {
                 controller.exibirMenu(e.key);
               },*/
               onChange: (a) {},
-              color: controller.modoNoturno
+              color: controller.widget.modoNoturno
                   ? Color.fromRGBO(44, 49, 55, 1)
                   : Neutral10,
               items: e.value.items
@@ -202,7 +227,7 @@ class Rodape extends StatelessWidget {
                   .toList(),
               child: Obx(
                 () => Container(
-                  color: controller.modoNoturno
+                  color: controller.widget.modoNoturno
                       ? Color.fromRGBO(33, 36, 38, 1)
                       : Color.fromRGBO(243, 243, 243, 1),
                   child: Wrap(
@@ -212,18 +237,18 @@ class Rodape extends StatelessWidget {
                     children: [
                       FaIcon(
                         e.value.icon,
-                        color: controller.modoNoturno ? Neutral10 : Neutral90,
+                        color: controller.widget.modoNoturno ? Neutral10 : Neutral90,
                         size: 20,
                       ),
                       Text(e.value.text,
                           style: GoogleFonts.roboto(
                               fontSize: 16,
-                              color: controller.modoNoturno
+                              color: controller.widget.modoNoturno
                                   ? Neutral10
                                   : Neutral90)),
                       Icon(Icons.expand_more,
                           color:
-                              controller.modoNoturno ? Neutral10 : Neutral90),
+                              controller.widget.modoNoturno ? Neutral10 : Neutral90),
                     ],
                   ),
                 ),
@@ -234,7 +259,7 @@ class Rodape extends StatelessWidget {
       )
       .toList();*/
 
-  List<Widget> _gerarBotoesNavegacao() => botoesNavegacao
+  List<Widget> _gerarBotoesNavegacao() => widget.botoesNavegacao
       .map(
         (e) => Container(
           height: 72,
@@ -250,7 +275,7 @@ class Rodape extends StatelessWidget {
                 children: [
                   FaIcon(
                     e.icon,
-                    color: modoNoturno ? Neutral10 : Neutral90,
+                    color: widget.modoNoturno ? Neutral10 : Neutral90,
                     size: 20,
                   ),
                   Text(
@@ -258,12 +283,12 @@ class Rodape extends StatelessWidget {
                     style: GoogleFonts.sourceSansPro(
                         fontSize: 19,
                         fontWeight: FontWeight.w600,
-                        color: modoNoturno ? Neutral10 : Neutral90),
+                        color: widget.modoNoturno ? Neutral10 : Neutral90),
                   ),
                 ],
               ),
               Icon(Icons.expand_more,
-                  color: modoNoturno ? Neutral10 : Neutral90),
+                  color: widget.modoNoturno ? Neutral10 : Neutral90),
             ],
           ),
         ),

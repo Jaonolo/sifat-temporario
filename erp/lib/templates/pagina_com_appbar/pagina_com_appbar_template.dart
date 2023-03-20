@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:im_stepper/stepper.dart';
 import '../../widgets/personalizados/popup_menu_personalizado_more.dart';
 import '../../widgets/responsive.dart';
 
@@ -37,7 +38,7 @@ class PaginaComAppBar extends GetView<PaginaComAppBarController> {
           slivers: [
             SliverPadding(
               padding: EdgeInsets.symmetric(
-                  vertical: MediaQuery.of(context).size.width > 1020 ? 18 : 24),
+                  vertical: 18),
               sliver: SliverToBoxAdapter(
                 child: Responsive(
                   larguraMaximaMobile: 1020,
@@ -211,7 +212,7 @@ class PaginaComAppBar extends GetView<PaginaComAppBarController> {
                 ? Color.fromRGBO(33, 36, 38, 1)
                 : Color.fromRGBO(243, 243, 243, 1),
           ),
-          padding: EdgeInsets.fromLTRB(24, 10, 24, 10),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: MediaQuery.of(context).size.width > 400 ? 24 : 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -507,23 +508,24 @@ class PaginaComAppBar extends GetView<PaginaComAppBarController> {
 
   final List<Botoes> botoesMore = [
     Botoes(
-      icon: Icons.account_circle,
-      text: 'Dashboard',
+      icon: Icons.account_circle_outlined,
+      text: 'Ver perfil',
       items: [],
     ),
     Botoes(
-      icon: Icons.settings,
-      text: 'Dashboard',
+      icon: Icons.settings_outlined,
+      text: 'Configurações',
       items: [],
     ),
     Botoes(
       icon: Icons.login,
-      text: 'Dashboard',
+      text: 'Sair',
       items: [],
     ),
   ];
 
-  List<Widget> _gerarBotoesMore() => botoesMore
+  List<Widget> _gerarBotoesMore() => [...botoesMore
+  .sublist(0, botoesMore.length - 1)
       .map(
         (e) => Container(
           padding: EdgeInsets.all(8),
@@ -547,5 +549,26 @@ class PaginaComAppBar extends GetView<PaginaComAppBarController> {
           ),
         ),
       )
-      .toList();
+      .toList(), Container(
+          padding: EdgeInsets.all(8),
+          child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 4,
+            children: [
+              FaIcon(
+                botoesMore.last.icon,
+                color: Color.fromRGBO(255, 53, 53, 1),
+                size: 16,
+              ),
+              Text(
+                botoesMore.last.text,
+                style: GoogleFonts.sourceSansPro(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromRGBO(255, 53, 53, 1),
+                ),
+              ),
+            ],
+          ),
+        )];
 }
