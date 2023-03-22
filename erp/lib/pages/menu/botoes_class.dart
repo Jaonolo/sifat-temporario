@@ -9,10 +9,11 @@ class Botoes implements _botoes {
 }
 
 class MenuEntries implements _menuEntries {
-  MenuEntries({required this.text, required this.onClick});
+  MenuEntries({required this.text, required this.onClick, this.items = const []});
 
   final String text;
   final Function() onClick;
+  final List<MenuEntries> items;
 }
 
 abstract class _botoes {

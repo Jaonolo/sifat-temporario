@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../widgets/responsive.dart';
 import 'analise_page_controller.dart';
 
 class AnalisePage extends GetView<AnalisePageController> {
@@ -184,9 +183,9 @@ class AnalisePage extends GetView<AnalisePageController> {
   Widget _bodyPagina(context) => Container(
         child: Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width <= 1020 ? 16 : 40,
-              vertical: MediaQuery.of(context).size.width <= 1020 ? 12 : 0
-              ,),
+            horizontal: MediaQuery.of(context).size.width <= 1020 ? 16 : 40,
+            vertical: MediaQuery.of(context).size.width <= 1020 ? 12 : 0,
+          ),
           child: Container(
             padding: EdgeInsets.all(
               MediaQuery.of(context).size.width <= 1020 ? 9 : 24,
@@ -202,17 +201,22 @@ class AnalisePage extends GetView<AnalisePageController> {
                   padding: EdgeInsets.symmetric(
                       vertical:
                           MediaQuery.of(context).size.width <= 1020 ? 15 : 24),
-                  child:
-                      Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          MediaQuery.of(context).size.width <= 510 ? Expanded(child: _addButton(context))
-                            : _addButton(context),
-                          SizedBox(height: 0, width: MediaQuery.of(context).size.width <= 510 ? 16 : 7),
-                          MediaQuery.of(context).size.width <= 510 ? Expanded(child: _saveButton(context))
-                            : _saveButton(context),
-                          ],
-                      ),
+                    children: [
+                      MediaQuery.of(context).size.width <= 510
+                          ? Expanded(child: _addButton(context))
+                          : _addButton(context),
+                      SizedBox(
+                          height: 0,
+                          width: MediaQuery.of(context).size.width <= 510
+                              ? 16
+                              : 7),
+                      MediaQuery.of(context).size.width <= 510
+                          ? Expanded(child: _saveButton(context))
+                          : _saveButton(context),
+                    ],
+                  ),
                 ),
                 _table(context)
                 /*Responsive(
@@ -228,81 +232,85 @@ class AnalisePage extends GetView<AnalisePageController> {
         ),
       );
 
-  Widget _saveButton (context) => GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              padding: MediaQuery.of(context).size.width <= 510 ? EdgeInsets.symmetric(vertical: 8) : EdgeInsets.symmetric(
-                                vertical: 12,
-                                horizontal: 18,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                                color: Colors.green,
-                              ),
-                              child: Center(
-                                  child: Wrap(
-                                  crossAxisAlignment: WrapCrossAlignment.center,
-                                  spacing: 8,
-                                  children: [
-                                    Icon(
-                                      Icons.save_outlined,
-                                      color: Colors.white,
-                                      size: 24,
-                                    ),
-                                    Text(
-                                      'Salvar',
-                                      style: GoogleFonts.sourceSansPro(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
+  Widget _saveButton(context) => GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {},
+        child: Container(
+          padding: MediaQuery.of(context).size.width <= 510
+              ? EdgeInsets.symmetric(vertical: 8)
+              : EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 18,
+                ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            color: Colors.green,
+          ),
+          child: Center(
+            child: Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              children: [
+                Icon(
+                  Icons.save_outlined,
+                  color: Colors.white,
+                  size: 24,
+                ),
+                Text(
+                  'Salvar',
+                  style: GoogleFonts.sourceSansPro(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      );
 
-  Widget _addButton (context) => GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              padding: MediaQuery.of(context).size.width <= 510 ? EdgeInsets.symmetric(vertical: 8) : EdgeInsets.symmetric(
-                                vertical: 12,
-                                horizontal: 18,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                                color: Colors.transparent,
-                                border: Border.all(
-                                    color: Colors.blueAccent,
-                                    width: 1,
-                                  ),
-                              ),
-                              child: Center(
-                                  child: Wrap(
-                                  spacing: 8,
-                                  crossAxisAlignment: WrapCrossAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.add,
-                                      color: Colors.blueAccent,
-                                      size: 24,
-                                    ),
-                                    Text(
-                                      'Adicionar',
-                                      style: GoogleFonts.sourceSansPro(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.blueAccent,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
+  Widget _addButton(context) => GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {},
+        child: Container(
+          padding: MediaQuery.of(context).size.width <= 510
+              ? EdgeInsets.symmetric(vertical: 8)
+              : EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 18,
+                ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            color: Colors.transparent,
+            border: Border.all(
+              color: Colors.blueAccent,
+              width: 1,
+            ),
+          ),
+          child: Center(
+            child: Wrap(
+              spacing: 8,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Colors.blueAccent,
+                  size: 24,
+                ),
+                Text(
+                  'Adicionar',
+                  style: GoogleFonts.sourceSansPro(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.blueAccent,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      );
 
   final List<Botoes> _botoesNavegacao = [
     Botoes(
@@ -315,7 +323,19 @@ class AnalisePage extends GetView<AnalisePageController> {
     Botoes(
       icon: FontAwesomeIcons.boxesStacked,
       text: 'Produtos',
-      items: [MenuEntries(onClick: () {}, text: 'oi')],
+      items: [
+        MenuEntries(onClick: () {}, text: 'oi', items: [
+          MenuEntries(text: 'oi2', onClick: () {}, items: [
+            MenuEntries(text: 'oi3', onClick: () {}, items: [
+              MenuEntries(
+                  text: 'oi4',
+                  onClick: () {
+                    print('oiiiiiiii');
+                  })
+            ])
+          ])
+        ])
+      ],
     ),
     Botoes(
       icon: FontAwesomeIcons.solidUser,
@@ -326,8 +346,8 @@ class AnalisePage extends GetView<AnalisePageController> {
       icon: FontAwesomeIcons.moneyCheckDollar,
       text: 'Finanças',
       items: [MenuEntries(onClick: () {}, text: 'oi')],
-    ),
-    /*Botoes(
+    ), /*
+    Botoes(
       icon: FontAwesomeIcons.solidFileLines,
       text: 'Fiscal',
       items: [MenuEntries(onClick: () {}, text: 'oi')],
@@ -339,7 +359,7 @@ class AnalisePage extends GetView<AnalisePageController> {
     ),
     Botoes(
       icon: FontAwesomeIcons.clipboardList,
-      text: 'Análise e relatórios',
+      text: 'Análises e relatórios',
       items: [MenuEntries(onClick: () {}, text: 'oi')],
     ),*/
   ];

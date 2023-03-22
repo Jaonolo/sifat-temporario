@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class PopupMenuPersonalizado extends StatefulWidget {
@@ -67,7 +69,7 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
       // }
 
       // lembrar de comentar depois
-      _overlayEntry1.remove();
+      //_overlayEntry1.remove();
     }
     super.deactivate();
   }
@@ -87,7 +89,7 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
 
   closeMenu() {
     // lembrar de comentar depois
-    _overlayEntry1.remove();
+    //_overlayEntry1.remove();
 
     _animationController.reverse();
 
@@ -102,7 +104,7 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
     _animationController.forward();
 
     //lembrar de comentar depois
-    Overlay.of(context).insert(_overlayEntry1);
+    //Overlay.of(context).insert(_overlayEntry1);
 
     // ANALISAR DPS
     setState(() {
@@ -122,8 +124,8 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        isMenuOpen ? Popup() : SizedBox.shrink(),
-        Stack(
+        //isMenuOpen ? Popup() : SizedBox.shrink(),
+        /*Stack(
           children: [
             isMenuOpen
                 ? ColoredBox(
@@ -133,65 +135,92 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
                       height: buttonSize.height,
                     ),
                   )
-                : SizedBox.shrink(),
-            Container(
-              key: _key,
-              child: GestureDetector(
-                onTap: () => {
-                  // ANALISAR DPS (TROCADO ORDEM)
-                  if (isMenuOpen) {closeMenu()} else {openMenu()},
-                  if (widget.onPress != null) {widget.onPress!()}
-                },
-                child: widget.child,
-              ),
-            ),
-          ],
+                : SizedBox.shrink(),*/
+        Container(
+          key: _key,
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => {
+              showModalBottomSheet(
+                  isScrollControlled: true,
+                  //constraints: BoxConstraints(minHeight: min((72 * widget.items.length).toDouble(), MediaQuery.of(context).size.height - 60)),
+                  context: context,
+                  builder: Popup),
+              //if (widget.onPress != null) {widget.onPress!()}
+            },
+            child: widget.child,
+          ),
         ),
+        /*],
+        ),*/
       ],
     );
   }
 
-  Widget Popup() => Container(
-        width: buttonSize.width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
-          color: widget.color,
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: List.generate(
-              widget.items.length,
-              (index) {
-                return GestureDetector(
-                  onTap: () {
-                    widget.onChange(index);
-                    closeMenu();
-                  },
-                  child: Container(
-                    alignment: Alignment.centerLeft,
-                    child: /*Row(
-                          children: [*/
-                        widget.items[index].child,
-                    /*ExpandIcon(
-                              isExpanded: isMenuOpen,
-                              onPressed: (o) {},
-                            )
-                          ],
-                        ),*/
+  Widget Popup(context) {
+    print(widget.items.length);
+    double buttons = (widget.items.length + 1) / 2;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: min((60 * widget.items.length).toDouble(),
+                  MediaQuery.of(context).size.height) -
+              80,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
+            color: widget.color,
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  ...List.generate(
+                    widget.items.length,
+                    (index) {
+                      return GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          widget.onChange(index);
+                          closeMenu();
+                        },
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: /*Row(
+                                  children: [*/
+                              widget.items[index].child,
+                          /*ExpandIcon(
+                                      isExpanded: isMenuOpen,
+                                      onPressed: (o) {},
+                                    )
+                                  ],
+                                ),*/
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+                ],
+              ),
             ),
           ),
         ),
-      );
+        GestureDetector(
+          child: widget.child,
+          onTap: () => Navigator.pop(context),
+        )
+      ],
+    );
+  }
 
   OverlayEntry _overlayEntryBuilder1() {
     return OverlayEntry(
       builder: (context) {
         return GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => {closeMenu()},
           child: Container(
             height: MediaQuery.of(context).size.height,

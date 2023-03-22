@@ -1,26 +1,22 @@
 import 'package:erp/pages/menu/botoes_class.dart';
+import 'package:erp/templates/pagina_com_appbar/botao_navegacao.dart';
 import 'package:erp/templates/pagina_com_appbar/rodape.dart';
 import 'package:erp/templates/pagina_com_appbar/pagina_com_appbar_controller.dart';
-import 'package:erp/widgets/personalizados/popup_menu_personalizado.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:im_stepper/stepper.dart';
 import '../../widgets/personalizados/popup_menu_personalizado_more.dart';
 import '../../widgets/responsive.dart';
 
 class PaginaComAppBar extends GetView<PaginaComAppBarController> {
   late final Widget _child;
   late final List<Botoes> _botoesNavegacao;
-  late final List<GlobalKey> _keysBotoes;
 
   PaginaComAppBar(
       {required List<Botoes> botoesNavegacao, required Widget child}) {
     this._child = child;
     this._botoesNavegacao = botoesNavegacao;
-    this._keysBotoes =
-        _botoesNavegacao.map<GlobalKey>((e) => GlobalKey()).toList();
   }
 
   final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
@@ -86,16 +82,22 @@ class PaginaComAppBar extends GetView<PaginaComAppBarController> {
               //  hasScrollBody: false,
               child: _child,
             ),
+            SliverToBoxAdapter(child: Responsive(
+          desktop: SizedBox.shrink(),
+          mobile: Rodape(
+            botoesNavegacao: _botoesNavegacao,
+            modoNoturno: controller.modoNoturno,
+          ),),),
           ],
         ),
-        bottomNavigationBar: Responsive(
+        /*bottomNavigationBar: Responsive(
           desktop: SizedBox.shrink(),
           mobile: Rodape(
             botoesNavegacao: _botoesNavegacao,
             modoNoturno: controller.modoNoturno,
           ),
           larguraMaximaMobile: 1020,
-        ),
+        ),*/
       ),
     );
   }
@@ -191,8 +193,9 @@ class PaginaComAppBar extends GetView<PaginaComAppBarController> {
               ),
               ButtonBar(
                   buttonPadding: EdgeInsets.all(0),
-                  alignment: MainAxisAlignment.spaceBetween,
-                  children: _gerarBotoesNavegacao())
+                  alignment: _botoesNavegacao.length >= 7 ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start,
+                  children: _botoesNavegacao.length >= 7 ? _gerarBotoesNavegacao() : _gerarListaAlternada(_gerarBotoesNavegacao(), SizedBox(height: 0, width: 40,)),
+                  )
             ],
           ),
         ),
@@ -307,11 +310,10 @@ class PaginaComAppBar extends GetView<PaginaComAppBarController> {
         (i) => i % 2 == 0 ? list[i ~/ 2] : divisor,
       );
 
-  //Widget _wrapIconesBotoes(context) => Responsive(desktop: ,)
-
   Widget _botaoTrocarLoja(context) => Obx(
         () => TextButton(
           style: ButtonStyle(
+              shape: MaterialStateProperty.all<OutlinedBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8)))),
               padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                 MediaQuery.of(context).size.width > 1020
                     ? EdgeInsets.fromLTRB(16, 0, 24, 0)
@@ -385,21 +387,10 @@ class PaginaComAppBar extends GetView<PaginaComAppBarController> {
         value: !controller.modoNoturno,
         onChanged: (a) => controller.trocarModoNoturno(),
         activeColor: Color.fromRGBO(236, 215, 26, 1),
-        //inactiveThumbColor: Color.fromRGBO(236, 215, 26, 1),
-        inactiveThumbColor: Neutral80,
+        inactiveThumbColor: Color.fromRGBO(113, 120, 125, 1),
         activeTrackColor: Color.fromRGBO(243, 243, 243, 1),
-        inactiveTrackColor: Neutral80,
+        inactiveTrackColor: Color.fromRGBO(113, 120, 125, 1),
         inactiveThumbImage: AssetImage('images/dark_mode_icon.png'),
-
-        /*thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
-              (Set<MaterialState> states) {
-                if (!states.contains(MaterialState.selected)) {
-                  return Icon(DarkModeIcon.dark_mode_icon);
-                }
-
-                return null;
-              },
-            ),*/
       ));
 
   Widget _botaoPerfil() => Obx(
@@ -430,71 +421,9 @@ class PaginaComAppBar extends GetView<PaginaComAppBarController> {
       .asMap()
       .entries
       .map(
-        (e) => SizedBox(
-          height: 24,
-          child: Obx(
-            () => PopupMenuPersonalizado(
-              //isOpenParent: e.key == controller.menuExibido,
-              /*onPress: () {
-                controller.exibirMenu(e.key);
-              },*/
-              onChange: (a) {
-                print("b");
-              },
-              color: controller.modoNoturno
-                  ? Color.fromRGBO(44, 49, 55, 1)
-                  : Neutral10,
-              items: e.value.items
-                  .map<PopupMenuItem<Function>>(_gerarItens)
-                  .toList(),
-              child: Obx(
-                () => Container(
-                  color: controller.modoNoturno
-                      ? Color.fromRGBO(33, 36, 38, 1)
-                      : Color.fromRGBO(243, 243, 243, 1),
-                  child: Wrap(
-                    key: _keysBotoes[e.key],
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    spacing: 9,
-                    children: [
-                      FaIcon(
-                        e.value.icon,
-                        color: controller.modoNoturno ? Neutral10 : Neutral90,
-                        size: 20,
-                      ),
-                      Text(e.value.text,
-                          style: GoogleFonts.roboto(
-                              fontSize: 16,
-                              color: controller.modoNoturno
-                                  ? Neutral10
-                                  : Neutral90)),
-                      Icon(Icons.expand_more,
-                          color:
-                              controller.modoNoturno ? Neutral10 : Neutral90),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+        (e) => BotaoNavegacao(items: e.value.items, text: e.value.text, icon: e.value.icon, modoNoturno: controller.modoNoturno)
       )
       .toList();
-
-  PopupMenuItem<Function> _gerarItens(MenuEntries e) => PopupMenuItem<Function>(
-        padding: EdgeInsets.all(0),
-        value: e.onClick,
-        child: SizedBox(
-          width: double.infinity,
-          child: Text(
-              style: GoogleFonts.sourceSansPro(
-                fontSize: 15,
-                fontWeight: FontWeight.w400,
-                color: controller.modoNoturno ? Neutral30 : Neutral80,
-              ),
-              e.text),
-        ),
-      );
 
   PopupMenuItem<Function> _gerarItensMore(Widget child) =>
       PopupMenuItem<Function>(
@@ -529,15 +458,14 @@ class PaginaComAppBar extends GetView<PaginaComAppBarController> {
       .map(
         (e) => Container(
           padding: EdgeInsets.all(8),
-          child: Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            spacing: 4,
+          child: Row(
             children: [
               FaIcon(
                 e.icon,
                 color: controller.modoNoturno ? Neutral10 : Neutral90,
                 size: 16,
               ),
+            SizedBox(height: 0, width: 4),
               Text(
                 e.text,
                 style: GoogleFonts.sourceSansPro(

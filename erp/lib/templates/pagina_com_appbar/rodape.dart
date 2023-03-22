@@ -28,28 +28,28 @@ class _EstadoRodape extends State<Rodape> {
   @override 
     void didUpdateWidget(o) {
 
-    WidgetsBinding.instance
+    /*WidgetsBinding.instance
       .scheduleFrameCallback((_) {
         overlay.markNeedsBuild();
-      });
+      });*/
 
       super.didUpdateWidget(o);
   }
 
   @override
     void initState() {
-    overlay = _iconeBusiness();
+    /*overlay = _iconeBusiness();
     WidgetsBinding.instance
         .scheduleFrameCallback((_) {
           print(context);
           Overlay.of(context).insert(overlay);
-        });
+        });*/
     super.initState();
   }
 
   @override
     void deactivate() {
-      overlay.remove();
+      //overlay.remove();
 
       super.deactivate();
     }

@@ -8,6 +8,7 @@ class PopupMenuPersonalizado extends StatefulWidget {
   final Color color;
   final bool isOpenParent;
   final VoidCallback? onPress;
+  final VoidCallback? onClose;
 
   const PopupMenuPersonalizado({
     required this.items,
@@ -15,6 +16,7 @@ class PopupMenuPersonalizado extends StatefulWidget {
     required this.child,
     required this.color,
     this.onPress,
+    this.onClose,
     this.selectedIndex = 0,
     this.isOpenParent = false,
   });
@@ -54,9 +56,14 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
 
   @override
   void didUpdateWidget(old) {
-    /*if (isMenuOpen && !widget.isOpenParent) {
+    if(widget.items == old.items) {
       closeMenu();
-    }*/
+    } else {
+      WidgetsBinding.instance
+      .scheduleFrameCallback((_) {
+        _overlayEntry.markNeedsBuild();
+      });
+    }
     super.didUpdateWidget(old);
   }
 
@@ -95,6 +102,10 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
 
     _animationController.reverse();
     isMenuOpen = !isMenuOpen;
+
+    if (widget.onClose != null) {
+      widget.onClose!();
+    }
   }
 
   openMenu() {
@@ -110,16 +121,11 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
 
   @override
   Widget build(BuildContext context) {
-    if (isMenuOpen) {
-      // if (widget.onPress != null) {
-      //   widget.onPress!();
-      // }
-      closeMenu();
-    }
-
     return Container(
       key: _key,
       child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+
         onTap: () => {
           if (widget.onPress != null) {widget.onPress!()},
           if (isMenuOpen) {closeMenu()} else {openMenu()}
@@ -156,9 +162,11 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
                   widget.items.length,
                   (index) {
                     return GestureDetector(
+                                            behavior: HitTestBehavior.opaque,
+
                       onTap: () {
                         widget.onChange(index);
-                        closeMenu();
+
                       },
                       child: Container(
                         alignment: Alignment.centerLeft,
@@ -189,6 +197,8 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
     return OverlayEntry(
       builder: (context) {
         return GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+
           onTap: () => {closeMenu()},
           child: Container(
             height: MediaQuery.of(context).size.height,

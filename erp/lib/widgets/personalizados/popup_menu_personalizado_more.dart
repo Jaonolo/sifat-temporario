@@ -124,6 +124,7 @@ class _PopupMenuMoreState extends State<PopupMenuMore>
     return Container(
       key: _key,
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: () => {
           if (widget.onPress != null) {widget.onPress!()},
           if (isMenuOpen) {closeMenu()} else {openMenu()}
@@ -138,9 +139,9 @@ class _PopupMenuMoreState extends State<PopupMenuMore>
       builder: (context) {
         return Positioned(
           top: buttonPosition.dy + widget.offsety + 18,
-          left: buttonPosition.dx + widget.offsetx - 123,
+          left: buttonPosition.dx + widget.offsetx - 126,
           child: Container(
-            width: 123,
+            width: 126,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(6)),
                 color: widget.color,
@@ -159,6 +160,7 @@ class _PopupMenuMoreState extends State<PopupMenuMore>
                   widget.items.length,
                   (index) {
                     return GestureDetector(
+                      behavior: HitTestBehavior.opaque,
                       onTap: () {
                         widget.onChange(index);
                         closeMenu();
@@ -190,6 +192,7 @@ class _PopupMenuMoreState extends State<PopupMenuMore>
     return OverlayEntry(
       builder: (context) {
         return GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => {closeMenu()},
           child: Container(
             height: MediaQuery.of(context).size.height,
