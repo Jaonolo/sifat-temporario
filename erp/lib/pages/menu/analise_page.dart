@@ -346,8 +346,8 @@ class AnalisePage extends GetView<AnalisePageController> {
       icon: FontAwesomeIcons.moneyCheckDollar,
       text: 'Finanças',
       items: [MenuEntries(onClick: () {}, text: 'oi')],
-    ), /*
-    Botoes(
+    ),
+    /*Botoes(
       icon: FontAwesomeIcons.solidFileLines,
       text: 'Fiscal',
       items: [MenuEntries(onClick: () {}, text: 'oi')],

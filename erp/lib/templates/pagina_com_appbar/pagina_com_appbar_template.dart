@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:im_stepper/stepper.dart';
 import '../../widgets/personalizados/popup_menu_personalizado_more.dart';
 import '../../widgets/responsive.dart';
 

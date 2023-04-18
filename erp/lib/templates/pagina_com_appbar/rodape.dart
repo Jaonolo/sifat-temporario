@@ -25,19 +25,18 @@ class _EstadoRodape extends State<Rodape> {
   final PrimaryBrand = Color.fromRGBO(19, 124, 185, 1);
   final Brand400 = Color.fromRGBO(35, 160, 232, 1);
 
-  @override 
-    void didUpdateWidget(o) {
-
+  @override
+  void didUpdateWidget(o) {
     /*WidgetsBinding.instance
       .scheduleFrameCallback((_) {
         overlay.markNeedsBuild();
       });*/
 
-      super.didUpdateWidget(o);
+    super.didUpdateWidget(o);
   }
 
   @override
-    void initState() {
+  void initState() {
     /*overlay = _iconeBusiness();
     WidgetsBinding.instance
         .scheduleFrameCallback((_) {
@@ -48,11 +47,11 @@ class _EstadoRodape extends State<Rodape> {
   }
 
   @override
-    void deactivate() {
-      //overlay.remove();
+  void deactivate() {
+    //overlay.remove();
 
-      super.deactivate();
-    }
+    super.deactivate();
+  }
 
   @override
   Widget build(context) {
@@ -155,57 +154,56 @@ class _EstadoRodape extends State<Rodape> {
   }
 
   OverlayEntry _iconeBusiness() {
-    return OverlayEntry(
-      builder: (context) {
-        return Positioned(
-          left: (MediaQuery.of(context).size.width/2) - 28,
-          bottom: 80 - 28,
-          child: Container(
-            width: 56,
-            height: 56,
-            decoration: BoxDecoration(
-              color: widget.modoNoturno
-                  ? Color.fromRGBO(33, 36, 38, 1)
-                  : Color.fromRGBO(243, 243, 243, 1),
-              borderRadius: BorderRadius.circular(50),
-              boxShadow: widget.modoNoturno
-                  ? null
-                  : [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
-                        spreadRadius: 0.1,
-                        blurRadius: 0.1,
-                        offset: Offset(0, 1), // changes position of shadow
-                      ),
-                    ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(6.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color:
-                      widget.modoNoturno ? Color.fromRGBO(52, 55, 58, 1) : Colors.white,
-                  borderRadius: BorderRadius.circular(50),
-                  boxShadow: [
+    return OverlayEntry(builder: (context) {
+      return Positioned(
+        left: (MediaQuery.of(context).size.width / 2) - 28,
+        bottom: 80 - 28,
+        child: Container(
+          width: 56,
+          height: 56,
+          decoration: BoxDecoration(
+            color: widget.modoNoturno
+                ? Color.fromRGBO(33, 36, 38, 1)
+                : Color.fromRGBO(243, 243, 243, 1),
+            borderRadius: BorderRadius.circular(50),
+            boxShadow: widget.modoNoturno
+                ? null
+                : [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
-                      spreadRadius: 0.5,
-                      blurRadius: 0.5,
-                      offset: Offset(0, 2), // changes position of shadow
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 0.1,
+                      blurRadius: 0.1,
+                      offset: Offset(0, 1), // changes position of shadow
                     ),
                   ],
-                ),
-                child: Icon(
-                  Icons.business,
-                  size: 30,
-                  color: Color.fromRGBO(35, 160, 232, 1),
-                ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: widget.modoNoturno
+                    ? Color.fromRGBO(52, 55, 58, 1)
+                    : Colors.white,
+                borderRadius: BorderRadius.circular(50),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 0.5,
+                    blurRadius: 0.5,
+                    offset: Offset(0, 2), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Icon(
+                Icons.business,
+                size: 30,
+                color: Color.fromRGBO(35, 160, 232, 1),
               ),
             ),
           ),
-        ); 
-      }
-    ); 
+        ),
+      );
+    });
   }
 
   Widget _botaoScrollarAcima() {

@@ -121,8 +121,7 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
     return Container(
       key: _key,
       child: GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-
+        behavior: HitTestBehavior.opaque,
         onTap: () => {
           if (widget.onPress != null) {widget.onPress!()},
           if (isMenuOpen) {closeMenu()} else {openMenu()}
@@ -215,8 +214,7 @@ class _PopupMenuPersonalizadoState extends State<PopupMenuPersonalizado>
     return OverlayEntry(
       builder: (context) {
         return GestureDetector(
-                                behavior: HitTestBehavior.opaque,
-
+          behavior: HitTestBehavior.opaque,
           onTap: () => {closeMenu()},
           child: Container(
             height: MediaQuery.of(context).size.height,
